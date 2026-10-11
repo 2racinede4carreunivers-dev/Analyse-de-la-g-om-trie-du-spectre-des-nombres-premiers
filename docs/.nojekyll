@@ -1,0 +1,2 @@
+# Empeche Jekyll de re-traiter les fichiers _* ou d'appliquer Liquid a index.html.
+# La page est du HTML pur qui doit etre servi tel quel.

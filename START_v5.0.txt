@@ -1,0 +1,154 @@
+# ============================================================
+#                       GABRIEL v5.0
+#                     SOLUTION FINALE
+# ============================================================
+
+## 🎯 COMMENCER ICI
+
+Lisez dans cet ordre:
+
+1. **LIS-MOI FIRST** → `GABRIEL_v5_EXPLIQUE_SIMPLEMENT.txt`
+   (Explication simple en français)
+
+2. **MISE À JOUR** → Exécute:
+   ```powershell
+   cd C:\agent-multiloop-Gabriel-local-final\agent-multiloop-Gabriel-local
+   .\UPDATE_GABRIEL_v5.ps1
+   ```
+
+3. **RÉSUMÉ** → `GABRIEL_v5.0_FINAL_SUMMARY.txt`
+   (Après la mise à jour, pour vérifier)
+
+---
+
+## ⚡ EN 30 SECONDES
+
+### Problème:
+Port 8080 reste occupé même après fermeture de Gabriel
+
+### Solution:
+Nouvelle librairie `socket_cleanup.py` qui ferme COMPLÈTEMENT le port quand Gabriel s'arrête
+
+### Installation:
+```powershell
+.\UPDATE_GABRIEL_v5.ps1
+```
+
+### Résultat:
+✅ Port se libère automatiquement
+✅ Redémarrage instantané
+✅ Docker Desktop jamais fermé
+
+---
+
+## 📁 FICHIERS IMPORTANTS
+
+### À Lire (Doc):
+- `GABRIEL_v5_EXPLIQUE_SIMPLEMENT.txt` ← **COMMENCER ICI**
+- `GABRIEL_v5.0_FINAL_SUMMARY.txt`
+- `GABRIEL_FINAL_v5_SOCKET_CLEANUP.md` (technique)
+- `GABRIEL_v5_UPDATE_GUIDE.md` (détaillé)
+
+### À Exécuter:
+- `UPDATE_GABRIEL_v5.ps1` ← **APRÈS AVOIR LU**
+
+### Nouveau Code:
+- `socket_cleanup.py` (copié automatiquement par UPDATE_GABRIEL_v5.ps1)
+- `main_cli.py` v5.0 (copié automatiquement)
+
+---
+
+## 🚀 DANS 5 MINUTES
+
+```powershell
+# 1. Lire (2 min)
+# Ouvrir: GABRIEL_v5_EXPLIQUE_SIMPLEMENT.txt
+
+# 2. Mettre à jour (2 min)
+cd C:\agent-multiloop-Gabriel-local-final\agent-multiloop-Gabriel-local
+.\UPDATE_GABRIEL_v5.ps1
+
+# 3. Attendre le rebuild (1-2 min)
+# Le script va relancer Gabriel automatiquement
+```
+
+---
+
+## ✅ VÉRIFICATION
+
+Après UPDATE_GABRIEL_v5.ps1:
+
+```powershell
+# Test:
+.\gabriel.ps1 start
+# Attendre 20 sec
+# Accéder: http://localhost:8080
+# Taper: quitter
+# Vérifier: netstat -ano | findstr :8080
+# Résultat attendu: (VIDE!)
+# Redémarrer: .\gabriel.ps1 start
+# Résultat: Fonctionne! ✅
+```
+
+---
+
+## 🎯 LE VRAI CHANGEMENT
+
+### Avant (v4.0):
+```
+Taper "quitter"
+  ↓
+❌ Port bloqué
+  ↓
+❌ Redémarrage impossible
+```
+
+### Après (v5.0):
+```
+Taper "quitter"
+  ↓
+socket_cleanup() s'exécute
+  ↓
+Port libéré proprement
+  ↓
+✅ Redémarrage instantané
+```
+
+---
+
+## 💡 POINT CLÉ À COMPRENDRE
+
+**Le problème n'était pas Docker Desktop.
+C'était la socket TCP qui restait ouverte.**
+
+Avant: Gabriel ferme (mais partiellement)
+Après: Gabriel ferme ET nettoie la socket complètement
+
+Résultat: Port complètement libre
+
+---
+
+## 📊 STATUS
+
+- ✅ Socket cleanup implémenté
+- ✅ Signal handlers configurés
+- ✅ Update script créé
+- ✅ Documentation complète
+- ✅ Prêt pour production
+
+---
+
+## 🎉 DERNIER RAPPEL
+
+**Une seule commande à exécuter**:
+```powershell
+.\UPDATE_GABRIEL_v5.ps1
+```
+
+Puis profitez de Gabriel v5.0 sans problème de port! 🚀
+
+---
+
+*Besoin d'aide? Lire les fichiers de documentation.*
+
+*Gabriel v5.0 - Socket Cleanup Solution - FINAL* ✅

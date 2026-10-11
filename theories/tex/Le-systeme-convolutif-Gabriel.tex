@@ -1,0 +1,3343 @@
+% ======================================================================
+%  LE SYSTÈME CONVOLUTIF — RAPPORTS TYPIQUE ET NON TYPIQUES 1/k
+%  Géométrie du spectre des nombres premiers — Théorie « L'Univers est au carré »
+%  Auteur : Philippe Thomas Savard
+% ======================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2.4cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage[table]{xcolor}
+\usepackage{booktabs,longtable,array,multirow}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,backgrounds}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+
+\allowdisplaybreaks[3]
+\setlength{\emergencystretch}{2em}
+\setlength{\tabcolsep}{4pt}
+
+% ---------- Palette « géométrie du spectre » ----------
+\definecolor{spectralbleu}{RGB}{18,42,90}
+\definecolor{spectralazur}{RGB}{41,98,168}
+\definecolor{spectralor}{RGB}{196,148,34}
+\definecolor{spectralviolet}{RGB}{96,54,140}
+\definecolor{spectralgris}{RGB}{244,246,250}
+\definecolor{spectralrouge}{RGB}{158,42,52}
+
+% ---------- En-tête / pied de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{spectralbleu}\textbf{www.universestaucarre.com} --- Dépôt GitHub de l'agent Gabriel multiloop local}
+\fancyhead[R]{\small\color{spectralbleu}Page \thepage\ sur \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\headrule}{\color{spectralor}\hrule width\headwidth height 0.8pt}
+\fancyfoot[C]{\small\color{spectralbleu}\itshape La géométrie du spectre des nombres premiers --- Le système convolutif}
+
+% ---------- Titres ----------
+\titleformat{\section}{\Large\bfseries\color{spectralbleu}}{\thesection.}{0.6em}{}[{\color{spectralor}\titlerule[1.2pt]}]
+\titleformat{\subsection}{\large\bfseries\color{spectralazur}}{\thesubsection.}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{spectralviolet}}{\thesubsubsection.}{0.6em}{}
+
+% ---------- Boîtes ----------
+\newtcolorbox{boiteformule}[1][]{colback=spectralgris,colframe=spectralbleu,
+  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+  enhanced,breakable,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
+\newtcolorbox{boitenote}[1][Note]{colback=white,colframe=spectralor,
+  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+  enhanced,breakable,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
+\newtcolorbox{boitealerte}[1][Point de vigilance]{colback=white,colframe=spectralrouge,
+  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+  enhanced,breakable,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
+
+\newcommand{\SA}{\mathrm{S}_A}
+\newcommand{\SB}{\mathrm{S}_B}
+
+\begin{document}
+% ======================================================================
+%  PAGE DE TITRE — style autodidacte mathématique, thème spectral
+% ======================================================================
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[spectralbleu] (current page.north west) rectangle ([yshift=-3.2cm]current page.north east);
+  \fill[spectralor]   ([yshift=-3.2cm]current page.north west) rectangle ([yshift=-3.35cm]current page.north east);
+  \fill[spectralbleu] (current page.south west) rectangle ([yshift=1.6cm]current page.south east);
+  \fill[spectralor]   ([yshift=1.6cm]current page.south west) rectangle ([yshift=1.75cm]current page.south east);
+  % Spectre des nombres premiers : graduations 1..61, barres dorées aux premiers
+  \begin{scope}[shift={([yshift=-10.9cm]current page.north west)},x=2.5mm]
+    \draw[spectralbleu!40,thick] (2,0) -- (61,0);
+    \foreach \n in {2,3,...,61}{ \draw[spectralbleu!35] (\n,0) -- (\n,0.12); }
+    \foreach \p in {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61}{
+      \draw[spectralor,line width=1.4pt] (\p,0) -- (\p,0.85);
+      \fill[spectralor] (\p,0.85) circle (0.9pt); }
+    \draw[spectralviolet,dashed,line width=1pt] (31.5,-0.25) -- (31.5,1.5)
+      node[above]{\footnotesize\color{spectralviolet}$R_{sP}=\tfrac{1}{2}$};
+  \end{scope}
+  % Carré « L'Univers est au carré » avec hypoténuse
+  \begin{scope}[shift={([xshift=15.2cm,yshift=-14.2cm]current page.north west)}]
+    \draw[spectralazur,thick] (0,0) rectangle (2.4,2.4);
+    \draw[spectralor,thick] (0,0) -- (2.4,2.4) node[midway,above left,sloped]{\footnotesize $\sqrt{a^{2}+b^{2}}$};
+    \node[below] at (1.2,0) {\footnotesize $b=k^{i}$};
+    \node[left] at (0,1.2) {\footnotesize $a=k^{i-1}$};
+  \end{scope}
+  \node[anchor=west,text=white,font=\small\bfseries] at ([xshift=2.2cm,yshift=-1.1cm]current page.north west)
+    {www.universestaucarre.com};
+  \node[anchor=west,text=white!85!spectralbleu,font=\footnotesize] at ([xshift=2.2cm,yshift=-1.75cm]current page.north west)
+    {Dépôt GitHub de l'agent Gabriel multiloop local --- \texttt{agent-multiloop-Gabriel-local}};
+  \node[anchor=west,text=white!85!spectralbleu,font=\footnotesize] at ([xshift=2.2cm,yshift=-2.35cm]current page.north west)
+    {Théorie unifiée : \emph{L'Univers est au carré} --- Chapitre : \emph{La géométrie du spectre des nombres premiers}};
+  \node[anchor=west,text=spectralbleu,font=\Huge\bfseries,align=left] at ([xshift=2.0cm,yshift=-6.6cm]current page.north west)
+    {Le système convolutif};
+  \node[anchor=west,text=spectralazur,font=\LARGE\bfseries] at ([xshift=2.0cm,yshift=-7.9cm]current page.north west)
+    {Rapports typique et non typiques : $1/k = 1/2$ et $1/k \neq 1/2$};
+  \node[anchor=west,text=spectralviolet,font=\large\itshape] at ([xshift=2.0cm,yshift=-8.9cm]current page.north west)
+    {Système équationnel convolutif pour les requêtes multi-rapports du pipeline cognitif};
+  \node[anchor=north west,align=left,font=\small] at ([xshift=2.0cm,yshift=-17.6cm]current page.north west)
+    {\textbf{\color{spectralbleu}Auteur :} Philippe Thomas Savard\\[2pt]
+     \textbf{\color{spectralbleu}Collaborateurs :} Copilot Microsoft --- Gordon Docker Desktop --- E1 emergent.sh\\
+     \hspace{3.1cm} API Anthropic --- API OpenAI --- Cline --- Gemini Google\\[6pt]
+     \textbf{\color{spectralbleu}Adresse :} 4-5354 Rue du Menuet, Lévis, Chaudière-Appalaches, Canada, G6X 2Y6\\
+     \textbf{\color{spectralbleu}Courriel :} philippethomassavard@gmail.com\\[6pt]
+     \textbf{\color{spectralbleu}Lieu et date :} Lévis, Chaudière-Appalaches, Canada --- le vingt-six septembre deux mille vingt-six};
+  \node[anchor=south,text=white,font=\footnotesize] at ([yshift=0.6cm]current page.south)
+    {Licence Apache 2.0 --- Document fourni tel quel, sans garantie --- Créé sans financement d'aucune nature};
+\end{tikzpicture}
+\phantom{x}
+\end{titlepage}
+
+% ======================================================================
+%  AVERTISSEMENT ET LICENCE (texte du document original, orthographe corrigée)
+% ======================================================================
+\section*{Avertissement et licence}
+\addcontentsline{toc}{section}{Avertissement et licence}
+
+Les informations contenues dans le document que vous consultez sont sous
+\textsc{Licence Apache~2.0}. Le document est présent sous la même licence sur
+GitHub dans le dépôt public :
+\url{https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local.git}.
+Il est possible, selon certaines restrictions en lien avec la \textsc{Licence
+Apache~2.0} et la réglementation du dépôt, de contribuer via PR, de cloner,
+partager et modifier les informations présentes dans ce document. Le document
+est fourni tel quel, sans garantie ni assurance quant à sa validité, et son
+utilisation est permise dans la mesure de cet avertissement en ce qui concerne
+sa validité. Le document a été créé sans financement de toute nature, ni
+avantage, ni intérêt.
+
+Le présent document est une section de la théorie unifiée \og L'Univers est au
+carré \fg{}, et fait partie du chapitre de cette théorie unifiée : \og La
+géométrie du spectre des nombres premiers \fg{}. Cette géométrie, incluse dans
+la théorie mentionnée, est un outil dynamique conçu entièrement par son auteur
+Philippe Thomas Savard en collaboration avec les entités mentionnées. Cet outil
+dynamique est conçu pour résoudre la question de l'énigme de Bernhard Riemann
+et la conjecture de la fonction Zêta de Riemann.
+
+Le dépôt mathlib : \url{https://github.com/leanprover-community/mathlib4.git}
+est utilisé pour certaines informations selon les termes de la licence du dépôt
+en question. Les informations utilisées, pouvant avoir été modifiées, sont
+incluses dans le fichier \texttt{.thy} de contre-validation du dépôt :
+\url{agent-multiloop-Gabriel-local/theories/validation_zeta_lean.thy} ; la
+licence du dépôt mathlib est incluse dans le fichier \texttt{.thy}. Cette
+contre-validation, et la contre-validation jumelle dans le même sens
+\texttt{validation\_hol\_unifiee.thy}, concernent toutes deux la validation
+principale \texttt{methode\_spectral.thy}, présentes aux adresses du dépôt :
+\url{agent-multiloop-Gabriel-local/theories/validation_hol_unifiee.thy} et
+\url{agent-multiloop-Gabriel-local/theories/methode_spectral.thy},
+disponibles en sept langues différentes sur le dépôt ; quelques annotations
+sont en langue phonétique.
+
+\tableofcontents
+\newpage
+
+% ======================================================================
+\section{Rapports typique et non typiques : $1/k = 1/2$ et $1/k \neq 1/2$}
+% ======================================================================
+
+\subsection{Exemple de suites géométriques A et B}
+
+Pour le rapport typique $t = 1/k = 1/2$, les suites A et B sont construites
+selon le modèle de l'hypoténuse $\sqrt{a^{2}+b^{2}}$, dix termes par suite
+(convention de notation : $(t^{m})^{2}$ signifie le carré de $t^{m}$ ; ainsi
+$(t^{3})^{2} = t^{6}$) :
+
+\begin{boiteformule}[Somme suite A --- modèle hypoténuse]
+\[
+\begin{aligned}
+\SA ={}& \bigl((1^{1})^{2} + (t^{1})^{2}\bigr)^{1/2}
+ + \bigl((t^{1})^{2} + (t^{2})^{2}\bigr)^{1/2}
+ + \bigl((t^{2})^{2} + (t^{3})^{2}\bigr)^{1/2}
+ + \bigl((t^{3})^{2} + (t^{4})^{2}\bigr)^{1/2} \\
+& + \bigl((t^{4})^{2} + (t^{5})^{2}\bigr)^{1/2}
+ + \bigl((t^{5})^{2} + (t^{6})^{2}\bigr)^{1/2}
+ + \bigl((t^{6})^{2} + (t^{7})^{2}\bigr)^{1/2}
+ + \bigl((t^{7})^{2} + (t^{8})^{2}\bigr)^{1/2} \\
+& + \bigl((t^{8} - t^{6})^{2} + (t^{9} - t^{7})^{2}\bigr)^{1/2}
+ + \bigl((t^{9} - t^{7})^{2} + (t^{10} - t^{8})^{2}\bigr)^{1/2}.
+\end{aligned}
+\]
+\end{boiteformule}
+
+\begin{boiteformule}[Somme suite B --- modèle hypoténuse (saut structurel en position 6)]
+\[
+\begin{aligned}
+\SB ={}& \bigl((1^{1})^{2} + (t^{1})^{2}\bigr)^{1/2}
+ + \bigl((t^{1})^{2} + (t^{2})^{2}\bigr)^{1/2}
+ + \bigl((t^{2})^{2} + (t^{3})^{2}\bigr)^{1/2} \\
+& + \bigl((t^{3})^{2} + (t^{4})^{2}\bigr)^{1/2}
+ + \bigl((t^{4})^{2} + (t^{5})^{2}\bigr)^{1/2} \\
+& + \bigl((t^{6})^{2} + (t^{7})^{2}\bigr)^{1/2}
+ + \bigl((t^{7})^{2} + (t^{8})^{2}\bigr)^{1/2}
+ + \bigl((t^{8})^{2} + (t^{9})^{2}\bigr)^{1/2} \\
+& + \bigl((t^{10} - t^{8})^{2} + (t^{11} - t^{9})^{2}\bigr)^{1/2} \\
+& + \bigl((t^{11} - t^{9})^{2} + (t^{12} - t^{10})^{2}\bigr)^{1/2}.
+\end{aligned}
+\]
+\end{boiteformule}
+
+\begin{boitenote}[Décalage structurel A $\to$ B]
+La suite B ne comporte pas de terme $\bigl((t^{5})^{2}+(t^{6})^{2}\bigr)^{1/2}$ :
+c'est le \emph{saut Zêta}, décalage structurel de A vers B. Les deux suites sont
+identiques pour les positions $i \le 5$, puis divergent à partir de $i = 6$.
+\end{boitenote}
+
+\subsection{Reconstruction du nombre premier pour $n = 10$}
+
+\subsubsection{Quatre possibilités pour le Digamma}
+
+\begin{enumerate}[nosep]
+  \item Additionner la 8\textsuperscript{ième} position de la suite A à la somme de la suite A 10 termes ($n=10$).
+  \item Soustraire la 8\textsuperscript{ième} position de la suite A à la somme suite A 10 termes ($n=10$).
+  \item Additionner la 7\textsuperscript{ième} position de la suite A à la somme de la suite A 10 termes ($n=10$).
+  \item Soustraire la 7\textsuperscript{ième} position de la suite A à la somme de la suite A 10 termes ($n=10$).
+\end{enumerate}
+
+Les quatre possibilités permettent de déterminer la valeur du Digamma calculé.
+
+\subsection{Généralisation des équations des suites A et B}
+
+\textbf{1. Coefficient A :}
+\[
+\frac{\text{Somme suite A}(10\ \text{termes}) - \text{Somme suite A}(9\ \text{termes})}{t^{8}}
+= \text{Coefficient A}.
+\]
+
+\textbf{Coefficient B :}
+\[
+\frac{\text{Somme suite B}(10\ \text{termes}) - \text{Somme suite B}(9\ \text{termes})}{t^{8}}
+= \text{Coefficient B}.
+\]
+
+\textbf{2. Reconstruire les suites A et B en déterminant la somme des suites A
+et B pour toutes les valeurs $n$ :}
+\[
+\frac{\text{Coefficient A}}{x} \times k^{n} - \text{Reste} = \text{Somme suite A},
+\qquad
+\frac{\text{Coefficient A}}{\text{Somme suite A}}\, k^{10} = \text{Reste} + x .
+\]
+\[
+(\text{Reste} + x) - \text{la valeur entière} = x .
+\]
+
+La valeur de $(\text{Reste} + x)$ forme deux blocs A et B : A étant la partie
+entière de la valeur $(\text{Reste} + x)$, et B formant la partie $< 1$ qui est
+décimale de $(\text{Reste} + x)$.
+\begin{align*}
+\frac{\text{Coefficient A}}{x}\times k^{10}-\text{Reste}
+&=\text{Somme suite A}+\text{Reste},\\
+\text{Somme suite A}-(\text{Somme suite}+\text{Reste})
+&=\text{Reste}.
+\end{align*}
+
+\begin{boiteformule}[Équation reconstruite A généralisant la valeur de $n$]
+\[
+\frac{\text{Coefficient A}}{x} \times k^{n} - \text{Reste} = \text{Somme suite A},
+\qquad \text{quand } n \text{ est un entier strictement positif.}
+\]
+\end{boiteformule}
+
+De même pour la suite B :
+\[
+\frac{\text{Coefficient B}}{x} \times k^{n} - \text{Reste} = \text{Somme suite B},
+\qquad
+\frac{\text{Coefficient B}}{\text{Somme suite B}}\, k^{10} = \text{Reste} + x ,
+\]
+\begin{align*}
+\frac{\text{Coefficient B}}{x}\times k^{10}-\text{Reste}
+&=\text{Somme suite B}+\text{Reste},\\
+\text{Somme suite B}-(\text{Somme suite}+\text{Reste})
+&=\text{Reste}.
+\end{align*}
+
+\begin{boiteformule}[Équation reconstruite B généralisant la valeur de $n$]
+\[
+\frac{\text{Coefficient B}}{x} \times k^{n} - \text{Reste} = \text{Somme suite B},
+\qquad \text{quand } n \text{ est un entier strictement positif.}
+\]
+\end{boiteformule}
+
+\subsection{Approche généralisée de niveau 1}
+
+\begin{boiteformule}[Sommes des suites A et B (forme formelle, $n = 10$)]
+\begin{align*}
+t^{1}+t^{2}+t^{3}+t^{4}+t^{5}+t^{6}+t^{7}+t^{8}+(t^{9}-t^{7})+(t^{10}-t^{8}) &= \text{Somme suite A},\\
+t^{1}+t^{2}+t^{3}+t^{4}+t^{5}+t^{7}+t^{8}+t^{9}+(t^{10}-t^{8})+(t^{11}-t^{9}) &= \text{Somme suite B}.
+\end{align*}
+\end{boiteformule}
+
+Digamma, 4 possibilités :
+\begin{enumerate}[nosep]
+  \item $-$ 8\textsuperscript{ième} position suite A : $-t^{8}$
+  \item $+$ 8\textsuperscript{ième} position suite A : $+t^{8}$
+  \item $-$ 7\textsuperscript{ième} position suite A : $-t^{7}$
+  \item $+$ 7\textsuperscript{ième} position suite A : $+t^{7}$
+\end{enumerate}
+
+Digamma calculé : $\ \text{Somme suite A} - t^{8}$ ;\quad
+$\text{Somme suite A} + t^{8}$ ;\quad
+$\text{Somme suite A} - t^{7}$ ;\quad
+$\text{Somme suite A} + t^{7}$.
+
+\subsubsection{Détermination du nombre premier}
+\begin{boiteformule}[Reconstruction du nombre premier]
+\[
+\frac{\text{Somme suite B} - \text{Digamma calculé}}{6\textsuperscript{ième}\ \text{position suite A}\ (\text{Zêta})}
+= \text{Nombre premier}.
+\]
+\end{boiteformule}
+
+\subsubsection{Équations des sommes des suites A et B}
+
+Déterminer le coefficient A :
+$\displaystyle \frac{(\text{Somme suite A}_{n=10}) - \text{Somme suite A}_{n=9})}{t^{8}}$ \quad
+Déterminer le coefficient B :
+$\displaystyle \frac{(\text{Somme suite B}_{n=10}) - \text{Somme suite B}_{n=9})}{t^{8}}$
+
+Déterminer l'équation A :
+\begin{align*}
+\frac{\text{Coefficient A}}{\text{Somme suite A}_{n=10}}\,t^{10}
+&=x+\text{Reste},\\
+(x+\text{Reste})-\text{Valeur réelle}&=x,\\
+\frac{\text{Coefficient A}}{x}\times t^{10}
+&=\text{Somme suite A}+\text{Reste},\\
+(\text{Somme suite A}+\text{Reste})-(\text{Somme suite A})
+&=\text{Reste}.
+\end{align*}
+
+\textbf{Équation A :} $\displaystyle \frac{\text{Coefficient A}}{x} \times t^{n} - \text{Reste} = \text{Somme suite A}$,
+quand $n$ est un entier strictement positif.
+
+Déterminer l'équation B :
+\begin{align*}
+\frac{\text{Coefficient B}}{\text{Somme suite B}_{n=10}}\,t^{10}
+&=x+\text{Reste},\\
+(x+\text{Reste})-\text{Valeur réelle}&=x,\\
+\frac{\text{Coefficient B}}{x}\times t^{10}
+&=\text{Somme suite B}+\text{Reste},\\
+(\text{Somme suite B}+\text{Reste})-(\text{Somme suite B})
+&=\text{Reste}.
+\end{align*}
+
+\textbf{Équation B :} $\displaystyle \frac{\text{Coefficient B}}{x} \times t^{n} - \text{Reste} = \text{Somme suite B}$,
+quand $n$ est un entier strictement positif.
+
+\begin{boitenote}[Inspiration]
+Cette équation est tirée de la formule déjà connue des suites géométriques :
+\[
+\text{Si } q \neq 1,\quad S = 1 + q + q^{2} + q^{3} \dots q^{n} = \frac{1 - q^{n+1}}{1 - q}.
+\]
+\end{boitenote}
+
+% ======================================================================
+\section{Définition et propriétés des rapports non typiques}
+% ======================================================================
+
+Les rapports non typiques $1/k$ sont définis pour toute valeur $1/k < 1/2$,
+notamment $1/3$, $1/4$, $1/5$, $1/6$, \dots, $1/k$.
+
+Contrairement au rapport typique $1/2$, la valeur de $n$ ne correspond pas à la
+position du nombre premier. Elle représente exclusivement le nombre de termes
+des suites A et B.
+
+\subsection{Exemple pour $n=10$ des suites A et B pour un rapport non typique $1/k = 1/3$}
+
+\begin{boiteformule}[Sommes des suites A et B --- rapport $1/3$, $n = 10$]
+\begin{align*}
+3^{1}+3^{2}+3^{3}+3^{4}+3^{5}+3^{6}+3^{7}+3^{8}+(3^{9}-3^{7})+(3^{10}-3^{8})
+  &= \text{Somme suite A} = 79\,824,\\
+3^{1}+3^{2}+3^{3}+3^{4}+3^{5}+3^{7}+3^{8}+3^{9}+(3^{10}-3^{8})+(3^{11}-3^{9})
+  &= \text{Somme suite B} = 238\,746.
+\end{align*}
+\end{boiteformule}
+
+$\text{Digamma} = 3^{8}$ (8\textsuperscript{ième} position, soustraite) ;\quad
+Digamma calculé $= 79\,824 - 3^{8} = 73\,263$.
+
+Déterminer le nombre premier :
+\[
+\frac{238\,746 - 73\,263}{3^{6}} = 227 \quad (49\textsuperscript{ième}\ \text{nombre premier}).
+\]
+
+\subsubsection{Rapport non typique $1/k = 1/3$ --- équations généralisées}
+
+Somme suite A$(227) = 79\,824$.
+
+\textbf{1.} Déterminer la somme de la suite B du nombre précédent 227, qui est 223 :
+\begin{align*}
+\text{Somme suite A}(227)-3^{6}
+  &= \text{Somme suite B}(223),\\
+\text{Somme suite B}(223)
+  &= 79\,824-3^{6}=79\,095.
+\end{align*}
+9 termes, suite B(223) :
+\begin{align*}
+3^{1}+3^{2}+3^{3}+3^{4}+3^{5}+3^{7}+3^{8}
+&+(3^{9}-3^{7})+(3^{10}+3^{8})\\
+&=79\,095.
+\end{align*}
+9 termes, suite A(223) :
+\begin{align*}
+3^{1}+3^{2}+3^{3}+3^{4}+3^{5}+3^{6}+3^{7}
+&+(3^{8}-3^{6})+(3^{9}+3^{7})\\
+&=26\,607.
+\end{align*}
+
+\textbf{2.} Déterminer le coefficient B, avec Somme suite B$(227) = 238\,746$ :
+\begin{align*}
+\frac{\text{Somme suite B}(227) - \text{Somme suite B}(223)}{3^{8}}
+&= \text{Coefficient B},\\
+\frac{238\,746 - 79\,095}{3^{8}} &= \frac{219}{9} = \text{Coefficient B}.
+\end{align*}
+\begin{boitenote}
+Il s'agit de l'écart le plus petit entre deux suites B pour toutes les valeurs
+de $n$ positives.
+\end{boitenote}
+
+\textbf{3.} Déterminer l'écart minimum entre les termes $n=1$ et $n=2$ pour le
+rapport non typique $1/k = 1/3$ des suites B :
+\begin{align*}
+\frac{\text{Somme suite B}(227) - \text{Somme suite B}(223)}{3^{6}}
+&= \text{différence entre les deux suites B}(227)\ \text{et B}(223),\\
+\frac{238\,746 - 79\,095}{3^{6}} &= 219.
+\end{align*}
+
+\textbf{4.} Écart entre les suites A(227) et B(223) :
+\begin{align*}
+\frac{219}{3} &= 73,\\
+\left(\frac{79\,824}{3^{6}} - 73\right) \times 3^{6}
+&= 26\,607 \quad \text{Somme suite A}(223).
+\end{align*}
+
+\textbf{5.} Déterminer le coefficient pour l'équation de la suite A :
+\begin{align*}
+\frac{\text{Somme suite A}(227) - \text{Somme suite A}(223)}{3^{8}}
+&= \text{Coefficient A},\\
+\frac{79\,824 - 26\,607}{3^{8}} &= \frac{73}{9} = \text{Coefficient A}.
+\end{align*}
+
+\textbf{6.} Équations pour les sommes des suites A et B --- l'équation est
+inspirée de celle déjà connue concernant les suites géométriques
+($S = \frac{1-q^{n+1}}{1-q}$, $q \neq 1$). Déterminer l'équation pour la
+suite A, coefficient A $= 73/9$ :
+\begin{align*}
+\left(\frac{73}{9}\,x \times 3^{10}\right)-\text{Reste} &= 79\,824,\\
+\frac{73}{9}\Big/\frac{238\,746+\text{reste}}{3^{10}}
+&\colon \frac{73}{9}/1.351826449 = 6.000112748,\\
+6.000112748-0.000112748 &= 6=x,\\
+\frac{73}{9}\times6\times3^{10}-\text{Reste} &= 79\,824,\\
+\frac{73}{9}\times6\times3^{10} &= 79\,825.5,\\
+79\,825.5-79\,824 &= \frac{3}{2}=\text{Reste}.
+\end{align*}
+
+\begin{boiteformule}[Équation somme suite A --- rapport $1/3$]
+\[
+\text{Équation } n=10 :\quad \left(\frac{73}{9}\times 6 \times 3^{10}\right) - \frac{3}{2} = 79\,824.
+\]
+\[
+\text{Forme générale :}\quad \left(\frac{73}{9}\times 6 \times 3^{n}\right) - \frac{3}{2} = \text{Somme suite A}
+\quad (n \text{ entier strictement positif}),
+\]
+\[
+\frac{73}{9}\times 3^{-n} - \frac{3}{2} = \text{Somme suite A négative}
+\quad (n \text{ entier strictement négatif}).
+\]
+\end{boiteformule}
+
+\textbf{7.} Déterminer l'équation pour la suite B (coefficient B $= 219/9$) :
+\[
+\left(\frac{219}{9}\, x \times 3^{10}\right) - \text{Reste} = 238\,746,
+\qquad
+\frac{219}{9}\times 4.043184474 = 6.018358423,
+\]
+\[
+6.018358423 - 0.018358423 = 6 = x,
+\qquad
+\frac{219}{9}\times 6 \times 3^{10} - \text{Reste} = 238\,746,
+\]
+\[
+\frac{219}{9}\times 6 \times 3^{10} = 238\,476.5,
+\qquad
+238\,476.5 - 238\,746 = 730.5 = \text{Reste},
+\qquad
+\frac{730.5}{3/2} = 487.
+\]
+
+\begin{boiteformule}[Équation somme suite B --- rapport $1/3$]
+\[
+\text{Équation } n=10 :\quad \left(\frac{219}{9}\times 6 \times 3^{10}\right) - \frac{3}{2}(487) = 238\,746.
+\]
+\[
+\text{Forme générale :}\quad \left(\frac{219}{9}\times 6 \times 3^{n}\right) - \frac{3}{2}(487) = \text{Somme suite B}
+\quad (n \text{ entier strictement positif}),
+\]
+\[
+\frac{219}{9}\times 3^{-n} - \frac{3}{2}(487) = \text{Somme suite B négative}
+\quad (n \text{ entier strictement négatif}).
+\]
+\end{boiteformule}
+
+\textbf{9.} Caractéristiques intrinsèques de la valeur de $n$ pour les rapports
+non typiques $1/k \neq 1/2$ : la valeur de $n$ pour des suites A et B non
+typiques ne correspond pas à la position du nombre premier ; la valeur de $n$
+correspond à la quantité de termes dans les suites A et B, tant pour les suites
+positives que négatives.
+
+\subsection{Rapport non typique $1/k = 1/4$ ($n = 10$ ; $p = 947$, 161\textsuperscript{ème} nombre premier)}
+
+\begin{boiteformule}[Sommes des suites A et B --- rapport $1/4$, $n = 10$]
+\begin{align*}
+4^{1}+4^{2}+4^{3}+4^{4}+4^{5}+4^{6}+4^{7}+4^{8}+(4^{9}-4^{7})+(4^{10}-4^{8})
+  &= \text{Somme suite A} = 1\,316\,180,\\
+4^{1}+4^{2}+4^{3}+4^{4}+4^{5}+4^{7}+4^{8}+4^{9}+(4^{10}-4^{8})+(4^{11}-4^{9})
+  &= \text{Somme suite B} = 5\,260\,628.
+\end{align*}
+\end{boiteformule}
+
+Reconstruire le nombre premier --- Digamma : $+4^{8}$ :
+\begin{align*}
+\text{Digamma calculé : }1\,316\,180+4^{8}
+&=1\,316\,180+65\,536=1\,381\,716,\\
+\frac{5\,260\,628-1\,381\,716}{4^{6}}
+&=\frac{3\,878\,912}{4096}=947.
+\end{align*}
+
+Suites A et B pour $n = 9$ termes (941) :
+\begin{align*}
+4^{1}+4^{2}+4^{3}+4^{4}+4^{5}+4^{6}+4^{7}+(4^{8}-4^{6})+(4^{9}-4^{7}) &= 329\,044,\\
+4^{1}+4^{2}+4^{3}+4^{4}+4^{5}+4^{7}+4^{8}+(4^{9}-4^{7})+(4^{10}-4^{8}) &= 1\,312\,084.
+\end{align*}
+
+Déterminer Somme suite B(941) et les écarts :
+\[
+1316180 - 4096 = 1\,312\,084,
+\qquad
+\frac{5\,260\,628 - 1\,312\,084}{4^{6}} = \frac{3\,948\,544}{4096} = 964,
+\qquad
+\frac{964}{4} = 241,
+\]
+\begin{align*}
+\frac{1\,316\,180 - 329\,044}{4^{6}}
+&= \frac{987\,136}{4096} = 241,\\
+\text{Coefficient A} &= \frac{987\,136}{65\,536} = \frac{241}{16},\\
+\text{Coefficient B} &= \frac{3\,948\,544}{65\,536}
+= \frac{964}{16} = \frac{241}{4}.
+\end{align*}
+
+\begin{boiteformule}[Équations généralisées --- rapport $1/4$]
+\begin{align*}
+\text{Équation A }(n=10):\quad
+\left(\frac{241}{16}\times12\times4^{10}\right)-\frac{4}{3}
+&=1\,316\,180,\\
+\frac{241}{16}\Big/\frac{1\,316\,180}{4^{10}}
+&=12.000001216\Rightarrow x=12,\\
+\text{Équation A généralisée :}\quad
+\left(\frac{241}{192}\times4^{n}\right)-\frac{4}{3}
+&=\text{Somme suite A}\quad(n\in\mathbb{Z},\ n>0),\\
+\frac{241}{16}\times4^{-n}-\frac{4}{3}
+&=\text{Somme suite A négative}.
+\end{align*}
+\begin{align*}
+\text{Équation B }(n=10):\quad
+\left(\frac{241}{4}\times12\times4^{10}\right)-3073\left(\frac{4}{3}\right)
+&=5\,260\,628,\\
+\text{Équation B généralisée :}\quad
+\left(\frac{241}{4}\times12\times4^{n}\right)-3073\left(\frac{4}{3}\right)
+&=\text{Somme suite B},\\
+\frac{241}{4}\times4^{n}-3073\left(\frac{4}{3}\right)
+&=\text{Somme suite B négative}.
+\end{align*}
+\end{boiteformule}
+
+\subsection{Rapport non typique $1/k = 1/5$}
+
+\begin{boiteformule}[Sommes des suites A et B --- rapport $1/5$, $n = 10$]
+\begin{align*}
+5^{1}+5^{2}+5^{3}+5^{4}+5^{5}+5^{6}+5^{7}+5^{8}+(5^{9}-5^{7})+(5^{10}-5^{8})
+  &= 11\,738\,280 \quad \text{Somme suite A},\\
+5^{1}+5^{2}+5^{3}+5^{4}+5^{5}+5^{7}+5^{8}+5^{9}+(5^{10}-5^{8})+(5^{11}+5^{9})
+  &= 58\,675\,780 \quad \text{Somme suite B}.
+\end{align*}
+\end{boiteformule}
+
+\textbf{1.} Reconstruire le nombre premier --- Digamma : $+$7\textsuperscript{ième}
+position suite A : $+5^{7}$ :
+\[
+\text{Digamma calculé : } 11\,738\,280 + 5^{7} = 11\,816\,405,
+\qquad
+\frac{58\,675\,780 - 11\,816\,405}{5^{6}} = 2999.
+\]
+
+\textbf{2.} Suites A et B pour $n = 9$ termes (2993) :
+\begin{align*}
+5^{1}+5^{2}+5^{3}+5^{4}+5^{5}+5^{6}+5^{7}+(5^{8}-5^{6})+(5^{9}-5^{7}) &= 2\,347\,655,\\
+5^{1}+5^{2}+5^{3}+5^{4}+5^{5}+5^{7}+5^{8}+(5^{9}-5^{7})+(5^{10}-5^{8}) &= 11\,722\,655.
+\end{align*}
+
+\textbf{3.} Déterminer les équations servant de manière généralisée à
+l'ensemble des valeurs de $n$ entières positives et négatives pour les suites A
+et B.
+
+\textbf{4.} Déterminer Somme suite B(2993) :
+$\ \text{Somme suite B}(2999) - 5^{6} = \text{Somme suite A}$ ;
+$\ 11\,738\,280 - 5^{6} = 11\,722\,655$.
+
+\textbf{5.} $\displaystyle \frac{\text{Somme suite B}(2999) - \text{Somme suite B}(2993)}{5^{6}}
+= \frac{58\,675\,780 - 11\,722\,655}{5^{6}} = 3005$ \quad (écart entre les suites B $= 3005$).
+
+\textbf{6.} $\displaystyle \frac{3005}{5} = 601$ (écart entre les suites A(2999) et A(2993)) ;
+$\displaystyle \frac{11\,738\,280 - 2\,347\,655}{5^{6}} = 601$.
+
+\textbf{7.} Coefficients : \quad
+Coefficient A $= \dfrac{11\,738\,280 - 2\,347\,655}{5^{8}} = \dfrac{601}{25}$ ;\qquad
+Coefficient B $= \dfrac{58\,675\,780 - 11\,722\,655}{5^{8}} = \dfrac{601}{5}$.
+
+\textbf{8.} Équation A :
+\[
+\left(\frac{601}{25}\, x \times 5^{10}\right) - \text{Reste} = 11\,738\,280,
+\qquad
+\frac{601}{25}\Big/\frac{11\,738\,280}{5^{10}} = 20.00000213 \Rightarrow x = 20,
+\]
+\[
+\frac{601}{25}\times 20 \times 5^{10} - \text{Reste} = 11\,738\,281.25,
+\qquad
+11\,738\,280 - 11\,738\,281.25 = -\frac{5}{4}.
+\]
+
+\begin{boiteformule}[Équations généralisées --- rapport $1/5$]
+\begin{align*}
+\text{Équation A }(n=10):\quad
+\left(\frac{601}{25}\times20\times5^{10}\right)-\frac{5}{4}
+&=11\,738\,280,\\
+\left(\frac{601}{25}\times20\times5^{n}\right)-\frac{5}{4}
+&=\text{Somme suite A},\\
+\text{Équation A négative :}\quad
+\frac{601}{25}\times5^{n}-\frac{5}{4}
+&=\text{Somme suite A},\\
+\text{Équation B :}\quad
+\frac{601}{5}\times20\times5^{10}-\text{Reste}
+&=58\,675\,780,\\
+\frac{601}{5}\Big/\frac{58\,675\,780}{5^{10}}
+&=20.13847323\Rightarrow x=20,\\
+\left(\frac{601}{5}\times20\times5^{10}\right)-\text{Reste}
+&=58\,691\,406.25,\\
+58\,691\,406.25-58\,675\,780 &=15\,626.25,\\
+\frac{15\,626.25}{1.25} &=12\,501,\\
+\text{Équation B }(n=10):\quad
+\frac{601}{5}\times20\times5^{10}
+-12\,501\left(\frac{5}{4}\right)
+&=58\,675\,780,\\
+\frac{601}{5}\times20\times5^{n}
+-12\,501\left(\frac{5}{4}\right)
+&=\text{Somme suite B}.
+\end{align*}
+\end{boiteformule}
+
+\subsection{Rapport non typique $1/k = 1/6$}
+
+\begin{boiteformule}[Sommes des suites A et B --- rapport $1/6$, $n = 10$]
+\begin{align*}
+6^{1}+6^{2}+6^{3}+6^{4}+6^{5}+6^{6}+6^{7}+6^{8}+(6^{9}-6^{7})+(6^{10}+6^{8})
+  &= \text{Somme suite A} = 70\,599\,858,\\
+6^{1}+6^{2}+6^{3}+6^{4}+6^{5}+6^{7}+6^{8}+6^{9}+(6^{10}-6^{8})+(6^{11}+6^{9})
+  &= \text{Somme suite B} = 423\,552\,498.
+\end{align*}
+\end{boiteformule}
+
+Digamma $= +6^{8}$ --- la septième position est la position pour déterminer le
+Digamma calculé et est soustraite :
+\begin{align*}
+\text{Digamma calculé} &=70\,599\,858+6^{7}=72\,279\,474,\\
+\frac{423\,552\,498-72\,279\,474}{6^{6}}
+&=7529\quad\text{nombre premier}.
+\end{align*}
+
+\textbf{1.} Suites A et B de 9 termes (7523) :
+\begin{align*}
+\begin{gathered}
+6^{1}+6^{2}+6^{3}+6^{4}+6^{5}\\
+{}+6^{6}+6^{7}+(6^{8}-6^{6})+(6^{9}-6^{7})
+\end{gathered}
+&=11\,766\,642\quad\text{Somme suite A 9 termes (7523)},\\
+\begin{gathered}
+6^{1}+6^{2}+6^{3}+6^{4}+6^{5}\\
+{}+6^{7}+6^{8}+(6^{9}-6^{7})+(6^{10}-6^{8})
+\end{gathered}
+&=70\,553\,202\quad\text{Somme suite B 9 termes (7523)}.
+\end{align*}
+\[
+\text{Somme suite A}(7529) - 6^{6} = \text{Somme suite B},
+\qquad
+70\,599\,858 - 6^{6} = 70\,553\,202.
+\]
+
+\textbf{2.} Écart des sommes des suites B :
+$\displaystyle \frac{423\,552\,498 - 70\,553\,202}{6^{6}} = 7566$.
+
+\textbf{3.} Écart entre les sommes des suites A(7529) et A(7523) :
+$\displaystyle \frac{7566}{6} = 1261$.
+
+\textbf{4.} Coefficient A :
+$\displaystyle \frac{70\,599\,858 - 11\,766\,642}{6^{8}} = \frac{1261}{36}$.
+
+\textbf{5.} Coefficient B :
+$\displaystyle \frac{423\,552\,498 - 70\,553\,202}{6^{8}} = \frac{1261}{6}$.
+
+\textbf{6.} Équations généralisant la valeur de $n$ pour les suites A et B du
+rapport non typique $1/k = 1/6$ :
+\begin{align*}
+\frac{1261}{36}\, x \times 6^{10} - \text{Reste} = 70\,599\,858,
+\qquad
+\frac{1261}{36}\Big/\frac{70\,599\,858}{6^{10}}
+&=30.00000051\Rightarrow x=30,\\
+\frac{1261}{36}\times30\times6^{10}-\text{Reste}
+&=70\,599\,859.2,\\
+\frac{-46\,657.2}{6/5} &=-38\,881\times\frac{6}{5},\\
+\frac{1261}{36}\times30\times6^{10}
+-38\,881\left(\frac{6}{5}\right)
+&=70\,553\,202.
+\end{align*}
+Pour la somme de la suite B :
+\begin{align*}
+\frac{1261}{6}\, x \times 6^{10} - \text{Reste} = 423\,552\,498,
+\qquad
+\frac{1261}{6}\Big/\frac{423\,552\,498}{6^{10}}
+&=30.0033047\Rightarrow x=30,\\
+\frac{1261}{6}\times30\times6^{10}-\text{Reste}
+&=423\,599\,155.2,\\
+\frac{-46\,657.2}{6/5} &=-38\,881,\\
+\frac{1261}{6}\times30\times6^{10}-\text{Reste}
+&=423\,552\,498.
+\end{align*}
+
+\subsection{Rapport non typique $1/k = 1/7$}
+
+\begin{boiteformule}[Sommes des suites A et B --- rapport $1/7$, $n = 10$]
+\begin{align*}
+7^{1}+7^{2}+7^{3}+7^{4}+7^{5}+7^{6}+7^{7}+7^{8}+(7^{9}-7^{7})+(7^{10}-7^{8})
+  &= \text{Somme suite A} = 322\,966\,112,\\
+7^{1}+7^{2}+7^{3}+7^{4}+7^{5}+7^{7}+7^{8}+7^{9}+(7^{10}-7^{8})+(7^{11}-7^{9})
+  &= \text{Somme suite B} = 2\,260\,645\,142.
+\end{align*}
+\end{boiteformule}
+
+Reconstruire le nombre premier --- Digamma : $-7^{8}$ :
+\begin{align*}
+\text{Digamma calculé : }322\,966\,112-7^{8}
+&=322\,966\,112-5\,764\,801=317\,201\,321,\\
+\frac{2\,260\,645\,142-317\,201\,321}{7^{6}}
+&=\frac{1\,943\,443\,821}{117\,649}=16\,519.
+\end{align*}
+
+Suites A et B pour $n = 9$ termes (16\,511) :
+\begin{align*}
+7^{1}+7^{2}+7^{3}+7^{4}+7^{5}+7^{6}+7^{7}+(7^{8}-7^{6})+(7^{9}-7^{7}) &= 46\,138\,018,\\
+7^{1}+7^{2}+7^{3}+7^{4}+7^{5}+7^{7}+7^{8}+(7^{9}-7^{7})+(7^{10}-7^{8}) &= 322\,848\,463.
+\end{align*}
+
+Équations pour les suites A et B du rapport non typique $1/7$ :
+\begin{align*}
+\text{Somme suite A}(16519)-7^{6}
+&=322\,966\,112-117\,649\\
+&=322\,848\,463=\text{Somme suite B (9 termes)},\\
+\frac{2\,260\,645\,142-322\,848\,463}{7^{6}}
+&=\frac{1\,937\,796\,679}{117\,649}=16\,471,\\
+\frac{16\,471}{7} &=2353,\\
+\frac{322\,966\,112-46\,138\,018}{7^{6}}
+&=\frac{276\,828\,094}{117\,649}=2353,\\
+\text{Coefficient A}
+&=\frac{276\,828\,094}{5\,764\,801}=\frac{2353}{49},\\
+\text{Coefficient B}
+&=\frac{1\,937\,796\,679}{5\,764\,801}=\frac{2353}{7}.
+\end{align*}
+
+\begin{boiteformule}[Équations généralisées --- rapport $1/7$]
+\begin{align*}
+\text{Équation A }(n=10):\quad
+\left(\frac{2353}{49}\times42\times7^{10}\right)-\frac{7}{6}
+&=322\,966\,112,\\
+\frac{2353}{49}\Big/\frac{322\,966\,112}{7^{10}}
+&=42.00000006\Rightarrow x=42,\\
+\text{Forme générale A :}\quad
+\left(\frac{2353}{2058}\times7^{n}\right)-\frac{7}{6}
+&=\text{Somme suite A},\\
+\frac{2353}{49}\times7^{-n}-\frac{7}{6}
+&=\text{Somme suite A négative},\\
+\text{Équation B }(n=10):\quad
+\left(\frac{2353}{7}\times42\times7^{10}\right)
+-100\,843\left(\frac{7}{6}\right)
+&=2\,260\,645\,142,\\
+\frac{705\,901}{6}\Big/\frac{7}{6} &=100\,843,\\
+\text{Forme générale B :}\quad
+\left(\frac{2353}{294}\times7^{n}\right)
+-100\,843\left(\frac{7}{6}\right)
+&=\text{Somme suite B}.
+\end{align*}
+\end{boiteformule}
+
+% ======================================================================
+\section{Système d'équations convolutif généralisé --- pour tout rapport $1/k$ ($k \ge 2$) et tout $n$ commun}
+% ======================================================================
+
+\subsection{Niveau 1 --- Constantes Savard universelles}
+
+\begin{boiteformule}[Constantes universelles]
+\[
+\alpha_A(k) = \frac{2\,(k^{4} - k^{2} + 1)}{(k-1)\cdot k^{3}},
+\qquad
+\alpha_B(k) = k \cdot \alpha_A(k),
+\]
+\[
+\delta_A(k) = \frac{k}{k-1},
+\qquad
+\delta_B(k) = \frac{k^{7} - k^{6} + k}{k-1}.
+\]
+\end{boiteformule}
+
+\subsection{Niveau 2 --- Formules fermées ($n$ quelconque, $n$ commun à tous les rapports)}
+
+\begin{boiteformule}[Formules fermées des sommes]
+\[
+\SA(k,n) = \frac{\alpha_A(k)}{2}\cdot k^{n} - \delta_A(k),
+\qquad
+\SB(k,n) = \frac{\alpha_B(k)}{2}\cdot k^{n} - \delta_B(k).
+\]
+\end{boiteformule}
+
+\begin{boitenote}[Invariant spectral prouvé algébriquement (Théorème XIV.3)]
+\[
+\frac{\SA(k,n_1) - \SA(k,n_2)}{\SB(k,n_1) - \SB(k,n_2)} = \frac{1}{k}
+\qquad \forall\, n_1 \neq n_2,\ k \ge 2.
+\]
+\end{boitenote}
+
+\subsection{Niveau 3 --- Construction terme à terme (Suite A, $n \ge 8$)}
+
+\begin{center}
+\small
+\begin{tabular}{@{}c l l@{}}
+\toprule
+\rowcolor{spectralgris}
+Position $i$ & Terme $A(k,n,i)$ & Terme $B(k,n,i)$ \\
+\midrule
+$1 \le i \le n-2$ & $k^{i}$ & $k^{i}$ ($i \le 5$) ; $k^{7}$ ($i=6$, Saut Zêta) ; $k^{i+1}$ ($7 \le i \le n-2$) \\
+$i = n-1$ & $k^{n-1} - k^{n-3}$ & $k^{n} - k^{n-2}$ \\
+$i = n$ & $k^{n} - k^{n-2}$ & $k^{n+1} - k^{n-1}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Niveau 4 --- Mécanisme d'ancrage à $n = 10$ (4 candidats Digamma)}
+
+Les quatre essais dans l'ordre déterministe :
+
+\begin{center}
+\small
+\begin{tabular}{@{}c c c l l@{}}
+\toprule
+\rowcolor{spectralgris}
+\# & Position & Signe & Digamma & Candidat $P$ \\
+\midrule
+1 & 8 & $-$ & $\SA(k,10) - k^{8}$ & $(\SB - \text{Digamma})/k^{6}$ \\
+2 & 8 & $+$ & $\SA(k,10) + k^{8}$ & $(\SB - \text{Digamma})/k^{6}$ \\
+3 & 7 & $+$ & $\SA(k,10) + k^{7}$ & $(\SB - \text{Digamma})/k^{6}$ \\
+4 & 7 & $-$ & $\SA(k,10) - k^{7}$ & $(\SB - \text{Digamma})/k^{6}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$\to$ Les quatre quotients sont examinés dans cet ordre. Si un seul candidat
+est premier, il peut constituer l'ancre standard. Si plusieurs le sont, toutes
+les branches sont conservées et aucune n'est choisie automatiquement ; une
+branche inscrite au catalogue peut être utilisée seulement comme choix explicite
+et doit rester distinguée d'une ancre unique. Si aucun candidat n'est premier,
+aucune ancre standard n'est produite.
+\[
+P\bigl(1/k,\ n=10\bigr) = \frac{\SB(k,10) - \bigl[\SA(k,10) \pm k^{7}\ \text{ou}\ \pm k^{8}\bigr]}{k^{6}}.
+\]
+
+\subsection{Niveau 5 --- Reconstruction pour $n \neq 10$ ($n$ commun)}
+
+\begin{boiteformule}[Loi de rang spectral]
+\[
+\text{rang\_cible}(k,n) = \text{rang\_base}(k) + n - 10,
+\qquad
+P(k,n) = \text{premier}(\text{rang\_cible}),
+\]
+\[
+\text{Digamma}(k,n) = \SB(k,n) - P(k,n) \times k^{6}.
+\]
+\end{boiteformule}
+
+\subsection{Vérification $k = 3$ à $9$ (tous corrects, 100\,\%)}
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r c r@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & $P(n=10)$ & Branche HOL & Calculé \checkmark \\
+\midrule
+3 & 227 & pos8 $-$ & 227 \\
+4 & 947 & pos8 $+$ & 947 \\
+5 & 2\,999 & pos7 $+$ & 2\,999 \\
+6 & 7\,529 & pos8 $+$ & 7\,529 \\
+7 & 16\,519 & pos8 $-$ & 16\,519 \\
+8 & 32\,327 & pos8 $-$ & 32\,327 \\
+9 & 58\,337 & pos7 $-$ & 58\,337 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Tableau complet $P(1/k)$, $n = 10$ --- $k = 10$ à $k = 111$}
+
+Légende : \textbf{P unique} (un seul candidat standard premier) $\mid$
+\textbf{C\_MULTIPLE} (plusieurs candidats premiers ; aucune sélection
+automatique) $\mid$ \textbf{AUCUN P} (aucun candidat standard premier ; une
+règle spéciale requiert une validation distincte). Lorsqu'une valeur et une
+branche sont indiquées pour un cas multiple, elles désignent le choix de
+référence documenté, pas l'unique candidat.
+
+{\small
+\begin{longtable}{@{}c r l c@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & $P(1/k,\ n=10)$ & État & Branche \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{spectralgris}
+$k$ & $P(1/k,\ n=10)$ & État & Branche \\
+\midrule
+\endhead
+10 & 99\,109 & C\_MULTIPLE & pos8 $-$ \\
+11 & --- & RÈGLE SPÉCIALE (PDF : 1\,611\,851) & --- \\
+12 & 247\,259 & & pos8 $-$ \\
+13 & 368\,939 & & pos8 $+$ \\
+14 & --- & AUCUN P & --- \\
+15 & 755\,789 & & pos8 $+$ \\
+16 & 1\,044\,751 & C\_MULTIPLE & pos8 $-$ \\
+17 & 1\,414\,943 & & pos7 $+$ \\
+18 & 1\,883\,429 & & pos8 $+$ \\
+19 & 2\,469\,277 & & pos7 $-$ \\
+20 & 3\,192\,419 & C\_MULTIPLE & pos8 $-$ \\
+21 & 4\,074\,419 & C\_MULTIPLE & pos8 $+$ \\
+22 & --- & AUCUN P & --- \\
+23 & 6\,424\,727 & & pos8 $-$ \\
+24 & 7\,949\,399 & C\_MULTIPLE & pos8 $-$ \\
+25 & 9\,750\,649 & C\_MULTIPLE & pos8 $-$ \\
+26 & 11\,863\,799 & & pos7 $+$ \\
+27 & --- & RÈGLE SPÉCIALE HOL ($P = 14\,330\,707$) & --- \\
+28 & --- & AUCUN P & --- \\
+29 & --- & AUCUN P & --- \\
+30 & 24\,273\,929 & & pos8 $-$ \\
+31 & --- & AUCUN P & --- \\
+32 & 33\,522\,719 & & pos8 $-$ \\
+33 & --- & AUCUN P & --- \\
+34 & --- & AUCUN P & --- \\
+35 & --- & AUCUN P & --- \\
+36 & 60\,420\,851 & C\_MULTIPLE & pos8 $-$ \\
+37 & 69\,293\,303 & & pos7 $+$ \\
+38 & --- & AUCUN P & --- \\
+39 & --- & AUCUN P & --- \\
+40 & 102\,337\,639 & C\_MULTIPLE & pos8 $-$ \\
+41 & --- & AUCUN P & --- \\
+42 & 130\,617\,143 & & pos7 $+$ \\
+43 & 146\,929\,021 & & pos7 $-$ \\
+44 & --- & AUCUN P & --- \\
+45 & --- & AUCUN P & --- \\
+46 & 205\,867\,801 & C\_MULTIPLE & pos8 $-$ \\
+47 & --- & AUCUN P & --- \\
+48 & --- & AUCUN P & --- \\
+49 & 282\,357\,599 & C\_MULTIPLE & pos7 $+$ \\
+50 & --- & AUCUN P & --- \\
+51 & --- & AUCUN P & --- \\
+52 & 380\,066\,179 & & pos8 $-$ \\
+53 & --- & AUCUN P & --- \\
+54 & 459\,010\,529 & C\_MULTIPLE & pos8 $-$ \\
+55 & --- & AUCUN P & --- \\
+56 & --- & AUCUN P & --- \\
+57 & 601\,506\,977 & & pos7 $-$ \\
+58 & 656\,165\,077 & & pos8 $-$ \\
+59 & --- & AUCUN P & --- \\
+60 & --- & AUCUN P & --- \\
+61 & --- & AUCUN P & --- \\
+62 & 915\,894\,503 & & pos7 $+$ \\
+63 & 992\,182\,589 & C\_MULTIPLE & pos8 $+$ \\
+64 & 1\,073\,483\,839 & C\_MULTIPLE (3 premiers !) & pos8 $-$ \\
+65 & 1\,160\,020\,289 & C\_MULTIPLE & pos8 $-$ \\
+66 & 1\,252\,049\,501 & C\_MULTIPLE & pos8 $-$ \\
+67 & --- & AUCUN P & --- \\
+68 & --- & AUCUN P & --- \\
+69 & 1\,563\,702\,839 & & pos7 $+$ \\
+70 & 1\,680\,356\,999 & & pos7 $+$ \\
+71 & 1\,803\,876\,551 & & pos8 $-$ \\
+72 & --- & AUCUN P & --- \\
+73 & --- & AUCUN P & --- \\
+74 & --- & AUCUN P & --- \\
+75 & 2\,372\,624\,999 & & pos7 $+$ \\
+76 & --- & AUCUN P & --- \\
+77 & 2\,706\,333\,629 & & pos8 $-$ \\
+78 & 2\,886\,705\,977 & & pos8 $-$ \\
+79 & --- & AUCUN P & --- \\
+80 & 3\,276\,294\,479 & & pos8 $-$ \\
+81 & --- & AUCUN P & --- \\
+82 & --- & AUCUN P & --- \\
+83 & --- & AUCUN P & --- \\
+84 & --- & AUCUN P & --- \\
+85 & 4\,436\,438\,999 & & pos7 $+$ \\
+86 & --- & AUCUN P & --- \\
+87 & 4\,983\,550\,877 & & pos7 $-$ \\
+88 & 5\,276\,645\,527 & C\_MULTIPLE & pos8 $-$ \\
+89 & --- & AUCUN P & --- \\
+90 & --- & AUCUN P & --- \\
+91 & --- & AUCUN P & --- \\
+92 & --- & AUCUN P & --- \\
+93 & --- & AUCUN P & --- \\
+94 & --- & AUCUN P & --- \\
+95 & --- & AUCUN P & --- \\
+96 & 8\,152\,842\,431 & & pos7 $-$ \\
+97 & 8\,586\,418\,271 & C\_MULTIPLE & pos8 $+$ \\
+98 & --- & AUCUN P & --- \\
+99 & --- & AUCUN P & --- \\
+100 & --- & AUCUN P & --- \\
+101 & --- & AUCUN P & --- \\
+102 & 11\,039\,747\,027 & & pos7 $-$ \\
+103 & 11\,591\,637\,509 & & pos8 $+$ \\
+104 & --- & AUCUN P & --- \\
+105 & 12\,761\,657\,999 & & pos7 $+$ \\
+106 & 13\,381\,076\,101 & & pos8 $-$ \\
+107 & 14\,024\,303\,819 & & pos8 $-$ \\
+108 & 14\,692\,021\,271 & & pos7 $-$ \\
+109 & 15\,384\,932\,747 & & pos8 $+$ \\
+110 & --- & AUCUN P & --- \\
+111 & 16\,849\,226\,351 & C\_MULTIPLE & pos8 $-$ \\
+\bottomrule
+\end{longtable}}
+
+\subsection{Synthèse statistique ($k = 10$ à $111$)}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l c c@{}}
+\toprule
+\rowcolor{spectralgris}
+État & Nombre de $k$ & \% \\
+\midrule
+P certifié unique & 38 & 37\,\% \\
+C\_MULTIPLE ($\ge 2$ premiers) & 20 & 20\,\% \\
+AUCUN P (règle standard) & 44 & 43\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Notes importantes pour la programmation de l'agent}
+
+\begin{boitealerte}[Cas AUCUN P (44 valeurs)]
+Les 4 candidats standards sont tous composites. Deux stratégies possibles selon
+votre HOL :
+\begin{itemize}[nosep]
+  \item Règle spéciale cataloguée (comme $k=27$ : Digamma $= \SA - (2k^{8}-k^{6})$, $P = 14\,330\,707$) ;
+  \item Mode \textsc{création d'ancrage} : l'agent retourne C\_NON\_CERTIFIÉ et attend validation HOL externe.
+\end{itemize}
+\end{boitealerte}
+
+\begin{boitenote}[Cas C\_MULTIPLE (20 valeurs)]
+Selon le contrat HOL, retourner toutes les branches premières et ne faire
+aucune sélection silencieuse. Une branche de référence portée par le catalogue
+doit être identifiée comme telle ; elle ne rend pas les autres branches
+inexistantes ni le cas unique.
+\end{boitenote}
+
+\begin{boitenote}[Règles spéciales]
+$k=11$ ne donne aucun candidat premier aux quatre essais standards. La valeur
+$P=1\,611\,851$ (rang 121\,982), associée à la règle A7$-$ du moteur géométrique,
+est une règle spéciale distincte et doit être validée séparément. De même,
+$k=27$ utilise une règle spéciale HOL documentée ; aucune de ces règles ne doit
+être extrapolée à d'autres rapports.
+\end{boitenote}
+
+\begin{boitealerte}[Arithmétique exacte requise]
+Pour $k \ge 50$, les valeurs de $\SA$ et $\SB$ dépassent $10^{15}$ : l'agent
+doit utiliser l'arithmétique entière Python (pas float) pour éviter les erreurs
+d'arrondi Excel.
+\end{boitealerte}
+
+\subsection{Exécutions multi-rapports archivées ($n=10$)}
+
+Deux rapports d'exécution du dépôt couvrent les plages communes suivantes :
+\url{liste_k2_k1001_n10.txt} traite $k=2..1001$ (1\,000 rapports) et
+annonce 423 succès ; \url{liste_k1002_k10001_n10.txt} traite
+$k=1002..10001$ (9\,000 rapports) et annonce 2\,604 succès. Ces compteurs
+reproduisent le statut du dispatcher v7.9 au moment de la génération.
+
+\begin{boitealerte}[Portée des rapports archivés]
+Ces fichiers sont des journaux de calcul, pas des certificats indépendants.
+Le dispatcher historique retenait le premier candidat premier rencontré ; il
+ne consignait pas systématiquement toutes les branches premières. Les succès
+ne démontrent donc ni l'unicité de l'ancre, ni la primalité démontrée par HOL,
+ni une propriété sur les zéros de la fonction zêta. Le dispatcher corrigé
+conserve les branches candidates, signale les ambiguïtés hors catalogue et
+réserve les sélections documentées à une décision explicite.
+\end{boitealerte}
+
+% ======================================================================
+\section{Exemple numérique complet --- $n = 15$}
+% ======================================================================
+
+\subsection{Rapport $1/13$ ($k = 13$, $n = 15$)}
+
+\subsubsection{Niveau 1 --- Constantes Savard universelles}
+
+\begin{center}\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\rowcolor{spectralgris}
+Constante & Formule & Valeur exacte \\
+\midrule
+$\alpha_A(13)$ & $2(13^{4}-13^{2}+1)/(12\cdot 13^{3})$ & $28\,393/13\,182$ \\
+$\alpha_B(13)$ & $13\cdot\alpha_A(13)$ & $28\,393/1014$ \\
+$\delta_A(13)$ & $13/12$ & $13/12$ \\
+$\delta_B(13)$ & $(13^{7}-13^{6}+13)/12$ & $57\,921\,721/12$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 2 --- Formules fermées}
+\begin{align*}
+\SA(13,15) &= \frac{(k^{4}-k^{2}+1)k^{12}}{k-1}-\frac{k}{k-1},\\
+&= \frac{28\,393\times23\,298\,085\,122\,481}{12}-\frac{13}{12},\\
+&=55\,125\,210\,906\,883\,585,\\
+\SB(13,15) &= \frac{(k^{4}-k^{2}+1)k^{13}}{k-1}
+-\frac{k^{7}-k^{6}+k}{k-1},\\
+&=716\,627\,741\,784\,659\,809.
+\end{align*}
+
+Invariant spectral (Théorème XIV.3) :
+\begin{align*}
+\Delta\SA &= \SA(n{=}15)-\SA(n{=}10),\\
+&=55\,125\,210\,906\,883\,585-148\,468\,220\,264,\\
+&=55\,125\,062\,438\,663\,321,\\
+\Delta\SB &= \SB(n{=}15)-\SB(n{=}10),\\
+&=716\,627\,741\,784\,659\,809-1\,930\,082\,036\,636,\\
+&=716\,625\,811\,702\,623\,173,\\
+\Delta\SA / \Delta\SB &= 1/13 \quad \checkmark
+\end{align*}
+
+\subsubsection{Niveau 3 --- Construction terme à terme ($n = 15$)}
+
+\begin{center}\small
+\begin{tabular}{@{}c r r l l@{}}
+\toprule
+\rowcolor{spectralgris}
+$i$ & $A(13,15,i)$ & $B(13,15,i)$ & Règle A & Règle B \\
+\midrule
+1 & 13 & 13 & $k^{1}$ & $k^{1}$ \\
+2 & 169 & 169 & $k^{2}$ & $k^{2}$ \\
+3 & 2\,197 & 2\,197 & $k^{3}$ & $k^{3}$ \\
+4 & 28\,561 & 28\,561 & $k^{4}$ & $k^{4}$ \\
+5 & 371\,293 & 371\,293 & $k^{5}$ & $k^{5}$ \\
+6 & 4\,826\,809 & 62\,748\,517 & $k^{6}$ & $k^{7}$ $\leftarrow$ Saut Zêta \\
+7 & 62\,748\,517 & 815\,730\,721 & $k^{7}$ & $k^{8}$ \\
+8 & 815\,730\,721 & 10\,604\,499\,373 & $k^{8}$ & $k^{9}$ \\
+9 & 10\,604\,499\,373 & 137\,858\,491\,849 & $k^{9}$ & $k^{10}$ \\
+10 & 137\,858\,491\,849 & 1\,792\,160\,394\,037 & $k^{10}$ & $k^{11}$ \\
+11 & 1\,792\,160\,394\,037 & 23\,298\,085\,122\,481 & $k^{11}$ & $k^{12}$ \\
+12 & 23\,298\,085\,122\,481 & 302\,875\,106\,592\,253 & $k^{12}$ & $k^{13}$ \\
+13 & 302\,875\,106\,592\,253 & 3\,937\,376\,385\,699\,289 & $k^{13}$ & $k^{14}$ \\
+14 & 3\,914\,078\,300\,576\,808 & 50\,883\,017\,907\,498\,504 & $k^{14}-k^{12}$ & $k^{15}-k^{13}$ \\
+15 & 50\,883\,017\,907\,498\,504 & 661\,479\,232\,797\,480\,552 & $k^{15}-k^{13}$ & $k^{16}-k^{14}$ \\
+\midrule
+$\Sigma$ & \multicolumn{2}{l}{$\Sigma A = 55\,125\,210\,906\,883\,585 = \SA(13,15)$} & \multicolumn{2}{l}{$\Sigma B = 716\,627\,741\,784\,659\,809 = \SB(13,15)$} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 4 --- 4 essais Digamma ($k^{6} = 4\,826\,809$)}
+
+Les 4 essais sont calibrés pour $n=10$. Pour $n=15$, ils servent de
+vérification structurelle --- tous composites est le comportement attendu.
+
+\begin{center}\small
+\begin{tabular}{@{}c r r l@{}}
+\toprule
+\rowcolor{spectralgris}
+Branche & Digamma & $P$ candidat & État \\
+\midrule
+pos13$-$ & 54\,822\,335\,800\,291\,332 & 137\,110\,336\,453 & composé \\
+pos13$+$ & 55\,428\,086\,013\,475\,838 & 136\,984\,839\,419 & composé \\
+pos12$+$ & 55\,148\,508\,992\,006\,066 & 137\,042\,761\,127 & composé \\
+pos12$-$ & 55\,101\,912\,821\,761\,104 & 137\,052\,414\,745 & composé \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 5 --- Reconstruction rang cible (méthode officielle pour $n \neq 10$)}
+\begin{gather*}
+P(13,n{=}10)\ \text{documenté}=368\,939,\\
+\text{rang\_base}(13)=\pi(368\,939)=31\,452,\\
+\Delta n=15-10=5,\\
+\text{rang\_cible}(13,n{=}15)=31\,452+5=31\,457,\\
+P(13,n{=}15)=\text{premier}(31\,457)=369\,023
+\quad\textbf{PREMIER certifié}.
+\end{gather*}
+\begin{multline*}
+\text{Digamma}(13,15)=\SB-P\times k^{6}\\
+=716\,627\,741\,784\,659\,809\\
+{}-369\,023\times4\,826\,809\\
+=716\,625\,960\,581\,122\,202.
+\end{multline*}
+
+\subsection{Rapport $1/42$ ($k = 42$, $n = 15$)}
+
+\subsubsection{Niveau 1 --- Constantes Savard universelles}
+
+\begin{center}\small
+\begin{tabular}{@{}l l@{}}
+\toprule
+\rowcolor{spectralgris}
+Constante & Valeur exacte \\
+\midrule
+$\alpha_A(42)$ & $3\,109\,933\,/\,1\,518\,804$ \\
+$\alpha_B(42)$ & $3\,109\,933\,/\,36\,162$ \\
+$\delta_A(42)$ & $42/41$ \\
+$\delta_B(42)$ & $225\,050\,301\,546\,/\,41$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 2 --- Formules fermées}
+\begin{align*}
+\SA(42,15)&=2\,285\,381\,254\,365\,702\,554\,104\,806,\\
+\SB(42,15)&=95\,986\,012\,683\,359\,501\,783\,370\,150.
+\end{align*}
+
+\subsubsection{Niveau 3 --- Construction terme à terme ($n = 15$)}
+
+\begin{center}\small
+\begin{tabular}{@{}c r r@{}}
+\toprule
+\rowcolor{spectralgris}
+$i$ & $A(42,15,i)$ & $B(42,15,i)$ \\
+\midrule
+1 & 42 & 42 \\
+2 & 1\,764 & 1\,764 \\
+3 & 74\,088 & 74\,088 \\
+4 & 3\,111\,696 & 3\,111\,696 \\
+5 & 130\,691\,232 & 130\,691\,232 \\
+6 & 5\,489\,031\,744 & 230\,539\,333\,248 \quad $\leftarrow$ Saut Zêta ($k^{7}$) \\
+7 & 230\,539\,333\,248 & 9\,682\,651\,996\,416 \\
+8 & 9\,682\,651\,996\,416 & 406\,671\,383\,849\,472 \\
+9 & 406\,671\,383\,849\,472 & 17\,080\,198\,121\,677\,824 \\
+10 & 17\,080\,198\,121\,677\,824 & 717\,368\,321\,110\,468\,608 \\
+11 & 717\,368\,321\,110\,468\,608 & 30\,129\,469\,486\,639\,681\,536 \\
+12 & 30\,129\,469\,486\,639\,681\,536 & 1\,265\,437\,718\,438\,866\,624\,512 \\
+13 & 1\,265\,437\,718\,438\,866\,624\,512 & 53\,148\,384\,174\,432\,398\,229\,504 \\
+14 & 53\,118\,254\,704\,945\,758\,547\,968 & 2\,230\,966\,697\,607\,721\,859\,014\,656 \\
+15 & 2\,230\,966\,697\,607\,721\,859\,014\,656 & 93\,700\,601\,299\,524\,318\,078\,615\,552 \\
+\midrule
+$\Sigma$ & \multicolumn{2}{l}{$\Sigma A = 2\,285\,381\,254\,365\,702\,554\,104\,806$ \quad $\Sigma B = 95\,986\,012\,683\,359\,501\,783\,370\,150$} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 4 --- 4 essais Digamma ($k^{6} = 5\,489\,031\,744$)}
+
+\begin{center}\small
+\begin{tabular}{@{}c r r l@{}}
+\toprule
+\rowcolor{spectralgris}
+Branche & Digamma & $P$ candidat & État \\
+\midrule
+pos13$-$ & 2\,284\,115\,816\,647\,263\,687\,480\,294 & 17\,070\,751\,498\,046\,399 & composé \\
+pos13$+$ & 2\,286\,646\,692\,084\,141\,420\,729\,318 & 17\,070\,290\,419\,379\,903 & composé \\
+pos12$+$ & 2\,285\,411\,383\,835\,189\,193\,786\,342 & 17\,070\,515\,469\,681\,407 & composé \\
+pos12$-$ & 2\,285\,351\,124\,896\,215\,914\,423\,270 & 17\,070\,526\,447\,744\,895 & composé \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 5 --- Reconstruction rang\_cible}
+\begin{gather*}
+P(42,n{=}10)\ \text{documenté}=130\,617\,143,\\
+\text{rang\_base}(42)=\pi(130\,617\,143)=7\,411\,117,\\
+\Delta n=15-10=5,\\
+\text{rang\_cible}(42,n{=}15)=7\,411\,117+5=7\,411\,122,\\
+P(42,n{=}15)=\text{premier}(7\,411\,122)=130\,617\,251
+\quad\textbf{PREMIER certifié}.
+\end{gather*}
+\begin{multline*}
+\text{Digamma}(42,15)=\SB-P\times k^{6}\\
+=95\,986\,012\,683\,359\,501\,783\,370\,150\\
+{}-130\,617\,251\times5\,489\,031\,744\\
+=95\,986\,011\,966\,397\,264\,730\,354\,406.
+\end{multline*}
+
+\subsection{Rapport $1/54$ ($k = 54$, $n = 15$)}
+
+\subsubsection{Niveau 1 --- Constantes Savard universelles}
+
+\begin{center}\small
+\begin{tabular}{@{}l l@{}}
+\toprule
+\rowcolor{spectralgris}
+Constante & Valeur exacte \\
+\midrule
+$\alpha_A(54)$ & $8\,500\,141\,/\,4\,172\,796$ \\
+$\alpha_B(54)$ & $8\,500\,141\,/\,77\,274$ \\
+$\delta_A(54)$ & $54/53$ \\
+$\delta_B(54)$ & $1\,314\,130\,298\,742\,/\,53$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 2 --- Formules fermées}
+\begin{align*}
+\SA(54,15)&=98\,599\,651\,085\,954\,948\,762\,648\,034,\\
+\SB(54,15)&=5\,324\,381\,158\,641\,567\,208\,388\,082\,594,\\
+\Delta\SA/\Delta\SB&=1/54\quad\checkmark
+\end{align*}
+
+\subsubsection{Niveau 3 --- Construction terme à terme ($n = 15$)}
+
+\begin{center}\small
+\begin{tabular}{@{}c r r@{}}
+\toprule
+\rowcolor{spectralgris}
+$i$ & $A(54,15,i)$ & $B(54,15,i)$ \\
+\midrule
+1--5 & \multicolumn{2}{l}{54 / 2\,916 / 157\,464 / 8\,503\,056 / 459\,165\,024 \quad (idem A et B)} \\
+6 & 24\,794\,911\,296 & 1\,338\,925\,209\,984 \quad $\leftarrow$ Saut Zêta ($54^{7}$) \\
+7 & 1\,338\,925\,209\,984 & 72\,301\,961\,339\,136 \\
+8 & 72\,301\,961\,339\,136 & 3\,904\,305\,912\,313\,344 \\
+9 & 3\,904\,305\,912\,313\,344 & 210\,832\,519\,264\,920\,576 \\
+10 & 210\,832\,519\,264\,920\,576 & 11\,384\,956\,040\,305\,711\,104 \\
+11 & 11\,384\,956\,040\,305\,711\,104 & 614\,787\,626\,176\,508\,399\,616 \\
+12 & 614\,787\,626\,176\,508\,399\,616 & 33\,198\,531\,813\,531\,453\,579\,264 \\
+13 & 33\,198\,531\,813\,531\,453\,579\,264 & 1\,792\,720\,717\,930\,698\,493\,280\,256 \\
+14 & 1\,792\,105\,930\,304\,521\,984\,880\,640 & 96\,773\,720\,236\,444\,187\,183\,554\,560 \\
+15 & 96\,773\,720\,236\,444\,187\,183\,554\,560 & 5\,225\,780\,892\,767\,986\,107\,911\,946\,240 \\
+\midrule
+$\Sigma$ & \multicolumn{2}{l}{$\Sigma A = 98\,599\,651\,085\,954\,948\,762\,648\,034$ \quad $\Sigma B = 5\,324\,381\,158\,641\,567\,208\,388\,082\,594$} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 4 --- 4 essais Digamma ($k^{6} = 24\,794\,911\,296$)}
+
+\begin{center}\small
+\begin{tabular}{@{}c >{\raggedleft\arraybackslash}p{5.6cm} >{\raggedleft\arraybackslash}p{4.2cm} l@{}}
+\toprule
+\rowcolor{spectralgris}
+Branche & Digamma & $P$ candidat & État \\
+\midrule
+pos13$-$ & 98\,566\,452\,554\,141\,417\,309\,068\,770 & 210\,761\,581\,023\,702\,719 & composé \\
+pos13$+$ & 98\,632\,849\,617\,768\,480\,216\,227\,298 & 210\,758\,903\,173\,282\,751 & composé \\
+pos12$+$ & 98\,600\,265\,873\,581\,125\,271\,047\,650 & 210\,760\,217\,303\,581\,439 & composé \\
+pos12$-$ & 98\,599\,036\,298\,328\,772\,254\,248\,418 & 210\,760\,266\,893\,404\,031 & composé \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Niveau 5 --- Reconstruction rang\_cible}
+\begin{gather*}
+P(54,n{=}10)\ \text{documenté}=459\,010\,529,\\
+\text{rang\_base}(54)=\pi(459\,010\,529)=24\,304\,918,\\
+\Delta n=15-10=5,\\
+\text{rang\_cible}(54,n{=}15)=24\,304\,918+5=24\,304\,923,\\
+P(54,n{=}15)=\text{premier}(24\,304\,923)=459\,010\,597
+\quad\textbf{PREMIER certifié}.
+\end{gather*}
+\begin{multline*}
+\text{Digamma}(54,15)=\SB-P\times k^{6}\\
+=5\,324\,381\,158\,641\,567\,208\,388\,082\,594\\
+{}-459\,010\,597\times24\,794\,911\,296\\
+=5\,324\,381\,147\,260\,440\,171\,849\,078\,882.
+\end{multline*}
+\begin{boitealerte}[Statut de l'ancre $1/54$]
+Le tableau 3.7 classe $k=54$ comme \textbf{C\_MULTIPLE}. Les essais exacts
+produisent au moins les deux branches premières $A(8)-=459\,010\,529$ et
+$A(8)+=459\,004\,697$. Les calculs de rang ci-dessus suivent la branche
+$A(8)-$ explicitement documentée par la source ; le résultat n'est pas une
+ancre unique et doit rester conditionnel à cette sélection de référence.
+\end{boitealerte}
+
+\subsection{Tableau récapitulatif final --- $P(1/k,\ n = 15)$}
+
+\begin{center}\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}c r r r r r r l@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & \multicolumn{1}{c}{$\SA(k,15)$} & \multicolumn{1}{c}{$\SB(k,15)$} & rang base & rang cible & $P(k,n{=}15)$ & $P(k,n{=}10)$ & État \\
+\midrule
+13 & 55\,125\,210\,906\,883\,585 & 716\,627\,741\,784\,659\,809 & 31\,452 & 31\,457 & 369\,023 & 368\,939 & CERTIFIÉ \\
+42 & $2.29\times 10^{24}$ & $9.60\times 10^{25}$ & 7\,411\,117 & 7\,411\,122 & 130\,617\,251 & 130\,617\,143 & CERTIFIÉ \\
+54 & $9.86\times 10^{25}$ & $5.32\times 10^{27}$ & 24\,304\,918 & 24\,304\,923 & 459\,010\,597 & 459\,010\,529 & C\_MULTIPLE ; A(8)- documentée \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\subsection{Notes critiques pour l'agent}
+
+\subsubsection{1. Saut Zêta --- asymétrie A / B confirmée}
+La correction importante validée ici : $A(k,n,i) = k^{i}$ pour tout
+$1 \le i \le n-2$ (pas de Saut Zêta dans la suite A). Le Saut Zêta $k^{7}$ à la
+position $i=6$ n'existe que dans la suite B. Les deux suites sont identiques
+pour $i \le 5$, puis divergent à partir de $i = 6$.
+
+\subsubsection{2. Niveau 4 hors-calibrage pour $n \neq 10$}
+Les 4 essais Digamma (pos$(n-2)\pm$, pos$(n-3)\pm$) produisent tous des
+candidats composites pour $n=15$ --- ce comportement est attendu et correct.
+Ces essais sont calibrés structurellement sur $n=10$ ; le Niveau 5 est la voie
+officielle pour tout $n \neq 10$.
+
+\subsubsection{3. Niveau 5 --- formule rang\_cible}
+\begin{boiteformule}[Pseudo-code officiel]
+\texttt{rang\_base(k) = primepi(P(k, n=10))} \quad \# rang du P certifié à n=10\\
+\texttt{rang\_cible(k, n) = rang\_base(k) + (n - 10)}\\
+\texttt{P(k, n) = prime(rang\_cible(k, n))} \quad \# arithmétique exacte sympy
+\end{boiteformule}
+L'écart en rang $+5$ (pour $\Delta n = 5$) est cohérent pour les trois $k$,
+et illustre la règle de rang pour ces trois exemples. Trois cas numériques ne
+suffisent pas à établir l'universalité de cette règle pour tout $k$.
+
+\subsubsection{4. Invariant spectral (Théorème XIV.3) --- vérifié pour les 3 rapports}
+\[
+\Delta\SA(k, n{=}15, n{=}10)\,/\,\Delta\SB(k, n{=}15, n{=}10) = 1/k
+\qquad \forall\, k \in \{13, 42, 54\} \quad \checkmark
+\]
+
+\subsubsection{5. Arithmétique --- seuils de dépassement float}
+
+\begin{center}\small
+\begin{tabular}{@{}c c c l@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & $\SA(k,15)$ & Ordre de grandeur & Float 64 safe ? \\
+\midrule
+13 & 55\,125\,210\,906\,883\,585 & $\sim 5.5\times 10^{16}$ & limite \\
+42 & $2.29\times 10^{24}$ & $\sim 10^{24}$ & erreur garantie \\
+54 & $9.86\times 10^{25}$ & $\sim 10^{25}$ & erreur garantie \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boitealerte}
+Arithmétique entière Python obligatoire dès $k \ge 42$ pour $n = 15$.
+Excel / float64 introduiraient des erreurs d'arrondi fatales.
+\end{boitealerte}
+
+
+% ======================================================================
+\section{Schéma neuronal et arborescence algorithmique du système convolutif}
+% ======================================================================
+
+Cette section est construite à partir des tables convolutives du classeur Excel
+\url{systeme_convolutif_spectral_general.xlsx} (feuilles
+\emph{Convolution}, \emph{Systeme General}, \emph{Parametres},
+\emph{Moteur Géo Convolutif}, \emph{Tests Digamma}, \emph{Suites Géo A-B}).
+
+\subsection{Schéma neuronal de la table convolutive}
+
+Chaque terme de la table de convolution formelle vaut $c_1 \cdot k^{e_1} +
+c_2 \cdot k^{e_2}$ : cette représentation encode les additions et soustractions
+sans figer $k$. Le schéma ci-dessous en trace le réseau de propagation, de
+l'entrée $(k, n)$ jusqu'au premier certifié.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  entree/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu!12,thick,minimum width=2.6cm,minimum height=0.8cm,align=center},
+  neurone/.style={circle,draw=spectralazur,fill=spectralazur!12,thick,minimum size=0.62cm,inner sep=1pt},
+  neuroneB/.style={circle,draw=spectralviolet,fill=spectralviolet!12,thick,minimum size=0.62cm,inner sep=1pt},
+  somme/.style={rectangle,rounded corners,draw=spectralor,fill=spectralor!18,thick,minimum width=1.7cm,minimum height=0.8cm,align=center},
+  digamma/.style={diamond,draw=spectralviolet,fill=spectralviolet!10,thick,aspect=2.2,align=center,inner sep=0.5pt},
+  sortie/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=2.9cm,minimum height=0.9cm,align=center},
+  flux/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!70},
+  fluxor/.style={-{Stealth[length=2.2mm]},thick,spectralor!90!black}
+]
+  % --- Entrées
+  \node[entree] (k) at (0,0) {Rapport $1/k$\\[-1pt]$k \ge 2$ entier};
+  \node[entree] (n) at (3.4,0) {$n$ = nombre de\\[-1pt]termes ($n \ge 8$)};
+
+  % --- Couche termes (neurones)
+  \foreach \i/\lab in {1/$k^{1}$,2/$k^{2}$,3/$k^{3}$,5/$k^{i}$,7/$k^{n-2}$}{
+    \node[neurone] (a\i) at (0.4*\i+0.2,-2.1) {\lab};}
+  \node at (3.4,-2.1) {\footnotesize $\cdots$};
+  \node[neurone,draw=spectralor,fill=spectralor!25] (as1) at (3.6,-2.1) {};
+  \node[neurone,draw=spectralor,fill=spectralor!25] (as2) at (4.4,-2.1) {};
+  \node[below=1pt of as1,xshift=-4pt] {\scriptsize Savard $k^{n-1}{-}k^{n-3}$};
+  \node[below=1pt of as2,xshift=4pt] {\scriptsize Savard $k^{n}{-}k^{n-2}$};
+
+  \foreach \i/\lab in {1/$k^{1}$,2/$k^{2}$,3/$k^{5}$,5/$k^{i+1}$,7/$k^{n-2}$}{
+    \node[neuroneB] (b\i) at (0.4*\i+0.2,-3.4) {\lab};}
+  \node at (3.4,-3.4) {\footnotesize $\cdots$};
+  \node[neuroneB,draw=spectralor,fill=spectralor!25] (bs1) at (3.6,-3.4) {};
+  \node[neuroneB,draw=spectralor,fill=spectralor!25] (bs2) at (4.4,-3.4) {};
+  \node[above=1pt of b3,yshift=2pt] {};
+  \node[below=1pt of bs1,xshift=-4pt] {\scriptsize décalé $k^{n}{-}k^{n-2}$};
+  \node[below=1pt of bs2,xshift=4pt] {\scriptsize décalé $k^{n+1}{-}k^{n-1}$};
+  \node[neuroneB,draw=spectralrouge,fill=spectralrouge!15] (zeta) at (2.6,-3.4) {$k^{7}$};
+  \node[above=1pt of zeta] {\scriptsize\color{spectralrouge} Saut Zêta ($i=6$)};
+
+  % --- Sommes
+  \node[somme] (sa) at (2.1,-5.0) {$\SA(k,n)$\\[-2pt]\scriptsize $\frac{\alpha_A}{2}k^{n}-\delta_A$};
+  \node[somme] (sb) at (2.1,-6.3) {$\SB(k,n)$\\[-2pt]\scriptsize $\frac{\alpha_B}{2}k^{n}-\delta_B$};
+
+  % --- Digamma : 4 branches
+  \node[digamma] (d1) at (6.9,-4.4) {\scriptsize $\SA - k^{8}$};
+  \node[digamma] (d2) at (6.9,-5.3) {\scriptsize $\SA + k^{8}$};
+  \node[digamma] (d3) at (6.9,-6.2) {\scriptsize $\SA + k^{7}$};
+  \node[digamma] (d4) at (6.9,-7.1) {\scriptsize $\SA - k^{7}$};
+
+  % --- Division Zêta + primalité
+  \node[somme,minimum width=2.5cm] (div) at (10.6,-5.3) {$P = \dfrac{\SB - \text{Digamma}}{k^{6}}$\\[-1pt]\scriptsize test : entier ? premier ?};
+  \node[sortie] (p) at (10.6,-7.4) {$P$ certifié\\\scriptsize ancrage $n=10$};
+  \node[sortie,fill=spectralviolet] (rang) at (10.6,-8.9) {Niveau 5\\\scriptsize rang cible $=$ rang base $+\,n-10$};
+
+  % --- Flux
+  \draw[flux] (k.south) -- (1.1,-1.2) -| (a1.north);
+  \draw[flux] (n.south) -- (3.4,-1.2) -| (as2.north);
+  \foreach \i in {1,2,3,5,7}{ \draw[fluxor] (a\i.south) -- (a\i.south |- sa.north); }
+  \draw[fluxor] (as1.south) -- (as1.south |- sa.north);
+  \draw[fluxor] (as2.south) -- (as2.south |- sa.north);
+  \foreach \i in {1,2,3,5,7}{ \draw[fluxor] (b\i.south) -- (b\i.south |- sb.north); }
+  \draw[fluxor] (zeta.south) -- (zeta.south |- sb.north);
+  \draw[fluxor] (bs1.south) -- (bs1.south |- sb.north);
+  \draw[fluxor] (bs2.south) -- (bs2.south |- sb.north);
+  \draw[flux] (sa.east) -- (d1.west); \draw[flux] (sa.east) -- (d2.west);
+  \draw[flux] (sa.east) -- (d3.west); \draw[flux] (sa.east) -- (d4.west);
+  \draw[flux] (sb.east) -| (div.south);
+  \foreach \i in {1,2,3,4}{ \draw[flux] (d\i.east) -- (div.west |- d\i.east); }
+  \draw[flux] (div.south) -- (p.north);
+  \draw[flux] (p.south) -- (rang.north) node[midway,right]{\scriptsize $n \neq 10$};
+  % Étiquettes de couches
+  \node[rotate=90,anchor=south,color=spectralbleu] at (-1.15,-2.75) {\scriptsize couche termes (table Convolution)};
+  \node[rotate=90,anchor=south,color=spectralor!80!black] at (-1.15,-5.65) {\scriptsize couche sommes};
+  \node[rotate=90,anchor=south,color=spectralviolet] at (5.6,-5.75) {\scriptsize 4 branches Digamma};
+\end{tikzpicture}
+\caption{Schéma neuronal du système convolutif : propagation des termes
+$c_1 k^{e_1} + c_2 k^{e_2}$ des suites A et B vers les sommes $\SA$/$\SB$, puis
+vers les quatre branches Digamma et la division Zêta $k^{6}$ menant au premier
+certifié (ancrage $n=10$) ou à la loi de rang spectral (Niveau 5).}
+\end{figure}
+
+\subsection{Arborescence algorithmique --- niveaux 1 et 2}
+
+Les deux niveaux évaluent la même construction sous deux représentations : le
+niveau géométrique multiplie les termes entiers par un facteur commun et
+reproduit les mêmes quatre candidats. Il ne crée pas une ancre supplémentaire
+lorsque le niveau entier n'en trouve aucune. Le résultat à $n=10$ doit donc
+être classé comme candidat unique, choix de catalogue explicite, ambiguïté sans
+décision ou absence de candidat standard.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  scale=0.82,transform shape,
+  font=\footnotesize,
+  etape/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralgris,thick,minimum width=6.4cm,minimum height=0.78cm,align=center},
+  decision/.style={diamond,draw=spectralor,fill=spectralor!15,thick,aspect=2.6,align=center,inner sep=0.5pt},
+  fin/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=4.4cm,minimum height=0.8cm,align=center},
+  geo/.style={rectangle,rounded corners,draw=spectralviolet,fill=spectralviolet!10,thick,minimum width=5.4cm,minimum height=0.78cm,align=center},
+  fl/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!80}
+]
+  \node[etape] (e1) at (0,0) {\textbf{[1]} Sommes A/B à $n=10$ --- suites construites terme à terme};
+  \node[etape] (e2) at (0,-1.1) {\textbf{[2]} Quatre possibilités Digamma : $\SA \pm k^{8}$, $\SA \pm k^{7}$};
+  \node[etape] (e3) at (0,-2.2) {\textbf{[3]} Sommes A/B à $n=9$ (premier précédent)};
+  \node[etape] (e4) at (0,-3.3) {\textbf{[4]} Coefficients : $\bigl(\mathrm{S}(10)-\mathrm{S}(9)\bigr)/k^{8}$};
+  \node[etape] (e5) at (0,-4.4) {\textbf{[5]} $(\text{Reste}+x)$ $\to$ blocs A (entière) / B (décimale)};
+  \node[etape] (e6) at (0,-5.5) {\textbf{[6]} Équations généralisées $\frac{\text{Coeff}}{x}\,k^{n} - \text{Reste}$ ($n > 0$ et $n < 0$)};
+  \node[etape] (e7) at (0,-6.6) {\textbf{[7]} Sommes A/B au $n$ demandé $+$ premier conséquent};
+
+  \node[decision] (d10) at (-5.6,-1.1) {$n = 10$ ?};
+  \node[decision] (dpr) at (-5.6,-3.3) {$\ge 1$ premier\\parmi 4 essais ?};
+  \node[geo] (g2) at (-5.6,-5.6) {\textbf{Niveau 2 (fallback géométrique)}\\suites $\sqrt{a^{2}+b^{2}}$, facteur $g(k)=\frac{\sqrt{1+k^{2}}}{k}$\\extraction floor/ceil/round, test de primalité};
+  \node[fin] (f1) at (-5.6,-7.6) {$P$ certifié --- ancrage $n=10$};
+
+  \node[decision] (dn) at (5.9,-1.1) {$n \neq 10$ ?};
+  \node[etape,minimum width=5.6cm] (r1) at (5.9,-2.9) {\textbf{Niveau 5} : rang cible $=$ rang base $+\,n-10$\\$P(k,n) = \text{premier}(\text{rang cible})$};
+  \node[etape,minimum width=5.6cm] (r2) at (5.9,-4.3) {Digamma à rebours : $\SB(k,n) - P(k,n)\,k^{6}$};
+  \node[fin] (f2) at (5.9,-7.6) {Premier conséquent certifié};
+
+  \draw[fl] (e1) -- (e2); \draw[fl] (e2) -- (e3); \draw[fl] (e3) -- (e4);
+  \draw[fl] (e4) -- (e5); \draw[fl] (e5) -- (e6); \draw[fl] (e6) -- (e7);
+  \draw[fl] (d10) -- node[above]{\scriptsize oui} (e2);
+  \draw[fl] (d10.north) |- node[above,pos=0.75]{\scriptsize non} (dn.west);
+  \draw[fl] (e2.west) -- (dpr.north);
+  \draw[fl] (dpr) -- node[above]{\scriptsize non} (g2.north);
+  \draw[fl] (dpr.east) -- node[above]{\scriptsize oui} (e3.west);
+  \draw[fl] (g2) -- (f1) node[midway,right]{\scriptsize $\ge 1$ premier};
+  \draw[fl] (e7.west) -| (f1.east);
+  \draw[fl] (dn) -- node[right]{\scriptsize oui} (r1);
+  \draw[fl] (r1) -- (r2);
+  \draw[fl] (r2) -- (f2);
+  \draw[fl,dashed,spectralor] (f1.south) -- ++(0,-0.5) -| (r1.south)
+    node[pos=0.25,below]{\scriptsize ancrage obligatoire};
+\end{tikzpicture}
+\caption{Arborescence algorithmique des étapes du système convolutif pour les
+niveaux 1 (entier) et 2 (géométrique), avec la voie officielle du Niveau 5 pour
+tout $n \neq 10$. Invariants : le Digamma (4 possibilités) et les équations de
+reconstruction pour $\forall n$ demeurent identiques d'un niveau à l'autre.}
+\end{figure}
+
+\subsection{Équations de reconstruction des suites A et B --- les deux niveaux}
+
+\begin{boiteformule}[Niveau 1 (entier) --- reconstruction généralisée de $n$]
+\begin{align*}
+\SA(k,n) &= \frac{\alpha_A(k)}{2}\,k^{n} - \delta_A(k)\\
+&= \frac{k^{4}-k^{2}+1}{(k-1)\,k^{3}}\,k^{n} - \frac{k}{k-1},\\
+\SB(k,n) &= \frac{\alpha_B(k)}{2}\,k^{n} - \delta_B(k)\\
+&= \frac{k^{4}-k^{2}+1}{(k-1)\,k^{2}}\,k^{n}\\
+&\quad-\frac{k^{7}-k^{6}+k}{k-1}.
+\end{align*}
+formes fermées exactes valables pour tout $k$ entier $\ge 3$ et tout $n$
+entier (positif ou négatif), coïncidant avec la construction terme à terme
+(Niveau 3) dès $n = 8$ ; pour $n \le 7$, la construction terme à terme
+progression simple fait foi (seuil des formes fermées : $n = 8$).
+\end{boiteformule}
+
+\begin{boiteformule}[Niveau 2 (géométrique) --- modèle hypoténuse $\sqrt{a^{2}+b^{2}}$]
+Chaque terme géométrique est le terme entier correspondant multiplié par le
+zêta géométrique $g(k) = \dfrac{\sqrt{1+k^{2}}}{k}$ :
+\begin{align*}
+\SA^{\,\mathrm{g\acute eo}}(k,n) &= g(k)\cdot\SA(k,n),\\
+\SB^{\,\mathrm{g\acute eo}}(k,n) &= g(k)\cdot\SB(k,n),\\
+\mathrm{Digamma}_{\mathrm{g\acute eo}} &= g(k)\cdot\mathrm{Digamma},\\
+\mathrm{Z\hat eta}_{\mathrm{g\acute eo}} &= g(k)\cdot k^{6}.
+\end{align*}
+\textbf{Identité centrale :} le facteur $g(k)$ s'annule dans
+\begin{align*}
+P &= \frac{\SB^{\mathrm{g\acute eo}}-\mathrm{Digamma}_{\mathrm{g\acute eo}}}
+{\mathrm{Z\hat eta}_{\mathrm{g\acute eo}}}\\
+&= \frac{\SB-\mathrm{Digamma}}{k^{6}}.
+\end{align*}
+\emph{Les deux niveaux ont les mêmes utilités et les mêmes ancrages}
+(8/8 conformes, Section XIV.5).
+\end{boiteformule}
+
+\begin{boitenote}[Exemple numérique croisé --- rapport $1/3$]
+Au niveau 1 :
+\[
+\SA(3,10)=\frac{73}{9}\cdot6\cdot3^{10}-\frac{3}{2}=79\,824,
+\qquad
+\text{Digamma}=\SA-3^{8}=73\,263.
+\]
+La reconstruction donne
+\[
+P=\frac{238\,746-73\,263}{729}=227
+\quad(49\textsuperscript{ème} premier).
+\]
+Au niveau 2, les sommes géométriques sont multipliées par
+$g(3)=\sqrt{10}/3\approx1.05409255338946$ ; le facteur s'élimine et redonne
+$P=227$.
+\end{boitenote}
+
+% ======================================================================
+\section{Fiche technique --- Pipeline cognitif de l'agent Mm.\ Gabriel multiloop}
+% ======================================================================
+
+La présente fiche technique décrit le fonctionnement de l'agent \textbf{Mm.\
+Gabriel}, agent multiloop local dédié et spécialiste de la géométrie du spectre
+des nombres premiers, tel qu'analysé dans le dépôt local
+\texttt{agent-multiloop-Gabriel-local} (version v3.35, licence Apache 2.0).
+
+\subsection{Vocation et portée}
+
+Gabriel est un \textbf{assistant mathématique expert HOL/Lean} entièrement
+dédié à un objectif unique : assister l'auteur, Philippe Thomas Savard, à
+construire l'outil géométrique dynamique --- la géométrie du spectre des
+nombres premiers --- permettant d'apporter une réponse à l'énigme de Bernhard
+Riemann et à la conjecture de la fonction zêta de Riemann. L'agent
+\textbf{ne répond qu'aux questions portant sur la géométrie du spectre des
+nombres premiers} ; toute question hors de ce champ est déclinée poliment. Sa
+compétence principale est le fichier de preuve formelle
+\texttt{theories/methode\_spectral.thy} (Isabelle/HOL ; 3\,714 lignes,
+133 lemmes, 27 théorèmes), sur lequel toute réponse est ancrée.
+
+\subsection{Architecture cognitive --- les 7 moteurs collaboratifs}
+
+Le pipeline cognitif complet (\texttt{src/core/pipeline.py}) enchaîne sept
+moteurs :
+\[
+\begin{gathered}
+\texttt{RequestDecomposer}\to\texttt{ProofPlanner}\\
+\to\texttt{SpectralCore}\to\texttt{RefinementLoop}\\
+\to\texttt{CoherenceDetector}\to\texttt{SilentAuditLoop}
+\end{gathered}
+\]
+où \texttt{RefinementLoop} assure l'auto-critique multiloop et
+\texttt{SilentAuditLoop} l'audit silencieux anti-hallucination inversé. Un
+\textbf{pré-raisonneur dynamique} (\texttt{PreReasoner}, fichier
+\url{src/multiloop/pre_reasoner.py})
+décide en T0, avant toute exécution, du niveau d'effort :
+
+\begin{center}\small
+\begin{tabular}{@{}l c l@{}}
+\toprule
+\rowcolor{spectralgris}
+Mode & Itérations & Usage \\
+\midrule
+INSTANTANÉ & 0 & salutations, oui/non, continuation \\
+RAPIDE & 1 & questions verbales/discursives sur Isabelle \\
+STANDARD & 2 & calculs simples (RsP, gap, reconstruction) \\
+APPROFONDI & 3 & configurations $n \times n$, blocs A/B \\
+TRÈS COMPLEXE & 4 & théorie avancée, Pont Savard, Riemann \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Commandes CLI de forçage : \texttt{/rapide}, \texttt{/standard},
+\texttt{/approfondi}, \texttt{/complet}, \texttt{/instantane}. Un mode
+\og cinématique \fg{} affiche en temps réel mode détecté, itérations prévues,
+chronomètre et ETA (rafraîchissement 2 Hz).
+
+\subsection{Pipeline convolutif spectral (niveaux 1 et 2)}
+
+Le dossier \texttt{pipeline\_cognitif/} implante le système convolutif décrit
+aux sections précédentes --- c'est le moteur qui exécute l'arborescence
+algorithmique de la section~5 :
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.42\textwidth} p{0.54\textwidth}@{}}
+\toprule
+\rowcolor{spectralgris}
+Module & Rôle \\
+\midrule
+\url{suites_geometriques_niveau2.py} & cœur : calculateurs niveaux 1 et 2, Digamma, formes fermées, ancrages XIV \\
+\url{reconstruction_premiers_1_sur_k.py} & reconstructeur de référence 1/7 (16\,519 via $\SA - 7^{8}$) \\
+\url{gabriel_geometric_wrapper_v74.py} & \texttt{PipelineCognitifNiveaux} : wrapper unifié (typique 1/2, non typiques $1/k$) \\
+\url{Suites_geometriques_AB.py} & suites A/B géométriques générales \\
+\url{fallback_geometrique.py} & repli géométrique si l'approche algébrique échoue \\
+\url{metaphore_geometrique.py} & bloc \og Structure Géométrique Spatiale \fg{} des réponses \\
+\url{validation_section_xiv.py} & validation de conformité à la Section XIV (exit 0 = conforme) \\
+\url{multi_ratio_dispatcher.py} & distribution des requêtes multi-rapports $1/k$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Niveau 1 (entier)} : suites A et B à termes entiers ($k^{i}$), règles
+Savard terme à terme, 4 possibilités Digamma, division par $k^{6}$.
+\textbf{Niveau 2 (géométrique)} : mêmes suites en forme $\sqrt{a^{2}+b^{2}}$
+avec $a_1 = \sqrt{1+k^{2}}$ ; chaque terme géométrique vaut exactement
+$a_1 \times$ terme entier, donc le facteur s'annule dans
+$(\SB - \text{Digamma})/k^{6}$ : les deux niveaux ont les mêmes utilités.
+
+\begin{boiteformule}[Conformité à la Section XIV de \texttt{methode\_spectral.thy} (0 écart)]
+\begin{itemize}[nosep]
+  \item Ancrages $n=10$ : rangs officiels $=$ rangs réels dans $\mathbb{P}$ (XIV.6) --- $k=2..9$ conformes (29, 227, 947, 2999, 7529, 16519, 32327, 58337) ;
+  \item Formes fermées universelles $\SA$, $\SB$ (XIV.2) --- exactes pour $n \ge 8$ (arithmétique \texttt{Fraction}) ;
+  \item Construction terme à terme (XIV.4) --- niveau 1 exact pour tout $n$ ; niveau 2 $= a_1 \times$ XIV.4 ;
+  \item Validation exacte $k=8$, $n=34$ (XIV.7) --- $\SA$, $\SB$, Digamma conformes au chiffre près ; $P = 32\,537$ (rang 3\,492) ;
+  \item Décalage de rang $\text{rang}(n) = \text{rang\_ancre} + (n-10)$ (XIV.6) --- $k=3$, $n=9..17$ : 223, 227, 229, 233, 239, 241, 251, 257, 263 ;
+  \item Niveau 2 : mêmes ancrages que le niveau 1 (XIV.5) --- 8/8 conformes.
+\end{itemize}
+\end{boiteformule}
+
+\subsection{Pipeline HOL du dépôt et corpus HOL}
+
+Le pipeline HOL repose sur une \textbf{architecture concentrique à trois
+sphères} formalisée dans \texttt{methode\_spectral.thy} et
+\texttt{validation\_hol\_unifiee.thy} :
+\[
+\text{Ensemble} = \frac{1}{ms} + \frac{1}{t} + \frac{1}{x},
+\qquad
+\begin{cases}
+1/x & \text{fonction zêta de Riemann (sphères } y_1, y_2, y_3\text{)},\\
+1/t & \text{équation psi\_savard (Pont Chebyshev} \leftrightarrow \text{Spectral)},\\
+1/ms & \text{Méthode Spectrale (sphères } ms_1, ms_2, ms_3\text{)}.
+\end{cases}
+\]
+
+Trois concordances verrouillent la preuve : \textbf{C1} : $1/y_1 = 1/t$
+(Chebyshev $=$ psi\_savard, validé numériquement) ; \textbf{C2} :
+$1/y_3 = 1/ms_1$ (zéros $\leftrightarrow$ positions des premiers, exclusion des
+composés) ; \textbf{C3} : $1/y_2 = 1/ms_3$ ($\mathrm{Re}(\rho) = 1/2 = R_{sP} = 1/2$,
+alignement central). Théorème final : $R_{sP} = \mathrm{Re} = 1/2$, vrai sur tous
+les entiers positifs distincts.
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.42\textwidth} p{0.54\textwidth}@{}}
+\toprule
+\rowcolor{spectralgris}
+Composante du corpus HOL & Caractéristiques \\
+\midrule
+\url{theories/methode_spectral.thy} & preuve principale : 3\,714 lignes, 133 lemmes, 27 théorèmes, 13 régimes, Section XIII / Pont Savard \\
+\url{theories/validation_hol_unifiee.thy} & contre-validation jumelle HOL \\
+\url{theories/validation_zeta_lean.thy} & contre-validation Lean/mathlib4 \\
+\url{theories/ROOT} & session Isabelle \texttt{Methode\_Spectral} (Isabelle/HOL 2025-2) \\
+\url{corpus/formulas_1_4.json}, \url{verif_p1097_n23_ratio4.thy} & corpus de formules et vérifications ciblées \\
+\url{memory/dictionnaire_spectral.py} & 13 régimes cognitifs codifiés, dont \texttt{regime\_pont\_savard} \\
+\url{memory/methode_spectral_section_XIII.py} & encyclopédie du Pont Savard \\
+\url{gabriel_corpus.db} & base du corpus cognitif local (mémoire RAG) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Une \textbf{factorisation formelle} par \emph{locale paramétré}
+\texttt{spectral\_family} unifie les modèles 1/2, 1/3 et 1/4 ; trois
+interprétations (\texttt{regime\_1\_2}, \texttt{regime\_1\_3},
+\texttt{regime\_1\_4}) héritent du théorème universel
+\texttt{RsP\_generic\_constant}, et l'extension à un modèle $1/k$ arbitraire ne
+requiert qu'une seule ligne --- c'est le point d'ancrage HOL du système
+convolutif multi-rapports du présent document. La section \og Foundations /
+Meta-theory \fg{} du fichier \texttt{.thy} documente 6 postulats (P1..P6), les
+3 opérations fondamentales (Reconstruction, Exclusion, Rapport spectral), la
+règle Savard ($\text{Ensemble} = 1 = 1/x + 1/t + 1/ms$) et les 3 concordances
+C1, C2, C3.
+
+\subsection{Robustesse, audit et utilités pour la géométrie du spectre}
+
+\begin{itemize}[nosep]
+  \item \textbf{Tests} : 1\,702 tests Pytest (multiloop, RAG, syntaxe Isabelle, pipeline, PreReasoner, foundations, locale \texttt{spectral\_family}, Pont Savard, Section XIII) ; compilation Isabelle/HOL 2025-2 validée localement (Cygwin, 1\,min\,35) et en CI GitHub Actions (37 s, cache HIT) avec attestation SLSA (SHA256).
+  \item \textbf{Audit} : \texttt{AuditStore}, trace JSON signée de chaque question/réponse ; chaque réponse est ancrée sur \texttt{methode\_spectral.thy} (empreinte SHA256 tracée).
+  \item \textbf{Reconstruction} : calcul de $R_{sP}$, de \texttt{psi\_savard}, reconstruction du $n$-ième premier, exclusion des composés, en arithmétique entière exacte (\texttt{Fraction}/\texttt{sympy}) --- indispensable dès $k \ge 50$ où $\SA, \SB > 10^{15}$.
+  \item \textbf{Contrat HOL} : le moteur produit les candidats C ; la validation HOL générale décide \texttt{EXCLU\_HOL}, \texttt{ANCRAGE\_POSSIBLE}, \texttt{P\_CERTIFIÉ} ou \texttt{C\_NON\_DÉCIDÉ} ; seul \texttt{P\_CERTIFIÉ} peut être annoncé comme nombre premier reconstruit (aucune sélection silencieuse).
+  \item \textbf{Utilité spectrale} : le pipeline convolutif fournit à la géométrie du spectre un mécanisme constructif de localisation des premiers (ancrages $n=10$ + loi de rang spectral), tandis que le corpus HOL garantit la contre-validation formelle de chaque résultat annoncé.
+\end{itemize}
+
+\clearpage
+\section*{Transcription corrig\'ee du PDF source : pages 22 \`a 48}
+Les sections ci-dessous reprennent le texte des pages 22 a 48 du document source. La
+transcription conserve le contenu et l'ordre du texte; seules les erreurs de lecture
+\'evidentes et l'orthographe ont \'et\'e normalis\'ees. Les formules sont reproduites en
+texte pour garder la transcription compl\`ete et comparable \`a la source.
+\smallskip
+\subsubsection*{Page 22}
+\begin{Verbatim}[fontsize=\footnotesize]
+2353
+49  x  7-n - 7
+6 = Somme suite A négative. 
+*Quand n est un entier et qu'il est strictement négatif. 
+ 
+Déterminer l'équation pour la somme de la suite B : 
+(
+2353
+7
+x  x  710) - Reste = 2260645142 Somme suite B. 
+2353
+7
+2260645142
+710
+= 42.00000078  =>  x = 42 
+(
+2353
+7
+42  x  710) - Reste = 2260762792.167 
+2260762792.167 - 2260645142 = 117650.167 = 705901
+6 = Reste 
+705901
+6
+7
+6
+= 100843 
+Équation B n = 10 : 
+(
+2353
+7
+42  x  710) - 100843 (7
+6) = 2260645142 Somme suite B. 
+Forme générale pour la suite B (1/7) : 
+(2353
+294  x  7n) - 100843 (7
+6) = Somme suite B. 
+3.  SYSTÈME D'ÉQUATIONS CONVOLUTIF 
+GÉNÉRALISÉ 
+Pour tout rapport 1/k (k >= 2) et tout n commun 
+3.1. NIVEAU 1  --  Constantes Savard universelles 
+alphaA(k) = 2(k4 - k2 + 1) / ((k - 1)  .  k3) 
+alphaB(k) = k  .  alphaA(k) 
+deltaA(k) = k / (k - 1) 
+deltaB(k) = (k7 - k6 + k) / (k - 1) 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 23}
+\begin{Verbatim}[fontsize=\footnotesize]
+3.2. NIVEAU 2  --  Formules fermées (n quelconque, n commun à 
+tous les rapports) 
+SA(k, n) = (alphaA(k) / 2)  .  kn - deltaA(k) 
+SB(k, n) = (alphaB(k) / 2)  .  kn - deltaB(k) 
+Invariant spectral prouvé algébriquement (Théorème XIV .3) : 
+(SA(k,n1) - SA(k,n2)) / (SB(k,n1) - SB(k,n2)) = 1/k for all n1 != n2, k >= 2 
+3.3. NIVEAU 3  --  Construction terme à terme (Suite A, n >= 8) 
+Position i Terme A(k,n,i) Terme B(k,n,i) 
+1 <= i <= n-2 ki ki (i<=5) ; k7 (i=6, Saut Zêta) ; k^(i+1) (7<=i<=n-2) 
+i = n-1 k^(n-1) - k^(n-3) k^n - k^(n-2) 
+i = n k^n - k^(n-2) k^(n+1) - k^(n-1) 
+ 
+3.4. NIVEAU 4  --  Mécanisme d'ancrage à n=10 (4 candidats 
+Digamma) 
+Les quatre essais dans l'ordre déterministe : 
+# Position Signe Digamma Candidat P 
+1 8 - SA(k,10) - k8 (SB - Digamma) / k6 
+2 8 + SA(k,10) + k8 (SB - Digamma) / k6 
+3 7 + SA(k,10) + k7 (SB - Digamma) / k6 
+4 7 - SA(k,10) - k7 (SB - Digamma) / k6 
+ 
+ ->  P certifié = premier candidat entier premier dans cet ordre. 
+P(1/k, n=10) = (SB(k,10) - [SA(k,10) ± k7 ou ± k8]) / k6 
+3.5. NIVEAU 5  --  Reconstruction pour n != 10 (n commun) 
+rang_cible(k,n) = rang_base(k) + n - 10 
+P(k,n) = premier rang_cible 
+Digamma(k,n) = SB(k,n) - P(k,n)  x  k6 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 24}
+\begin{Verbatim}[fontsize=\footnotesize]
+ 
+3.6. [OK]  VÉRIFICATION k=3 à 9 (tous corrects, 100%) 
+k P(n=10) HOL Branche Calculé [OK] 
+3 227 pos8 - 227    
+4 947 pos8 + 947    
+5 2 999 pos7 + 2 999    
+6 7 529 pos8 + 7 529    
+7 16 519 pos8 - 16 519    
+8 32 327 pos8 - 32 327    
+9 58 337 pos7 - 58 337    
+ 
+3.7. TABLEAU COMPLET P(1/k), n=10  --  k=10 à k=111 
+Légende :  P certifié unique |  C_MULTIPLE (plusieurs premiers, premier en ordre retenu) |  
+AUCUN P (règle spéciale requise) 
+k P(1/k, n=10) État Branche 
+10 99 109     C_MULTIPLE pos8 - 
+11  --    RÈGLE SPÉCIALE (PDF: 1 611 851)  --  
+12 247 259    pos8 - 
+13 368 939    pos8 + 
+14  --    AUCUN P  --  
+15 755 789    pos8 + 
+16 1 044 751     C_MULTIPLE pos8 - 
+17 1 414 943    pos7 + 
+18 1 883 429    pos8 + 
+19 2 469 277    pos7 - 
+20 3 192 419     C_MULTIPLE pos8 - 
+21 4 074 419     C_MULTIPLE pos8 + 
+22  --    AUCUN P  --  
+23 6 424 727    pos8 - 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 25}
+\begin{Verbatim}[fontsize=\footnotesize]
+24 7 949 399     C_MULTIPLE pos8 - 
+25 9 750 649     C_MULTIPLE pos8 - 
+26 11 863 799    pos7 + 
+27  --    RÈGLE SPÉCIALE HOL (P=14 330 707)  --  
+28  --    AUCUN P  --  
+29  --    AUCUN P  --  
+30 24 273 929    pos8 - 
+31  --    AUCUN P  --  
+32 33 522 719    pos8 - 
+33  --    AUCUN P  --  
+34  --    AUCUN P  --  
+35  --    AUCUN P  --  
+36 60 420 851     C_MULTIPLE pos8 - 
+37 69 293 303    pos7 + 
+38  --    AUCUN P  --  
+39  --    AUCUN P  --  
+40 102 337 639     C_MULTIPLE pos8 - 
+41  --    AUCUN P  --  
+42 130 617 143    pos7 + 
+43 146 929 021    pos7 - 
+44  --    AUCUN P  --  
+45  --    AUCUN P  --  
+46 205 867 801     C_MULTIPLE pos8 - 
+47  --    AUCUN P  --  
+48  --    AUCUN P  --  
+49 282 357 599     C_MULTIPLE pos7 + 
+50  --    AUCUN P  --  
+51  --    AUCUN P  --  
+52 380 066 179    pos8 - 
+53  --    AUCUN P  --  
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 26}
+\begin{Verbatim}[fontsize=\footnotesize]
+54 459 010 529     C_MULTIPLE pos8 - 
+55  --    AUCUN P  --  
+56  --    AUCUN P  --  
+57 601 506 977    pos7 - 
+58 656 165 077    pos8 - 
+59  --    AUCUN P  --  
+60  --    AUCUN P  --  
+61  --    AUCUN P  --  
+62 915 894 503    pos7 + 
+63 992 182 589     C_MULTIPLE pos8 + 
+64 1 073 483 839     C_MULTIPLE (3 premiers!) pos8 - 
+65 1 160 020 289     C_MULTIPLE pos8 - 
+66 1 252 049 501     C_MULTIPLE pos8 - 
+67  --    AUCUN P  --  
+68  --    AUCUN P  --  
+69 1 563 702 839    pos7 + 
+70 1 680 356 999    pos7 + 
+71 1 803 876 551    pos8 - 
+72  --    AUCUN P  --  
+73  --    AUCUN P  --  
+74  --    AUCUN P  --  
+75 2 372 624 999    pos7 + 
+76  --    AUCUN P  --  
+77 2 706 333 629    pos8 - 
+78 2 886 705 977    pos8 - 
+79  --    AUCUN P  --  
+80 3 276 294 479    pos8 - 
+81  --    AUCUN P  --  
+82  --    AUCUN P  --  
+83  --    AUCUN P  --  
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 27}
+\begin{Verbatim}[fontsize=\footnotesize]
+84  --    AUCUN P  --  
+85 4 436 438 999    pos7 + 
+86  --    AUCUN P  --  
+87 4 983 550 877    pos7 - 
+88 5 276 645 527     C_MULTIPLE pos8 - 
+89  --    AUCUN P  --  
+90  --    AUCUN P  --  
+91  --    AUCUN P  --  
+92  --    AUCUN P  --  
+93  --    AUCUN P  --  
+94  --    AUCUN P  --  
+95  --    AUCUN P  --  
+96 8 152 842 431    pos7 - 
+97 8 586 418 271     C_MULTIPLE pos8 + 
+98  --    AUCUN P  --  
+99  --    AUCUN P  --  
+100  --    AUCUN P  --  
+101  --    AUCUN P  --  
+102 11 039 747 027    pos7 - 
+103 11 591 637 509    pos8 + 
+104  --    AUCUN P  --  
+105 12 761 657 999    pos7 + 
+106 13 381 076 101    pos8 - 
+107 14 024 303 819    pos8 - 
+108 14 692 021 271    pos7 - 
+109 15 384 932 747    pos8 + 
+110  --    AUCUN P  --  
+111 16 849 226 351     C_MULTIPLE pos8 - 
+ 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 28}
+\begin{Verbatim}[fontsize=\footnotesize]
+3.8.  Synthèse statistique (k=10 à 111) 
+État Nombre de k % 
+   P certifié unique 38 37 % 
+    C_MULTIPLE (>=2 premiers) 20 20 % 
+  AUCUN P (règle standard) 44 43 % 
+ 
+3.9.  Notes importantes pour la programmation de l'agent 
+Cas AUCUN P (44 valeurs)  --  Les 4 candidats standards sont tous composites. Deux 
+stratégies possibles selon votre HOL : 
+Règle spéciale cataloguée (comme k=27 : Digamma = SA - (2k8-k6), P=14 330 707) 
+Mode CRÉATION D'ANCRAGE : l'agent retourne C_NON_CERTIFIÉ et attend validation HOL 
+externe 
+Cas C_MULTIPLE (20 valeurs)  --  Selon le contrat HOL : retourner tous les C/P possibles, 
+aucune sélection silencieuse. L'agent doit les lister tous et attendre confirmation. 
+k=11 est un cas forme spéciale : per votre fichier Moteur Géo, P=1 611 851 (rang 121 982) 
+avec règle A7- documentée dans le PDF  --  non reconstruit par les 4 essais standards à 
+n=10. 
+Arithmétique exacte requise : pour k >= 50, les valeurs de SA et SB dépassent 10¹5  --  l'agent 
+doit utiliser l'arithmétique entière Python (pas float) pour éviter les erreurs d'arrondi Excel 
+4.  EXEMPLE NUMÉRIQUE COMPLET  --  n = 15 
+4.1.  RAPPORT 1/13 (k = 13, n = 15) 
+4.1.1. NIVEAU 1  --  Constantes Savard universelles 
+Constante Formule Valeur exacte 
+alpha_A(13) 2(134-13²+1) / (12·13³) 28393/13182 
+alpha_B(13) 13·alpha_A(13) 28393/1014 
+delta_A(13) 13/12 13/12 
+delta_B(13) (137-136+13)/12 57 921 721/12 
+ 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 29}
+\begin{Verbatim}[fontsize=\footnotesize]
+ 
+4.1.2. NIVEAU 2  --  Formules fermées 
+Code 
+Copier 
+SA(13, 15) = (k4-k²+1)·k¹² / (k-1) - k/(k-1) 
+           = 28 393  x  23 298 085 122 481 / 12 - 13/12 
+           = 55 125 210 906 883 585 
+SB(13, 15) = (k4-k²+1)·k¹³ / (k-1) - (k7-k6+k)/(k-1) 
+           = 716 627 741 784 659 809 
+Invariant spectral (Théorème XIV .3) : 
+Code 
+Copier 
+DeltaSA = SA(n=15) - SA(n=10) = 55 125 210 906 883 585 - 148 468 220 264 
+    = 55 125 062 438 663 321 
+DeltaSB = SB(n=15) - SB(n=10) = 716 627 741 784 659 809 - 1 930 082 036 636 
+    = 716 625 811 702 623 173 
+DeltaSA / DeltaSB = 1/13   
+4.1.3. NIVEAU 3  --  Construction terme à terme (n = 15) 
+i A(13, 15, i) B(13, 15, i) Règle A Règle B 
+1 13 13 k¹ k¹ 
+2 169 169 k² k² 
+3 2 197 2 197 k³ k³ 
+4 28 561 28 561 k4 k4 
+5 371 293 371 293 k5 k5 
+6 4 826 809 62 748 517 k6 k7  <-  Saut Zêta 
+7 62 748 517 815 730 721 k7 k8 
+8 815 730 721 10 604 499 373 k8 k9 
+9 10 604 499 373 137 858 491 849 k9 k¹0 
+10 137 858 491 849 1 792 160 394 037 k¹0 k¹¹ 
+11 1 792 160 394 037 23 298 085 122 481 k¹¹ k¹² 
+12 23 298 085 122 481 302 875 106 592 253 k¹² k¹³ 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 30}
+\begin{Verbatim}[fontsize=\footnotesize]
+13 302 875 106 592 253 3 937 376 385 699 289 k¹³ k¹4 
+14 3 914 078 300 576 808 50 883 017 907 498 504 k¹4-k¹² k¹5-k¹³ 
+15 50 883 017 907 498 504 661 479 232 797 480 552 k¹5-k¹³ k¹6-k¹4 
+ 
+Code 
+Copier 
+Sigma A = 55 125 210 906 883 585   = SA(13,15) 
+Sigma B = 716 627 741 784 659 809  = SB(13,15) 
+4.1.4. NIVEAU 4  --  4 essais Digamma (k^6 = 4 826 809) 
+ Les 4 essais sont calibrés pour n=10. Pour n=15, ils servent de vérification structurelle  --  
+tous composites est le comportement attendu. 
+Branche Digamma P candidat État 
+pos13- 54 822 335 800 291 332 137 110 336 453   composé 
+pos13+ 55 428 086 013 475 838 136 984 839 419   composé 
+pos12+ 55 148 508 992 006 066 137 042 761 127   composé 
+pos12- 55 101 912 821 761 104 137 052 414 745   composé 
+ 
+4.1.5. NIVEAU 5  --  Reconstruction rang cible (méthode officielle pour n 
+!= 10) 
+Code 
+Copier 
+P(13, n=10) documenté = 368 939 
+rang_base(13)  = primepi(368 939) = 31 452 
+Deltan = 15 - 10 = 5 
+rang_cible(13, n=15) = 31 452 + 5 = 31 457 
+P(13, n=15) = prime(31 457) = 369 023   PREMIER certifié 
+Digamma (13,15) = SB - P  x  k6 
+               = 716 627 741 784 659 809 - 369 023  x  4 826 809 
+               = 716 625 960 581 122 202 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 31}
+\begin{Verbatim}[fontsize=\footnotesize]
+4.2.  RAPPORT 1/42 (k = 42, n = 15) 
+4.2.1. NIVEAU 1  --  Constantes Savard universelles 
+Constante Valeur exacte 
+alpha_A(42) 3 109 933 / 1 518 804 
+alpha_B(42) 3 109 933 / 36 162 
+delta_A(42) 42/41 
+delta_B(42) 225 050 301 546 / 41 
+ 
+4.2.2. NIVEAU 2  --  Formules fermées 
+Code 
+Copier 
+SA(42, 15) = 2 285 381 254 365 702 554 104 806 
+SB(42, 15) = 95 986 012 683 359 501 783 370 150 
+DeltaSA / DeltaSB = 1/42   
+4.2.3. NIVEAU 3  --  Construction terme à terme (n = 15) 
+i A(42, 15, i) B(42, 15, i) 
+1 42 42 
+2 1 764 1 764 
+3 74 088 74 088 
+4 3 111 696 3 111 696 
+5 130 691 232 130 691 232 
+6 5 489 031 744 230 539 333 248  <-  Saut Zêta (k7) 
+7 230 539 333 248 9 682 651 996 416 
+8 9 682 651 996 416 406 671 383 849 472 
+9 406 671 383 849 472 17 080 198 121 677 824 
+10 17 080 198 121 677 824 717 368 321 110 468 608 
+11 717 368 321 110 468 608 30 129 469 486 639 681 536 
+12 30 129 469 486 639 681 536 1 265 437 718 438 866 624 512 
+13 1 265 437 718 438 866 624 512 53 148 384 174 432 398 229 504 
+14 53 118 254 704 945 758 547 968 2 230 966 697 607 721 859 014 656 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 32}
+\begin{Verbatim}[fontsize=\footnotesize]
+15 2 230 966 697 607 721 859 014 656 93 700 601 299 524 318 078 615 552 
+ 
+Code 
+Copier 
+Sigma A = 2 285 381 254 365 702 554 104 806   
+Sigma B = 95 986 012 683 359 501 783 370 150   
+4.2.4. NIVEAU 4  --  4 essais Digamma (k^6 = 5 489 031 744) 
+Branche Digamma P candidat État 
+pos13- 2 284 115 816 647 263 687 480 294 17 070 751 498 046 399   composé 
+pos13+ 2 286 646 692 084 141 420 729 318 17 070 290 419 379 903   composé 
+pos12+ 2 285 411 383 835 189 193 786 342 17 070 515 469 681 407   composé 
+pos12- 2 285 351 124 896 215 914 423 270 17 070 526 447 744 895   composé 
+ 
+4.2.5. NIVEAU 5  --  Reconstruction rang_cible 
+Code 
+Copier 
+P(42, n=10) documenté = 130 617 143 
+rang_base(42)  = primepi(130 617 143) = 7 411 117 
+Deltan = 15 - 10 = 5 
+rang_cible(42, n=15) = 7 411 117 + 5 = 7 411 122 
+P(42, n=15) = prime(7 411 122) = 130 617 251   PREMIER certifié 
+Digamma (42,15) = 95 986 012 683 359 501 783 370 150 
+               - 130 617 251  x  5 489 031 744 
+               = 95 986 011 966 397 264 730 354 406 
+4.3.  RAPPORT 1/54 (k = 54, n = 15) 
+4.3.1. NIVEAU 1  --  Constantes Savard universelles 
+Constante Valeur exacte 
+alpha_A(54) 8 500 141 / 4 172 796 
+alpha_B(54) 8 500 141 / 77 274 
+delta_A(54) 54/53 
+delta_B(54) 1 314 130 298 742 / 53 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 33}
+\begin{Verbatim}[fontsize=\footnotesize]
+ 
+4.3.2. NIVEAU 2  --  Formules fermées 
+Code 
+Copier 
+SA(54, 15) = 98 599 651 085 954 948 762 648 034 
+SB(54, 15) = 5 324 381 158 641 567 208 388 082 594 
+DeltaSA / DeltaSB = 1/54   
+4.3.3. NIVEAU 3  --  Construction terme à terme (n = 15) 
+i A(54, 15, i) B(54, 15, i) 
+1-
+5 
+54 / 2 916 / 157 464 / 8 503 056 / 459 165 
+024 
+idem 
+6 24 794 911 296 1 338 925 209 984  <-  Saut Zêta (547) 
+7 1 338 925 209 984 72 301 961 339 136 
+8 72 301 961 339 136 3 904 305 912 313 344 
+9 3 904 305 912 313 344 210 832 519 264 920 576 
+10 210 832 519 264 920 576 11 384 956 040 305 711 104 
+11 11 384 956 040 305 711 104 614 787 626 176 508 399 616 
+12 614 787 626 176 508 399 616 33 198 531 813 531 453 579 264 
+13 33 198 531 813 531 453 579 264 1 792 720 717 930 698 493 280 256 
+14 1 792 105 930 304 521 984 880 640 96 773 720 236 444 187 183 554 560 
+15 96 773 720 236 444 187 183 554 560 5 225 780 892 767 986 107 911 946 
+240 
+ 
+Code 
+Copier 
+Sigma A = 98 599 651 085 954 948 762 648 034   
+Sigma B = 5 324 381 158 641 567 208 388 082 594   
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 34}
+\begin{Verbatim}[fontsize=\footnotesize]
+ 
+ 
+4.3.4. NIVEAU 4  --  4 essais Digamma (k^6 = 24 794 911 296) 
+Branche Digamma P candidat État 
+pos13- 98 566 452 554 141 417 309 068 
+770 
+210 761 581 023 702 
+719 
+  
+composé 
+pos13+ 98 632 849 617 768 480 216 227 
+298 
+210 758 903 173 282 
+751 
+  
+composé 
+pos12+ 98 600 265 873 581 125 271 047 
+650 
+210 760 217 303 581 
+439 
+  
+composé 
+pos12- 98 599 036 298 328 772 254 248 
+418 
+210 760 266 893 404 
+031 
+  
+composé 
+ 
+4.3.5. NIVEAU 5  --  Reconstruction rang_cible 
+Code 
+Copier 
+P(54, n=10) documenté = 459 010 529 
+rang_base(54)  = primepi(459 010 529) = 24 304 918 
+Deltan = 15 - 10 = 5 
+rang_cible(54, n=15) = 24 304 918 + 5 = 24 304 923 
+P(54, n=15) = prime(24 304 923) = 459 010 597   PREMIER certifié 
+Digamma(54,15) = 5 324 381 158 641 567 208 388 082 594 
+               - 459 010 597  x  24 794 911 296 
+               = 5 324 381 147 260 440 171 849 078 882 
+4.4.  TABLEAU RÉCAPITULATIF FINAL  --  P(1/k, n = 15) 
+k SA(k, 15) SB(k, 15) rang_base rang_cible P(k, 
+n=15) 
+P(k, 
+n=10) 
+État 
+13 55 125 210 
+906 883 
+585 
+716 627 741 
+784 659 809 
+31 452 31 457 369 
+023 
+368 
+939 
+   
+CERTIFIÉ 
+42 2 285 381 
+254 365 
+95 986 012 
+683 359 501 
+783 370 150 
+7 411 117 7 411 122 130 
+617 
+251 
+130 
+617 
+143 
+   
+CERTIFIÉ 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 35}
+\begin{Verbatim}[fontsize=\footnotesize]
+702 554 
+104 806 
+54 98 599 651 
+085 954 
+948 762 
+648 034 
+5 324 381 
+158 641 567 
+208 388 082 
+594 
+24 304 
+918 
+24 304 923 459 
+010 
+597 
+459 
+010 
+529 
+   
+CERTIFIÉ 
+ 
+4.5.  Notes critiques pour l'agent 
+4.5.1. 1. Saut Zêta  --  asymétrie A / B confirmée 
+La correction importante validée ici : A(k, n, i) = k^i pour tout 1 <= i <= n-2 (pas de Saut
+    Zêta
+dans la suite A). Le Saut Zêta k7 à la position i=6 n'existe que dans la suite B. Les deux
+    suites
+sont identiques pour i <= 5, puis divergent à partir de i = 6. 
+4.5.2. 2. Niveau 4 hors-calibrage pour n != 10 
+Les 4 essais Digamma (pos(n-2)±, pos(n-3)±) produisent tous des candidats composites 
+pour n=15  --  ce comportement est attendu et correct. Ces essais sont calibrés 
+structurellement sur n=10 ; le Niveau 5 est la voie officielle pour tout n != 10. 
+4.5.3. 3. Niveau 5  --  formule rang_cible 
+python 
+Copier 
+rang_base(k)       = primepi(P(k, n=10))   # rang du P certifié à n=10 
+rang_cible(k, n)   = rang_base(k) + (n - 10) 
+P(k, n)            = prime(rang_cible(k, n))  # arithmétique exacte sympy 
+L'écart en rang +5 (pour Deltan = 5) est cohérent pour les trois k, confirmant l'universalité de
+    la
+loi de rang spectral. 
+4.5.4. 4. Invariant spectral (Théorème XIV .3)  --  vérifié pour les 3 rapports 
+Code 
+Copier 
+DeltaSA(k, n=15, n=10) / DeltaSB(k, n=15, n=10) = 1/k   for all k  in  {13, 42, 54}   
+4.5.5. 5. Arithmétique  --  seuils de dépassement float 
+k SA(k,15) Ordre de grandeur Float 64 safe= 
+13 55 125 210 906 883 585 ~5.5 x 10¹6     limite 
+42 2.29 x 10²4 ~10²4   erreur garantie 
+54 9.86 x 10²5 ~10²5   erreur garantie 
+\end{Verbatim}
+\medskip
+\clearpage
+\subsubsection*{Page 36}
+\begin{Verbatim}[fontsize=\footnotesize]
+ 
+ ->  Arithmétique entière Python obligatoire dès k >= 42 pour n = 15. Excel / float64 
+introduiraient des erreurs d'arrondi fatales. 
+ 
+Comparaison structurelle entre les ancrages premiers de la géométrie du spectre des 
+nombres premiers et les zéros non triviaux de la fonction zêta de Riemann 
+1. Deux géométries distinctes des nombres premiers 
+La fonction zêta de Riemann encode les nombres premiers dans le plan complexe à travers 
+la relation fondamentale : 
+zeta(s) = sum n-s
+infinity
+n=1
+. 
+Les zéros non triviaux de zeta(s)se situent dans la bande critique 0 < Re(s) < 1, et leur 
+distribution est décrite par la formule asymptotique : 
+N(T) ~ T
+2pi log ( T
+2pi) - T
+2pi, 
+où N(T)désigne le nombre de zéros non triviaux dont la partie imaginaire satisfait | t |<= T. 
+Cette loi est presque linéaire en T, modulée par un facteur logarithmique. 
+Dans la géométrie du spectre des nombres premiers, la situation est fondamentalement 
+différente : il ne s'agit pas de compter des zéros, mais de reconstruire des nombres 
+premiers à partir de rapports typiques et non typiques 1/k. Chaque rapport 1/kproduit un 
+entier P(k), qui peut être un nombre premier ou un composé. 
+Les rapports typiques et non typiques qui possèdent un ancrage pour n = 10 --  comme 
+démontré précédemment  --  retournent un élément de l'ensemble complet des nombres 
+premiers P. Inversement, lorsque le système convolutif (et l'équation qui permet la 
+reconstruction des premiers pour des rapports multiples) ne trouve aucun ancrage, aucun 
+nombre premier n'est retourné pour l'ensemble P. 
+Le rapport typique 1/k = 1/2 retourne pour n = 10 l'ancrage P = 29. Dans ce cas, la valeur
+de ncorrespond exactement à la position du nombre premier dans l'ordre chronologique 
+des premiers. 
+Pour les rapports non typiques 1/k != 1/2, la valeur de nreprésente uniquement la quantité 
+de termes dans les suites Aet B. Le nombre premier retourné ne correspond pas à la 
+position n, contrairement au cas typique. 
+Ainsi : 
+-  Rapport typique : 
+n = quantite
+
+ de termes dans A et B = position du premier. 
+-  Rapport non typique : 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 37}
+\begin{Verbatim}[fontsize=\footnotesize]
+n = quantite
+
+ de termes dans A et B != position du premier. 
+Il est important de rappeler que la position des nombres premiers dans la géométrie du 
+spectre suit l'ordre chronologique croissant : 
+2 = 1er,  3 = 2ie
+
+me,  5 = 3ie
+
+me,  7 = 4ie
+
+me,  Pn = nie
+
+me premier. 
+La même convention s'applique aux nombres premiers négatifs : 
+-2 = -1er,   - 3 = -2ie
+
+me,   - 5 = -3ie
+
+me,   - 7 = -4ie
+
+me,   - Pn = -nie
+
+me premier. 
+Validation HOL/Isabelle et le "pont Savard" 
+La géométrie du spectre des nombres premiers s'appuie sur une validation formelle 
+réalisée à l'aide de l'assistant de preuve Isabelle et du code HOL contenu dans le fichier 
+methode_spectral.thy. La section 13, intitulée « pont Savard », établit un lien entre la 
+géométrie du spectre et l'énigme de Bernhard Riemann, en particulier la conjecture portant 
+sur la fonction zêta. 
+Cette section démontre, via un théorème local au fichier thy, que : 
+RsP = Re(s) = 1
+2 
+est vrai dans le cadre de la validation methode_spectral.thy. 
+Le « pont Savard » met en relation, à l'aide d'une équation, certains invariants communs 
+entre : 
+-  la géométrie du spectre des nombres premiers (validée dans le script HOL), 
+-  et la fonction zêta de Riemann. 
+L'équation de Tchebyshev joue un rôle central dans cette correspondance. Philippe Thomas 
+Savard identifie cette équation comme un invariant fondamental partagé par les deux 
+structures, en raison de son unicité au sein de la théorie analytique des nombres. 
+Savard adapte l'équation de Tchebyshev à la géométrie du spectre, rendant les deux 
+formulations difficilement distinguables. 
+Voici la correspondance : 
+Équation de Tchebyshev : 
+psi(x) = x - xp
+p - log(2pi) - 1
+2 log(1 - x-2) 
+Équation psi (Savard) : 
+psiSavard(x) = x - kn
+Sbn
+- log(2pi) - 1
+2 log(1 - x-2) 
+Dans l'équation de Tchebyshev, le terme 
+xp
+p correspond, dans l'équation de Savard, à : 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 38}
+\begin{Verbatim}[fontsize=\footnotesize]
+kn
+Sbn
+. 
+où : 
+-  kest la valeur du rapport typique 1/k = 1/2ou non typique 1/k != 1/2, 
+-  Sbnest la somme de la suite B. 
+Par exemple, pour le rapport typique 1/k = 1/2et n = 10, l'ancrage retourné est P = 29, et 
+la somme de la suite Best : 
+Sbn = 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + (29 - 27) + (210 - 28) = 3262. 
+ 
+La formulation de Tchebyshev adaptée par Savard commence par l'évaluation suivante : 
+44
+4 + 33
+3 + 52
+5 + 71
+1 + 111
+1 + 131
+1 + 171
+1 + 191
+1 + 231
+1 + 291
+1 = 197, 
+soit un total de 10 termes. 
+On calcule ensuite : 
+log(197)
+log(10) = 2.294466226. 
+Puis : 
+2.294466226 - log(2pi) - 1
+2 log(1 - 30-2) = 1.496527767. 
+Enfin : 
+30 - 1.496527767 = 28.50347223. 
+La valeur généralement obtenue pour l'ancrage du premier 29 à l'aide de l'équation de
+Tchebyshev est : 
+28.49765. 
+Comparaison avec l'équation psi (Savard) 
+L'équation psi (Savard) donne pour le même cas : 
+psiSavard = 30 - 210
+3262 - log(pi) - 1
+2 log(1 - 30-2) = 28.8881437. 
+La valeur exacte recherchée étant 29, l'équation psi (Savard) présente une oscillation plus 
+faible et une ondulation moins prononcée que celle de Tchebyshev. De plus, la précision de 
+psiSavard augmente systématiquement lorsque la valeur du nombre premier considéré croît.
+Par exemple, pour le nombre premier 227, qui est le 49e premier : 
+psiSavard(227) = 226.894132. 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 39}
+\begin{Verbatim}[fontsize=\footnotesize]
+La partie réelle 0.894132est plus proche de l'entier exact 227que ne l'est la partie réelle 
+0.8881437obtenue pour 29. Elle est également plus précise que l'ondulation obtenue pour 
+le premier 31, où : 
+psiSavard(31) = 30.89125839. 
+Cette amélioration constante de la précision montre que, à grande hauteur sur la droite 
+critique, l'équation psi (Savard) devient asymptotiquement exacte, ce qui confirme la 
+pertinence de son comportement pour des valeurs très grandes comme pour des valeurs 
+proches de zéro. 
+Lien avec la validation HOL/Isabelle 
+L'équation psi (Savard), conçue comme une méta-analyse de l'équation de Tchebyshev, est 
+mise en avant dans la section 13 du fichier methode_spectral.thy de la validation 
+HOL/Isabelle. Cette section traite également de la répartition des nombres premiers et de 
+leur correspondance avec les zéros de la droite critique de la fonction zêta. 
+La répartition des premiers est au coeur de l'énigme de Riemann, qui pose la question : 
+Re(s) = 1
+2   = 
+Le fichier methode_spectral.thy, conçu à l'aide de l'assistant de preuve Isabelle, inclut 
+également une section intitulée « preuve par l'absurde », démontrant que les entiers 
+composés Csont nécessairement exclus de la méthode spectrale. 
+Théorème de la section "Preuve par l'absurde" (methode_spectral.thy, lignes 1982-
+2002) 
+isabelle 
+text \<open> 
+  Puisque prime_i i est défini via un choix de Hilbert sur la propriété
+  "prime p \<and> position p = i" , et que prime_i_is_prime démontre que
+  prime (prime_i i) tient toujours, il est logiquement impossible qu'un 
+  entier composé C soit égal à prime_i i pour un i quelconque.
+\<close> 
+ 
+theorem composite_not_prime_i: 
+  fixes C :: nat 
+  assumes "~ prime C" 
+  shows "ALL i. C ~= prime_i i" 
+proof (rule allI, rule ccontr) 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 40}
+\begin{Verbatim}[fontsize=\footnotesize]
+  fix i 
+  assume "~ (C ~= prime_i i)" 
+  hence eq: "C = prime_i i" by simp 
+  have "prime (prime_i i)" by (rule prime_i_is_prime) 
+  with eq have "prime C" by simp 
+  with assms show False by contradiction 
+qed 
+Ce théorème démontre élégamment que si l'on attribue à un entier composé Cla qualité 
+d'être un premier P, alors C = Pipour un certain i, ce qui est impossible. Ainsi, les 
+composés sont exclus de la méthode spectrale de manière certaine. 
+Cette exclusion se manifeste également dans l'historique de l'agent Gabriel multiloop, 
+conçu par Savard à partir du corpus HOL et du pipeline cognitif incluant le système 
+convolutif. Les logs de l'agent montrent que lorsqu'une requête demande un nombre 
+composé, la méthode échoue, car elle ne s'applique qu'aux nombres premiers. 
+Équation de reconstruction des premiers 
+Somme Suite B - Digamma Calcule
+
+t6(zeta) = Pi. 
+Si l'on remplace Pipar un composé Ci, la valeur de nobtenue n'est plus un entier 
+strictement positif (pour les premiers positifs) ni strictement négatif (pour les premiers 
+négatifs). Elle contient une partie réelle, ce qui prouve que le résultat n'est pas un nombre 
+premier. Ainsi, la méthode spectrale exclut automatiquement les composés. 
+Portée de la méthode spectrale 
+Pour les rapports typiques et non typiques 1/kavec k  in  [2, 10001], la méthode spectrale 
+retourne 2604 ancrages premiers, surpassant largement les records actuels concernant 
+les zéros non triviaux (~= 1012) en atteignant une échelle de : 
+1020. 
+Par exemple, pour le rapport non typique 1/9999 et n = 10, l'ancrage retourné est :
+99950008999300019999. 
+La méthode spectrale détermine donc 2604 rapports 1/k pour lesquels un ancrage premier 
+est obtenu, chacun définissant un ensemble complet P. 
+Correspondance avec la fonction zêta 
+La fonction zêta, sa droite critique et ses zéros non triviaux trouvent un homologue 
+structurel dans la géométrie du spectre des nombres premiers. Le rapport typique 1/k =
+1/2représente la droite critique, tandis que les rapports non typiques correspondent aux 
+hauteurs tronquées Tdans la formule : 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 41}
+\begin{Verbatim}[fontsize=\footnotesize]
+N(T) ~ T
+2pi log ( T
+2pi) - T
+2pi. 
+Par exemple, le rapport non typique 1/3 retourne pour n = 10 le 49e nombre premier, soit
+227. Dans ce cas, toutes les valeurs premières inférieures à 173sont considérées comme 
+négatives pour ce rapport. 
+De même, le rapport non typique 1/4 retourne pour n = 10 le premier 947, ce qui rend
+toutes les valeurs premières inférieures à 881négatives pour ce rapport. Ainsi, un même 
+nombre premier (par exemple 227) peut être positif pour un rapport non typique, et négatif 
+pour un autre. 
+Cette bipolarité (+/-)entre rapports non typiques constitue une caractéristique 
+essentielle de la géométrie du spectre des nombres premiers. 
+ 
+Les équations associées au rapport typique 1/k = 1/2, qui déterminent les sommes des
+suites Aet Bet généralisent la valeur de npour les nombres premiers négatifs, sont les 
+suivantes : 
+Somme suite A = 3.25  x  2-n - 2, 
+Somme suite B = 6.5  x  2-n - 66. 
+L'équation psi (Savard), adaptée au cas négatif, s'écrit : 
+psiSavard = -x - 2-n
+Sbn
+- log(2pi) - 1
+2 log(1 - (-x)-2). 
+Par exemple, pour x = -28et n = -10, avec Sbn = -65.99365234, on obtient : 
+psiSavard = -28 - 2-10
+-65.99365234 - log(2pi) - 1
+2 log(1 - (-28)-2) = -28.79844187. 
+La valeur exacte recherchée est -29, soit le -10e nombre premier. La valeur obtenue par 
+psiSavard est plus proche de -29 que ne l'est la valeur positive correspondante obtenue pour
+29, où : 
+psiSavard(29) = 28.8881437. 
+L'ondulation est donc plus précise pour le premier négatif -29. 
+Écarts entre nombres premiers : positifs, négatifs et mixtes 
+La géométrie du spectre des nombres premiers étudie également les écarts entre premiers. 
+La validation HOL/Isabelle (methode_spectral.thy) distingue trois types d'écarts : 
+1. Écarts positifs : entre deux premiers positifs. 
+2. Écarts négatifs : entre deux premiers négatifs. 
+3. Écarts mixtes : entre un premier positif et un premier négatif. 
+Exemple : écart entre les premiers 23 et 7 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 42}
+\begin{Verbatim}[fontsize=\footnotesize]
+Pour déterminer la quantité de nombres entre 23 et 7, on procède comme suit : 
+1. Somme de la suite A du premier suivant 7, soit 11 
+(7 est le 4e premier, 11 est le 5e.) 
+Somme A(11) = (3.25
+2  x  25) - 2 = 50. 
+2. Somme de la suite B du premier 23 
+Somme B(23) = (6.5
+2  x  29) - 66 = 1598. 
+3. Digamma calculé de 23 
+(1598/64 - 23)  x  64 = 126. 
+4. Calcul de l'écart 
+50 - (1598 - 126) = -1442. 
+5. Digamma calculé de 7 
+Somme B(7) = (6.5
+2  x  24) - 66 = -14, 
+((-14)/64 - 7)  x  64 = -464. 
+6. Quantité de nombres entre 23 et 7 
+-1442 - (-462)
+64 = -15. 
+Les nombres entre 7 et 23 sont donc : 
+8,9,10,11,12,13,14,15,16,17,18,19,20,21,22, 
+soit 15 nombres. 
+Exemple : écart entre les premiers négatifs -19 et -5 
+1. Déterminer le premier précédent -19, soit -17 
+(-17 est le 7e premier négatif.) 
+Somme A(-17) = 3.25  x  2-7 - 2 = - 10110
+5120 . 
+2. Somme de la suite B du premier -5 
+Somme B(-5) = 6.5  x  2-3 - 66 = - 20860
+320 . 
+3. Digamma calculé de -5 
+(-20860/320
+64 - (-5))  x  64 = 81540
+320 . 
+4. Calcul intermédiaire 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 43}
+\begin{Verbatim}[fontsize=\footnotesize]
+- 10110
+5120 - (- 20860
+320 - 81540
+320 ) = 1628290
+5120 . 
+5. Somme de la suite B de -19 
+Somme B(-19) = 6.5  x  2-8 - 66 = - 337790
+5120 . 
+6. Digamma calculé de -19 
+(-337790/5120
+64 - (-11))  x  64 = 5888130
+5120 . 
+7. Quantité de nombres entre -19 et -5 
+1628290/5120 - 5888130/5120
+64 = -13. 
+Les nombres entre -19 et -5 sont donc : 
+-18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6, 
+soit 13 nombres. 
+Interprétation géométrique des écarts négatifs 
+Pour les écarts positifs, la première étape consiste à déterminer le premier suivant la valeur 
+minimale (par exemple, 7  ->  11). Pour les écarts négatifs, la première étape consiste à 
+déterminer le premier précédent la valeur minimale (par exemple, -19  ->  -17). 
+La géométrie du spectre adopte une convention idiomatique pour les premiers négatifs : 
+-  -2est le plus grand des premiers négatifs, 
+-  -3est le deuxième plus grand, 
+-  puis -5, -7, etc. 
+Cette convention est analogue à l'échelle des températures : 
+-  -1 deg Cest plus chaud que -30 deg C, 
+-  bien que les valeurs soient négatives. 
+Ainsi, sur une droite représentant l'ensemble Ppositif et négatif : 
+-  la valeur minimale est toujours située à gauche, 
+-  la valeur suivante est à droite, 
+-  que l'on soit dans le domaine positif ou négatif. 
+Cette structure permet de traiter les écarts négatifs de manière cohérente avec les écarts 
+positifs. 
+ 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 44}
+\begin{Verbatim}[fontsize=\footnotesize]
+L 'équation psi (Savard) appliquée aux quinze premiers nombres premiers négatifs 
+produit une ondulation dont la précision varie selon la valeur de Sbn. Au-delà du 
+quinzième premier négatif, soit -47, la valeur de Sbndevient pratiquement égale à 
+66. Ainsi, pour tous les nombres premiers négatifs précédant -47, l'ondulation 
+demeure essentiellement identique, car les exposants contraignent la valeur de 
+Sbnà se stabiliser autour de 66. 
+Les quinze premiers nombres premiers négatifs  --  les plus grands de l'infini négatif 
+ --  sont : 
+-2, - 3, - 5, - 7, - 11, - 13, - 17, - 19, - 23, - 29, - 31, - 37, - 41, - 43, - 47. 
+Ces quinze valeurs constituent la « tête » de l'infini premier négatif, tandis que toutes 
+les valeurs précédentes sont plus petites. 
+Limites numériques et nécessité d'une approche algébrique 
+La méthode spectrale, lorsqu'elle utilise une approche numérique pour déterminer 
+la valeur de n, présente une difficulté inhérente : l'exposant 2-nproduit des valeurs 
+extrêmement grandes lorsque nest strictement positif, et des valeurs infinitésimales 
+lorsque nest strictement négatif. 
+Pour les très grands nombres premiers, l'approche numérique devient impraticable. 
+Il faut alors recourir à une approche algébrique, ce que Savard juge 
+conceptuellement délicat, car la question de Riemann porte précisément sur la 
+nature analytique des zéros : 
+« Est-ce que tous les zéros non triviaux de la fonction zêta de Bernhard Riemann ont 
+pour partie réelle 1/2= » 
+Pour Savard, une « partie réelle algébrique » ne peut être qu'une partie imaginaire, ce 
+qui contredit l'esprit de la conjecture et ne peut donc servir à résoudre l'énigme. 
+Suites et rapport spectral 
+Les zéros de la fonction zêta sont définis par des suites, par exemple : 
+delta(2) = pi2
+6 . 
+La méthode spectrale adopte une approche analogue : les suites Aet Bdéterminent 
+la quantité de termes correspondant à la valeur de n, laquelle représente la position 
+du nombre premier dans le cas du rapport typique. 
+Les équations permettant de déterminer le rapport spectral RsP = 1/2 entre deux
+premiers symétriques sont : 
+Comparaison symétrique 1 x 1 
+((3.25/2  x  2n1) - 2) - ((3.25/2  x  2n2) - 2)
+((6.5/2  x  2n1) - 66) - ((6.5/2  x  2n2) - 66) = 1
+2. 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 45}
+\begin{Verbatim}[fontsize=\footnotesize]
+Cas incluant un premier négatif 
+((3.25  x  2n1) - 2) - ((3.25/2  x  2n2) - 2)
+((6.5  x  2n1) - 66) - ((6.5/2  x  2n2) - 66) = 1
+2. 
+Comparaison symétrique n x n 
+((3.25/2  x  2n1) - 2) - ((3.25/2  x  2n2) - 2) - ((3.25/2  x  2n1) - 2) + ((3.25/2  x  2n2) -
+    2)
+((6.5/2  x  2n1) - 66) - ((6.5/2  x  2n2) - 66) - ((6.5/2  x  2n1) - 66) + ((6.5/2  x  2n2) -
+    66)
+= 1
+2. 
+Les équations des suites A et B permettent de calculer les sommes de manière
+efficace, sans devoir dénombrer chaque terme individuellement. Elles sont exactes 
+pour toute valeur entière de n. 
+La coïncidence 3.25 / 6.5 n'est pas la raison du rapport spectral 
+Considérons les équations : 
+x + 2 = 13, 
+2x + 4 = 109. 
+On observe que : 
+x + 2
+2x + 109 != 1
+2, 
+bien que la simplification algébrique puisse donner l'illusion d'un rapport 1/2. De 
+même, le fait que : 
+3.25
+6.5 = 1
+2 
+est une coïncidence algébrique, et non la raison profonde du rapport spectral 
+RsP = 1/2. 
+Exemple : premiers 7 et 31 
+((3.25/2  x  24) - 2) - ((3.25/2  x  211) - 2)
+((6.5/2  x  24) - 66) - ((6.5/2  x  211) - 66) = RsP. 
+Ce qui donne : 
+24 - 3326
+-14 - 6590 = 1
+2. 
+Or : 
+24
+-14 != 1
+2 ,  3326
+6590 != 1
+2. 
+La simplification algébrique ne reflète donc pas la véritable structure du rapport 
+spectral. 
+\end{Verbatim}
+\medskip
+\clearpage
+\subsubsection*{Page 46}
+\begin{Verbatim}[fontsize=\footnotesize]
+Évidence fondamentale de la géométrie du spectre 
+« Lorsque n >= 1ou n <= -1et que nest un entier, toutes les valeurs de nramènent à 
+un nombre premier P. Toutes les valeurs de nsont la conséquence directe de la 
+quantité de termes dans les suites Aet B. Tous les nombres premiers Prespectent le 
+rapport spectral 1/k. Ce rapport est numériquement valide, mais algébriquement 
+incohérent. » 
+Lien avec la fonction zêta et les rapports non typiques 
+L 'axiome concernant les parties réelles algébriques introduit des difficultés dans la 
+validation HOL/Isabelle. Cependant, grâce au pipeline cognitif et au corpus HOL 
+intégré dans le dépôt GitHub, la géométrie du spectre permet de reconstruire les 
+nombres premiers pour la valeur généralisée de n, pour tous les rapports typiques et 
+non typiques. 
+Le rapport typique 1/k = 1/2correspond à la droite critique de la fonction zêta. Les 
+rapports non typiques sont l'analogue des zéros non triviaux. 
+Dans la formule : 
+N(T) ~ T
+2pi log ( T
+2pi) - T
+2pi, 
+la valeur Treprésente une hauteur tronquée de la droite critique. Les rapports non 
+typiques 1/k != 1/2jouent un rôle similaire : la valeur de nne correspond pas à la 
+position du nombre premier, mais uniquement à la quantité de termes dans les 
+suites Aet B. 
+Par exemple : 
+-  Pour 1/k = 1/3 et n = 10, le premier retourné est 227, soit le 49e premier.
+-  Pour 1/k = 1/4 et n = 10, le premier retourné est 947, ce qui rend toutes les
+valeurs premières inférieures à 881 négatives pour ce rapport. 
+Ainsi, un même nombre premier peut être positif pour un rapport non typique et 
+négatif pour un autre, en raison de la polarité déterminée par la valeur de n. 
+Les ancrages premiers observés dans la géométrie du spectre suivent une loi empirique de 
+type puissance : 
+log P (k) ~= a log k + b,  avec a ~= 5. 
+Ce qui équivaut à : 
+P(k) ~= C  .  k5. 
+Il s'agit d'une loi polynomiale, et non logarithmique. Elle définit une géométrie alternative 
+des nombres premiers, dans laquelle la taille des premiers reconstruits croît comme une 
+puissance de l'indice k. 
+2. Comparaison des ordres de grandeur 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 47}
+\begin{Verbatim}[fontsize=\footnotesize]
+Les zéros non triviaux de la fonction zeta(s)atteignent des hauteurs de l'ordre de : 
+1012 
+dans les calculs analytiques les plus avancés. 
+Dans Gabriel multiloop, pour des rapports non typiques proches de : 
+1/k avec k ~= 104, 
+les ancrages premiers atteignent des tailles de l'ordre de : 
+P(k) ~= k5 ~= (104)5 = 1020. 
+Autrement dit : 
+Les premiers reconstruits par Gabriel multiloop dépassent d'un facteur d'environ 
+1000 x  les hauteurs des zéros non triviaux connus de zeta(s). 
+Il ne s'agit pas d'une imitation de la fonction zêta : c'est une structure parallèle, produisant
+des objets arithmétiques (des nombres premiers) dans des ordres de grandeur analogues à 
+ceux où la zêta produit ses zéros. 
+3. Interprétation géométrique 
+Dans la fonction zêta de Riemann, la structure est contrôlée par : 
+s = sigma + it,  sigma = 1
+2. 
+La partie réelle sigma = 1/2constitue la ligne critique, où se situent les zéros non triviaux
+    selon
+l'hypothèse de Riemann. 
+Dans Gabriel multiloop, la structure est contrôlée par une loi de puissance : 
+P(k) ~= C  .  ka,  a ~= 5. 
+On peut interpréter l'exposant acomme un analogue discret de la partie réelle sigmadans la 
+zêta : 
+-  sigma = 1/2 ->  structure des zéros, 
+-  a ~= 5 ->  structure des ancrages premiers. 
+Ce parallèle n'est pas une équivalence mathématique, mais une analogie structurelle : 
+dans les deux cas, une exposante réelle contrôle la croissance d'objets fondamentaux 
+(zéros ou premiers). 
+4. Rapport typique vs rapport non typique 
+Les rapports typiques (comme 1/2) produisent des ancrages faibles et réguliers. Les 
+rapports non typiques (comme 1/9999) produisent des ancrages extrêmement grands. 
+Cette dichotomie rappelle la distinction entre : 
+-  zéros triviaux : simples, réguliers, prévisibles, 
+\end{Verbatim}
+\medskip
+\subsubsection*{Page 48}
+\begin{Verbatim}[fontsize=\footnotesize]
+-  zéros non triviaux : complexes, oscillants, riches en structure. 
+Dans Gabriel multiloop : 
+-  les rapports typiques jouent le rôle des zéros triviaux, 
+-  les rapports non typiques jouent le rôle des zéros non triviaux. 
+5. Conclusion : une géométrie alternative des nombres premiers 
+La structure des ancrages premiers dans Gabriel multiloop n'imite pas la fonction zêta de 
+Riemann. Elle produit une géométrie polynomiale des premiers : 
+P(k) ~= C  .  k5, 
+qui : 
+-  croît beaucoup plus rapidement que les hauteurs des zéros de zeta(s), 
+-  possède une régularité remarquable, 
+-  révèle une dynamique interne riche (Digamma, Zêta, offsets), 
+-  et ouvre une voie entièrement nouvelle pour la compréhension des nombres 
+premiers. 
+ 
+\end{Verbatim}
+\medskip
+
+\section{Fusion des rapports typiques et non typiques dans la fonction zêta spectrale de Savard}
+
+\subsection{Droite critique spectrale : le rapport typique $1/2$}
+
+Dans la géométrie du spectre des nombres premiers, le rapport typique
+$1/k=1/2$ (donc $k=2$) joue le rôle d'un homologue de la droite critique
+de la fonction zêta de Riemann. Dans ce modèle, $n$ indique à la fois le
+nombre de termes des suites $A$ et $B$ et le rang du premier associé :
+\[
+n=1\mapsto 2,\qquad n=2\mapsto 3,\qquad n=3\mapsto 5,\qquad
+\ldots,\qquad n=49\mapsto 227.
+\]
+
+Pour les indices négatifs, on adopte la convention $P_{-m}=-p_m$, où $p_m$
+est le $m$-ième premier positif :
+\[
+n=-1\mapsto -2,\qquad n=-2\mapsto -3,\qquad n=-3\mapsto -5,\qquad
+\ldots,\qquad n=-15\mapsto -47.
+\]
+Ainsi, dans cette convention, les indices entiers non nuls parcourent les
+premiers positifs et négatifs. Cette correspondance est une propriété du
+modèle spectral présenté ici; elle n'établit pas à elle seule une équivalence
+avec l'hypothèse de Riemann.
+
+Dans la formalisation Isabelle/HOL citée dans le rapport, le théorème
+\texttt{composite\_not\_prime\_i} établit qu'un entier composé ne peut être
+égal à \texttt{prime\_i i}, puisque \texttt{prime\_i i} est démontré premier.
+Cette propriété porte sur la fonction formalisée; le pipeline doit toujours
+signaler explicitement les candidats absents ou ambigus.
+
+\subsection{Rapports non typiques : positions et polarité spectrales}
+
+Les rapports non typiques $1/k$, avec $k\geq 3$, conservent dans cette
+interprétation la grille des positions définie par les premiers, mais $n$
+représente seulement le nombre de termes des suites $A$ et $B$. Il n'est donc
+pas, en général, le rang du premier retourné. La polarité associée à un
+premier peut aussi dépendre du rapport considéré.
+
+Par exemple, pour $n=10$, le rapport $1/3$ retourne $227$, qui est le
+49\textsuperscript{e} premier, tandis que $1/4$ retourne $947$, qui est le
+161\textsuperscript{e} premier. Selon les conventions décrites dans le
+rapport, les premiers inférieurs à $881$ sont négatifs pour le rapport $1/4$.
+Un même premier peut donc être positif pour un rapport non typique et négatif
+pour un autre, tout en gardant son rang habituel dans la suite des premiers.
+On peut interpréter les rapports non typiques comme des projections spectrales
+de la structure associée au rapport typique; il s'agit ici d'une analogie du
+modèle, et non d'une identité avec les zéros de la fonction zêta classique.
+
+\subsection{Définition proposée de la fonction zêta spectrale de Savard}
+
+L'équation proposée pour la fonction $\psi$ de Savard s'écrit
+\[
+\psi_{\mathrm{Savard}}(x;k,n)
+=x-\frac{k^n}{S_B(k,n)}
+-\log(2\pi)-\frac{1}{2}\log(1-x^{-2}),
+\]
+pour les valeurs où les termes de l'expression sont définis. Les cas négatifs
+requièrent l'adaptation de signe décrite dans les sections précédentes.
+
+Un ancrage premier $P$ est dit résonant dans ce modèle lorsque
+$\psi_{\mathrm{Savard}}(P;k,n)$ est proche de $P$, c'est-à-dire lorsque
+l'écart résiduel est faible. Les exemples présentés attribuent au rapport
+typique $1/2$ une ondulation faible et décrivent une amélioration de la
+proximité pour certains grands premiers. Pour les indices négatifs au-delà de
+$-47$, le rapport indique que $S_B(n)$ se stabilise près de $66$; cette
+observation concerne la suite négative et l'extension de l'équation à ce cas.
+
+\subsection{Reconstruction des premiers et exclusion des composés}
+
+La relation de reconstruction utilisée est
+\[
+P_i=\frac{S_B(k,n)-\mathrm{Digamma}_{\mathrm{calculé}}}{k^6}.
+\]
+Dans la formalisation citée, la fonction $\texttt{prime\_i}$ ne retourne que
+des nombres premiers, ce qui exclut les composés de son image. L'interprétation
+supplémentaire selon laquelle le remplacement d'un premier par un composé
+conduirait à un indice non entier est une explication du mécanisme de
+reconstruction présenté; elle doit être distinguée du théorème Isabelle
+\texttt{composite\_not\_prime\_i}.
+
+\subsection{Comptages observés et loi de croissance proposée}
+
+Les trois catalogues dynamiques actuellement cités couvrent les plages
+$k=2$ à $1001$, $1002$ à $10001$, et $10002$ à $100001$. Ils rapportent
+respectivement $423$, $2604$ et $19215$ lignes marquées
+\texttt{PREMIER TROUVE}, soit
+\[
+423+2604+19215=22242
+\]
+ancrages consignés sur $100000$ rapports traités. Ces nombres sont les bilans
+des fichiers générés; ils ne signifient pas que chaque résultat dispose d'un
+certificat HOL indépendant.
+
+Les ancrages observés suggèrent empiriquement une croissance de type puissance :
+\[
+\log P(k)\approx a\log k+b,\qquad a\approx 5,
+\qquad\text{soit}\qquad P(k)\approx Ck^5.
+\]
+Cette loi reste une approximation empirique dans les données présentées. Elle
+place certains ancrages vers $10^{20}$ pour $k$ de l'ordre de $10^4$ et vers
+$10^{25}$ pour $k$ de l'ordre de $10^5$.
+
+\subsection{Interprétation zêta : analogie des exposants}
+
+Dans la fonction zêta de Riemann, la droite critique est donnée par
+$\sigma=1/2$. Dans le modèle spectral de Savard, l'exposant de croissance
+$a\approx 5$ décrit la taille des ancrages premiers. On peut rapprocher ces
+deux paramètres comme analogues structurels : l'un intervient dans la
+description des zéros, l'autre dans la croissance des ancrages. Les deux
+constructions ne sont pas mathématiquement équivalentes : la fonction zêta
+classique concerne ses zéros, tandis que le modèle de Savard produit des
+candidats nombres premiers.
+
+Le rapport mentionne des hauteurs de zéros non triviaux de l'ordre de
+$10^{12}$ et des ancrages pouvant atteindre l'ordre de $10^{25}$. Le quotient
+des deux échelles est
+\[
+\frac{10^{25}}{10^{12}}=10^{13}.
+\]
+Cette comparaison est uniquement une comparaison d'ordres de grandeur : une
+hauteur de zéro et la valeur d'un nombre premier sont des quantités de nature
+différente. Faute de référence bibliographique précisant une borne vérifiable,
+$10^{12}$ est présenté ici comme l'ordre de grandeur mentionné dans le rapport,
+et non comme un record mondial établi.
+
+\subsection{Hypothèse de Savard : formulation spectrale}
+
+\textbf{Hypothèse de Savard (formulation proposée).} Pour un entier $n$ fixé
+et le long des rapports non typiques $1/k$ pour lesquels le pipeline fournit
+un ancrage unique, la résonance et la loi de croissance sont conjecturées sous
+la forme
+\[
+\psi_{\mathrm{Savard}}(P_{k,n};k,n)=P_{k,n}+o(1),
+\qquad
+P(k)\sim Ck^5\quad (k\to\infty).
+\]
+Ces relations sont des hypothèses asymptotiques à vérifier; elles ne découlent
+pas des seuls exemples numériques ni du théorème d'exclusion des composés.
+
+\clearpage
+\appendix
+\section{Annexe --- Tables du classeur Excel}
+% ======================================================================
+
+\textbf{Classeur source :} \url{systeme_convolutif_spectral_general.xlsx}.
+
+\subsection{Table de convolution formelle (feuille \emph{Convolution}, extrait)}
+
+Chaque terme vaut $c_1 \cdot k^{e_1} + c_2 \cdot k^{e_2}$ : cette
+représentation encode les additions et soustractions sans figer $k$.
+
+\begin{center}\small
+\begin{tabular}{@{}c c c c c c c r l@{}}
+\toprule
+\rowcolor{spectralgris}
+Rapport & Suite & Ordre & Coeff 1 & Exp 1 & Coeff 2 & Exp 2 & Valeur & Expression formelle \\
+\midrule
+1/3 & A & 1 & 1 & 1 & 0 & 0 & 3 & $k^{1}$ \\
+1/3 & A & 8 & 1 & 8 & 0 & 0 & 6\,561 & $k^{8}$ \\
+1/3 & A & 9 & 1 & 9 & $-1$ & 7 & 17\,496 & $k^{9} - k^{7}$ \\
+1/3 & A & 10 & 1 & 10 & $-1$ & 8 & 52\,488 & $k^{10} - k^{8}$ \\
+1/3 & B & 9 & 1 & 9 & 0 & 0 & 19\,683 & $k^{9}$ \\
+1/3 & B & 10 & 1 & 10 & $-1$ & 8 & 52\,488 & $k^{10} - k^{8}$ \\
+1/3 & B & 11 & 1 & 11 & $-1$ & 9 & 157\,464 & $k^{11} - k^{9}$ \\
+1/8 & A & 9 & 1 & 9 & $-1$ & 7 & 132\,120\,576 & $k^{9} - k^{7}$ \\
+1/8 & A & 10 & 1 & 10 & $-1$ & 8 & 1\,056\,964\,608 & $k^{10} - k^{8}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Système généralisé (feuille \emph{Systeme General})}
+
+Formules fermées exactes, valables pour tout $k$ entier $\ge 3$ et tout $n$
+entier (positif ou négatif), validées contre les exemples numériques $k=3..7$ :
+$\SA(k,n) = (\alpha_A(k)/2)\,k^{n} - \delta_A(k)$ et
+$\SB(k,n) = (\alpha_B(k)/2)\,k^{n} - \delta_B(k)$. À $n=10$ : Digamma $= \SA
+\pm A(7\ \text{ou}\ 8)$ ; les quatre possibilités servent uniquement à
+déterminer l'ancrage premier du rapport. À $n \neq 10$ : rang cible $=$ rang
+premier à $n=10$ $+\,n-10$ ; $P$ cible lu dans \texttt{tblPremiers} ; Digamma
+calculé $= \SB(k,n) - P_{\text{cible}} \times k^{6}$. Reconstruction :
+$P = [\SB(k,n) - \text{Digamma calculé}]/k^{6}$ ; un rapport sans ancrage
+unique à $n=10$ demeure bloqué.
+
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}c c c r r c c r r r l@{}}
+\toprule
+\rowcolor{spectralgris}
+Rapport & $k$ & $n$ & \multicolumn{1}{c}{Somme A} & \multicolumn{1}{c}{Somme B} & Pos. Dig. & Signe & \multicolumn{1}{c}{Digamma} & \multicolumn{1}{c}{Premier} & Rang & Statut \\
+\midrule
+1/3 & 3 & 10 & 79\,824 & 238\,746 & 8 & $-1$ & 73\,263 & 227 & 49 & Résolu \\
+1/4 & 4 & 10 & 1\,316\,180 & 5\,260\,628 & 8 & $+1$ & 1\,381\,716 & 947 & 161 & Résolu \\
+1/5 & 5 & 10 & 11\,738\,280 & 58\,675\,780 & 7 & $+1$ & 11\,816\,405 & 2\,999 & 430 & Résolu \\
+1/6 & 6 & 10 & 70\,599\,858 & 423\,552\,498 & 8 & $+1$ & 72\,279\,474 & 7\,529 & 954 & Résolu \\
+1/7 & 7 & 10 & 322\,966\,112 & 2\,260\,645\,142 & 8 & $-1$ & 317\,201\,311 & 16\,519 & 1\,913 & Résolu \\
+1/8 & 8 & 10 & 1\,208\,259\,144 & 9\,665\,811\,016 & 8 & $-1$ & 1\,191\,481\,928 & 32\,327 & 3\,468 & Résolu \\
+1/9 & 9 & 10 & 3\,874\,802\,760 & 34\,872\,693\,408 & 7 & $-1$ & 3\,870\,019\,791 & 58\,337 & 5\,906 & Résolu \\
+1/10 & 10 & 10 & 11\,001\,111\,110 & 110\,010\,111\,110 & \multicolumn{5}{c}{---} & Ambigu (3 candidats) \\
+1/11 & 11 & 10 & 28\,297\,321\,008 & 311\,268\,759\,538 & \multicolumn{5}{c}{---} & Ambigu (aucun candidat) \\
+1/12 & 12 & 10 & 67\,080\,402\,012 & 804\,961\,838\,172 & \multicolumn{5}{c}{---} & Ambigu (2 candidats) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Cas corrigé exact --- rapport 1/8, $n = 34$ :} 32\,327 est le
+3\,468\textsuperscript{ème} premier à $n=10$ ; le décalage de 24 rangs donne le
+3\,492\textsuperscript{ème} premier, soit 32\,537.
+$\SA(8,34) = 5\,705\,842\,489\,643\,358\,455\,620\,763\,423\,304$ ;
+$\SB(8,34) = 45\,646\,739\,917\,146\,867\,644\,966\,107\,124\,296$ ;
+Zêta $k^{6} = 262\,144$ ; Digamma exact
+$= 45\,646\,739\,917\,146\,867\,644\,957\,577\,744\,968$ --- \emph{reconstruit
+exactement}.
+
+\subsection{Paramètres des règles et constantes des sommes fermées (feuille \emph{Parametres})}
+
+\begin{center}\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}c c c c c c l@{}}
+\toprule
+\rowcolor{spectralgris}
+Rapport & $k$ & $n$ & Exp. reconstruction & Position Digamma & Signe Digamma & Statut \\
+\midrule
+1/3 & 3 & 10 & 6 & 8 & $-1$ & Ancrage $n=10$ validé ; séquence par rang active \\
+1/4 & 4 & 10 & 6 & 8 & $+1$ & Ancrage $n=10$ validé ; séquence par rang active \\
+1/5 & 5 & 10 & 6 & 7 & $+1$ & Ancrage $n=10$ validé ; séquence par rang active \\
+1/6 & 6 & 10 & 6 & 8 & $+1$ & Ancrage $n=10$ validé ; séquence par rang active \\
+1/7 & 7 & 10 & 6 & 8 & $-1$ & Ancrage $n=10$ validé ; séquence par rang active \\
+1/8 & 8 & 10 & 6 & 8 & $-1$ & Ancrage $n=10$ validé ; séquence par rang active \\
+1/9 & 9 & 10 & 6 & 7 & $-1$ & Ancrage $n=10$ validé ; séquence par rang active \\
+1/10 & 10 & 10 & 6 & \multicolumn{2}{c}{---} & Essai-erreur requis \\
+1/11 & 11 & 10 & 6 & \multicolumn{2}{c}{---} & Essai-erreur requis \\
+1/12 & 12 & 10 & 6 & \multicolumn{2}{c}{---} & Essai-erreur requis \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Obligation universelle : chaque premier cible doit être produit une fois par le
+catalogue complet. Règles actives --- $n = 10$ : A et B construites, quatre
+Digamma $\pm A(7)$, $\pm A(8)$, sélection du seul entier premier, dénominateur
+$k^{6}$, création de l'ancrage ; $n \neq 10$ : A et B construites, rang cible
+$=$ rang base $+\,n-10$, premier lu dans \texttt{tblPremiers}, Digamma $= \Sigma B
+- P \times k^{6}$, ancrage $n=10$ obligatoire.
+
+\subsection{Moteur géo convolutif (feuille \emph{Moteur Géo Convolutif}, $k = 11$)}
+
+Implémentation des annexes PDF 16.1--16.19 : chaque terme géométrique est le
+terme entier correspondant multiplié par $g(k) = \sqrt{1+k^{2}}/k$
+($g(11) = 1.0041237288352056$). Identité centrale :
+$\SA^{\text{géo}} = g(k)\cdot\SA^{\text{entier}}$ ;
+$\SB^{\text{géo}} = g(k)\cdot\SB^{\text{entier}}$ ;
+$\text{Digamma}_{\text{géo}} = g(k)\cdot\text{Digamma}_{\text{entier}}$ ;
+$\text{Zêta}_{\text{géo}} = g(k)\cdot k^{6}$ --- le facteur s'annule dans $P$.
+Somme entière A $= 28\,297\,321\,008$, B $= 311\,268\,759\,538$ ; sommes
+géométriques : contrôle facteur 0. Pour $k = 11$, les six branches
+($A(n{-}3)\pm$, $A(n{-}2)\pm$, diagnostics $B(n{-}2)\pm$) donnent des candidats
+entiers non premiers : verdict pipeline \og AUCUN P --- COMPOSÉS EXCLUS \fg{}
+(6 composés exclus HOL) ; la règle standard ne sélectionne que les quatre
+branches A. Référence PDF : premier imprimé 1\,611\,851 (règle A7$-$, forme
+spéciale) ; correction séquentielle : ancrage rang 121\,982 à $n=10$, cible
+rang 121\,987 à $n=15$ $\Rightarrow$ premier 1\,611\,901.
+
+\subsection{Tests Digamma (feuille \emph{Tests Digamma})}
+
+Le candidat est A ajustée $=$ Somme A $+$ signe $\cdot k^{\text{position}}$ ;
+puis $P = (\text{Somme B} - \text{A ajustée})/k^{\text{exp reconstruction}}$.
+Pour $1/3$ ($n=10$) : seule la combinaison position 8 / signe $-$ produit 227,
+premier de rang 49 ; les trois autres candidats sont composés (221, 215, 209).
+Essai convolutif $1/3$, $n = 18$ : $\SA(18) = 523\,735\,104$,
+$\SB(18) = 1\,571\,204\,586$ ; les quatre options donnent des quotients
+entiers, et les options position 8 produisent deux premiers consécutifs
+(1\,436\,849 et 1\,436\,867) : la règle Digamma ne sélectionne pas encore une
+solution unique pour $n = 18$ --- un critère supplémentaire est requis, d'où la
+voie officielle du Niveau 5 (décalage de rang, Digamma calculé à rebours).
+
+\subsection{Suites géométriques A--B (feuille \emph{Suites Géo A-B}, modèle hypoténuse)}
+
+Pour $t = 1/k$ : typique $k=2$ ($t = 1/2$, $\SA = 2.2469862782$,
+$\SB = 2.2016753304$, $\SA + \SB = 4.4486616086$) ; non typiques $k = 3..12$
+(ex.\ $k=7$ : $\SA = 1.1785207100$, $\SB = 1.1784513659$). Logique de repli
+automatique : Étape 1 approche algébrique ($k^{n}$ + 4 Digamma) ; si 0 premier,
+Étape 2 approche géométrique (suites $\sqrt{a^{2}+b^{2}}$, extraction
+floor/ceil/round de $\SA$, $\SB$, $n\SA$, $n\SB$, test de primalité).
+Invariants : Digamma inchangé ; les équations pour $\forall n$ restent
+identiques.
+
+\subsection{Bilan des ancrages pour $n=10$ et extraits des grands rapports}
+
+Les trois catalogues dynamiques couvrant successivement $k=2$--$1001$, $1002$--
+$10001$, puis $10002$--$100001$ rapportent les nombres de resultats suivants.
+Les nombres de la colonne "ancrages" sont les lignes marquees \texttt{PREMIER TROUVE}
+par le pipeline dans les fichiers de resultats cites.
+
+\begin{center}\small
+\begin{tabular}{@{}l r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+Plage de $k$ & Rapports traites & Ancrages trouves & Proportion \\
+\midrule
+$2$--$1001$ & 1\,000 & 423 & 42,30\% \\
+$1002$--$10001$ & 9\,000 & 2\,604 & 28,93\% \\
+$10002$--$100001$ & 90\,000 & 19\,215 & 21,35\% \\
+\midrule
+\rowcolor{spectralazur!8}
+Total ($2$--$100001$) & 100\,000 & \textbf{22\,242} & 22,242\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Les totaux reproduisent les bilans des fichiers \url{liste_k2_k1001_n10.txt},
+\url{liste_k1002_k10001_n10.txt} et
+\url{liste_k10002_k100001_n10.txt}. Ils decrivent les resultats consignes par
+le pipeline; ils ne remplacent pas un certificat independant pour chaque ancrage.
+
+\paragraph{Comparaison d'ordres de grandeur.}
+Les ancrages des rapports proches de $1/100000$ atteignent environ $10^{25}$ dans le
+catalogue ci-dessous. Le document evoque des calculs de zeros non triviaux de hauteur
+de l'ordre de $10^{12}$. Le quotient de ces ordres de grandeur est
+$10^{25}/10^{12}=10^{13}$, soit $10\,000$ milliards. Cette comparaison porte uniquement
+sur les tailles numeriques : une hauteur de zero et la valeur d'un nombre premier sont
+des quantites de nature differente. Faute de reference bibliographique precisant une
+borne et un record verifiables, $10^{12}$ est presente ici comme un ordre de grandeur,
+non comme un record mondial etabli.
+
+\subsubsection*{Extrait dynamique : $k=9978$--$10001$}
+\small
+\begin{longtable}{@{}r >{\raggedleft\arraybackslash}p{4.3cm} c >{\raggedright\arraybackslash}p{5.2cm}@{}}
+\toprule
+\rowcolor{spectralgris}
+Rapport & Ancre $P(n=10)$ & Etat DYN & Resultat du rapport \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{spectralgris}
+Rapport & Ancre $P(n=10)$ & Etat DYN & Resultat du rapport \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\rowcolor{spectralazur!8} $1/9978$ & $98\allowbreak\,904\allowbreak\,828\allowbreak\,370\allowbreak\,293\allowbreak\,156\allowbreak\,971$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralazur!8} $1/9979$ & $98\allowbreak\,954\allowbreak\,399\allowbreak\,755\allowbreak\,106\allowbreak\,335\allowbreak\,579$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralazur!8} $1/9980$ & $99\allowbreak\,003\allowbreak\,991\allowbreak\,013\allowbreak\,984\allowbreak\,807\allowbreak\,999$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralrouge!8} $1/9981$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9982$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9983$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9984$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9985$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9986$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralazur!8} $1/9987$ & $99\allowbreak\,351\allowbreak\,686\allowbreak\,808\allowbreak\,222\allowbreak\,880\allowbreak\,721$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralrouge!8} $1/9988$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9989$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9990$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9991$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/9992$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralazur!8} $1/9993$ & $99\allowbreak\,650\allowbreak\,488\allowbreak\,659\allowbreak\,218\allowbreak\,583\allowbreak\,521$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralazur!8} $1/9994$ & $99\allowbreak\,700\allowbreak\,358\allowbreak\,785\allowbreak\,863\allowbreak\,712\allowbreak\,439$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralrouge!8} $1/9995$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralazur!8} $1/9996$ & $99\allowbreak\,800\allowbreak\,158\allowbreak\,937\allowbreak\,112\allowbreak\,409\allowbreak\,019$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralazur!8} $1/9997$ & $99\allowbreak\,850\allowbreak\,088\allowbreak\,973\allowbreak\,903\allowbreak\,799\allowbreak\,777$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralrouge!8} $1/9998$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralazur!8} $1/9999$ & $99\allowbreak\,950\allowbreak\,008\allowbreak\,999\allowbreak\,300\allowbreak\,019\allowbreak\,999$ & \textcolor{spectralbleu}{\textbf{TROUVE}} & Essais DYN : premier retourne \\
+\rowcolor{spectralrouge!8} $1/10000$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\rowcolor{spectralrouge!8} $1/10001$ & \textemdash & \textcolor{spectralrouge}{\textbf{ECHEC}} & Aucun ancrage (4 essais Digamma) \\
+\end{longtable}
+\normalsize
+
+\subsubsection*{Extrait du catalogue detaille : $k=99975$--$100001$}
+\small
+\begin{longtable}{@{}r >{\raggedleft\arraybackslash}p{4.3cm} c >{\raggedright\arraybackslash}p{5.2cm}@{}}
+\toprule
+\rowcolor{spectralgris}
+Rapport & Ancre $P(n=10)$ & Etat & Branche / remarque \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{spectralgris}
+Rapport & Ancre $P(n=10)$ & Etat & Branche / remarque \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\rowcolor{spectralazur!8} $1/99975$ & $9\allowbreak\,987\allowbreak\,506\allowbreak\,247\allowbreak\,438\allowbreak\,445\allowbreak\,115\allowbreak\,449\allowbreak\,949$ & \textcolor{spectralbleu}{\textbf{UNIQUE}} & Branche A(7)- \\
+\rowcolor{spectralazur!8} $1/99976$ & $9\allowbreak\,988\allowbreak\,005\allowbreak\,757\allowbreak\,618\allowbreak\,485\allowbreak\,707\allowbreak\,451\allowbreak\,151$ & \textcolor{spectralbleu}{\textbf{UNIQUE}} & Branche A(7)- \\
+\rowcolor{spectralgris} $1/99977$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99978$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralor!20} $1/99979$ & \textemdash & \textcolor{spectralor!70!black}{\textbf{AMBIGU}} & A(8)+ : $9\,989\,504\,408\,074\,617\,108\,424\,697$; A(7)- : $9\,989\,504\,408\,074\,627\,104\,325\,117$ \\
+\rowcolor{spectralgris} $1/99980$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99981$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99982$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99983$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99984$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99985$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99986$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralazur!8} $1/99987$ & $9\allowbreak\,993\allowbreak\,501\allowbreak\,688\allowbreak\,780\allowbreak\,714\allowbreak\,226\allowbreak\,931\allowbreak\,059$ & \textcolor{spectralbleu}{\textbf{UNIQUE}} & Branche A(8)- \\
+\rowcolor{spectralgris} $1/99988$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99989$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralazur!8} $1/99990$ & $9\allowbreak\,995\allowbreak\,000\allowbreak\,998\allowbreak\,900\allowbreak\,304\allowbreak\,969\allowbreak\,900\allowbreak\,999$ & \textcolor{spectralbleu}{\textbf{UNIQUE}} & Branche A(7)+ \\
+\rowcolor{spectralgris} $1/99991$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99992$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99993$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99994$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99995$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralazur!8} $1/99996$ & $9\allowbreak\,998\allowbreak\,000\allowbreak\,158\allowbreak\,993\allowbreak\,720\allowbreak\,123\allowbreak\,199\allowbreak\,039$ & \textcolor{spectralbleu}{\textbf{UNIQUE}} & Branche A(7)+ \\
+\rowcolor{spectralgris} $1/99997$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99998$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/99999$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/100000$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\rowcolor{spectralgris} $1/100001$ & \textemdash & \textcolor{spectralrouge}{\textbf{ABSENT}} & -- \\
+\end{longtable}
+\normalsize
+
+Pour $k=99979$, le catalogue detaille signale deux candidats de branches differentes;
+le statut reste \textbf{AMBIGU} et aucun choix unique n'est presente ici. Les Etats
+\textbf{ABSENT} et \textbf{AMBIGU} ne sont donc pas comptes comme ancrages uniques dans
+le bilan precedent.
+
+\end{document}

@@ -1,0 +1,157 @@
+# ============================================================
+# Multi-Loop Math Agent - docker-compose.yml
+# Services : agent (multiloop), ollama, ollama-init, isabelle
+# 
+# v5.4 CORRIGE :
+# ✓ Ports cohérents (Gabriel interne 8000, externe 9001)
+# ✓ .env non monté en double
+# ✓ Volumes RW pour .thy
+# ✓ Logs Ollama rediriges (problem 1 resolu)
+# ✓ Pytest monte correctement avec volume tests (problem 2 resolu)
+# ============================================================
+
+services:
+
+  llm-agent-multiloop:
+    build:
+      context: ..
+      dockerfile: agent-multiloop-Gabriel-local/Dockerfile.cli
+    container_name: llm-agent-multiloop-run
+    restart: "no"
+
+    env_file:
+      - .env
+
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - DEFAULT_LANGUAGE=fr
+      - ISABELLE_HOME=/opt/Isabelle2025-2
+      - GABRIEL_HTTP_PORT=8000
+      - GABRIEL_HOST=0.0.0.0
+      - GABRIEL_TESTS_DIR=/home/agent/app/tests
+
+    stdin_open: true
+    tty: true
+
+    ports:
+      - "9001:8000"
+
+    command: ["python", "main_cli.py"]
+
+    volumes:
+      - ./src:/home/agent/app/src
+      - ./main.py:/home/agent/app/main.py
+      - ./main_cli.py:/home/agent/app/main_cli.py
+      - ./gabriel_launcher.py:/home/agent/app/gabriel_launcher.py
+      - ./port_cleanup.py:/home/agent/app/port_cleanup.py
+      - ./config.yaml:/home/agent/app/config.yaml
+      - ./tests:/home/agent/app/tests:ro
+      - ./scripts:/home/agent/app/scripts
+      - ./theories:/home/agent/app/theories
+      - ../pipeline_cognitif:/home/agent/app/pipeline_cognitif:ro
+      - ../pipeline_correction:/home/agent/app/pipeline_correction:ro
+      - ../Le-systeme-convolutif-Gabriel.tex:/home/agent/app/Le-systeme-convolutif-Gabriel.tex:ro
+      - ../Le-systeme-convolutif-Gabriel.pdf:/home/agent/app/Le-systeme-convolutif-Gabriel.pdf:ro
+      - ./CONFIG_ENV_GUIDE.md:/home/agent/app/CONFIG_ENV_GUIDE.md
+      - ./.github:/home/agent/app/.github
+      - ./docker-compose.yml:/home/agent/app/docker-compose.yml
+      - ./memory:/home/agent/app/memory
+      - agent-data:/home/agent/app/data
+      - agent-logs:/home/agent/app/logs
+      - ${HOST_DEBAT_DIR:-./data/debats}:/home/agent/app/data/debats-onedrive
+
+    networks:
+      - agent-network
+
+    depends_on:
+      - ollama
+
+    # Redirection des logs pour eviter la pollution de l'interface CLI
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    volumes:
+      - ollama-data:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - agent-network
+    # Configuration : rediriger les logs Ollama STDOUT vers les fichiers JSON
+    # au lieu de les afficher sur le terminal (resout le probleme des logs parasites a l'entete)
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # Desactiver les logs de demarrage trop verbeux
+    environment:
+      - OLLAMA_DEBUG=false
+
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: ollama-init
+    depends_on:
+      - ollama
+    entrypoint: ["/bin/sh", "-c"]
+    command: |
+      "
+      echo 'Attente du demarrage d Ollama...' >> /tmp/ollama-init.log 2>&1
+      sleep 30
+      OLLAMA_HOST=http://ollama:11434 ollama pull llama3.2 >> /tmp/ollama-init.log 2>&1 || true
+      echo 'Modeles telecharges.' >> /tmp/ollama-init.log 2>&1
+      "
+    networks:
+      - agent-network
+    restart: "no"
+    # Redirection des logs ollama-init aussi
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "1"
+
+  isabelle:
+    image: makarius/isabelle:latest
+    container_name: isabelle
+    restart: unless-stopped
+    profiles: ["isabelle"]
+
+    environment:
+      - GABRIEL_HOST=llm-agent-multiloop
+      - GABRIEL_PORT=8000
+      - ISABELLE_BATCH_MODE=true
+
+    volumes:
+      - ./theories:/theories
+      - ./scripts/isabelle-integration.sh:/scripts/isabelle-integration.sh
+      - isabelle-heaps:/home/isabelle/.isabelle/heaps
+      - isabelle-output:/tmp/isabelle-output
+
+    working_dir: /theories
+
+    networks:
+      - agent-network
+
+    depends_on:
+      - llm-agent-multiloop
+
+    entrypoint: ["/bin/bash"]
+    command: ["-c", "exec /scripts/isabelle-integration.sh"]
+
+volumes:
+  agent-data:
+  agent-logs:
+  ollama-data:
+  isabelle-heaps:
+  isabelle-output:
+
+networks:
+  agent-network:
+    driver: bridge

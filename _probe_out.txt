@@ -1,0 +1,1015 @@
+FILE: C:/Users/thomasphiliippesavar/OneDrive/Documents/systeme_convolutif_spectral_general.xlsx
+SIZE: 545600 octets
+SHEETS: ['Accueil', 'Catalogue Premiers', 'Exemple 1-3', 'Parametres', 'Moteur Universel', 'Modèle Formel', 'Démonstration Formelle', 'Convolution', 'Suites Géo A-B', 'Tests Digamma', 'Code Python', 'Systeme General', 'Reconstruction Universelle', 'Validation Convolutive', 'Moteur Géo Convolutif', 'Références PDF', 'Tests Géo Demandés', 'Test 1-66', 'Test 1-14', 'Checklist 1-81', 'Validation HOL Générale', 'Référence Géo Généralisée']
+
+##### Accueil | rows=26 cols=3 | mode=FULL #####
+Système convolutif — rapports non typiques |  | 
+Cadre paramétrique validé sur le rapport 1/3; les autres rapports exigent leurs propres termes et paramètres avant une preuve de couverture universelle. |  | 
+ |  | 
+CONTENU |  | 
+Exemple 1-3 | Feuille originale conservée avec les suites A et B fournies. | 
+Catalogue Premiers | 25 000 premiers et ancrages uniques obtenus à n=10. | 
+Parametres | Règles actives, constantes et contrôle de l’ancrage sélectionné. | 
+Convolution | Termes formels signés évalués numériquement à partir de k. | 
+Tests Digamma | Quatre essais réservés à n=10; validation corrigée du cas 1/8, n=34. | 
+Moteur Universel | Construction A/B et reconstruction par décalage du rang premier. | 
+Modèle Formel | Substitution de k et n avec premier cible et Digamma calculé. | 
+Démonstration Formelle | Preuve visuelle de l’ancrage n=10 et de la règle pour n≠10. | 
+Code Python | Moteur exact : fractions, table des premiers, ancrages et contrôles. | 
+Systeme General | Formules générales, ancrages n=10 et exemple exact 1/8–n=34. | 
+Moteur Géo Convolutif | Moteur paramétrable k,n avec six branches Digamma et garde-fous. | 
+Références PDF | Tables des annexes 16.1–16.19, valeurs imprimées et audit de cohérence. | 
+Validation Convolutive | Comparatif des formes généralisées entière et géométrique pour k=3 à 12. | 
+Tests Géo Demandés | Tests exacts des rapports 1/2, 1/13, 1/18, 1/27 et 1/79. | 
+Test 1-66 | Deux ancrages n=10 et deux reconstructions possibles à n=19. | 
+Validation HOL Générale | Couche C→P universelle : identité, primalité, position et verdict HOL. | 
+Checklist 1-81 | Journal complet du test convolutif 1/81 jusqu’au blocage d’ancrage. | 
+Rapport actif | 2026-01-08 00:00:00 | 
+Ancrage n=10 | 32 327, rang 3 468 | 
+Cible n=34 | 32 537, rang 3 492 | 
+Règle | Digamma = Somme B − Premier cible × k^6 | 
+v7.4 — Suites géo A et B √(a²+b²) + fallback automatique — Philippe Savard, sept. 2026 |  | 
+
+##### Catalogue Premiers | rows=25004 cols=9 | mode=cap=30 #####
+Catalogue des premiers et ancrages n=10 |  |  |  |  |  |  |  | 
+La reconstruction pour n≠10 décale le rang du premier d’ancrage : rang cible = rang base + n − 10. |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+Rang | Premier |  | Rapport | k | n base | Premier base | Rang base | Statut
+1 | 2 |  | 2026-01-03 00:00:00 | 3 | 10 | 227 | 49 | Ancrage unique validé
+2 | 3 |  | 2026-01-04 00:00:00 | 4 | 10 | 947 | 161 | Ancrage unique validé
+3 | 5 |  | 2026-01-05 00:00:00 | 5 | 10 | 2999 | 430 | Ancrage unique validé
+4 | 7 |  | 2026-01-06 00:00:00 | 6 | 10 | 7529 | 954 | Ancrage unique validé
+5 | 11 |  | 2026-01-07 00:00:00 | 7 | 10 | 16519 | 1913 | Ancrage unique validé
+6 | 13 |  | 2026-01-08 00:00:00 | 8 | 10 | 32327 | 3468 | Ancrage unique validé
+7 | 17 |  | 2026-01-09 00:00:00 | 9 | 10 | 58337 | 5906 | Ancrage unique validé
+8 | 19 |  | 2026-01-10 00:00:00 | 10 | 10 |  |  | Ancrage ambigu — choix requis
+9 | 23 |  | 2026-01-11 00:00:00 | 11 | 10 |  |  | Aucun premier aux quatre essais
+10 | 29 |  | 2026-01-12 00:00:00 | 12 | 10 |  |  | Ancrage ambigu — choix requis
+11 | 31 |  |  |  |  |  |  | 
+12 | 37 |  |  |  |  |  |  | 
+13 | 41 |  |  |  |  |  |  | 
+14 | 43 |  |  |  |  |  |  | 
+15 | 47 |  |  |  |  |  |  | 
+16 | 53 |  |  |  |  |  |  | 
+17 | 59 |  |  |  |  |  |  | 
+18 | 61 |  |  |  |  |  |  | 
+19 | 67 |  |  |  |  |  |  | 
+20 | 71 |  |  |  |  |  |  | 
+21 | 73 |  |  |  |  |  |  | 
+22 | 79 |  |  |  |  |  |  | 
+23 | 83 |  |  |  |  |  |  | 
+24 | 89 |  |  |  |  |  |  | 
+25 | 97 |  |  |  |  |  |  | 
+26 | 101 |  |  |  |  |  |  | 
+
+##### Exemple 1-3 | rows=35 cols=14 | mode=FULL #####
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  | Table servant a reconstruire le rapport non typique |  |  |  |  |  |  |  |  | 
+ |  |  |  | 1/k | 0 | 1 | 2 |  |  |  |  |  | 
+ |  |  |  | 3 | 4 | 5 | 6 |  |  |  |  |  | 
+ |  |  |  | 7 | 8 | 9 | 10 |  |  |  |  |  | 
+ |  | t^1+ | t^2+ | t^3+ | t^4+ | t^5+ | t^6+ | t^7+ | t^8+ | (t^9-t^7)+ | (t^10-t^8) | Somme suite A | Somme suite A
+ |  | t^1+ | t^2+ | t^3+ | t^4+ | t^5+ | t^7+ | t^8+ | t^9+ | (t^10-t^8)+ | (t^11-t^9) | Somme suite B | Somme suite B
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  | Déteminer les suite A et B pour 9 termes |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  | t^1+ | t^2+ | t^3+ | t^4+ | t^5+ | t^6+ | t^7+ |  | (t^9-t^7)+ | (t^10-t^8) | Somme suite A | Somme suite A
+ |  | t^1+ | t^2+ | t^3+ | t^4+ | t^5+ | t^7+ | t^8+ |  | (t^10-t^8)+ | (t^11-t^9) | Somme suite B | Somme suite B
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  | (m13-m27)/t^8= | coefficient A |  |  |  |  |  |  | 
+ |  |  |  |  | (m14-m28)/t^8 | coefficient B |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 0 |  |  |  | 
+ |  |  |  |  | Forme des équation générale ((coefficient A/x)*(k^n)-reste |  |  |  | somme suite A |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | ((coefficient B)/x)*(k^n)-reste |  | somme suite B |  |  |  | 
+
+##### Parametres | rows=39 cols=7 | mode=FULL #####
+Paramètres des règles |  |  |  |  |  | 
+Une ligne par rapport 1/k. Aucun autre rapport n’est inventé : ajoutez ses termes dans Convolution puis ses paramètres ici. |  |  |  |  |  | 
+ |  |  |  |  |  | 
+CATALOGUE DES RÈGLES |  |  |  |  |  | 
+Rapport | k | n | Exp reconstruction | Position Digamma | Signe Digamma | Statut
+1/3 | 3 | 10 | 6 | 8 | -1 | Ancrage n=10 validé; séquence par rang active
+1/4 | 4 | 10 | 6 | 8 | 1 | Ancrage n=10 validé; séquence par rang active
+1/5 | 5 | 10 | 6 | 7 | 1 | Ancrage n=10 validé; séquence par rang active
+1/6 | 6 | 10 | 6 | 8 | 1 | Ancrage n=10 validé; séquence par rang active
+1/7 | 7 | 10 | 6 | 8 | -1 | Ancrage n=10 validé; séquence par rang active
+1/8 | 8 | 10 | 6 | 8 | -1 | Ancrage n=10 validé; séquence par rang active
+1/9 | 9 | 10 | 6 | 7 | -1 | Ancrage n=10 validé; séquence par rang active
+1/10 | 10 | 10 | 6 |  |  | Essai-erreur requis
+1/11 | 11 | 10 | 6 |  |  | Essai-erreur requis
+1/12 | 12 | 10 | 6 |  |  | Essai-erreur requis
+ |  |  |  |  |  | 
+ |  |  |  |  |  | 
+SORTIE DE LA RÈGLE SÉLECTIONNÉE |  |  |  |  |  | 
+Rapport | Somme A | Somme B | A ajustée | P reconstruit | Premier? | Rang premier
+1/8 | 1208259144 | 9665811016 | 1191481928 | 32327 | Oui | 3468
+Obligation universelle |  |  |  |  |  | Chaque premier cible doit être produit une fois par le catalogue complet.
+ |  |  |  |  |  | 
+ |  |  |  |  |  | 
+CONSTANTES DES SOMMES FERMÉES |  |  |  |  |  | 
+k | αA | αB | offset A | offset B | Portée | Statut
+3 | 2.703703703703704 | 8.11111111111111 | 1.5 | 730.5 | 1/3 | Généralisé (formule fermée validée)
+4 | 2.510416666666667 | 10.04166666666667 | 1.333333333333333 | 4097.333333333333 | 1/4 | Généralisé (formule fermée validée)
+5 | 2.404 | 12.02 | 1.25 | 15626.25 | 1/5 | Généralisé (formule fermée validée)
+6 | 2.335185185185185 | 14.01111111111111 | 1.2 | 46657.2 | 1/6 | Généralisé (formule fermée validée)
+7 | 2.286686103012634 | 16.00680272108843 | 1.166666666666667 | 117650.1666666667 | 1/7 | Généralisé (formule fermée validée)
+8 | 2.250558035714286 | 18.00446428571428 | 1.142857142857143 | 262145.1428571428 | 1/8 | Généralisé (formule fermée validée)
+9 | 2.222565157750343 | 20.00308641975309 | 1.125 | 531442.125 | 1/9 | Généralisé (formule fermée validée)
+10 | 2.200222222222222 | 22.00222222222222 | 1.111111111111111 | 1000001.111111111 | 1/10 | Généralisé (formule fermée validée)
+11 | 2.181968444778362 | 24.00165289256199 | 1.1 | 1771562.1 | 1/11 | Généralisé (formule fermée validée)
+12 | 2.166771885521885 | 26.00126262626263 | 1.090909090909091 | 2985985.090909091 | 1/12 | Généralisé (formule fermée validée)
+ |  |  |  |  |  | 
+RÈGLES ACTIVES |  |  |  |  |  | 
+n = 10 | A et B construites | Quatre Digamma ±A(7), ±A(8) | Sélection du seul entier premier | Dénominateur k^6 | Création de l’ancrage | 
+n ≠ 10 | A et B construites | Rang cible = rang base + n − 10 | Premier lu dans tblPremiers | Digamma = ΣB − P×k^6 | Ancrage n=10 obligatoire | 
+
+##### Moteur Universel | rows=69 cols=13 | mode=cap=30 #####
+Moteur convolutif universel — rapports non typiques |  |  |  |  |  |  |  |  |  |  |  | 
+Construction pour tout k≥2 et n≥1. Les constantes des sommes fermées doivent être renseignées par rapport; le Digamma est testé selon quatre possibilités. |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  | 
+ENTRÉES |  |  |  |  |  | RECONSTRUCTION PAR ANCRAGE n=10 ET TABLE DES PREMIERS |  |  |  |  |  | 
+Paramètre | Valeur |  |  |  |  | Mode | n base | Premier base | Rang base | Rang cible | Premier cible | Digamma calculé
+k | 8 | Entier ≥2 |  |  |  | Séquence par rang | 10 | 32327 | 3468 | 3492 | 32537 | 4.5646739917146865e+31
+n | 34 | Entier ≥1 |  |  |  |  |  |  |  |  |  | 
+Modèle n≤7 | XIII simple | XIII simple ou XII terminal |  |  |  | CONTRÔLES |  |  |  |  |  | 
+Régime | Positif | Positif ou Négatif |  |  |  | Rapport | Constantes? | Ancrage? | Zêta | Somme A | Somme B | État
+a₁ | 8 | Valeur initiale |  |  |  | 1/8 | Oui | Oui | 262144 | 5.705842489643358e+30 | 4.5646739917146865e+31 | Reconstruit
+ |  |  |  |  |  |  |  |  |  |  |  | 
+SOMMES ET CONTRÔLES |  |  |  |  |  | RÈGLE CORRIGÉE |  |  |  |  |  | 
+Mesure | Suite A | Suite B | Écart A | Écart B |  | À n=10, les quatre possibilités déterminent le premier d’ancrage. Pour n≠10, le rang cible est décalé de n−10 dans tblPremiers, puis Digamma = Somme B − Premier cible × k^6. Les calculs Excel au-delà de 15 chiffres sont indicatifs; les valeurs exactes sont produites par le code Python. |  |  |  |  |  | 
+Somme construite | 5.705842489643358e+30 | 4.5646739917146865e+31 |  |  |  |  |  |  |  |  |  | 
+Somme fermée | 5.705842489643358e+30 | 4.5646739917146865e+31 | 0 | 0 |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  | 
+CONSTRUCTION TERME À TERME |  |  |  |  |  |  |  |  |  |  |  | 
+Position | Terme A | Terme B | Règle A | Règle B |  |  |  |  |  |  |  | 
+1 | 8 | 8 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+2 | 64 | 64 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+3 | 512 | 512 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+4 | 4096 | 4096 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+5 | 32768 | 32768 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+6 | 262144 | 2097152 | Progression simple | Saut Zêta |  |  |  |  |  |  |  | 
+7 | 2097152 | 16777216 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+8 | 16777216 | 134217728 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+9 | 134217728 | 1073741824 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+10 | 1073741824 | 8589934592 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+11 | 8589934592 | 68719476736 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+12 | 68719476736 | 549755813888 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+
+##### Modèle Formel | rows=68 cols=7 | mode=cap=30 #####
+Modèle formel universel — rapport 1/k |  |  |  |  |  | 
+Aucune valeur numérique par défaut : saisissez k et n, puis le modèle substitue ces valeurs aux formes universelles A(n,i), B(n,i) et teste les quatre Digamma. |  |  |  |  |  | 
+ |  |  |  |  |  | 
+VARIABLES À SUBSTITUER |  |  | SORTIES GÉNÉRALES |  |  | 
+Variable | Valeur | Définition | Mesure | Résultat |  | 
+k | 8 | Dénominateur du rapport 1/k | Somme A(n) | 5.705842489643358e+30 |  | 
+n | 34 | Nombre de termes | Somme B(n) | 4.5646739917146865e+31 |  | 
+1/k | =IF(B6="","","1/"&B6) | Rapport demandé | Zêta | 262144 |  | 
+a₁ | 8 | a₁ := k | Rang cible | 3492 |  | 
+r | 8 | r := k | Premier cible | 32537 |  | 
+Modèle n≤7 | XIII simple | XIII simple ou XII terminal | Digamma calculé | 4.5646739917146865e+31 |  | 
+ |  |  |  |  |  | 
+RECONSTRUCTION SÉQUENTIELLE CORRIGÉE |  |  |  |  |  | 
+n base | Premier base | Rang base | n cible | Rang cible | Premier cible | Digamma calculé
+10 | 32327 | 3468 | 34 | 3492 | 32537 | 4.5646739917146865e+31
+ |  |  |  |  |  | 
+La méthode des quatre possibilités est réservée à n=10. Toute autre valeur de n utilise l’ancrage du rapport et la table des premiers. Les grandes sommes exactes nécessitent le moteur Python à cause de la limite de 15 chiffres d’Excel. |  |  |  |  |  | 
+ |  |  |  |  |  | 
+ |  |  |  |  |  | 
+DÉFINITIONS FORMELLES APPLIQUÉES |  |  |  |  |  | 
+n ≤ 7, modèle XIII : A(n,i)=a₁·r^(i−1) et B(n,i)=A(n,i). |  |  |  |  |  | 
+n ≤ 7, modèle XII : cas terminaux avec le facteur (r−1/r); B(n,i)=A(n,i). |  |  |  |  |  | 
+n ≥ 8 : A suit la progression jusqu’à n−2, puis les deux termes terminaux Savard. |  |  |  |  |  | 
+n ≥ 8 : B insère a₁·r^6 à i=6, décale la progression et applique ses termes terminaux. |  |  |  |  |  | 
+Reconstruction : P=[Somme B(n)−(Somme A(n)±A(n,7 ou 8))]/k^6. |  |  |  |  |  | 
+ |  |  |  |  |  | 
+CONSTRUCTION TERME À TERME |  |  |  |  |  | 
+Position i | Forme A(n,i) | Valeur substituée A | Forme B(n,i) | Valeur substituée B |  | 
+1 | a₁ | 8 | a₁ | 8 |  | 
+2 | a₁·r^(i−1) | 64 | a₁·r^(i−1) | 64 |  | 
+
+##### Démonstration Formelle | rows=68 cols=9 | mode=cap=30 #####
+Démonstration formelle universelle — tout rapport 1/k |  |  |  |  |  |  |  | 
+Même démonstration que Tests Digamma, lignes 21 à 57, sans substitution numérique : k demeure une variable entière positive représentant le dénominateur de 1/k. |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+SUITES A — 10 ET 9 TERMES |  |  |  |  |  |  |  | 
+Position | Terme A₁₀ | Expression | Règle |  | Position | Terme A₉ | Expression | Règle
+1 | k^1 | k^1 | progression |  | 1 | k^1 | k^1 | progression
+2 | k^2 | k^2 | progression |  | 2 | k^2 | k^2 | progression
+3 | k^3 | k^3 | progression |  | 3 | k^3 | k^3 | progression
+4 | k^4 | k^4 | progression |  | 4 | k^4 | k^4 | progression
+5 | k^5 | k^5 | progression |  | 5 | k^5 | k^5 | progression
+6 | k^6 | k^6 | progression |  | 6 | k^6 | k^6 | progression
+7 | k^7 | k^7 | progression |  | 7 | k^7 | k^7 | progression
+8 | k^8 | k^8 | progression |  | 8 | k^8 − k^6 | k^8 − k^6 | avant-dernier Savard
+9 | k^9 − k^7 | k^9 − k^7 | avant-dernier Savard |  | 9 | k^9 − k^7 | k^9 − k^7 | dernier Savard
+10 | k^10 − k^8 | k^10 − k^8 | dernier Savard |  | Somme | k^1 + k^2 + k^3 + k^4 + k^5 + k^6 + k^7 + k^8 − k^6 + k^9 − k^7 | k^1 + k^2 + k^3 + k^4 + k^5 + k^6 + k^7 + k^8 − k^6 + k^9 − k^7 | 
+Somme | k^1 + k^2 + k^3 + k^4 + k^5 + k^6 + k^7 + k^8 + k^9 − k^7 + k^10 − k^8 | k^1 + k^2 + k^3 + k^4 + k^5 + k^6 + k^7 + k^8 + k^9 − k^7 + k^10 − k^8 |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+SUITES B — 10 ET 9 TERMES AVEC SAUT ZÊTA |  |  |  |  |  |  |  | 
+Position | Terme B₁₀ | Expression | Règle |  | Position | Terme B₉ | Expression | Règle
+1 | k^1 | k^1 | progression |  | 1 | k^1 | k^1 | progression
+2 | k^2 | k^2 | progression |  | 2 | k^2 | k^2 | progression
+3 | k^3 | k^3 | progression |  | 3 | k^3 | k^3 | progression
+4 | k^4 | k^4 | progression |  | 4 | k^4 | k^4 | progression
+5 | k^5 | k^5 | progression |  | 5 | k^5 | k^5 | progression
+6 | k^7 | k^7 | saut Zêta |  | 6 | k^7 | k^7 | saut Zêta
+7 | k^8 | k^8 | progression décalée |  | 7 | k^8 | k^8 | progression décalée
+8 | k^9 | k^9 | progression décalée |  | 8 | k^9 − k^7 | k^9 − k^7 | avant-dernier Savard
+9 | k^10 − k^8 | k^10 − k^8 | avant-dernier Savard |  | 9 | k^10 − k^8 | k^10 − k^8 | dernier Savard
+10 | k^11 − k^9 | k^11 − k^9 | dernier Savard |  | Somme | k^1 + k^2 + k^3 + k^4 + k^5 + k^7 + k^8 + k^9 − k^7 + k^10 − k^8 | k^1 + k^2 + k^3 + k^4 + k^5 + k^7 + k^8 + k^9 − k^7 + k^10 − k^8 | 
+Somme | k^1 + k^2 + k^3 + k^4 + k^5 + k^7 + k^8 + k^9 + k^10 − k^8 + k^11 − k^9 | k^1 + k^2 + k^3 + k^4 + k^5 + k^7 + k^8 + k^9 + k^10 − k^8 + k^11 − k^9 |  |  |  |  |  | 
+
+##### Convolution | rows=205 cols=9 | mode=cap=30 #####
+Table de convolution formelle |  |  |  |  |  |  |  | 
+Chaque terme vaut c₁·k^e₁ + c₂·k^e₂. Cette représentation encode les additions et soustractions sans figer k. |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  | 
+TERMES DES SUITES |  |  |  |  |  |  |  | 
+Rapport | Suite | Ordre | Coeff 1 | Exposant 1 | Coeff 2 | Exposant 2 | Valeur | Expression formelle
+1/3 | A | 1 | 1 | 1 | 0 | 0 | 3 | k^1
+1/3 | A | 2 | 1 | 2 | 0 | 0 | 9 | k^2
+1/3 | A | 3 | 1 | 3 | 0 | 0 | 27 | k^3
+1/3 | A | 4 | 1 | 4 | 0 | 0 | 81 | k^4
+1/3 | A | 5 | 1 | 5 | 0 | 0 | 243 | k^5
+1/3 | A | 6 | 1 | 6 | 0 | 0 | 729 | k^6
+1/3 | A | 7 | 1 | 7 | 0 | 0 | 2187 | k^7
+1/3 | A | 8 | 1 | 8 | 0 | 0 | 6561 | k^8
+1/3 | A | 9 | 1 | 9 | -1 | 7 | 17496 | k^9 - k^7
+1/3 | A | 10 | 1 | 10 | -1 | 8 | 52488 | k^10 - k^8
+1/3 | B | 1 | 1 | 1 | 0 | 0 | 3 | k^1
+1/3 | B | 2 | 1 | 2 | 0 | 0 | 9 | k^2
+1/3 | B | 3 | 1 | 3 | 0 | 0 | 27 | k^3
+1/3 | B | 4 | 1 | 4 | 0 | 0 | 81 | k^4
+1/3 | B | 5 | 1 | 5 | 0 | 0 | 243 | k^5
+1/3 | B | 7 | 1 | 7 | 0 | 0 | 2187 | k^7
+1/3 | B | 8 | 1 | 8 | 0 | 0 | 6561 | k^8
+1/3 | B | 9 | 1 | 9 | 0 | 0 | 19683 | k^9
+1/3 | B | 10 | 1 | 10 | -1 | 8 | 52488 | k^10 - k^8
+1/3 | B | 11 | 1 | 11 | -1 | 9 | 157464 | k^11 - k^9
+1/4 | A | 1 | 1 | 1 | 0 | 0 | 4 | k^1
+1/4 | A | 2 | 1 | 2 | 0 | 0 | 16 | k^2
+1/4 | A | 3 | 1 | 3 | 0 | 0 | 64 | k^3
+1/4 | A | 4 | 1 | 4 | 0 | 0 | 256 | k^4
+1/4 | A | 5 | 1 | 5 | 0 | 0 | 1024 | k^5
+
+##### Suites Géo A-B | rows=76 cols=10 | mode=cap=30 #####
+SUITES GÉOMÉTRIQUES A ET B — Modèle hypoténuse √(a²+b²) — Gabriel Multiloop v7.4 |  |  |  |  |  |  |  |  | 
+t = 1/k  |  Typique : k=2 (t=1/2)  |  Non typique : k≥2 quelconque  |  Digamma inchangé  |  Fallback auto si 0 premier |  |  |  |  |  |  |  |  | 
+Convention de notation : (t^m)^2 signifie le carré de t^m. Ainsi, (t^3)^2 = t^6 — ce n’est jamais t^32. |  |  |  |  |  |  |  |  | 
+FORMULES — Termes hypoténuse individuels (10 termes par suite) |  |  |  |  |  |  |  |  | 
+Suite | Terme | Expression Suite A |  |  |  | Suite | Terme | Expression Suite B | 
+Suite A | T1 | √(1^2 + (t^1)^2) |  |  |  | Suite B | T1 | √(1^2 + (t^1)^2) | 
+Suite A | T2 | √((t^1)^2 + (t^2)^2) |  |  |  | Suite B | T2 | √((t^1)^2 + (t^2)^2) | 
+Suite A | T3 | √((t^2)^2 + (t^3)^2) |  |  |  | Suite B | T3 | √((t^2)^2 + (t^3)^2) | 
+Suite A | T4 | √((t^3)^2 + (t^4)^2) |  |  |  | Suite B | T4 | √((t^3)^2 + (t^4)^2) | 
+Suite A | T5 | √((t^4)^2 + (t^5)^2) |  |  |  | Suite B | T5 | √((t^4)^2 + (t^5)^2) | 
+Suite A | T6 | √((t^5)^2 + (t^6)^2) |  |  |  | Suite B | — | [SAUT : pas de terme ((t^5),(t^6)) — décalage structurel A→B] | 
+Suite A | T7 | √((t^6)^2 + (t^7)^2) |  |  |  | Suite B | T6 | √((t^6)^2 + (t^7)^2) | 
+Suite A | T8 | √((t^7)^2 + (t^8)^2) |  |  |  | Suite B | T7 | √((t^7)^2 + (t^8)^2) | 
+Suite A | T9 | √((t^8−t^6)^2 + (t^9−t^7)^2)  ← différentiel |  |  |  | Suite B | T8 | √((t^8)^2 + (t^9)^2) | 
+Suite A | T10 | √((t^9−t^7)^2 + (t^10−t^8)^2)  ← différentiel |  |  |  | Suite B | T9 | √((t^10−t^8)^2 + (t^11−t^9)^2)  ← différentiel décalé | 
+Suite A | S_A | Somme des 10 termes |  |  |  | Suite B | T10 | √((t^11−t^9)^2 + (t^12−t^10)^2)  ← différentiel décalé | 
+ |  |  |  |  |  | Suite B | S_B | Somme des 10 termes | 
+ |  |  |  |  |  |  |  |  | 
+VALEURS NUMÉRIQUES — k=2 (★ typique) à k=12 (non typiques) |  |  |  |  |  |  |  |  | 
+k | t=1/k | T1_A | T9_A (diff) | T10_A (diff) | S_A | T9_B (diff) | T10_B (diff) | S_B | S_A+S_B
+1/2 ★ | 0.5 | 1.11803398874989 | 0.01310196080566 | 0.00655098040283 | 2.24698627817118 | 0.00327549020142 | 0.00163774510071 | 2.20167533038493 | 4.4486616085561
+1/3 | 0.33333333333333 | 1.05409255338946 | 0.00128528279639 | 0.0004284275988 | 1.58261154995505 | 0.0001428091996 | 4.760306653e-05 | 1.57691108273773 | 3.15952263269278
+1/4 | 0.25 | 1.03077640640442 | 0.00023592599634 | 5.898149908e-05 | 1.3746424781683 | 1.474537477e-05 | 3.68634369e-06 | 1.37337511320672 | 2.74801759137502
+1/5 | 0.2 | 1.01980390271856 | 6.265675178e-05 | 1.253135036e-05 | 1.27482680312785 | 2.50627007e-06 | 5.0125401e-07 | 1.27443089599891 | 2.54925769912676
+1/6 | 0.16666666666667 | 1.0137937550497 | 2.112553192e-05 | 3.52092199e-06 | 1.2165764282096 | 5.8682033e-07 | 9.780339e-08 | 1.21642269525474 | 2.43299912346434
+1/7 | 0.14285714285714 | 1.01015254455221 | 8.4109273e-06 | 1.20156104e-06 | 1.17852071003367 | 1.7165158e-07 | 2.452165e-08 | 1.1784513658615 | 2.35697207589517
+1/8 | 0.125 | 1.00778221853732 | 3.78431557e-06 | 4.7303945e-07 | 1.1517552956051 | 5.912993e-08 | 7.39124e-09 | 1.15172040976716 | 2.30347570537226
+1/9 | 0.11111111111111 | 1.00615390423749 | 1.86988255e-06 | 2.0776473e-07 | 1.13192519361923 | 2.308497e-08 | 2.565e-09 | 1.13190612569073 | 2.26383131930996
+1/10 | 0.1 | 1.00498756211209 | 9.9493769e-07 | 9.949377e-08 | 1.11665393005614 | 9.94938e-09 | 9.9494e-10 | 1.11664280674325 | 2.23329673679939
+1/11 | 0.09090909090909 | 1.00412372883521 | 5.6211736e-07 | 5.110158e-08 | 1.10453670978492 | 4.6456e-09 | 4.2233e-10 | 1.10452987149988 | 2.2090665812848
+
+##### Tests Digamma | rows=102 cols=10 | mode=cap=100 #####
+Tests des quatre Digamma |  |  |  |  |  |  |  |  | 
+Le candidat est A ajustée = Somme A + signe·k^position; puis P = (Somme B − A ajustée)/k^exp_reconstruction. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CANDIDATS POUR 1/3 |  |  |  |  |  |  |  |  | 
+Rapport | k | Position | Signe | Somme A | Somme B | Rang |  |  | 
+1/3 | 3 | 7 | -1 | 79824 | 238746 |  |  |  | 
+1/3 | 3 | 7 | 1 | 79824 | 238746 |  |  |  | 
+1/3 | 3 | 8 | -1 | 79824 | 238746 | 49 |  |  | 
+1/3 | 3 | 8 | 1 | 79824 | 238746 |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Lecture |  |  |  |  |  |  |  |  | 
+Seule la combinaison position 8 / signe − produit 227, qui est premier et occupe le rang 49. |  |  |  |  |  |  |  |  | 
+Les trois autres candidats sont composés : 221, 215 et 209. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  | Position | Terme | Expression |  | Position | Terme | Expression | 
+ |  | 1 | t_a^1 | t_a^1 |  | 1 | t_a^1 | t_a^1 | 
+ |  | 2 | t_a^2 | t_a^2 |  | 2 | t_a^2 | t_a^2 | 
+ |  | 3 | t_a^3 | t_a^3 |  | 3 | t_a^3 | t_a^3 | 
+ |  | 4 | t_a^4 | t_a^4 |  | 4 | t_a^4 | t_a^4 | 
+ |  | 5 | t_a^5 | t_a^5 |  | 5 | t_a^5 | t_a^5 | 
+ |  | 6 | t_a^6 | t_a^6 |  | 6 | t_a^6 | t_a^6 | 
+ |  | 7 | t_a^7 | t_a^7 |  | 7 | t_a^7 | t_a^7 | 
+ |  | 8 | t_a^8 | t_a^8 |  | 8 | t_a^8 - t_a^6 | t_a^8 − t_a^6 | 
+ |  | 9 | t_a^9 - t_a^7 | t_a^9 − t_a^7 |  | 9 | t_a^9 - t_a^7 | t_a^9 − t_a^7 | 
+ |  | 10 | t_a^10 - t_a^8 | t_a^10 − t_a^8 |  | Somme | Somme_A9 | Somme_Suite_A_9 | 
+ |  | Somme | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 - t_a^7 + t_a^10 - t_a^8 | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8 |  |  | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 - t_a^6 + t_a^9 - t_a^7 | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 − t_a^6 + t_a^9 − t_a^7 | 
+ |  |  |  |  |  |  |  |  | 
+ |  | Position | Terme | Expression formelle |  | Position | Terme | Expression formelle | 
+ |  | 1 | t_b^1 | t_b^1 |  | 1 | t_b^1 | t_b^1 | 
+ |  | 2 | t_b^2 | t_b^2 |  | 2 | t_b^2 | t_b^2 | 
+ |  | 3 | t_b^3 | t_b^3 |  | 3 | t_b^3 | t_b^3 | 
+ |  | 4 | t_b^4 | t_b^4 |  | 4 | t_b^4 | t_b^4 | 
+ |  | 5 | t_b^5 | t_b^5 |  | 5 | t_b^5 | t_b^5 | 
+ |  | 6 | t_b^7 | t_b^7 |  | 6 | t_b^7 | t_b^7 | 
+ |  | 7 | t_b^8 | t_b^8 |  | 7 | t_b^8 | t_b^8 | 
+ |  | 8 | t_b^9 | t_b^9 |  | 8 | t_b^9 - t_b^7 | (t_b^9 − t_b^7) | 
+ |  | 9 | t_b^10 - t_b^8 | (t_b^10 − t_b^8) |  | 9 | t_b^10 - t_b^8 | (t_b^10 − t_b^8) | 
+ |  | 10 | t_b^11 - t_b^9 | (t_b^11 − t_b^9) |  | Somme | Somme_B9 | Somme suite B₉ | 
+ |  | Somme | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + t_b^9 + t_b^10 - t_b^8 + t_b^11 - t_b^9 | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + t_b^9 + (t_b^10 − t_b^8) + (t_b^11 − t_b^9) |  |  | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + t_b^9 - t_b^7 + t_b^10 - t_b^8 | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + (t_b^9 − t_b^7) + (t_b^10 − t_b^8) | 
+ |  |  |  |  |  |  |  |  | 
+ |  | Option | Position Digamma | Terme Digamma | Opération | Forme concise | Développement complet | Statut | 
+ |  | 1 | 7 | t_a^7 | + | Somme_A10 + t_a^7 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) + t_a^7 | Candidate | 
+ |  | 2 | 7 | t_a^7 | − | Somme_A10 − t_a^7 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) − t_a^7 | Candidate | 
+ |  | 3 | 8 | t_a^8 | + | Somme_A10 + t_a^8 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) + t_a^8 | Candidate | 
+ |  | 4 | 8 | t_a^8 | − | Somme_A10 − t_a^8 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) − t_a^8 | Option retenue pour 1/8 | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  | Option | Digamma calculé (A₁₀ ± k^p) | Somme B₁₀ | Zêta k^6 | Formule appliquée | P reconstruit
+ |  |  |  | 1 | 2195 | 10 | 729 | (10 − 2195) / 729 | -2.9972565157750344
+ |  |  |  | 2 | -2179 | 10 | 729 | (10 − -2179) / 729 | 3.0027434842249656
+ |  |  |  | 3 | 6569 | 10 | 729 | (10 − 6569) / 729 | -8.997256515775033
+ |  |  |  | 4 | -6553 | 10 | 729 | (10 − -6553) / 729 | 9.002743484224967
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ESSAI CONVOLUTIF — RAPPORT 1/3, n = 18 |  |  |  |  |  |  |  |  | 
+Construction Isabelle/HOL : progression simple jusqu’à n−2, deux termes terminaux Savard et saut Zêta à la position 6 de B. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Position A | Expression formelle | Règle | Valeur |  | Position B | Expression formelle | Règle | Valeur | 
+1 | k^1 | progression simple | 3 |  | 1 | k^1 | progression décalée | 3 | 
+2 | k^2 | progression simple | 9 |  | 2 | k^2 | progression décalée | 9 | 
+3 | k^3 | progression simple | 27 |  | 3 | k^3 | progression décalée | 27 | 
+4 | k^4 | progression simple | 81 |  | 4 | k^4 | progression décalée | 81 | 
+5 | k^5 | progression simple | 243 |  | 5 | k^5 | progression décalée | 243 | 
+6 | k^6 | progression simple | 729 |  | 6 | k^7 (saut Zêta) | substitution position 6 | 2187 | 
+7 | k^7 | progression simple | 2187 |  | 7 | k^8 | progression décalée | 6561 | 
+8 | k^8 | progression simple | 6561 |  | 8 | k^9 | progression décalée | 19683 | 
+9 | k^9 | progression simple | 19683 |  | 9 | k^10 | progression décalée | 59049 | 
+10 | k^10 | progression simple | 59049 |  | 10 | k^11 | progression décalée | 177147 | 
+11 | k^11 | progression simple | 177147 |  | 11 | k^12 | progression décalée | 531441 | 
+12 | k^12 | progression simple | 531441 |  | 12 | k^13 | progression décalée | 1594323 | 
+13 | k^13 | progression simple | 1594323 |  | 13 | k^14 | progression décalée | 4782969 | 
+14 | k^14 | progression simple | 4782969 |  | 14 | k^15 | progression décalée | 14348907 | 
+15 | k^15 | progression simple | 14348907 |  | 15 | k^16 | progression décalée | 43046721 | 
+16 | k^16 | progression simple | 43046721 |  | 16 | k^17 | progression décalée | 129140163 | 
+17 | k^17 − k^15 | avant-dernier Savard | 114791256 |  | 17 | k^18 − k^16 | avant-dernier Savard | 344373768 | 
+18 | k^18 − k^16 | dernier Savard | 344373768 |  | 18 | k^19 − k^17 | dernier Savard | 1033121304 | 
+Somme A₁₈ |  |  | 523735104 |  | Somme B₁₈ |  |  | 1571204586 | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Option | Position | Signe | Digamma A₁₈ ajusté | Somme B₁₈ | Zêta 3^6 | P reconstruit | Entier? | Premier? | Conclusion
+1 | 7 | + | 523737291 | 1571204586 | 729 | 1436855 | Oui | Non | Composé
+2 | 7 | − | 523732917 | 1571204586 | 729 | 1436861 | Oui | Non | Composé
+3 | 8 | + | 523741665 | 1571204586 | 729 | 1436849 | Oui | Oui | Premier candidat
+4 | 8 | − | 523728543 | 1571204586 | 729 | 1436867 | Oui | Oui | Premier candidat
+ |  |  |  |  |  |  |  |  | 
+CONSTAT |  |  |  |  |  |  |  |  | 
+Les quatre options donnent des quotients entiers. Les options position 8 produisent deux nombres premiers consécutifs : 1 436 849 et 1 436 867. |  |  |  |  |  |  |  |  | 
+La règle Digamma fournie ne sélectionne donc pas encore une solution unique pour n=18; un critère supplémentaire est requis. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CORRECTION — RAPPORT 1/8, n = 34 |  |  |  |  |  |  |  |  | 
+Les quatre Digamma sont utilisés à n=10 seulement. À n=34, le premier est obtenu par décalage de rang, puis le Digamma est calculé à rebours. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Premier base | Rang base | Écart n−10 | Rang cible | Premier cible | Zêta | Somme A exacte | Somme B exacte | Digamma exact | Contrôle P
+32327 | 3468 | 24 | 3492 | 32537 | 262144 | 5705842489643358455620763423304 | 45646739917146867644966107124296 | 45646739917146867644957577744968 | 32537
+
+##### Code Python | rows=150 cols=2 | mode=cap=30 #####
+Code Python du moteur convolutif | 
+Moteur exact corrigé : les quatre essais créent l’ancrage à n=10; les autres n utilisent le rang premier et calculent Digamma à rebours. | 
+ | 
+CODE | 
+Ligne | Code
+1 | from fractions import Fraction
+2 | from math import isqrt
+3 | 
+4 | ANCHORS = {
+5 |     3:(227,49), 4:(947,161), 5:(2999,430),
+6 |     6:(7529,954), 7:(16519,1913), 8:(32327,3468),
+7 |     9:(58337,5906),
+8 | }
+9 | 
+10 | def term_a(k,n,i):
+11 |     if not (k>=2 and n>=1 and 1<=i<=n): return 0
+12 |     if n<=7: return k**i
+13 |     if i<=n-2: return k**i
+14 |     if i==n-1: return k**(n-1)-k**(n-3)
+15 |     return k**n-k**(n-2)
+16 | 
+17 | def term_b(k,n,i):
+18 |     if not (k>=2 and n>=1 and 1<=i<=n): return 0
+19 |     if n<=7: return term_a(k,n,i)
+20 |     if i<=5: return k**i
+21 |     if i==6: return k**7
+22 |     if i<=n-2: return k**(i+1)
+23 |     if i==n-1: return k**n-k**(n-2)
+24 |     return k**(n+1)-k**(n-1)
+25 | 
+
+##### Systeme General | rows=35 cols=11 | mode=cap=30 #####
+Système convolutif généralisé — tous les rapports non typiques 1/k |  |  |  |  |  |  |  |  |  | 
+Formules fermées exactes, valables pour tout k entier >= 3 et tout n entier (positif ou négatif). Validées contre les exemples numériques fournis pour k=3..7. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+FORMULES GÉNÉRALES (n entier, positif ou négatif) |  |  |  |  |  |  |  |  |  | 
+Somme suite A(k,n) = (alphaA(k)/2) * k^n − offsetA(k) |  |  |  |  |  |  |  |  |  | 
+Somme suite B(k,n) = (alphaB(k)/2) * k^n − offsetB(k) |  |  |  |  |  |  |  |  |  | 
+alphaA(k) = 2*(k^4 − k^2 + 1) / [(k−1) * k^3] |  |  |  |  |  |  |  |  |  | 
+alphaB(k) = k * alphaA(k) |  |  |  |  |  |  |  |  |  | 
+offsetA(k) = k / (k−1) |  |  |  |  |  |  |  |  |  | 
+offsetB(k) = (k^7 − k^6 + k) / (k−1) |  |  |  |  |  |  |  |  |  | 
+À n=10 : Digamma = Somme A ± A(7 ou 8); les quatre possibilités servent uniquement à déterminer l’ancrage premier du rapport. |  |  |  |  |  |  |  |  |  | 
+À n≠10 : rang cible = rang premier à n=10 + n − 10; P cible est lu dans tblPremiers; Digamma calculé = Somme B(k,n) − P cible × k^6. |  |  |  |  |  |  |  |  |  | 
+Reconstruction : P = [Somme B(k,n) − Digamma calculé] / k^6. Un rapport sans ancrage unique à n=10 demeure bloqué. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+Rapport | k | n | Somme A | Somme B | Position Digamma | Signe Digamma | Digamma calculé | Premier reconstruit | Rang du premier | Statut
+1/3 | 3 | 10 | 79824 | 238746 | 8 | -1 | 73263 | 227 | 49 | Résolu (formule générale)
+1/4 | 4 | 10 | 1316180 | 5260628 | 8 | 1 | 1381716 | 947 | 161 | Résolu (formule générale)
+1/5 | 5 | 10 | 11738280 | 58675780 | 7 | 1 | 11816405 | 2999 | 430 | Résolu (formule générale)
+1/6 | 6 | 10 | 70599858 | 423552498 | 8 | 1 | 72279474 | 7529 | 954 | Résolu (formule générale)
+1/7 | 7 | 10 | 322966112 | 2260645142 | 8 | -1 | 317201311 | 16519 | 1913 | Résolu (formule générale)
+1/8 | 8 | 10 | 1208259144 | 9665811016 | 8 | -1 | 1191481928 | 32327 | 3468 | Résolu (formule générale)
+1/9 | 9 | 10 | 3874802760 | 34872693408 | 7 | -1 | 3870019791 | 58337 | 5906 | Résolu (formule générale)
+1/10 | 10 | 10 | 11001111110 | 110010111110 |  |  |  |  |  | Ambigu : Plusieurs candidats premiers trouvés pour k=10, n=10: [CandidatDigamma(position=7, signe=1, digamma_calcule=Fraction(11011111110, 1), p_candidat=Fraction(98999, 1), est_entier=True, est_premier=True, rang_premier=9505), CandidatDigamma(position=8, signe=1, digamma_calcule=Fraction(11101111110, 1), p_candidat=Fraction(98909, 1), est_entier=True, est_premier=True, rang_premier=9495), CandidatDigamma(position=8, signe=-1, digamma_calcule=Fraction(10901111110, 1), p_candidat=Fraction(99109, 1), est_entier=True, est_premier=True, rang_premier=9515)]. Ajoutez une entrée dans CATALOGUE_DIGAMMA pour désambiguïser.
+1/11 | 11 | 10 | 28297321008 | 311268759538 |  |  |  |  |  | Ambigu : Aucun candidat premier trouvé pour k=11, n=10.
+1/12 | 12 | 10 | 67080402012 | 804961838172 |  |  |  |  |  | Ambigu : Plusieurs candidats premiers trouvés pour k=12, n=10: [CandidatDigamma(position=8, signe=1, digamma_calcule=Fraction(67510383708, 1), p_candidat=Fraction(246971, 1), est_entier=True, est_premier=True, rang_premier=21796), CandidatDigamma(position=8, signe=-1, digamma_calcule=Fraction(66650420316, 1), p_candidat=Fraction(247259, 1), est_entier=True, est_premier=True, rang_premier=21814)]. Ajoutez une entrée dans CATALOGUE_DIGAMMA pour désambiguïser.
+ |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+Note : la table Convolution encode les suites; Catalogue Premiers contient les rangs et tblAncrages contient les solutions de départ à n=10. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+
+##### Reconstruction Universelle | rows=57 cols=8 | mode=cap=30 #####
+Reconstruction universelle des suites A et B - rapport non typique 1/k |  |  |  |  |  |  | 
+Saisir k >= 3 et des longueurs n >= 7. Toutes les formules sont algébriques et reconstruisent les coefficients depuis deux sommes, sans valeurs propres à un k. |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+PARAMETRES A MODIFIER |  |  |  |  |  |  | 
+k (rapport 1/k) | 5 | Condition : k >= 3 |  |  |  |  | 
+n1 : première somme | 10 | Conditions : n1, n2 >= 7 et n1 <> n2 |  |  |  |  | 
+n2 : deuxième somme distincte | 11 |  |  |  |  |  | 
+n cible (>= n1 pour convolution) | 14 |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+SOMMES DE DEPART (CONVOLUTION FORMELLE) |  |  |  |  |  |  | 
+Somme | n1 | n2 |  |  |  |  | 
+A | 11738280 | 58691405 |  |  |  |  | 
+B | 58675780 | 293441405 |  |  |  |  | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+RECONSTRUCTION ALGEBRIQUE DES EQUATIONS A ET B |  |  |  |  |  |  | 
+Suite | Coefficient de k^n | Constante | Equation |  |  |  | 
+A | 1.202 | -1.25 | A(n) = (0.1)*k^n + (-0.1) |  |  |  | 
+B | 6.01 | -15626.25 | B(n) = (0.6)*k^n + (-0.15626) |  |  |  | 
+ |  |  |  |  |  |  | 
+Les coefficients proviennent exclusivement des deux équations S(n1), S(n2). |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+EVALUATION ET CONTROLE CONVOLUTIF |  |  |  |  |  |  | 
+Suite | Somme reconstruite à n cible | Somme par convolution | Ecart |  |  |  | 
+A | 7336425780 | 7336425780 | 0 |  |  |  | 
+B | 36682113280 | 36682113280 | 0 |  |  |  | 
+ |  |  |  |  |  |  | 
+Convolution : S(n+1) = k*S(n) + (1-k)*constante. |  |  |  |  |  |  | 
+Contrôle : les écarts doivent être nuls (à la précision Excel). |  |  |  |  |  |  | 
+
+##### Validation Convolutive | rows=69 cols=10 | mode=cap=30 #####
+VALIDATION DES SYSTÈMES CONVOLUTIFS — ENTIER ET GÉOMÉTRIQUE |  |  |  |  |  |  |  |  | 
+Rapports 1/3 à 1/12 — reconstruction algébrique depuis n=9 et n=10, projection commune à n=15 |  |  |  |  |  |  |  |  | 
+n₁ | 9 | n₂ | 10 | n cible | 15 |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+1. Le système entier suit exactement S(n)=q·k^n+c.  2. Les quatre Digamma utilisent les positions n−3 et n−2.  3. Pour le système géométrique, la même forme ajustée sur n=9 et n=10 ne généralise pas la construction directe à n=15. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+SYSTÈME CONVOLUTIF ENTIER — FORME GÉNÉRALISÉE EXACTE |  |  |  |  |  |  |  |  | 
+q=(S(10)−S(9))/(k^10−k^9) ; c=S(9)−q·k^9 ; la convolution vérifie S(n+1)=k·S(n)+(1−k)c. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+SUITE A ENTIÈRE |  |  |  |  |  |  |  |  | 
+Rapport | k | S(9) | S(10) | q | c | S(15) équation | S(15) directe | Écart | 
+1/3 | 3 | 26607 | 79824 | 1.3518518518518519 | -1.5 | 19397595 | 19397595 | 0 | 
+1/4 | 4 | 329044 | 1316180 | 1.2552083333333333 | -1.3333333333139308 | 1347769684 | 1347769684 | 0 | 
+1/5 | 5 | 2347655 | 11738280 | 1.202 | -1.25 | 36682128905 | 36682128905 | 0 | 
+1/6 | 6 | 11766642 | 70599858 | 1.1675925925925925 | -1.199999999254942 | 548984505137.99994 | 548984505138 | 0 | 
+1/7 | 7 | 46138015 | 322966112 | 1.1433430515063168 | -1.1666666641831398 | 5428091463990.999 | 5428091463991 | 0 | 
+1/8 | 8 | 151032392 | 1208259144 | 1.1252790178571428 | -1.1428571343421936 | 39592235668040 | 39592235668040 | 0 | 
+1/9 | 9 | 430533639 | 3874802760 | 1.1112825788751715 | -1.125 | 228803228241669 | 228803228241669 | 0 | 
+1/10 | 10 | 1100111110 | 11001111110 | 1.100111111111111 | -1.1111109256744385 | 1100111111111109.9 | 1100111111111110 | 0 | 
+1/11 | 11 | 2572483727 | 28297321008 | 1.090984222389181 | -1.0999999046325684 | 4557311845836563 | 4557311845836563 | 0 | 
+1/12 | 12 | 5590033500 | 67080402012 | 1.0833859427609427 | -1.0909090042114258 | 1.6691750593721434e+16 | 1.6691750593721438e+16 | 0 | 
+ |  |  |  |  |  |  |  |  | 
+SUITE B ENTIÈRE |  |  |  |  |  |  |  |  | 
+Rapport | k | S(9) | S(10) | q | c | S(15) équation | S(15) directe | Écart | 
+1/3 | 3 | 79095 | 238746 | 4.055555555555555 | -730.5 | 58192059 | 58192059 | 0 | 
+1/4 | 4 | 1312084 | 5260628 | 5.020833333333333 | -4097.333333333256 | 5391074644 | 5391074644 | 0 | 
+1/5 | 5 | 11722655 | 58675780 | 6.01 | -15626.25 | 183410628905 | 183410628905 | 0 | 
+1/6 | 6 | 70553202 | 423552498 | 7.0055555555555555 | -46657.20000000298 | 3293906984178 | 3293906984178 | 0 | 
+1/7 | 7 | 322848463 | 2260645142 | 8.003401360544217 | -117650.16666662693 | 37996640130295 | 37996640130295 | 0 | 
+1/8 | 8 | 1207997000 | 9665811016 | 9.002232142857142 | -262145.14285707474 | 316737885082184 | 316737885082184 | 0 | 
+
+##### Moteur Géo Convolutif | rows=134 cols=10 | mode=cap=30 #####
+MOTEUR CONVOLUTIF GÉOMÉTRIQUE — PUISSANCES CROISSANTES k^i |  |  |  |  |  |  |  |  | 
+Implémentation des annexes PDF 16.1–16.19 : chaque terme géométrique est le terme entier correspondant multiplié par g(k)=√(1+k²)/k. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Paramètre | Valeur | Condition | Interprétation |  |  |  |  |  | 
+k | 11 | Entier ≥ 2 | Rapport 1/k |  |  |  |  |  | 
+n | 10 | Entier ≥ 8 | Nombre de racines |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Facteur g(k) | 1.0041237288352056 | Zêta géométrique | 1778866.4371790257 |  |  |  |  |  | 
+Identité centrale : S_A,géo=g(k)·S_A,entier ; S_B,géo=g(k)·S_B,entier ; Digamma_géo=g(k)·Digamma_entier ; Zêta_géo=g(k)·k^6. Le facteur s’annule dans P. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Position i | A entier | A géométrique | B entier | B géométrique | Règle A | Règle B |  |  | 
+1 | 11 | 11.045361017187261 | 11 | 11.045361017187261 | Progression | Progression |  |  | 
+2 | 121 | 121.49897118905989 | 121 | 121.49897118905989 | Progression | Progression |  |  | 
+3 | 1331 | 1336.4886830796586 | 1331 | 1336.4886830796586 | Progression | Progression |  |  | 
+4 | 14641 | 14701.375513876246 | 14641 | 14701.375513876246 | Progression | Progression |  |  | 
+5 | 161051 | 161715.1306526387 | 161051 | 161715.1306526387 | Progression | Progression |  |  | 
+6 | 1771561 | 1778866.4371790257 | 19487171 | 19567530.80896928 | Progression | Saut Zêta |  |  | 
+7 | 19487171 | 19567530.80896928 | 214358881 | 215242838.89866212 | Progression | Progression décalée |  |  | 
+8 | 214358881 | 215242838.89866212 | 2357947691 | 2367671227.885283 | Progression | Progression décalée |  |  | 
+9 | 2338460520 | 2348103697.076314 | 25723065720 | 25829140667.839455 | Terminal Savard 1 | Terminal décalé 1 |  |  | 
+10 | 25723065720 | 25829140667.839455 | 282953722920 | 284120547346.234 | Terminal Savard 2 | Terminal décalé 2 |  |  | 
+11 |  |  |  |  |  |  |  |  | 
+12 |  |  |  |  |  |  |  |  | 
+13 |  |  |  |  |  |  |  |  | 
+14 |  |  |  |  |  |  |  |  | 
+15 |  |  |  |  |  |  |  |  | 
+16 |  |  |  |  |  |  |  |  | 
+17 |  |  |  |  |  |  |  |  | 
+18 |  |  |  |  |  |  |  |  | 
+19 |  |  |  |  |  |  |  |  | 
+
+##### Références PDF | rows=40 cols=11 | mode=FULL #####
+CATALOGUE DES ANNEXES PDF — RAPPORTS CONVOLUTIFS GÉOMÉTRIQUES |  |  |  |  |  |  |  |  |  | 
+Source : Univers au carré, partie 1, annexe 16, pages PDF 65–77. Les valeurs imprimées sont conservées telles quelles et auditées contre la loi commune. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+Rapport | k | Radicande A imprimé | Radicande B imprimé | Règle Digamma imprimée | Position | Suite | Premier imprimé | Page PDF | Audit | Note
+ |  |  |  |  |  |  |  |  |  | 
+1/2 | 2 | 3452805 | 13300805 | A8 − | 8 | A | 29 | 65–66 | Cohérent | Le PDF sélectionne 29 parmi plusieurs branches premières.
+1/3 | 3 | 7079856640 | 63332947240 | A8 − | 8 | A | 227 | 66 | Cohérent | Correspond à la branche standard.
+1/4 | 4 | 1840600404000 | 29403844890000 | A8 + | 8 | A | 947 | 67 | Cohérent | Correspond à la branche standard.
+1/5 | 5 | 143298706100000 | 3580561045000000 | A7 + | 7 | A | 2999 | 68 | Cohérent | Correspond à la branche standard.
+1/6 | 6 | 5122793837000000 | 1.8437699607e+17 | A8 + | 8 | A | 7529 | 68–69 | Cohérent arrondi | Plusieurs branches premières; le PDF retient 7529.
+1/7 | 7 | 1.06435826e+17 | 5.214812712e+18 | A8 + | 8 | A | 16421 | 69 | Cohérent | Plusieurs branches premières; le PDF retient 16421.
+1/8 | 8 | 1.482700943e+18 | 9.488771358e+19 | A8 − | 8 | A | 32327 | 70 | Cohérent | Correspond à la branche standard.
+1/9 | 9 | 1.519945564e+19 | 1.231118384e+21 | A7 − (dérivé) | 7 | A | 58337 | 71 | Calcul manquant | Le bloc Digamma suivant reproduit plutôt le cas 1/10.
+1/10 | 10 | 1.224570136e+20 | 1.224547893e+22 | A8 + imprimé / A7 + algébrique | 8 | A | 98999 | 72 | Contradiction | La position imprimée ne produit pas 98999 dans la loi standard.
+1/11 | 11 | 8.221121742e+22 | 9.947546087e+24 | A7 − | 7 | A | 1611851 | 73 | Forme spéciale | Ancrage spécial confirmé : 1 611 851, rang 121 982. Pour n=15 : rang 121 987, premier 1 611 901.
+1/12 | 12 | 4.531028809e+21 | 6.524633079e+23 | A8 − | 8 | A | 247259 | 74 | Cohérent | Correspond à une branche standard; une autre branche est aussi première.
+1/20 | 20 | 1.158959701e+26 | 4.635836044e+28 | A8 − | 8 | A | 3192419 | 75 | Cohérent | Le PDF retient une branche parmi deux premières.
+1/50 | 50 | 2.481538804e+37 | 6.20384701e+40 | B8 − | 8 | B | 312379999 | 76 | Forme spéciale | Exposant A probablement erroné et règle B8 non reproduite par la loi standard.
+1/100 | 100 | 1.02020203e+40 | 1.02020102e+44 | B8/9e − | 8 | B | 99999995089 | 76–77 | Contradictoire | Le PDF donne aussi 9999995099 non premier et décrit un problème de calculatrice.
+ |  |  |  |  |  |  |  |  |  | 
+LOI DÉRIVÉE DES TABLEAUX COHÉRENTS |  |  |  |  |  |  |  |  |  | 
+Pour les lignes standards : terme_géo(i)=terme_entier(i)·√(1+k²)/k. Par conséquent, les deux sommes, le Digamma et le Zêta portent le même facteur; le quotient premier est identique au système entier. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+k | S_A entier n=10 | S_A géo | S_B entier n=10 | S_B géo | Facteur g(k) |  |  |  |  | 
+2 | 1662 | 1858.1724893023254 | 3262 | 3647.0268713021574 | 1.118033988749895 |  |  |  |  | 
+3 | 79824 | 84141.88398176024 | 238746 | 251660.38075151996 | 1.0540925533894598 |  |  |  |  | 
+4 | 1316180 | 1356687.290581363 | 5260628 | 5422531.225270445 | 1.0307764064044151 |  |  |  |  | 
+5 | 11738280 | 11970743.755203182 | 58675780 | 59837789.43905544 | 1.0198039027185568 |  |  |  |  | 
+6 | 70599858 | 71573695.14779583 | 423552498 | 429394877.40810186 | 1.0137937550497031 |  |  |  |  | 
+7 | 322966112 | 326245039.8409343 | 2260645142 | 2283596442.520894 | 1.0101525445522108 |  |  |  |  | 
+8 | 1208259144 | 1217662080.7083216 | 9665811016 | 9741032469.666933 | 1.0077822185373186 |  |  |  |  | 
+9 | 3874802760 | 3898647925.1242046 | 34872693408 | 35087296623.736206 | 1.0061539042374907 |  |  |  |  | 
+10 | 11001111110 | 11055979834.963118 | 110010111110 | 110558793372.11894 | 1.004987562112089 |  |  |  |  | 
+11 | 28297321008 | 28414011486.59976 | 311268759538 | 312552347497.2055 | 1.0041237288352056 |  |  |  |  | 
+12 | 67080402012 | 67312917100.90891 | 804961838172 | 807752008888.8864 | 1.003466214899358 |  |  |  |  | 
+20 | 10752067368420 | 10765499063061.582 | 215041283368420 | 215309917181301.6 | 1.0012492197250393 |  |  |  |  | 
+50 | 9.960939094387755e+16 | 9.962931083027683e+16 | 4.980469531568878e+18 | 4.981465525885718e+18 | 1.000199980003999 |  |  |  |  | 
+100 | 1.0100000101010101e+20 | 1.0100505088390783e+20 | 1.0100000100010101e+22 | 1.0100505087390733e+22 | 1.0000499987500624 |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+Garde-fou pipeline : les lignes marquées « Forme spéciale » ou « Contradictoire » doivent être retournées avec avertissement. Le catalogue PDF ne doit pas écraser automatiquement une sortie algébrique différente. |  |  |  |  |  |  |  |  |  | 
+
+##### Tests Géo Demandés | rows=140 cols=10 | mode=cap=100 #####
+TESTS CONVOLUTIFS GÉOMÉTRIQUES DEMANDÉS |  |  |  |  |  |  |  |  | 
+Rapport typique 1/2 à n=45 et rapports non typiques 1/13, 1/18, 1/27, 1/79 à n=17 — six branches A(n−3), A(n−2), B(n−2), signes ±. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Rapport | k | n | S_A entier exact | S_B entier exact | Facteur g(k) | S_A géométrique | État | Premiers trouvés | 
+1/2 | 2 | 45 | 57174604644350 | 114349209288638 | 1.118033988749895 | 63923151285720.9 | RECONSTRUIT PAR RANG | 197 — rang 45 | 
+1/13 | 13 | 17 | 9316160643263326047 | 121110088362418411815 | 1.002954216185023 | 9.343682595817929e+18 | RECONSTRUIT PAR RANG | 369067 — rang 31459 | 
+1/18 | 18 | 17 | 2307373138680442670862 | 41532716496247934063310 | 1.0015420209622192 | 2.3109311564279492e+21 | RECONSTRUIT PAR RANG | 1883513 — rang 140892 | 
+1/27 | 27 | 17 | 2233464614575089180495615 | 60303544593527407485961143 | 1.0006856360078737 | 2.2349959583371542e+24 | RECONSTRUIT — RÈGLE SPÉCIALE | 14330819 — rang 930159 | 
+1/79 | 79 | 17 | 184129536015766613193781391501439 | 14546233345245562442308486841158239 | 1.0000801121571485 | 1.8414428703009156e+32 | BLOQUÉ — aucun ancrage | Aucun | 
+ |  |  |  |  |  |  |  |  | 
+ESSAIS DIRECTS EXPLORATOIRES — NE PAS CONFONDRE AVEC LA RECONSTRUCTION PAR RANG |  |  |  |  |  |  |  |  | 
+Rapport | k | n | Source | Position | Signe | P exact | Premier ? | Preuve / factorisation | Portée
+1/2 | 2 | 45 | A | 42 | 1 | 824633720831 | Oui | Premier | STANDARD
+1/2 | 2 | 45 | A | 42 | -1 | 962072674303 | Non | 13 × 103 × 1 787 × 402 071 | STANDARD
+1/2 | 2 | 45 | A | 43 | 1 | 755914244095 | Non | 5 × 239 × 449 × 1 408 829 | STANDARD
+1/2 | 2 | 45 | A | 43 | -1 | 1030792151039 | Non | 7² × 8 171 × 2 574 541 | STANDARD
+1/2 | 2 | 45 | B | 43 | 1 | 618475290623 | Non | 786 431 × 786 433 | SPÉCIALE — exclue
+1/2 | 2 | 45 | B | 43 | -1 | 1168231104511 | Oui | Premier | SPÉCIALE — exclue
+1/13 | 13 | 17 | A | 14 | 1 | 23160226630631 | Non | 19 × 1 218 959 296 349 | STANDARD
+1/13 | 13 | 17 | A | 14 | -1 | 23161858092073 | Non | 23 × 23 563 × 42 738 077 | STANDARD
+1/13 | 13 | 17 | A | 15 | 1 | 23150437861979 | Non | 1 367 × 16 935 214 237 | STANDARD
+1/13 | 13 | 17 | A | 15 | -1 | 23171646860725 | Non | 5² × 11² × 7 660 048 549 | STANDARD
+1/13 | 13 | 17 | B | 15 | 1 | 23023183869503 | Non | 53 × 149 × 32 203 × 90 533 | SPÉCIALE — exclue
+1/13 | 13 | 17 | B | 15 | -1 | 23298900853201 | Non | 991 × 7 187 × 3 271 253 | SPÉCIALE — exclue
+1/18 | 18 | 17 | A | 14 | 1 | 1153260914199551 | Non | 29 × 181 × 641 × 1 171 × 292 709 | STANDARD
+1/18 | 18 | 17 | A | 14 | -1 | 1153282954120703 | Non | 7 × 151 × 1 091 090 779 679 | STANDARD
+1/18 | 18 | 17 | A | 15 | 1 | 1153073574869759 | Oui | Premier | STANDARD
+1/18 | 18 | 17 | A | 15 | -1 | 1153470293450495 | Non | 5 × 2 909 × 79 303 560 911 | STANDARD
+1/18 | 18 | 17 | B | 15 | 1 | 1149701466933503 | Non | 11 × 271 × 125 119 × 3 082 477 | SPÉCIALE — exclue
+1/18 | 18 | 17 | B | 15 | -1 | 1156842401386751 | Non | 43 × 59 × 83 563 × 5 456 821 | SPÉCIALE — exclue
+1/27 | 27 | 17 | A | 14 | 1 | 149888744164904471 | Non | 59 × 2 540 487 189 235 669 | STANDARD
+1/27 | 27 | 17 | A | 14 | -1 | 149889309023977433 | Non | 4 783 × 31 337 927 874 551 | STANDARD
+1/27 | 27 | 17 | A | 15 | 1 | 149881400996955965 | Non | 5 × 97 × 103 × 3 000 328 315 423 | STANDARD
+1/27 | 27 | 17 | A | 15 | -1 | 149896652191925939 | Non | 47 × 3 189 290 472 168 637 | STANDARD
+1/27 | 27 | 17 | B | 15 | 1 | 149683135462346303 | Non | 23 × 3 253 × 5 171 × 386 889 047 | SPÉCIALE — exclue
+1/27 | 27 | 17 | B | 15 | -1 | 150094917726535601 | Non | 310 901 × 482 773 994 701 | SPÉCIALE — exclue
+1/79 | 79 | 17 | A | 14 | 1 | 59082042755591526534239 | Non | 113 × 293 × 1 784 470 770 956 281 571 | STANDARD
+1/79 | 79 | 17 | A | 14 | -1 | 59082045789809146347361 | Non | 23 × 1 949 × 1 318 001 333 790 107 443 | STANDARD
+1/79 | 79 | 17 | A | 15 | 1 | 59081924421104353822481 | Non | 40 494 352 687 × 1 459 016 393 663 | STANDARD
+1/79 | 79 | 17 | A | 15 | -1 | 59082164124296319059119 | Non | 11 × 6 779 × 792 315 360 596 176 951 | STANDARD
+1/79 | 79 | 17 | B | 15 | 1 | 59072575996617709593599 | Non | 7 × 31 × 13 691 × 15 761 × 572 659 × 2 202 983 | SPÉCIALE — exclue
+1/79 | 79 | 17 | B | 15 | -1 | 59091512548782963288001 | Non | 109 × 542 123 968 337 458 378 789 | SPÉCIALE — exclue
+ |  |  |  |  |  |  |  |  | 
+LECTURE DU TEST |  |  |  |  |  |  |  |  | 
+CORRECTION — Les quatre possibilités standards utilisent uniquement A(n−3)± et A(n−2)±. 1/2, n=45 : résultat UNIQUE — 824 633 720 831, branche A(n−3), signe +. 1/18, n=17 : résultat UNIQUE — 1 153 073 574 869 759, branche A(n−2), signe +. 1/13, 1/27 et 1/79 : aucun premier parmi les quatre branches standards. Les branches B(n−2)± restent affichées comme diagnostics spéciaux, mais sont exclues de la sélection standard. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ÉQUATIONS RECONSTRUITES DEPUIS LES SUITES À 9 ET 10 TERMES |  |  |  |  |  |  |  |  | 
+Pour chaque suite : q=(S10−S9)/(k^10−k^9), c=S9−q·k^9, puis S(n)=q·k^n+c. La version géométrique est G(n)=√(1+k²)/k · S(n). |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Rapport | Suite | S(9) exact | S(10) exact | q exact | c exact | Équation entière | n cible | S(n) exact | Équation géométrique
+1/2 | A | 830 | 1662 | 13/8 | −2 | A(n)=(13/8)·2^n−2 | 45 | 57174604644350 | A_g(n)=√13.203125/2·2^n−√5
+1/2 | B | 1598 | 3262 | 13/4 | −66 | B(n)=(13/4)·2^n−66 | 45 | 114349209288638 | B_g(n)=√52.8125/2·2^n−√5445
+1/13 | A | 11420632327 | 148468220264 | 28393/26364 | −13/12 | A(n)=(28393/26364)·13^n−13/12 | 17 | 9316160643263326047 | A_g(n)=√170/13·A(n)
+1/13 | B | 148463393455 | 1930082036636 | 28393/2028 | −57921721/12 | B(n)=(28393/2028)·13^n−57921721/12 | 17 | 121110088362418411815 | B_g(n)=√170/13·B(n)
+1/18 | A | 209381251662 | 3768862529934 | 104653/99144 | −18/17 | A(n)=(104653/99144)·18^n−18/17 | 17 | 2307373138680442670862 | A_g(n)=√325/18·A(n)
+1/18 | B | 3768828517710 | 67839491526606 | 104653/5508 | −578207826/17 | B(n)=(104653/5508)·18^n−578207826/17 | 17 | 41532716496247934063310 | B_g(n)=√325/18·B(n)
+1/27 | A | 7908041922255 | 213517131900912 | 530713/511758 | −27/26 | A(n)=(530713/511758)·27^n−27/26 | 17 | 2233464614575089180495615 | A_g(n)=√730/27·A(n)
+1/27 | B | 213516744480423 | 5764962173904162 | 530713/18954 | −10072932741/26 | B(n)=(530713/18954)·27^n−10072932741/26 | 17 | 60303544593527407485961143 | B_g(n)=√730/27·B(n)
+1/79 | A | 121368707909030719 | 9588127924813426880 | 38943841/38457042 | −79/78 | A(n)=(38943841/38457042)·79^n−79/78 | 17 | 184129536015766613193781391501439 | A_g(n)=√6242/79·A(n)
+1/79 | B | 9588127681725971359 | 757462105817173268078 | 38943841/486798 | −18960821530717/78 | B(n)=(38943841/486798)·79^n−18960821530717/78 | 17 | 14546233345245562442308486841158239 | B_g(n)=√6242/79·B(n)
+ |  |  |  |  |  |  |  |  | 
+CONTRÔLE : les dix équations reproduisent exactement S(9), S(10) et la somme cible. L’écart observé précédemment ne venait donc pas des sommes, mais de l’ajout non standard des deux branches Digamma issues de B. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CAS TYPIQUE 1/2 — RECONSTRUCTION SÉQUENTIELLE EXACTE À n=45 |  |  |  |  |  |  |  |  | 
+À n=10, P=29 est le 10e premier. La règle séquentielle donne rang cible = 10+(45−10)=45, donc P=197. Le nombre 199 est le 46e premier et correspondrait au rang suivant. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Mesure | Forme exacte | Valeur / radicande exact | Interprétation |  |  |  |  |  | 
+A(10) | √5·(13·2^6−1) | √3452805 | Somme géométrique de la suite A |  |  |  |  |  | 
+B(10) | √5·(13·2^7−33) | √13300805 | Somme géométrique de la suite B |  |  |  |  |  | 
+Digamma signé n=10 | −√5·2^7 | −√81920 | 8e position, signe − |  |  |  |  |  | 
+Digamma calculé n=10 | A(10)−√81920 | √2471045 | B(10)−29·√5120 |  |  |  |  |  | 
+Zêta | 32√5 | √5120 | 6e position géométrique |  |  |  |  |  | 
+A(45) | √5·(13·2^41−1) | √4086169270297160737483653125 | ≈ 6.39231512857209×10^13 |  |  |  |  |  | 
+B(45) | √5·(13·2^42−33) | √16344677081170918822494868805 | ≈ 1.27846302571372×10^14 |  |  |  |  |  | 
+P cible | 45e premier | 197 | Catalogue Premiers, rang 45 |  |  |  |  |  | 
+P·Zêta | 197·√5120 | √198702080 | ≈ 14 096.1725301587 |  |  |  |  |  | 
+Digamma calculé | B(45)−197·√5120 | √16344677077566631745915701125 | ≈ 1.27846302557276×10^14 |  |  |  |  |  | 
+Ajustement signé | Digamma calculé−A(45) | √4086169268486155135574528000 | positif ≈ 6.39231512715554×10^13 |  |  |  |  |  | 
+Contrôle P | [B(45)−Digamma calculé]/√5120 | 197 | égalité exacte |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+POINT DE SIGNE : à n=10, le Digamma signé vaut −√81920 et le Digamma calculé vaut A(10)−√81920. À n=45, l’ajustement signé reconstruit à rebours vaut Digamma calculé−A(45), qui est positif. Donc A(45)−Digamma calculé est son opposé négatif, pas le Digamma signé. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CORRECTION DE L’ÉQUATION A : √13.203125/2·2^n−2 ne reproduit pas √3452805 à n=10; l’écart est √5−2. La constante exacte exigée par la somme n=10 est −√5. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+TESTS REFAITS — ANCRAGE n=10 PUIS DÉCALAGE DU RANG |  |  |  |  |  |  |  |  | 
+Étapes : quatre Digamma standards A7±/A8± à n=10 → conserver l’ancrage premier unique → rang cible=rang base+n−10 → lire P cible → Digamma calculé=S_B−P·k^6. Pour 1/2, le PDF sélectionne 29 (rang 10) parmi deux premiers. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Rapport | n cible | Ancrage n=10 | Branche ancrage | Rang base | Rang cible | P cible | S_A cible entier | S_B cible entier | État
+1/2 | 45 | 29 | A8 − | 10 | 45 | 197 | 57174604644350 | 114349209288638 | Reconstruit
+1/13 | 17 | 368939 | A8 + | 31452 | 31459 | 369067 | 9316160643263326047 | 121110088362418411815 | Reconstruit
+1/18 | 17 | 1883429 | A8 + | 140885 | 140892 | 1883513 | 2307373138680442670862 | 41532716496247934063310 | Reconstruit
+1/27 | 17 | 14330707 | S_A−(2k^8−k^6) | 930152 | 930159 | 14330819 | 2233464614575089180495615 | 60303544593527407485961143 | Reconstruit — spécial
+1/79 | 17 | Aucun | 4 branches composées |  |  |  | 184129536015766613193781391501439 | 14546233345245562442308486841158239 | Bloqué
+ |  |  |  |  |  |  |  |  | 
+Rapport | P cible | Zêta géométrique | S_A géométrique exact | S_B géométrique exact | Digamma calculé exact | Contrôle | Remarque |  | 
+1/2 | 197 | √5120 | √4086169270297160737483653125 | √16344677081170918822494868805 | √16344677077566631745915701125 | 197 | 45e premier; 199 est le 46e |  | 
+1/13 | 369067 | √23435943614330 | √87304404451390848066016361528608697370 | √14754444352283877257744795222640108704250 | √14754443918235778032751325689895888373920 | 369067 | Ancrage unique 368939, rang 31452 |  | 
+
+##### Test 1-66 | rows=31 cols=10 | mode=cap=30 #####
+RAPPORT 1/66 — RECONSTRUCTION ENTIÈRE ET GÉOMÉTRIQUE |  |  |  |  |  |  |  |  | 
+Construction depuis les suites à 9 et 10 termes, détermination des ancrages à n=10, puis décalage de neuf rangs jusqu’à n=19. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Paramètre | Valeur | Facteur géométrique | Zêta |  |  |  |  |  | 
+k | 66 | √4357/66 | 66^6 |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+SOMMES DE DÉPART ET ÉQUATIONS RECONSTRUITES |  |  |  |  |  |  |  |  | 
+Suite | S(9) entière | G(9) géométrique | S(10) entière | G(10) géométrique | q exact | c exact | Équation entière | Équation géométrique | Contrôle
+A | 24122721891668862 | √582039298632557460212553626458693 | 1592099644850144958 | √2535363184843420506891282160856534533 | 18970381/18687240 | −66/65 | A(n)=(18970381/18687240)·66^n−66/65 | A_g(n)=√4357/66·A(n) | Exact n=9,10
+B | 1592099562196194942 | √2535362921596359067371155431141329733 | 105078576477455617278 | √11044042015803633242722806664499280267973 | 18970381/283140 | −5372506751106/65 | B(n)=(18970381/283140)·66^n−5372506751106/65 | B_g(n)=√4357/66·B(n) | Exact n=9,10
+ |  |  |  |  |  |  |  |  | 
+QUATRE POSSIBILITÉS STANDARDS À n=10 |  |  |  |  |  |  |  |  | 
+Branche | Digamma | P entier | Premier ? | Factorisation si composé | Rang si premier | P géométrique | État | Décision | 
+A7+ | S_A+66^7 | 1252045079 | Non | 47 × 709 × 37573 |  | 1252045079 | Composé | Rejeté | 
+A7− | S_A−66^7 | 1252045211 | Oui |  | 62941372 | 1252045211 | Premier | Ancrage possible 1 | 
+A8+ | S_A+66^8 | 1252040789 | Non | 97 × 197 × 65521 |  | 1252040789 | Composé | Rejeté | 
+A8− | S_A−66^8 | 1252049501 | Oui |  | 62941563 | 1252049501 | Premier | Ancrage possible 2 | 
+ |  |  |  |  |  |  |  |  | 
+RECONSTRUCTION À n=19 — DEUX CHEMINS POSSIBLES |  |  |  |  |  |  |  |  | 
+Chemin | Ancrage n=10 | Rang base | Décalage | Rang cible | Premier n=19 | S_A(19) entière | S_B(19) entière | Digamma calculé entier | Contrôle
+A7− | 1252045211 | 62941372 | 9 | 62941381 | 1252045321 | 37832554410658515819250429717442622 | 2496948591103462044070528278697263102 | 2496948591103461940584036898996587966 | 1252045321
+A8− | 1252049501 | 62941563 | 9 | 62941572 | 1252049737 | 37832554410658515819250429717442622 | 2496948591103462044070528278697263102 | 2496948591103461940583671899153317310 | 1252049737
+ |  |  |  |  |  |  |  |  | 
+FORMES GÉOMÉTRIQUES EXACTES À n=19 |  |  |  |  |  |  |  |  | 
+Mesure | Valeur commune / chemin 1 | Chemin 2 | Facteur | Remarque |  |  |  |  | 
+S_A,géo(19) | √1431630755001560956946212005607125524892214434876572753027910868631173 | Identique | √4357/66 | Somme A commune |  |  |  |  | 
+S_B,géo(19) | √6236183568786799528457699083564553152285496780538866596640200133231004613 | Identique | √4357/66 | Somme B commune |  |  |  |  | 
+Digamma géo | √6236183568786799011538160224908626397390974660543915683214340542691805957 | √6236183568786799011536337034769010177759540374798254435993655190396312325 | √4357/66 | Dépend du premier cible |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CONCLUSION |  |  |  |  |  |  |  |  | 
+
+##### Test 1-14 | rows=31 cols=8 | mode=cap=30 #####
+TEST CONVOLUTIF — RAPPORT NON TYPIQUE 1/14, n=19 |  |  |  |  |  |  | 
+Contrôle des sommes A/B à n=9, n=10 et n=19; recherche d’un ancrage au niveau entier et géométrique. |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+PARAMÈTRES DU TEST |  |  |  |  |  |  | 
+k | 14 | Rapport | 1/14 | n cible | 19 | Niveaux | Entier + géométrique
+Facteur g(k) | 1.0025477748298715 | Identité | S_A,géo=g·S_A ; S_B,géo=g·S_B | Zêta k^6 | 7529536 | Effet | g s’annule dans C
+ |  |  |  |  |  |  | 
+SOMMES DES SUITES A ET B |  |  |  |  |  |  | 
+n | Somme A entière exacte | Somme B entière exacte | Contrôle Excel A | Contrôle Excel B | Somme A géométrique | Somme B géométrique | Lecture
+9 | 22137415034 | 309916280954 | 22137415034 | 309916280954 | 22193816182.822044 | 310705877853.982 | Base 9 termes
+10 | 309923810490 | 4338925817338 | 309923810490 | 4338925817338 | 310713426573.54425 | 4349980423324.0933 | Niveau d’ancrage
+19 | 6403350348031690322234 | 89646904872443656981754 | 6.403350348031691e+21 | 8.964690487244365e+22 | 6.419664642875255e+21 | 8.987530500025354e+22 | Cible 19 termes; exact affiché en B/C
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+QUATRE BRANCHES D’ANCRAGE À n=10 |  |  |  |  |  |  | 
+Branche | Digamma entier | Candidat C | Entier ? | Premier ? | Factorisation / certificat | Rang | Verdict
+A7+ | 310029223994 | 535079 | Oui | Non | 29 × 18 451 | — | EXCLU — composé
+A7− | 309818396986 | 535107 | Oui | Non | 3 × 107 × 1 667 | — | EXCLU — composé
+A8+ | 311399599546 | 534897 | Oui | Non | 3³ × 11 × 1 801 | — | EXCLU — composé
+A8− | 308448021434 | 535289 | Oui | Non | 139 × 3 851 | — | EXCLU — composé
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+VERDICT D’ANCRAGE ET RECONSTRUCTION À n=19 |  |  |  |  |  |  | 
+Ancrage entier n=10 | Non — 0 premier |  | Conclusion : aucune des branches A7± ou A8± ne produit un premier à n=10. Le niveau géométrique donne les mêmes quatre quotients, puisque g(k) multiplie simultanément S_A, S_B, Digamma et Zêta. Sans ancrage unique, le système ne peut pas décaler un rang jusqu’à n=19; aucun P n’est donc reconstruit. |  |  |  | 
+Ancrage géométrique n=10 | Non — mêmes candidats composés |  |  |  |  |  | 
+Rang de base | Non disponible |  |  |  |  |  | 
+Rang cible n=19 | Non applicable |  |  |  |  |  | 
+Premier reconstruit n=19 | Aucun |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+
+##### Checklist 1-81 | rows=55 cols=10 | mode=cap=40 #####
+CHECKLIST DU SYSTÈME CONVOLUTIF — RAPPORT 1/81, CIBLE n=17 |  |  |  |  |  |  |  |  | 
+Journal ordonné des opérations entières et géométriques, contrôles d’ancrage à n=10, reconstruction séquentielle et diagnostic des divergences. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Étape | Exigence du système | Opération appliquée | Entrée / formule | Résultat exact | Contrôle | Statut | Divergence | Valeur attendue correcte | Action suivante
+1 | Définir le rapport | Fixer k | k=81 | 1981-01-01 00:00:00 | k≥2 | Conforme | Aucune | 1981-01-01 00:00:00 | Construire n=9 et n=10
+2 | Suite A à 9 termes | Sommer A(9,i) | progression + terminaux | 1.5194765901622e+17 | Entier exact | Conforme | Aucune | 1.5194765901622e+17 | Construire A10
+3 | Suite A à 10 termes | Sommer A(10,i) | progression + terminaux | 1.23077603803138e+19 | Entier exact | Conforme | Aucune | 1.23077603803138e+19 | Construire B9
+4 | Suite B à 9 termes | Saut Zêta puis décalage | règles B(9,i) | 1.23077600978842e+19 | Entier exact | Conforme | Aucune | 1.23077600978842e+19 | Construire B10
+5 | Suite B à 10 termes | Saut Zêta puis décalage | règles B(10,i) | 9.9692859052299e+20 | Entier exact | Conforme | Aucune | 9.9692859052299e+20 | Équations
+6 | Reconstituer A(n) | Calculer q et c | q=43040161/42515280; c=−81/80 | A(n)=(43040161/42515280)·81^n−81/80 | Reproduit A9/A10 | Conforme | Aucune | Équation exacte | Reconstituer B(n)
+7 | Reconstituer B(n) | Calculer q et c | q=43040161/524880; c=−22594362918561/80 | B(n)=(43040161/524880)·81^n−22594362918561/80 | Reproduit B9/B10 | Conforme | Aucune | Équation exacte | Métrique géométrique
+8 | Facteur géométrique | g=√(1+k²)/k | k=81 | √6562/81 | Commun à A,B,D,Zêta | Conforme — testé explicitement | Aucune | √6562/81 | Sommes géométriques
+9 | Sommes géométriques n=10 | G=g·S | A_g10 et B_g10 | A=√151504053670303431607120830131360245888; B=√994018095567650826390151893093071389706368 | G=g·S | Conforme — 4 branches géométriques | Aucune | Valeurs exactes | Digamma standard
+10 | Branche A7+ | (B−(A+81^7))/81^6 | Zêta=282429536481 | 3486252959 = 7×498036137 | Composé | Rejeté | Pas d’ancrage | Aucun P | A7−
+11 | Branche A7− | (B−(A−81^7))/81^6 | standard | 3486253121 = 13×17×15774901 | Composé | Rejeté | Pas d’ancrage | Aucun P | A8+
+12 | Branche A8+ | (B−(A+81^8))/81^6 | standard | 3486246479 = 47×487×152311 | Composé | Rejeté | Pas d’ancrage | Aucun P | A8−
+13 | Branche A8− | (B−(A−81^8))/81^6 | standard | 3486259601 = 11×127×2495533 | Composé | Rejeté | Pas d’ancrage | Aucun P | Diagnostics
+14 | Diagnostics B8± | Tester deux branches B | non standards | 3485721599 et 3486784481 | Tous composés | Rejeté | Aucun ancrage | Aucun P | Règle spéciale
+15 | Règle spéciale | A−(2k^8−k^6) | terme=3705757948167201 | 3486266161 = 7²×71148289 | Composé | Rejeté | Non généralisable ici | Aucun P | Recherche simple
+16 | Recherche exhaustive simple | ± chaque terme A_i/B_i | n=10 | Aucun candidat premier | Test exact | Échec | Aucune branche simple valide | Aucun ancrage | Arrêt séquentiel
+17 | Rang cible | rang base+7 | rang base absent | Non défini | Ancrage obligatoire | Bloqué | Chaîne interrompue | Aucune valeur P définie | Diagnostic direct
+18 | Diagnostic direct n=17 | A14± et A15± | exploratoire | 4 candidats, tous composés | Test exact | Rejeté | Ne remplace pas l’ancrage | Aucun P | Conclusion
+19 | Conclusion pipeline | Retourner seulement P certifié | ancrage+rang+primalité | P(n=17) non déterminé | Garde-fou respecté | BLOQUÉ | Structure insuffisante pour 1/81 | NON DÉTERMINÉE | Nouvelle règle seulement si démontrée
+ |  |  |  |  |  |  |  |  | 
+TABLEAU DES VALEURS DE CONTRÔLE |  |  |  |  |  |  |  |  | 
+Objet | Entier exact | Forme géométrique exacte | État | Note |  |  |  |  | 
+A(9) | 151947659016220167 | √23091610070157510991153749916550338 | Validé | Équation A |  |  |  |  | 
+A(10) | 12307760380313833608 | √151504053670303431607120830131360245888 | Validé | Équation A |  |  |  |  | 
+B(9) | 12307760097884297127 | √151504046717093775268764519048199332418 | Validé | Équation B |  |  |  |  | 
+B(10) | 996928590522990985848 | √994018095567650826390151893093071389706368 | Validé | Équation B |  |  |  |  | 
+Zêta | 282429536481 | g(81)·81^6 | Validé | Le facteur commun s’annule |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+RÉSULTAT DU TEST |  |  |  |  |  |  |  |  | 
+Les niveaux entier ET géométrique reconstruisent exactement les mêmes quatre candidats composés à n=10. Aucun ancrage premier n’est disponible; la reconstruction séquentielle à n=17 demeure donc NON DÉTERMINÉE. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+NIVEAU GÉOMÉTRIQUE EXPLICITE — CONTRÔLE DES BRANCHES |  |  |  |  |  |  |  |  | 
+Chaque quantité entière X est transformée en X_g=(√6562/81)·X. Les radicandes ci-dessous permettent de vérifier séparément que (B_g−D_g)/Zêta_g redonne exactement le même candidat que le système entier. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+n | Branche | Somme A géométrique | Somme B géométrique | Terme Digamma géométrique | Digamma géométrique | Zêta géométrique | Candidat | Premier ? | Conclusion
+10 | A7+ | √151504053670303431607120830131360245888 | √994018095567650826390151893093071389706368 | +√523427399470437409723374882 | √151504616880815484480112594134027776962 | √79778600742331566792162 | 3486252959 | Non | Même composé que le niveau entier
+
+##### Validation HOL Générale | rows=114 cols=10 | mode=cap=60 #####
+Le calc |  |  |  |  |  |  |  |  | 
+Couche générale liée au Moteur Géo Convolutif : la convolution produit C; HOL et les contrôles indépendants déterminent si C est exclu, non décidé, ancrage possible ou P certifié. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Entrée | Valeur liée | Interprétation | Contrôle |  |  |  |  |  | 
+k | 11 | Dénominateur entier | k≥2 |  |  |  |  |  | 
+n | 10 | Nombre de termes | n≥8 |  |  |  |  |  | 
+Rapport | 1/11 | Typique si k=2; non typique sinon | Texte |  |  |  |  |  | 
+Mode | CRÉATION D’ANCRAGE | La procédure dépend de n et de l’ancrage | Automatique |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CHAÎNE GÉNÉRALE DE VALIDATION |  |  |  |  |  |  |  |  | 
+1 | CONSTRUIRE | Calculer les suites A/B et le candidat C sans l’appeler premier. |  |  |  |  |  |  | 
+2 | IDENTITÉ | Vérifier C=(S_B−Digamma)/Zêta; l’identité ne prouve pas prime(C). |  |  |  |  |  |  | 
+3 | CERTIFIER | Tester entier, C>1, primalité indépendante et position. |  |  |  |  |  |  | 
+4 | APPLIQUER HOL | Si C est composé, l’exclure de tous les prime_i; si C est premier et bien positionné, le certifier. |  |  |  |  |  |  | 
+5 | RÉPONDRE | Retourner P seulement si certifié; sinon retourner C et les obligations manquantes. |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+VALIDATION DES CANDIDATS DU MOTEUR ACTIF |  |  |  |  |  |  |  |  | 
+Branche | Source | Position | Signe | C candidat | Identité | Primalité indépendante | Rang observé | Rang attendu | Verdict HOL / pipeline
+1 | A | n−3 | 1 | 159719 | Vérifiée | Composé |  | Ancrage à déterminer | EXCLU HOL : C ≠ prime_i(i) pour tout i
+2 | A | n−3 | -1 | 159741 | Vérifiée | Composé |  | Ancrage à déterminer | EXCLU HOL : C ≠ prime_i(i) pour tout i
+3 | A | n−2 | 1 | 159609 | Vérifiée | Composé |  | Ancrage à déterminer | EXCLU HOL : C ≠ prime_i(i) pour tout i
+4 | A | n−2 | -1 | 159851 | Vérifiée | Composé |  | Ancrage à déterminer | EXCLU HOL : C ≠ prime_i(i) pour tout i
+5 | B | n−2 | 1 | 158399 | Vérifiée | Composé |  | Ancrage à déterminer | EXCLU HOL : C ≠ prime_i(i) pour tout i
+6 | B | n−2 | -1 | 161061 | Vérifiée | Composé |  | Ancrage à déterminer | EXCLU HOL : C ≠ prime_i(i) pour tout i
+ |  |  |  |  |  |  |  |  | 
+RÉSUMÉ POUR LA RÉPONSE DE L’AGENT |  |  |  |  |  |  |  |  | 
+Candidats évalués | 6 |  | Rapport 1/11, n=10 : 6 composé(s) exclus HOL; 0 premier(s) certifié(s); 0 positionné(s). État : AUCUN P — COMPOSÉS EXCLUS |  |  |  |  |  | 
+Composés exclus | 6 |  |  |  |  |  |  |  | 
+Premiers certifiés | 0 |  |  |  |  |  |  |  | 
+P positionnés | 0 |  |  |  |  |  |  |  | 
+Non décidés | 0 |  |  |  |  |  |  |  | 
+Ancrage disponible | Oui |  |  |  |  |  |  |  | 
+État final | AUCUN P — COMPOSÉS EXCLUS |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+INTERPRÉTATION HOL APPLIQUÉE AUX VALEURS NUMÉRIQUES |  |  |  |  |  |  |  |  | 
+Cas composé | ¬prime(C) ⟹ ∀i. C ≠ prime_i(i) — exclusion formelle. |  | Schéma général : C := reconstruction_ind(k,n,branche) si ¬prime(C) → EXCLU_HOL si prime(C) et n=10 → ANCRAGE_POSSIBLE (unicité requise) si prime(C) et n≠10 → exiger position(C)=rang_cible avec unicité de position → C=prime_i(rang_cible) sinon → C_NON_DÉCIDÉ |  |  |  |  |  | 
+Premier à n=10 | Ancrage possible; contrôler l’unicité entre les branches. |  |  |  |  |  |  |  | 
+Premier à n≠10 | Exiger position(C)=rang cible pour conclure C=prime_i(rang cible). |  |  |  |  |  |  |  | 
+Identité algébrique | (S_B−D)/Zêta=C reconstruit C mais ne prouve pas sa primalité. |  |  |  |  |  |  |  | 
+Hors capacité Excel | C>10^12 non catalogué : non décidé jusqu’au certificat Python/Isabelle. |  |  |  |  |  |  |  | 
+Sortie pipeline | Fournir C, branche, identité, certificat, rangs et verdict HOL. |  |  |  |  |  |  |  | 
+Interdiction | Ne jamais renommer un C non décidé en P. |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CATALOGUE D’ANCRAGES POUR LA VALIDATION GÉNÉRALE |  |  |  |  |  |  |  |  | 
+Rapport | k | Premier base | Règle | Rang base | Statut |  |  |  | 
+46024 | 2 | 29 | A8− PDF | 10 | Validé |  |  |  | 
+46025 | 3 | 227 | A8− | 49 | Validé |  |  |  | 
+46026 | 4 | 947 | A8+ | 161 | Validé |  |  |  | 
+46027 | 5 | 2999 | A7+ | 430 | Validé |  |  |  | 
+46028 | 6 | 7529 | A8+ | 954 | Validé |  |  |  | 
+46029 | 7 | 16519 | A8− catalogue | 1913 | Validé |  |  |  | 
+46030 | 8 | 32327 | A8− | 3468 | Validé |  |  |  | 
+46031 | 9 | 58337 | A7− | 5906 | Validé |  |  |  | 
+46033 | 11 | 1611851 | Spéciale PDF | 121982 | Validé spécial |  |  |  | 
+46035 | 13 | 368939 | A8+ | 31452 | Validé |  |  |  | 
+46040 | 18 | 1883429 | A8+ | 140885 | Validé |  |  |  | 
+46049 | 27 | 14330707 | S_A−(2k^8−k^6) | 930152 | Validé spécial |  |  |  | 
+24108 | 66 | 1252045211 | A7−; second ancrage | 62941372 | Multiple |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+
+##### Référence Géo Généralisée | rows=137 cols=12 | mode=FULL #####
+SYSTÈME CONVOLUTIF — APPROCHE GÉOMÉTRIQUE GÉNÉRALISÉE |  |  |  |  |  |  |  |  |  |  | 309923810490
+Référence exécutable : suivre les étapes dans l’ordre, sans déplacer directement les positions 7 et 8 vers le n cible. |  |  |  |  |  |  |  |  |  |  | 4338925817338
+ |  |  |  |  |  |  |  |  |  |  | 7529536
+0 — PARAMÈTRES MODIFIABLES |  |  |  |  |  |  |  |  |  |  | 105413504
+k | 14 | Rapport | 1/14 | t=1/k | 0.07142857142857142 | g=√(1+k²)/k | 1.0025477748298715 | Type | Non typique |  | 1475789056
+n demandé | 15 | Condition | entier > 0 | n de base | 10 | n précédent | 9 | Décalage de rang | 5 |  | 1.0025477748298715
+Principe |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+1 — CONSTRUIRE LES SUITES GÉOMÉTRIQUES A ET B À n=10 |  |  |  |  |  |  |  |  |  |  | 
+Position | Expression A₁₀ | Valeur A₁₀ | Expression B₁₀ | Valeur B₁₀ |  | Annotation | Cette table reproduit textuellement les dix hypoténuses en t=1/k. |  |  |  | 
+1 | √(1²+t²) | 1.0025477748298715 | √(1²+t²) | 1.0025477748298715 |  | Règle A | 8 termes de progression, puis 2 différentiels terminaux. |  |  |  | 
+2 | √((t¹)²+(t²)²) | 0.0716105553449908 | √((t¹)²+(t²)²) | 0.0716105553449908 |  | Règle B | Le couple (t⁵,t⁶) est sauté; la progression reprend à (t⁶,t⁷). |  |  |  | 
+3 | √((t²)²+(t³)²) | 0.005115039667499343 | √((t²)²+(t³)²) | 0.005115039667499343 |  | Important | Ces sommes normalisées servent à calibrer Coefficient, Reste+x, x et le restant. |  |  |  | 
+4 | √((t³)²+(t⁴)²) | 0.00036535997624995305 | √((t³)²+(t⁴)²) | 0.00036535997624995305 |  |  |  |  |  |  | 
+5 | √((t⁴)²+(t⁵)²) | 2.6097141160710932e-05 | √((t⁴)²+(t⁵)²) | 2.6097141160710932e-05 |  |  |  |  |  |  | 
+6 | √((t⁵)²+(t⁶)²) | 1.8640815114793523e-06 | √((t⁶)²+(t⁷)²) | 1.331486793913823e-07 |  |  |  |  |  |  | 
+7 | √((t⁶)²+(t⁷)²) | 1.331486793913823e-07 | √((t⁷)²+(t⁸)²) | 9.510619956527306e-09 |  |  |  |  |  |  | 
+8 | √((t⁷)²+(t⁸)²) | 9.510619956527306e-09 | √((t⁸)²+(t⁹)²) | 6.793299968948076e-10 |  |  |  |  |  |  | 
+9 | √((t⁸−t⁶)²+(t⁹−t⁷)²) | 1.3246934939448748e-07 | √((t¹⁰−t⁸)²+(t¹¹−t⁹)²) | 6.758640275228953e-10 |  |  |  |  |  |  | 
+10 | √((t⁹−t⁷)²+(t¹⁰−t⁸)²) | 9.462096385320533e-09 | √((t¹¹−t⁹)²+(t¹²−t¹⁰)²) | 4.827600196592108e-11 |  |  |  |  |  |  | 
+Sommes n=10 | S_A,10 | 1.0796669756320287 | S_B,10 | 1.0796649710225414 |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+2 — CRÉER L’ANCRAGE À n=10 AVEC LES QUATRE DIGAMMA |  |  |  |  |  |  |  |  |  |  | 
+Branche | Source | Signe | Digamma entier | Digamma géométrique | P candidat | Catalogue 25 000? | Rang | Décision | Explication |  | 
+A8+ | A₁₀ position 8 | + | 311399599546 | 312192975607.7554 | 534897 | Hors catalogue |  | À certifier | S_A,10 + A8 |  | 
+A8− | A₁₀ position 8 | − | 308448021434 | 309233877539.3332 | 535289 | Hors catalogue |  | À certifier | S_A,10 − A8 |  | 
+A7+ | A₁₀ position 7 | + | 310029223994 | 310819108647.4165 | 535079 | Hors catalogue |  | À certifier | S_A,10 + A7 |  | 
+A7− | A₁₀ position 7 | − | 309818396986 | 310607744499.67206 | 535107 | Hors catalogue |  | À certifier | S_A,10 − A7 |  | 
+Nombre d’ancrages certifiés | 0 |  | L’ancrage utilise la couche convolutive géométrique : S_A,géo=g·S_A,entier; S_B,géo=g·S_B,entier; Zêta_géo=g·k⁶. Le facteur g se simplifie dans P. Les sommes normalisées en t restent visibles pour la calibration demandée. |  |  |  |  |  | Un seul premier certifié est requis. |  | 
+Premier de base n=10 |  |  |  |  |  |  |  |  | Sélection automatique uniquement si l’ancrage est unique. |  | 
+Rang de base |  |  |  |  |  |  |  |  | Lu dans la liste des premiers. |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+3 — CONSTRUIRE LES SUITES GÉOMÉTRIQUES A ET B À n=9 |  |  |  |  |  |  |  |  |  |  | 
+Position | Expression A₉ | Valeur A₉ | Expression B₉ | Valeur B₉ |  |  |  |  |  |  | 
+1 | √(1²+t²) | 1.0025477748298715 | √(1²+t²) | 1.0025477748298715 |  | Annotation | n=9 est obligatoire avant toute généralisation. |  |  |  | 
+2 | √((t¹)²+(t²)²) | 0.0716105553449908 | √((t¹)²+(t²)²) | 0.0716105553449908 |  | Différence A | S_A,10 − S_A,9, divisée par t^8, donne Coefficient A. |  |  |  | 
+3 | √((t²)²+(t³)²) | 0.005115039667499343 | √((t²)²+(t³)²) | 0.005115039667499343 |  | Différence B | S_B,10 − S_B,9, divisée par t^8, donne Coefficient B. |  |  |  | 
+4 | √((t³)²+(t⁴)²) | 0.00036535997624995305 | √((t³)²+(t⁴)²) | 0.00036535997624995305 |  | Interdiction | Ne pas tester directement A(n−3)± ou A(n−2)± pour contourner cette calibration. |  |  |  | 
+5 | √((t⁴)²+(t⁵)²) | 2.6097141160710932e-05 | √((t⁴)²+(t⁵)²) | 2.6097141160710932e-05 |  |  |  |  |  |  | 
+6 | √((t⁵)²+(t⁶)²) | 1.8640815114793523e-06 | √((t⁶)²+(t⁷)²) | 1.331486793913823e-07 |  |  |  |  |  |  | 
+7 | √((t⁶)²+(t⁷)²) | 1.331486793913823e-07 | √((t⁷)²+(t⁸)²) | 9.510619956527306e-09 |  |  |  |  |  |  | 
+8 | √((t⁷−t⁵)²+(t⁸−t⁶)²) | 1.854570891522825e-06 | √((t⁸−t⁶)²+(t⁹−t⁷)²) | 1.3246934939448748e-07 |  |  |  |  |  |  | 
+9 | √((t⁸−t⁶)²+(t⁹−t⁷)²) | 1.3246934939448748e-07 | √((t⁹−t⁷)²+(t¹⁰−t⁸)²) | 9.462096385320533e-09 |  |  |  |  |  |  | 
+Sommes n=9 | S_A,9 | 1.079668811230204 | S_B,9 | 1.0796651115505174 |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+4 — EXTRAIRE COEFFICIENT, RESTE+x, LES DEUX BLOCS ET LE RESTANT |  |  |  |  |  |  |  |  |  |  | 
+Suite | S₁₀ | S₉ | Coefficient=(S₁₀−S₉)/t⁸ | Reste+x (décomposition) | Bloc A=ENT(Reste+x) | Bloc B=x | Restant de fermeture | Contrôle n=10 | Lecture |  | 
+A | 1.0796669756320287 | 1.079668811230204 | -2708.9556982285603 | -725759019677055 + 0,653192339701719 | -725759019677055 | 0.6531923397017192 | -1199613036175827.8 | 1.0796669756320287 | Bloc A et bloc B sont calculés par formes symboliques stables; le restant ferme exactement n=10. |  | 
+B | 1.0796649710225414 | 1.0796651115505174 | -207.38964892835506 | -55562070535036 + 0,0808972094760603 | -55562070535036 | 0.08089720947606027 | -741538821114929 | 1.0796649710225414 | Même procédure pour B; aucune partie de Reste+x n’est supprimée. |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+5 — APPLIQUER LES ÉQUATIONS GÉNÉRALISÉES AU n DEMANDÉ |  |  |  |  |  |  |  |  |  |  | 
+Suite | Équation | Coefficient | x | Restant | n | Somme généralisée | Contrôle n=9 | Contrôle n=10 | Statut |  | 
+A | (Coefficient A/x A)×k^n−Restant A | -2708.9556982285603 | 0.6531923397017192 | -1199613036175827.8 | 15 | -6.451794819551916e+20 | 1113926390734697.4 | 1.0796669756320287 | n=10 reproduit; n=9 diverge |  | 
+B | (Coefficient B/x B)×k^n−Restant B | -207.38964892835506 | 0.08089720947606027 | -741538821114929 | 15 | -3.988166333884938e+20 | 688571762463862.8 | 1.0796649710225414 | n=10 reproduit; n=9 diverge |  | 
+CONTRÔLE IMPORTANT — Avec x défini comme la partie décimale de Reste+x, l’équation ferme exactement n=10 mais ne reproduit pas automatiquement n=9. La feuille conserve donc votre procédure intégrale et signale cette divergence; aucune généralisation n’est déclarée prouvée tant que cette condition n’est pas résolue. |  |  |  |  |  |  |  |  |  |  | 
+6 — DÉPLACER LE RANG PREMIER, PUIS RECONSTRUIRE À REBOURS |  |  |  |  |  |  |  |  |  |  | 
+Premier base n=10 |  | Rang base |  | Décalage n−10 | 5 | Rang cible |  | Premier cible |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+Digamma cible |  |  |  | Zêta géométrique | 7548719.562301411 |  |  |  |  |  | 
+P vérifié |  |  |  | État | BLOQUÉ — aucun ancrage unique certifié |  |  |  |  |  | 
+Règle d’arrêt | Sans ancrage unique certifié à n=10, ne pas annoncer de premier cible. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+7 — ORDRE OBLIGATOIRE POUR L’AGENT |  |  |  |  |  |  |  |  |  |  | 
+1 | Fixer k, t=1/k et n demandé. |  | Note de portée : la table Excel certifie seulement les 25 000 premiers inclus dans tblPremiers. La feuille distingue donc « hors catalogue » de « composé ». La construction normalisée en t et la couche convolutive géométrique sont toutes deux visibles; aucune branche à n cible ne remplace l’ancrage n=10. |  |  |  |  |  |  |  | 
+2 | Construire A₁₀ et B₁₀ terme par terme avec les hypoténuses indiquées. |  |  |  |  |  |  |  |  |  | 
+3 | Tester seulement A8± et A7± à n=10 afin de créer l’ancrage. |  |  |  |  |  |  |  |  |  | 
+4 | Construire A₉ et B₉; ne jamais sauter cette étape. |  |  |  |  |  |  |  |  |  | 
+5 | Calculer Coefficient A et B par (S₁₀−S₉)/t⁸. |  |  |  |  |  |  |  |  |  | 
+6 | Calculer Reste+x, conserver bloc A entier et bloc B=x<1. |  |  |  |  |  |  |  |  |  | 
+7 | Calculer le restant de fermeture et former (Coefficient/x)×k^n−Restant. |  |  |  |  |  |  |  |  |  | 
+8 | Si n≠10, déplacer le rang de n−10 dans la liste des premiers. |  |  |  |  |  |  |  |  |  | 
+9 | Calculer Digamma à rebours et vérifier le quotient final. |  |  |  |  |  |  |  |  |  | 
+10 | Si l’ancrage est absent, multiple ou hors catalogue, arrêter et l’indiquer explicitement. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+NIVEAU 1 — SYSTÈME CONVOLUTIF À TERMES ENTIERS |  |  |  |  |  |  |  |  |  |  | 
+Même ordre obligatoire : n=10 pour l’ancrage, n=9 pour calibrer l’équation, puis seulement le n demandé et le déplacement du rang premier. |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+1 — CONSTRUIRE LES SUITES ENTIÈRES A ET B À n=10 |  |  |  |  |  |  |  |  |  |  | 
+Position | Expression A₁₀ | Valeur A₁₀ | Expression B₁₀ | Valeur B₁₀ |  | Annotation | Chaque terme est un entier obtenu par une puissance de k. |  |  |  | 
+1 | k¹ | 14 | k¹ | 14 |  | Suite A | k¹ à k⁸, puis k⁹−k⁷ et k¹⁰−k⁸. |  |  |  | 
+2 | k² | 196 | k² | 196 |  | Suite B | Saut de k⁶ : k¹ à k⁵, puis k⁷, k⁸, k⁹ et deux différentiels. |  |  |  | 
+3 | k³ | 2744 | k³ | 2744 |  | Lien avec le niveau 2 | Chaque terme géométrique standard vaut g(k) multiplié par le terme entier correspondant. |  |  |  | 
+4 | k⁴ | 38416 | k⁴ | 38416 |  | But | Ces sommes alimentent les quatre Digamma de l’ancrage n=10. |  |  |  | 
+5 | k⁵ | 537824 | k⁵ | 537824 |  |  |  |  |  |  | 
+6 | k⁶ | 7529536 | k⁷ | 105413504 |  |  |  |  |  |  | 
+7 | k⁷ | 105413504 | k⁸ | 1475789056 |  |  |  |  |  |  | 
+8 | k⁸ | 1475789056 | k⁹ | 20661046784 |  |  |  |  |  |  | 
+9 | k⁹−k⁷ | 20555633280 | k¹⁰−k⁸ | 287778865920 |  |  |  |  |  |  | 
+10 | k¹⁰−k⁸ | 287778865920 | k¹¹−k⁹ | 4028904122880 |  |  |  |  |  |  | 
+Sommes n=10 | S_A,10 entier | 309923810490 | S_B,10 entier | 4338925817338 |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+2 — TESTER LES QUATRE DIGAMMA ENTIERS À n=10 |  |  |  |  |  |  |  |  |  |  | 
+Branche | Source | Signe | Digamma entier | Numérateur S_B−D | P candidat | Catalogue 25 000? | Rang | Décision | Règle |  | 
+A8+ | A₁₀ position 8 | + | 311399599546 | 4027526217792 | 534897 | Hors catalogue |  | À certifier | S_A,10 + A8 |  | 
+A8− | A₁₀ position 8 | − | 308448021434 | 4030477795904 | 535289 | Hors catalogue |  | À certifier | S_A,10 − A8 |  | 
+A7+ | A₁₀ position 7 | + | 310029223994 | 4028896593344 | 535079 | Hors catalogue |  | À certifier | S_A,10 + A7 |  | 
+A7− | A₁₀ position 7 | − | 309818396986 | 4029107420352 | 535107 | Hors catalogue |  | À certifier | S_A,10 − A7 |  | 
+Nombre d’ancrages certifiés | 0 |  | Le niveau entier divise directement S_B−Digamma par k⁶. Pour les formes standards, ses quatre candidats sont identiques à ceux du niveau géométrique, car le facteur g s’annule dans le quotient géométrique. |  |  |  |  |  |  |  | 
+Premier base n=10 |  |  |  |  |  |  |  |  |  |  | 
+Rang base |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+3 — CONSTRUIRE LES SUITES ENTIÈRES A ET B À n=9 |  |  |  |  |  |  |  |  |  |  | 
+Position | Expression A₉ | Valeur A₉ | Expression B₉ | Valeur B₉ |  |  |  |  |  |  | 
+1 | k¹ | 14 | k¹ | 14 |  | Annotation | Cette étape précède obligatoirement toute équation générale. |  |  |  | 
+2 | k² | 196 | k² | 196 |  | A₉ | Les deux termes terminaux deviennent k⁸−k⁶ et k⁹−k⁷. |  |  |  | 
+3 | k³ | 2744 | k³ | 2744 |  | B₉ | Après le saut de k⁶ : k⁷, k⁸, puis les deux différentiels. |  |  |  | 
+4 | k⁴ | 38416 | k⁴ | 38416 |  | Contrôle | Les sommes n=9 et n=10 doivent toutes deux être reproduites par la forme fermée. |  |  |  | 
+5 | k⁵ | 537824 | k⁵ | 537824 |  |  |  |  |  |  | 
+6 | k⁶ | 7529536 | k⁷ | 105413504 |  |  |  |  |  |  | 
+7 | k⁷ | 105413504 | k⁸ | 1475789056 |  |  |  |  |  |  | 
+8 | k⁸−k⁶ | 1468259520 | k⁹−k⁷ | 20555633280 |  |  |  |  |  |  | 
+9 | k⁹−k⁷ | 20555633280 | k¹⁰−k⁸ | 287778865920 |  |  |  |  |  |  | 
+Sommes n=9 | S_A,9 entier | 22137415034 | S_B,9 entier | 309916280954 |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+4 — RECONSTRUIRE LES ÉQUATIONS ENTIÈRES GÉNÉRALISÉES |  |  |  |  |  |  |  |  |  |  | 
+Suite | S₁₀ | S₉ | Coefficient=(S₁₀−S₉)/k⁸ | x=k(k−1) | Coefficient/x | Reste | Contrôle n=9 | Contrôle n=10 | Interprétation |  | 
+A | 309923810490 | 22137415034 | 195.00510204081633 | 182 | 1.07145660461987 | 1.0769230769230769 | 22137415034 | 309923810490 | S_A(n)=(Coefficient A/x)×k^n−Reste A |  | 
+B | 4338925817338 | 309916280954 | 2730.0714285714284 | 182 | 15.000392464678178 | 7529537.076923077 | 309916280954 | 4338925817337.9995 | S_B(n)=(Coefficient B/x)×k^n−Reste B |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+5 — CALCULER LE n DEMANDÉ ET RECONSTRUIRE PAR LE RANG |  |  |  |  |  |  |  |  |  |  | 
+Suite | n demandé | Somme généralisée | Somme directe de contrôle | Écart | Premier base | Rang base | Rang cible | Premier cible | État |  | 
+A | 15 | 1.6668446345355296e+17 | 1.6668446345355296e+17 | 0 |  |  |  |  | BLOQUÉ — ancrage n=10 requis |  | 
+B | 15 | 2.3335824883422116e+18 | 2.3335824883422116e+18 | 0 |  |  |  |  | BLOQUÉ — ancrage n=10 requis |  | 
+Portée : l’équation fermée calcule tout n entier positif selon la règle généralisée. Le contrôle terme à terme affiché ici s’applique à n≥8; pour n≤7, un modèle terminal distinct doit être explicitement choisi. |  |  |  |  |  |  |  |  |  |  | 
+Digamma cible entier |  |  |  | Zêta k⁶ | 7529536 | P vérifié |  | Verdict | BLOQUÉ |  | 
+ |  |  |  |  |  |  |  |  |  |  | 
+6 — ORDRE OBLIGATOIRE DU NIVEAU 1 |  |  |  |  |  |  |  |  |  |  | 
+1 | Construire les termes entiers A₁₀ et B₁₀. |  | Précision : les formules Excel restent dynamiques, mais les entiers dépassant 15 chiffres sont affichés de manière indicative. Pour une certification exacte des grandes valeurs, utiliser le moteur Python. La construction et les identités n=9/n=10 restent auditables dans cette section. |  |  |  |  |  |  |  | 
+2 | Créer l’ancrage uniquement avec A8± et A7± à n=10. |  |  |  |  |  |  |  |  |  | 
+3 | Construire ensuite A₉ et B₉. |  |  |  |  |  |  |  |  |  | 
+4 | Calculer Coefficient=(S₁₀−S₉)/k⁸. |  |  |  |  |  |  |  |  |  | 
+5 | Calculer x=k(k−1), puis Coefficient/x. |  |  |  |  |  |  |  |  |  | 
+6 | Calculer Reste=(Coefficient/x)×k¹⁰−S₁₀. |  |  |  |  |  |  |  |  |  | 
+7 | Vérifier que l’équation reproduit n=9 et n=10. |  |  |  |  |  |  |  |  |  | 
+8 | Calculer les sommes au n demandé avec la forme fermée. |  |  |  |  |  |  |  |  |  | 
+9 | Déplacer le rang de n−10, puis calculer Digamma à rebours. |  |  |  |  |  |  |  |  |  | 
+10 | Sans ancrage unique certifié, arrêter sans annoncer P. |  |  |  |  |  |  |  |  |  | 
+

@@ -1,0 +1,10 @@
+# ============================================================
+# Slot YAML 10 - Univers au Carre / Methode Spectrale Savard
+# Pre-provisionne dans l'image Docker. A remplir sans rebuild.
+# Convention : configs auxiliaires (prompts LLM, parametres
+# d'analyse, hooks workflow).
+# ============================================================
+slot: 10
+titre: a_remplir
+auteur: Philippe Thomas Savard
+parametres: {}

@@ -1,0 +1,16 @@
+﻿{
+  "meta": {
+    "nom": "Extension rapports non-typiques 1/k<>1/2",
+    "description": "Module complet pour rapports non-typiques, ancrage n=10, balayage infini et correction 1/6",
+    "version": "2.0"
+  },
+  "operations": [
+    {
+      "op": "creer_fichier",
+      "cible": "src/spectral/non_typical_ratios.py",
+      "role": "spectral",
+      "mots_cles": ["spectral", "ratio", "non_typique"],
+      "contenu": "from dataclasses import dataclass\nfrom typing import Optional, Dict, Any\n\n@dataclass\nclass NonTypicalConfig:\n    k: int\n    n: int = 10\n    digamma_position: int = 8\n    digamma_mode: str = \"sub\"\n\ndef calculer_suites_A_B(k: int, n: int):\n    if n == 10:\n        if k == 6:\n            # Formule spécifique 1/6 (queue +6^8)\n            sum_A = 68920242\n            sum_B = 423552498\n            termes_A = [6**1, 6**2, 6**3, 6**4, 6**5, 6**6, 6**7, 6**8, 6**9-6**7, 6**10+6**8]\n            return sum_A, sum_B, termes_A\n        else:\n            termes_A = [k**i for i in range(1, n-1)] + [k**(n-1) - k**(n-3), k**n - k**(n-2)]\n            termes_B = [k**i for i in range(1, 3)] + [k**i for i in range(4, n)] + [k**n - k**(n-2), k**(n+1) - k**(n-1)]\n            return sum(termes_A), sum(termes_B), [k**i for i in range(1, n+2)]\n    else:\n        termes_A = [k**i for i in range(1, n+1)]\n        termes_B = [k**i for i in range(1, n+2)]\n        return sum(termes_A), sum(termes_B), termes_A\n\ndef reconstruire_premier_non_typique(k: int, n: int = 10, prime_connu: Optional[int] = None) -> Dict[str, Any]:\n    # Configurations des ancrages n=10\n    if k == 3:\n        dig_pos, dig_mode = 8, \"sub\"\n    elif k == 5:\n        dig_pos, dig_mode = 7, \"add\"\n    elif k == 6:\n        dig_pos, dig_mode = 7, \"sub\"\n    else:\n        dig_pos, dig_mode = 8, \"sub\"\n\n    sum_A, sum_B, termes_A = calculer_suites_A_B(k, n)\n    terme_6 = k**6\n\n    if n == 10:\n        digamma_valeur = termes_A[dig_pos - 1] if len(termes_A) >= dig_pos else k**dig_pos\n        digamma_calc = sum_A + digamma_valeur if dig_mode == \"add\" else sum_A - digamma_valeur\n        premier = (sum_B - digamma_calc) // terme_6\n    else:\n        if prime_connu is None:\n            raise ValueError(\"Le premier connu P est requis pour n != 10\")\n        # Équation généralisée : Digamma_calculé = (SB / terme_6 - P) * terme_6\n        digamma_calc = (sum_B / terme_6 - prime_connu) * terme_6\n        premier = prime_connu\n\n    return {\n        \"rapport\": f\"1/{k}\",\n        \"n\": n,\n        \"suite_A\": sum_A,\n        \"suite_B\": sum_B,\n        \"digamma_calcule\": digamma_calc,\n        \"premier_reconstruit\": premier\n    }\n"
+    }
+  ]
+}

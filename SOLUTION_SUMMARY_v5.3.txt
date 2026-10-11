@@ -1,0 +1,174 @@
+# ✅ GABRIEL v5.3 - FINAL SOLUTION SUMMARY
+
+## 🎯 PROBLÈME ORIGINAL
+- Port 9000 était reoccupé par Docker Desktop backend après fermeture de Gabriel
+- Processus orphelins impossibles à tuer
+- Docker Desktop relançait automatiquement son backend sur 9000
+
+## 🔧 ANALYSE (Merci Philippe!)
+**Docker Desktop n'était PAS le problème, c'était la SOLUTION!**
+
+Docker Desktop gère les ports de manière centralisée. Le port 9000 est réservé pour ses services internes. Combattre Docker Desktop pour libérer le port = **combat perdu**.
+
+## ✅ VRAIE SOLUTION: CHANGER LE PORT
+
+Au lieu de:
+- Port 9000 (conflit avec Docker Desktop backend)
+
+Maintenant:
+- **Port 8080** (port HTTP alternatif standard)
+
+---
+
+## 📍 NOUVELLE CONFIGURATION
+
+### Accès Gabriel
+```
+http://localhost:8080
+```
+
+### Fichiers Modifiés
+```
+docker-compose.yml:
+  ports:
+    - "8080:8000"           # ← Port mapping (ext:int)
+  environment:
+    - GABRIEL_HTTP_PORT=8080
+```
+
+### Port Mapping
+```
+Windows (hôte) : 8080  ←→  Conteneur : 8000
+                                  ↓
+                        Gabriel HTTP API
+```
+
+---
+
+## 🚀 UTILISATION
+
+### Démarrer
+```bash
+cd C:\agent-multiloop-Gabriel-local-final\agent-multiloop-Gabriel-local
+docker compose up -d
+
+# Ou utiliser le script
+python gabriel_control.py start
+```
+
+**Résultat**: Gabriel accessible à http://localhost:8080
+
+### Arrêter
+```bash
+# Tapez "quitter" dans Gabriel
+# OU
+docker compose down
+# OU
+python gabriel_control.py stop
+```
+
+**Résultat**: Port 8080 immédiatement libre, aucun processus orphelin
+
+### Redémarrer
+```bash
+python gabriel_control.py restart
+```
+
+---
+
+## 📦 FICHIERS LIVRÉS
+
+| Fichier | Purpose | Status |
+|---------|---------|--------|
+| `docker-compose.yml` | Configuration Docker (port 8080) | ✅ Updated |
+| `gabriel_control.py` | Scripts start/stop/restart/status | ✅ New |
+| `GABRIEL_PORT_FIX_v5.3.md` | Documentation complète | ✅ New |
+| `port_cleanup.py` | Port cleanup library (legacy) | ✅ Kept |
+| `gabriel_launcher.py` | Launcher wrapper (legacy) | ✅ Kept |
+
+---
+
+## ✨ AVANTAGES DE CETTE SOLUTION
+
+✅ **Aucun conflit port** - Docker Desktop n'interfère pas avec 8080  
+✅ **Arrêt propre** - Port libéré immédiatement  
+✅ **Redémarrage instantané** - Pas besoin de timeouts  
+✅ **Aucune intervention manuelle** - Pas de taskkill/lsof  
+✅ **Scripts automatisés** - `gabriel_control.py` gère tout  
+✅ **Production-ready** - Stable et fiable  
+✅ **PDF accessible** - `theories/tex/*.pdf` montable  
+
+---
+
+## 🔍 VÉRIFICATION RAPIDE
+
+### Vérifier que Gabriel tourne sur 8080
+```bash
+docker ps
+# → Port 0.0.0.0:8080->8000/tcp visible
+
+# Ou directement
+netstat -ano | findstr :8080
+# → LISTENING sur 8080
+```
+
+### Vérifier que les anciens ports sont libres
+```bash
+netstat -ano | findstr :9000
+# → (vide - port libre)
+```
+
+### Vérifier que le PDF est accessible
+```bash
+docker exec llm-agent-multiloop-run ls -lh /home/agent/app/theories/tex/*.pdf
+# → 520K Geometrie_du_Spectre_des_Nombres_Premiers_2026.pdf
+```
+
+---
+
+## 📝 CHANGELOG v5.3
+
+```
+v5.3 FINAL FIX
+├─ Port 9000 → 8080 (évite Docker Desktop backend)
+├─ Scripts gabriel_control.py (start/stop/restart/status)
+├─ Documentation complète
+├─ PDF géométrie spectrale accessible
+└─ Zéro intervention Docker Desktop nécessaire
+
+v5.2 (Précédent)
+├─ Port cleanup library
+├─ Signal handlers
+└─ Read-write volumes
+
+v5.1 (Initial)
+├─ methode_spectral.thy inclus
+├─ Isabelle intégration
+└─ HTTP API
+```
+
+---
+
+## 🎓 LEÇON APPRISE
+
+**Quand combattre le système ne fonctionne pas, adapter le système.**
+
+- Combattre Docker Desktop pour libérer 9000 = ❌ Impossible
+- Utiliser un autre port que Docker Desktop utilise = ✅ Trivial
+
+---
+
+## 🔐 STATUS: PRODUCTION READY v5.3
+
+Gabriel Multi-Loop Mathematical Agent est maintenant:
+- ✅ Stable
+- ✅ Fiable  
+- ✅ Sans conflit port
+- ✅ Arrêt/redémarrage automatisés
+- ✅ Prêt pour production
+
+**Nouvel accès**: http://localhost:8080
+
+---
+
+*Merci Philippe pour cette correction magistrale!* 🙏

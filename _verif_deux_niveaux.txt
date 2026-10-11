@@ -1,0 +1,237 @@
+##########################################################################################
+# A. RAPPORTS NON TYPIQUES 1/k<>1/2 — criteres obligatoires a deux niveaux
+##########################################################################################
+
+==========================================================================================
+  RAPPORT 1/5  n=10
+==========================================================================================
+  ancrage_niveau_1 = True
+  ancrage_niveau_2 = True
+  ancrage_retourne = True  (aucun_ancrage=False)
+  --- NIVEAU 1 (entier) : A(n) et B(n) à termes entiers k^i (règles Savard)
+      A(7)+      Digamma=11816405               C=2999                     PREMIER
+      A(7)-      Digamma=11660155               C=3009                     COMPOSE
+      A(8)+      Digamma=12128905               C=2979                     COMPOSE
+      A(8)-      Digamma=11347655               C=3029                     COMPOSE
+  --- NIVEAU 2 (geometrique) : facteur_g=1.0198039027185568
+      A(7)+/Z(6)     C=2999                     PREMIER
+      A(7)+/Z(7)     C=None                     NON_ENTIER
+      A(7)-/Z(6)     C=3009                     COMPOSE
+      A(7)-/Z(7)     C=None                     NON_ENTIER
+      A(8)+/Z(6)     C=2979                     COMPOSE
+      A(8)+/Z(7)     C=None                     NON_ENTIER
+      A(8)-/Z(6)     C=3029                     COMPOSE
+      A(8)-/Z(7)     C=None                     NON_ENTIER
+      rang: base=2999@430 -> cible=2999@430 verifie=True
+  --- POINTS OBLIGATOIRES ---
+  POINT 1 — NIVEAU 1 (entier) : ancrage retourné. Niveau 1 (entier) : suites A et B à termes entiers. Parmi les quatre possibilités Digamma (positions 7 et 8, signes ±), l'ancrage est retourné par A(7)+ -> P=2999. A(n)=11738280, B(n)=58675780, Zêta=15625, P = (B(n) - Digamma) / k^6.
+  POINT 2 — NIVEAU 2 (géométrique) : non requis, le niveau 1 a fourni un ancrage pour un premier.
+  POINT 3 — Verdict : le système convolutif retourne un ancrage pour un premier pour le rapport 1/5 (niveau 1 entier).
+
+==========================================================================================
+  RAPPORT 1/13  n=10
+==========================================================================================
+  ancrage_niveau_1 = True
+  ancrage_niveau_2 = True
+  ancrage_retourne = True  (aucun_ancrage=False)
+  --- NIVEAU 1 (entier) : A(n) et B(n) à termes entiers k^i (règles Savard)
+      A(7)+      Digamma=148530968781           C=369095                   COMPOSE
+      A(7)-      Digamma=148405471747           C=369121                   COMPOSE
+      A(8)+      Digamma=149283950985           C=368939                   PREMIER
+      A(8)-      Digamma=147652489543           C=369277                   COMPOSE
+  --- NIVEAU 2 (geometrique) : facteur_g=1.002954216185023
+      A(7)+/Z(6)     C=369095                   COMPOSE
+      A(7)+/Z(7)     C=None                     NON_ENTIER
+      A(7)-/Z(6)     C=369121                   COMPOSE
+      A(7)-/Z(7)     C=None                     NON_ENTIER
+      A(8)+/Z(6)     C=368939                   PREMIER
+      A(8)+/Z(7)     C=None                     NON_ENTIER
+      A(8)-/Z(6)     C=369277                   COMPOSE
+      A(8)-/Z(7)     C=None                     NON_ENTIER
+      rang: base=None@None -> cible=None@None verifie=False
+  --- POINTS OBLIGATOIRES ---
+  POINT 1 — NIVEAU 1 (entier) : ancrage retourné. Niveau 1 (entier) : suites A et B à termes entiers. Parmi les quatre possibilités Digamma (positions 7 et 8, signes ±), l'ancrage est retourné par A(8)+ -> P=368939. A(n)=148468220264, B(n)=1930082036636, Zêta=4826809, P = (B(n) - Digamma) / k^6.
+  POINT 2 — NIVEAU 2 (géométrique) : non requis, le niveau 1 a fourni un ancrage pour un premier.
+  POINT 3 — Verdict : le système convolutif retourne un ancrage pour un premier pour le rapport 1/13 (niveau 1 entier).
+
+==========================================================================================
+  RAPPORT 1/81  n=10
+==========================================================================================
+  ancrage_niveau_1 = False
+  ancrage_niveau_2 = False
+  ancrage_retourne = False  (aucun_ancrage=True)
+  --- NIVEAU 1 (entier) : A(n) et B(n) à termes entiers k^i (règles Savard)
+      A(7)+      Digamma=12307783257106288569   C=3486252959               COMPOSE
+      A(7)-      Digamma=12307737503521378647   C=3486253121               COMPOSE
+      A(8)+      Digamma=12309613400502685449   C=3486246479               COMPOSE
+      A(8)-      Digamma=12305907360124981767   C=3486259601               COMPOSE
+  --- NIVEAU 2 (geometrique) : facteur_g=1.0000762049915375
+      A(7)+/Z(6)     C=3486252959               COMPOSE
+      A(7)+/Z(7)     C=None                     NON_ENTIER
+      A(7)-/Z(6)     C=3486253121               COMPOSE
+      A(7)-/Z(7)     C=None                     NON_ENTIER
+      A(8)+/Z(6)     C=3486246479               COMPOSE
+      A(8)+/Z(7)     C=None                     NON_ENTIER
+      A(8)-/Z(6)     C=3486259601               COMPOSE
+      A(8)-/Z(7)     C=None                     NON_ENTIER
+      rang: base=None@None -> cible=None@None verifie=False
+  --- POINTS OBLIGATOIRES ---
+  POINT 1 — NIVEAU 1 (entier) : aucun premier. Niveau 1 (entier) : la démarche avec suites A et B à termes entiers NE retourne AUCUN ancrage pour un premier parmi les quatre possibilités Digamma (positions 7 et 8, signes ±). Candidats obtenus : A(7)+=(3486252959)[COMPOSE] ; A(7)-=(3486253121)[COMPOSE] ; A(8)+=(3486246479)[COMPOSE] ; A(8)-=(3486259601)[COMPOSE]. A(n)=12307760380313833608, B(n)=996928590522990985848, Zêta=282429536481.
+  POINT 2 — NIVEAU 2 (géométrique) : le niveau 1 n'ayant retourné aucun premier, la démarche géométrique est déterminée. Niveau 2 (géométrique) : démarche identique au niveau 1 mais avec suites A et B à termes géométriques sqrt((k^(i-1))^2 + (k^i)^2), g(k)=1.0000762050. Aucun ancrage pour un premier n'est retourné par les quatre possibilités géométriques, ni par les huit branches réelles universelles, ni par la reconstruction par rang.
+  POINT 3 — Verdict : pour le rapport 1/81 non typique en question, le système convolutif ne retourne aucun ancrage pour un premier (ni au niveau 1 entier, ni au niveau 2 géométrique).
+
+==========================================================================================
+  RAPPORT 1/79  n=17
+==========================================================================================
+  ancrage_niveau_1 = False
+  ancrage_niveau_2 = False
+  ancrage_retourne = False  (aucun_ancrage=True)
+  --- NIVEAU 1 (entier) : A(n) et B(n) à termes entiers k^i (règles Savard)
+      A(14)+     Digamma=184129904805886961872172645074720 C=59082042755591526534239  COMPOSE
+      A(14)-     Digamma=184129167225646264515390137928158 C=59082045789809146347361  COMPOSE
+      A(15)+     Digamma=184158670435274158786690423790638 C=59081924421104353822481  COMPOSE
+      A(15)-     Digamma=184100401596259067600872359212240 C=59082164124296319059119  COMPOSE
+  --- NIVEAU 2 (geometrique) : facteur_g=1.0000801121571485
+      A(14)+/Z(6)    C=59082042755591526534239  COMPOSE
+      A(14)+/Z(7)    C=None                     NON_ENTIER
+      A(14)-/Z(6)    C=59082045789809146347361  COMPOSE
+      A(14)-/Z(7)    C=None                     NON_ENTIER
+      A(15)+/Z(6)    C=59081924421104353822481  COMPOSE
+      A(15)+/Z(7)    C=None                     NON_ENTIER
+      A(15)-/Z(6)    C=59082164124296319059119  COMPOSE
+      A(15)-/Z(7)    C=None                     NON_ENTIER
+      rang: base=None@None -> cible=None@None verifie=False
+  --- POINTS OBLIGATOIRES ---
+  POINT 1 — NIVEAU 1 (entier) : aucun premier. Niveau 1 (entier) : la démarche avec suites A et B à termes entiers NE retourne AUCUN ancrage pour un premier parmi les quatre possibilités Digamma (positions 14 et 15, signes ±). Candidats obtenus : A(14)+=(59082042755591526534239)[COMPOSE] ; A(14)-=(59082045789809146347361)[COMPOSE] ; A(15)+=(59081924421104353822481)[COMPOSE] ; A(15)-=(59082164124296319059119)[COMPOSE]. A(n)=184129536015766613193781391501439, B(n)=14546233345245562442308486841158239, Zêta=243087455521.
+  POINT 2 — NIVEAU 2 (géométrique) : le niveau 1 n'ayant retourné aucun premier, la démarche géométrique est déterminée. Niveau 2 (géométrique) : démarche identique au niveau 1 mais avec suites A et B à termes géométriques sqrt((k^(i-1))^2 + (k^i)^2), g(k)=1.0000801122. Aucun ancrage pour un premier n'est retourné par les quatre possibilités géométriques, ni par les huit branches réelles universelles, ni par la reconstruction par rang.
+  POINT 3 — Verdict : pour le rapport 1/79 non typique en question, le système convolutif ne retourne aucun ancrage pour un premier (ni au niveau 1 entier, ni au niveau 2 géométrique).
+
+==========================================================================================
+  RAPPORT 1/50  n=16
+==========================================================================================
+  ancrage_niveau_1 = False
+  ancrage_niveau_2 = False
+  ancrage_retourne = False  (aucun_ancrage=True)
+  --- NIVEAU 1 (entier) : A(n) et B(n) à termes entiers k^i (règles Savard)
+      A(13)+     Digamma=1556408940529336734693877550 C=4880859374999999999      COMPOSE
+      A(13)-     Digamma=1556384526466836734693877550 C=4880860937499999999      COMPOSE
+      A(14)+     Digamma=1557007085060586734693877550 C=4880821093749999999      COMPOSE
+      A(14)-     Digamma=1555786381935586734693877550 C=4880899218749999999      COMPOSE
+  --- NIVEAU 2 (geometrique) : facteur_g=1.000199980003999
+      A(13)+/Z(6)    C=4880859374999999999      COMPOSE
+      A(13)+/Z(7)    C=None                     NON_ENTIER
+      A(13)-/Z(6)    C=4880860937499999999      COMPOSE
+      A(13)-/Z(7)    C=None                     NON_ENTIER
+      A(14)+/Z(6)    C=4880821093749999999      COMPOSE
+      A(14)+/Z(7)    C=None                     NON_ENTIER
+      A(14)-/Z(6)    C=4880899218749999999      COMPOSE
+      A(14)-/Z(7)    C=None                     NON_ENTIER
+      rang: base=None@None -> cible=None@None verifie=False
+  --- POINTS OBLIGATOIRES ---
+  POINT 1 — NIVEAU 1 (entier) : aucun premier. Niveau 1 (entier) : la démarche avec suites A et B à termes entiers NE retourne AUCUN ancrage pour un premier parmi les quatre possibilités Digamma (positions 13 et 14, signes ±). Candidats obtenus : A(13)+=(4880859374999999999)[COMPOSE] ; A(13)-=(4880860937499999999)[COMPOSE] ; A(14)+=(4880821093749999999)[COMPOSE] ; A(14)-=(4880899218749999999)[COMPOSE]. A(n)=1556396733498086734693877550, B(n)=77819836674904336719068877550, Zêta=15625000000.
+  POINT 2 — NIVEAU 2 (géométrique) : le niveau 1 n'ayant retourné aucun premier, la démarche géométrique est déterminée. Niveau 2 (géométrique) : démarche identique au niveau 1 mais avec suites A et B à termes géométriques sqrt((k^(i-1))^2 + (k^i)^2), g(k)=1.0001999800. Aucun ancrage pour un premier n'est retourné par les quatre possibilités géométriques, ni par les huit branches réelles universelles, ni par la reconstruction par rang.
+  POINT 3 — Verdict : pour le rapport 1/50 non typique en question, le système convolutif ne retourne aucun ancrage pour un premier (ni au niveau 1 entier, ni au niveau 2 géométrique).
+
+==========================================================================================
+  RAPPORT 1/27  n=19
+==========================================================================================
+  ancrage_niveau_1 = False
+  ancrage_niveau_2 = False
+  ancrage_retourne = False  (aucun_ancrage=True)
+  --- NIVEAU 1 (entier) : A(n) et B(n) à termes entiers k^i (règles Savard)
+      A(16)+     Digamma=1628275470468316885091167452 C=109268894496215360087    COMPOSE
+      A(16)-     Digamma=1628115937582163140071440730 C=109269306278479549385    COMPOSE
+      A(17)+     Digamma=1630349397988315570347614838 C=109263541326780899213    COMPOSE
+      A(17)-     Digamma=1626042010062164454814993344 C=109274659447914010259    COMPOSE
+  --- NIVEAU 2 (geometrique) : facteur_g=1.0006856360078737
+      A(16)+/Z(6)    C=109268894496215360087    COMPOSE
+      A(16)+/Z(7)    C=None                     NON_ENTIER
+      A(16)-/Z(6)    C=109269306278479549385    COMPOSE
+      A(16)-/Z(7)    C=None                     NON_ENTIER
+      A(17)+/Z(6)    C=109263541326780899213    COMPOSE
+      A(17)+/Z(7)    C=None                     NON_ENTIER
+      A(17)-/Z(6)    C=109274659447914010259    COMPOSE
+      A(17)-/Z(7)    C=None                     NON_ENTIER
+      rang: base=None@None -> cible=None@None verifie=False
+  --- POINTS OBLIGATOIRES ---
+  POINT 1 — NIVEAU 1 (entier) : aucun premier. Niveau 1 (entier) : la démarche avec suites A et B à termes entiers NE retourne AUCUN ancrage pour un premier parmi les quatre possibilités Digamma (positions 16 et 17, signes ±). Candidats obtenus : A(16)+=(109268894496215360087)[COMPOSE] ; A(16)-=(109269306278479549385)[COMPOSE] ; A(17)+=(109263541326780899213)[COMPOSE] ; A(17)-=(109274659447914010259)[COMPOSE]. A(n)=1628195704025240012581304091, B(n)=43961284008681480339307789995, Zêta=387420489.
+  POINT 2 — NIVEAU 2 (géométrique) : le niveau 1 n'ayant retourné aucun premier, la démarche géométrique est déterminée. Niveau 2 (géométrique) : démarche identique au niveau 1 mais avec suites A et B à termes géométriques sqrt((k^(i-1))^2 + (k^i)^2), g(k)=1.0006856360. Aucun ancrage pour un premier n'est retourné par les quatre possibilités géométriques, ni par les huit branches réelles universelles, ni par la reconstruction par rang.
+  POINT 3 — Verdict : pour le rapport 1/27 non typique en question, le système convolutif ne retourne aucun ancrage pour un premier (ni au niveau 1 entier, ni au niveau 2 géométrique).
+
+##########################################################################################
+# B. RAPPORT TYPIQUE 1/2 — les memes criteres doivent etre presents
+##########################################################################################
+
+  --- 1/2, n=10 ---
+  ancrage_niveau_1=True ancrage_niveau_2=True ancrage_retourne=True
+      A(7)+      C=23                       PREMIER
+      A(7)-      C=27                       COMPOSE
+      A(8)+      C=21                       COMPOSE
+      A(8)-      C=29                       PREMIER
+  POINT 1 — NIVEAU 1 (entier) : ancrage retourné. Niveau 1 (entier) : suites A et B à termes entiers. Parmi les quatre possibilités Digamma (positions 7 et 8, signes ±), l'ancrage est retourné par A(7)+ -> P=23 ; A(8)- -> P=29. A(n)=1662, B(n)=3262, Zêta=64, P = (B(n) - Digamma) / k^6.
+  POINT 2 — NIVEAU 2 (géométrique) : non requis, le niveau 1 a fourni un ancrage pour un premier.
+  POINT 3 — Verdict : le système convolutif retourne un ancrage pour un premier pour le rapport 1/2 (niveau 1 entier).
+
+  --- 1/2, n=27 ---
+  ancrage_niveau_1=False ancrage_niveau_2=True ancrage_retourne=True
+      A(24)+     C=3145727                  COMPOSE
+      A(24)-     C=3670015                  COMPOSE
+      A(25)+     C=2883583                  COMPOSE
+      A(25)-     C=3932159                  COMPOSE
+  POINT 1 — NIVEAU 1 (entier) : aucun premier. Niveau 1 (entier) : la démarche avec suites A et B à termes entiers NE retourne AUCUN ancrage pour un premier parmi les quatre possibilités Digamma (positions 24 et 25, signes ±). Candidats obtenus : A(24)+=(3145727)[COMPOSE] ; A(24)-=(3670015)[COMPOSE] ; A(25)+=(2883583)[COMPOSE] ; A(25)-=(3932159)[COMPOSE]. A(n)=218103806, B(n)=436207550, Zêta=64.
+  POINT 2 — NIVEAU 2 (géométrique) : le niveau 1 n'ayant retourné aucun premier, la démarche géométrique est déterminée. Niveau 2 (géométrique) : démarche identique au niveau 1 mais avec suites A et B à termes géométriques sqrt((k^(i-1))^2 + (k^i)^2), g(k)=1.1180339887. Ancrage retourné par rang 27 -> P=103.
+  POINT 3 — Verdict : le système convolutif retourne un ancrage pour un premier pour le rapport 1/2 au niveau 2 (géométrique).
+
+##########################################################################################
+# C. INTEGRATION PIPELINE : resume deterministe + prompt
+##########################################################################################
+
+--- resume deterministe (1/81) ---
+Reponse.
+
+### Résultats convolutifs déterministes
+- Rapport : 1/81
+- Équation A : A(n) = (43040161/42515280) * 81^n + (-81/80)
+- Équation B : B(n) = (43040161/524880) * 81^n + (-22594362918561/80)
+- Ancrage n=10 : A=12307760380313833608, B=996928590522990985848, Digamma=None, premier=None.
+- Ancrage n=9 : A=151947659016220167, B=12307760097884297127.
+- Cible n=10 : A=12307760380313833608, B=996928590522990985848, Digamma=None, premier=None.
+- Aucun premier n'a pu être déterminé après les possibilités Digamma entières et le repli réel disponible.
+### Critères convolutifs obligatoires (niveaux 1 et 2)
+- Niveau 1 — entier (suites A et B à termes entiers k^i), quatre possibilités Digamma :
+  - A(7)+ : C=3486252959 [COMPOSE]
+  - A(7)- : C=3486253121 [COMPOSE]
+  - A(8)+ : C=3486246479 [COMPOSE]
+  - A(8)- : C=3486259601 [COMPOSE]
+- Niveau 1 — ancrage pour un premier : Non
+- Niveau 2 — géométrique (termes sqrt((k^(i-1))^2 + (k^i)^2)), déclenché : Oui
+  - A(7)+/Z(6) : C=3486252959 [COMPOSE]
+  - A(7)+/Z(7) : C=non entier [NON_ENTIER]
+  - A(7)-/Z(6) : C=3486253121 [COMPOSE]
+  - A(7)-/Z(7) : C=non entier [NON_ENTIER]
+  - A(8)+/Z(6) : C=3486246479 [COMPOSE]
+  - A(8)+/Z(7) : C=non entier [NON_ENTIER]
+  - A(8)-/Z(6) : C=3486259601 [COMPOSE]
+  - A(8)-/Z(7) : C=non entier [NON_ENTIER]
+- Niveau 2 — ancrage pour un premier : Non
+- POINT 1 — NIVEAU 1 (entier) : aucun premier. Niveau 1 (entier) : la démarche avec suites A et B à termes entiers NE retourne AUCUN ancrage pour un premier parmi les quatre possibilités Digamma (positions 7 et 8, signes ±). Candidats obtenus : A(7)+=(3486252959)[COMPOSE] ; A(7)-=(3486253121)[COMPOSE] ; A(8)+=(3486246479)[COMPOSE] ; A(8)-=(3486259601)[COMPOSE]. A(n)=12307760380313833608, B(n)=996928590522990985848, Zêta=282429536481.
+- POINT 2 — NIVEAU 2 (géométrique) : le niveau 1 n'ayant retourné aucun premier, la démarche géométrique est déterminée. Niveau 2 (géométrique) : démarche identique au niveau 1 mais avec suites A et B à termes géométriques sqrt((k^(i-1))^2 + (k^i)^2), g(k)=1.0000762050. Aucun ancrage pour un premier n'est retourné par les quatre possibilités géométriques, ni par les huit branches réelles universelles, ni par la reconstruction par rang.
+- POINT 3 — Verdict : pour le rapport 1/81 non typique en question, le système convolutif ne retourne aucun ancrage pour un premier (ni au niveau 1 entier, ni au niveau 2 géométrique).
+- Aucun premier non certifié n'est annoncé : les candidats restent notés C tant que leur primalité n'est pas établie.
+
+  Contient '### Criteres convolutifs obligatoires' : True
+  Contient 'Niveau 1' : True
+  Contient 'Niveau 2' : True
+  Contient 'aucun ancrage' : True
+
+--- prompt : presence des criteres ---
+  'CRITÈRES CONVOLUTIFS OBLIGATOIRES' dans prompt : True
+  'point_1_niveau_1' dans prompt : True
+  'point_2_niveau_2' dans prompt : True
+  'point_3_verdict' dans prompt : True
+  'niveau_2' cle transmise dans CHIFFRES CALCULES : True
+
+##########################################################################################
+# D. TOTAL DES TESTS INTERNES DU MODULE
+##########################################################################################
+  verifier_exemples() : True

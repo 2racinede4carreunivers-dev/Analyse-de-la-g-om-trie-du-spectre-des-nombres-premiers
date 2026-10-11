@@ -1,0 +1,77 @@
+##### Suites Géo A-B | rows=76 cols=10 #####
+SUITES GÉOMÉTRIQUES A ET B — Modèle hypoténuse √(a²+b²) — Gabriel Multiloop v7.4 |  |  |  |  |  |  |  |  | 
+t = 1/k  |  Typique : k=2 (t=1/2)  |  Non typique : k≥2 quelconque  |  Digamma inchangé  |  Fallback auto si 0 premier |  |  |  |  |  |  |  |  | 
+Convention de notation : (t^m)^2 signifie le carré de t^m. Ainsi, (t^3)^2 = t^6 — ce n’est jamais t^32. |  |  |  |  |  |  |  |  | 
+FORMULES — Termes hypoténuse individuels (10 termes par suite) |  |  |  |  |  |  |  |  | 
+Suite | Terme | Expression Suite A |  |  |  | Suite | Terme | Expression Suite B | 
+Suite A | T1 | √(1^2 + (t^1)^2) |  |  |  | Suite B | T1 | √(1^2 + (t^1)^2) | 
+Suite A | T2 | √((t^1)^2 + (t^2)^2) |  |  |  | Suite B | T2 | √((t^1)^2 + (t^2)^2) | 
+Suite A | T3 | √((t^2)^2 + (t^3)^2) |  |  |  | Suite B | T3 | √((t^2)^2 + (t^3)^2) | 
+Suite A | T4 | √((t^3)^2 + (t^4)^2) |  |  |  | Suite B | T4 | √((t^3)^2 + (t^4)^2) | 
+Suite A | T5 | √((t^4)^2 + (t^5)^2) |  |  |  | Suite B | T5 | √((t^4)^2 + (t^5)^2) | 
+Suite A | T6 | √((t^5)^2 + (t^6)^2) |  |  |  | Suite B | — | [SAUT : pas de terme ((t^5),(t^6)) — décalage structurel A→B] | 
+Suite A | T7 | √((t^6)^2 + (t^7)^2) |  |  |  | Suite B | T6 | √((t^6)^2 + (t^7)^2) | 
+Suite A | T8 | √((t^7)^2 + (t^8)^2) |  |  |  | Suite B | T7 | √((t^7)^2 + (t^8)^2) | 
+Suite A | T9 | √((t^8−t^6)^2 + (t^9−t^7)^2)  ← différentiel |  |  |  | Suite B | T8 | √((t^8)^2 + (t^9)^2) | 
+Suite A | T10 | √((t^9−t^7)^2 + (t^10−t^8)^2)  ← différentiel |  |  |  | Suite B | T9 | √((t^10−t^8)^2 + (t^11−t^9)^2)  ← différentiel décalé | 
+Suite A | S_A | Somme des 10 termes |  |  |  | Suite B | T10 | √((t^11−t^9)^2 + (t^12−t^10)^2)  ← différentiel décalé | 
+ |  |  |  |  |  | Suite B | S_B | Somme des 10 termes | 
+ |  |  |  |  |  |  |  |  | 
+VALEURS NUMÉRIQUES — k=2 (★ typique) à k=12 (non typiques) |  |  |  |  |  |  |  |  | 
+k | t=1/k | T1_A | T9_A (diff) | T10_A (diff) | S_A | T9_B (diff) | T10_B (diff) | S_B | S_A+S_B
+1/2 ★ | 0.5 | 1.11803398874989 | 0.01310196080566 | 0.00655098040283 | 2.24698627817118 | 0.00327549020142 | 0.00163774510071 | 2.20167533038493 | 4.4486616085561
+1/3 | 0.33333333333333 | 1.05409255338946 | 0.00128528279639 | 0.0004284275988 | 1.58261154995505 | 0.0001428091996 | 4.760306653e-05 | 1.57691108273773 | 3.15952263269278
+1/4 | 0.25 | 1.03077640640442 | 0.00023592599634 | 5.898149908e-05 | 1.3746424781683 | 1.474537477e-05 | 3.68634369e-06 | 1.37337511320672 | 2.74801759137502
+1/5 | 0.2 | 1.01980390271856 | 6.265675178e-05 | 1.253135036e-05 | 1.27482680312785 | 2.50627007e-06 | 5.0125401e-07 | 1.27443089599891 | 2.54925769912676
+1/6 | 0.16666666666667 | 1.0137937550497 | 2.112553192e-05 | 3.52092199e-06 | 1.2165764282096 | 5.8682033e-07 | 9.780339e-08 | 1.21642269525474 | 2.43299912346434
+1/7 | 0.14285714285714 | 1.01015254455221 | 8.4109273e-06 | 1.20156104e-06 | 1.17852071003367 | 1.7165158e-07 | 2.452165e-08 | 1.1784513658615 | 2.35697207589517
+1/8 | 0.125 | 1.00778221853732 | 3.78431557e-06 | 4.7303945e-07 | 1.1517552956051 | 5.912993e-08 | 7.39124e-09 | 1.15172040976716 | 2.30347570537226
+1/9 | 0.11111111111111 | 1.00615390423749 | 1.86988255e-06 | 2.0776473e-07 | 1.13192519361923 | 2.308497e-08 | 2.565e-09 | 1.13190612569073 | 2.26383131930996
+1/10 | 0.1 | 1.00498756211209 | 9.9493769e-07 | 9.949377e-08 | 1.11665393005614 | 9.94938e-09 | 9.9494e-10 | 1.11664280674325 | 2.23329673679939
+1/11 | 0.09090909090909 | 1.00412372883521 | 5.6211736e-07 | 5.110158e-08 | 1.10453670978492 | 4.6456e-09 | 4.2233e-10 | 1.10452987149988 | 2.2090665812848
+1/12 | 0.08333333333333 | 1.00346621489936 | 3.3372506e-07 | 2.781042e-08 | 1.09469077524343 | 2.31754e-09 | 1.9313e-10 | 1.09468638584669 | 2.18937716109012
+ |  |  |  |  |  |  |  |  | 
+CONVOLUTION DISCRÈTE A⊗B — C[j]=Σ A[l]·B[j−l]  (k=2, rapport typique) |  |  |  |  |  |  |  |  | 
+j | A[j] | B[j] | S_A cumul | S_B cumul | Conv C[j] | S_A/S_B |  |  | 
+1 | 1.1180339887 | 1.1180339887 | 1.1180339887 | 1.1180339887 | 1.25 | 1 |  |  | 
+2 | 0.5590169944 | 0.5590169944 | 1.6770509831 | 1.6770509831 | 1.25 | 1 |  |  | 
+3 | 0.2795084972 | 0.2795084972 | 1.9565594803 | 1.9565594803 | 0.9375 | 1 |  |  | 
+4 | 0.1397542486 | 0.1397542486 | 2.0963137289 | 2.0963137289 | 0.625 | 1 |  |  | 
+5 | 0.0698771243 | 0.0698771243 | 2.1661908532 | 2.1661908532 | 0.390625 | 1 |  |  | 
+6 | 0.0349385621 | 0.0174692811 | 2.2011294154 | 2.1836601343 | 0.21484375 | 1.008 |  |  | 
+7 | 0.0174692811 | 0.0087346405 | 2.2185986964 | 2.1923947748 | 0.1171875 | 1.0119521912 |  |  | 
+8 | 0.0087346405 | 0.0043673203 | 2.227333337 | 2.1967620951 | 0.0634765625 | 1.013916501 |  |  | 
+9 | 0.0131019608 | 0.0032754902 | 2.2404352978 | 2.2000375853 | 0.0451660156 | 1.0183622829 |  |  | 
+10 | 0.0065509804 | 0.0016377451 | 2.2469862782 | 2.2016753304 | 0.029296875 | 1.0205802132 |  |  | 
+ |  |  |  |  |  |  |  |  | 
+LOGIQUE DE FALLBACK GÉOMÉTRIQUE — Ordre automatique dans Gabriel |  |  |  |  |  |  |  |  | 
+Étape | Label | Description |  |  |  |  |  |  | 
+ÉTAPE 1 | Approche algébrique | Reconstruction suites k^n + 4 Digamma |  |  |  |  |  |  | 
+  → SI ≥ 1 premier | Succès | Continuer normalement — pas de fallback |  |  |  |  |  |  | 
+  → SI 0 premier | DÉCLENCHEMENT FALLBACK | Passer à étape 2 automatiquement |  |  |  |  |  |  | 
+ÉTAPE 2 | Approche géométrique | Suites A et B modèle √(a²+b²) |  |  |  |  |  |  | 
+  2a | Calcul S_A / S_B | Pour t=1/k typique ET t=1/n non typique |  |  |  |  |  |  | 
+  2b | Extraction candidats | floor/ceil/round(S_A, S_B, n·S_A, n·S_B) |  |  |  |  |  |  | 
+  2c | Test de primalité | Filtrer → garder les entiers premiers |  |  |  |  |  |  | 
+  → SI ≥ 1 premier | Succès géométrique | TypeApproche.GEOMETRIQUE — loggé |  |  |  |  |  |  | 
+  → SI 0 premier | Échec double | Deux approches échouées — cas enregistré |  |  |  |  |  |  | 
+INVARIANT | Digamma inchangé | 4 possibilités Digamma — méthode identique |  |  |  |  |  |  | 
+INVARIANT | Reconstruction n | Équations pour ∀n restent identiques |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+MISE À JOUR — MODÈLE PDF À PUISSANCES CROISSANTES |  |  |  |  |  |  |  |  | 
+La précédente extension n=15 fondée sur t^i décroissant a été retirée. Utiliser `Moteur Géo Convolutif` pour les suites k^i des annexes PDF; cette feuille conserve le modèle normalisé t=1/k à titre distinct. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 

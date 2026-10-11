@@ -1,0 +1,70 @@
+##### Moteur Universel | rows=69 cols=13 #####
+Moteur convolutif universel — rapports non typiques |  |  |  |  |  |  |  |  |  |  |  | 
+Construction pour tout k≥2 et n≥1. Les constantes des sommes fermées doivent être renseignées par rapport; le Digamma est testé selon quatre possibilités. |  |  |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  | 
+ENTRÉES |  |  |  |  |  | RECONSTRUCTION PAR ANCRAGE n=10 ET TABLE DES PREMIERS |  |  |  |  |  | 
+Paramètre | Valeur |  |  |  |  | Mode | n base | Premier base | Rang base | Rang cible | Premier cible | Digamma calculé
+k | 8 | Entier ≥2 |  |  |  | Séquence par rang | 10 | 32327 | 3468 | 3492 | 32537 | 4.5646739917146865e+31
+n | 34 | Entier ≥1 |  |  |  |  |  |  |  |  |  | 
+Modèle n≤7 | XIII simple | XIII simple ou XII terminal |  |  |  | CONTRÔLES |  |  |  |  |  | 
+Régime | Positif | Positif ou Négatif |  |  |  | Rapport | Constantes? | Ancrage? | Zêta | Somme A | Somme B | État
+a₁ | 8 | Valeur initiale |  |  |  | 1/8 | Oui | Oui | 262144 | 5.705842489643358e+30 | 4.5646739917146865e+31 | Reconstruit
+ |  |  |  |  |  |  |  |  |  |  |  | 
+SOMMES ET CONTRÔLES |  |  |  |  |  | RÈGLE CORRIGÉE |  |  |  |  |  | 
+Mesure | Suite A | Suite B | Écart A | Écart B |  | À n=10, les quatre possibilités déterminent le premier d’ancrage. Pour n≠10, le rang cible est décalé de n−10 dans tblPremiers, puis Digamma = Somme B − Premier cible × k^6. Les calculs Excel au-delà de 15 chiffres sont indicatifs; les valeurs exactes sont produites par le code Python. |  |  |  |  |  | 
+Somme construite | 5.705842489643358e+30 | 4.5646739917146865e+31 |  |  |  |  |  |  |  |  |  | 
+Somme fermée | 5.705842489643358e+30 | 4.5646739917146865e+31 | 0 | 0 |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  | 
+CONSTRUCTION TERME À TERME |  |  |  |  |  |  |  |  |  |  |  | 
+Position | Terme A | Terme B | Règle A | Règle B |  |  |  |  |  |  |  | 
+1 | 8 | 8 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+2 | 64 | 64 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+3 | 512 | 512 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+4 | 4096 | 4096 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+5 | 32768 | 32768 | Progression simple | Progression simple |  |  |  |  |  |  |  | 
+6 | 262144 | 2097152 | Progression simple | Saut Zêta |  |  |  |  |  |  |  | 
+7 | 2097152 | 16777216 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+8 | 16777216 | 134217728 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+9 | 134217728 | 1073741824 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+10 | 1073741824 | 8589934592 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+11 | 8589934592 | 68719476736 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+12 | 68719476736 | 549755813888 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+13 | 549755813888 | 4398046511104 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+14 | 4398046511104 | 35184372088832 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+15 | 35184372088832 | 281474976710656 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+16 | 281474976710656 | 2251799813685248 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+17 | 2251799813685248 | 1.8014398509481984e+16 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+18 | 1.8014398509481984e+16 | 1.4411518807585587e+17 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+19 | 1.4411518807585587e+17 | 1.152921504606847e+18 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+20 | 1.152921504606847e+18 | 9.223372036854776e+18 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+21 | 9.223372036854776e+18 | 7.378697629483821e+19 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+22 | 7.378697629483821e+19 | 5.902958103587057e+20 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+23 | 5.902958103587057e+20 | 4.722366482869645e+21 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+24 | 4.722366482869645e+21 | 3.777893186295716e+22 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+25 | 3.777893186295716e+22 | 3.022314549036573e+23 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+26 | 3.022314549036573e+23 | 2.4178516392292583e+24 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+27 | 2.4178516392292583e+24 | 1.9342813113834067e+25 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+28 | 1.9342813113834067e+25 | 1.5474250491067253e+26 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+29 | 1.5474250491067253e+26 | 1.2379400392853803e+27 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+30 | 1.2379400392853803e+27 | 9.903520314283042e+27 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+31 | 9.903520314283042e+27 | 7.922816251426434e+28 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+32 | 7.922816251426434e+28 | 6.338253001141147e+29 | Progression simple | Progression décalée |  |  |  |  |  |  |  | 
+33 | 6.2392177979983166e+29 | 4.991374238398653e+30 | Avant-dernier Savard | Avant-dernier Savard |  |  |  |  |  |  |  | 
+34 | 4.991374238398653e+30 | 3.9930993907189226e+31 | Dernier Savard | Dernier Savard |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  |  |  | 
+FALLBACK GÉOMÉTRIQUE — v7.4 — Seconde tentative automatique si 0 premier via Digamma |  |  |  |  |  |  |  |  |  |  |  | 
+Déclencheur |  |  |  |  |  |  |  |  |  |  |  | 
+ | k |  |  |  |  |  |  |  |  |  |  | 
+ |  | S_A géo |  |  |  |  |  |  |  |  |  | 
+ |  |  | S_B géo |  |  |  |  |  |  |  |  | 
+ |  |  |  | S_A+S_B |  |  |  |  |  |  |  | 
+ |  |  |  |  | S_A/S_B |  |  |  |  |  |  | 
+ |  |  |  |  |  | Candidats |  |  |  |  |  | 
+ |  |  |  |  |  |  | Approche |  |  |  |  | 
+0 premiers Digamma → fallback | 1/2 ★ | 2.2469862782 | 2.2016753304 | 4.4486616086 | 1.0205802132 | floor/ceil/round(S_A,S_B,n·S)→premier | TypeApproche.GEOMETRIQUE |  |  |  |  | 
+0 premiers Digamma → fallback | 1/3 | 1.58261155 | 1.5769110827 | 3.1595226327 | 1.0036149579 | floor/ceil/round(S_A,S_B,n·S)→premier | TypeApproche.GEOMETRIQUE |  |  |  |  | 
+0 premiers Digamma → fallback | 1/4 | 1.3746424782 | 1.3733751132 | 2.7480175914 | 1.0009228105 | floor/ceil/round(S_A,S_B,n·S)→premier | TypeApproche.GEOMETRIQUE |  |  |  |  | 
+0 premiers Digamma → fallback | 1/5 | 1.2748268031 | 1.274430896 | 2.5492576991 | 1.0003106541 | floor/ceil/round(S_A,S_B,n·S)→premier | TypeApproche.GEOMETRIQUE |  |  |  |  | 
+0 premiers Digamma → fallback | 1/6 | 1.2165764282 | 1.2164226953 | 2.4329991235 | 1.0001263812 | floor/ceil/round(S_A,S_B,n·S)→premier | TypeApproche.GEOMETRIQUE |  |  |  |  | 
+0 premiers Digamma → fallback | 1/7 | 1.17852071 | 1.1784513659 | 2.3569720759 | 1.0000588435 | floor/ceil/round(S_A,S_B,n·S)→premier | TypeApproche.GEOMETRIQUE |  |  |  |  | 
+0 premiers Digamma → fallback | 1/8 | 1.1517552956 | 1.1517204098 | 2.3034757054 | 1.0000302902 | floor/ceil/round(S_A,S_B,n·S)→premier | TypeApproche.GEOMETRIQUE |  |  |  |  | 

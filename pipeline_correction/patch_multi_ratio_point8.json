@@ -1,0 +1,33 @@
+﻿{
+  "meta": {
+    "nom": "Correction_Multi_Ratio_Point8",
+    "description": "Propagation de la boucle multi-ratios préservant les équations convolutives individuelles SA/SB",
+    "version": "1.0"
+  },
+  "operations": [
+    {
+      "op": "propager_texte",
+      "mots_cles": ["spectral"],
+      "role": "core",
+      "profondeur": 2,
+      "operation": {
+        "op": "remplacer_texte",
+        "ancien_texte": "def traiter_multi_ratios(ratios, n):\n    return [reconstruire_premier_spectral(ratios[0], n)]",
+        "nouveau_texte": "def traiter_multi_ratios(ratios, n):\n    \"\"\"Exécute la reconstruction exacte pour chaque ratio via le modèle spectral individuel.\"\"\"\n    resultats = {}\n    for ratio in ratios:\n        resultats[ratio] = reconstruire_premier_spectral(ratio, n)\n    return resultats"
+      },
+      "message": "Propagation de l'itération multi-ratios dans le réseau du cœur spectral"
+    },
+    {
+      "op": "propager_texte",
+      "mots_cles": ["multiloop"],
+      "role": "multiloop",
+      "profondeur": 2,
+      "operation": {
+        "op": "remplacer_texte",
+        "ancien_texte": "premiers = [29, 31, 37, 41, 43]",
+        "nouveau_texte": "premiers = [traiter_multi_ratios(ratios, n)[r] for r in ratios]"
+      },
+      "message": "Remplacement de l'énumération consécutive par les valeurs spectrales exactes"
+    }
+  ]
+}

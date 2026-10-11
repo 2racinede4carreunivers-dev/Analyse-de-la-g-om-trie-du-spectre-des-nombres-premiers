@@ -1,0 +1,38 @@
+name: Gabriel Build - Isabelle 2025-2
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Isabelle 2025-2
+        run: |
+          cd /tmp
+          wget -q https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/Isabelle2025-2_linux.tar.gz || wget -q https://sourceforge.net/projects/isabelle/files/Isabelle2025-2_linux.tar.gz/download -O Isabelle2025-2_linux.tar.gz
+          tar -xzf Isabelle2025-2_linux.tar.gz
+          echo "/tmp/isabelle/Isabelle2025-2/bin" >> "$GITHUB_PATH"
+          /tmp/isabelle/Isabelle2025-2/bin/isabelle version
+      - name: Build
+        run: isabelle build -v -D .
+        working-directory: agent-multiloop-Gabriel-local
+      - uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: |
+            agent-multiloop-Gabriel-local/theories/methode_spectral.thy
+            agent-multiloop-Gabriel-local/theories/validation_hol_unifiee.thy
+      - uses: actions/upload-artifact@v4
+        with:
+          name: methode-spectral-attestation-payload
+          path: |
+            agent-multiloop-Gabriel-local/theories/methode_spectral.thy
+            agent-multiloop-Gabriel-local/theories/validation_hol_unifiee.thy

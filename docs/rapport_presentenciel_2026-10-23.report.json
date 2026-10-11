@@ -1,0 +1,37 @@
+{
+  "genere_le": "2026-10-06T00:24:07Z",
+  "plaidoyer": "non_coupable",
+  "conclusion": "SOUS_RESERVE_VERDICT",
+  "regle": "R_NON_COUPABLE",
+  "titre_document": "Demande de confection d'un rapport présentenciel sous réserve de la déclaration de culpabilité et observations de la défense (article 721 (1) du Code criminel)",
+  "recu": true,
+  "chemin": [
+    "d_721_1",
+    "cond_culpabilite",
+    "juris_nguyen",
+    "dec_sous_reserve",
+    "dec_imm",
+    "cond_requisition"
+  ],
+  "blocs_extrait": [
+    "Contexte de la cause",
+    "Faits reprochés",
+    "Position de la défense",
+    "Éléments personnels et sociaux",
+    "Pièces et annexes"
+  ],
+  "base": "C:\\agent-multiloop-Gabriel-local\\agent-multiloop-Gabriel-local\\data\\rapport_presentenciel\\rapport_presentenciel.db",
+  "extrait": "C:\\agent-multiloop-Gabriel-local\\agent-multiloop-Gabriel-local\\theories\\tex\\extrait_faits_rapport_presentenciel.tex",
+  "tex": "C:\\agent-multiloop-Gabriel-local\\agent-multiloop-Gabriel-local\\docs\\rapport_presentenciel_2026-10-23.tex",
+  "validation": {
+    "ok": true,
+    "erreurs": [],
+    "avertissements": [],
+    "accolades_ecart": 0,
+    "octets": 10536
+  },
+  "compilation": {
+    "statut": "latex_indisponible",
+    "message": "pdflatex/latexmk introuvable dans le PATH."
+  }
+}

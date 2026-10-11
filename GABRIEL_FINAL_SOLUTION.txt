@@ -1,0 +1,274 @@
+# ✅ GABRIEL POWERSHELL ISE - SOLUTION FINALE
+
+## 🎯 LE PROBLÈME DÉCOUVERT
+
+Quand vous lancez Gabriel depuis **PowerShell ISE**:
+1. Les conteneurs Docker restent actifs en arrière-plan
+2. Le port 8080 reste occupé même après fermeture du terminal
+3. **Tuer le processus = Ferme Docker Desktop complètement**
+4. Cycle infini: plus rien ne fonctionne
+
+## ✅ LA SOLUTION: Utiliser `gabriel.ps1`
+
+Au lieu de gérer Docker manuellement, utilisez le script PowerShell qui:
+- ✅ Démarre/arrête Gabriel proprement
+- ✅ Gère les conteneurs sans risque
+- ✅ Ne ferme jamais Docker Desktop
+- ✅ Libère le port 8080 correctement
+
+---
+
+## 🚀 UTILISATION SIMPLE
+
+### 1. Ouvrir PowerShell ISE
+
+Appuyez sur `Win + R`, tapez `powershell_ise` et appuyez sur Entrée
+
+### 2. Naviguer au dossier
+
+Dans PowerShell ISE, exécutez:
+```powershell
+cd C:\agent-multiloop-Gabriel-local-final\agent-multiloop-Gabriel-local
+```
+
+### 3. DÉMARRER Gabriel
+
+```powershell
+.\gabriel.ps1 start
+```
+
+**Résultat:**
+```
+[Info] Demarrage de Gabriel...
+[Info] Lancement des conteneurs Docker...
+[Success] Conteneurs lances
+[Info] Attente du demarrage complet (20 secondes)...
+[Success] GABRIEL ACCESSIBLE: http://localhost:8080
+```
+
+Puis accédez à: **http://localhost:8080**
+
+### 4. UTILISER Gabriel
+
+Travaillez normalement avec Gabriel...
+
+### 5. ARRÊTER Gabriel
+
+Dans PowerShell ISE, exécutez:
+```powershell
+.\gabriel.ps1 stop
+```
+
+**Résultat:**
+```
+[Info] Arret de Gabriel...
+[Info] Arret des conteneurs Docker...
+[Success] Conteneurs arretes proprement
+[Success] Port 8080 libere
+```
+
+### 6. Fermer PowerShell ISE
+
+Maintenant vous pouvez fermer PowerShell ISE sans crainte!
+
+---
+
+## 📋 TOUTES LES COMMANDES
+
+```powershell
+# Voir le statut
+.\gabriel.ps1 status
+
+# Démarrer
+.\gabriel.ps1 start
+
+# Arrêter
+.\gabriel.ps1 stop
+
+# Redémarrer complètement
+.\gabriel.ps1 restart
+
+# Voir les logs
+.\gabriel.ps1 logs
+```
+
+---
+
+## ⚠️ IMPORTANT: CE QU'IL NE FAUT PAS FAIRE
+
+```powershell
+# ❌ NE JAMAIS faire cela:
+taskkill /PID 25988 /F
+
+# ❌ NE JAMAIS faire cela:
+Get-Process docker* | Stop-Process
+
+# ❌ NE JAMAIS faire cela:
+Fermer simplement PowerShell ISE sans executer .\gabriel.ps1 stop
+```
+
+**Pourquoi?** Tous ces actions fermeraient Docker Desktop et bloqueraient le port 8080 indéfiniment.
+
+---
+
+## 🔄 WORKFLOW COMPLET
+
+### Première utilisation
+
+```
+1. Ouvrir PowerShell ISE
+2. cd C:\agent-multiloop-Gabriel-local-final\agent-multiloop-Gabriel-local
+3. .\gabriel.ps1 start
+4. Attendre 20 secondes
+5. Ouvrir http://localhost:8080
+6. Utiliser Gabriel...
+7. .\gabriel.ps1 stop
+8. Fermer PowerShell ISE
+```
+
+### Utilisation ultérieure
+
+```
+1. Ouvrir PowerShell ISE
+2. cd (répertoire)
+3. .\gabriel.ps1 start
+4. http://localhost:8080
+... travail ...
+6. .\gabriel.ps1 stop
+```
+
+### Redémarrage rapide
+
+```
+1. .\gabriel.ps1 restart
+2. Attendre 20 secondes
+3. http://localhost:8080 fonctionne
+```
+
+---
+
+## 🐛 TROUBLESHOOTING
+
+### Erreur: "Port 8080 already allocated"
+
+**Cause:** Reste des conteneurs d'une session précédente
+
+**Solution:**
+```powershell
+.\gabriel.ps1 stop
+Start-Sleep -Seconds 5
+.\gabriel.ps1 start
+```
+
+### Erreur: "Docker Desktop: NON REPONDANT"
+
+**Cause:** Docker Desktop s'est fermé
+
+**Solution:**
+1. Relancer Docker Desktop manuellement
+2. Puis: `.\gabriel.ps1 start`
+
+### Gabriel ne répond pas sur http://localhost:8080
+
+**Cause:** Délai insuffisant
+
+**Solution:**
+1. Attendre 30 secondes au lieu de 20
+2. Ou consulter: `.\gabriel.ps1 logs`
+
+### "Cannot find path" ou "Permission denied"
+
+**Cause:** PowerShell ne peut pas exécuter les scripts
+
+**Solution:**
+```powershell
+# Exécuter une seule fois:
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
+```
+
+---
+
+## 📊 COMPARAISON
+
+| Situation | Avant | Après |
+|-----------|-------|-------|
+| **Démarrage** | Manuel (docker compose) | `.\gabriel.ps1 start` |
+| **Arrêt** | Pas possible sans casser | `.\gabriel.ps1 stop` |
+| **Port occupé** | Tuer processus → Docker ferme | Gestion automatique |
+| **Redémarrage** | Complexe/risqué | `.\gabriel.ps1 restart` |
+| **Fiabilité** | ❌ Très instable | ✅ Stable |
+| **Risque** | ❌ Très haut | ✅ Nul |
+
+---
+
+## 💡 ASTUCE: Créer un Raccourci
+
+Pour lancer Gabriel directement depuis le bureau:
+
+### 1. Créer `demarrer-gabriel.bat`
+
+Créez un fichier dans `C:\agent-multiloop-Gabriel-local-final\agent-multiloop-Gabriel-local\` nommé `demarrer-gabriel.bat`:
+
+```batch
+@echo off
+powershell -ExecutionPolicy Bypass -NoExit -File "%~dp0gabriel.ps1" start
+```
+
+### 2. Créer un raccourci Windows
+
+- Clic droit sur `demarrer-gabriel.bat`
+- "Envoyer vers" → "Bureau"
+- Double-cliquez le raccourci pour démarrer Gabriel!
+
+---
+
+## 📁 FICHIERS CRÉÉS
+
+- ✅ `gabriel.ps1` - **Script PowerShell principal (à utiliser)**
+- ✅ `POWERSHELL_ISE_GUIDE.md` - Documentation détaillée
+- ✅ `SOLUTION_SUMMARY_v5.3.txt` - Résumé technique
+- ✅ `port-locker.ps1` - Utilitaire avancé (optionnel)
+- ✅ `docker-compose.yml` - Mis à jour avec port 8080
+
+---
+
+## ✨ BILAN
+
+### Avant (Problématique)
+❌ Port 9000 conflit avec Docker Desktop backend
+❌ Processus orphelins impossibles à tuer
+❌ Docker Desktop se ferme quand on essaie
+❌ Redémarrage = cauchemar
+
+### Après (Stable)
+✅ Port 8080 (pas de conflit)
+✅ Scripts PowerShell propres
+✅ Arrêt sans casser Docker
+✅ Redémarrage instantané et fiable
+
+---
+
+## 🎯 RÉSUMÉ EN 3 ÉTAPES
+
+```
+1. DÉMARRER:   .\gabriel.ps1 start
+2. UTILISER:   http://localhost:8080
+3. ARRÊTER:    .\gabriel.ps1 stop
+```
+
+**C'est tout!** 🎉
+
+---
+
+## 📞 COMMANDE UNIQUE À MÉMORISER
+
+```powershell
+.\gabriel.ps1 start      # Pour commencer
+.\gabriel.ps1 stop       # Pour terminer
+```
+
+---
+
+**Status: ✅ PRODUCTION READY**
+
+Gabriel est maintenant stable, fiable et sans risque avec PowerShell ISE!

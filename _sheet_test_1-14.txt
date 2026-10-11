@@ -1,0 +1,32 @@
+##### Test 1-14 | rows=31 cols=8 #####
+TEST CONVOLUTIF — RAPPORT NON TYPIQUE 1/14, n=19 |  |  |  |  |  |  | 
+Contrôle des sommes A/B à n=9, n=10 et n=19; recherche d’un ancrage au niveau entier et géométrique. |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+PARAMÈTRES DU TEST |  |  |  |  |  |  | 
+k | 14 | Rapport | 1/14 | n cible | 19 | Niveaux | Entier + géométrique
+Facteur g(k) | 1.0025477748298715 | Identité | S_A,géo=g·S_A ; S_B,géo=g·S_B | Zêta k^6 | 7529536 | Effet | g s’annule dans C
+ |  |  |  |  |  |  | 
+SOMMES DES SUITES A ET B |  |  |  |  |  |  | 
+n | Somme A entière exacte | Somme B entière exacte | Contrôle Excel A | Contrôle Excel B | Somme A géométrique | Somme B géométrique | Lecture
+9 | 22137415034 | 309916280954 | 22137415034 | 309916280954 | 22193816182.822044 | 310705877853.982 | Base 9 termes
+10 | 309923810490 | 4338925817338 | 309923810490 | 4338925817338 | 310713426573.54425 | 4349980423324.0933 | Niveau d’ancrage
+19 | 6403350348031690322234 | 89646904872443656981754 | 6.403350348031691e+21 | 8.964690487244365e+22 | 6.419664642875255e+21 | 8.987530500025354e+22 | Cible 19 termes; exact affiché en B/C
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+QUATRE BRANCHES D’ANCRAGE À n=10 |  |  |  |  |  |  | 
+Branche | Digamma entier | Candidat C | Entier ? | Premier ? | Factorisation / certificat | Rang | Verdict
+A7+ | 310029223994 | 535079 | Oui | Non | 29 × 18 451 | — | EXCLU — composé
+A7− | 309818396986 | 535107 | Oui | Non | 3 × 107 × 1 667 | — | EXCLU — composé
+A8+ | 311399599546 | 534897 | Oui | Non | 3³ × 11 × 1 801 | — | EXCLU — composé
+A8− | 308448021434 | 535289 | Oui | Non | 139 × 3 851 | — | EXCLU — composé
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+VERDICT D’ANCRAGE ET RECONSTRUCTION À n=19 |  |  |  |  |  |  | 
+Ancrage entier n=10 | Non — 0 premier |  | Conclusion : aucune des branches A7± ou A8± ne produit un premier à n=10. Le niveau géométrique donne les mêmes quatre quotients, puisque g(k) multiplie simultanément S_A, S_B, Digamma et Zêta. Sans ancrage unique, le système ne peut pas décaler un rang jusqu’à n=19; aucun P n’est donc reconstruit. |  |  |  | 
+Ancrage géométrique n=10 | Non — mêmes candidats composés |  |  |  |  |  | 
+Rang de base | Non disponible |  |  |  |  |  | 
+Rang cible n=19 | Non applicable |  |  |  |  |  | 
+Premier reconstruit n=19 | Aucun |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 
+Règle appliquée : C=(S_B−Digamma)/k^6 à n=10; pour n≠10, rang cible=rang base+n−10 seulement si un ancrage premier unique existe. |  |  |  |  |  |  | 

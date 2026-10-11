@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================================
+     Slot SVG 10 - Univers au Carre / Methode Spectrale Savard
+     Pre-provisionne dans l'image Docker. A remplir sans rebuild.
+     Convention : diagrammes vectoriels (spectre, Pont Savard,
+     configurations n×n, comparaisons chaotique/ordonnee).
+     ============================================================ -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <title>Slot SVG 10 - a remplir</title>
+  <desc>Slot pre-provisionne, aucun contenu graphique.</desc>
+</svg>

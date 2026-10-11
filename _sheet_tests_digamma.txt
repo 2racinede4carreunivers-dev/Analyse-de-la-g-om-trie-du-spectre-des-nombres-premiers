@@ -1,0 +1,103 @@
+##### Tests Digamma | rows=102 cols=10 #####
+Tests des quatre Digamma |  |  |  |  |  |  |  |  | 
+Le candidat est A ajustée = Somme A + signe·k^position; puis P = (Somme B − A ajustée)/k^exp_reconstruction. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CANDIDATS POUR 1/3 |  |  |  |  |  |  |  |  | 
+Rapport | k | Position | Signe | Somme A | Somme B | Rang |  |  | 
+1/3 | 3 | 7 | -1 | 79824 | 238746 |  |  |  | 
+1/3 | 3 | 7 | 1 | 79824 | 238746 |  |  |  | 
+1/3 | 3 | 8 | -1 | 79824 | 238746 | 49 |  |  | 
+1/3 | 3 | 8 | 1 | 79824 | 238746 |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Lecture |  |  |  |  |  |  |  |  | 
+Seule la combinaison position 8 / signe − produit 227, qui est premier et occupe le rang 49. |  |  |  |  |  |  |  |  | 
+Les trois autres candidats sont composés : 221, 215 et 209. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  | Position | Terme | Expression |  | Position | Terme | Expression | 
+ |  | 1 | t_a^1 | t_a^1 |  | 1 | t_a^1 | t_a^1 | 
+ |  | 2 | t_a^2 | t_a^2 |  | 2 | t_a^2 | t_a^2 | 
+ |  | 3 | t_a^3 | t_a^3 |  | 3 | t_a^3 | t_a^3 | 
+ |  | 4 | t_a^4 | t_a^4 |  | 4 | t_a^4 | t_a^4 | 
+ |  | 5 | t_a^5 | t_a^5 |  | 5 | t_a^5 | t_a^5 | 
+ |  | 6 | t_a^6 | t_a^6 |  | 6 | t_a^6 | t_a^6 | 
+ |  | 7 | t_a^7 | t_a^7 |  | 7 | t_a^7 | t_a^7 | 
+ |  | 8 | t_a^8 | t_a^8 |  | 8 | t_a^8 - t_a^6 | t_a^8 − t_a^6 | 
+ |  | 9 | t_a^9 - t_a^7 | t_a^9 − t_a^7 |  | 9 | t_a^9 - t_a^7 | t_a^9 − t_a^7 | 
+ |  | 10 | t_a^10 - t_a^8 | t_a^10 − t_a^8 |  | Somme | Somme_A9 | Somme_Suite_A_9 | 
+ |  | Somme | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 - t_a^7 + t_a^10 - t_a^8 | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8 |  |  | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 - t_a^6 + t_a^9 - t_a^7 | t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 − t_a^6 + t_a^9 − t_a^7 | 
+ |  |  |  |  |  |  |  |  | 
+ |  | Position | Terme | Expression formelle |  | Position | Terme | Expression formelle | 
+ |  | 1 | t_b^1 | t_b^1 |  | 1 | t_b^1 | t_b^1 | 
+ |  | 2 | t_b^2 | t_b^2 |  | 2 | t_b^2 | t_b^2 | 
+ |  | 3 | t_b^3 | t_b^3 |  | 3 | t_b^3 | t_b^3 | 
+ |  | 4 | t_b^4 | t_b^4 |  | 4 | t_b^4 | t_b^4 | 
+ |  | 5 | t_b^5 | t_b^5 |  | 5 | t_b^5 | t_b^5 | 
+ |  | 6 | t_b^7 | t_b^7 |  | 6 | t_b^7 | t_b^7 | 
+ |  | 7 | t_b^8 | t_b^8 |  | 7 | t_b^8 | t_b^8 | 
+ |  | 8 | t_b^9 | t_b^9 |  | 8 | t_b^9 - t_b^7 | (t_b^9 − t_b^7) | 
+ |  | 9 | t_b^10 - t_b^8 | (t_b^10 − t_b^8) |  | 9 | t_b^10 - t_b^8 | (t_b^10 − t_b^8) | 
+ |  | 10 | t_b^11 - t_b^9 | (t_b^11 − t_b^9) |  | Somme | Somme_B9 | Somme suite B₉ | 
+ |  | Somme | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + t_b^9 + t_b^10 - t_b^8 + t_b^11 - t_b^9 | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + t_b^9 + (t_b^10 − t_b^8) + (t_b^11 − t_b^9) |  |  | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + t_b^9 - t_b^7 + t_b^10 - t_b^8 | t_b^1 + t_b^2 + t_b^3 + t_b^4 + t_b^5 + t_b^7 + t_b^8 + (t_b^9 − t_b^7) + (t_b^10 − t_b^8) | 
+ |  |  |  |  |  |  |  |  | 
+ |  | Option | Position Digamma | Terme Digamma | Opération | Forme concise | Développement complet | Statut | 
+ |  | 1 | 7 | t_a^7 | + | Somme_A10 + t_a^7 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) + t_a^7 | Candidate | 
+ |  | 2 | 7 | t_a^7 | − | Somme_A10 − t_a^7 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) − t_a^7 | Candidate | 
+ |  | 3 | 8 | t_a^8 | + | Somme_A10 + t_a^8 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) + t_a^8 | Candidate | 
+ |  | 4 | 8 | t_a^8 | − | Somme_A10 − t_a^8 | (t_a^1 + t_a^2 + t_a^3 + t_a^4 + t_a^5 + t_a^6 + t_a^7 + t_a^8 + t_a^9 − t_a^7 + t_a^10 − t_a^8) − t_a^8 | Option retenue pour 1/8 | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  | Option | Digamma calculé (A₁₀ ± k^p) | Somme B₁₀ | Zêta k^6 | Formule appliquée | P reconstruit
+ |  |  |  | 1 | 2195 | 10 | 729 | (10 − 2195) / 729 | -2.9972565157750344
+ |  |  |  | 2 | -2179 | 10 | 729 | (10 − -2179) / 729 | 3.0027434842249656
+ |  |  |  | 3 | 6569 | 10 | 729 | (10 − 6569) / 729 | -8.997256515775033
+ |  |  |  | 4 | -6553 | 10 | 729 | (10 − -6553) / 729 | 9.002743484224967
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ESSAI CONVOLUTIF — RAPPORT 1/3, n = 18 |  |  |  |  |  |  |  |  | 
+Construction Isabelle/HOL : progression simple jusqu’à n−2, deux termes terminaux Savard et saut Zêta à la position 6 de B. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Position A | Expression formelle | Règle | Valeur |  | Position B | Expression formelle | Règle | Valeur | 
+1 | k^1 | progression simple | 3 |  | 1 | k^1 | progression décalée | 3 | 
+2 | k^2 | progression simple | 9 |  | 2 | k^2 | progression décalée | 9 | 
+3 | k^3 | progression simple | 27 |  | 3 | k^3 | progression décalée | 27 | 
+4 | k^4 | progression simple | 81 |  | 4 | k^4 | progression décalée | 81 | 
+5 | k^5 | progression simple | 243 |  | 5 | k^5 | progression décalée | 243 | 
+6 | k^6 | progression simple | 729 |  | 6 | k^7 (saut Zêta) | substitution position 6 | 2187 | 
+7 | k^7 | progression simple | 2187 |  | 7 | k^8 | progression décalée | 6561 | 
+8 | k^8 | progression simple | 6561 |  | 8 | k^9 | progression décalée | 19683 | 
+9 | k^9 | progression simple | 19683 |  | 9 | k^10 | progression décalée | 59049 | 
+10 | k^10 | progression simple | 59049 |  | 10 | k^11 | progression décalée | 177147 | 
+11 | k^11 | progression simple | 177147 |  | 11 | k^12 | progression décalée | 531441 | 
+12 | k^12 | progression simple | 531441 |  | 12 | k^13 | progression décalée | 1594323 | 
+13 | k^13 | progression simple | 1594323 |  | 13 | k^14 | progression décalée | 4782969 | 
+14 | k^14 | progression simple | 4782969 |  | 14 | k^15 | progression décalée | 14348907 | 
+15 | k^15 | progression simple | 14348907 |  | 15 | k^16 | progression décalée | 43046721 | 
+16 | k^16 | progression simple | 43046721 |  | 16 | k^17 | progression décalée | 129140163 | 
+17 | k^17 − k^15 | avant-dernier Savard | 114791256 |  | 17 | k^18 − k^16 | avant-dernier Savard | 344373768 | 
+18 | k^18 − k^16 | dernier Savard | 344373768 |  | 18 | k^19 − k^17 | dernier Savard | 1033121304 | 
+Somme A₁₈ |  |  | 523735104 |  | Somme B₁₈ |  |  | 1571204586 | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Option | Position | Signe | Digamma A₁₈ ajusté | Somme B₁₈ | Zêta 3^6 | P reconstruit | Entier? | Premier? | Conclusion
+1 | 7 | + | 523737291 | 1571204586 | 729 | 1436855 | Oui | Non | Composé
+2 | 7 | − | 523732917 | 1571204586 | 729 | 1436861 | Oui | Non | Composé
+3 | 8 | + | 523741665 | 1571204586 | 729 | 1436849 | Oui | Oui | Premier candidat
+4 | 8 | − | 523728543 | 1571204586 | 729 | 1436867 | Oui | Oui | Premier candidat
+ |  |  |  |  |  |  |  |  | 
+CONSTAT |  |  |  |  |  |  |  |  | 
+Les quatre options donnent des quotients entiers. Les options position 8 produisent deux nombres premiers consécutifs : 1 436 849 et 1 436 867. |  |  |  |  |  |  |  |  | 
+La règle Digamma fournie ne sélectionne donc pas encore une solution unique pour n=18; un critère supplémentaire est requis. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+CORRECTION — RAPPORT 1/8, n = 34 |  |  |  |  |  |  |  |  | 
+Les quatre Digamma sont utilisés à n=10 seulement. À n=34, le premier est obtenu par décalage de rang, puis le Digamma est calculé à rebours. |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  | 
+Premier base | Rang base | Écart n−10 | Rang cible | Premier cible | Zêta | Somme A exacte | Somme B exacte | Digamma exact | Contrôle P
+32327 | 3468 | 24 | 3492 | 32537 | 262144 | 5705842489643358455620763423304 | 45646739917146867644966107124296 | 45646739917146867644957577744968 | 32537
+ |  |  |  |  |  |  |  |  | 
+Contrôle exact : (Somme B − Digamma) / 262144 = 32537. La précédente extrapolation ±8^position hors n=10 est annulée. |  |  |  |  |  |  |  |  | 

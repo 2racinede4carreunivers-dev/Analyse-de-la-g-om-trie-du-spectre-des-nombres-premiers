@@ -1,0 +1,236 @@
+════════════════════════════════════════════════════════════════════════════════
+ A) TOPO DES MOTEURS GABRIEL — Comportement typé attendu
+════════════════════════════════════════════════════════════════════════════════
+
+────────────────────────────────────────────────────────────────────────────────
+ MOTEUR : MULTILOOP_ENGINE
+ Fichier : src/engines/multiloop_engine.py
+ Rôle    : Orchestrateur principal. Reçoit la requête brute, lance le pipeline en boucle (max N itérations), évalue le score à chaque itération et transmet la meilleure réponse.
+ Entrées : requête_texte, config_gabriel
+ Sorties : réponse_finale, score, itération_atteinte
+ Comportement typé :
+   init: Charge config/gabriel_defaults.yaml → fixe max_iter, seuil_score, model_par_défaut.
+   loop: Pour chaque iter : appelle spectral_core.solve() → reçoit {p, SA, SB, model, invariant} → envoie à scorer.evaluate() → si score ≥ seuil : break.
+   fallback: Si max_iter atteint sans score suffisant : retourne la meilleure réponse trouvée.
+   assemblage: Appelle hol_generator.generate() puis formate la réponse Markdown pour affichage.
+ Invariants attendus :
+   ✓ model transmis à spectral_core doit correspondre au ratio demandé
+   ✓ scorer doit valider l'adéquation ratio/model avant de scorer
+
+────────────────────────────────────────────────────────────────────────────────
+ MOTEUR : RATIO_DISPATCHER
+ Fichier : src/dispatch/ratio_dispatcher.py
+ Rôle    : Lit le ratio 1/k dans la requête parsée et sélectionne le modèle de calcul correspondant (1/2, 1/3, 1/4, …).
+ Entrées : parsed_params: {k, n, ratio_str}
+ Sorties : model_id: str, formula_set: dict
+ Comportement typé :
+   parsing: Regex sur la requête pour extraire k. Ex: '1/4' → k=4, model_id='1/4'.
+   dispatch: Lookup dans FORMULA_REGISTRY[model_id]. Si absent : raise UnknownRatioError.
+   default: FORMULA_REGISTRY doit NE PAS avoir de fallback silencieux vers '1/2'. Toute clé manquante → exception.
+ Invariants attendus :
+   ✓ FORMULA_REGISTRY contient une entrée pour chaque k supporté
+   ✓ Aucun fallback silencieux vers model='1/2'
+   ✓ model_id retourné doit être loggé avant d'entrer dans spectral_core
+
+────────────────────────────────────────────────────────────────────────────────
+ MOTEUR : SPECTRAL_CORE
+ Fichier : src/core/spectral_core.py
+ Rôle    : Moteur de calcul spectral. Reçoit {k, n, model_id, formula_set} et calcule SA(n), SB(n), digamma, p.
+ Entrées : k: int, n: int, model_id: str, formula_set: dict
+ Sorties : SA: float, SB: float, digamma: float, p: int, invariant: str, equation_holds: bool
+ Comportement typé :
+   SA_SB: Applique les formules du formula_set reçu (PAS des constantes hardcodées). k=4 : SA=(241/192)×4^n-4/3, SB=(964/192)×4^n-12292/3.
+   invariant_k2: Si k=2 : position=n=terms (invariant symétrique).
+   invariant_kN: Si k≠2 : n=terms, position≠n (invariant asymétrique). La position du premier reconstruit n'est pas n.
+   digamma: digamma = SB - p × 4^6. Reconstruction : p = (SB - digamma) / 4^6.
+   validation: equation_holds = ((SB - digamma) / 4^6 == p). NE SUFFIT PAS à valider le ratio — c'est tautologique.
+ Invariants attendus :
+   ✓ formula_set utilisé provient exclusivement de ratio_dispatcher
+   ✓ self.model est fixé par ratio_dispatcher, jamais par défaut interne
+   ✓ L'invariant loggé doit mentionner le ratio réel (k), pas '1/2'
+   ✓ equation_holds ne doit pas être utilisé seul comme preuve de correction
+
+────────────────────────────────────────────────────────────────────────────────
+ MOTEUR : SPECTRAL_MODEL
+ Fichier : src/models/spectral_model.py
+ Rôle    : Registre des formules spectrales par ratio. Définit SA_def, SB_def, digamma_def pour chaque k.
+ Entrées : k: int
+ Sorties : SpectralFormulas dataclass
+ Comportement typé :
+   k2: SA=(3.25/2)×2^n-2, SB=(6.5/2)×2^n-66, base=2
+   k3: SA=(...), SB=(...), base=3  [à définir]
+   k4: SA=(241/192)×4^n-4/3, SB=(964/192)×4^n-12292/3, base=4
+   kN: Formule générique paramétrée par k
+ Invariants attendus :
+   ✓ Chaque entrée k a des coefficients SA/SB distincts
+   ✓ Base = k (pas hardcodé à 2)
+   ✓ get_formulas(k) lève KeyError si k non supporté
+
+────────────────────────────────────────────────────────────────────────────────
+ MOTEUR : HOL_GENERATOR
+ Fichier : src/engines/hol_generator.py
+ Rôle    : Génère un fragment Isabelle/HOL de validation formelle en accord avec methode_spectral.thy.
+ Entrées : k: int, n: int, p: int, SA: float, SB: float, digamma: float
+ Sorties : theory_text: str  (Isabelle/HOL valide)
+ Comportement typé :
+   theory_name: verif_p{p}_n{n}_ratio{k}  (ex: verif_p1097_n23_ratio4)
+   SA_def_used: SA_k{k}_def  (ex: SA_k4_def)
+   SB_def_used: SB_k{k}_def  (ex: SB_k4_def)
+   lemmas:
+     • SA_n_{n}_ratio_{k}
+     • SB_n_{n}_ratio_{k}
+     • digamma_n{n}_p{p}
+     • verif_premier_{p}_n_{n}
+     • invariant_ratio_asymetrique  (si k≠2)
+ Invariants attendus :
+   ✓ theory_name encode k, n, p correctement
+   ✓ SA_def et SB_def référencent le modèle k (pas modèle 2)
+   ✓ L'invariant dans le fragment correspond à k (symétrique si k=2, asymétrique sinon)
+   ✓ Les valeurs numériques dans les lemmes correspondent aux formules k
+
+────────────────────────────────────────────────────────────────────────────────
+ MOTEUR : SCORER
+ Fichier : src/engines/scorer.py
+ Rôle    : Évalue la qualité de la réponse produite par spectral_core et retourne un score /10 pour décider si multiloop continue.
+ Entrées : response: dict, request_params: dict
+ Sorties : score: float, score_details: dict
+ Comportement typé :
+   critères:
+     • ratio_coherence : model == ratio demandé  (poids élevé)
+     • formula_match   : SA/SB correspondent aux formules du ratio
+     • invariant_check : invariant loggé == ratio demandé
+     • hol_coherence   : theory_name encode le bon ratio
+     • numeric_plausibility : SA/SB dans l'ordre de grandeur attendu
+   pénalités:
+     • -3.0 pts si model ≠ ratio demandé
+     • -2.0 pts si formules SA/SB incohérentes avec ratio
+     • -1.5 pts si invariant mentionne le mauvais ratio
+ Invariants attendus :
+   ✓ ratio_coherence est un critère obligatoire (non optionnel)
+   ✓ Un score ≥ seuil ne peut pas être atteint si ratio_coherence échoue
+
+
+════════════════════════════════════════════════════════════════════════════════
+ B) DÉFAILLANCES IDENTIFIÉES (croisement session × topo moteurs)
+════════════════════════════════════════════════════════════════════════════════
+ Session   : Reconstruit le premier pour le rapport 1/4 pour n=23
+ Total     : 7 défaillances
+ 🔴 CRITIQUE: 3
+ 🟠 MAJEURE : 3
+ 🟡 MINEURE : 1
+════════════════════════════════════════════════════════════════════════════════
+
+────────────────────────────────────────────────────────────────────────────────
+ DEF-01 🔴 CRITIQUE — Fallback silencieux vers model='1/2' quand k≠2
+ Moteur   : ratio_dispatcher
+ Fichier  : src/dispatch/ratio_dispatcher.py
+ Priorité : #1
+ Observé  : Requête k=4 (ratio 1/4) → dispatch retourne model='1/2'. Aucune exception levée, aucun log d'avertissement.
+ Attendu  : Pour k=4, ratio_dispatcher doit retourner model='1/4' et charger les formules SA=(241/192)×4^n-4/3.
+ Preuve   : model = 1/2  dans Chiffres calculés (session Gabriel)
+ Correction requise :
+   1. Supprimer le fallback DEFAULT_MODEL='1/2'.
+   2. Ajouter '1/4' dans FORMULA_REGISTRY avec les bons coefficients.
+   3. Lever UnknownRatioError si k absent du registre.
+   4. Logger explicitement : 'Dispatching to model={model_id} for k={k}'.
+
+────────────────────────────────────────────────────────────────────────────────
+ DEF-02 🔴 CRITIQUE — Formules SA/SB hardcodées pour k=2 indépendamment du model reçu
+ Moteur   : spectral_core
+ Fichier  : src/core/spectral_core.py
+ Priorité : #2
+ Observé  : SA(23) = 13 631 486.0 = (3.25/2)×2^23-2  (formule k=2). SB(23) = 27 262 910.0 = (6.5/2)×2^23-66  (formule k=2). Ces valeurs sont 6 ordres de grandeur inférieures aux valeurs k=4.
+ Attendu  : SA(23) ≈ 8.8327×10^13  = (241/192)×4^23-4/3. SB(23) ≈ 3.5331×10^14  = (964/192)×4^23-12292/3.
+ Preuve   : SA_float=13631486.0, SB_float=27262910.0 confirmés par calcul : (3.25/2)×2^23-2 = 13631486.
+ Correction requise :
+   1. Remplacer les constantes SA/SB hardcodées par un appel à    spectral_model.get_formulas(k).compute_SA(n).
+   2. Paramétrer la base : base = k (pas base = 2 en dur).
+   3. Vérification : assert abs(SA - expected_SA(k,n)) < epsilon.
+
+────────────────────────────────────────────────────────────────────────────────
+ DEF-03 🔴 CRITIQUE — Mauvais invariant appliqué : position=n=terms pour k≠2
+ Moteur   : spectral_core
+ Fichier  : src/core/spectral_core.py
+ Priorité : #3
+ Observé  : Log : 'INVARIANT (ratio 1/2): position = n = number_of_terms = 23'. Résultat : p=83 (23ème premier), comme si n=position.
+ Attendu  : Pour k=4 : n = nombre_de_termes ≠ position_dans_les_premiers. p=1097 est le 184ème premier ; n=23 est la quantité de termes.
+ Preuve   : INVARIANT (ratio 1/2): position = n = number_of_terms = 23 → p = 83 (23ème premier)
+ Correction requise :
+   1. Extraire l'invariant vers spectral_model.get_formulas(k).invariant.
+   2. k=2 → invariant='symmetric' : position=n=terms.
+   3. k≠2 → invariant='asymmetric' : n=terms, position=f(p).
+   4. Le log doit afficher : 'INVARIANT (ratio 1/{k}): n=terms≠position'.
+
+────────────────────────────────────────────────────────────────────────────────
+ DEF-04 🟠 MAJEURE — Formules k=4 absentes ou non chargées dans le registre
+ Moteur   : spectral_model
+ Fichier  : src/models/spectral_model.py
+ Priorité : #4
+ Observé  : Aucun chargement de formulas_1_k.json ou d'un bloc k=4 dans spectral_model.py. Les coefficients 241/192 et 964/192 ne sont jamais instanciés.
+ Attendu  : FORMULA_REGISTRY = {
+  '1/2': SpectralFormulas(a_SA=Fraction(13,8), b_SA=-2, ...),
+  '1/4': SpectralFormulas(a_SA=Fraction(241,192), b_SA=Fraction(-4,3),
+                         a_SB=Fraction(964,192), b_SB=Fraction(-12292,3),
+                         base=4),
+}
+ Preuve   : corpus/formulas_1_2.json chargé ; formulas_1_k.json ignoré.
+ Correction requise :
+   1. Créer corpus/formulas_1_4.json avec les coefficients exacts.
+   2. Ajouter SpectralFormulas(k=4, ...) dans FORMULA_REGISTRY.
+   3. Tester : get_formulas(4).compute_SA(23) == 88327434098004.
+
+────────────────────────────────────────────────────────────────────────────────
+ DEF-05 🟠 MAJEURE — Fragment HOL généré avec formules k=2 malgré titre 'modele 1/4'
+ Moteur   : hol_generator
+ Fichier  : src/engines/hol_generator.py
+ Priorité : #5
+ Observé  : theory verif_p83_n23 : formules SA_def=(3.25/2)×2^n-2, lemme validant SA=13631486, SB=27262910, p=83. Section titulaire : 'Verification 83 via modele 1/4' (contradiction).
+ Attendu  : theory verif_p1097_n23_ratio4 : formules SA_k4_def=(241/192)×4^n-4/3, lemmes validant SA≈8.83e13, SB≈3.53e14, p=1097.
+ Preuve   : Fragment HOL : 'SA(n) = (3.25/2) × 2^n - 2' et 'lemma verif_premier_83_n_23'.
+ Correction requise :
+   1. hol_generator reçoit {k, n, p, SA, SB} depuis spectral_core.
+   2. theory_name = f'verif_p{p}_n{n}_ratio{k}'.
+   3. SA_def_name = f'SA_k{k}_def', SB_def_name = f'SB_k{k}_def'.
+   4. Lemme invariant : si k≠2 → 'invariant_ratio_asymetrique'.
+   5. Valeurs numériques dans les lemmes issues de spectral_core (k=4).
+
+────────────────────────────────────────────────────────────────────────────────
+ DEF-06 🟠 MAJEURE — Absence du critère ratio_coherence dans le scorer
+ Moteur   : scorer
+ Fichier  : src/engines/scorer.py
+ Priorité : #6
+ Observé  : Score 8.1/10 attribué à une réponse avec model=1/2 pour requête k=4. Le scorer n'a pas pénalisé l'incohérence ratio/model.
+ Attendu  : Critère ratio_coherence obligatoire. Si model ≠ ratio_demandé → pénalité -3.0 pts. Score résultant ≤ 5.1/10 → multiloop itère à nouveau.
+ Preuve   : score 8.1/10, iter 2 — malgré model=1/2 pour k=4.
+ Correction requise :
+   1. Ajouter check_ratio_coherence(response, request) dans scorer.
+   2. Pondérer ratio_coherence avec poids >= 30% du score total.
+   3. Configurer seuil_score > 5.0 pour forcer rejet si ratio faux.
+   4. Tester : scorer(model='1/2', ratio='1/4') doit retourner < seuil.
+
+────────────────────────────────────────────────────────────────────────────────
+ DEF-07 🟡 MINEURE — DEFAULT_MODEL='1/2' dans la configuration globale
+ Moteur   : config
+ Fichier  : config/gabriel_defaults.yaml
+ Priorité : #7
+ Observé  : gabriel_defaults.yaml fixe DEFAULT_MODEL: '1/2'. Ce défaut est propagé silencieusement si ratio_dispatcher échoue.
+ Attendu  : DEFAULT_MODEL: null (ou absent). Si le ratio n'est pas reconnu → exception explicite, pas de calcul avec un modèle par défaut incorrect.
+ Preuve   : model = 1/2  dans les chiffres calculés (jamais overridé).
+ Correction requise :
+   1. Remplacer DEFAULT_MODEL: '1/2' par DEFAULT_MODEL: null.
+   2. Ajouter STRICT_RATIO_MODE: true pour forcer l'exception.
+   3. Documenter dans le yaml que le ratio doit être explicite.
+
+════════════════════════════════════════════════════════════════════════════════
+ FICHIERS À CORRIGER (transmis à gabriel_03_corrector.py)
+════════════════════════════════════════════════════════════════════════════════
+  → config/gabriel_defaults.yaml
+  → src/core/spectral_core.py
+  → src/dispatch/ratio_dispatcher.py
+  → src/engines/hol_generator.py
+  → src/engines/scorer.py
+  → src/models/spectral_model.py
+
+════════════════════════════════════════════════════════════════════════════════
+ → Ce rapport est consommé par gabriel_03_corrector.py
+════════════════════════════════════════════════════════════════════════════════

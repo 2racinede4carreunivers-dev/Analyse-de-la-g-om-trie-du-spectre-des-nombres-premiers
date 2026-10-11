@@ -1,0 +1,10 @@
+Question pour Gabriel de Philippe Thomas Savard: En te fiant sur le fichier methode_spectral.thy et l'identifications des variables a l'intérieur de se fichier
+peux-tu générer en HOL4/lean pour les définitions suivantes:
+
+Règles pour les suites A et B pour rapport spectral=1/k_i .
+
+	Règle pour construire les suites A_i et B_i Les deux suites doivent avoir la même quantité de terme 〖TSA〗_i=〖TSB〗_i
+
+	Les suites A_i et B_i ont une double progression de termes〖 i〗_1+i_2 〖+ i〗_(3_)…+i_n des suites A_i et B_i. Les termes 〖 i〗_1  au terme i_(T_(i précédent l^' avant dernier terme) ) ces termes de la première position 〖 i〗_1 a i_n entre chaque : 〖 i〗_1+i_2 〖+ i〗_(3_)…+i_n  il faut effectué le produit égale a ×i_2/i_1 . Entre l’avant derniers terme et celui qui le précède il faut effectuer le produit (i_2/i_1 -i_1/i_2 )× i_(T_(i précédent l^' avant dernier terme) )=i_(avant dernier terme). Le dernier terme i_(dernier terme) est égale : i_(avant dernier terme)×i_2/i_1  la progression initiale. 
+
+Ex : 〖(i〗_1 )^1+〖(i〗_2 )^2+〖(i〗_3 )^3…+〖(i〗_(T_(i précédent l^' avant dernier terme) ) )^i+〖((i〗_(T_(i précédent l^' avant dernier terme) ) )^(i+1)-〖((i〗_(T_(i précédent l^' avant dernier terme) ) )^(i-1)+〖((i〗_(T_(i précédent l^' avant dernier terme) ) )^(i+2)-〖((i〗_(T_(i précédent l^' avant dernier terme) ) )^(i+1)=Somme  A_i

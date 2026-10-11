@@ -1,0 +1,4 @@
+session Probe = HOL +
+  options [document = false]
+  theories
+    test_probe

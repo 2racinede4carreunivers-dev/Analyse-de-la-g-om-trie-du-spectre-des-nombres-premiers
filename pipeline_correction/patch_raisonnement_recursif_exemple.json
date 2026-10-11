@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "nom": "raisonnement-recursif-exemple",
+    "description": "Patch de correction .json d'exemple — pipeline de raisonnement recursif de La fiancée de Cline Mm. Gabriel multiloop local. A appliquer via PipelineAutoProgrammation (sandbox, dry-run par defaut).",
+    "role": "spectral",
+    "mots_cles": ["spectre", "nombre premier", "reconstruction", "ratio"],
+    "version": "1.0"
+  },
+  "operations": [
+    {
+      "op": "creer_fichier",
+      "cible": "auto_extension_spectrale.py",
+      "contenu": "# Auto-extension generee par le raisonnement recursif (sandbox)\n# Sujet unique : geometrie du spectre des nombres premiers.\n\ndef extension_spectrale():\n    return {\"statut\": \"a_completer\", \"sujet\": \"spectre des nombres premiers\"}\n"
+    },
+    {
+      "op": "ajouter_a_la_fin",
+      "cible": "auto_extension_spectrale.py",
+      "contenu": "\n# TODO: completer la connaissance manquante detectee par le pipeline expert.\n"
+    }
+  ]
+}

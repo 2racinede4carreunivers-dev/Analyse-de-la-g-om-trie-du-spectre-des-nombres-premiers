@@ -1,0 +1,106 @@
+INSTRUCTIONS MANUELLES POUR AJOUTER RECONNAISSANCE THÉORIQUE
+
+Fichier: src/multiloop/request_decomposer.py
+
+ÉTAPE 1: Localiser la ligne avec INTENT_PATTERNS
+--------------------------------------------------
+Ligne ~74:
+    INTENT_PATTERNS = {
+        "reconstruction": [
+
+ÉTAPE 2: Remplacer par
+-----------------------
+    INTENT_PATTERNS = {
+        "theoretical_advanced": [
+            # Section 13 et pont logique Psi-Savard / Chebyshev
+            r"section\s+13", r"pont\s+(?:logique|direct)",
+            r"psi\s*[-_]?savard", r"psi\s*\(\s*savard",
+            r"chebyshev|tchebychev", r"équation\s+psi",
+            # Premiers négatifs (cas théorique avancé)
+            r"premiers\s+négatifs", r"nombres\s+premiers\s+négatifs",
+            r"psi\s*\(\s*-",
+            # Analyse de structure mathématique
+            r"écart\s+minimal", r"écart\s+comme\s+pour",
+            r"équation\s+\s*=\s*0\.5\s*\*\s*it",
+            r"résoudre\s+l'équation",
+            # Lien aux zéros de zeta, droite critique
+            r"zéros?\s+(?:de\s+)?zêta", r"droite\s+critique",
+            r"hypothèse\s+de\s+riemann", r"\briemann\b",
+        ],
+        "reconstruction": [
+
+ÉTAPE 3: Localiser la section decompose(), ligne ~148
+-------------------------------------------------------
+        # 1. Detecter l'intention
+        for intent, patterns in self.INTENT_PATTERNS.items():
+
+ÉTAPE 4: Remplacer par
+-----------------------
+        # 0.ter Detecter les requetes THEORIQUES AVANCEES
+        # (Section 13, Psi-Savard, Chebyshev, etc.)
+        # Ces requetes doivent être traitées comme conversationnelles.
+        for pat in self.INTENT_PATTERNS.get("theoretical_advanced", []):
+            if re.search(pat, q_low):
+                result.detected_intent = "theoretical_advanced"
+                result.is_conversational = True
+                break
+
+        # 1. Detecter l'intention (autres types)
+        if result.detected_intent == "unknown":
+            for intent, patterns in self.INTENT_PATTERNS.items():
+
+RÉSULTAT ATTENDU
+==================
+Avec ces modifications, ta requête Section 13 sera:
+- Intent: "theoretical_advanced" (au lieu de "gap")
+- Marquée comme is_conversational=True
+- Pas de faux déclenchement du debugger
+- Gabriel pourra répondre sainement à ta question philosophique/théorique
+
+ALTERNATIVE: Appliquer via Python
+===================================
+Si tu as accès à Python, tu peux exécuter ce script:
+
+---
+import re
+
+with open('src/multiloop/request_decomposer.py', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# Ajouter patterns théoriques
+replacement1 = '''        "theoretical_advanced": [
+            r"section\\s+13", r"pont\\s+(?:logique|direct)",
+            r"psi\\s*[-_]?savard", r"psi\\s*\\(\\s*savard",
+            r"chebyshev|tchebychev", r"équation\\s+psi",
+            r"premiers\\s+négatifs", r"nombres\\s+premiers\\s+négatifs",
+            r"psi\\s*\\(\\s*-",
+            r"écart\\s+minimal", r"écart\\s+comme\\s+pour",
+            r"équation\\s+\\s*=\\s*0\.5\\s*\\*\\s*it",
+            r"résoudre\\s+l'équation",
+            r"zéros?\\s+(?:de\\s+)?zêta", r"droite\\s+critique",
+            r"hypothèse\\s+de\\s+riemann", r"\\briemann\\b",
+        ],
+        "reconstruction": ['''
+
+content = content.replace('        "reconstruction": [', replacement1)
+
+# Ajouter détection théorique avant la boucle normale
+replacement2 = '''        # 0.ter Detecter les requetes THEORIQUES AVANCEES
+        for pat in self.INTENT_PATTERNS.get("theoretical_advanced", []):
+            if re.search(pat, q_low):
+                result.detected_intent = "theoretical_advanced"
+                result.is_conversational = True
+                break
+
+        # 1. Detecter l'intention (autres types)
+        if result.detected_intent == "unknown":
+            for intent, patterns in self.INTENT_PATTERNS.items():'''
+
+content = content.replace('''        # 1. Detecter l'intention
+        for intent, patterns in self.INTENT_PATTERNS.items():''', replacement2)
+
+with open('src/multiloop/request_decomposer.py', 'w', encoding='utf-8') as f:
+    f.write(content)
+
+print("OK: Modifications appliquées!")
+---

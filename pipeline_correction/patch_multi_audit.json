@@ -1,0 +1,16 @@
+﻿{
+  "meta": {
+    "nom": "Correction_Multi_Ratio_Audit",
+    "description": "Remplacement de re.search par re.findall et appel a traiter_multi_ratios",
+    "version": "1.0"
+  },
+  "operations": [
+    {
+      "op": "remplacer_texte",
+      "cible": "src/core/spectral_core.py",
+      "ancien_texte": "        if ground_truth is None:\n            m_rap = re.search(r'1/([2-9]|[1-9]\\d+)', question)\n            if m_rap and int(m_rap.group(1)) != 2:\n                m_n = re.search(r'n\\s*=\\s*(\\d+)', question, re.IGNORECASE)\n                n_rnt = int(m_n.group(1)) if m_n else 10\n                rnt = self.core.reconstruire_rapport_non_typique('1/%s' % m_rap.group(1), n=n_rnt)\n                if rnt and rnt.get('premier') is not None:\n                    ground_truth = {\n                        'position': n_rnt,\n                        'prime': rnt['premier'],\n                        'n': n_rnt,\n                        'num_terms': n_rnt,\n                        'ratio': '1/%s' % m_rap.group(1),\n                        'note': rnt.get('note'),\n                    }",
+      "nouveau_texte": "        if ground_truth is None:\n            ratios_trouves = re.findall(r'1/(?:[2-9]|[1-9]\\d+)', question)\n            if ratios_trouves:\n                m_n = re.search(r'n\\s*=\\s*(\\d+)', question, re.IGNORECASE)\n                n_rnt = int(m_n.group(1)) if m_n else 10\n                if len(ratios_trouves) > 1:\n                    res_multi = self.core.traiter_multi_ratios(ratios_trouves, n=n_rnt)\n                    ground_truth = {\n                        'position': n_rnt,\n                        'n': n_rnt,\n                        'num_terms': n_rnt,\n                        'ratios': ratios_trouves,\n                        'multi_results': res_multi,\n                    }\n                else:\n                    rnt = self.core.reconstruire_rapport_non_typique(ratios_trouves[0], n=n_rnt)\n                    if rnt and rnt.get('premier') is not None:\n                        ground_truth = {\n                            'position': n_rnt,\n                            'prime': rnt['premier'],\n                            'n': n_rnt,\n                            'num_terms': n_rnt,\n                            'ratio': ratios_trouves[0],\n                            'note': rnt.get('note'),\n                        }",
+      "message": "Support complet des questions multi-ratios dans l'auditeur silencieux"
+    }
+  ]
+}

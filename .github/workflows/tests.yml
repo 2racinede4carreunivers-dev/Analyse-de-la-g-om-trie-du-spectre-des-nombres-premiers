@@ -1,0 +1,49 @@
+name: Gabriel CI - Tests Pytest
+
+# Exécution automatique des 161 tests à chaque push et pull request sur main
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # Permet aussi un déclenchement manuel depuis l'onglet Actions
+
+jobs:
+  pytest:
+    name: Pytest (161 tests Gabriel multiloop)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+
+      - name: Configuration Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Installation des dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Exécution de la suite pytest complète
+        run: |
+          python -m pytest tests/ -v --tb=short --color=yes
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Résumé des tests
+        if: always()
+        run: |
+          echo "============================================"
+          echo "  Tests Gabriel - Méthode Spectrale (CI)"
+          echo "============================================"
+          python -m pytest tests/ --collect-only -q 2>&1 | tail -5

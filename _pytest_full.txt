@@ -1,0 +1,113 @@
+﻿
+=================================== ERRORS ====================================
+_________________ ERROR collecting tests/test_audit_store.py __________________
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_audit_store.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_audit_store.py:23: in <module>
+    from src.core.types import CandidateAnswer, FinalAnswer
+E   ModuleNotFoundError: No module named 'src.core.types'
+_______ ERROR collecting tests/test_certainty_model_and_logical_loop.py _______
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_certainty_model_and_logical_loop.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_certainty_model_and_logical_loop.py:19: in <module>
+    from src.core.types import FinalAnswer
+E   ModuleNotFoundError: No module named 'src.core.types'
+_________ ERROR collecting tests/test_integrateur_memoire_api_fix.py __________
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_integrateur_memoire_api_fix.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_integrateur_memoire_api_fix.py:18: in <module>
+    from src.core.integrateur_memoire import IntegrateurMemoireGabriel
+src\core\integrateur_memoire.py:21: in <module>
+    from memoire_conceptuelle import (
+E   ModuleNotFoundError: No module named 'memoire_conceptuelle'
+_____________ ERROR collecting tests/test_mandatory_questions.py ______________
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_mandatory_questions.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_mandatory_questions.py:21: in <module>
+    from src.core.types import AsymmetryKind, GapKind
+E   ModuleNotFoundError: No module named 'src.core.types'
+______________ ERROR collecting tests/test_pipeline_epistemic.py ______________
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_pipeline_epistemic.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_pipeline_epistemic.py:8: in <module>
+    from src.core.types import FinalAnswer
+E   ModuleNotFoundError: No module named 'src.core.types'
+_________________ ERROR collecting tests/test_silent_audit.py _________________
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_silent_audit.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_silent_audit.py:24: in <module>
+    from src.core.types import FinalAnswer
+E   ModuleNotFoundError: No module named 'src.core.types'
+_____________ ERROR collecting tests/test_slow_motion_debugger.py _____________
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_slow_motion_debugger.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_slow_motion_debugger.py:22: in <module>
+    from src.core.types import CandidateAnswer, FinalAnswer
+E   ModuleNotFoundError: No module named 'src.core.types'
+___________ ERROR collecting tests/test_slow_motion_improvements.py ___________
+ImportError while importing test module 'C:\agent-multiloop-Gabriel-local\agent-multiloop-Gabriel-local\tests\test_slow_motion_improvements.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_slow_motion_improvements.py:14: in <module>
+    from src.core.types import FinalAnswer
+E   ModuleNotFoundError: No module named 'src.core.types'
+___________ ERROR collecting tests/test_workflow_2025_2_contract.py ___________
+tests\test_workflow_2025_2_contract.py:7: in <module>
+    CONTENT = BUILD.read_text(encoding="utf-8")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\thomasphiliippesavar\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:771: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: '\\home\\agent\\app\\.github\\workflows\\build.yml'
+============================== warnings summary ===============================
+..\.venv\Lib\site-packages\PyPDF2\__init__.py:21
+  C:\agent-multiloop-Gabriel-local\.venv\Lib\site-packages\PyPDF2\__init__.py:21: DeprecationWarning: PyPDF2 is deprecated. Please move to the pypdf library instead.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR tests/test_audit_store.py
+ERROR tests/test_certainty_model_and_logical_loop.py
+ERROR tests/test_integrateur_memoire_api_fix.py
+ERROR tests/test_mandatory_questions.py
+ERROR tests/test_pipeline_epistemic.py
+ERROR tests/test_silent_audit.py
+ERROR tests/test_slow_motion_debugger.py
+ERROR tests/test_slow_motion_improvements.py
+ERROR tests/test_workflow_2025_2_contract.py - FileNotFoundError: [Errno 2] N...
+!!!!!!!!!!!!!!!!!!! Interrupted: 9 errors during collection !!!!!!!!!!!!!!!!!!!
+1 warning, 9 errors in 10.24s
