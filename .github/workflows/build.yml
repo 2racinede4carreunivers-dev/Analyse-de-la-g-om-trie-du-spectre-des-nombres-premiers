@@ -1,38 +1,146 @@
-name: Gabriel Build - Isabelle 2025-2
+name: Certification de provenance - Geometrie du Spectre des Nombres Premiers
+
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
   id-token: write
   attestations: write
+
 jobs:
-  build:
+  validation-institutionnelle:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+
+    env:
+      ISABELLE_VERSION: Isabelle2025-2
+      # Taille officielle (octets) et SHA256 de Isabelle2025-2_linux.tar.gz
+      ISABELLE_TARBALL: Isabelle2025-2_linux.tar.gz
+      ISABELLE_MIN_BYTES: "1200000000"
+      ISABELLE_SHA256: 8f187496e295f169952e944745af9e4ae00c9c1cd2ed4cadbcf7d898e444913e
+      SESSION_NAME: Geometrie_Spectre_Premier_Philippe_Thomas_Savard
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Isabelle 2025-2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache Isabelle 2025-2
+        uses: actions/cache@v4
+        with:
+          path: /tmp/isabelle
+          key: isabelle-2025-2-linux-v1
+
+      - name: Install Isabelle 2025-2 (robuste, verifie)
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          cd /tmp
-          wget -q https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/Isabelle2025-2_linux.tar.gz || wget -q https://sourceforge.net/projects/isabelle/files/Isabelle2025-2_linux.tar.gz/download -O Isabelle2025-2_linux.tar.gz
-          tar -xzf Isabelle2025-2_linux.tar.gz
-          echo "/tmp/isabelle/Isabelle2025-2/bin" >> "$GITHUB_PATH"
-          /tmp/isabelle/Isabelle2025-2/bin/isabelle version
-      - name: Build
-        run: isabelle build -v -D .
-        working-directory: agent-multiloop-Gabriel-local
-      - uses: actions/attest-build-provenance@v1
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y wget tar coreutils
+          mkdir -p /tmp/isabelle
+          cd /tmp/isabelle
+
+          MIRRORS=(
+            "https://isabelle.in.tum.de/website-Isabelle2025-2/dist/${ISABELLE_TARBALL}"
+            "https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/${ISABELLE_TARBALL}"
+            "https://downloads.sourceforge.net/projects/isabelle/files/Isabelle2025-2/${ISABELLE_TARBALL}/download"
+          )
+
+          success=0
+          for url in "${MIRRORS[@]}"; do
+            echo "::group::Telechargement : ${url}"
+            if wget --tries=3 --timeout=120 -O "${ISABELLE_TARBALL}" "${url}"; then
+              size=$(stat -c%s "${ISABELLE_TARBALL}" 2>/dev/null || echo 0)
+              echo "Taille telechargee : ${size} octets"
+              if [ "${size}" -gt "${ISABELLE_MIN_BYTES}" ]; then
+                echo "Telechargement OK"
+                success=1
+                echo "::endgroup::"
+                break
+              else
+                echo "Archive trop petite (${size} octets), miroir suivant."
+              fi
+            else
+              echo "Echec wget sur ce miroir."
+            fi
+            echo "::endgroup::"
+          done
+
+          if [ "${success}" -ne 1 ]; then
+            echo "::error::Aucun miroir Isabelle n'a fourni une archive valide."
+            exit 8
+          fi
+
+          echo "Verification SHA256..."
+          echo "${ISABELLE_SHA256}  ${ISABELLE_TARBALL}" | sha256sum -c -
+
+          echo "Extraction..."
+          tar -xzf "${ISABELLE_TARBALL}"
+
+          # Verification explicite AVANT tout build : le binaire doit exister
+          if [ ! -x "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle" ]; then
+            echo "::error::Extraction echouee : /tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle absent."
+            ls -la /tmp/isabelle || true
+            exit 9
+          fi
+          echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"
+
+      - name: Verify Isabelle installation
+        run: |
+          set -euo pipefail
+          isabelle version
+          isabelle build -b
+
+      - name: Show repository layout
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 3 \( -name ROOT -o -name 'methode_spectral.thy' \) | sort
+
+      - name: Build Isabelle session
+        # La session est definie dans theories/ROOT (structure sans prefixe).
+        working-directory: theories
+        run: |
+          set -euo pipefail
+          isabelle build -d . -v "${SESSION_NAME}"
+
+      - name: Create explicit attestation payload
+        if: success()
+        run: |
+          cat > attestation_payload.json <<'EOF'
+          {
+            "schemaVersion": 1,
+            "subject": "theories/methode_spectral.thy",
+            "author": "Philippe Thomas Savard",
+            "coAuthors": [
+              "Emergent.sh E1",
+              "Gordon Docker Desktop",
+              "Copilot Microsoft"
+            ],
+            "statement": "These assistants contributed remarkably and their contribution is invaluable for Philippe Thomas Savard."
+          }
+          EOF
+
+      - name: Generate build provenance attestation
+        if: success()
+        uses: actions/attest-build-provenance@v2
         with:
           subject-path: |
-            agent-multiloop-Gabriel-local/theories/methode_spectral.thy
-            agent-multiloop-Gabriel-local/theories/validation_hol_unifiee.thy
-      - uses: actions/upload-artifact@v4
+            theories/methode_spectral.thy
+            theories/validation_hol_unifiee.thy
+            theories/validation_zeta_lean.thy
+
+      - name: Upload attestation payload artifact
+        if: success()
+        uses: actions/upload-artifact@v4
         with:
           name: methode-spectral-attestation-payload
           path: |
-            agent-multiloop-Gabriel-local/theories/methode_spectral.thy
-            agent-multiloop-Gabriel-local/theories/validation_hol_unifiee.thy
+            attestation_payload.json
+            theories/methode_spectral.thy
+            theories/validation_hol_unifiee.thy
+            theories/validation_zeta_lean.thy
+          retention-days: 30
