@@ -1,0 +1,135 @@
+════════════════════════════════════════════════════════════════════════════════
+ GABRIEL PIPELINE TRACE — Rapport d'analyse de session
+════════════════════════════════════════════════════════════════════════════════
+ Date session    : 2026-08-18 14:41
+ Requête         : Reconstruit le premier pour le rapport 1/4 pour n=23
+ Étapes totales  : 13
+ ✅ OK           : 3
+ 🔴 FAUTES       : 8
+ ⚠️  AVERTISSEMENTS: 2
+════════════════════════════════════════════════════════════════════════════════
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 01 ✅ OK — Réception de la requête utilisateur
+ Fichier : src/engines/multiloop_engine.py
+ Input   : {"raw_text": "Reconstruit le premier pour le rapport 1/4 pour n=23"}
+ Output  : {"parsed_intent": "reconstruction_premier_spectral"}
+ Log     : Philippe > Reconstruit le premier pour le rapport 1/4 pour n=23
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 02 ✅ OK — Parsing des paramètres (k, n)
+ Fichier : src/core/spectral_core.py
+ Input   : {"prompt": "Reconstruit le premier pour le rapport 1/4 pour n=23"}
+ Output  : {"k": 4, "n": 23, "ratio": "1/4"}
+ Log     : Étape 2 : SA(23)=(241/192)*4^23-4/3 et SB(23)=(964/192)*4^23-12292/3
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 03 🔴 FAULT — Dispatch vers le moteur de calcul (ratio_dispatcher)
+ Fichier : src/dispatch/ratio_dispatcher.py
+ Input   : {"ratio_demandé": "1/4", "k": 4}
+ Output  : {"model_sélectionné": "1/2"}
+ Log     : model = 1/2  ← présent dans Chiffres calculés
+ DÉTAIL  : ratio_dispatcher a retourné model='1/2' au lieu de '1/4'. Vraisemblablement : fallback sur la valeur par défaut dans config/gabriel_defaults.yaml.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 04 🔴 FAULT — Sélection du modèle et de l'invariant
+ Fichier : src/models/spectral_model.py
+ Input   : {"model_dispatché": "1/2 (erroné)"}
+ Output  : {"invariant_appliqué": "position = n = number_of_terms", "base_puissance": "2^n  (erronée, devrait être 4^n)"}
+ Log     : INVARIANT (ratio 1/2): position = n = number_of_terms = 23
+ DÉTAIL  : spectral_model.py a chargé le modèle 1/2 : l'invariant 'position=n=terms' est appliqué. Pour k=4, l'invariant correct est n=terms ≠ position_premier.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 05 🔴 FAULT — Chargement des formules SA/SB
+ Fichier : corpus/formulas_1_2.json
+ Input   : {"fichier_chargé": "corpus/formulas_1_2.json  (FAUTIF)"}
+ Output  : {"SA_coeff": "3.25/2 × 2^n - 2", "SB_coeff": "6.5/2  × 2^n - 66"}
+ Log     : SA(23)=13631486.0 = (3.25/2)×2^23-2  SB(23)=27262910.0 = (6.5/2)×2^23-66
+ DÉTAIL  : formulas_1_2.json chargé au lieu de formulas_1_k.json. Les coefficients 241/192 et 964/192 avec base 4^n n'ont pas été utilisés.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 06 ✅ OK — Initialisation multiloop (1 frames spinner)
+ Fichier : src/engines/multiloop_engine.py
+ Input   : {"max_iter": "configurable", "frames_observés": 1}
+ Output  : {"iter_atteinte": 2}
+ Log     : 1 occurrences 'Execution pipeline + multiloop' dans les logs
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 07 🔴 FAULT — Calcul numérique SA(n) et SB(n)
+ Fichier : src/core/spectral_core.py
+ Input   : {"n": 23, "formules": "modèle 1/2 (erroné)"}
+ Output  : {"SA": "13631486.0", "SB": "27262910.0"}
+ Log     : SA_float=13631486.0, SB_float=27262910.0
+ DÉTAIL  : SA=13631486.0 et SB=27262910.0 sont les valeurs du modèle 1/2. Valeurs correctes (k=4) : SA≈8.8327e13, SB≈3.5331e14.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 08 🔴 FAULT — Reconstruction du nombre premier P
+ Fichier : src/core/spectral_core.py
+ Input   : {"n": 23, "invariant": "position=n=23 (erroné pour k=4)"}
+ Output  : {"p_reconstruit": "83", "position_retournée": "23"}
+ Log     : p = 83, prime = 83
+ DÉTAIL  : p=83 est le 23ème premier (modèle 1/2). Résultat attendu : p=1097 (184ème premier, modèle 1/4).
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 09 🔴 FAULT — Calcul du Digamma
+ Fichier : src/core/spectral_core.py
+ Input   : {"SB": "27262910.0 (erroné)", "p": "83 (erroné)", "exp": "4096"}
+ Output  : {"digamma_calc": "83.0"}
+ Log     : digamma_calc_float = 83.0
+ DÉTAIL  : digamma_calc = SB_wrong - 4096×p_wrong = 27262910 - 4096×83 = 27257598. Valeur correcte : SB_correct - 4096×1097 = 3.5331e14 - 4493312 ≈ 3.5331e14.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 10 ⚠️ WARNING — Vérification equation_holds (faux positif)
+ Fichier : src/core/spectral_core.py
+ Input   : {"SA": "13631486", "SB": "27262910", "digamma": "27257598", "p": "83"}
+ Output  : {"equation_holds": "True"}
+ Log     : equation_holds = True
+ DÉTAIL  : equation_holds=True est un FAUX POSITIF : l'équation tautologique (SB - (SB - 4096×p)) / 4096 = p est toujours vraie quel que soit p. Elle ne valide pas que p=83 est correct pour k=1/4.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 11 ⚠️ WARNING — Évaluation par le scorer (score=8.1/10, iter=2)
+ Fichier : src/engines/scorer.py
+ Input   : {"réponse_proposée": "p=83", "iter": 2}
+ Output  : {"score": 8.1}
+ Log     : score 8.1/10, iter 2
+ DÉTAIL  : Le scorer a attribué 8.1/10 sans détecter l'incohérence model=1/2 pour une requête k=1/4. Le critère de validation du ratio dans scorer.py semble absent ou non pondéré.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 12 🔴 FAULT — Génération du fragment HOL (Isabelle)
+ Fichier : src/engines/hol_generator.py
+ Input   : {"theory_name": "verif_p83_n23", "imports": "methode_spectral"}
+ Output  : {"lemma_principal": "prime_equation 23 83 = real 83"}
+ Log     : theory verif_p83_n23 / SA(n)=(3.25/2)×2^n-2
+ DÉTAIL  : hol_generator.py a généré un fragment titré 'Verification 83 via modele 1/4' mais les lemmes utilisent SA_def/SB_def du modèle 1/2 (2^n). Le fragment HOL est doublement incorrect : titre ET contenu.
+
+────────────────────────────────────────────────────────────────────────────────
+ ÉTAPE 13 🔴 FAULT — Assemblage et transmission de la réponse
+ Fichier : src/engines/multiloop_engine.py
+ Input   : {"score": 8.1, "iter": 2}
+ Output  : {"p_transmis": "83", "message": "L'équation est vérifiée : equation_holds=True"}
+ Log     : Premier reconstruit : p=83  ← affiché à l'utilisateur
+ DÉTAIL  : La réponse transmise (p=83) est fausse malgré iter=2 : le multiloop n'a pas détecté la faute de dispatch ratio. La boucle de correction ne teste pas l'adéquation model/ratio.
+
+════════════════════════════════════════════════════════════════════════════════
+ COMPARAISON RÉPONSE GABRIEL vs RÉPONSE ATTENDUE
+════════════════════════════════════════════════════════════════════════════════
+Paramètre            Gabriel (erroné)               Attendu (correct)
+──────────────────── ────────────────────────────── ──────────────────────────────
+p                    83                             1097  ✗
+SA                   13631486.0                     8.8327e+13  ✗
+SB                   27262910.0                     3.5331e+14  ✗
+model_used           1/2                            1/4  ✗
+
+════════════════════════════════════════════════════════════════════════════════
+ FICHIERS FAUTIFS IDENTIFIÉS
+════════════════════════════════════════════════════════════════════════════════
+  🔴  corpus/formulas_1_2.json
+  🔴  src/core/spectral_core.py
+  🔴  src/dispatch/ratio_dispatcher.py
+  🔴  src/engines/hol_generator.py
+  🔴  src/engines/multiloop_engine.py
+  🔴  src/models/spectral_model.py
+
+════════════════════════════════════════════════════════════════════════════════
+ → Ce rapport est consommé par gabriel_02_engine_audit.py
+════════════════════════════════════════════════════════════════════════════════
