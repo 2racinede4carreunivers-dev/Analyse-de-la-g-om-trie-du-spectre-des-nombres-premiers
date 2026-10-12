@@ -10,3 +10,7 @@ node_modules/
 .DS_Store
 _archive_tmp/
 *.tar
+# Ephemeral / machine-specific (VS Code sidecar, locks jEdit) — never commit
+.sidecar/
+theories/#*#
+*#validation_hol_unifiee.thy#

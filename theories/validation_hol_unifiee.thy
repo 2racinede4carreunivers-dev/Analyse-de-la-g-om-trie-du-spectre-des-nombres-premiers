@@ -599,43 +599,9 @@ lemma toutes_branches_composees_implique_bloque:
     verdict_branche k b (case b of
       A7plus  \<Rightarrow> C1 | A7moins \<Rightarrow> C2 |
       A8plus  \<Rightarrow> C3 | A8moins \<Rightarrow> C4) = ''EXCLU_HOL''"
-proof (rule allI)
-    fix b :: "branche_digamma"
-    show ?thesis
-    proof (cases b)
-      case A7plus
-      have red: "(case b of A7plus \<Rightarrow> C1 | A7moins \<Rightarrow> C2
-                 | A8plus \<Rightarrow> C3 | A8moins \<Rightarrow> C4) = C1"
-        using A7plus by simp
-      have h1: "verdict_branche k b C1 = ''EXCLU_HOL''"
-        using np1 by (simp only: verdict_branche_def np1 if_False)
-      show ?thesis by (simp only: red h1)
-    next
-      case A7moins
-      have red: "(case b of A7plus \<Rightarrow> C1 | A7moins \<Rightarrow> C2
-                 | A8plus \<Rightarrow> C3 | A8moins \<Rightarrow> C4) = C2"
-        using A7moins by simp
-      have h1: "verdict_branche k b C2 = ''EXCLU_HOL''"
-        using np2 by (simp only: verdict_branche_def np2 if_False)
-      show ?thesis by (simp only: red h1)
-    next
-      case A8plus
-      have red: "(case b of A7plus \<Rightarrow> C1 | A7moins \<Rightarrow> C2
-                 | A8plus \<Rightarrow> C3 | A8moins \<Rightarrow> C4) = C3"
-        using A8plus by simp
-      have h1: "verdict_branche k b C3 = ''EXCLU_HOL''"
-        using np3 by (simp only: verdict_branche_def np3 if_False)
-      show ?thesis by (simp only: red h1)
-    next
-      case A8moins
-      have red: "(case b of A7plus \<Rightarrow> C1 | A7moins \<Rightarrow> C2
-                 | A8plus \<Rightarrow> C3 | A8moins \<Rightarrow> C4) = C4"
-        using A8moins by simp
-      have h1: "verdict_branche k b C4 = ''EXCLU_HOL''"
-        using np4 by (simp only: verdict_branche_def np4 if_False)
-      show ?thesis by (simp only: red h1)
-    qed
-  qed
+  using np1 np2 np3 np4
+  unfolding verdict_branche_def
+  by (auto split: branche_digamma.split)
 
 (* ============================================================================
    SECTION 10 : CONTRÔLE DE DOMAINE — CERTIFICAT PAR L'ABSURDE (NOUVEAUTÉ v7.5)
