@@ -14,13 +14,14 @@ services:
 
   llm-agent-multiloop:
     build:
-      context: ..
-      dockerfile: agent-multiloop-Gabriel-local/Dockerfile.cli
+      context: .
+      dockerfile: Dockerfile.cli
     container_name: llm-agent-multiloop-run
     restart: "no"
 
     env_file:
-      - .env
+      - path: .env
+        required: false
 
     environment:
       - OLLAMA_HOST=http://ollama:11434
@@ -29,6 +30,11 @@ services:
       - GABRIEL_HTTP_PORT=8000
       - GABRIEL_HOST=0.0.0.0
       - GABRIEL_TESTS_DIR=/home/agent/app/tests
+      # Git : identité + dépôt distant de l'agent (token via .env GITHUB_TOKEN)
+      - GITHUB_REPO_URL=https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local.git
+      - GITHUB_DEFAULT_BRANCH=main
+      # Répertoire de travail git par défaut pour le GitController
+      - GABRIEL_GIT_REPO=/home/agent/app/repo
 
     stdin_open: true
     tty: true
@@ -48,10 +54,14 @@ services:
       - ./tests:/home/agent/app/tests:ro
       - ./scripts:/home/agent/app/scripts
       - ./theories:/home/agent/app/theories
-      - ../pipeline_cognitif:/home/agent/app/pipeline_cognitif:ro
-      - ../pipeline_correction:/home/agent/app/pipeline_correction:ro
-      - ../Le-systeme-convolutif-Gabriel.tex:/home/agent/app/Le-systeme-convolutif-Gabriel.tex:ro
-      - ../Le-systeme-convolutif-Gabriel.pdf:/home/agent/app/Le-systeme-convolutif-Gabriel.pdf:ro
+      - ./pipeline_cognitif:/home/agent/app/pipeline_cognitif:ro
+      - ./pipeline_correction:/home/agent/app/pipeline_correction:ro
+      - ./pipeline_correction_developeur:/home/agent/app/pipeline_correction_developeur:ro
+      - ./pipeline_correction_HOL:/home/agent/app/pipeline_correction_HOL:ro
+      - ./Le-systeme-convolutif-Gabriel.pdf:/home/agent/app/Le-systeme-convolutif-Gabriel.pdf:ro
+      - ./Le-systeme-convolutif-Gabriel.tex:/home/agent/app/Le-systeme-convolutif-Gabriel.tex:ro
+      - ./theories/tex:/home/agent/app/theories_tex:ro
+      - ./theories/tex/Geometrie_du_Spectre_des_Nombres_Premiers_2026.pdf:/home/agent/app/Geometrie_du_Spectre_des_Nombres_Premiers_2026.pdf:ro
       - ./CONFIG_ENV_GUIDE.md:/home/agent/app/CONFIG_ENV_GUIDE.md
       - ./.github:/home/agent/app/.github
       - ./docker-compose.yml:/home/agent/app/docker-compose.yml
@@ -59,6 +69,9 @@ services:
       - agent-data:/home/agent/app/data
       - agent-logs:/home/agent/app/logs
       - ${HOST_DEBAT_DIR:-./data/debats}:/home/agent/app/data/debats-onedrive
+      # Dépôt Git de l'agent (son propre code) : permet git push/pull/commit
+      # depuis l'intérieur du conteneur. Le .git local est partagé avec l'hôte.
+      - ./:/home/agent/app/repo:rw
 
     networks:
       - agent-network

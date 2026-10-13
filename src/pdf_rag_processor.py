@@ -36,7 +36,7 @@ class PDFSection:
     content: str
     topics: List[str]  # Mots-clés extraits
     is_hol: bool  # Est une section HOL à ignorer
-    embedding: Optional[np.ndarray] = None
+    embedding: Optional["np.ndarray"] = None
 
 class PDFRAGProcessor:
     """Traite le PDF Riemann et crée un index RAG"""

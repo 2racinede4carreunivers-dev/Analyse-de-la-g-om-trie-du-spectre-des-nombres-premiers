@@ -601,7 +601,7 @@ lemma toutes_branches_composees_implique_bloque:
       A8plus  \<Rightarrow> C3 | A8moins \<Rightarrow> C4) = ''EXCLU_HOL''"
   using np1 np2 np3 np4
   unfolding verdict_branche_def
-  by (auto split: branche_digamma.split)
+  by (auto simp del: prime.simps split: branche_digamma.split)
 
 (* ============================================================================
    SECTION 10 : CONTRÔLE DE DOMAINE — CERTIFICAT PAR L'ABSURDE (NOUVEAUTÉ v7.5)

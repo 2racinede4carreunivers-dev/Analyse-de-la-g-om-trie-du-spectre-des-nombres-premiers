@@ -1435,6 +1435,10 @@ class CLIInterface:
         console.print(Panel(footer, border_style="dim green"))
         console.print()
 
+        if c == "git" or c.startswith("git "):
+            from .git_commands import handle_git_command
+            return handle_git_command(cmd, console)
+
     async def _handle_modele(self, cmd: str) -> bool:
         """Commande `modele <action> [args...]` pour interroger les 3 modeles spectraux.
 

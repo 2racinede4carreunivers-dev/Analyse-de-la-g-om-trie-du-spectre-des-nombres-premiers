@@ -1,6 +1,9 @@
 #!/usr/bin/env powershell
 # =============================================================================
-#  start-agent.ps1 v4.1 
+#  start-agent.ps1 v4.1 — MULTI-LOOP MATH AGENT / Gabriel Local Launcher
+#  Racine : C:\Analyse-de-la-geometrie-du-spectre-des-nombres-premiers
+#  Depot  : Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers
+#  (version restauree mot-pour-mot, seul $ProjectName mis a jour)
 # =============================================================================
 
 param(
@@ -12,10 +15,16 @@ param(
     [switch]$PullOnly
 )
 
+# --- Racine du depot (ne pas modifier : derive du script lui-meme) ---
+$RepoRoot = "C:\Analyse-de-la-geometrie-du-spectre-des-nombres-premiers"
+$DepotDir = "Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers"
+
 Set-Location -Path $PSScriptRoot
 
 $ProjectRoot   = $PSScriptRoot
-$ProjectName   = "agent-multiloop-gabriel-local"
+# Nom derive du dossier reel (Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers).
+# -p docker compose normalise : minuscules, sans accents/espaces.
+$ProjectName   = "analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers"
 $ContainerName = "llm-agent-multiloop-run"
 $ServiceMain   = "llm-agent-multiloop"
 $ComposeFile   = Join-Path $ProjectRoot "docker-compose.yml"

@@ -160,6 +160,53 @@ class AntiHallucinationValidator:
 
 
 # --- PATCH Gabriel C3 : SpectralMethodCore ---
+def _load_primes():
+    """Charge la table de premiers (donnees pures) SANS declencher le __init__
+    du package spectral (qui tire pydantic/numpy). Robuste en tout environnement.
+    """
+    import importlib.util
+    from pathlib import Path
+    try:
+        data_path = Path(__file__).resolve().parent.parent / "spectral" / "_primes_data.py"
+        spec = importlib.util.spec_from_file_location("_gabriel_primes_data", data_path)
+        if spec and spec.loader:
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            return list(mod.PRIMES_RAW)
+    except Exception:
+        pass
+    try:
+        from src.spectral.prime_table import PRIMES
+        return list(PRIMES)
+    except Exception:
+        return []
+
+
+def _load_suite_functions(model):
+    """Charge get_suite_functions(model) depuis suites.py SANS declencher le
+    __init__ du package spectral (pydantic). Conserve suites.py comme source
+    unique de verite mathematique (SA/SB, sumA/sumB).
+    """
+    import importlib.util
+    from pathlib import Path
+    suites_path = Path(__file__).resolve().parent.parent / "spectral" / "suites.py"
+    try:
+        spec = importlib.util.spec_from_file_location("_gabriel_suites", suites_path)
+        if spec and spec.loader:
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            return mod.get_suite_functions(model)
+    except Exception:
+        pass
+    from src.spectral.suites import get_suite_functions
+    return get_suite_functions(model)
+
+
+def _is_strictly_increasing(seq) -> bool:
+    """True si la sequence est strictement croissante."""
+    return all(seq[i] < seq[i + 1] for i in range(len(seq) - 1))
+
+
 class SpectralMethodCore:
     """
     Noyau de methodes spectrales du pipeline multi-loop Gabriel.
@@ -173,6 +220,11 @@ class SpectralMethodCore:
             threshold=self.config.get("hallucination_threshold", 0.85),
             strict_mode=self.config.get("strict_mode", False),
         )
+        # Table des nombres premiers (1000 premiers, 2..7919) requise par
+        # curves.py (len(core.prime_list)) et slow_motion_debugger.py.
+        # Chargement direct du module de donnees pures (evite le __init__ du
+        # package spectral qui tire pydantic/numpy et tout cycle d'import).
+        self.prime_list = list(_load_primes())
         self._initialized = True
 
     def process(self, data):
@@ -203,6 +255,111 @@ class SpectralMethodCore:
     @property
     def is_initialized(self):
         return self._initialized
+
+    # ------------------------------------------------------------------
+    # Rapport spectral n*n — reconstruction (requise par les tests v3.3x,
+    # curves.py et slow_motion_debugger.py). Formule « a differences » :
+    #   RsP = (sum_SA(A) - sum_SA(B)) / (sum_SB(A) - sum_SB(B))
+    # qui vaut exactement 1/2 pour le modele 1/2 (lemme Savard prouve).
+    # ------------------------------------------------------------------
+
+    def primes_to_positions(self, primes):
+        """Convertit une liste de premiers en positions (1-indexees).
+
+        Retourne (positions, was_prime) ou positions[i] est la position du
+        premier dans la table (None si inconnu) et was_prime[i] un booleen.
+        Utilise la table locale self.prime_list (aucun import lourd requis).
+        """
+        index = {p: i + 1 for i, p in enumerate(self.prime_list)}
+        positions = []
+        was_prime = []
+        for p in primes:
+            pos = index.get(p)
+            positions.append(pos)
+            was_prime.append(pos is not None)
+        return positions, was_prime
+
+    def classify_configuration(self, A_indices, B_indices):
+        """Classifie la configuration : 1x1, symmetric_nxn, asym_ordonnee, asym_chaotique."""
+        la, lb = len(A_indices), len(B_indices)
+        if la == 1 and lb == 1:
+            return "1x1"
+        if la == lb:
+            return "symmetric_nxn"
+        # asymetrique : longueur(B) = longueur(A) + 1, croissant, max(A) < min(B)
+        if lb == la + 1 and _is_strictly_increasing(A_indices) \
+                and _is_strictly_increasing(B_indices) \
+                and max(A_indices) < min(B_indices):
+            return "asym_ordonnee"
+        return "asym_chaotique"
+
+    def compute_RsP_nn(self, A_indices, B_indices, model="1/2"):
+        """Rapport spectral a differences pour le modele donne.
+
+        RsP = (sum_SA(A) - sum_SA(B)) / (sum_SB(A) - sum_SB(B))
+        """
+        fns = _load_suite_functions(model)
+        sum_a_A = fns["sumA"](list(A_indices))
+        sum_a_B = fns["sumA"](list(B_indices))
+        sum_b_A = fns["sumB"](list(A_indices))
+        sum_b_B = fns["sumB"](list(B_indices))
+        num = sum_a_A - sum_a_B
+        den = sum_b_A - sum_b_B
+        config = self.classify_configuration(list(A_indices), list(B_indices))
+        if den == 0:
+            return {
+                "configuration": config,
+                "error": "Denominateur nul : division impossible.",
+                "A_indices": list(A_indices),
+                "B_indices": list(B_indices),
+            }
+        ratio = num / den  # Fraction
+        k = int(model.split("/")[1])
+        expected = Fraction(1, k)
+        return {
+            "configuration": config,
+            "A_indices": list(A_indices),
+            "B_indices": list(B_indices),
+            "RsP_fraction": str(ratio),
+            "RsP_decimal": float(ratio),
+            "expected": str(expected),
+            "matches_half": ratio == Fraction(1, 2),
+            "matches_expected": ratio == expected,
+            "near_half": abs(float(ratio) - 0.5) < 0.01 and ratio != Fraction(1, 2),
+            "method": f"formule a differences (modele {model})",
+            "citations": [
+                "methode_spectral.thy : rapport spectral par differences de blocs",
+                "MS_05_Modeles_1_3_1_4.thy : generalisation 1/k",
+            ],
+        }
+
+    def analyze_spectral_ratio(self, primes_A, primes_B, model="1/2"):
+        """Point d'entree haut niveau : prend des PREMIERS, convertit en positions
+        puis calcule le rapport spectral. Retourne un dict exploitable par
+        slow_motion_debugger.py (cles: configuration, A_input, A_positions,
+        A_primes, B_*, RsP_fraction, RsP_decimal, matches_half, near_half,
+        citations, method...).
+        """
+        A_positions, A_was = self.primes_to_positions(primes_A)
+        B_positions, B_was = self.primes_to_positions(primes_B)
+        if not all(A_was) or not all(B_was):
+            unknown = [p for p, ok in list(zip(primes_A, A_was)) + list(zip(primes_B, B_was)) if not ok]
+            return {
+                "error": f"Premiers hors table (inconnus) : {unknown}",
+                "A_input": list(primes_A),
+                "B_input": list(primes_B),
+            }
+        # Positions reelles (on ignore l'ordre d'entree pour le calcul de blocs)
+        result = self.compute_RsP_nn(list(A_positions), list(B_positions), model=model)
+        result.update({
+            "A_input": list(primes_A),
+            "B_input": list(primes_B),
+            "A_positions": list(A_positions),
+            "B_positions": list(B_positions),
+            "A_primes": list(primes_A),
+            "B_primes": list(primes_B),
+        })
+        return result
 
 
 # --- PATCH Gabriel 2026-10-02 C4 : classes manquantes auto-detectees ---
