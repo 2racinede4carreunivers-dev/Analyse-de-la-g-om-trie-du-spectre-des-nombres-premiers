@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from src.core.spectral_core import AntiHallucinationValidator
-from src.core.types import FinalAnswer
+from src.core.spectral_types import FinalAnswer
 from src.multiloop.silent_audit import SilentAuditLoop
 
 

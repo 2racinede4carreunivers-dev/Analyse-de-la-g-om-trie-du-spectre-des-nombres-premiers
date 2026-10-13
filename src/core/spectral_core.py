@@ -152,6 +152,129 @@ class AntiHallucinationValidator:
     def check(self, text):
         return self.validate(text)["valid"]
 
+    # ------------------------------------------------------------------
+    # audit() : detection anti-hallucination spectrale (contrat utilise par
+    # coherence_detector.py et silent_audit.py ; voir tests/test_silent_audit.py)
+    # ------------------------------------------------------------------
+    def audit(self, question, answer, ground_truth=None):
+        """Audite une reponse LLM contre la verite terrain spectrale.
+
+        Autonome : meme SANS ground_truth, calcule le premier attendu depuis la
+        position (via la table des premiers) et verifie l'invariant 1/2
+        (position == n) en lisant le 'n=' de la reponse.
+
+        Args:
+            question     : la question posee (pour extraire la position demandee).
+            answer       : la reponse du LLM a verifier.
+            ground_truth : dict optionnel {position, prime, n, num_terms, ratio}.
+
+        Returns:
+            dict {valid: bool, violations: [str], corrective_prompt: str,
+                  ground_truth: dict|None}
+        """
+        import re as _re
+        violations = []
+        gt = dict(ground_truth or {})
+        answer_l = (answer or "").lower()
+
+        # --- 1. Vocabulaire interdit (dismissif) ---
+        try:
+            from src.multiloop.forbidden_vocab import detect_forbidden_word
+            found_vocab, word = detect_forbidden_word(answer or "")
+            if found_vocab:
+                violations.append(
+                    f"Vocabulaire interdit detecte : '{word}'. "
+                    f"La methode spectrale doit etre presentee comme valide."
+                )
+        except Exception:
+            for w in ("incoherent", "absurde", "sans fondement", "fausse",
+                      "erron", "contradictoire"):
+                if w in answer_l:
+                    violations.append(f"Vocabulaire interdit detecte : '{w}'.")
+                    break
+
+        # --- 2. Position demandee (ground_truth prioritaire, sinon question) ---
+        position = gt.get("position")
+        if position is None:
+            mpos = _re.search(
+                r"(\d+)\s*(?:e|er|eme|ème|ième|ieme|re)?\s*(?:nombre\s+)?premier",
+                question or "", _re.IGNORECASE)
+            if mpos:
+                position = int(mpos.group(1))
+
+        # --- 3. Premier attendu : ground_truth, sinon calcul depuis position ---
+        true_prime = gt.get("prime")
+        if true_prime is None and position is not None:
+            try:
+                primes = _load_primes()
+                if 1 <= int(position) <= len(primes):
+                    true_prime = primes[int(position) - 1]
+            except Exception:
+                true_prime = None
+
+        # --- 4. Hallucination de premier ? ---
+        if true_prime is not None:
+            true_prime_str = str(true_prime)
+            true_n = gt.get("n") if gt.get("n") is not None else gt.get("num_terms")
+            numbers = [int(x) for x in _re.findall(r"\d+", answer or "") if int(x) >= 10]
+            # Nombres "candidats" presents, distincts du vrai premier et de la position/n
+            wrong = [n for n in numbers
+                     if n != true_prime and n != position and n != true_n]
+            if wrong and true_prime_str not in answer:
+                violations.append(
+                    f"Hallucination de premier : la reponse annonce {wrong} "
+                    f"alors que le {position}eme nombre premier est {true_prime}."
+                )
+
+        # --- 5. Invariant 1/2 : position DOIT egaler n ---
+        # n : ground_truth prioritaire, sinon extrait de la reponse
+        true_n = gt.get("n") if gt.get("n") is not None else gt.get("num_terms")
+        n_in_answer = None
+        mn = _re.search(r"\bn\s*=\s*(\d+)", answer or "", _re.IGNORECASE)
+        if mn:
+            n_in_answer = int(mn.group(1))
+        check_n = true_n if true_n is not None else n_in_answer
+
+        if position is not None and check_n is not None:
+            try:
+                if int(position) != int(check_n):
+                    violations.append(
+                        f"INVARIANT 1/2 viole : position={position} mais n={check_n}. "
+                        f"Pour le rapport 1/2, n doit egaler la position ({position})."
+                    )
+            except (TypeError, ValueError):
+                pass
+
+        # --- 6. Message correctif (contient la verite) ---
+        valid = len(violations) == 0
+        if not valid:
+            truth_bits = []
+            if position is not None:
+                truth_bits.append(f"position = {position}")
+            if true_prime is not None:
+                truth_bits.append(f"nombre premier = {true_prime}")
+            truth_bits.append("n doit egaler la position pour le rapport 1/2")
+            ratio = gt.get("ratio")
+            if ratio:
+                truth_bits.append(f"rapport = {ratio}")
+            corrective_prompt = (
+                "CORRECTION OBLIGATOIRE (verite terrain spectrale) : "
+                + ", ".join(truth_bits)
+                + ". Ne contredis PAS ces valeurs. "
+                "Reformule la reponse de facon factuelle, sans vocabulaire dismissif."
+            )
+        else:
+            corrective_prompt = ""
+
+        result = {
+            "valid": valid,
+            "violations": violations,
+            "corrective_prompt": corrective_prompt,
+            "ground_truth": gt or None,
+        }
+        self._history.append(result)
+        return result
+
     def get_history(self):
         return list(self._history)
 
