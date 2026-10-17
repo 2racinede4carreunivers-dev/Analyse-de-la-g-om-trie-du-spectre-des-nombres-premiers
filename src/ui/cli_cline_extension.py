@@ -54,7 +54,12 @@ class CLIClikeExtension:
         if result.is_gabriel and result.gabriel_handler:
             try:
                 output = result.gabriel_handler()
-                console.print(f"[bold cyan]Gabriel:[/bold cyan] {output}")
+                if isinstance(output, str) and "\n" in output:
+                    # Reponse longue (multi-rapports) : afficher brut, sans markup
+                    console.print("[bold cyan]Gabriel :[/bold cyan]")
+                    console.print(output, markup=False)
+                else:
+                    console.print(f"[bold cyan]Gabriel:[/bold cyan] {output}")
             except Exception as e:
                 console.print(f"[red]Error:[/red] {e}")
             return True

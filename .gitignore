@@ -10,7 +10,18 @@ node_modules/
 .DS_Store
 _archive_tmp/
 *.tar
+# pythonLLM — artefacts regenérés (base SQLite + emissions) : jamais committés
+pythonLLM/corpus/*.db
+pythonLLM/corpus/*.db-wal
+pythonLLM/corpus/*.db-shm
+pythonLLM/sorties/
+# Copies brutes des sources ouvertes (W3C / UE / SMC) : usage local uniquement,
+# jamais publiees sur le depot ; seules les notions encodees (avec attribution
+# et SHA-256) sont partageables via pythonLLM/corpus/sources_ouvertes.py
+pythonLLM/corpus/snapshots/
 # Ephemeral / machine-specific (VS Code sidecar, locks jEdit) — never commit
 .sidecar/
 theories/#*#
 *#validation_hol_unifiee.thy#
+# Artefact generateur volumineux (46 Mo) — regenerable, jamais commite
+rapports_ancres_1000001_3000001.txt

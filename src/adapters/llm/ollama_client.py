@@ -15,10 +15,27 @@ logger = logging.getLogger(__name__)
 class OllamaClient:
     """Client async pour l'API Ollama avec correction UTF-8."""
 
-    def __init__(self, base_url: str | None = None, model: str = "llama3.2", timeout: float = 10.0):
+    def __init__(
+        self,
+        base_url: str | None = None,
+        model: str = "llama3.2",
+        timeout: float = 10.0,
+        keep_alive: str | float | None = None,
+        num_predict: int | None = None,
+        num_ctx: int | None = None,
+    ):
         self.base_url = (base_url or os.environ.get("OLLAMA_HOST", "http://ollama:11434")).rstrip("/")
         self.model = model
         self.timeout = timeout
+        # keep_alive : duree de maintien du modele en RAM (evite le cold-start
+        # de ~7s au premier appel). Accepte "30m", "10s", -1 (infini) ou None.
+        self.keep_alive = keep_alive
+        # Longueur de generation (sans frais : 100% local). None = defaut Ollama.
+        # Pour un tableau 1/2 -> 1/111 (109 ancrages), viser >= 4096 tokens.
+        self.num_predict = num_predict
+        # Fenetre de contexte : un prompt multi-rapports + chiffres calcules
+        # depasse vite 4k tokens. 8192 evite la troncature d'entree.
+        self.num_ctx = num_ctx
         self.sanitizer = UTF8Sanitizer()
 
     async def is_available(self) -> bool:
@@ -56,6 +73,20 @@ class OllamaClient:
             "stream": False,
             "options": {"temperature": temperature},
         }
+        # Restitution enrichie (sans toucher au pipeline cognitif) :
+        # propage num_predict / num_ctx sinon Ollama coupe court (~defaut court).
+        if self.num_predict is not None:
+            try:
+                payload["options"]["num_predict"] = int(self.num_predict)
+            except (TypeError, ValueError):
+                pass
+        if self.num_ctx is not None:
+            try:
+                payload["options"]["num_ctx"] = int(self.num_ctx)
+            except (TypeError, ValueError):
+                pass
+        if self.keep_alive is not None:
+            payload["keep_alive"] = self.keep_alive
         if system_clean:
             payload["system"] = system_clean
         
@@ -104,6 +135,19 @@ class OllamaClient:
             "stream": False,
             "options": {"temperature": temperature},
         }
+        # Idem generate : propage le budget tokens / contexte (restitution seule).
+        if self.num_predict is not None:
+            try:
+                payload["options"]["num_predict"] = int(self.num_predict)
+            except (TypeError, ValueError):
+                pass
+        if self.num_ctx is not None:
+            try:
+                payload["options"]["num_ctx"] = int(self.num_ctx)
+            except (TypeError, ValueError):
+                pass
+        if self.keep_alive is not None:
+            payload["keep_alive"] = self.keep_alive
         try:
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 resp = await client.post(f"{self.base_url}/api/chat", json=payload)

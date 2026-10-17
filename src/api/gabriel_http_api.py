@@ -47,6 +47,17 @@ def init_gabriel_api(gabriel_pipeline, gabriel_config):
     logger.info("Gabriel HTTP API initialized (port 8000)")
 
 
+def _enrichir_multi_rapports(question: str, answer):
+    """Couche reponse : append le tableau multi-rapports deterministe (no-throw)."""
+    try:
+        from src.core.multi_ratio_response import enrichir_reponse_multi_rapports
+        cfg_multi = (config or {}).get("multi_ratio_reponse", None) if isinstance(config, dict) else None
+        enrichir_reponse_multi_rapports(question, answer, cfg_multi)
+    except Exception as exc:  # pragma: no cover - garde-fou reponse
+        logger.warning("Enrichissement multi-rapports ignore: %s", exc)
+    return answer
+
+
 def _guard_reject(question: str):
     """Garde-fou de domaine absolu (La fiancée de Cline).
 
@@ -99,7 +110,8 @@ def query():
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         final_answer = loop.run_until_complete(pipeline.process(question))
-        
+        final_answer = _enrichir_multi_rapports(question, final_answer)
+
         return jsonify({
             "answer": final_answer.answer_text,
             "confidence": final_answer.confidence,
@@ -225,6 +237,7 @@ def sync_universestaucarre():
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         local_answer = loop.run_until_complete(pipeline.process(question))
+        local_answer = _enrichir_multi_rapports(question, local_answer)
         
         # Sauvegarder la synchro
         sync_dir = Path("/home/agent/app/data/universestaucarre-sync")
@@ -290,7 +303,8 @@ def stream_query():
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         final_answer = loop.run_until_complete(pipeline.process(question))
-        
+        final_answer = _enrichir_multi_rapports(question, final_answer)
+
         return jsonify({
             "answer": final_answer.answer_text,
             "streamed": True,

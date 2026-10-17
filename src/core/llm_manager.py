@@ -96,7 +96,11 @@ class ClaudeClient:
                 )
             else:
                 try:
-                    self.client = anthropic.Anthropic(api_key=self.api_key)
+                    # SDK anthropic 1.x : le timeout se règle au niveau du
+                    # client, PAS dans messages.create() (qui le refuse).
+                    self.client = anthropic.Anthropic(
+                        api_key=self.api_key, timeout=self.timeout
+                    )
                     logger.info(f"✅ Claude client initialized: model={self.model}")
                 except Exception as e:
                     logger.error(f"❌ Claude initialization failed: {e}")
@@ -117,15 +121,23 @@ class ClaudeClient:
             return ""
 
         try:
-            response = self.client.messages.create(
-                model=self.model,
-                max_tokens=self.max_tokens,
-                system=system
+            # SDK anthropic 1.x : temperature vit dans
+            # output_config={"temperature": ...} (plus en kwarg direct),
+            # et le timeout HTTP est réglé sur le client.
+            kwargs: dict = {
+                "model": self.model,
+                "max_tokens": self.max_tokens,
+                "system": system
                 or "Tu es Gabriel, un expert en mathématiques et géométrie spectrale.",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=temperature or self.temperature,
-                timeout=self.timeout,
-            )
+                "messages": [{"role": "user", "content": prompt}],
+            }
+            if (temperature if temperature is not None else self.temperature) is not None:
+                kwargs["output_config"] = {
+                    "temperature": temperature
+                    if temperature is not None
+                    else self.temperature
+                }
+            response = self.client.messages.create(**kwargs)
 
             return response.content[0].text
 
@@ -147,13 +159,19 @@ class ClaudeClient:
             return ""
 
         try:
-            response = self.client.messages.create(
-                model=self.model,
-                max_tokens=self.max_tokens,
-                messages=messages,
-                temperature=temperature or self.temperature,
-                timeout=self.timeout,
-            )
+            # SDK 1.x : voir generate() — output_config + timeout sur client.
+            kwargs: dict = {
+                "model": self.model,
+                "max_tokens": self.max_tokens,
+                "messages": messages,
+            }
+            if (temperature if temperature is not None else self.temperature) is not None:
+                kwargs["output_config"] = {
+                    "temperature": temperature
+                    if temperature is not None
+                    else self.temperature
+                }
+            response = self.client.messages.create(**kwargs)
 
             return response.content[0].text
 
@@ -184,12 +202,19 @@ class LLMManager:
         self.primary = llm_cfg.get("primary", "ollama")
         self.fallback_1 = llm_cfg.get("fallback_1", "claude")
         self.fallback_2 = llm_cfg.get("fallback_2", "openai")
+        # 2026-10-13 : mode 100% local gratuit. Si true, generate()/chat()
+        # court-circuitent les fallbacks cloud (cles 401) et ne touchent
+        # qu'a Ollama. Basculer a false quand les cles seront revalidees.
+        self.ollama_only = bool(llm_cfg.get("ollama_only", False))
 
         # Initialiser clients
         self.ollama = OllamaClient(
             base_url=ollama_cfg.get("base_url"),
             model=ollama_cfg.get("model", "llama3.2"),
             timeout=float(ollama_cfg.get("timeout_seconds", 10)),
+            keep_alive=ollama_cfg.get("keep_alive"),
+            num_predict=ollama_cfg.get("num_predict", 8192),
+            num_ctx=ollama_cfg.get("num_ctx", 8192),
         )
 
         self.claude = ClaudeClient(
@@ -297,6 +322,16 @@ class LLMManager:
                 len(ctx_block),
             )
 
+        # --- Couche reponse : consigne MULTI-RAPPORTS par lots -------------
+        # Evite que llama3.2 ne resume la liste des rapports 1/k a « un seul
+        # ancre » : il decrit par lots, le tableau exhaustif deterministe
+        # etant append APRES sa reponse (voir multi_ratio_response).
+        try:
+            from .multi_ratio_response import consigne_prompt_multi_rapports
+            prompt_augmente = consigne_prompt_multi_rapports(prompt_augmente)
+        except Exception as exc:  # pragma: no cover - garde-fou prompt
+            logger.debug("Consigne multi-rapports ignoree: %s", exc)
+
         # ========== ÉTAPE 1: OLLAMA ==========
         if self.primary == "ollama" and await self._check_ollama():
             logger.info("🔵 Tentative 1/3: Ollama (llama3.2) - timeout 10s")
@@ -311,6 +346,11 @@ class LLMManager:
             logger.warning("⚠️ Ollama timeout ou réponse vide (10s expiré)")
         elif self.primary == "ollama":
             logger.warning("⚠️ Ollama indisponible (daemon non détecté)")
+
+        # 2026-10-13 : mode 100% local gratuit -> pas de fallback cloud (cles 401).
+        if self.ollama_only:
+            logger.error("❌ Mode ollama_only : Ollama seul autorise, echec sans fallback cloud.")
+            return "[ERREUR LLM] Ollama indisponible (mode local seul, sans fallback cloud)."
 
         # ========== ÉTAPE 2: CLAUDE ==========
         if self.claude.is_available():
@@ -385,6 +425,11 @@ class LLMManager:
             if result:
                 return result
             logger.warning("⚠️ Ollama chat vide, fallback Claude")
+
+        # 2026-10-13 : mode 100% local gratuit -> pas de fallback cloud.
+        if self.ollama_only:
+            logger.error("❌ Mode ollama_only : Chat Ollama seul autorise, echec sans fallback cloud.")
+            return "[ERREUR LLM] Chat Ollama indisponible (mode local seul)."
 
         # CLAUDE
         if self.claude.is_available():

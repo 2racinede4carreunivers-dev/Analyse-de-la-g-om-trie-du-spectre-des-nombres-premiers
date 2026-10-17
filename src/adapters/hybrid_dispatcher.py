@@ -19,6 +19,8 @@ from typing import Optional, Any, Callable
 
 from .cline_tools_bridge import ClineToolDispatcher, ToolResult
 from ..dispatch.ratio_dispatcher import dispatch_from_prompt as gabriel_dispatch
+from ..dispatch.multi_ratio_parser import est_requete_multi, parser_multi_ratio
+from ..dispatch.formateur_multi_ratio import repondre_multi_ratio
 
 logger = logging.getLogger("gabriel.hybrid_dispatcher")
 
@@ -121,6 +123,49 @@ class HybridDispatcher:
         
         # Commandes Gabriel natives
         elif category == CommandCategory.GABRIEL_MATH:
+            # --- Requete multi-rapports (plage 1/k=a 1/b) -> pipeline cognitif ---
+            if est_requete_multi(command):
+                try:
+                    spec = parser_multi_ratio(command)
+                except ValueError as e:
+                    # Hors limites agent (k_fin > 1 000 000) ou invalide :
+                    # refus formel, pas de fallback LLM silencieux.
+                    logger.info(f"Multi-ratio refuse: {e}")
+                    reponse = repondre_multi_ratio(command)  # message d'erreur standardise
+                    return DispatchResult(
+                        category=category,
+                        is_cline=False,
+                        is_gabriel=True,
+                        command_text=command,
+                        gabriel_handler=lambda: reponse,
+                        metadata={"type": "multi_ratio_refuse", "raison": str(e)},
+                    )
+                try:
+                    reponse = repondre_multi_ratio(command)
+                    return DispatchResult(
+                        category=category,
+                        is_cline=False,
+                        is_gabriel=True,
+                        command_text=command,
+                        gabriel_handler=lambda: reponse,
+                        metadata={
+                            "type": "multi_ratio",
+                            "k_debut": spec.k_debut,
+                            "k_fin": spec.k_fin,
+                            "n": spec.n,
+                            "nb_rapports": spec.taille,
+                        }
+                    )
+                except Exception as e:
+                    logger.warning(f"Multi-ratio dispatch failed: {e}")
+                    return DispatchResult(
+                        category=CommandCategory.LLM_ROUTING,
+                        is_cline=False,
+                        is_gabriel=False,
+                        command_text=command,
+                        metadata={"fallback_reason": str(e)}
+                    )
+            # --- Ratio unique 1/k (registre FORMULA_REGISTRY) ---
             try:
                 ratio, formulas = self.gabriel_dispatch(command)
                 return DispatchResult(

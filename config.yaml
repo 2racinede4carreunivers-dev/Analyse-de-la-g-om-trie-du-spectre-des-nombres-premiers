@@ -13,11 +13,22 @@ llm:
   primary: "ollama"
   fallback_1: "claude"             # priorite sur OpenAI pour HOL/maths
   fallback_2: "openai"
+  # 2026-10-13 : cles cloud Claude/OpenAI invalides (401) -> 100% local gratuit.
+  # true = ne JAMAIS appeler Claude/OpenAI (zero cout, zero 401). false = fallback cloud.
+  ollama_only: true
   ollama:
     model: "llama3.2"
     base_url: "http://ollama:11434"  # Service Docker Compose
-    timeout_seconds: 10              # 10s max par appel (au lieu de 60s)
+    # 2026-10 : le 1er appel charge llama3.2 en RAM (~7s). Un prompt multi-
+    # rapports depassait 10s -> faux "Ollama indisponible". Timeout genereux.
+    timeout_seconds: 120
+    # Garde le modele precharge en RAM entre les appels (evite le cold-start).
+    keep_alive: "30m"
     temperature: 0.2
+    # Restitution enrichie (hors pipeline cognitif) : budget generation / contexte.
+    # 8192 tokens permet le tableau 1/2 -> 1/111 (109 ancrages) sans surcout (100% local).
+    num_predict: 8192
+    num_ctx: 8192
   claude:
     # Si vide, lit CLAUDE_MODEL du .env, sinon defaut Sonnet 4.5
     # Modeles disponibles en 2026 :
@@ -74,6 +85,18 @@ slow_motion:
     num_variants: 4            # nombre de reformulations demandees (3-5 ideal)
     timeout_s: 5.0             # timeout LLM (fallback silencieux au-dela)
     temperature: 0.3           # basse pour rester factuel
+
+# === Restitution MULTI-RAPPORTS (couche reponse - equations non modifiees) ===
+# Quand l'utilisateur demande PLUSIEURS rapports 1/k (plage « 1/2 a 1/111 »,
+# lots « 1/2-1/10, 1/11-1/20 », « tous les rapports »), la couche reponse
+# append un tableau DETERMINISTE genere par pipeline_cognitif (lecture seule).
+# Fichiers precalcules reutilises : Liste_Premier_Multi_Rapports_K/liste_k*_n*.txt
+multi_ratio_reponse:
+  enabled: true
+  max_k_calcul_direct: 2000   # au-dela : fichier precalcule requis ou message
+  max_k_inline: 5000          # au-dela : extrait tete/queue dans la reponse
+  lots_lignes: 10             # taille des lots pour la consigne LLM
+  tableau_comparatif: true    # + tableau Digamma/branches si <= 200 rapports
 
 # === Pipeline cognitif ===
 pipeline:

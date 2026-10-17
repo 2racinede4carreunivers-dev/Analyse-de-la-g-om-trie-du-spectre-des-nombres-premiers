@@ -2745,15 +2745,35 @@ class CLIInterface:
         if is_slow_motion:
             return self._display_slow_motion(answer)
 
+        # Couche reponse : separer la prose LLM du tableau multi-rapports
+        # deterministe (append par multi_ratio_response). Le tableau est
+        # imprime BRUT : markup=False evite que Rich interprete [DYN] /
+        # [PREMIER TROUVE] comme des styles, soft_wrap preserve les colonnes.
+        texte = answer.answer_text or ""
+        marqueur = "### Reconstruction multi-rapports"
+        idx = texte.find(marqueur)
+        if idx > 0:
+            prose, tableau = texte[:idx].rstrip(), texte[idx:]
+        else:
+            prose, tableau = texte, None
+
         # Affichage principal standard
         console.print(
             Panel(
-                answer.answer_text,
+                prose,
                 title=f"[bold green]Reponse[/bold green]  "
                 f"(score {answer.best_score:.1f}/10, iter {answer.iterations_used})",
                 border_style="green",
             )
         )
+        if tableau:
+            console.print()
+            console.print(
+                Text(tableau, no_wrap=True, overflow="ignore"),
+                markup=False,
+                highlight=False,
+            )
+            console.print()
         # Calculs intermediaires
         if answer.structured_data:
             facts = []

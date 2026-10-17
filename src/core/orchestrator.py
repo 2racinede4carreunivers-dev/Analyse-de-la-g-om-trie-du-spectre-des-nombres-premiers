@@ -37,6 +37,16 @@ class Orchestrator:
         force_mode: Any = None,
     ) -> FinalAnswer:
         result = await self.pipeline.process(question, progress_cb=progress_cb, force_mode=force_mode)
+        # --- Couche reponse : restitution MULTI-RAPPORTS deterministe ------
+        # Si la question demande plusieurs rapports 1/k (plage, lots, liste),
+        # append le tableau exhaustif genere par le dispatcher du pipeline
+        # cognitif (lecture seule, equations intactes). Idempotent + no-throw.
+        try:
+            from .multi_ratio_response import enrichir_reponse_multi_rapports
+            cfg_multi = (self.config or {}).get("multi_ratio_reponse", None)
+            enrichir_reponse_multi_rapports(question, result, cfg_multi)
+        except Exception as exc:  # pragma: no cover - garde-fou reponse
+            logger.warning("Enrichissement multi-rapports ignore: %s", exc)
         # Journal léger (backward-compatible)
         self.memory.append({"role": "user", "content": question})
         self.memory.append({"role": "assistant", "content": result.answer_text})
