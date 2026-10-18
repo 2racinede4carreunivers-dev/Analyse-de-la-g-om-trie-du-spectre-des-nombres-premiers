@@ -1,6 +1,6 @@
-"""
+r"""
 Gabriel Image Analysis Interface - Module d'interface utilisateur
-==================================================================
+=================================================================
 
 Permet aux utilisateurs de demander à Gabriel d'analyser des images
 sauvegardées sur leur système local.
@@ -18,17 +18,25 @@ from pathlib import Path
 from typing import Optional, Dict, Any
 import re
 
-try:
-    from complete_validation_integration import get_complete_vision_system
+try:  # contexte paquet : src.gabriel_image_interface
+    from .complete_validation_integration import get_complete_vision_system
     VISION_AVAILABLE = True
-except ImportError:
-    VISION_AVAILABLE = False
+except ImportError:  # contexte plat : src/ sur sys.path
+    try:
+        from complete_validation_integration import get_complete_vision_system
+        VISION_AVAILABLE = True
+    except ImportError:
+        VISION_AVAILABLE = False
 
-try:
-    from production_validation_system import get_production_validation_system
+try:  # contexte paquet : src.gabriel_image_interface
+    from .production_validation_system import get_production_validation_system
     PRODUCTION_AVAILABLE = True
-except ImportError:
-    PRODUCTION_AVAILABLE = False
+except ImportError:  # contexte plat : src/ sur sys.path
+    try:
+        from production_validation_system import get_production_validation_system
+        PRODUCTION_AVAILABLE = True
+    except ImportError:
+        PRODUCTION_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +60,7 @@ class GabrielImageInterface:
             self.production_system = None
     
     def process_image_request(self, user_input: str) -> Dict[str, Any]:
-        """
+        r"""
         Traite une requête d'analyse d'image en langage naturel
         
         Exemples de requêtes:

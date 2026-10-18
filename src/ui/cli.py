@@ -429,6 +429,15 @@ class CLIInterface:
         # une question spectrale et halluciner une reponse.
         if c.startswith("image "):
             return self._handle_analyser_image("analyser-image " + cmd[len("image "):])
+        # Commandes vision documentees (docs/VISION_GABRIEL_TOUS_FORMATS_CHEMIN.md) :
+        # !image <chemin> / !analyser / !historique. Traitees ici AVANT le
+        # pipeline naturel pour que '!image C:\...' ne soit pas hallucine.
+        if (
+            c == "!image"
+            or c.startswith("!image ")
+            or c in {"!analyser", "!historique"}
+        ):
+            return self._handle_vision_commande(cmd)
         if c.startswith("lire ") or c == "lire":
             return self._handle_lire(cmd)
         if c.startswith("scan ") or c == "scan":
@@ -1291,6 +1300,10 @@ class CLIInterface:
                  "Alias rapide : analyse Claude Vision (idem analyser-image)"),
                 ("analyser-image <chemin> \\[q]",
                  "Analyse Claude Vision (decrit / interprete l'image)"),
+                ("!image <chemin>",
+                 "Vision Gabriel : charge l'image (analyse locale + Claude Vision)"),
+                ("!analyser / !historique",
+                 "Analyse la derniere image / liste les images chargees"),
                 ("lire <chemin> [n_lignes]",
                  "Lit un fichier texte (.tex/.thy/.md/.py/.csv/...)"),
                 ("scan <chemin>",
@@ -2021,6 +2034,77 @@ class CLIInterface:
         except (FileNotFoundError, IsADirectoryError, RuntimeError, ValueError) as exc:
             console.print(f"\n  [red]{exc}[/red]\n")
         return True
+
+    def _handle_vision_commande(self, cmd: str) -> bool:
+        """Commandes vision : !image <chemin> / !analyser / !historique.
+
+        Analyse locale (metadonnees reelles, sans dependance reseau) puis, si
+        une cle Anthropic est disponible, analyse Claude Vision complete.
+        L'historique est conserve entre commandes via le singleton
+        TerminalVisionGabriel (docs/VISION_GABRIEL_TOUS_FORMATS_CHEMIN.md).
+        """
+        from ..core.vision_gabriel import get_terminal_vision
+        from ..core.filesystem_access import analyser_image
+
+        tv = get_terminal_vision()
+        texte = cmd.strip()
+
+        if texte.lower() == "!image":
+            console.print(
+                "\n  [yellow]Usage : !image <chemin>\n"
+                "  Exemple : !image C:\\Users\\Philippe\\Desktop\\graphe.png\n"
+                "  Puis    : !analyser  |  !historique[/yellow]\n"
+            )
+            return True
+
+        if texte.lower().startswith("!image "):
+            chemin = texte[len("!image "):].strip().strip("\"'")
+            sortie = tv.commande_charger_image(chemin)
+            if sortie.startswith("Erreur"):
+                console.print(f"\n  [red]{sortie}[/red]\n")
+                return True
+
+            derniere = tv.historique_images[-1]
+            console.print(Panel(
+                self._rapport_vision_local(derniere),
+                title=f"[cyan]Vision Gabriel (local) : {derniere['chemin']}[/cyan]",
+                border_style="cyan",
+            ))
+            try:
+                analyse_claude = analyser_image(derniere["chemin"])
+            except (RuntimeError, FileNotFoundError, IsADirectoryError, ValueError) as exc:
+                console.print(
+                    f"\n  [yellow]{exc}[/yellow]\n"
+                    "  [dim]Analyse locale ci-dessus. Pour la description complete, "
+                    "configurer la cle Claude (commande 'env-check').[/dim]\n"
+                )
+            else:
+                console.print(Panel(
+                    analyse_claude,
+                    title=f"[cyan]Analyse Claude Vision : {derniere['chemin']}[/cyan]",
+                    border_style="cyan",
+                ))
+            return True
+
+        sortie = tv.processer_commande_terminal(texte)
+        if sortie is None:
+            console.print(f"\n  [yellow]Commande vision inconnue : {texte}[/yellow]\n")
+            return True
+        console.print(Panel(sortie, title="[cyan]Vision Gabriel[/cyan]", border_style="cyan"))
+        return True
+
+    @staticmethod
+    def _rapport_vision_local(entree: dict) -> str:
+        """Rapport compact de l'analyse locale d'une image chargee."""
+        analyse = entree["analyse"]
+        return (
+            f"Image : {entree['chemin']}\n"
+            f"  Type        : {analyse['type'].value}\n"
+            f"  Description : {analyse['description']}\n"
+            f"  Elements    : {len(analyse['elements'])}\n"
+            f"  Texte (OCR) : {analyse['texte']}\n"
+            f"  Donnees     : {analyse['donnes']}"
+        )
 
     def _handle_lire(self, cmd: str) -> bool:
         """Commande `lire <chemin> [n_lignes]` : lecture d'un fichier texte."""

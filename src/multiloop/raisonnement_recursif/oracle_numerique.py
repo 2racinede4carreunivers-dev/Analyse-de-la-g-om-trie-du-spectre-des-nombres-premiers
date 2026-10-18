@@ -129,6 +129,17 @@ class OracleNumerique:
             )
         return asyncio.run(self.interroger(question))
 
+    # ── repli local deterministe (helpers exposes sur l'instance) ──────────
+    @staticmethod
+    def _est_premier(n: int) -> bool:
+        """Test de primalite deterministe (delègue au helper du module)."""
+        return _est_premier(n)
+
+    @staticmethod
+    def _nieme_premier(n: int) -> Optional[int]:
+        """n-ieme nombre premier (delègue au helper du module)."""
+        return _nieme_premier(n)
+
     # ── repli local deterministe ───────────────────────────────────────────
     def _repli_local(self, question: str) -> Optional[ResultatOracle]:
         import re

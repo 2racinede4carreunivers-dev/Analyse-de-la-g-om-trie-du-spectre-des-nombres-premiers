@@ -18,7 +18,7 @@ from src.spectral import (
     reconstruct_pth_prime_full,
     verify_prime_equation,
 )
-from src.core.types import AsymmetryKind, GapKind
+from src.core.spectral_types import AsymmetryKind, GapKind
 
 
 # =============================================================

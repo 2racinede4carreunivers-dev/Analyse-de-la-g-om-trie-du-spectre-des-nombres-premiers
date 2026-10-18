@@ -15,23 +15,37 @@ from typing import Optional, Dict, Any, List, Tuple
 from datetime import datetime
 import json
 
-try:
-    from complete_vision_system import (
+try:  # contexte paquet : src.complete_validation_integration
+    from .complete_vision_system import (
         get_complete_vision_system,
         CompleteAnalysisResult,
     )
     VISION_AVAILABLE = True
-except ImportError:
-    VISION_AVAILABLE = False
+except ImportError:  # contexte plat : src/ sur sys.path
+    try:
+        from complete_vision_system import (
+            get_complete_vision_system,
+            CompleteAnalysisResult,
+        )
+        VISION_AVAILABLE = True
+    except ImportError:
+        VISION_AVAILABLE = False
 
-try:
-    from parametric_validation_module import (
+try:  # contexte paquet : src.complete_validation_integration
+    from .parametric_validation_module import (
         get_parametric_validator,
         ParametricValidator,
     )
     VALIDATION_AVAILABLE = True
-except ImportError:
-    VALIDATION_AVAILABLE = False
+except ImportError:  # contexte plat : src/ sur sys.path
+    try:
+        from parametric_validation_module import (
+            get_parametric_validator,
+            ParametricValidator,
+        )
+        VALIDATION_AVAILABLE = True
+    except ImportError:
+        VALIDATION_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 

@@ -105,7 +105,9 @@ class TestGapDirect:
         )
 
     def test_out_of_range_returns_error(self, core):
-        r = core.compute_gap_between_primes(1001, 1002)
+        # Spec agent : table etendue aux premiers <= 100001 (9592 entrees),
+        # borne de positions out-of-range = 9592 -> (9593, 9594) doit errer.
+        r = core.compute_gap_between_primes(9593, 9594)
         assert "error" in r
 
 

@@ -21,25 +21,33 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from datetime import datetime
 import json
 
-try:
-    from image_access_manager import ImageAccessManager, ImageSource, access_image
+try:  # contexte paquet : src.complete_vision_system
+    from .image_access_manager import ImageAccessManager, ImageSource, access_image
     ACCESS_AVAILABLE = True
-except ImportError:
-    ACCESS_AVAILABLE = False
-    ImageSource = None
+except ImportError:  # contexte plat : src/ sur sys.path
+    try:
+        from image_access_manager import ImageAccessManager, ImageSource, access_image
+        ACCESS_AVAILABLE = True
+    except ImportError:
+        ACCESS_AVAILABLE = False
+        ImageSource = None
 
-try:
-    from vision_module import ImageVisionAnalyzer, Shape
+try:  # contexte paquet : src.complete_vision_system
+    from .vision_module import ImageVisionAnalyzer, Shape
     VISION_AVAILABLE = True
-except ImportError:
-    VISION_AVAILABLE = False
+except ImportError:  # contexte plat : src/ sur sys.path
+    try:
+        from vision_module import ImageVisionAnalyzer, Shape
+        VISION_AVAILABLE = True
+    except ImportError:
+        VISION_AVAILABLE = False
 
-try:
-    from advanced_vision_module import (
+try:  # contexte paquet : src.complete_vision_system
+    from .advanced_vision_module import (
         AdvancedVisionAnalyzer,
         TableDetector,
         GraphDetector,
@@ -47,8 +55,18 @@ try:
         GridDetector,
     )
     ADVANCED_VISION_AVAILABLE = True
-except ImportError:
-    ADVANCED_VISION_AVAILABLE = False
+except ImportError:  # contexte plat : src/ sur sys.path
+    try:
+        from advanced_vision_module import (
+            AdvancedVisionAnalyzer,
+            TableDetector,
+            GraphDetector,
+            DiagramDetector,
+            GridDetector,
+        )
+        ADVANCED_VISION_AVAILABLE = True
+    except ImportError:
+        ADVANCED_VISION_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 

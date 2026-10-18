@@ -24,6 +24,7 @@ from .engine_recursif_background import (
 from .generateur_question_modeste import (
     construire_questions_modestes,
     meilleure_question_modeste,
+    choix_scores,
 )
 from .messages import MESSAGE_AUTOPROGRAMMATION
 from .oracle_numerique import OracleNumerique, ResultatOracle
@@ -61,6 +62,7 @@ __all__ = [
     "analyser",
     "construire_questions_modestes",
     "meilleure_question_modeste",
+    "choix_scores",
     "OracleNumerique",
     "ResultatOracle",
     "ArchiveurTimeline",

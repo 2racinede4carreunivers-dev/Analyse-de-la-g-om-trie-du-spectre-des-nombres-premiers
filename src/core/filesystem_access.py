@@ -112,7 +112,15 @@ def _resolve(chemin: str) -> Path:
                 mapping[key.strip().rstrip(":").upper()] = val.strip()
         if drive in mapping:
             return Path(mapping[drive]) / rest
-        # 2. Heuristique connue : dossier canonique de Philippe
+        # 2. Execution native Windows (hors conteneur) : si le chemin existe
+        # tel quel sur le disque local, on l'utilise directement. Sans ce
+        # test, voir-image/analyser-image/lire/scan refusaient tout chemin
+        # Windows absolu lorsque Gabriel tourne nativement sous Windows.
+        if os.name == "nt":
+            native = Path(raw)
+            if native.exists():
+                return native
+        # 3. Heuristique connue : dossier canonique de Philippe
         low = rest.lower()
         canonical_root = "theorie-mathematique-philippe-thomas-savard-2026"
         if low.startswith(canonical_root):
@@ -132,7 +140,7 @@ def _resolve(chemin: str) -> Path:
                 f"    - C:/{canonical_root}:/home/agent/app/theorie-savard:ro\n"
                 f"puis relancez : docker-compose down && docker-compose up"
             )
-        # 3. Chemin Windows generique non mappe : erreur explicite
+        # 4. Chemin Windows generique non mappe : erreur explicite
         raise FileNotFoundError(
             f"Chemin Windows detecte '{raw}' mais le lecteur '{drive}:' n'est "
             f"pas monte dans le conteneur Docker. Options :\n"

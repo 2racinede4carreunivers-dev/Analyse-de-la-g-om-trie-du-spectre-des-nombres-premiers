@@ -1,4 +1,4 @@
-"""
+r"""
 Gabriel Advanced Analysis Criteria System
 ==========================================
 
@@ -126,7 +126,7 @@ class CriteriaParser:
     
     @staticmethod
     def parse(user_query: str) -> AnalysisCriteria:
-        """
+        r"""
         Parse une requête utilisateur et retourne les critères
         
         Formats supportés:
@@ -406,10 +406,13 @@ class AdvancedAnalysisExecutor:
         
         # Importer le système de vision complet
         try:
-            from complete_vision_system import analyze_image_complete
-        except ImportError:
-            logger.warning("Vision system non disponible")
-            return analyses
+            from .complete_vision_system import analyze_image_complete
+        except ImportError:  # contexte plat : src/ sur sys.path
+            try:
+                from complete_vision_system import analyze_image_complete
+            except ImportError:
+                logger.warning("Vision system non disponible")
+                return analyses
         
         # Analyser l'image
         vision_result = analyze_image_complete(str(criteria.image_path))

@@ -33,6 +33,11 @@ from ..spectral.prime_table import nth_prime, PRIMES
 
 Z_RATIO_1_2 = 64  # constante du rapport 1/2
 
+# Bornes de la commande gap :
+#  - positions interpretables : 1..1000 (spec originale de la commande)
+#  - valeurs de premiers : table etendue jusqu'a 100001 (agent spec ecarts)
+MAX_POSITION_GAP = 1000
+
 
 @dataclass
 class GapPoint:
@@ -63,19 +68,23 @@ class GapResult:
 def _resolve_input(value: int) -> tuple[int, int]:
     """
     Resoudre une entree utilisateur en (position, prime).
-    
-    Logique :
-      - Si value <= 1000 ET value figure dans le tableau des primes a sa position :
+
+    Logique (spec commande gap) :
+      - Si value <= 1000 (MAX_POSITION_GAP, positions de la commande) :
         on prend value comme POSITION (lookup direct).
-      - Si value figure dans PRIMES (reverse lookup) : on prend value comme PRIME
-        et on en deduit la position.
-      - Si ambigu (value est a la fois <= 1000 et un nombre premier) : on prefere
-        la POSITION (interpretation prioritaire pour les petits indices).
+      - Si value figure dans PRIMES (reverse lookup — table etendue jusqu'aux
+        premiers <= 100001) : on prend value comme PRIME et on en deduit la
+        position.
+      - Si ambigu (value <= 1000 et nombre premier) : on prefere la POSITION
+        (interpretation prioritaire pour les petits indices).
+
+    Borne positive agent : premiers <= 100001 (table _primes_data).
+    Borne negative agent : premiers >= -1001 (|p| <= 1001, couvert par la table).
     """
     if value < 1:
         raise ValueError(f"Valeur invalide : {value}. Doit etre >= 1.")
     # Cas 1 : interpretation comme position (priorite si <= 1000)
-    if 1 <= value <= len(PRIMES):
+    if 1 <= value <= MAX_POSITION_GAP:
         return value, PRIMES[value - 1]
     # Cas 2 : interpretation comme prime (reverse lookup)
     try:
@@ -83,8 +92,9 @@ def _resolve_input(value: int) -> tuple[int, int]:
         return idx + 1, value
     except ValueError:
         raise ValueError(
-            f"Valeur {value} : ni une position valide (1..{len(PRIMES)}) "
-            f"ni un nombre premier connu dans la table."
+            f"Valeur {value} : ni une position valide (1..{MAX_POSITION_GAP}) "
+            f"ni un nombre premier connu dans la table (bornes agent : "
+            f"premiers <= 100001)."
         )
 
 

@@ -30,7 +30,25 @@ SORTIE_DEFAUT = Path(__file__).resolve().parent / "sorties"
 # Commandes terminal
 # --------------------------------------------------------------------------- #
 def traiter_commande(texte: str) -> Optional[str]:
-    """Traite une commande !... de l'agent fusionné; None si pas une commande."""
+    """Traite une commande !... de l'agent fusionné; None si pas une commande.
+
+    Les sous-modules d'analyse sont optionnels : un module absent produit un
+    message explicite au lieu d'une exception ModuleNotFoundError.
+    """
+    if not texte.strip().startswith("!"):
+        return None
+    try:
+        return _traiter_commande_interne(texte)
+    except ModuleNotFoundError as exc:
+        commande = texte.strip().split()[0]
+        nom = getattr(exc, "name", None) or str(exc)
+        return (
+            f"Module vision absent: {nom} (commande {commande} indisponible). "
+            "Utilisez 'image <chemin>' ou 'analyser-image' (analyse Claude Vision)."
+        )
+
+
+def _traiter_commande_interne(texte: str) -> Optional[str]:
     t = texte.strip()
     if not t.startswith("!"):
         return None
@@ -141,6 +159,15 @@ def main(argv=None) -> int:
 
     args = ap.parse_args(argv)
 
+    try:
+        return _main_dispatch(args)
+    except ModuleNotFoundError as exc:
+        nom = getattr(exc, "name", None) or str(exc)
+        print(f"Module vision absent: {nom}", file=sys.stderr)
+        return 1
+
+
+def _main_dispatch(args) -> int:
     if args.cmd == "analyse":
         from .analyse_formes import analyser_image
         print(analyser_image(args.chemin).resume())

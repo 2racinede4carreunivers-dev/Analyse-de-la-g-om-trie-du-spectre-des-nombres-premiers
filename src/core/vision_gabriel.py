@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+r"""
 VISION GABRIEL - RECONNAISSANCE D'IMAGES v7.5
 ==============================================
 
@@ -53,6 +53,14 @@ class VisionGabriel:
     def __init__(self):
         self.formats_supportes = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp']
         self.llm_vision = None  # Sera initialisé avec Claude/GPT-4V si disponible
+
+        # Windows (cp1252) : les emoji provoquent UnicodeEncodeError quand
+        # stdout est redirige (fichier/pipe). On rend l'ecriture tolerante.
+        if hasattr(sys.stdout, "reconfigure"):
+            try:
+                sys.stdout.reconfigure(errors="replace")
+            except (ValueError, OSError, AttributeError):
+                pass
         
         # Chemins de base acceptés (Windows et conteneur)
         self.chemins_base = {
@@ -67,7 +75,7 @@ class VisionGabriel:
         print(f"   Chemins acceptés: {list(self.chemins_base.keys())}")
     
     def resoudre_chemin(self, chemin_utilisateur: str) -> Optional[Path]:
-        """
+        r"""
         Résout un chemin utilisateur vers un chemin absolu valide
         
         Accepte:
@@ -256,25 +264,37 @@ class VisionGabriel:
         return ImageType.UNKNOWN
     
     def _generer_description(self, image_bytes: bytes) -> str:
-        """Génère description textuelle"""
-        return "Image analysable. Appelle Claude Vision pour description complète."
-    
+        """Génère description textuelle à partir des métadonnées réelles (PIL)"""
+        try:
+            from io import BytesIO
+            from PIL import Image
+            with Image.open(BytesIO(image_bytes)) as img:
+                return (
+                    f"Image {img.format or '?'} {img.size[0]}x{img.size[1]} px, "
+                    f"mode {img.mode}, {len(image_bytes)} octets."
+                )
+        except Exception:
+            return f"Image {len(image_bytes)} octets (métadonnées illisibles)."
+
     def _extraire_elements(self, image_bytes: bytes) -> List[Dict]:
-        """Extrait éléments détectés"""
+        """Extrait éléments détectés (analyse locale : aucun détecteur de formes)"""
         return []
-    
+
     def _extraire_texte(self, image_bytes: bytes) -> str:
-        """Extrait texte OCR"""
-        return "Texte OCR extraite à partir de l'image"
+        """Extrait texte OCR (non disponible localement sans Tesseract)"""
+        return ("OCR local indisponible — utilisez 'image <chemin>' "
+                "(analyse Claude Vision) pour extraire le texte.")
     
     def _extraire_donnees(self, image_bytes: bytes) -> Dict:
         """Extrait données structurées"""
         return {'graphique': None, 'tableau': None, 'equation': None}
     
-    def preparer_pour_gabriel(self, chemin_image: str) -> str:
-        """Prépare image pour Gabriel"""
-        
-        analyse = self.analyser_image(chemin_image)
+    def preparer_pour_gabriel(self, chemin_image: str,
+                              analyse: Optional[Dict[str, Any]] = None) -> str:
+        """Prépare image pour Gabriel (analyse fournie ou relue depuis le chemin)"""
+
+        if analyse is None:
+            analyse = self.analyser_image(chemin_image)
         
         if 'erreur' in analyse:
             return f"Erreur: {analyse['erreur']}"
@@ -323,8 +343,8 @@ class TerminalVisionGabriel:
         
         analyse = self.vision.analyser_image(image_bytes)
         self.historique_images.append({'chemin': chemin, 'analyse': analyse})
-        
-        return self.vision.preparer_pour_gabriel(chemin)
+
+        return self.vision.preparer_pour_gabriel(chemin, analyse=analyse)
     
     def processer_commande_terminal(self, texte: str) -> Optional[str]:
         """
@@ -367,6 +387,25 @@ DERNIÈRE IMAGE: {derniere['chemin']}
             return resultat
         
         return None
+
+# ========================================================================
+# SINGLETON (historique persistant entre commandes CLI)
+# ========================================================================
+
+_terminal_vision: Optional["TerminalVisionGabriel"] = None
+
+
+def get_terminal_vision() -> "TerminalVisionGabriel":
+    """Retourne l'instance unique de TerminalVisionGabriel.
+
+    L'historique des images (!image / !analyser / !historique) persiste ainsi
+    d'une commande à l'autre dans la session CLI de Gabriel.
+    """
+    global _terminal_vision
+    if _terminal_vision is None:
+        _terminal_vision = TerminalVisionGabriel()
+    return _terminal_vision
+
 
 # ========================================================================
 # TEST/DÉMO
