@@ -1,7 +1,7 @@
 """
 CertaintyKernel — Noyau de Certitude Spectral.
 
-Distillat MINIMAL des 17 sources de verite :
+Distillat MINIMAL des 18 sources de verite :
   1. theories/MS_01_Fondements.thy         (Fondements / Meta-theory, lignes origine 118-351)
   2. theories/MS_02_Suites_AB_RsP_1_2.thy  (Suites A et B + Rapport 1-2 + n x n, lignes origine 352-491)
   3. theories/MS_03_Digamma_Equation_Generale.thy  (Digamma + Axiomatisation + Equation generale, lignes origine 492-676)
@@ -16,12 +16,18 @@ Distillat MINIMAL des 17 sources de verite :
  12. theories/MS_12_Construction_Generalisee_1k.thy (Construction generalisee 1-k_i, lignes origine 3225-3492)
  13. theories/MS_13_Pont_Savard.thy          (Pont Savard : psi Tchebychev, zeta, Re=1/2, lignes origine 3493-4232)
  14. theories/MS_14_Systeme_Convolutif.thy   (Systeme convolutif 1-k + References + Licence, lignes origine 4233-5014)
- 15. theories/validation_hol_unifiee.thy     (Contre-validation formelle independante)
- 16. theories/geometrie_spectre_premier.thy  (Structures geometriques v2)
- 17. spectral_knowledge.py                   (Plan cognitif injecte dans le prompt LLM)
+ 15. theories/validation_hol_unifiee.thy     (Contre-validation formelle independante 1/2, Isabelle/HOL)
+ 16. theories/validation_zeta_lean.thy       (Contre-validation formelle inter-assistants 2/2, Lean 4 / Mathlib)
+ 17. theories/geometrie_spectre_premier.thy  (Structures geometriques v2)
+ 18. spectral_knowledge.py                   (Plan cognitif injecte dans le prompt LLM)
 
 methode_spectral.thy est le fichier source monolithe ; il a ete divise verbatim
-en les 14 sections MS_01 a MS_14 ci-dessus. Chaque entree du kernel porte une
+en les 14 sections MS_01 a MS_14 ci-dessus. La session HOL/Isabelle
+(Geometrie_spectre_premier_Philippe_Thomas_Savard) valide maintenant ces 14
+sections comme validation principale, avec deux contre-validations formelles :
+validation_hol_unifiee.thy (1/2, liens causaux internes Isabelle/HOL) et
+validation_zeta_lean.thy (2/2, pont inter-assistants Lean 4 / Mathlib : zeta,
+Lambda, zeros, psi de Tchebychev C1). Chaque entree du kernel porte une
 PROVENANCE precise (fichier.thy + ligne, ou plan) permettant la traceabilite
 complete depuis le Slow-Motion Debugger jusqu'a la section HOL/Isabelle d'origine.
 
@@ -35,7 +41,7 @@ PHILOSOPHIE :
   - Chaque entree porte une PROVENANCE (fichier.thy + ligne, ou plan).
   - Si une question peut etre repondue uniquement avec le kernel,
     la reponse est CERTAINE (pas d'hallucination possible).
-  - validation_hol_unifiee.thy sert de contre-validation indépendante.
+  - validation_hol_unifiee.thy et validation_zeta_lean.thy servent de contre-validation indépendante.
 """
 from __future__ import annotations
 
@@ -67,7 +73,7 @@ class Certainty:
 
 class CertaintyKernel:
     """
-    Noyau de Certitude : agrege et indexe les invariants des 17 sources (14 sections MS_01-MS_14 + 3 sources supplementaires).
+    Noyau de Certitude : agrege et indexe les invariants des 18 sources (14 sections MS_01-MS_14 + validation_hol_unifiee.thy + validation_zeta_lean.thy + geometrie_spectre_premier.thy + plan cognitif).
     
     Methodes principales :
       - get(key)             : recupere une certitude par sa cle
@@ -81,14 +87,15 @@ class CertaintyKernel:
         self.theories_dir = Path(theories_dir)
         self.certainties: dict[str, Certainty] = {}
         self._build_kernel()
-        logger.info("CertaintyKernel: %d certitudes chargees (17 sources: 14 sections MS + 3 supplementaires)", len(self.certainties))
+        logger.info("CertaintyKernel: %d certitudes chargees (18 sources: 14 sections MS + 4 supplementaires)", len(self.certainties))
 
     # ---------- Construction ----------
 
     def _build_kernel(self) -> None:
-        """Construit le noyau a partir des 17 sources (14 sections MS + validation + geometrie + plan cognitif)."""
+        """Construit le noyau a partir des 18 sources (14 sections MS + 2 contre-validations HOL + geometrie + plan cognitif)."""
         self._load_methode_spectral_thy()
-        self._load_validation_hol_unifiee()  # NOUVELLE SOURCE
+        self._load_validation_hol_unifiee()  # CONTRE-VALIDATION HOL 1/2 (Isabelle/HOL)
+        self._load_validation_zeta_lean()    # CONTRE-VALIDATION HOL 2/2 (Lean 4 / Mathlib)
         self._load_geometrie_spectre_thy()
         self._load_cognitive_plan()
         self._add_distilled_invariants()
@@ -224,6 +231,50 @@ class CertaintyKernel:
                     domain=domain, confidence=conf,
                 )
 
+    def _load_validation_zeta_lean(self) -> None:
+        """Extrait invariants de la contre-validation HOL 2/2 (Lean 4 / Mathlib).
+
+        Sources : fonction zeta, version completee Lambda, equation
+        fonctionnelle, zeros, fonction psi de Tchebychev (concordance C1)
+        et Pont Savard (Section XIII). Aucune hypothese de Riemann n'est
+        axiomatisee ici : seuls des enonnes specifies depuis Mathlib.
+        """
+        path = self.theories_dir / "validation_zeta_lean.thy"
+        if not path.exists():
+            logger.warning("validation_zeta_lean.thy introuvable a %s", path)
+            return
+        text = path.read_text(encoding="utf-8")
+
+        entries = [
+            ("zeta_mathlib_spec",
+             "La fonction zeta de Riemann est specifiee depuis Mathlib (completedRiemannZeta / riemannZeta).",
+             None, "general"),
+            ("equation_fonctionnelle_zeta",
+             "Equation fonctionnelle de la fonction completee : Lambda(1 - s) = Lambda(s).",
+             None, "general"),
+            ("zeros_zeta_discrets_finis",
+             "Les zéros de zeta forment un ensemble discret, fini sur tout compact (pas d'axiome RH).",
+             None, "general"),
+            ("psi_tchebychev_c1",
+             "psi(x) = somme_{n <= x} Lambda(n) : fonction psi de Tchebychev, point commun C1 du Pont Savard.",
+             None, "ratio_1_2"),
+            ("pont_savard_conditionnel",
+             "Pont Savard : RsP = 1/2 <=> Re(s) = 1/2 est un theoreme conditionnel ; RH est une definition booleenne.",
+             None, "ratio_1_2"),
+            ("pont_savard_constructif",
+             "Direction constructive RsP = 1/2, inconditionnelle (Section XIII du pipeline HOL).",
+             None, "ratio_1_2"),
+        ]
+        for key, statement, formula, domain in entries:
+            keyword = key.split("_")[0] if "_" in key else key
+            if keyword in text or key.replace("_", "").lower() in text.lower().replace("_", ""):
+                line = self._find_line(text, keyword)
+                self.certainties[key] = Certainty(
+                    key=key, statement=statement, formula=formula,
+                    provenance=[f"validation_zeta_lean.thy:{line}"],
+                    domain=domain, confidence=0.95,
+                )
+
     def _load_geometrie_spectre_thy(self) -> None:
         """Extrait invariants geometriques + lemme reconstruction_P."""
         path = self.theories_dir / "geometrie_spectre_premier.thy"
@@ -346,6 +397,23 @@ class CertaintyKernel:
             domain="ratio_1_3",
             confidence=0.95,
         )
+        self.certainties["KERNEL_PONT_SAVARD_ZETA"] = Certainty(
+            key="KERNEL_PONT_SAVARD_ZETA",
+            statement=(
+                "Pont Savard (Section XIII) : RsP = 1/2 <=> Re(s) = 1/2, "
+                "avec la fonction psi de Tchebychev comme point commun C1. "
+                "L'hypothese de Riemann n'est pas axiomatisee ; le pont est "
+                "conditionnel, la direction constructive RsP = 1/2 est "
+                "inconditionnelle."
+            ),
+            formula="RsP = 1/2 <=> Re(s) = 1/2 ; psi(x) = sum_{n<=x} Lambda(n)",
+            provenance=[
+                "MS_13_Pont_Savard.thy::Section XIII (Pont Savard)",
+                "validation_zeta_lean.thy::pont_savard_conditionnel, pont_savard_constructif, psi_tchebychev_c1",
+            ],
+            domain="ratio_1_2",
+            confidence=0.95,
+        )
         # NOUVELLES CERTITUDES : Configurations spectrales (PDF p.26-29 + .thy)
         self.certainties["KERNEL_CONFIG_1X1"] = Certainty(
             key="KERNEL_CONFIG_1X1",
@@ -437,6 +505,7 @@ class CertaintyKernel:
                 "MS_13_Pont_Savard.thy",
                 "MS_14_Systeme_Convolutif.thy",
                 "validation_hol_unifiee.thy",
+                "validation_zeta_lean.thy",
                 "geometrie_spectre_premier.thy",
                 "plan_cognitif",
             ],

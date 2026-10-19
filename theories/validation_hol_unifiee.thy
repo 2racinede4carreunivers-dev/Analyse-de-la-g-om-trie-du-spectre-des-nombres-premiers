@@ -6,7 +6,8 @@
    Date : Le trois octobre deux mille vingt-six
    Lieu : Levis, Chausdiere-Appalaches, Canada
    Role : contre-validation independante de la validation principale
-   (MS_01 a MS_14), approche formelle rigoureuse dans Isabelle/HOL.
+   (MS_01 a MS_14 = decoupage verbatim de methode_spectral.thy en 14 sections),
+   approche formelle rigoureuse dans Isabelle/HOL.
    ----------------------------------------------------------------------------
    TABLE DES MATIERES (sections + N° de ligne debut-fin, origine v7.5) :
    L  54 - L  55 : [section] Définitions de Validation Unifiée

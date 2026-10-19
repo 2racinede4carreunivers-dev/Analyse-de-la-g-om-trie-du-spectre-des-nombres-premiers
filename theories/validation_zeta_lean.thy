@@ -31,7 +31,7 @@ begin
     CONTRE-VALIDATION No 2 (INTER-ASSISTANTS) : LEAN 4 / MATHLIB <-> ISABELLE/HOL
     ==========================================================================
     Pipeline HOL/Isabelle du depot agent-multiloop-Gabriel-local :
-      * Validation principale  : methode_spectral.thy
+      * Validation principale  : MS_01 a MS_14 (decoupage verbatim de methode_spectral.thy en 14 sections)
         (objectif : Section XIII, Le Pont Savard, equation RsP = Re(s) = 1/2).
       * Contre-validation No 1 : validation_hol_unifiee.thy
         (completude et liens causaux internes de la validation principale,
