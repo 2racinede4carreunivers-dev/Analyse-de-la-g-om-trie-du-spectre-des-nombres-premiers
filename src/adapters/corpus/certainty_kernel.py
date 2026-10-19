@@ -1,11 +1,29 @@
 """
 CertaintyKernel — Noyau de Certitude Spectral.
 
-Distillat MINIMAL des 4 sources de verite :
-  1. theories/methode_spectral.thy  (definitions et axiomes Isabelle/HOL)
-  2. theories/validation_hol_unifiee.thy  (NOUVELLE: contre-validation formelle)
-  3. theories/geometrie_spectre_premier.thy  (structures geometriques v2)
-  4. spectral_knowledge.py  (plan cognitif injecte dans le prompt LLM)
+Distillat MINIMAL des 17 sources de verite :
+  1. theories/MS_01_Fondements.thy         (Fondements / Meta-theory, lignes origine 118-351)
+  2. theories/MS_02_Suites_AB_RsP_1_2.thy  (Suites A et B + Rapport 1-2 + n x n, lignes origine 352-491)
+  3. theories/MS_03_Digamma_Equation_Generale.thy  (Digamma + Axiomatisation + Equation generale, lignes origine 492-676)
+  4. theories/MS_04_Generalisation_Prime_i.thy     (Generalisation i-eme premier, lignes origine 677-761)
+  5. theories/MS_05_Modeles_1_3_1_4.thy     (Modeles 1-4 et 1-3 + Validations, lignes origine 762-1039)
+  6. theories/MS_06_Mixtes_Negatives_Asymetries.thy (Suites mixtes + Negatives + Asymetries, lignes origine 1040-1204)
+  7. theories/MS_07_Comparaison_Blocs.thy   (Comparaison asymetrique + Blocs A_k B_k, lignes origine 1205-1658)
+  8. theories/MS_08_Ecarts_Negatifs.thy     (Rapports negatifs + Ecarts negatifs, lignes origine 1659-1978)
+  9. theories/MS_09_Preuve_Absurde.thy      (Preuve par l'absurde — exclusion des composes, lignes origine 1979-2307)
+ 10. theories/MS_10_Ecarts_Mixtes_Positifs.thy (Ecarts mixtes + 1-3 + 1-4, lignes origine 2308-2630)
+ 11. theories/MS_11_Construction_SpectralFamily.thy (Construction A_i B_i + spectral_family, lignes origine 2631-3224)
+ 12. theories/MS_12_Construction_Generalisee_1k.thy (Construction generalisee 1-k_i, lignes origine 3225-3492)
+ 13. theories/MS_13_Pont_Savard.thy          (Pont Savard : psi Tchebychev, zeta, Re=1/2, lignes origine 3493-4232)
+ 14. theories/MS_14_Systeme_Convolutif.thy   (Systeme convolutif 1-k + References + Licence, lignes origine 4233-5014)
+ 15. theories/validation_hol_unifiee.thy     (Contre-validation formelle independante)
+ 16. theories/geometrie_spectre_premier.thy  (Structures geometriques v2)
+ 17. spectral_knowledge.py                   (Plan cognitif injecte dans le prompt LLM)
+
+methode_spectral.thy est le fichier source monolithe ; il a ete divise verbatim
+en les 14 sections MS_01 a MS_14 ci-dessus. Chaque entree du kernel porte une
+PROVENANCE precise (fichier.thy + ligne, ou plan) permettant la traceabilite
+complete depuis le Slow-Motion Debugger jusqu'a la section HOL/Isabelle d'origine.
 
 Le kernel expose uniquement les INVARIANTS PROUVES (axiomatises ou lemmes
 demonstres) qui constituent la verite spectrale d'urgence : c'est sur ces
@@ -49,7 +67,7 @@ class Certainty:
 
 class CertaintyKernel:
     """
-    Noyau de Certitude : agrege et indexe les invariants des 4 sources.
+    Noyau de Certitude : agrege et indexe les invariants des 17 sources (14 sections MS_01-MS_14 + 3 sources supplementaires).
     
     Methodes principales :
       - get(key)             : recupere une certitude par sa cle
@@ -63,12 +81,12 @@ class CertaintyKernel:
         self.theories_dir = Path(theories_dir)
         self.certainties: dict[str, Certainty] = {}
         self._build_kernel()
-        logger.info("CertaintyKernel: %d certitudes chargees (4 sources)", len(self.certainties))
+        logger.info("CertaintyKernel: %d certitudes chargees (17 sources: 14 sections MS + 3 supplementaires)", len(self.certainties))
 
     # ---------- Construction ----------
 
     def _build_kernel(self) -> None:
-        """Construit le noyau a partir des 4 sources."""
+        """Construit le noyau a partir des 17 sources (14 sections MS + validation + geometrie + plan cognitif)."""
         self._load_methode_spectral_thy()
         self._load_validation_hol_unifiee()  # NOUVELLE SOURCE
         self._load_geometrie_spectre_thy()
@@ -76,14 +94,27 @@ class CertaintyKernel:
         self._add_distilled_invariants()
 
     def _load_methode_spectral_thy(self) -> None:
-        """Extrait definitions + axiomes de methode_spectral.thy."""
-        path = self.theories_dir / "methode_spectral.thy"
-        if not path.exists():
-            logger.warning("methode_spectral.thy introuvable a %s", path)
-            return
-        text = path.read_text(encoding="utf-8")
+        """Extrait definitions + axiomes des 14 sections MS_01 a MS_14 (decoupage verbatim de methode_spectral.thy)."""
+        # Mapping de chaque cle vers sa section MS d'origine (fichier .thy)
+        section_of = {
+            # --- MS_02 : Suites A et B + Rapport 1-2 + n x n ---
+            "SA_def": "MS_02_Suites_AB_RsP_1_2.thy",
+            "SB_def": "MS_02_Suites_AB_RsP_1_2.thy",
+            "RsP_def": "MS_02_Suites_AB_RsP_1_2.thy",
+            # --- MS_03 : Digamma + Axiomatisation positive + Equation generale ---
+            "digamma_calc_def": "MS_03_Digamma_Equation_Generale.thy",
+            "prime_equation_identity": "MS_03_Digamma_Equation_Generale.thy",
+            "spectral_postulate_pos": "MS_03_Digamma_Equation_Generale.thy",
+            # --- MS_05 : Modeles 1-4 et 1-3 + Validations generalisees ---
+            "A_1_4_def": "MS_05_Modeles_1_3_1_4.thy",
+            "B_1_4_def": "MS_05_Modeles_1_3_1_4.thy",
+            "A_1_3_def": "MS_05_Modeles_1_3_1_4.thy",
+            "B_1_3_def": "MS_05_Modeles_1_3_1_4.thy",
+            "spectral_postulate_1_4": "MS_05_Modeles_1_3_1_4.thy",
+            "spectral_postulate_1_3": "MS_05_Modeles_1_3_1_4.thy",
+        }
 
-        # Definitions stables
+        # Definitions stables (confidence 1.0 - lemmes prouves)
         defs = [
             ("SA_def", "SA(n) = (3.25/2) * 2^n - 2",
              "SA n = (3.25 / 2) * (2 ^ n) - 2", "ratio_1_2"),
@@ -106,17 +137,22 @@ class CertaintyKernel:
              "B_1_3 n = ((219/9)/12) * (3^n) - 487*1.5", "ratio_1_3"),
         ]
         for key, statement, formula, domain in defs:
-            # Verifie que la definition existe textuellement dans le fichier
+            section_file = section_of.get(key, "methode_spectral.thy")
+            path = self.theories_dir / section_file
+            if not path.exists():
+                logger.warning("Section %s introuvable a %s", section_file, path)
+                continue
+            text = path.read_text(encoding="utf-8")
             base = key.split("_")[0]
             if base in text or statement.split("(")[0].strip() in text:
                 line = self._find_line(text, base)
                 self.certainties[key] = Certainty(
                     key=key, statement=statement, formula=formula,
-                    provenance=[f"methode_spectral.thy:{line}"],
+                    provenance=[f"{section_file}:{line}"],
                     domain=domain, confidence=1.0,
                 )
 
-        # Axiomes (confidence 0.95 - postules)
+        # Axiomes / postulats (confidence 0.95)
         axioms = [
             ("spectral_postulate_pos",
              "Pour tout n>=1 et p premier : prime_equation(n,p) = p",
@@ -129,11 +165,17 @@ class CertaintyKernel:
              "(B_1_3(n) - (B_1_3(n) - 729p))/729 = p", "ratio_1_3"),
         ]
         for key, statement, formula, domain in axioms:
+            section_file = section_of.get(key, "methode_spectral.thy")
+            path = self.theories_dir / section_file
+            if not path.exists():
+                logger.warning("Section %s introuvable a %s", section_file, path)
+                continue
+            text = path.read_text(encoding="utf-8")
             if key in text:
                 line = self._find_line(text, key)
                 self.certainties[key] = Certainty(
                     key=key, statement=statement, formula=formula,
-                    provenance=[f"methode_spectral.thy:{line}"],
+                    provenance=[f"{section_file}:{line}"],
                     domain=domain, confidence=0.95,
                 )
 
@@ -268,7 +310,7 @@ class CertaintyKernel:
             ),
             formula="N -> nth_prime(N)=p ; SA(N), SB(N) ; (SB(N) - (SB(N)-64p))/64 = p",
             provenance=[
-                "methode_spectral.thy::prime_equation_identity",
+                "MS_03_Digamma_Equation_Generale.thy::prime_equation_identity",
                 "validation_hol_unifiee.thy::validation_prime_reconstruction",
                 "geometrie_spectre_premier.thy::reconstruction_P",
                 "plan_cognitif::INVARIANT_1_2",
@@ -282,7 +324,7 @@ class CertaintyKernel:
             formula="Z = 64",
             provenance=[
                 "geometrie_spectre_premier.thy::Z_def",
-                "methode_spectral.thy::digamma_calc_def",
+                "MS_03_Digamma_Equation_Generale.thy::digamma_calc_def",
                 "validation_hol_unifiee.thy::validation_digamma_formula",
             ],
             domain="ratio_1_2",
@@ -292,7 +334,7 @@ class CertaintyKernel:
             key="KERNEL_INVARIANT_Z_4096",
             statement="Pour le rapport 1/4 : la constante diviseuse est 4096 (= 4^6).",
             formula="Z_1_4 = 4096",
-            provenance=["methode_spectral.thy::spectral_postulate_1_4"],
+            provenance=["MS_05_Modeles_1_3_1_4.thy::spectral_postulate_1_4"],
             domain="ratio_1_4",
             confidence=0.95,
         )
@@ -300,7 +342,7 @@ class CertaintyKernel:
             key="KERNEL_INVARIANT_Z_729",
             statement="Pour le rapport 1/3 : la constante diviseuse est 729 (= 3^6).",
             formula="Z_1_3 = 729",
-            provenance=["methode_spectral.thy::spectral_postulate_1_3"],
+            provenance=["MS_05_Modeles_1_3_1_4.thy::spectral_postulate_1_3"],
             domain="ratio_1_3",
             confidence=0.95,
         )
@@ -313,7 +355,7 @@ class CertaintyKernel:
             ),
             formula="RsP(n1,n2) = (SA(n1)-SA(n2)) / (SB(n1)-SB(n2)) = 1/2",
             provenance=[
-                "methode_spectral.thy::RsP_un_demi_general (lemme prouve)",
+                "MS_02_Suites_AB_RsP_1_2.thy::RsP_un_demi_general (lemme prouve)",
                 "validation_hol_unifiee.thy::validation_A_growth, validation_B_growth",
                 "analyse_hypothese_riemann_savard.pdf::page_26",
             ],
@@ -329,7 +371,7 @@ class CertaintyKernel:
             ),
             formula="RsP_nn(A,B) = sum_list(map SA A) / sum_list(map SB B), avec |A|=|B|",
             provenance=[
-                "methode_spectral.thy::RsP_nn (definition formelle)",
+                "MS_02_Suites_AB_RsP_1_2.thy::RsP_nn (definition formelle)",
                 "validation_hol_unifiee.thy::rsa_converges_to_half (definition seulement)",
                 "analyse_hypothese_riemann_savard.pdf::page_26",
             ],
@@ -347,7 +389,7 @@ class CertaintyKernel:
             ),
             formula="|B|=|A|+1 ; A,B strict croissants ; max(A)<min(B) ; RsP_bloc != 1/2",
             provenance=[
-                "methode_spectral.thy::asymetrique_ordonnee_nat",
+                "MS_07_Comparaison_Blocs.thy::asymetrique_ordonnee_nat",
                 "analyse_hypothese_riemann_savard.pdf::page_27 (exemple A=(2,3) B=(5,7,11))",
             ],
             domain="ratio_1_2",
@@ -364,7 +406,7 @@ class CertaintyKernel:
             ),
             formula="(sum_SA(A) - sum_SA(B)) / (sum_SB(A) - sum_SB(B)) ~= 1/2",
             provenance=[
-                "methode_spectral.thy::RsP_bloc_1_2",
+                "MS_07_Comparaison_Blocs.thy::RsP_bloc_1_2",
                 "analyse_hypothese_riemann_savard.pdf::page_28 (exemple chaotique = 0.498311)",
             ],
             domain="ratio_1_2",
@@ -380,7 +422,20 @@ class CertaintyKernel:
             ),
             formula=None,
             provenance=[
-                "methode_spectral.thy",
+                "MS_01_Fondements.thy",
+                "MS_02_Suites_AB_RsP_1_2.thy",
+                "MS_03_Digamma_Equation_Generale.thy",
+                "MS_04_Generalisation_Prime_i.thy",
+                "MS_05_Modeles_1_3_1_4.thy",
+                "MS_06_Mixtes_Negatives_Asymetries.thy",
+                "MS_07_Comparaison_Blocs.thy",
+                "MS_08_Ecarts_Negatifs.thy",
+                "MS_09_Preuve_Absurde.thy",
+                "MS_10_Ecarts_Mixtes_Positifs.thy",
+                "MS_11_Construction_SpectralFamily.thy",
+                "MS_12_Construction_Generalisee_1k.thy",
+                "MS_13_Pont_Savard.thy",
+                "MS_14_Systeme_Convolutif.thy",
                 "validation_hol_unifiee.thy",
                 "geometrie_spectre_premier.thy",
                 "plan_cognitif",

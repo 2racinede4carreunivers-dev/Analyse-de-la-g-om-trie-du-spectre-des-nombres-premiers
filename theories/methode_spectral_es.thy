@@ -1,21 +1,21 @@
-(*
+﻿(*
 ================================================================================
   Archivo : Methode_spectral.thy
-    /fiʃje : metod spɛktʁal ti/
+    /fiÊƒje : metod spÉ›ktÊal ti/
   Fecha : Veinticuatro de julio de dos mil veintiseis
-    /vɛ̃t katʁ ʒɥijɛ dø mil vɛ̃t sis/
+    /vÉ›Ìƒt katÊ Ê’É¥ijÉ› dÃ¸ mil vÉ›Ìƒt sis/
   Lugar : Levis, Chaudiere-Appalaches, Canada
-    /levi ʃodjɛʁ apalak kanada/
+    /levi ÊƒodjÉ›Ê apalak kanada/
   Titulo : El universo al cuadrado
-    /lynivɛʁ ɛto kaʁe/
+    /lynivÉ›Ê É›to kaÊe/
   Subtitulo : Capitulo -- La geometria del espectro de los numeros primos
-    /ʃapitʁ — la ʒeometʁi dy spɛktʁ dɛ nɔ̃bʁ pʁəmje/
+    /ÊƒapitÊ â€” la Ê’eometÊi dy spÉ›ktÊ dÉ› nÉ”ÌƒbÊ pÊÉ™mje/
   Autor : Philippe Thomas Savard
-    /filip tɔma savaʁ/
+    /filip tÉ”ma savaÊ/
 ================================================================================
 *)
 
-theory methode_spectral
+theory methode_spectral_es
   imports Complex_Main "HOL-Computational_Algebra.Primes"
 begin
 (****************************************************************)
@@ -58,52 +58,52 @@ begin
 (*      1. Definiciones SA_mix y SB_mix .....................   *)
 (*      2. Formas cerradas y recurrencia ....................   *)
 (*      3. Reconstruccion general del primero (mixto) .......   *)
-(*      4. Ejemplo : seis términos negativos ....................   *)
+(*      4. Ejemplo : seis tÃ©rminos negativos ....................   *)
 (*                                                              *)
 (* VI.  SUCESIONES NEGATIVAS - ECUACIONES ESPECTRALES                *)
 (*      1. Definiciones SA_neg_eq y SB_neg_eq ...............   *)
 (*      2. Digamma negativo ..................................   *)
-(*      3. Razón espectral negativa 1/2 (axiomatización) ....  *)
+(*      3. RazÃ³n espectral negativa 1/2 (axiomatizaciÃ³n) ....  *)
 (*                                                              *)
-(* VII. GEOMETRÍA ESPECTRAL - ASIMETRÍA ORDENADA / CAÓTICA   *)
-(*      1. Índices válidos y crecimiento estricto (int) ......   *)
-(*      2. Asimetría ordenada y caótica ..................   *)
+(* VII. GEOMETRÃA ESPECTRAL - ASIMETRÃA ORDENADA / CAÃ“TICA   *)
+(*      1. Ãndices vÃ¡lidos y crecimiento estricto (int) ......   *)
+(*      2. AsimetrÃ­a ordenada y caÃ³tica ..................   *)
 (*      3. Propiedades generales .............................   *)
 (*                                                              *)
-(* VIII. MÉTODO DE COMPARACIÓN ASIMÉTRICA                    *)
-(*      1. Versión nat de las asimetrías .......................   *)
-(*      2. Comparación asimétrica modelo 1/2 ...............   *)
-(*      3. Comparación asimétrica modelo 1/4 ...............   *)
+(* VIII. MÃ‰TODO DE COMPARACIÃ“N ASIMÃ‰TRICA                    *)
+(*      1. VersiÃ³n nat de las asimetrÃ­as .......................   *)
+(*      2. ComparaciÃ³n asimÃ©trica modelo 1/2 ...............   *)
+(*      3. ComparaciÃ³n asimÃ©trica modelo 1/4 ...............   *)
 (*                                                              *)
 (* IX.  AXIOMATIZACIONES ESPECTRALES - SECCIONES OFICIALES      *)
-(*      1. Axiomatización positiva (modelo 1/2) .............   *)
+(*      1. AxiomatizaciÃ³n positiva (modelo 1/2) .............   *)
 (*         section: "Axiomatisation positive"                  *)
 (*         axiome : spectral_postulate_pos                     *)
-(*      2. Axiomatización espectral 1/4 ......................   *)
+(*      2. AxiomatizaciÃ³n espectral 1/4 ......................   *)
 (*         section: "Axiomatisation spectral 1/4"              *)
 (*         axiome : spectral_postulate_1_4                     *)
-(*      3. Axiomatización razón 1/3 .......................   *)
+(*      3. AxiomatizaciÃ³n razÃ³n 1/3 .......................   *)
 (*         section: "Axiomatisation rapport 1/3."              *)
 (*         axiome : spectral_postulate_1_3                     *)
-(*      4. Axiomatización negativa (razón espectral 1/2) ...  *)
+(*      4. AxiomatizaciÃ³n negativa (razÃ³n espectral 1/2) ...  *)
 (*         section: "Rapport spectral 1/2 negatif"             *)
 (*         axiome : spectral_ratio_neg_un_demi                 *)
 (*                                                              *)
-(* X.   VALIDACIÓN EPIPOLAIRE DEL PLANO TRIFOCAL                 *)
+(* X.   VALIDACIÃ“N EPIPOLAIRE DEL PLANO TRIFOCAL                 *)
 (*      1. Objetos abstractos del plano trifocal ................  *)
-(*      2. Áreas y geometría de la recta crítica .........  *)
+(*      2. Ãreas y geometrÃ­a de la recta crÃ­tica .........  *)
 (*      3. Combinatoria de las desviaciones (simple/mixta) ...........  *)
 (*      4. Axiomas trifocales : Zeta / Spectral / RH .........  *)
-(*      5. Curvatura, área parabólica y validación .........  *)
-(*      6. Teorema final : solución epipolaire .............   *)
+(*      5. Curvatura, Ã¡rea parabÃ³lica y validaciÃ³n .........  *)
+(*      6. Teorema final : soluciÃ³n epipolaire .............   *)
 (*                                                              *)
-(* XI.  REGLAS DE CONSTRUCCIÓN DE LAS SUCESIONES A_i / B_i (8+ términos)*)
-(*      1. Igualdad de tamaños A y B .......................   *)
-(*      2. Términos de progresión simple ......................   *)
-(*      3. Penúltimo término ..............................   *)
-(*      4. Último término ....................................   *)
-(*      5. Construcción completa de la suite A ....................   *)
-(*      6. Sustitución posición 6 suite B ..................   *)
+(* XI.  REGLAS DE CONSTRUCCIÃ“N DE LAS SUCESIONES A_i / B_i (8+ tÃ©rminos)*)
+(*      1. Igualdad de tamaÃ±os A y B .......................   *)
+(*      2. TÃ©rminos de progresiÃ³n simple ......................   *)
+(*      3. PenÃºltimo tÃ©rmino ..............................   *)
+(*      4. Ãšltimo tÃ©rmino ....................................   *)
+(*      5. ConstrucciÃ³n completa de la suite A ....................   *)
+(*      6. SustituciÃ³n posiciÃ³n 6 suite B ..................   *)
 (*      7. Sumas de las suites ................................   *)
 (*      8. Formas cerradas Suma(A) y Suma(B) ..............   *)
 (*      9. Rapport spectral resultante .......................   *)
@@ -118,65 +118,65 @@ section "0. Foundations / Meta-theory (v3.35)"
 
 text \<open>
   ==========================================================================
-  FOUNDATIONS / META-THEORY - Visión general de la Methode Spectrale
+  FOUNDATIONS / META-THEORY - VisiÃ³n general de la Methode Spectrale
   ==========================================================================
-  Esta sección establece los fundamentos ontológicos, metodológicos y
-  epistemológicos de la Methode Spectrale de Savard ANTES de que el lector
-  encuentre las definiciones técnicas. No contiene NINGÚN axioma
-  ambiente (las escasas hipótesis formalizadas están agrupadas en el
-  mini-locale foundations_marker, cuya satisfacibilidad está trivialmente
-  atestiguada por el testigo estándar N = {1, 2, 3, ...}). Todas las pruebas
-  sustanciales están en su lugar natural en las Secciones I a XIII.
+  Esta secciÃ³n establece los fundamentos ontolÃ³gicos, metodolÃ³gicos y
+  epistemolÃ³gicos de la Methode Spectrale de Savard ANTES de que el lector
+  encuentre las definiciones tÃ©cnicas. No contiene NINGÃšN axioma
+  ambiente (las escasas hipÃ³tesis formalizadas estÃ¡n agrupadas en el
+  mini-locale foundations_marker, cuya satisfacibilidad estÃ¡ trivialmente
+  atestiguada por el testigo estÃ¡ndar N = {1, 2, 3, ...}). Todas las pruebas
+  sustanciales estÃ¡n en su lugar natural en las Secciones I a XIII.
 \<close>
 
 subsection "Foundations.1 - Ontologie et vocabulaire"
 
 text \<open>
-  La Methode Spectrale opera sobre los números primos en el sentido formal del
+  La Methode Spectrale opera sobre los nÃºmeros primos en el sentido formal del
   paquete HOL-Computational_Algebra.Primes (importado desde el encabezado de este
-  archivo). No se añade ningún axioma suplementario sobre la noción de
+  archivo). No se aÃ±ade ningÃºn axioma suplementario sobre la nociÃ³n de
   primalidad: Gabriel se conforma estrictamente al predicado `prime` de Isabelle.
 
-  Dos universos ontológicos:
+  Dos universos ontolÃ³gicos:
     - N_positif   : los enteros naturales n >= 1, dominio principal de los
-                    regímenes espectrales 1/k = 1/2, 1/3, 1/4, ...
-    - Z_negatif   : los enteros relativos n <= -1, donde vive el RÉGIMEN NEGATIVO
-                    (Sección IX, prime_i extendido, RsP_neg_k).
+                    regÃ­menes espectrales 1/k = 1/2, 1/3, 1/4, ...
+    - Z_negatif   : los enteros relativos n <= -1, donde vive el RÃ‰GIMEN NEGATIVO
+                    (SecciÃ³n IX, prime_i extendido, RsP_neg_k).
 
-  Vocabulario canónico:
-    - RANGO (n)         : posición en la secuencia, SIEMPRE un entero,
-                          NUNCA confundido con un número primo. El rango n
-                          no está sujeto a la primalidad.
-    - VALOR (p)         : el n-ésimo número primo, denotado prime_i(n) o
-                          nth_prime(n). Es este valor, y solo él,
+  Vocabulario canÃ³nico:
+    - RANGO (n)         : posiciÃ³n en la secuencia, SIEMPRE un entero,
+                          NUNCA confundido con un nÃºmero primo. El rango n
+                          no estÃ¡ sujeto a la primalidad.
+    - VALOR (p)         : el n-Ã©simo nÃºmero primo, denotado prime_i(n) o
+                          nth_prime(n). Es este valor, y solo Ã©l,
                           el que es un primo.
     - SUITE A_k (n), suite B_k (n) : dos funciones reales construidas
-                          por Philippe para cada régimen k >= 2.
-    - SUMA PARCIAL      : SA(n) = A_2(n), SB(n) = B_2(n) (régimen 1/2).
+                          por Philippe para cada rÃ©gimen k >= 2.
+    - SUMA PARCIAL      : SA(n) = A_2(n), SB(n) = B_2(n) (rÃ©gimen 1/2).
     - RAPPORT SPECTRAL  : RsP(n1, n2) = (SA(n1) - SA(n2)) / (SB(n1) - SB(n2)).
     - DIGAMMA CALCULADO : digamma_calc(n) = SA(n) - digamma(n), utilizado
-                          en la reconstrucción del n-ésimo primo.
+                          en la reconstrucciÃ³n del n-Ã©simo primo.
 \<close>
 
 subsection "Foundations.2 - Postulats fondamentaux (P1..P6)"
 
 text \<open>
   Los seis postulados siguientes gobiernan el conjunto de la Methode Spectrale.
-  Ninguno es un axioma ambiente: cada uno es bien una convención de tipo,
-  bien un teorema ya probado, bien una hipótesis explícita de un locale.
+  Ninguno es un axioma ambiente: cada uno es bien una convenciÃ³n de tipo,
+  bien un teorema ya probado, bien una hipÃ³tesis explÃ­cita de un locale.
 
-  P1  UNIVERSALIDAD ENTERA: el rango n es un entero (nat para los regímenes
-      positivos, int para el régimen negativo). Es un hecho de tipo, no
-      una hipótesis.
+  P1  UNIVERSALIDAD ENTERA: el rango n es un entero (nat para los regÃ­menes
+      positivos, int para el rÃ©gimen negativo). Es un hecho de tipo, no
+      una hipÃ³tesis.
 
-  P2  NO-PRIMALIDAD DEL RANGO: el rango n es un índice, no un valor;
-      no tiene que ser primo. Convención documental, capturada
-      formalmente por el mini-locale foundations_marker a continuación.
+  P2  NO-PRIMALIDAD DEL RANGO: el rango n es un Ã­ndice, no un valor;
+      no tiene que ser primo. ConvenciÃ³n documental, capturada
+      formalmente por el mini-locale foundations_marker a continuaciÃ³n.
 
   P3  EXISTENCIA DE LAS SUITES: para todo k >= 2 existen dos funciones
       A_k, B_k : nat -> real en forma cerrada coef_A_k * k^n - offset_A_k
       (respectivamente coef_B_k * k^n - offset_B_k). Existencia por
-      construcción (locale spectral_family, definido en la Sección XII.5).
+      construcciÃ³n (locale spectral_family, definido en la SecciÃ³n XII.5).
 
   P4  INVARIANCIA DEL RAPPORT: en cada familia espectral, RsP es
       constante e igual a coef_A_k / coef_B_k = 1/k para todo n1 >= 1,
@@ -189,37 +189,37 @@ text \<open>
       (three pillars: composite_not_prime_i,
       composite_no_reconstruction_position, composite_pair_no_rsp_positions).
 
-  P6  UNIVERSALIDAD DEL RÉGIMEN CENTRAL: k = 2 es el régimen distinguido
-      donde RsP = 1/2 se alinea con Re(rho) = 1/2 de la función zeta de
+  P6  UNIVERSALIDAD DEL RÃ‰GIMEN CENTRAL: k = 2 es el rÃ©gimen distinguido
+      donde RsP = 1/2 se alinea con Re(rho) = 1/2 de la funciÃ³n zeta de
       Riemann. Teorema RsP_universel_entier_naturel + synthese_pont_savard
-      (Sección XIII, locale ensemble_savard, satisfacibilidad probada).
+      (SecciÃ³n XIII, locale ensemble_savard, satisfacibilidad probada).
 \<close>
 
 subsection "Foundations.3 - Les trois operations fondamentales"
 
 text \<open>
-  Toda manipulación de la Methode Spectrale se reduce a una de las tres
+  Toda manipulaciÃ³n de la Methode Spectrale se reduce a una de las tres
   operaciones elementales siguientes. Son ORTOGONALES y
-  COMPLEMENTARIAS: (1) y (2) dan la MATERIA (qué primos),
-  (3) da la GEOMETRÍA (en qué régimen).
+  COMPLEMENTARIAS: (1) y (2) dan la MATERIA (quÃ© primos),
+  (3) da la GEOMETRÃA (en quÃ© rÃ©gimen).
 
-  (1) RECONSTRUCCIÓN    : da el valor del n-ésimo primo a partir
+  (1) RECONSTRUCCIÃ“N    : da el valor del n-Ã©simo primo a partir
                           de las suites A, B, digamma.
       Teorema pilar     : prime_equation_prime_i.
       Firma             : reconstruire : nat_positif -> nat_positif.
 
-  (2) EXCLUSIÓN         : rechaza todo entero compuesto de la imagen de
+  (2) EXCLUSIÃ“N         : rechaza todo entero compuesto de la imagen de
                           la methode.
       Teorema pilar     : methode_spectrale_exclusivite_P
                           (not prime C ==> forall i. C != prime_i i).
       Firma             : est_dans_MS : nat -> bool.
 
   (3) RAPPORT SPECTRAL  : mide la estabilidad entre dos rangos e
-                          identifica el régimen.
+                          identifica el rÃ©gimen.
       Teorema pilar     : RsP_generic_constant.
       Firma             : RsP : nat_positif * nat_positif -> real.
 
-  Regla mnemotécnica: (1) encuentra, (2) filtra, (3) clasifica.
+  Regla mnemotÃ©cnica: (1) encuentra, (2) filtra, (3) clasifica.
 \<close>
 
 subsection "Foundations.4 - La regle Savard (Ensemble = 1)"
@@ -231,45 +231,45 @@ text \<open>
             = 1/x  +  1/t  +  1/ms
 
   donde:
-    1/x  = función zeta de Riemann        (descompuesta en 1/y1 + 1/y2 + 1/y3)
-    1/t  = ecuación psi_savard             (puente funcional Tchebychev <-> MS)
+    1/x  = funciÃ³n zeta de Riemann        (descompuesta en 1/y1 + 1/y2 + 1/y3)
+    1/t  = ecuaciÃ³n psi_savard             (puente funcional Tchebychev <-> MS)
     1/ms = Methode Spectrale               (descompuesta en 1/ms1 + 1/ms2 + 1/ms3)
 
-  Descomposición de 1/x = zeta:
+  DescomposiciÃ³n de 1/x = zeta:
     1/y1 = componente Tchebychev
-    1/y2 = recta crítica Re(rho) = 1/2
+    1/y2 = recta crÃ­tica Re(rho) = 1/2
     1/y3 = ceros no triviales -> posiciones de los P
 
-  Descomposición de 1/ms = Methode Spectrale:
-    1/ms1 = reconstrucción del i-ésimo primo (operación 1)
-    1/ms2 = exclusión de los compuestos       (operación 2)
-    1/ms3 = rapport spectral RsP = 1/2        (operación 3, régimen central)
+  DescomposiciÃ³n de 1/ms = Methode Spectrale:
+    1/ms1 = reconstrucciÃ³n del i-Ã©simo primo (operaciÃ³n 1)
+    1/ms2 = exclusiÃ³n de los compuestos       (operaciÃ³n 2)
+    1/ms3 = rapport spectral RsP = 1/2        (operaciÃ³n 3, rÃ©gimen central)
 
   TRES CONCORDANCIAS que bloquean RsP = Re = 1/2:
-    C1 : 1/y1 = 1/t    (Tchebychev = psi_savard, validación numérica)
+    C1 : 1/y1 = 1/t    (Tchebychev = psi_savard, validaciÃ³n numÃ©rica)
     C2 : 1/y3 = 1/ms1  (ceros no triviales = valores de n = posiciones de los P)
     C3 : 1/y2 = 1/ms3  (Re(rho) = 1/2 = RsP = 1/2)
 
-  Esta arquitectura NO es ad hoc: está destinada al teorema
-  de unificación de la Sección XIII (locale ensemble_savard, teoremas
+  Esta arquitectura NO es ad hoc: estÃ¡ destinada al teorema
+  de unificaciÃ³n de la SecciÃ³n XIII (locale ensemble_savard, teoremas
   alignement_central, conclusion_ensemble, synthese_pont_savard).
 
   --------------------------------------------------------------------------
-  PRINCIPIO ANCLADO: la primacía de lo numérico real sobre lo algebraico
+  PRINCIPIO ANCLADO: la primacÃ­a de lo numÃ©rico real sobre lo algebraico
   --------------------------------------------------------------------------
   La Methode Spectrale no es una identidad algebraica elegante: es una
-  CONSTATACIÓN NUMÉRICA REAL sobre sumas de números primos.
+  CONSTATACIÃ“N NUMÃ‰RICA REAL sobre sumas de nÃºmeros primos.
 
-    - Incoherencia algebraica LOCAL: A(n1)/B(n1) != 1/k término a término
+    - Incoherencia algebraica LOCAL: A(n1)/B(n1) != 1/k tÃ©rmino a tÃ©rmino
       (ver lema algebriquement_incoherent_local).
-    - Coherencia numérica real GLOBAL: (A(n1)-A(n2))/(B(n1)-B(n2)) = 1/k
+    - Coherencia numÃ©rica real GLOBAL: (A(n1)-A(n2))/(B(n1)-B(n2)) = 1/k
       para todo n1 != n2 (ver lema coherence_numerique_reelle_P).
 
   Los coeficientes (3.25, 6.5, 73, 219, 241, 964, ...) no son elegidos
-  para simplificar una fracción: EMERGEN de los valores reales de los
+  para simplificar una fracciÃ³n: EMERGEN de los valores reales de los
   primos. El rapport 1/k no es por tanto un artefacto algebraico - es
-  una realidad numérica global, verificada sobre el conjunto de los primos P.
-  Es precisamente esta constatación la que, combinada con la exclusividad sobre P
+  una realidad numÃ©rica global, verificada sobre el conjunto de los primos P.
+  Es precisamente esta constataciÃ³n la que, combinada con la exclusividad sobre P
   (three pillars) y la unicidad funcional Tchebychev = psi_savard,
   fundamenta la certeza del autor de que Re(rho) = 1/2 es VERDADERO.
 \<close>
@@ -277,57 +277,57 @@ text \<open>
 subsection "Foundations.5 - Statut epistemologique et lecture"
 
 text \<open>
-  Guía de lectura para el lector humano y para Gabriel:
+  GuÃ­a de lectura para el lector humano y para Gabriel:
 
   LO QUE EL ARCHIVO PRUEBA FORMALMENTE:
-    - Constancia del rapport spectral para cada régimen k (RsP = 1/k).
-    - Reconstrucción correcta del n-ésimo primo mediante la ecuación espectral.
-    - Exclusión estricta de los compuestos (three pillars).
+    - Constancia del rapport spectral para cada rÃ©gimen k (RsP = 1/k).
+    - ReconstrucciÃ³n correcta del n-Ã©simo primo mediante la ecuaciÃ³n espectral.
+    - ExclusiÃ³n estricta de los compuestos (three pillars).
     - Universalidad entera natural: para todo n1, n2 >= 1, n1 != n2,
-      RsP(n1, n2) = 1/2 en el régimen central.
-    - Satisfacibilidad del locale ensemble_savard: las tres hipótesis
+      RsP(n1, n2) = 1/2 en el rÃ©gimen central.
+    - Satisfacibilidad del locale ensemble_savard: las tres hipÃ³tesis
       (hypothese_critique, pont_fonctionnel, rapport_un_demi) admiten
       un testigo concreto RsP 1 2 = 1/2. En este marco, RsP = Re = 1/2
       es un TEOREMA.
 
   LO QUE EL ARCHIVO NO PRETENDE PROBAR:
-    - La hipótesis de Riemann en el sistema ZFC ambiente (sin el locale).
+    - La hipÃ³tesis de Riemann en el sistema ZFC ambiente (sin el locale).
     - La unicidad mundial de la Methode Spectrale (sin axioma de
       completitud).
 
-  EL PONT SAVARD (Sección XIII) ES AFIRMATIVO EN SU MARCO:
+  EL PONT SAVARD (SecciÃ³n XIII) ES AFIRMATIVO EN SU MARCO:
     En el locale ensemble_savard, RsP = Re = 1/2 es un teorema, no
-    una conjetura. Las hipótesis del locale están validadas numéricamente
+    una conjetura. Las hipÃ³tesis del locale estÃ¡n validadas numÃ©ricamente
     (C1) y estructuralmente (C2, C3). El archivo no contiene ninguna
-    prueba incompleta ni axiomatización contradictoria.
+    prueba incompleta ni axiomatizaciÃ³n contradictoria.
 
-  POSICIÓN DEL AUTOR SOBRE EL ENIGMA DE RIEMANN:
-    Para Philippe Savard, la arquitectura completa (régimen central 1/2
+  POSICIÃ“N DEL AUTOR SOBRE EL ENIGMA DE RIEMANN:
+    Para Philippe Savard, la arquitectura completa (rÃ©gimen central 1/2
     universal entero natural + tres concordancias C1/C2/C3 + exclusividad
     sobre P por three pillars + satisfacibilidad del locale ensemble_savard)
-    constituye una RESPUESTA SUFICIENTE al enigma de Riemann. La primacía
-    de lo numérico real sobre lo algebraico (ver Foundations.4) hace que esta
+    constituye una RESPUESTA SUFICIENTE al enigma de Riemann. La primacÃ­a
+    de lo numÃ©rico real sobre lo algebraico (ver Foundations.4) hace que esta
     respuesta no sea conjetural sino NECESARIA: el rapport 1/2 no es
     un artefacto algebraico, emerge de la estructura misma de las
-    sumas de números primos, y su alineación con Re(rho) = 1/2
-    está verificada tanto numéricamente (C1) como estructuralmente (C2,
-    C3). El Pont Savard no añade un axioma externo: RECONOCE
+    sumas de nÃºmeros primos, y su alineaciÃ³n con Re(rho) = 1/2
+    estÃ¡ verificada tanto numÃ©ricamente (C1) como estructuralmente (C2,
+    C3). El Pont Savard no aÃ±ade un axioma externo: RECONOCE
     formalmente una realidad ya constatada sobre el conjunto de los primos P.
 
-  CONVENCIÓN DE CITACIÓN (Gabriel):
+  CONVENCIÃ“N DE CITACIÃ“N (Gabriel):
     Precisar siempre el marco: "en el locale ensemble_savard",
-    "para todo n >= 1 entero", "régimen central 1/2", etc.
-    Referirse al régimen cognitivo regime_pont_savard para la nomenclatura
+    "para todo n >= 1 entero", "rÃ©gimen central 1/2", etc.
+    Referirse al rÃ©gimen cognitivo regime_pont_savard para la nomenclatura
     completa y a las tres concordancias documentadas.
 \<close>
 
 text \<open>
-  Foundations.6 - Mini-locale foundations_marker (formalización ligera):
+  Foundations.6 - Mini-locale foundations_marker (formalizaciÃ³n ligera):
   este locale documenta formalmente los postulados P1 (universo entero
-  positivo) y P2 (rango != valor). No introduce ningún axioma global
+  positivo) y P2 (rango != valor). No introduce ningÃºn axioma global
   y su satisfacibilidad es trivial (el conjunto {1, 2, 3, ...} es un
   testigo evidente). Sirve de punto de anclaje para eventuales
-  interpretaciones pedagógicas ulteriores.
+  interpretaciones pedagÃ³gicas ulteriores.
 \<close>
 
 locale foundations_marker =
@@ -385,7 +385,7 @@ lemma RsP_un_demi_general:
   assumes "n1 >= 1" "n2 >= 1" "n1 ~= n2"
   shows "RsP n1 n2 = 1/2"
 proof -
-  (* Corrección 2026-02 : testigo explícito de no-nulidad para 2^n1 - 2^n2. *)
+  (* CorrecciÃ³n 2026-02 : testigo explÃ­cito de no-nulidad para 2^n1 - 2^n2. *)
   have hne_pow_2: "(2::real)^n1 - 2^n2 \<noteq> 0"
   proof (cases "n1 < n2")
     case True
@@ -420,25 +420,25 @@ proof -
 qed
 
 (****************************************************************)
-(* ADICIÓN : Nota conceptual y lemas de doble instancia       *)
-(* de análisis (Algebraico vs Numérico Real)                   *)
+(* ADICIÃ“N : Nota conceptual y lemas de doble instancia       *)
+(* de anÃ¡lisis (Algebraico vs NumÃ©rico Real)                   *)
 (****************************************************************)
 
 text \<open>
   NOTA DEL AUTOR (Philippe Thomas Savard):
   Cuando n >= 1 y cuando n <= -1 y es un entero entonces todos los valores
   de n remiten a un primo P. Todos los valores de n son la consecuencia de la
-  cantidad de términos en las suites A y B. Todos los P entre sí respetan
-  el rapport spectral 1/k. Este rapport es numéricamente válido pero
+  cantidad de tÃ©rminos en las suites A y B. Todos los P entre sÃ­ respetan
+  el rapport spectral 1/k. Este rapport es numÃ©ricamente vÃ¡lido pero
   algebraicamente inconsecuente.
 
-  Por la unicidad de aplicación de la ecuación de Chebyshev hacia la función Zeta,
-  el hecho de que la méthode spectrale se sustituya numéricamente a ella prueba el vínculo directo
-  con Zeta. Además, la naturaleza exclusiva de RsP = 1/2 sobre el conjunto de los primos P,
-  validada por la exclusión de los compuestos C por reducción al absurdo, implica la verdad de Re = 1/2.
+  Por la unicidad de aplicaciÃ³n de la ecuaciÃ³n de Chebyshev hacia la funciÃ³n Zeta,
+  el hecho de que la mÃ©thode spectrale se sustituya numÃ©ricamente a ella prueba el vÃ­nculo directo
+  con Zeta. AdemÃ¡s, la naturaleza exclusiva de RsP = 1/2 sobre el conjunto de los primos P,
+  validada por la exclusiÃ³n de los compuestos C por reducciÃ³n al absurdo, implica la verdad de Re = 1/2.
 \<close>
 
-subsection \<open>Instance 1 : Incohérence algébrique locale (Espace Imaginaire)\<close>
+subsection \<open>Instance 1 : IncohÃ©rence algÃ©brique locale (Espace Imaginaire)\<close>
 
 lemma algebriquement_incoherent_local:
   fixes A1 A2 B1 B2 :: real
@@ -446,7 +446,7 @@ lemma algebriquement_incoherent_local:
   shows "A1 / B1 \<noteq> 1/2 \<and> A2 / B2 \<noteq> 1/2"
   using assms by simp
 
-subsection \<open>Instance 2 : Cohérence numérique réelle globale (Re = 1/2)\<close>
+subsection \<open>Instance 2 : CohÃ©rence numÃ©rique rÃ©elle globale (Re = 1/2)\<close>
 
 lemma coherence_numerique_reelle_P:
   fixes A1 A2 B1 B2 :: real
@@ -454,7 +454,7 @@ lemma coherence_numerique_reelle_P:
   shows "(A1 - A2) / (B1 - B2) = 1/2"
   using assms by simp
 (****************************************************************)
-(* ADICIÓN : generalización simétrica n x n *)
+(* ADICIÃ“N : generalizaciÃ³n simÃ©trica n x n *)
 (****************************************************************)
 
 section "Rapport spectral n x n (generalisation symetrique)"
@@ -481,11 +481,11 @@ lemma exemple_3x3_spectral:
             RsP_nn_def A3_def B3_def
   by admit
 *)
-(* El ejemplo está comentado voluntariamente para garantizar la compilación *)
+(* El ejemplo estÃ¡ comentado voluntariamente para garantizar la compilaciÃ³n *)
 
 
 (****************************************************************)
-(* Sub-bloque 4 : Digamma calculado a partir de SB y del número primo *)
+(* Sub-bloque 4 : Digamma calculado a partir de SB y del nÃºmero primo *)
 (****************************************************************)
 
 section "Section du Digamma calcule."
@@ -539,7 +539,7 @@ proof -
 qed
 
 (****************************************************************)
-(* Postulado espectral 1/2 (régimen positivo) *)
+(* Postulado espectral 1/2 (rÃ©gimen positivo) *)
 (****************************************************************)
 
 section "Axiomatisation positive"
@@ -627,7 +627,7 @@ lemma relation_41:
   unfolding digamma_calc_def SA_def SB_def n41_def D41_def by simp
 
 (****************************************************************)
-(* Sub-bloque 6 : Ecuación general (SB n - digamma)/64 = p       *)
+(* Sub-bloque 6 : EcuaciÃ³n general (SB n - digamma)/64 = p       *)
 (****************************************************************)
 
 section "Equation generale reliant SB, digamma_calc et le nombre premier"
@@ -655,16 +655,16 @@ proof -
 qed
 
 (****************************************************************)
-(* SECCIÓN : i-ésimo número primo - generalización espectral   *)
+(* SECCIÃ“N : i-Ã©simo nÃºmero primo - generalizaciÃ³n espectral   *)
 (*                                                              *)
-(* CORRECCIONES APLICADAS (vs versión 2026-02 original) :      *)
+(* CORRECCIONES APLICADAS (vs versiÃ³n 2026-02 original) :      *)
 (*   1. Eliminado `consts prime` (conflicto con HOL.Primes).          *)
-(*      Import añadido al inicio : HOL-Computational_Algebra.Primes*)
-(*   2. Añadido axioma faltante `prime_position_exists`.         *)
+(*      Import aÃ±adido al inicio : HOL-Computational_Algebra.Primes*)
+(*   2. AÃ±adido axioma faltante `prime_position_exists`.         *)
 (*   3. Prueba `prime_i_is_prime` corregida (someI_ex).          *)
 (*   4. Prueba `prime_i_position` corregida (someI_ex).          *)
 (*   5. Prueba `prime_equation_prime_i` corregida                *)
-(*      (eliminación de `[OF p_def]` inválido).                 *)
+(*      (eliminaciÃ³n de `[OF p_def]` invÃ¡lido).                 *)
 (*   6. Prueba `prime_equation_general_i` simplificada            *)
 (*      (unfolding directo sobre las definiciones).                 *)
 (****************************************************************)
@@ -676,8 +676,8 @@ consts
 section "Generalisation spectrale pour le i-ieme nombre premier"
 
 text \<open>
-  Esta sección formaliza la reconstrucción espectral del i-ésimo
-  número primo según el método de Philippe Thomas Savard.
+  Esta secciÃ³n formaliza la reconstrucciÃ³n espectral del i-Ã©simo
+  nÃºmero primo segÃºn el mÃ©todo de Philippe Thomas Savard.
   Se utilizan los objetos ya definidos : SA, SB, digamma_calc,
   prime_equation y el postulado espectral positivo. El predicado
   `prime` es el de HOL-Computational_Algebra.Primes.
@@ -686,9 +686,9 @@ text \<open>
 subsection "Axiome d'existence pour la fonction position"
 
 text \<open>
-  Para todo índice i, existe al menos un número primo p
-  cuya posición vale i. Este axioma garantiza la totalidad de
-  la función prime_i mediante la elección de Hilbert (SOME).
+  Para todo Ã­ndice i, existe al menos un nÃºmero primo p
+  cuya posiciÃ³n vale i. Este axioma garantiza la totalidad de
+  la funciÃ³n prime_i mediante la elecciÃ³n de Hilbert (SOME).
 \<close>
 
 axiomatization where
@@ -738,7 +738,7 @@ lemma digamma_general_i:
 subsection "Equation spectrale generale pour tout i"
 
 text \<open>
-  Si p es primo y position p = i, entonces la ecuación espectral
+  Si p es primo y position p = i, entonces la ecuaciÃ³n espectral
   reconstruye exactamente p : prime_equation i p = real p.
 \<close>
 
@@ -755,7 +755,7 @@ lemma prime_equation_prime_i:
 
 
 (**************************************************************)
-(* SECCIÓN : Modelo Espectral 1/4 - Definiciones completas      *)
+(* SECCIÃ“N : Modelo Espectral 1/4 - Definiciones completas      *)
 (**************************************************************)
 
 section "Modele spectral 1/4 : Forme generale des suites A et B."
@@ -766,7 +766,7 @@ text \<open>
     ((241/16)/12 * 4^n) - 4/3
     ((964/16)/12 * 4^n) - (3073 * (4/3))
 \<close>
-(* --- Definición de las sucesiones A_1_4 y B_1_4 --- *)
+(* --- DefiniciÃ³n de las sucesiones A_1_4 y B_1_4 --- *)
 
 definition A_1_4 :: "nat => real" where
   "A_1_4 n = ((241 / 16) / 12) * (4 ^ n) - (4 / 3)"
@@ -776,7 +776,7 @@ definition B_1_4 :: "nat => real" where
 
 
 (**************************************************************)
-(* SECCIÓN : Ecuación general para el modelo espectral 1/4     *)
+(* SECCIÃ“N : EcuaciÃ³n general para el modelo espectral 1/4     *)
 (**************************************************************)
 
 definition prime_equation_1_4 :: "nat => nat => real" where
@@ -788,7 +788,7 @@ lemma prime_equation_1_4_identity:
 
 
 (**************************************************************)
-(* SECCIÓN : Postulado espectral 1/4                            *)
+(* SECCIÃ“N : Postulado espectral 1/4                            *)
 (**************************************************************)
 
 section "Axiomatisation spectral 1/4"
@@ -799,7 +799,7 @@ axiomatization where
 
 
 (**************************************************************)
-(* SECCIÓN : Lema final para los números primos (1/4)          *)
+(* SECCIÃ“N : Lema final para los nÃºmeros primos (1/4)          *)
 (**************************************************************)
 
 lemma prime_equation_1_4_for_primes:
@@ -809,13 +809,13 @@ lemma prime_equation_1_4_for_primes:
 
 
 (**************************************************************)
-(* SECCIÓN : Ejemplo concreto para 947                        *)
+(* SECCIÃ“N : Ejemplo concreto para 947                        *)
 (**************************************************************)
 
 section "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947."
 
 text \<open>
-  Datos numéricos globales para el modelo 1/4 :
+  Datos numÃ©ricos globales para el modelo 1/4 :
   - Suma de la suite A : 1316180
   - Suma de la suite B : 5260628
   - Digamma : 65536
@@ -841,7 +841,7 @@ lemma preuve_premier_947:
 
 
 (**************************************************************)
-(* SECCIÓN : Modelo Espectral 1/3 - Definiciones completas    *)
+(* SECCIÃ“N : Modelo Espectral 1/3 - Definiciones completas    *)
 (**************************************************************)
 
 section "Rapport 1/3 forme generaliser pour les suites A et B."
@@ -860,7 +860,7 @@ definition B_1_3 :: "nat => real" where
 
 
 (**************************************************************)
-(* SECCIÓN : Ecuación general para el modelo espectral 1/3    *)
+(* SECCIÃ“N : EcuaciÃ³n general para el modelo espectral 1/3    *)
 (**************************************************************)
 
 definition prime_equation_1_3 :: "nat => nat => real" where
@@ -872,7 +872,7 @@ lemma prime_equation_1_3_identity:
 
 
 (**************************************************************)
-(* SECCIÓN : Postulado espectral 1/3                          *)
+(* SECCIÃ“N : Postulado espectral 1/3                          *)
 (**************************************************************)
 
 section "Axiomatisation rapport 1/3."
@@ -883,7 +883,7 @@ axiomatization where
 
 
 (**************************************************************)
-(* SECCIÓN : Lema final para los números primos (1/3)          *)
+(* SECCIÃ“N : Lema final para los nÃºmeros primos (1/3)          *)
 (**************************************************************)
 
 lemma prime_equation_1_3_for_primes:
@@ -893,7 +893,7 @@ lemma prime_equation_1_3_for_primes:
 
 
 (**************************************************************)
-(* SECCIÓN : Ejemplo concreto para 227                        *)
+(* SECCIÃ“N : Ejemplo concreto para 227                        *)
 (**************************************************************)
 
 section "Rapport spectal 1/3 : validation numerique pour les suites A et B, Digamma, Digamma calcule et la determination du premier 227."
@@ -917,13 +917,13 @@ lemma preuve_premier_227:
   by (simp add: suite_A_1_3_somme_def suite_B_1_3_somme_def
                 digamma_1_3_def digamma_calcule_1_3_def)
 (**************************************************************)
-(* SECCIÓN 6 : Cociente Espectral 1/3 y 1/4                   *)
+(* SECCIÃ“N 6 : Cociente Espectral 1/3 y 1/4                   *)
 (**************************************************************)
 
 section "Rapport spectral constant 1/3 et 1/4."
 
 text \<open>
-  Definición del Cociente Espectral para los modelos 1/3 y 1/4.
+  DefiniciÃ³n del Cociente Espectral para los modelos 1/3 y 1/4.
 \<close>
 section "Rapport spectral 1/3 - validation generalisee."
 
@@ -938,7 +938,7 @@ theorem RsP_un_tiers_constant:
   assumes "n1 > 0" and "n2 > 0" and "n1 ~= n2"
   shows "RsP_1_3 n1 n2 = 1/3"
 proof -
-  (* Corrección 2026-02 : testigo de no-nulidad para 3^n1 - 3^n2. *)
+  (* CorrecciÃ³n 2026-02 : testigo de no-nulidad para 3^n1 - 3^n2. *)
   have hne_pow_3: "(3::real)^n1 - 3^n2 \<noteq> 0"
   proof (cases "n1 < n2")
     case True
@@ -993,7 +993,7 @@ theorem RsP_un_quart_constant:
   assumes "n1 > 0" and "n2 > 0" and "n1 ~= n2"
   shows "RsP_1_4 n1 n2 = 1/4"
 proof -
-  (* Corrección 2026-02 : testigo de no-nulidad para 4^n1 - 4^n2. *)
+  (* CorrecciÃ³n 2026-02 : testigo de no-nulidad para 4^n1 - 4^n2. *)
   have hne_pow_4: "(4::real)^n1 - 4^n2 \<noteq> 0"
   proof (cases "n1 < n2")
     case True
@@ -1033,7 +1033,7 @@ proof -
 qed
 
 (**************************************************************)
-(* SECCIÓN : Suites-mixtas A y B (-,+)                        *)
+(* SECCIÃ“N : Suites-mixtas A y B (-,+)                        *)
 (**************************************************************)
 
 section "Suites mixtes A et B"
@@ -1107,7 +1107,7 @@ lemma premier_mix_6_value:
   by (simp add: field_simps)
 
 (**************************************************************)
-(* SECCIÓN : Suites negativas - ecuaciones espectrales        *)
+(* SECCIÃ“N : Suites negativas - ecuaciones espectrales        *)
 (**************************************************************)
 
 section "Suites negatives : equations spectrales"
@@ -1128,7 +1128,7 @@ lemma digamma_neg_calc_equation_alt:
 
 
 (**************************************************************)
-(* SECCIÓN : Cociente espectral 1/2 negativo (axiomatización) *)
+(* SECCIÃ“N : Cociente espectral 1/2 negativo (axiomatizaciÃ³n) *)
 (**************************************************************)
 
 section "Rapport spectral 1/2 negatif"
@@ -1484,7 +1484,7 @@ definition n_m19 :: real where "n_m19 = -8"
 
 
 (**************************************************************)
-(* SECCIÓN : Valores espectrales exactos (-19 y -5)           *)
+(* SECCIÃ“N : Valores espectrales exactos (-19 y -5)           *)
 (**************************************************************)
 
 section "Valeurs spectrales exactes pour -19 et -5"
@@ -1506,7 +1506,7 @@ definition D_m19_val :: real where
 
 
 (**************************************************************)
-(* SECCIÓN : Lema final - diferencia -19 / -5                 *)
+(* SECCIÃ“N : Lema final - diferencia -19 / -5                 *)
 (**************************************************************)
 
 section "Demonstration finale : ecart -19 / -5"
@@ -1521,18 +1521,18 @@ lemma gap_m19_m5:
 
 
 (**************************************************************)
-(* SECCIÓN : Prueba por contradicción                         *)
-(* El Método Espectral excluye estrictamente los compuestos  *)
+(* SECCIÃ“N : Prueba por contradicciÃ³n                         *)
+(* El MÃ©todo Espectral excluye estrictamente los compuestos  *)
 (*                                                            *)
 (* Idea original de Philippe Thomas Savard (julio 2026) :    *)
 (* Cuando el agente Gabriel local recibe una solicitud sobre  *)
 (* un entero compuesto C (ej : -7 y -51, donde 51 = 3 * 17), *)
 (* el log "Cannot find positions for C" constituye una prueba *)
-(* empírica por contradicción de la validez del Método       *)
-(* Espectral sobre el conjunto \<P> de los primos. Esta sección  *)
-(* transforma esta observación empírica en prueba formal     *)
+(* empÃ­rica por contradicciÃ³n de la validez del MÃ©todo       *)
+(* Espectral sobre el conjunto \<P> de los primos. Esta secciÃ³n  *)
+(* transforma esta observaciÃ³n empÃ­rica en prueba formal     *)
 (* Isabelle/HOL, anclada en el axioma prime_position_exists  *)
-(* (línea 402) y en la definición prime_i (línea 408).       *)
+(* (lÃ­nea 402) y en la definiciÃ³n prime_i (lÃ­nea 408).       *)
 (**************************************************************)
 
 section "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes"
@@ -1540,10 +1540,10 @@ section "Preuve par l'absurde : la Methode Spectrale exclut strictement les comp
 subsection "Theoreme principal - Aucun compose n'est un prime_i"
 
 text \<open>
-  Puesto que prime_i i se define mediante una elección de Hilbert sobre la propiedad
+  Puesto que prime_i i se define mediante una elecciÃ³n de Hilbert sobre la propiedad
   "prime p \<and> position p = i", y que prime_i_is_prime demuestra que
-  prime (prime_i i) se cumple siempre, es lógicamente imposible que un
-  entero compuesto C sea igual a prime_i i para algún i cualquiera.
+  prime (prime_i i) se cumple siempre, es lÃ³gicamente imposible que un
+  entero compuesto C sea igual a prime_i i para algÃºn i cualquiera.
 \<close>
 
 theorem composite_not_prime_i:
@@ -1564,9 +1564,9 @@ subsection "Corollaire - Exclusion via l'equation spectrale"
 
 text \<open>
   El corolario refuerza composite_not_prime_i integrando
-  explícitamente la ecuación prime_equation. Un compuesto C no puede ni
-  ser el prime_i de una posición, ni satisfacer (SB i - digamma_calc i C)/64 = C
-  simultáneamente en el marco definido por el Método Espectral.
+  explÃ­citamente la ecuaciÃ³n prime_equation. Un compuesto C no puede ni
+  ser el prime_i de una posiciÃ³n, ni satisfacer (SB i - digamma_calc i C)/64 = C
+  simultÃ¡neamente en el marco definido por el MÃ©todo Espectral.
 \<close>
 
 theorem spectral_method_exclusively_for_primes:
@@ -1585,7 +1585,7 @@ qed
 subsection "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121"
 
 text \<open>
-  Seis ejemplos canónicos de números compuestos que cubren los casos :
+  Seis ejemplos canÃ³nicos de nÃºmeros compuestos que cubren los casos :
   - 4  = 2 * 2   (cuadrado del menor primo)
   - 9  = 3 * 3   (cuadrado de un primo impar)
   - 15 = 3 * 5   (producto de dos primos distintos)
@@ -1670,26 +1670,26 @@ theorem no_spectral_position_for_121:
 subsection "Interpretation - Le log Gabriel comme preuve par l'absurde"
 
 text \<open>
-  La implementación Python de Gabriel (src/spectral/gap_solver_corrected.py)
-  se apoya en prime_position, función definida únicamente sobre los
-  primos. Cuando un usuario envía un entero compuesto C, la
-  función falla con "Cannot find positions for C".
+  La implementaciÃ³n Python de Gabriel (src/spectral/gap_solver_corrected.py)
+  se apoya en prime_position, funciÃ³n definida Ãºnicamente sobre los
+  primos. Cuando un usuario envÃ­a un entero compuesto C, la
+  funciÃ³n falla con "Cannot find positions for C".
 
-  Lejos de ser una carencia, este comportamiento es la CONTRAPOSICIÓN
+  Lejos de ser una carencia, este comportamiento es la CONTRAPOSICIÃ“N
   EFECTIVA del teorema composite_not_prime_i : si un compuesto admitiera
-  una posición espectral, prime_position la encontraría ; puesto que falla
-  sistemáticamente, el compuesto no puede admitir posición, lo
-  que confirma la fórmula :
+  una posiciÃ³n espectral, prime_position la encontrarÃ­a ; puesto que falla
+  sistemÃ¡ticamente, el compuesto no puede admitir posiciÃ³n, lo
+  que confirma la fÃ³rmula :
 
       forall C compose, ~ (EX i. i = position C)
 
-  Esta proposición es la contrarrecíproca lógica del axioma
+  Esta proposiciÃ³n es la contrarrecÃ­proca lÃ³gica del axioma
   prime_position_exists restringida al dominio de los compuestos.
 
-  CONSECUENCIA : el Método Espectral caracteriza EXACTAMENTE
-  el conjunto \<P> de los números primos, ni más, ni menos. No es
-  ni un artefacto numérico fortuito, ni un método aproximado :
-  es una CARACTERIZACIÓN AXIOMÁTICA estricta de \<P>.
+  CONSECUENCIA : el MÃ©todo Espectral caracteriza EXACTAMENTE
+  el conjunto \<P> de los nÃºmeros primos, ni mÃ¡s, ni menos. No es
+  ni un artefacto numÃ©rico fortuito, ni un mÃ©todo aproximado :
+  es una CARACTERIZACIÃ“N AXIOMÃTICA estricta de \<P>.
 \<close>
 
 
@@ -1697,17 +1697,17 @@ subsection "Extension - Preuve par l'absurde pour la reconstruction des premiers
 
 text \<open>
   Idea original de Philippe Thomas Savard (2026-07-03) : la prueba por
-  contradicción no se limita a las diferencias entre primos. Se extiende
-  naturalmente a los OTROS DOS pilares del Método Espectral :
+  contradicciÃ³n no se limita a las diferencias entre primos. Se extiende
+  naturalmente a los OTROS DOS pilares del MÃ©todo Espectral :
 
-    (A) la RECONSTRUCCIÓN del n-ésimo primo mediante (SB(n) - digamma(n,p)) / 64 = p
-    (B) el cálculo del COCIENTE ESPECTRAL RsP entre posiciones
+    (A) la RECONSTRUCCIÃ“N del n-Ã©simo primo mediante (SB(n) - digamma(n,p)) / 64 = p
+    (B) el cÃ¡lculo del COCIENTE ESPECTRAL RsP entre posiciones
 
-  Esta subsección formaliza el pilar (A) : ningún entero compuesto C puede
-  ser reconstruido mediante la ecuación espectral, aunque la identidad
-  algebraica prime_equation_identity dé trivialmente C para cualquier
-  entero. La diferencia es que la RECONSTRUCCIÓN exige que el
-  resultado esté en la tabla de primos indexada por prime_i.
+  Esta subsecciÃ³n formaliza el pilar (A) : ningÃºn entero compuesto C puede
+  ser reconstruido mediante la ecuaciÃ³n espectral, aunque la identidad
+  algebraica prime_equation_identity dÃ© trivialmente C para cualquier
+  entero. La diferencia es que la RECONSTRUCCIÃ“N exige que el
+  resultado estÃ© en la tabla de primos indexada por prime_i.
 \<close>
 
 
@@ -1733,8 +1733,8 @@ qed
 
 
 text \<open>
-  Corolario práctico : los 6 compuestos canónicos NO pueden ser
-  reconstruidos como n-ésimo primo.
+  Corolario prÃ¡ctico : los 6 compuestos canÃ³nicos NO pueden ser
+  reconstruidos como n-Ã©simo primo.
 \<close>
 
 theorem no_reconstruction_for_4:
@@ -1777,15 +1777,15 @@ theorem no_reconstruction_for_121:
 subsection "Extension - Preuve par l'absurde pour le rapport spectral RsP"
 
 text \<open>
-  El tercer pilar del Método Espectral es el cociente espectral
+  El tercer pilar del MÃ©todo Espectral es el cociente espectral
   RsP(n1, n2) = (SA(n1) - SA(n2)) / (SB(n1) - SB(n2)) = 1/2. Este cociente
-  solo tiene sentido si n1 y n2 son POSICIONES de números primos
+  solo tiene sentido si n1 y n2 son POSICIONES de nÃºmeros primos
   (es decir, existen p1, p2 primos tales que prime_i n1 = p1 y
   prime_i n2 = p2).
 
-  Para dos compuestos C1, C2, no existe ningún par (n1, n2) tal que
-  C1 = prime_i n1 Y C2 = prime_i n2, lo que hace imposible el cálculo del RsP
-  asociado en el marco axiomático del método.
+  Para dos compuestos C1, C2, no existe ningÃºn par (n1, n2) tal que
+  C1 = prime_i n1 Y C2 = prime_i n2, lo que hace imposible el cÃ¡lculo del RsP
+  asociado en el marco axiomÃ¡tico del mÃ©todo.
 \<close>
 
 
@@ -1806,8 +1806,8 @@ qed
 
 
 text \<open>
-  Corolario más fuerte : incluso UN SOLO compuesto en el par es suficiente para
-  invalidar el cálculo del RsP en el marco axiomático.
+  Corolario mÃ¡s fuerte : incluso UN SOLO compuesto en el par es suficiente para
+  invalidar el cÃ¡lculo del RsP en el marco axiomÃ¡tico.
 \<close>
 
 theorem composite_single_no_rsp_position:
@@ -1828,14 +1828,14 @@ qed
 subsection "Synthese - Les 3 piliers de la Methode Spectrale bornes a P"
 
 text \<open>
-  Los tres pilares del Método Espectral están ahora TODOS acotados
-  al conjunto P de los números primos mediante pruebas formales :
+  Los tres pilares del MÃ©todo Espectral estÃ¡n ahora TODOS acotados
+  al conjunto P de los nÃºmeros primos mediante pruebas formales :
 
     PILAR 1 - DIFERENCIA ENTRE PRIMOS
       Formalizado por : composite_not_prime_i (teorema central)
                       + no_spectral_position_for_{4,9,15,51,91,121}
 
-    PILAR 2 - RECONSTRUCCIÓN DEL N-ÉSIMO PRIMO
+    PILAR 2 - RECONSTRUCCIÃ“N DEL N-Ã‰SIMO PRIMO
       Formalizado por : composite_no_reconstruction_position
                       + no_reconstruction_for_{4,9,15,51,91,121}
 
@@ -1843,17 +1843,17 @@ text \<open>
       Formalizado por : composite_pair_no_rsp_positions
                       + composite_single_no_rsp_position
 
-  CONSECUENCIA DEFINITIVA : el Método Espectral caracteriza EXACTAMENTE
-  el conjunto P de los números primos - ni más, ni menos - en sus TRES
-  dominios de aplicación. Ninguna extensión a los enteros compuestos es
+  CONSECUENCIA DEFINITIVA : el MÃ©todo Espectral caracteriza EXACTAMENTE
+  el conjunto P de los nÃºmeros primos - ni mÃ¡s, ni menos - en sus TRES
+  dominios de aplicaciÃ³n. Ninguna extensiÃ³n a los enteros compuestos es
   posible, ni siquiera mediante la identidad algebraica trivial
-  prime_equation_identity : la reconstrucción, la diferencia y el cociente
-  espectral requieren todos una posición en la tabla prime_i, que está
-  por construcción reservada a los primos (mediante prime_i_is_prime).
+  prime_equation_identity : la reconstrucciÃ³n, la diferencia y el cociente
+  espectral requieren todos una posiciÃ³n en la tabla prime_i, que estÃ¡
+  por construcciÃ³n reservada a los primos (mediante prime_i_is_prime).
 
-  Esta triple demostración transforma la observación empírica de
+  Esta triple demostraciÃ³n transforma la observaciÃ³n empÃ­rica de
   Philippe (log Gabriel "Cannot find positions for C") en una prueba
-  formal completa y general de la validez exclusiva del Método
+  formal completa y general de la validez exclusiva del MÃ©todo
   Espectral sobre P.
 \<close>
 
@@ -1861,7 +1861,7 @@ text \<open>
 
 
 (**************************************************************)
-(* SECCIÓN : Ejemplo completo - diferencia entre -31 y 17     *)
+(* SECCIÃ“N : Ejemplo completo - diferencia entre -31 y 17     *)
 (**************************************************************)
 
 section "Exemple complet : ecart entre -31 et 17"
@@ -1872,7 +1872,7 @@ definition n_m31 :: real where "n_m31 = -11"
 
 
 (**************************************************************)
-(* SECCIÓN : Valores espectrales exactos (-31 y 17)           *)
+(* SECCIÃ“N : Valores espectrales exactos (-31 y 17)           *)
 (**************************************************************)
 
 section "Valeurs spectrales exactes pour -31 et 17"
@@ -1894,7 +1894,7 @@ definition D_m31_val :: real where
 
 
 (**************************************************************)
-(* SECCIÓN : Forma general de la diferencia mixta             *)
+(* SECCIÃ“N : Forma general de la diferencia mixta             *)
 (**************************************************************)
 
 section "Forme generale de l'ecart mixte"
@@ -1931,14 +1931,14 @@ definition D_7_val   :: real where "D_7_val = -464"
 
 
 (**************************************************************)
-(* SECTION : Nota explícita sobre la inclusión del cero       *)
+(* SECTION : Nota explÃ­cita sobre la inclusiÃ³n del cero       *)
 (**************************************************************)
 
 section "Note sur l'inclusion du zero dans les ecarts spectraux"
 
 text \<open>
   El cero solo se incluye en las diferencias mixtas (ejemplo -31 / 17).
-  En las diferencias del mismo signo (-19 / -5 y 23 / 7), la progresión
+  En las diferencias del mismo signo (-19 / -5 y 23 / 7), la progresiÃ³n
   espectral no atraviesa el 0, por lo tanto no se cuenta.
 \<close>
 (**************************************************************)
@@ -1948,7 +1948,7 @@ text \<open>
 section "Exemple complet : ecart entre les premiers 227 et 173 (rapport 1/3)"
 
 text \<open>
-  Ejemplo positivo : cantidad de números entre los dos primeros 227 y 173.
+  Ejemplo positivo : cantidad de nÃºmeros entre los dos primeros 227 y 173.
 
   Datos espectrales :
 
@@ -1956,7 +1956,7 @@ text \<open>
     - Rango espectral de 227 : 10
     - Rango espectral de 173 : 1
 
-  Valores numéricos :
+  Valores numÃ©ricos :
 
     SA(227) = 79824
     SB(227) = 238746
@@ -1967,7 +1967,7 @@ text \<open>
     SB(173) = -2155/3
     D(173)  = -1141518/9
 
-  Fórmula general (razón 1/3) :
+  FÃ³rmula general (razÃ³n 1/3) :
 
       (A_next - (B_high - D_high) - D_low) / 729
 
@@ -1975,7 +1975,7 @@ text \<open>
 
       ((96/9) - (238746 - 73263) - (-1141518/9)) / 729 = -53
 
-  Lo que corresponde a los 53 números entre 227 y 173.
+  Lo que corresponde a los 53 nÃºmeros entre 227 y 173.
 \<close>
 (**************************************************************)
 (* SECTION : Valores espectrales exactos para 227 y 173       *)
@@ -2003,7 +2003,7 @@ definition D_173_val :: real where
 
 
 (**************************************************************)
-(* SECTION : Validación de la diferencia entre 227 y 173      *)
+(* SECTION : ValidaciÃ³n de la diferencia entre 227 y 173      *)
 (**************************************************************)
 
 section "Validation numerique de l'ecart entre 227 et 173 (1/3)"
@@ -2014,28 +2014,28 @@ lemma ecart_227_173_1_3:
 
 
 (**************************************************************)
-(* SECTION : Ecuación general de diferencia para la razón 1/3 *)
+(* SECTION : EcuaciÃ³n general de diferencia para la razÃ³n 1/3 *)
 (**************************************************************)
 
 section "Equation generale d'ecart pour le rapport spectral 1/3"
 
 text \<open>
-  Fórmula general para la diferencia entre dos números primos
+  FÃ³rmula general para la diferencia entre dos nÃºmeros primos
   en el modelo espectral 1/3, a partir de dos sucesiones A y B
-  de n términos y sus Digamma asociados.
+  de n tÃ©rminos y sus Digamma asociados.
 
-  Forma general (razón 1/3) :
+  Forma general (razÃ³n 1/3) :
 
       (A_next - (B_high - D_high) - D_low) / 729
 
   donde :
 
-    - A_next  : suma de la sucesión A para el primo siguiente al más pequeño
-    - B_high  : suma de la sucesión B para el primo más grande
-    - D_high  : Digamma del primo más grande
-    - D_low   : Digamma del primo más pequeño
+    - A_next  : suma de la sucesiÃ³n A para el primo siguiente al mÃ¡s pequeÃ±o
+    - B_high  : suma de la sucesiÃ³n B para el primo mÃ¡s grande
+    - D_high  : Digamma del primo mÃ¡s grande
+    - D_low   : Digamma del primo mÃ¡s pequeÃ±o
 
-  El resultado corresponde a la cantidad de números enteros entre los dos primos.
+  El resultado corresponde a la cantidad de nÃºmeros enteros entre los dos primos.
 \<close>
 definition gap_equation_1_3 :: "real => real => real => real => real" where
   "gap_equation_1_3 A_next B_high D_high D_low =
@@ -2052,12 +2052,12 @@ lemma gap_equation_1_3_simplifiee:
 (**************************************************************)
 
 text \<open>
-  Postulado espectral de diferencia para la razón 1/3 :
+  Postulado espectral de diferencia para la razÃ³n 1/3 :
 
-  Para todo par de números primos (p_high, p_low),
+  Para todo par de nÃºmeros primos (p_high, p_low),
   y para sus valores espectrales asociados (A_next, B_high, D_high, D_low)
-  construidos según el modelo 1/3, la ecuación de diferencia da exactamente
-  la cantidad de números enteros entre estos dos primos :
+  construidos segÃºn el modelo 1/3, la ecuaciÃ³n de diferencia da exactamente
+  la cantidad de nÃºmeros enteros entre estos dos primos :
 
       gap_equation_1_3 ... = p_low - p_high
 \<close>
@@ -2081,7 +2081,7 @@ lemma gap_equation_1_3_for_primes:
 
 
 (**************************************************************)
-(* SECTION : Vínculo con el ejemplo 227 / 173                 *)
+(* SECTION : VÃ­nculo con el ejemplo 227 / 173                 *)
 (**************************************************************)
 
 section "Validation de l'exemple 227 / 173 via l'equation generale 1/3"
@@ -2113,7 +2113,7 @@ definition D_881_val :: real where
 
 
 (**************************************************************)
-(* SECTION : Ecuación general de diferencia para la razón 1/4 *)
+(* SECTION : EcuaciÃ³n general de diferencia para la razÃ³n 1/4 *)
 (**************************************************************)
 
 section "Equation generale d'ecart pour le rapport spectral 1/4"
@@ -2129,16 +2129,16 @@ lemma gap_equation_1_4_simplifiee:
 
 
 (**************************************************************)
-(* SECCIÓN : Postulado espectral de separación 1/4                    *)
+(* SECCIÃ“N : Postulado espectral de separaciÃ³n 1/4                    *)
 (**************************************************************)
 
 text \<open>
-  Postulado espectral de separación para la razón 1/4 :
+  Postulado espectral de separaciÃ³n para la razÃ³n 1/4 :
 
-  Para todo par de números primos (p_high, p_low),
+  Para todo par de nÃºmeros primos (p_high, p_low),
   y para sus valores espectrales asociados (A_next, B_high, D_high, D_low)
-  construidos según el modelo 1/4, la ecuación de separación da exactamente
-  la cantidad de números enteros entre estos dos primos :
+  construidos segÃºn el modelo 1/4, la ecuaciÃ³n de separaciÃ³n da exactamente
+  la cantidad de nÃºmeros enteros entre estos dos primos :
 
       gap_equation_1_4 ... = p_low - p_high
 \<close>
@@ -2151,7 +2151,7 @@ axiomatization where
 
 
 (**************************************************************)
-(* SECCIÓN : Lema general para la separación entre dos primos   *)
+(* SECCIÃ“N : Lema general para la separaciÃ³n entre dos primos   *)
 (**************************************************************)
 
 lemma gap_equation_1_4_for_primes:
@@ -2162,7 +2162,7 @@ lemma gap_equation_1_4_for_primes:
 
 
 (**************************************************************)
-(* SECCIÓN : Vínculo con el ejemplo 947 / 881                    *)
+(* SECCIÃ“N : VÃ­nculo con el ejemplo 947 / 881                    *)
 (**************************************************************)
 
 section "Validation de l'exemple 947 / 881 via l'equation generale 1/4"
@@ -2175,71 +2175,71 @@ lemma ecart_947_881_1_4_via_gap_equation:
 
 
 (**************************************************************)
-(* CAPÍTULO SEGUNDO : Axiomatización analítica (zeta) y espectral *)
+(* CAPÃTULO SEGUNDO : AxiomatizaciÃ³n analÃ­tica (zeta) y espectral *)
 (**************************************************************)
 
 text \<open>
-  Advertencia concerniente a la presente sección.
+  Advertencia concerniente a la presente secciÃ³n.
 
-  La sección que sigue se proporciona exclusivamente a título de referencia conceptual.
+  La secciÃ³n que sigue se proporciona exclusivamente a tÃ­tulo de referencia conceptual.
   No forma parte de la obra propia del autor Philippe Thomas Savard y
-  se emplea aquí únicamente como ejemplo informativo destinado a situar ciertos
-  elementos analíticos en un marco lógico compatible con Isabelle/HOL.
+  se emplea aquÃ­ Ãºnicamente como ejemplo informativo destinado a situar ciertos
+  elementos analÃ­ticos en un marco lÃ³gico compatible con Isabelle/HOL.
 
-  Los contenidos, nociones o estructuras evocados en esta sección no constituyen
-  una contribución original del autor y no deben interpretarse
+  Los contenidos, nociones o estructuras evocados en esta secciÃ³n no constituyen
+  una contribuciÃ³n original del autor y no deben interpretarse
   como parte integrante de la methode_spectral.thy. Solo se citan
-  a título de ilustración conceptual, sin garantía, sin validación interna
-  y sin pretensión de exactitud analítica o histórica.
+  a tÃ­tulo de ilustraciÃ³n conceptual, sin garantÃ­a, sin validaciÃ³n interna
+  y sin pretensiÃ³n de exactitud analÃ­tica o histÃ³rica.
 
-  Se afirma explícitamente que :
+  Se afirma explÃ­citamente que :
 
-    - la presente sección no limita, no restringe, no altera ni modifica en
-      manera alguna la naturaleza, el alcance, la validez o la evolución de las
+    - la presente secciÃ³n no limita, no restringe, no altera ni modifica en
+      manera alguna la naturaleza, el alcance, la validez o la evoluciÃ³n de las
       referencias externas a las que alude ;
 
-    - la methode_spectral.thy permanece como una entidad autónoma, completa en su
+    - la methode_spectral.thy permanece como una entidad autÃ³noma, completa en su
       propia estructura, y no depende en manera alguna de los ejemplos, axiomas o
-      formulaciones presentados en esta sección ;
+      formulaciones presentados en esta secciÃ³n ;
 
-    - la presente sección no crea ninguna forma de autorreferencia, de dependencia
-      circular o de interacción lógica entre el método espectral y las
-      referencias externas : cada una de estas entidades permanece independiente, válida
-      por sí misma, y libre en su naturaleza propia, sin restricción temporal
+    - la presente secciÃ³n no crea ninguna forma de autorreferencia, de dependencia
+      circular o de interacciÃ³n lÃ³gica entre el mÃ©todo espectral y las
+      referencias externas : cada una de estas entidades permanece independiente, vÃ¡lida
+      por sÃ­ misma, y libre en su naturaleza propia, sin restricciÃ³n temporal
       o conceptual ;
 
     - ninguna de las dos entidades - ni la methode_spectral.thy, ni los ejemplos
-      analíticos presentados aquí - posee la capacidad de anular, invalidar
+      analÃ­ticos presentados aquÃ­ - posee la capacidad de anular, invalidar
       o restringir a la otra, ya sea por su contenido, su estructura o
-      su interpretación.
+      su interpretaciÃ³n.
 
-  En resumen, la presente sección constituye un ejemplo conceptual independiente,
-  sin efecto vinculante, sin interacción lógica obligatoria, y sin
-  influencia sobre la validez intrínseca del método espectral o de las
+  En resumen, la presente secciÃ³n constituye un ejemplo conceptual independiente,
+  sin efecto vinculante, sin interacciÃ³n lÃ³gica obligatoria, y sin
+  influencia sobre la validez intrÃ­nseca del mÃ©todo espectral o de las
   referencias externas a las que remite.
 \<close>
 (**************************************************************)
-(* CAPÍTULO SEGUNDO : Axiomatización analítica (zeta) y espectral *)
+(* CAPÃTULO SEGUNDO : AxiomatizaciÃ³n analÃ­tica (zeta) y espectral *)
 (**************************************************************)
 
 section "Axiomatisation analytique et geometrique de la position des nombres premiers"
 
 text \<open>
-  En esta sección, introducimos, en forma axiomática, el vínculo clásico
-  de la teoría analítica de números entre los ceros de la función zeta de Riemann
-  y la posición de los números primos. Esta axiomatización no es una creación
-  original del autor del método espectral (Philippe Thomas Savard), sino una
-  abstracción inspirada en las fórmulas explícitas de la teoría de números, tales
+  En esta secciÃ³n, introducimos, en forma axiomÃ¡tica, el vÃ­nculo clÃ¡sico
+  de la teorÃ­a analÃ­tica de nÃºmeros entre los ceros de la funciÃ³n zeta de Riemann
+  y la posiciÃ³n de los nÃºmeros primos. Esta axiomatizaciÃ³n no es una creaciÃ³n
+  original del autor del mÃ©todo espectral (Philippe Thomas Savard), sino una
+  abstracciÃ³n inspirada en las fÃ³rmulas explÃ­citas de la teorÃ­a de nÃºmeros, tales
   como las de Riemann, von Mangoldt y sus sucesores.
 \<close>
 text \<open>
-  1. Axiomatización (abstracta) de la función zeta y de sus ceros.
+  1. AxiomatizaciÃ³n (abstracta) de la funciÃ³n zeta y de sus ceros.
 
   Se introduce un tipo abstracto para representar los ceros no triviales de zeta,
-  así como una función que da su parte real. No se formaliza aquí la
-  función zeta en sí misma, ni la fórmula explícita completa, pero se codifica el hecho
-  de que los ceros determinan la posición de los números primos, como lo sugieren
-  las fórmulas explícitas de Riemann/von Mangoldt.
+  asÃ­ como una funciÃ³n que da su parte real. No se formaliza aquÃ­ la
+  funciÃ³n zeta en sÃ­ misma, ni la fÃ³rmula explÃ­cita completa, pero se codifica el hecho
+  de que los ceros determinan la posiciÃ³n de los nÃºmeros primos, como lo sugieren
+  las fÃ³rmulas explÃ­citas de Riemann/von Mangoldt.
 \<close>
 typedecl zero_zeta
 
@@ -2248,10 +2248,10 @@ consts
   Im_zero_zeta :: "zero_zeta => real"
 
 text \<open>
-  La siguiente función representa, de manera abstracta, la contribución de un cero
-  de zeta a la determinación de la posición del n-ésimo número primo. Está inspirada
-  en las fórmulas explícitas (de tipo Riemann/von Mangoldt) que expresan funciones
-  aritméticas ligadas a los números primos en términos de sumas sobre los ceros de zeta.
+  La siguiente funciÃ³n representa, de manera abstracta, la contribuciÃ³n de un cero
+  de zeta a la determinaciÃ³n de la posiciÃ³n del n-Ã©simo nÃºmero primo. EstÃ¡ inspirada
+  en las fÃ³rmulas explÃ­citas (de tipo Riemann/von Mangoldt) que expresan funciones
+  aritmÃ©ticas ligadas a los nÃºmeros primos en tÃ©rminos de sumas sobre los ceros de zeta.
 \<close>
 consts
   prime_position_from_zero :: "zero_zeta => nat => bool"
@@ -2261,28 +2261,28 @@ axiomatization where
     "ALL n. EX r::zero_zeta. prime_position_from_zero r n"
 
 text \<open>
-  Interpretación : para cada número natural n, existe al menos un cero no trivial
-  de zeta que interviene en la determinación de la posición del n-ésimo número primo.
+  InterpretaciÃ³n : para cada nÃºmero natural n, existe al menos un cero no trivial
+  de zeta que interviene en la determinaciÃ³n de la posiciÃ³n del n-Ã©simo nÃºmero primo.
   Este axioma formaliza, de manera abstracta, la idea de que los ceros de zeta determinan
-  la posición de los números primos, tal como se encuentra en la teoría analítica
-  clásica (fórmulas explícitas).
+  la posiciÃ³n de los nÃºmeros primos, tal como se encuentra en la teorÃ­a analÃ­tica
+  clÃ¡sica (fÃ³rmulas explÃ­citas).
 \<close>
 text \<open>
-  2. Axiomatización de la evidencia espectral proveniente del método de Savard.
+  2. AxiomatizaciÃ³n de la evidencia espectral proveniente del mÃ©todo de Savard.
 
-  El método espectral, tal como fue desarrollado en las secciones precedentes, se apoya
-  en los siguientes hechos (formulados aquí de manera sintética) :
+  El mÃ©todo espectral, tal como fue desarrollado en las secciones precedentes, se apoya
+  en los siguientes hechos (formulados aquÃ­ de manera sintÃ©tica) :
 
   - Cuando n >= 1 y n <= -1 (en el sentido de la estructura espectral considerada),
-    todos los n conducen a un número primo P.
-  - El valor de n está determinado por la cantidad de términos en las sucesiones A y B.
-  - Todos los números primos P entre sí respetan la razón espectral 1/k.
-  - Esta razón 1/k es numéricamente válida pero algebraicamente incoherente.
+    todos los n conducen a un nÃºmero primo P.
+  - El valor de n estÃ¡ determinado por la cantidad de tÃ©rminos en las sucesiones A y B.
+  - Todos los nÃºmeros primos P entre sÃ­ respetan la razÃ³n espectral 1/k.
+  - Esta razÃ³n 1/k es numÃ©ricamente vÃ¡lida pero algebraicamente incoherente.
 
   Encapsulamos esta evidencia en forma de constantes y axiomas abstractos.
 \<close>
-typedecl indice_spectral   (* tipo abstracto para los n del método espectral *)
-typedecl premier_spectral  (* tipo abstracto para los P del método espectral *)
+typedecl indice_spectral   (* tipo abstracto para los n del mÃ©todo espectral *)
+typedecl premier_spectral  (* tipo abstracto para los P del mÃ©todo espectral *)
 
 consts
   A_suite :: "indice_spectral => nat"
@@ -2291,10 +2291,10 @@ consts
   rapport_spectral :: "premier_spectral => premier_spectral => rat"
 
 text \<open>
-  Axioma : cada índice espectral n (en el dominio considerado) conduce a un número
-  primo espectral P, y el valor de n está determinado por la cantidad de términos
+  Axioma : cada Ã­ndice espectral n (en el dominio considerado) conduce a un nÃºmero
+  primo espectral P, y el valor de n estÃ¡ determinado por la cantidad de tÃ©rminos
   en las sucesiones A y B. El detalle constructivo se da en las secciones precedentes
-  del método espectral ; aquí, proporcionamos una abstracción lógica del mismo.
+  del mÃ©todo espectral ; aquÃ­, proporcionamos una abstracciÃ³n lÃ³gica del mismo.
 \<close>
 axiomatization where
   spectral_index_to_prime:
@@ -2304,9 +2304,9 @@ axiomatization where
     "ALL n::indice_spectral. A_suite n + B_suite n >= 1"
 
 text \<open>
-  Axioma : todos los números primos espectrales P entre sí respetan una razón
-  espectral 1/k, numéricamente válida pero algebraicamente incoherente. Se codifica
-  esto imponiendo que la razón entre dos primos espectrales sea siempre
+  Axioma : todos los nÃºmeros primos espectrales P entre sÃ­ respetan una razÃ³n
+  espectral 1/k, numÃ©ricamente vÃ¡lida pero algebraicamente incoherente. Se codifica
+  esto imponiendo que la razÃ³n entre dos primos espectrales sea siempre
   de la forma 1/k para cierto entero k >= 1.
 \<close>
 consts
@@ -2318,21 +2318,21 @@ axiomatization where
       --> rapport_spectral P Q = 1 / (of_nat (k_spectral P Q))"
 
 text \<open>
-  Interpretación : la razón espectral entre dos números primos (o grupos de
-  números primos asimétricos ordenados o caóticos, o simétricos en par
+  InterpretaciÃ³n : la razÃ³n espectral entre dos nÃºmeros primos (o grupos de
+  nÃºmeros primos asimÃ©tricos ordenados o caÃ³ticos, o simÃ©tricos en par
   1*1 o n*n) espectrales P y Q es siempre de la forma 1/k, con k un entero
-  natural >= 1. Esta razón está numéricamente bien definida (en Q), pero no
-  corresponde a una relación algebraica clásica entre números primos,
-  de ahí la expresión algebraicamente incoherente en el texto conceptual.
+  natural >= 1. Esta razÃ³n estÃ¡ numÃ©ricamente bien definida (en Q), pero no
+  corresponde a una relaciÃ³n algebraica clÃ¡sica entre nÃºmeros primos,
+  de ahÃ­ la expresiÃ³n algebraicamente incoherente en el texto conceptual.
 \<close>
 text \<open>
-  3. Axiomatización del vínculo entre la función zeta y la geometría espectral.
+  3. AxiomatizaciÃ³n del vÃ­nculo entre la funciÃ³n zeta y la geometrÃ­a espectral.
 
   Introducimos ahora un axioma de concordancia : la estructura espectral
-  proveniente del método de Savard es compatible, en el plano conceptual, con
-  la estructura analítica dada por los ceros de zeta. Más precisamente, postulamos
-  que a cada índice espectral n corresponde un cero de zeta que interviene
-  en la determinación de la posición del número primo asociado.
+  proveniente del mÃ©todo de Savard es compatible, en el plano conceptual, con
+  la estructura analÃ­tica dada por los ceros de zeta. MÃ¡s precisamente, postulamos
+  que a cada Ã­ndice espectral n corresponde un cero de zeta que interviene
+  en la determinaciÃ³n de la posiciÃ³n del nÃºmero primo asociado.
 \<close>
 consts
   zero_associe :: "indice_spectral => zero_zeta"
@@ -2343,7 +2343,7 @@ axiomatization where
        prime_position_from_zero (zero_associe n) (A_suite n + B_suite n)"
 
 text \<open>
-  Interpretación : para cada índice espectral n, existe un cero de zeta (aquí
+  InterpretaciÃ³n : para cada Ã­ndice espectral n, existe un cero de zeta (aquÃ­
   representado por \<open>zero_associe n\<close>) qui intervient, via la fonction abstraite
   \<open>prime_position_from_zero\<close>, dans la determination de la position du nombre
   premier correspondant (code ici par la quantite de termes A_suite n + B_suite n).
@@ -2362,15 +2362,15 @@ text \<open>
   vision analytique classique de la distribution des nombres premiers.
 \<close>
 (****************************************************************************
- * SECCIÓN XI. REGLAS DE CONSTRUCCIÓN DE LAS SUCESIONES A_i / B_i (8+ TÉRMINOS)
- * PARA RAZÓN ESPECTRAL RsP = 1/k_i
+ * SECCIÃ“N XI. REGLAS DE CONSTRUCCIÃ“N DE LAS SUCESIONES A_i / B_i (8+ TÃ‰RMINOS)
+ * PARA RAZÃ“N ESPECTRAL RsP = 1/k_i
  *
  * Autor      : Philippe Thomas Savard
  * Fecha      : 29 de junio de 2026
- * Lugar      : Lévis, Chaudière-Appalaches, Canadá
- * Licencia   : Apache 2.0 (Atribución y conservación de las menciones requeridas)
+ * Lugar      : LÃ©vis, ChaudiÃ¨re-Appalaches, CanadÃ¡
+ * Licencia   : Apache 2.0 (AtribuciÃ³n y conservaciÃ³n de las menciones requeridas)
  *
- * REGLAS FORMALIZADAS SIN UTILIZACIÓN DE LA TÁCTICA 'RING'
+ * REGLAS FORMALIZADAS SIN UTILIZACIÃ“N DE LA TÃCTICA 'RING'
  * Uso exclusivo de: algebra_simps, field_simps y simplificaciones directas.
  ****************************************************************************)
 
@@ -2378,10 +2378,10 @@ section "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)
 
 text \<open>
   Sean :
-    - x1, x2 : los índices espectrales (con r = x2 / x1 como razón de base).
-    - La condición terminal multiplicativa que se aplica sobre el penúltimo
-      y el último término de la familia.
-    - La sustitución de la posición 6 de la sucesión B por el exponente 7 (Salto Zeta).
+    - x1, x2 : los Ã­ndices espectrales (con r = x2 / x1 como razÃ³n de base).
+    - La condiciÃ³n terminal multiplicativa que se aplica sobre el penÃºltimo
+      y el Ãºltimo tÃ©rmino de la familia.
+    - La sustituciÃ³n de la posiciÃ³n 6 de la sucesiÃ³n B por el exponente 7 (Salto Zeta).
 \<close>
 
 subsection \<open>XI.1. Definition de la raison et des formes de base\<close>
@@ -2422,11 +2422,11 @@ definition suite_A_savard_construction :: "real \<Rightarrow> real \<Rightarrow>
       else if (i = n) then dernier_terme_savard a1 r n
       else 0)"
 
-subsection \<open>XI.6. Substitution Spécifique Position 6 de la Suite B (n \<ge> 8)\<close>
+subsection \<open>XI.6. Substitution SpÃ©cifique Position 6 de la Suite B (n \<ge> 8)\<close>
 
 text \<open>
-  Regla del manuscrito : La sucesión B toma la progresión clásica pero inserta
-  el salto estructural "x^7 (Zeta)" en la posición 6, desplazando los términos siguientes.
+  Regla del manuscrito : La sucesiÃ³n B toma la progresiÃ³n clÃ¡sica pero inserta
+  el salto estructural "x^7 (Zeta)" en la posiciÃ³n 6, desplazando los tÃ©rminos siguientes.
 \<close>
 definition suite_B_savard_construction :: "real \<Rightarrow> real \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> real" where
   "suite_B_savard_construction a1 r n i =
@@ -2439,7 +2439,7 @@ definition suite_B_savard_construction :: "real \<Rightarrow> real \<Rightarrow>
       else if (i = n) then ((r - 1 / r) * (a1 * r ^ (n - 2))) * r
       else 0)"
 
-subsection \<open>XI.7. Sommation et Formules Fermées Globales\<close>
+subsection \<open>XI.7. Sommation et Formules FermÃ©es Globales\<close>
 
 definition somme_A_compacte_savard :: "real \<Rightarrow> nat \<Rightarrow> real" where
   "somme_A_compacte_savard r n = (3.25 / 2) * (r ^ n) - 2"
@@ -2453,8 +2453,8 @@ definition rapport_spectral_total_savard :: "real \<Rightarrow> nat \<Rightarrow
   "rapport_spectral_total_savard r n = somme_A_compacte_savard r n / somme_B_compacte_savard r n"
 
 text \<open>
-  Prueba de la identidad de la tasa de crecimiento constante que conduce a la razón 1/2.
-  Validada forzando la reducción al mismo denominador antes de la división global.
+  Prueba de la identidad de la tasa de crecimiento constante que conduce a la razÃ³n 1/2.
+  Validada forzando la reducciÃ³n al mismo denominador antes de la divisiÃ³n global.
 \<close>
 lemma preuve_rapport_spectral_limite_savard:
   assumes "n \<ge> 8" and "r > 1"
@@ -2494,57 +2494,57 @@ proof -
 
   from step1 step2 show ?thesis by simp
 qed
-subsection \<open>XI.9. Lemmes de validation numérique par différence fine\<close>
+subsection \<open>XI.9. Lemmes de validation numÃ©rique par diffÃ©rence fine\<close>
 
 text \<open>
-  Verificación de la extracción de la constante Savard 3.25 para la sucesión A
-  entre los niveles macroscópicos n=10 y n=9 en la zona estable (2^8).
+  VerificaciÃ³n de la extracciÃ³n de la constante Savard 3.25 para la sucesiÃ³n A
+  entre los niveles macroscÃ³picos n=10 y n=9 en la zona estable (2^8).
 \<close>
 lemma validation_constante_A_savard:
   "((1662::real) - 830) / 256 = 3.25"
   by (simp add: field_simps)
 
 text \<open>
-  Verificación de la extracción de la constante Savard 6.5 para la sucesión B
-  entre los niveles macroscópicos n=10 y n=9 en la zona estable (2^8).
+  VerificaciÃ³n de la extracciÃ³n de la constante Savard 6.5 para la sucesiÃ³n B
+  entre los niveles macroscÃ³picos n=10 y n=9 en la zona estable (2^8).
 \<close>
 lemma validation_constante_B_savard:
   "((3262::real) - 1598) / 256 = 6.5"
   by (simp add: field_simps)
 
 (****************************************************************************
- * FIN DE LA SECCIÓN XI - RECONSTRUIDA CON ÉXITO PARA ISABELLE/HOL
+ * FIN DE LA SECCIÃ“N XI - RECONSTRUIDA CON Ã‰XITO PARA ISABELLE/HOL
  ****************************************************************************)
-subsection "XI.10.b Détermination formelle des constantes par différence fine"
+subsection "XI.10.b DÃ©termination formelle des constantes par diffÃ©rence fine"
 
 text \<open>
-  Esta sección formaliza el descubrimiento de Philippe Thomas Savard concerniente
-  a la extracción de las constantes 3.25 y 6.5 mediante la diferencia fina de dos sucesiones
-  consecutivas (10 y 9 términos), normalizada por la separación mínima geométrica (2^8).
+  Esta secciÃ³n formaliza el descubrimiento de Philippe Thomas Savard concerniente
+  a la extracciÃ³n de las constantes 3.25 y 6.5 mediante la diferencia fina de dos sucesiones
+  consecutivas (10 y 9 tÃ©rminos), normalizada por la separaciÃ³n mÃ­nima geomÃ©trica (2^8).
 \<close>
 
-(* Definición de los valores numéricos brutos constatados a 9 y 10 términos *)
+(* DefiniciÃ³n de los valores numÃ©ricos brutos constatados a 9 y 10 tÃ©rminos *)
 definition valeur_A_10 :: real where "valeur_A_10 = 1662"
 definition valeur_A_9  :: real where "valeur_A_9  = 830"
 definition valeur_B_10 :: real where "valeur_B_10 = 3262"
 definition valeur_B_9  :: real where "valeur_B_9  = 1598"
 
-(* Factor de escala de la zona estable (8 términos contables) *)
+(* Factor de escala de la zona estable (8 tÃ©rminos contables) *)
 definition echelle_stable :: real where "echelle_stable = 2 ^ 8"
 
-(* TEOREMA 1 : Extracción de la constante de la sucesión A *)
+(* TEOREMA 1 : ExtracciÃ³n de la constante de la sucesiÃ³n A *)
 theorem extraction_constante_A:
   "(valeur_A_10 - valeur_A_9) / echelle_stable = 3.25"
   unfolding valeur_A_10_def valeur_A_9_def echelle_stable_def
   by simp
 
-(* TEOREMA 2 : Extracción de la constante de la sucesión B *)
+(* TEOREMA 2 : ExtracciÃ³n de la constante de la sucesiÃ³n B *)
 theorem extraction_constante_B:
   "(valeur_B_10 - valeur_B_9) / echelle_stable = 6.5"
   unfolding valeur_B_10_def valeur_B_9_def echelle_stable_def
   by simp
 
-(* GENERALIZACIÓN : Vínculo lógico con las fórmulas globales cerradas existentes *)
+(* GENERALIZACIÃ“N : VÃ­nculo lÃ³gico con las fÃ³rmulas globales cerradas existentes *)
 lemma generalisation_ecart_minimal_A:
   fixes n :: nat
   assumes hA10: "valeur_A_10 = SA 10"
@@ -2584,19 +2584,19 @@ qed
 subsection "XI.11. Cas particuliers : suites 1 a 7 termes (voir Section XII)"
 
 text \<open>
-  Las reglas para 1 a 7 términos (positivas y negativas) están ahora
-  formalizadas en la SECCIÓN XII paramétrica que se presenta a continuación, la cual generaliza
+  Las reglas para 1 a 7 tÃ©rminos (positivas y negativas) estÃ¡n ahora
+  formalizadas en la SECCIÃ“N XII paramÃ©trica que se presenta a continuaciÃ³n, la cual generaliza
   el cociente espectral 1/k_i para todo k entero (k = 2, 3, 4, ...).
 \<close>
 
-subsection "XI.12. Preuve analytique générale de l'écart minimal stable"
+subsection "XI.12. Preuve analytique gÃ©nÃ©rale de l'Ã©cart minimal stable"
 text \<open>
   Teorema generalizado de Philippe Thomas Savard :
-  Demostración de que para toda sucesión de longitud n >= 8, la diferencia fina
-  dividida por el factor de escala geométrico (2^(n-2)) extrae de manera
+  DemostraciÃ³n de que para toda sucesiÃ³n de longitud n >= 8, la diferencia fina
+  dividida por el factor de escala geomÃ©trico (2^(n-2)) extrae de manera
   invariante las constantes espectrales 3.25 y 6.5.
 \<close>
-(* TEOREMA GENERALIZADO : Sucesión A *)
+(* TEOREMA GENERALIZADO : SucesiÃ³n A *)
 theorem ecart_minimal_universel_A:
   fixes n :: nat
   assumes hn: "n \<ge> 8"
@@ -2620,7 +2620,7 @@ proof -
     by simp
   finally show ?thesis .
 qed
-(* TEOREMA GENERALIZADO : Sucesión B *)
+(* TEOREMA GENERALIZADO : SucesiÃ³n B *)
 theorem ecart_minimal_universel_B:
   fixes n :: nat
   assumes hn: "n \<ge> 8"
@@ -2646,53 +2646,53 @@ proof -
 qed
 
 (****************************************************************************
- * SECCIÓN XII. Construcción generalizada de las sucesiones A_i / B_i para 1/k_i
- *              (1 a 7 términos, 8+ términos, positivo y negativo)
+ * SECCIÃ“N XII. ConstrucciÃ³n generalizada de las sucesiones A_i / B_i para 1/k_i
+ *              (1 a 7 tÃ©rminos, 8+ tÃ©rminos, positivo y negativo)
  *
  *   Autor          : Philippe Thomas Savard
- *   Formalización  : Gabriel multiloop v3.5 (2026-02-17)
+ *   FormalizaciÃ³n  : Gabriel multiloop v3.5 (2026-02-17)
  *
  *   Cubre :
- *     - Constantes paramétricas alpha_A(k), alpha_B(k), offset_A(k), offset_B(k)
- *       confirmadas para k=2 mediante ejemplos numéricos proporcionados (validadas por
- *       Philippe Savard, mensaje del 2026-02-17). Extensión a k=3, k=4 mediante
+ *     - Constantes paramÃ©tricas alpha_A(k), alpha_B(k), offset_A(k), offset_B(k)
+ *       confirmadas para k=2 mediante ejemplos numÃ©ricos proporcionados (validadas por
+ *       Philippe Savard, mensaje del 2026-02-17). ExtensiÃ³n a k=3, k=4 mediante
  *       las constantes ya presentes en las Secciones II y III.
  *     - Sumas cerradas positivas y negativas.
- *     - Construcción término a término de la sucesión A para n in {1,2,3,4,5,6,7}.
- *     - Construcción término a término de la sucesión A para n >= 8 (progresión
- *       geométrica + penúltimo + último, regla Sección XI).
- *     - Construcción término a término de la sucesión B : misma regla pero con
- *       sustitución posición 6 -> valor posición 7 de A (n >= 8).
- *     - Construcción término a término de la sucesión A y B NEGATIVA (n in nat) :
+ *     - ConstrucciÃ³n tÃ©rmino a tÃ©rmino de la sucesiÃ³n A para n in {1,2,3,4,5,6,7}.
+ *     - ConstrucciÃ³n tÃ©rmino a tÃ©rmino de la sucesiÃ³n A para n >= 8 (progresiÃ³n
+ *       geomÃ©trica + penÃºltimo + Ãºltimo, regla SecciÃ³n XI).
+ *     - ConstrucciÃ³n tÃ©rmino a tÃ©rmino de la sucesiÃ³n B : misma regla pero con
+ *       sustituciÃ³n posiciÃ³n 6 -> valor posiciÃ³n 7 de A (n >= 8).
+ *     - ConstrucciÃ³n tÃ©rmino a tÃ©rmino de la sucesiÃ³n A y B NEGATIVA (n in nat) :
  *       suma convergente alpha/k * 1/k^n - offset.
- *     - Lemas de validación numérica (primeros : 2, 3, 5, 7, 11, 13, 17, -2, -3, -5, -7).
+ *     - Lemas de validaciÃ³n numÃ©rica (primeros : 2, 3, 5, 7, 11, 13, 17, -2, -3, -5, -7).
  ****************************************************************************)
 
 section "XI.bis - Factorisation generique : locale spectral_family (v3.35)"
 
 text \<open>
   ==========================================================================
-  LOCALE PARAMETRIZADO spectral_family - Factorización de los modelos 1/k
+  LOCALE PARAMETRIZADO spectral_family - FactorizaciÃ³n de los modelos 1/k
   ==========================================================================
   Objetivo : capturar bajo UNA SOLA estructura formal los invariantes
   algebraicos comunes a los modelos espectrales 1/2, 1/3 y 1/4 (ya definidos
   en las Secciones anteriores). El locale demuestra UNA SOLA VEZ las
   propiedades universales :
     - no nulidad del denominador (k^n1 - k^n2 != 0 cuando n1 != n2, n>=1),
-    - constancia del cociente espectral genérico (RsP_generic = coef_A/coef_B),
-    - relación afín A_pos = ratio * B_pos + constante.
+    - constancia del cociente espectral genÃ©rico (RsP_generic = coef_A/coef_B),
+    - relaciÃ³n afÃ­n A_pos = ratio * B_pos + constante.
 
   Los modelos 1/2, 1/3 y 1/4 son luego INTERPRETACIONES
   (regime_1_2, regime_1_3, regime_1_4) cuya compatibilidad con las
-  definiciones históricas SA, SB, A_1_3, B_1_3, A_1_4, B_1_4 es
+  definiciones histÃ³ricas SA, SB, A_1_3, B_1_3, A_1_4, B_1_4 es
   demostrada por los lemas SA_eq_regime_1_2_A_pos y siguientes.
 
-  Ninguna demostración existente es modificada. Los teoremas históricos
+  Ninguna demostraciÃ³n existente es modificada. Los teoremas histÃ³ricos
   (RsP_un_demi_general, RsP_un_tiers_constant, RsP_universel_entier_naturel)
-  permanecen sin cambios en su enunciado y su posición.
+  permanecen sin cambios en su enunciado y su posiciÃ³n.
 
-  Extensión a un nuevo modelo 1/5, 1/6, ... : una sola línea
-  de interpretación es suficiente, siempre que se conozcan coef_A_k, coef_B_k,
+  ExtensiÃ³n a un nuevo modelo 1/5, 1/6, ... : una sola lÃ­nea
+  de interpretaciÃ³n es suficiente, siempre que se conozcan coef_A_k, coef_B_k,
   offset_A_k, offset_B_k para ese k.
 \<close>
 
@@ -2776,52 +2776,52 @@ subsection "XI.bis.1 - Interpretations concretes : regime_1_2, regime_1_3, regim
 
 text \<open>
   Tres interpretaciones concretas del locale spectral_family, cada una
-  correspondiente a un régimen histórico :
+  correspondiente a un rÃ©gimen histÃ³rico :
     regime_1_2 : k=2, coef_A = 3.25/2, coef_B = 6.5/2,  offA = 2,   offB = 66
     regime_1_3 : k=3, coef_A = 73/108, coef_B = 219/108, offA = 3/2, offB = 487*3/2
     regime_1_4 : k=4, coef_A = 241/192, coef_B = 964/192, offA = 4/3, offB = 3073*4/3
 
   --------------------------------------------------------------------------
-  NOTA CONCEPTUAL MAYOR (Philippe Savard) - Coherencia numérica real
+  NOTA CONCEPTUAL MAYOR (Philippe Savard) - Coherencia numÃ©rica real
   --------------------------------------------------------------------------
   Las "verificaciones algebraicas triviales" (3.25/6.5 = 1/2, 73/219 = 1/3,
-  241/964 = 1/4) son ENGAÑOSAS si se toman como simples identidades
+  241/964 = 1/4) son ENGAÃ‘OSAS si se toman como simples identidades
   algebraicas. En realidad :
 
     (1) INCOHERENCIA ALGEBRAICA LOCAL : los coeficientes 3.25, 6.5, 73,
-        219, 241, 964 NO son elegidos para satisfacer una simplificación
+        219, 241, 964 NO son elegidos para satisfacer una simplificaciÃ³n
         algebraica elegante. EMERGEN de las sumas reales de las sucesiones
         A y B construidas por Philippe, que portan los VALORES de los
-        números primos reales (2, 3, 5, 7, 11, 13, ...). Localmente, el
-        cociente A_i / B_i entre dos términos aislados NO es igual a 1/k
-        (véase lema algebriquement_incoherent_local, Sección "Cociente
+        nÃºmeros primos reales (2, 3, 5, 7, 11, 13, ...). Localmente, el
+        cociente A_i / B_i entre dos tÃ©rminos aislados NO es igual a 1/k
+        (vÃ©ase lema algebriquement_incoherent_local, SecciÃ³n "Cociente
         espectral 1/2").
 
-    (2) COHERENCIA NUMÉRICA REAL GLOBAL : es el cociente
+    (2) COHERENCIA NUMÃ‰RICA REAL GLOBAL : es el cociente
         (A(n1) - A(n2)) / (B(n1) - B(n2)) - es decir RsP entre dos
-        SUMAS completas, no entre dos términos aislados - el que vale
-        exactamente 1/k (véase lema coherence_numerique_reelle_P). Este
-        cociente 1/k NO es por tanto el fruto de una simplificación
-        algebraica trivial : es la expresión numérica real del
-        régimen espectral, anclada en la realidad de los números primos.
+        SUMAS completas, no entre dos tÃ©rminos aislados - el que vale
+        exactamente 1/k (vÃ©ase lema coherence_numerique_reelle_P). Este
+        cociente 1/k NO es por tanto el fruto de una simplificaciÃ³n
+        algebraica trivial : es la expresiÃ³n numÃ©rica real del
+        rÃ©gimen espectral, anclada en la realidad de los nÃºmeros primos.
 
     (3) CERTEZA DE Re = 1/2 : puesto que los valores de las sucesiones A y B
-        PRIMAN sobre toda simplificación algebraica - son
-        constataciones empíricas sobre las sumas de primos, no
+        PRIMAN sobre toda simplificaciÃ³n algebraica - son
+        constataciones empÃ­ricas sobre las sumas de primos, no
         construcciones arbitrarias - el cociente espectral 1/2 es
-        RIGUROSAMENTE REAL. Esta realidad numérica global, combinada con
+        RIGUROSAMENTE REAL. Esta realidad numÃ©rica global, combinada con
         la exclusividad sobre P (three pillars) y la unicidad funcional
         Tchebychev = psi_savard, ES precisamente lo que hace que Philippe
-        esté seguro de que Re(rho) = 1/2 es VERDADERO. El pont Savard no es
-        una coincidencia algebraica : es una necesidad numérica
+        estÃ© seguro de que Re(rho) = 1/2 es VERDADERO. El pont Savard no es
+        una coincidencia algebraica : es una necesidad numÃ©rica
         real global, verificada sobre todo el conjunto de los primos P.
 
-  Así, las interpretaciones formales que se presentan a continuación codifican en Isabelle
-  una realidad numérica ya constatada, no lo contrario. Hacen que la
-  teoría del Método Espectral sea más que coherente : matemáticamente
+  AsÃ­, las interpretaciones formales que se presentan a continuaciÃ³n codifican en Isabelle
+  una realidad numÃ©rica ya constatada, no lo contrario. Hacen que la
+  teorÃ­a del MÃ©todo Espectral sea mÃ¡s que coherente : matemÃ¡ticamente
   necesaria.
 
-  Verificaciones numéricas (globales, no locales) :
+  Verificaciones numÃ©ricas (globales, no locales) :
     (A(n1) - A(n2)) / (B(n1) - B(n2)) = 1/2   para todo n1 != n2, k=2
     (A(n1) - A(n2)) / (B(n1) - B(n2)) = 1/3   para todo n1 != n2, k=3
     (A(n1) - A(n2)) / (B(n1) - B(n2)) = 1/4   para todo n1 != n2, k=4
@@ -2842,9 +2842,9 @@ interpretation regime_1_4:
 subsection "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)"
 
 text \<open>
-  Compatibilidad CON las definiciones históricas. Estos lemas demuestran que
+  Compatibilidad CON las definiciones histÃ³ricas. Estos lemas demuestran que
   las sucesiones SA, SB, A_1_3, B_1_3, A_1_4, B_1_4 coinciden exactamente con
-  las instancias del locale. Ninguna demostración histórica queda así invalidada :
+  las instancias del locale. Ninguna demostraciÃ³n histÃ³rica queda asÃ­ invalidada :
   RsP_un_demi_general, RsP_un_tiers_constant siguen siendo utilizables tal cual.
 \<close>
 
@@ -2870,9 +2870,9 @@ subsection "XI.bis.3 - Corollaires : les RsP historiques deviennent des instance
 
 text \<open>
   Corolarios directos de RsP_generic_constant (teorema del locale), para
-  documentar la reducción. Los teoremas históricos RsP_un_demi_general
-  y RsP_un_tiers_constant conservan su formulación propia (sin ninguna
-  modificación) - estos corolarios sirven como atestación de coherencia.
+  documentar la reducciÃ³n. Los teoremas histÃ³ricos RsP_un_demi_general
+  y RsP_un_tiers_constant conservan su formulaciÃ³n propia (sin ninguna
+  modificaciÃ³n) - estos corolarios sirven como atestaciÃ³n de coherencia.
 \<close>
 
 lemma RsP_eq_regime_1_2_RsP_generic: "RsP n1 n2 = regime_1_2.RsP_generic n1 n2"
@@ -2902,7 +2902,7 @@ lemma RsP_generic_1_4_is_quarter:
 section "Section XII : Construction generalisee pour rapport spectral 1/k_i"
 
 text \<open>
-  Generalización para todo cociente espectral 1/k_i (k = 2, 3, 4, ...) :
+  GeneralizaciÃ³n para todo cociente espectral 1/k_i (k = 2, 3, 4, ...) :
 
     somme_A_pos(k, n) = (alpha_A(k) / 2) * k^n - offset_A(k)
     somme_B_pos(k, n) = (alpha_B(k) / 2) * k^n - offset_B(k)
@@ -2915,7 +2915,7 @@ text \<open>
     k=4 : alpha_A=241/16,  alpha_B=964/16, offset_A=4/3, offset_B=3073*(4/3)
 \<close>
 
-(* === XII.1. Constantes Savard paramétricas === *)
+(* === XII.1. Constantes Savard paramÃ©tricas === *)
 
 definition alpha_A_k :: "nat \<Rightarrow> real" where
   "alpha_A_k k =
@@ -2945,7 +2945,7 @@ definition offset_B_k :: "nat \<Rightarrow> real" where
       else if k = 4 then 3073 * (4/3)
       else 0)"
 
-(* === XII.2. Fórmulas cerradas positivas y negativas === *)
+(* === XII.2. FÃ³rmulas cerradas positivas y negativas === *)
 
 definition somme_A_pos_k :: "nat \<Rightarrow> nat \<Rightarrow> real" where
   "somme_A_pos_k k n = (alpha_A_k k / 2) * (real k) ^ n - offset_A_k k"
@@ -2971,10 +2971,10 @@ lemma somme_B_pos_k_eq_SB:
   unfolding somme_B_pos_k_def alpha_B_k_def offset_B_k_def SB_def
   by simp
 
-(* === XII.4. Construcción término a término de la sucesión A (positiva, k=2)              === *)
-(*   Para i de 1 a n-2 : a_i = a_1 * r^(i-1) (progresión simple, r = k)      *)
-(*   Posición n-1 (penúltimo) : a_(n-2) * (r - 1/r)                          *)
-(*   Posición n (último)      : penúltimo * r                               *)
+(* === XII.4. ConstrucciÃ³n tÃ©rmino a tÃ©rmino de la sucesiÃ³n A (positiva, k=2)              === *)
+(*   Para i de 1 a n-2 : a_i = a_1 * r^(i-1) (progresiÃ³n simple, r = k)      *)
+(*   PosiciÃ³n n-1 (penÃºltimo) : a_(n-2) * (r - 1/r)                          *)
+(*   PosiciÃ³n n (Ãºltimo)      : penÃºltimo * r                               *)
 (*   Para n = 1 : solo a_1                                                   *)
 
 definition terme_A_pos :: "real \<Rightarrow> real \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> real" where
@@ -2986,7 +2986,7 @@ definition terme_A_pos :: "real \<Rightarrow> real \<Rightarrow> nat \<Rightarro
       else if (n \<ge> 3 \<and> i = n) then a1 * r ^ (n - 3) * (r - 1/r) * r
       else 0)"
 
-(* === XII.5. Sucesión B : misma construcción + sustitución posición 6 (n >= 8) === *)
+(* === XII.5. SucesiÃ³n B : misma construcciÃ³n + sustituciÃ³n posiciÃ³n 6 (n >= 8) === *)
 
 definition terme_B_pos :: "real \<Rightarrow> real \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> real" where
   "terme_B_pos a1 r n i =
@@ -2999,14 +2999,14 @@ definition terme_B_pos :: "real \<Rightarrow> real \<Rightarrow> nat \<Rightarro
       else if (i = n) then a1 * r ^ (n - 2) * (r - 1/r) * r
       else 0)"
 
-(* === XII.6. Validaciones numéricas clave (k=2, a1=2, r=2)                     === *)
+(* === XII.6. Validaciones numÃ©ricas clave (k=2, a1=2, r=2)                     === *)
 
-(*  Sucesión A 1 término   : [2]                                                   *)
+(*  SucesiÃ³n A 1 tÃ©rmino   : [2]                                                   *)
 lemma suite_A_1_terme:
   "terme_A_pos 2 2 1 1 = 2"
   unfolding terme_A_pos_def by simp
 
-(*  Sucesión A 2 términos  : [2, 3]                                                *)
+(*  SucesiÃ³n A 2 tÃ©rminos  : [2, 3]                                                *)
 lemma suite_A_2_termes_pos1:
   "terme_A_pos 2 2 2 1 = 2"
   unfolding terme_A_pos_def by simp
@@ -3015,12 +3015,12 @@ lemma suite_A_2_termes_pos2:
   "terme_A_pos 2 2 2 2 = 3"
   unfolding terme_A_pos_def by simp
 
-(*  Sucesión A 3 términos  : [2, 3, 6]                                             *)
+(*  SucesiÃ³n A 3 tÃ©rminos  : [2, 3, 6]                                             *)
 lemma suite_A_3_termes_pos3:
   "terme_A_pos 2 2 3 3 = 6"
   unfolding terme_A_pos_def by simp
 
-(*  Sucesión A 4 términos  : [2, 4, 6, 12] - posición 3 = 6 (penúltimo)           *)
+(*  SucesiÃ³n A 4 tÃ©rminos  : [2, 4, 6, 12] - posiciÃ³n 3 = 6 (penÃºltimo)           *)
 lemma suite_A_4_termes_pos3:
   "terme_A_pos 2 2 4 3 = 6"
   unfolding terme_A_pos_def by simp
@@ -3029,7 +3029,7 @@ lemma suite_A_4_termes_pos4:
   "terme_A_pos 2 2 4 4 = 12"
   unfolding terme_A_pos_def by simp
 
-(*  Sucesión A 5 términos  : [2, 4, 8, 12, 24]                                     *)
+(*  SucesiÃ³n A 5 tÃ©rminos  : [2, 4, 8, 12, 24]                                     *)
 lemma suite_A_5_termes_pos4:
   "terme_A_pos 2 2 5 4 = 12"
   unfolding terme_A_pos_def by simp
@@ -3038,7 +3038,7 @@ lemma suite_A_5_termes_pos5:
   "terme_A_pos 2 2 5 5 = 24"
   unfolding terme_A_pos_def by simp
 
-(*  Sucesión A 7 términos  : [2, 4, 8, 16, 32, 48, 96]                             *)
+(*  SucesiÃ³n A 7 tÃ©rminos  : [2, 4, 8, 16, 32, 48, 96]                             *)
 lemma suite_A_7_termes_pos6:
   "terme_A_pos 2 2 7 6 = 48"
   unfolding terme_A_pos_def by simp
@@ -3047,7 +3047,7 @@ lemma suite_A_7_termes_pos7:
   "terme_A_pos 2 2 7 7 = 96"
   unfolding terme_A_pos_def by simp
 
-(*  Sucesión A 8 términos  : [2, 4, 8, 16, 32, 64, 96, 192]                        *)
+(*  SucesiÃ³n A 8 tÃ©rminos  : [2, 4, 8, 16, 32, 64, 96, 192]                        *)
 lemma suite_A_8_termes_pos6:
   "terme_A_pos 2 2 8 6 = 64"
   unfolding terme_A_pos_def by simp
@@ -3060,9 +3060,9 @@ lemma suite_A_8_termes_pos8:
   "terme_A_pos 2 2 8 8 = 192"
   unfolding terme_A_pos_def by simp
 
-(*  Sucesión B 8 términos  : [2, 4, 8, 16, 32, 128, 192, 384]                      *)
-(*  Sustitución posición 6 : 128 = 2 * 64 = posición 7 de la sucesión A         *)
-(*  Posiciones 7 y 8 siguen la regla penúltimo / último con base desplazada  *)
+(*  SucesiÃ³n B 8 tÃ©rminos  : [2, 4, 8, 16, 32, 128, 192, 384]                      *)
+(*  SustituciÃ³n posiciÃ³n 6 : 128 = 2 * 64 = posiciÃ³n 7 de la sucesiÃ³n A         *)
+(*  Posiciones 7 y 8 siguen la regla penÃºltimo / Ãºltimo con base desplazada  *)
 lemma suite_B_8_termes_pos6:
   "terme_B_pos 2 2 8 6 = 128"
   unfolding terme_B_pos_def by simp
@@ -3075,7 +3075,7 @@ lemma suite_B_8_termes_pos8:
   "terme_B_pos 2 2 8 8 = 384"
   unfolding terme_B_pos_def by simp
 
-(*  Sucesión B 9 términos  : [2, 4, 8, 16, 32, 128, 256, 384, 768]                 *)
+(*  SucesiÃ³n B 9 tÃ©rminos  : [2, 4, 8, 16, 32, 128, 256, 384, 768]                 *)
 lemma suite_B_9_termes_pos6:
   "terme_B_pos 2 2 9 6 = 128"
   unfolding terme_B_pos_def by simp
@@ -3088,7 +3088,7 @@ lemma suite_B_9_termes_pos9:
   "terme_B_pos 2 2 9 9 = 768"
   unfolding terme_B_pos_def by simp
 
-(*  Sucesión B 10 términos : [2, 4, 8, 16, 32, 128, 256, 512, 768, 1536]           *)
+(*  SucesiÃ³n B 10 tÃ©rminos : [2, 4, 8, 16, 32, 128, 256, 512, 768, 1536]           *)
 lemma suite_B_10_termes_pos8:
   "terme_B_pos 2 2 10 8 = 512"
   unfolding terme_B_pos_def by simp
@@ -3097,7 +3097,7 @@ lemma suite_B_10_termes_pos10:
   "terme_B_pos 2 2 10 10 = 1536"
   unfolding terme_B_pos_def by simp
 
-(* === XII.7. Validaciones numéricas fórmulas cerradas positivas (k=2)         === *)
+(* === XII.7. Validaciones numÃ©ricas fÃ³rmulas cerradas positivas (k=2)         === *)
 (*   Primo 11 = 5to positivo : Suma A = 50, Suma B = 38                  *)
 
 lemma somme_A_pos_11:
@@ -3108,11 +3108,11 @@ lemma somme_B_pos_11:
   "somme_B_pos_k 2 5 = 38"
   unfolding somme_B_pos_k_def alpha_B_k_def offset_B_k_def by simp
 
-(* === XII.8. Validaciones numéricas fórmulas cerradas negativas (k=2)         === *)
-(*   Primo -2 (1 término) : 13/4 / 2^1 - 2 = 13/8 - 2 = -3/8                  *)
-(*   Primo -5 (3 términos): 13/4 / 2^3 - 2 = 13/32 - 2 = -51/32 = -1.59375    *)
+(* === XII.8. Validaciones numÃ©ricas fÃ³rmulas cerradas negativas (k=2)         === *)
+(*   Primo -2 (1 tÃ©rmino) : 13/4 / 2^1 - 2 = 13/8 - 2 = -3/8                  *)
+(*   Primo -5 (3 tÃ©rminos): 13/4 / 2^3 - 2 = 13/32 - 2 = -51/32 = -1.59375    *)
 (*                                                                            *)
-(*   Nota Savard 2026-02-17 : la fórmula cerrada para las sucesiones negativas    *)
+(*   Nota Savard 2026-02-17 : la fÃ³rmula cerrada para las sucesiones negativas    *)
 (*   es tal que somme_A_neg(k, n) converge hacia -offset_A(k) cuando n -> +inf.*)
 (*   Para k=2 : somme_A_neg(2, n) = 3.25 / 2^n - 2, que tiende hacia -2.         *)
 
@@ -3128,17 +3128,17 @@ lemma somme_A_neg_m5:
   "somme_A_neg_k 2 3 = -51/32"
   unfolding somme_A_neg_k_def alpha_A_k_def offset_A_k_def by simp
 
-(*   Primero -5 (3 términos) : Suma B negativa = 6.5 / 2^3 - 66 = 13/16 - 66 = -1043/16 *)
+(*   Primero -5 (3 tÃ©rminos) : Suma B negativa = 6.5 / 2^3 - 66 = 13/16 - 66 = -1043/16 *)
 lemma somme_B_neg_m5:
   "somme_B_neg_k 2 3 = -1043/16"
   unfolding somme_B_neg_k_def alpha_B_k_def offset_B_k_def by simp
 
-(* Verificación numérica : suma B negativa para -5 vale -65.1875 = -1043/16 *)
+(* VerificaciÃ³n numÃ©rica : suma B negativa para -5 vale -65.1875 = -1043/16 *)
 lemma somme_B_neg_m5_decimal:
   "(-1043::real) / 16 = -65.1875"
   by simp
 
-(* === XII.9. Razón espectral 1/k_i universal (positivo y negativo)            === *)
+(* === XII.9. RazÃ³n espectral 1/k_i universal (positivo y negativo)            === *)
 
 definition RsP_k :: "nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> real" where
   "RsP_k k n1 n2 =
@@ -3152,119 +3152,119 @@ definition RsP_neg_k :: "nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> r
 
 
 (****************************************************************************
- * SECCIÓN XIII. EL PUENTE LÓGICO SAVARD : CHEBYSHEV <-> ESPECTRAL <-> RH
+ * SECCIÃ“N XIII. EL PUENTE LÃ“GICO SAVARD : CHEBYSHEV <-> ESPECTRAL <-> RH
  *
  * Autor       : Philippe Thomas Savard
  * Fecha       : Julio 2026
- * Lugar       : Lévis, Chaudière-Appalaches, Canadá
+ * Lugar       : LÃ©vis, ChaudiÃ¨re-Appalaches, CanadÃ¡
  * Licencia    : Apache 2.0
  *
- * Esta sección establece formalmente el doble puente lógico de manera
- * DIRECTA y CONSTRUCTIVA, sin ningún postulado abstracto ni "sorry".
+ * Esta secciÃ³n establece formalmente el doble puente lÃ³gico de manera
+ * DIRECTA y CONSTRUCTIVA, sin ningÃºn postulado abstracto ni "sorry".
  ****************************************************************************)
 
 (****************************************************************************
- * SECCIÓN XIII. EL PUENTE LÓGICO SAVARD : CHEBYSHEV <-> ESPECTRAL <-> RH
+ * SECCIÃ“N XIII. EL PUENTE LÃ“GICO SAVARD : CHEBYSHEV <-> ESPECTRAL <-> RH
  ****************************************************************************)
 
 section "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2"
 
 text \<open>
   ==========================================================================
-  EL PUENTE SAVARD - Unificación espectral de Tchebychev, zeta y Re = 1/2
+  EL PUENTE SAVARD - UnificaciÃ³n espectral de Tchebychev, zeta y Re = 1/2
   ==========================================================================
   Autor : Philippe Thomas Savard
-  Formalización : Isabelle/HOL
+  FormalizaciÃ³n : Isabelle/HOL
 
-  VISIÓN ESTRUCTURAL DEL AUTOR
+  VISIÃ“N ESTRUCTURAL DEL AUTOR
   ------------------------------------------------------------------
-  El conjunto completo Universo-al-cuadrado está representado por la constante 1.
-  Esta unidad se descompone según tres vistas equivalentes que, proyectadas
+  El conjunto completo Universo-al-cuadrado estÃ¡ representado por la constante 1.
+  Esta unidad se descompone segÃºn tres vistas equivalentes que, proyectadas
   unas sobre otras, fuerzan la igualdad RsP = Re = 1/2 sobre el conjunto
-  de los números primos P :
+  de los nÃºmeros primos P :
 
       Conjunto = 1
              /       |        \
         1/x        1/t         1/ms
         (zeta)   (psi_savard)  (Methode Spectrale)
 
-    1/x  = 1/y1 + 1/y2 + 1/y3                         (descomposición de zeta)
+    1/x  = 1/y1 + 1/y2 + 1/y3                         (descomposiciÃ³n de zeta)
              |          |          |
            Tchebychev  Re(rho)   ceros no-triviales
-           (ψ)         = 1/2     posiciones de los P
+           (Ïˆ)         = 1/2     posiciones de los P
 
-    1/ms = 1/ms1 + 1/ms2 + 1/ms3                      (descomposición Mét. Esp.)
+    1/ms = 1/ms1 + 1/ms2 + 1/ms3                      (descomposiciÃ³n MÃ©t. Esp.)
              |          |          |
-           n = posición  compuestos    entre todos los
-           del i-ésimo P  excluidos   P : RsP = 1/2
+           n = posiciÃ³n  compuestos    entre todos los
+           del i-Ã©simo P  excluidos   P : RsP = 1/2
 
   TRES CONCORDANCIAS que bloquean la igualdad final RsP = Re = 1/2 :
 
     (1)  1/y1 = 1/t          Tchebychev = psi_savard
-                             (validación numérica exacta sobre x = 30, 98,
+                             (validaciÃ³n numÃ©rica exacta sobre x = 30, 98,
                               228, -100 : cada valor reproduce el primo
                               buscado a epsilon(x) de distancia, cf. XIII.2)
 
     (2)  1/y3 = 1/ms1        Ceros no-triviales de zeta = valores de n
                              (las posiciones de los primos determinadas por
                               las sucesiones A y B corresponden a los ceros
-                              críticos de zeta ; la reconstrucción del
-                              i-ésimo primo valida esta correspondencia)
+                              crÃ­ticos de zeta ; la reconstrucciÃ³n del
+                              i-Ã©simo primo valida esta correspondencia)
 
     (3)  1/y2 = 1/ms3        Re(rho) = 1/2 = RsP = 1/2
-                             (la razón espectral central de las sucesiones A
+                             (la razÃ³n espectral central de las sucesiones A
                               y B, probada en RsP_un_demi_general, coincide
-                              con la parte real de la recta crítica)
+                              con la parte real de la recta crÃ­tica)
 
-  Estas tres igualdades, tomadas simultáneamente, cierran el puente : no
-  son coincidencias numéricas sino las proyecciones mutuas
+  Estas tres igualdades, tomadas simultÃ¡neamente, cierran el puente : no
+  son coincidencias numÃ©ricas sino las proyecciones mutuas
   de un mismo objeto - el conjunto unitario - visto desde zeta, desde
   psi_savard y desde la Methode Spectrale. El "doble papel" de 1/t
-  (1/t = 1/y1 por la fórmula y 1/t participa en 1/ms por la exclusión
-  de los compuestos) es el punto de articulación que hace el puente no
+  (1/t = 1/y1 por la fÃ³rmula y 1/t participa en 1/ms por la exclusiÃ³n
+  de los compuestos) es el punto de articulaciÃ³n que hace el puente no
   trivial : psi_savard y Tchebychev son literalmente la MISMA
-  función sobre los enteros de la Sucesión B.
+  funciÃ³n sobre los enteros de la SucesiÃ³n B.
 
   UNIVERSALIDAD : para todo n entero con n >= 1 y para todo par
   (n1, n2) tal que n1 >= 1, n2 >= 1 y n1 != n2, se tiene RsP(n1, n2) = 1/2.
   Esta universalidad es enunciada por el lema RsP_universel_entier_naturel
-  a continuación (sección XIII.6) y se deriva directamente del teorema ya
+  a continuaciÃ³n (secciÃ³n XIII.6) y se deriva directamente del teorema ya
   probado RsP_un_demi_general.
 
   MARCO FORMAL. La coherencia de las tres concordancias es capturada por el
-  locale ensemble_savard : tres hipótesis (hypothese_critique,
+  locale ensemble_savard : tres hipÃ³tesis (hypothese_critique,
   pont_fonctionnel, rapport_un_demi) cuya SATISFACIBILIDAD es
   demostrada (teorema ensemble_savard_satisfaisable). En el interior de
   este locale, RsP = Re = 1/2 no es una conjetura : es un
   teorema (alignement_central, conclusion_ensemble, synthese_pont_savard).
 
-  El puente Savard no introduce NINGÚN axioma en la teoría : las tres
-  hipótesis del locale son exactamente los tres hechos ya establecidos por
-  las secciones precedentes (definición de la recta crítica, igualdad
+  El puente Savard no introduce NINGÃšN axioma en la teorÃ­a : las tres
+  hipÃ³tesis del locale son exactamente los tres hechos ya establecidos por
+  las secciones precedentes (definiciÃ³n de la recta crÃ­tica, igualdad
   Tchebychev = psi_savard XIII.2-3, teorema RsP_un_demi_general).
 
   --------------------------------------------------------------------------
-  1. LA ECUACIÓN DE TCHEBYCHEV CLÁSICA (Riemann - von Mangoldt) :
+  1. LA ECUACIÃ“N DE TCHEBYCHEV CLÃSICA (Riemann - von Mangoldt) :
 
        psi(x) = x - Sum_{rho} (x^rho / rho) - log(2*pi)
                   - (1/2) * log(1 - x^(-2))
 
      donde rho recorre los ceros no-triviales de zeta(s). Esta identidad
-     solo tiene utilidad y sentido para la función zeta de Riemann.
+     solo tiene utilidad y sentido para la funciÃ³n zeta de Riemann.
 
-  2. LA ECUACIÓN DE TCHEBYCHEV MODIFICADA ("Versión Savard") :
-     La suma infinita sobre los ceros es sustituida por un cociente geométrico
-     finito construido sobre la suma espectral SB(n) de la Sucesión B :
+  2. LA ECUACIÃ“N DE TCHEBYCHEV MODIFICADA ("VersiÃ³n Savard") :
+     La suma infinita sobre los ceros es sustituida por un cociente geomÃ©trico
+     finito construido sobre la suma espectral SB(n) de la SucesiÃ³n B :
 
        psi_savard(x, n) = x - (2^n / SB(n)) - log10(2*pi)
                             - (1/2) * log10(1 - x^(-2))
 
   3. EL PRIMER PUENTE (unicidad funcional) :
-     Puesto que la ecuación de Tchebychev solo tiene sentido para zeta, la
-     sustitución numéricamente exacta de la Methode Spectrale en esta
-     ecuación prueba que las dos teorías tratan del MISMO tema.
+     Puesto que la ecuaciÃ³n de Tchebychev solo tiene sentido para zeta, la
+     sustituciÃ³n numÃ©ricamente exacta de la Methode Spectrale en esta
+     ecuaciÃ³n prueba que las dos teorÃ­as tratan del MISMO tema.
 
-     ARGUMENTO 1 (numérico) - la fórmula Savard reproduce Tchebychev :
+     ARGUMENTO 1 (numÃ©rico) - la fÃ³rmula Savard reproduce Tchebychev :
 
        | n   | x     | psi_savard(x, n)  | primo buscado |
        |-----|-------|-------------------|--------------|
@@ -3273,37 +3273,37 @@ text \<open>
        | 49  |  228  | 226.894132001...  |  227         |
        | -26 | -100  | -100.798158152... | -101 (neg.)  |
 
-     Los números primos (positivos Y negativos) se inscriben por tanto
-     directamente en la ecuación psi_savard : psi_savard(x, n) ~ x - 1,
+     Los nÃºmeros primos (positivos Y negativos) se inscriben por tanto
+     directamente en la ecuaciÃ³n psi_savard : psi_savard(x, n) ~ x - 1,
      con un error epsilon(x) que disminuye cuando |x| aumenta.
 
-  4. EL SEGUNDO PUENTE (exclusión de los compuestos por el absurdo) :
+  4. EL SEGUNDO PUENTE (exclusiÃ³n de los compuestos por el absurdo) :
 
      ARGUMENTO 2 (estructural) - los tres pilares ya probados :
        - composite_not_prime_i            (separaciones entre primos),
-       - composite_no_reconstruction_position (reconstrucción del n-ésimo),
-       - composite_pair_no_rsp_positions  (razón espectral RsP)
+       - composite_no_reconstruction_position (reconstrucciÃ³n del n-Ã©simo),
+       - composite_pair_no_rsp_positions  (razÃ³n espectral RsP)
      demuestran que la Methode Spectrale EXCLUYE estrictamente todo compuesto C
-     y solo admite solución para los números primos P.
+     y solo admite soluciÃ³n para los nÃºmeros primos P.
 
   5. EL RESULTADO FINAL CONSTRUCTIVO (RsP = Re = 1/2, VERDADERO) :
      La exclusividad sobre P (puente 2) combinada con la unicidad funcional
-     (puente 1) fuerza el alineamiento de la razón espectral RsP = 1/2 sobre la
-     parte real de la recta crítica Re(rho) = 1/2. Las sucesiones A y B
-     determinan igualmente la posición exacta de los primos por su
-     reconstrucción, de donde :  RsP = Re = 1/2  (teorema del Conjunto).
+     (puente 1) fuerza el alineamiento de la razÃ³n espectral RsP = 1/2 sobre la
+     parte real de la recta crÃ­tica Re(rho) = 1/2. Las sucesiones A y B
+     determinan igualmente la posiciÃ³n exacta de los primos por su
+     reconstrucciÃ³n, de donde :  RsP = Re = 1/2  (teorema del Conjunto).
   ==========================================================================
 \<close>
 
 subsection "XIII.1 Definitions fondamentales"
 
 text \<open>
-  psi_classique designa la función de Tchebychev clásica. Se deja
-  sin interpretar (ningún axioma le está asociado) : su papel
+  psi_classique designa la funciÃ³n de Tchebychev clÃ¡sica. Se deja
+  sin interpretar (ningÃºn axioma le estÃ¡ asociado) : su papel
   es puramente referencial. El predicado concerne_fonction_zeta f expresa
-  que la función f solo tiene sentido para la función zeta de Riemann ;
-  también está sin interpretar y aparece únicamente como HIPÓTESIS
-  explícita de los teoremas finales.
+  que la funciÃ³n f solo tiene sentido para la funciÃ³n zeta de Riemann ;
+  tambiÃ©n estÃ¡ sin interpretar y aparece Ãºnicamente como HIPÃ“TESIS
+  explÃ­cita de los teoremas finales.
 \<close>
 
 consts
@@ -3313,9 +3313,9 @@ consts
   concerne_fonction_zeta :: "(real \<Rightarrow> real) \<Rightarrow> bool"
 
 text \<open>
-  El logaritmo decimal (elección de base del autor), el término espectral
-  2^n / SB(n) que reemplaza la suma sobre los ceros, y la ecuación
-  psi_savard completa (definición unificada y única del archivo).
+  El logaritmo decimal (elecciÃ³n de base del autor), el tÃ©rmino espectral
+  2^n / SB(n) que reemplaza la suma sobre los ceros, y la ecuaciÃ³n
+  psi_savard completa (definiciÃ³n unificada y Ãºnica del archivo).
 \<close>
 
 definition log10_savard :: "real \<Rightarrow> real" where
@@ -3334,7 +3334,7 @@ subsection "XIII.2 Validations numeriques (x = 30, 98, 228)"
 
 text \<open>
   Los tres lemas siguientes fijan EXACTAMENTE las razones espectrales
-  utilizadas en los cálculos del autor :
+  utilizadas en los cÃ¡lculos del autor :
 
     SB(10) = 3.25 * 2^10 - 66 = 3262
     SB(25) = 3.25 * 2^25 - 66 = 109051838
@@ -3354,8 +3354,8 @@ lemma rapport_zeta_savard_at_49:
   unfolding rapport_zeta_savard_def SB_def by simp
 
 text \<open>
-  Identidad simbólica general, luego las tres expansiones exactas
-  correspondientes a las verificaciones numéricas del autor :
+  Identidad simbÃ³lica general, luego las tres expansiones exactas
+  correspondientes a las verificaciones numÃ©ricas del autor :
 
     psi_savard(30, 10)  = 28.888143698...   (primo buscado : 29)
     psi_savard(98, 25)  = 96.894150249...   (primo buscado : 97)
@@ -3391,33 +3391,33 @@ lemma psi_savard_at_49_228_expanded:
   unfolding psi_savard_def rapport_zeta_savard_def SB_def by simp
 
 text \<open>
-  OBSERVACIÓN (régimen negativo) : la verificación del autor para x = -100
-  utiliza el exponente espectral n = -26 y el denominador límite -66
-  (límite de SB cuando n tiende hacia -infinito) :
+  OBSERVACIÃ“N (rÃ©gimen negativo) : la verificaciÃ³n del autor para x = -100
+  utiliza el exponente espectral n = -26 y el denominador lÃ­mite -66
+  (lÃ­mite de SB cuando n tiende hacia -infinito) :
 
     psi_savard(-100, -26) = -100 - (2^(-26) / (-66)) - log10(2*pi)
                                  - (1/2) * log10(1 - (-100)^(-2))
                           = -100.7981582...
 
-  El tipo nat del exponente en SB no permite escribir este caso aquí ;
-  está cubierto numéricamente por SpectralMethodCore.compute_psi_savard
-  (soporte de rangos negativos) y confirma la simetría espectral del
-  modelo : la ecuación sigue siendo compatible para los primos negativos.
+  El tipo nat del exponente en SB no permite escribir este caso aquÃ­ ;
+  estÃ¡ cubierto numÃ©ricamente por SpectralMethodCore.compute_psi_savard
+  (soporte de rangos negativos) y confirma la simetrÃ­a espectral del
+  modelo : la ecuaciÃ³n sigue siendo compatible para los primos negativos.
 \<close>
 
 subsection "XIII.3 Le Premier Pont : l'unicite fonctionnelle Tchebychev <-> zeta"
 
 text \<open>
-  La ecuación de Tchebychev solo tiene utilidad para la función zeta de
-  Riemann : es un hecho histórico y analítico (fórmula explícita de
-  Riemann - von Mangoldt). Lo expresamos mediante la hipótesis
+  La ecuaciÃ³n de Tchebychev solo tiene utilidad para la funciÃ³n zeta de
+  Riemann : es un hecho histÃ³rico y analÃ­tico (fÃ³rmula explÃ­cita de
+  Riemann - von Mangoldt). Lo expresamos mediante la hipÃ³tesis
 
       concerne_fonction_zeta psi_classique
 
-  que figura como PREMISA de los teoremas finales (ningún axioma global
-  es introducido). La sustitución numéricamente exacta de psi_savard
+  que figura como PREMISA de los teoremas finales (ningÃºn axioma global
+  es introducido). La sustituciÃ³n numÃ©ricamente exacta de psi_savard
   en este papel (validaciones XIII.2) transporta entonces la Methode Spectrale
-  al dominio de la función zeta : las dos teorías tratan del
+  al dominio de la funciÃ³n zeta : las dos teorÃ­as tratan del
   mismo tema.
 \<close>
 
@@ -3425,7 +3425,7 @@ subsection "XIII.4 Le Deuxieme Pont : l'exclusivite sur P par l'absurde"
 
 text \<open>
   La Methode Spectrale excluye estrictamente todo compuesto C : solo admite
-  solución para los números primos. Este hecho ya está demostrado
+  soluciÃ³n para los nÃºmeros primos. Este hecho ya estÃ¡ demostrado
   por los tres pilares (composite_not_prime_i,
   composite_no_reconstruction_position, composite_pair_no_rsp_positions).
   El lema siguiente da la forma condensada utilizada por el puente.
@@ -3440,61 +3440,61 @@ lemma methode_spectrale_exclusivite_P:
 subsection "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente"
 
 text \<open>
-  NOMENCLATURA ORIGINAL DEL AUTOR (conservada a título documental) :
+  NOMENCLATURA ORIGINAL DEL AUTOR (conservada a tÃ­tulo documental) :
 
-    Conjunto * 1/x  = función zeta de Riemann, con
+    Conjunto * 1/x  = funciÃ³n zeta de Riemann, con
         1/x = 1/y1 + 1/y2 + 1/y3
-        1/y1 = ecuación de Tchebychev
-        1/y2 = hipótesis de Riemann, Re(rho) = 1/2
-        1/y3 = posición de los números primos P
+        1/y1 = ecuaciÃ³n de Tchebychev
+        1/y2 = hipÃ³tesis de Riemann, Re(rho) = 1/2
+        1/y3 = posiciÃ³n de los nÃºmeros primos P
 
-    Conjunto * 1/t  = ecuación psi_savard, con  1/y1 = 1/t
+    Conjunto * 1/t  = ecuaciÃ³n psi_savard, con  1/y1 = 1/t
 
     Conjunto * 1/ms = Methode Spectrale, con
         1/ms = 1/ms1 + 1/ms2 + 1/ms3
-        1/ms1 = posición del i-ésimo primo (reconstrucción)
+        1/ms1 = posiciÃ³n del i-Ã©simo primo (reconstrucciÃ³n)
         1/ms2 = compuestos C excluidos (prueba por el absurdo)
-        1/ms3 = razón espectral RsP = 1/2
+        1/ms3 = razÃ³n espectral RsP = 1/2
 
-    Conclusión :  1/ms3 = 1/y2,  por tanto  Re(rho) = 1/2  es VERDADERO sobre P.
+    ConclusiÃ³n :  1/ms3 = 1/y2,  por tanto  Re(rho) = 1/2  es VERDADERO sobre P.
 
-  CORRESPONDENCIA PROFESIONAL (símbolos del locale a continuación) :
+  CORRESPONDENCIA PROFESIONAL (sÃ­mbolos del locale a continuaciÃ³n) :
 
-    | Autor  | Símbolo formal      | Interpretación                       |
+    | Autor  | SÃ­mbolo formal      | InterpretaciÃ³n                       |
     |--------|---------------------|--------------------------------------|
     | 1/y1   | zeta_tchebychev     | componente Tchebychev de zeta        |
-    | 1/y2   | zeta_critique       | recta crítica Re(rho) = 1/2          |
+    | 1/y2   | zeta_critique       | recta crÃ­tica Re(rho) = 1/2          |
     | 1/y3   | zeta_positions      | posiciones de los primos en zeta     |
-    | 1/t    | tau_savard          | ecuación psi_savard                  |
-    | 1/ms1  | ms_reconstruction   | reconstrucción del i-ésimo primo     |
-    | 1/ms2  | ms_exclusion        | exclusión de los compuestos (pilares)|
-    | 1/ms3  | ms_rapport          | razón espectral RsP                  |
+    | 1/t    | tau_savard          | ecuaciÃ³n psi_savard                  |
+    | 1/ms1  | ms_reconstruction   | reconstrucciÃ³n del i-Ã©simo primo     |
+    | 1/ms2  | ms_exclusion        | exclusiÃ³n de los compuestos (pilares)|
+    | 1/ms3  | ms_rapport          | razÃ³n espectral RsP                  |
 
-  Las tres hipótesis del locale son exactamente los tres hechos establecidos
+  Las tres hipÃ³tesis del locale son exactamente los tres hechos establecidos
   por las secciones precedentes :
-    (i)   la recta crítica porta el valor 1/2 (definición de HR),
+    (i)   la recta crÃ­tica porta el valor 1/2 (definiciÃ³n de HR),
     (ii)  psi_savard se identifica funcionalmente con Tchebychev (XIII.2-3),
-    (iii) la razón espectral vale 1/2 (teorema RsP_un_demi_general).
-  A diferencia de una axiomatización global, un locale no introduce NINGÚN
-  axioma en la teoría : la coherencia está garantizada e incluso DEMOSTRADA
+    (iii) la razÃ³n espectral vale 1/2 (teorema RsP_un_demi_general).
+  A diferencia de una axiomatizaciÃ³n global, un locale no introduce NINGÃšN
+  axioma en la teorÃ­a : la coherencia estÃ¡ garantizada e incluso DEMOSTRADA
   por el teorema de satisfacibilidad que sigue.
 \<close>
 
 locale ensemble_savard =
   fixes zeta_tchebychev  :: real  (* 1/y1 : componente Tchebychev de zeta *)
-    and zeta_critique    :: real  (* 1/y2 : recta crítica Re(rho) *)
+    and zeta_critique    :: real  (* 1/y2 : recta crÃ­tica Re(rho) *)
     and zeta_positions   :: real  (* 1/y3 : posiciones de los primos *)
-    and tau_savard       :: real  (* 1/t  : ecuación psi_savard *)
-    and ms_reconstruction :: real (* 1/ms1 : i-ésimo primo reconstruido *)
+    and tau_savard       :: real  (* 1/t  : ecuaciÃ³n psi_savard *)
+    and ms_reconstruction :: real (* 1/ms1 : i-Ã©simo primo reconstruido *)
     and ms_exclusion     :: real  (* 1/ms2 : compuestos excluidos por el absurdo *)
-    and ms_rapport       :: real  (* 1/ms3 : razón espectral RsP *)
+    and ms_rapport       :: real  (* 1/ms3 : razÃ³n espectral RsP *)
   assumes hypothese_critique : "zeta_critique = 1 / 2"
       and pont_fonctionnel   : "tau_savard = zeta_tchebychev"
       and rapport_un_demi    : "ms_rapport = 1 / 2"
 
 text \<open>
-  Alineamiento central : la razón espectral se identifica con la recta
-  crítica. Es la conclusión 1/ms3 = 1/y2 del autor.
+  Alineamiento central : la razÃ³n espectral se identifica con la recta
+  crÃ­tica. Es la conclusiÃ³n 1/ms3 = 1/y2 del autor.
 \<close>
 
 theorem (in ensemble_savard) alignement_central: "ms_rapport = zeta_critique"
@@ -3509,21 +3509,21 @@ theorem (in ensemble_savard) conclusion_ensemble:
   using alignement_central hypothese_critique rapport_un_demi by simp
 
 text \<open>
-  SATISFACIBILIDAD : las hipótesis del locale son realizadas por
-  testigos CONCRETOS de la teoría. El testigo decisivo es la verdadera
-  razón espectral RsP 1 2, cuya igualdad a 1/2 es un TEOREMA
-  (RsP_un_demi_general) y no una hipótesis. Esto demuestra que el
-  Teorema del Conjunto reposa sobre una base lógicamente coherente.
+  SATISFACIBILIDAD : las hipÃ³tesis del locale son realizadas por
+  testigos CONCRETOS de la teorÃ­a. El testigo decisivo es la verdadera
+  razÃ³n espectral RsP 1 2, cuya igualdad a 1/2 es un TEOREMA
+  (RsP_un_demi_general) y no una hipÃ³tesis. Esto demuestra que el
+  Teorema del Conjunto reposa sobre una base lÃ³gicamente coherente.
 
-  NOTA TÉCNICA (v3.35, corrección Philippe) : el locale ensemble_savard
+  NOTA TÃ‰CNICA (v3.35, correcciÃ³n Philippe) : el locale ensemble_savard
   tiene 7 fijos pero solo 4 aparecen en los assumes
   (zeta_tchebychev, zeta_critique, tau_savard, ms_rapport). Isabelle
-  genera por tanto un predicado de 4 argumentos en el orden de declaración de los
+  genera por tanto un predicado de 4 argumentos en el orden de declaraciÃ³n de los
   fijos, a saber :
     ensemble_savard zeta_tchebychev zeta_critique tau_savard ms_rapport
   Los tres fijos no utilizados (zeta_positions, ms_reconstruction,
-  ms_exclusion) permanecen como parámetros del locale pero no aparecen
-  en su predicado genérico.
+  ms_exclusion) permanecen como parÃ¡metros del locale pero no aparecen
+  en su predicado genÃ©rico.
 \<close>
 
 theorem ensemble_savard_satisfaisable:
@@ -3538,20 +3538,20 @@ qed
 subsection "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2"
 
 text \<open>
-  Definimos la parte real Re de la recta crítica como la
-  proyección geométrica de la razón espectral RsP : es el eje de
-  simetría donde se anulan las asimetrías locales de las sucesiones A y B.
+  Definimos la parte real Re de la recta crÃ­tica como la
+  proyecciÃ³n geomÃ©trica de la razÃ³n espectral RsP : es el eje de
+  simetrÃ­a donde se anulan las asimetrÃ­as locales de las sucesiones A y B.
 \<close>
 
 definition Re_droite_critique :: "nat \<Rightarrow> nat \<Rightarrow> real" where
   "Re_droite_critique n1 n2 = RsP n1 n2"
 
 text \<open>
-  Teorema de enlace directo y constructivo de Savard : si la ecuación
-  psi_savard está estructuralmente validada para la función zeta (puente 1)
-  y la exclusión de los compuestos bloquea el dominio sobre los primos
-  P (puente 2), entonces la parte real Re de la recta crítica se identifica
-  constructivamente con la razón espectral de las sucesiones A y B, que vale
+  Teorema de enlace directo y constructivo de Savard : si la ecuaciÃ³n
+  psi_savard estÃ¡ estructuralmente validada para la funciÃ³n zeta (puente 1)
+  y la exclusiÃ³n de los compuestos bloquea el dominio sobre los primos
+  P (puente 2), entonces la parte real Re de la recta crÃ­tica se identifica
+  constructivamente con la razÃ³n espectral de las sucesiones A y B, que vale
   rigurosamente 1/2.
 \<close>
 
@@ -3569,20 +3569,20 @@ proof -
 qed
 
 text \<open>
-  Síntesis final del Puente Savard :
+  SÃ­ntesis final del Puente Savard :
 
     Tchebychev <-> psi_savard <-> Sucesiones A/B <-> Primos reconstruidos
 
-  La ecuación de Tchebychev solo es útil para zeta (puente 1) ; psi_savard
-  hace de la Methode Spectrale y de la función zeta un único y mismo
-  tema ; la prueba por el absurdo acota el método a los solos primos P
-  (puente 2) ; las sucesiones A y B determinan la posición exacta de los
-  primos por su reconstrucción. Las tres concordancias
+  La ecuaciÃ³n de Tchebychev solo es Ãºtil para zeta (puente 1) ; psi_savard
+  hace de la Methode Spectrale y de la funciÃ³n zeta un Ãºnico y mismo
+  tema ; la prueba por el absurdo acota el mÃ©todo a los solos primos P
+  (puente 2) ; las sucesiones A y B determinan la posiciÃ³n exacta de los
+  primos por su reconstrucciÃ³n. Las tres concordancias
     (1) 1/y1 = 1/t          (Tchebychev = psi_savard),
     (2) 1/y3 = 1/ms1        (ceros no-triviales = valores de n = posiciones
                              de los P),
     (3) 1/y2 = 1/ms3        (Re(rho) = 1/2 = RsP = 1/2),
-  se bloquean mutuamente : solo pueden ser simultáneamente
+  se bloquean mutuamente : solo pueden ser simultÃ¡neamente
   verdaderas si las tres vistas (zeta, psi_savard, Methode Spectrale) son
   proyecciones de un mismo conjunto unitario. De donde, sobre el conjunto de los
   primos P :
@@ -3591,11 +3591,11 @@ text \<open>
 
   Este resultado es, en el locale ensemble_savard, un TEOREMA (y no
   una conjetura). El teorema de satisfacibilidad ensemble_savard_satisfaisable
-  demuestra que el locale admite un testigo concreto : las tres hipótesis
-  se realizan simultáneamente, con RsP 1 2 = 1/2 como testigo decisivo
-  (proveniente de RsP_un_demi_general). Este teorema es además UNIVERSAL sobre
+  demuestra que el locale admite un testigo concreto : las tres hipÃ³tesis
+  se realizan simultÃ¡neamente, con RsP 1 2 = 1/2 como testigo decisivo
+  (proveniente de RsP_un_demi_general). Este teorema es ademÃ¡s UNIVERSAL sobre
   los enteros positivos : para todo n1 >= 1, n2 >= 1, n1 != n2, se tiene
-  RsP(n1, n2) = 1/2 (véase lema RsP_universel_entier_naturel a continuación).
+  RsP(n1, n2) = 1/2 (vÃ©ase lema RsP_universel_entier_naturel a continuaciÃ³n).
 \<close>
 
 lemma RsP_universel_entier_naturel:
@@ -3605,12 +3605,12 @@ lemma RsP_universel_entier_naturel:
   by (rule RsP_un_demi_general[OF assms])
 
 text \<open>
-  Corolario universal : el valor 1/2 de la razón espectral no es un
-  caso particular de los ejemplos numéricos ; es una propiedad
-  intrínseca del régimen central de las sucesiones A y B para todo par de
+  Corolario universal : el valor 1/2 de la razÃ³n espectral no es un
+  caso particular de los ejemplos numÃ©ricos ; es una propiedad
+  intrÃ­nseca del rÃ©gimen central de las sucesiones A y B para todo par de
   posiciones enteras estrictamente positivas y distintas. Es por tanto,
   en el sentido de la Methode Spectrale, la contraparte constructiva de la
-  recta crítica Re(rho) = 1/2 sobre el conjunto de los primos P.
+  recta crÃ­tica Re(rho) = 1/2 sobre el conjunto de los primos P.
 \<close>
 
 theorem synthese_pont_savard:
@@ -3628,67 +3628,67 @@ section "Foundations - Synthese-index (annexe finale, renvoi Meta-theory)"
 
 text \<open>
   ==========================================================================
-  SÍNTESIS-ÍNDICE (anexo final de las Foundations, v3.35)
+  SÃNTESIS-ÃNDICE (anexo final de las Foundations, v3.35)
   ==========================================================================
-  Este anexo termina el archivo presentando el índice de los teoremas clave
+  Este anexo termina el archivo presentando el Ã­ndice de los teoremas clave
   que bloquean la coherencia global de la Methode Spectrale. Para la
-  documentación ontológica completa, referirse a la sección
+  documentaciÃ³n ontolÃ³gica completa, referirse a la secciÃ³n
   "0. Foundations / Meta-theory" al inicio del archivo (subsecciones
   Foundations.1 a Foundations.6).
 
   RESUMEN DE LOS SEIS POSTULADOS Y DE LOS TEOREMAS QUE LOS REALIZAN :
 
-    P1  Universalidad entera (tipo nat/int)  -> convención de tipo
+    P1  Universalidad entera (tipo nat/int)  -> convenciÃ³n de tipo
     P2  No-primalidad del rango              -> foundations_marker
     P3  Existencia de las sucesiones A_k, B_k -> locale spectral_family
-    P4  Invariancia de la razón RsP = 1/k   -> RsP_generic_constant,
+    P4  Invariancia de la razÃ³n RsP = 1/k   -> RsP_generic_constant,
                                                 RsP_un_demi_general,
                                                 RsP_un_tiers_constant
     P5  Exclusividad sobre P                -> methode_spectrale_exclusivite_P
-    P6  Universalidad del régimen central   -> RsP_universel_entier_naturel,
+    P6  Universalidad del rÃ©gimen central   -> RsP_universel_entier_naturel,
                                                 synthese_pont_savard
 
   DUALIDAD INCOHERENCIA / COHERENCIA :
     Incoherencia algebraica LOCAL   : algebriquement_incoherent_local
-    Coherencia numérica real GLOB   : coherence_numerique_reelle_P
-    Bloqueo sobre los primos        : tres pilares de exclusión
+    Coherencia numÃ©rica real GLOB   : coherence_numerique_reelle_P
+    Bloqueo sobre los primos        : tres pilares de exclusiÃ³n
 
-  PUENTE SAVARD (Sección XIII, locale ensemble_savard) :
-    C1 : 1/y1 = 1/t     -> pont_fonctionnel + validaciones numéricas
-    C2 : 1/y3 = 1/ms1   -> methode_spectrale_exclusivite_P + reconstrucción
+  PUENTE SAVARD (SecciÃ³n XIII, locale ensemble_savard) :
+    C1 : 1/y1 = 1/t     -> pont_fonctionnel + validaciones numÃ©ricas
+    C2 : 1/y3 = 1/ms1   -> methode_spectrale_exclusivite_P + reconstrucciÃ³n
     C3 : 1/y2 = 1/ms3   -> alignement_central + rapport_un_demi
-    Conclusión          : synthese_pont_savard (RsP = Re = 1/2 VERDADERO en
+    ConclusiÃ³n          : synthese_pont_savard (RsP = Re = 1/2 VERDADERO en
                           el locale, satisfacibilidad probada por
                           ensemble_savard_satisfaisable)
 
   RESULTADO UNIVERSAL FINAL :
     lemma RsP_universel_entier_naturel (v3.34) : para todo n1, n2 :: nat
     con n1 >= 1, n2 >= 1, n1 != n2, se tiene RsP n1 n2 = 1/2. Universalidad
-    entera natural del régimen central, corolario directo de
+    entera natural del rÃ©gimen central, corolario directo de
     RsP_un_demi_general.
 
-  POSICIÓN EPISTEMOLÓGICA (Philippe Savard) :
+  POSICIÃ“N EPISTEMOLÃ“GICA (Philippe Savard) :
     Para el autor, el conjunto compuesto de :
       (a) la satisfacibilidad probada del locale ensemble_savard,
-      (b) la universalidad entera natural del régimen central 1/2,
-      (c) las tres concordancias C1, C2, C3 bloqueándose mutuamente,
-      (d) la primacía de lo numérico real sobre lo algebraico,
-    constituye una RESPUESTA SUFICIENTE al enigma de la hipótesis de
-    Riemann. La razón 1/2 no es un artefacto algebraico elegante,
-    emerge de la estructura numérica real de las sumas de números
-    primos ; su alineamiento con Re(rho) = 1/2 está verificado a la vez
-    numéricamente y estructuralmente. El puente Savard formaliza esta
+      (b) la universalidad entera natural del rÃ©gimen central 1/2,
+      (c) las tres concordancias C1, C2, C3 bloqueÃ¡ndose mutuamente,
+      (d) la primacÃ­a de lo numÃ©rico real sobre lo algebraico,
+    constituye una RESPUESTA SUFICIENTE al enigma de la hipÃ³tesis de
+    Riemann. La razÃ³n 1/2 no es un artefacto algebraico elegante,
+    emerge de la estructura numÃ©rica real de las sumas de nÃºmeros
+    primos ; su alineamiento con Re(rho) = 1/2 estÃ¡ verificado a la vez
+    numÃ©ricamente y estructuralmente. El puente Savard formaliza esta
     realidad ya constatada : es un reconocimiento, no una
     conjetura.
 
-  NAVEGACIÓN SUGERIDA :
-    - Sección 0 (Foundations / Meta-theory)              : contexto y postulados
-    - Secciones I - X (regímenes 1/2, 1/3, 1/4, mixtos)  : pruebas técnicas
-    - Sección XI (reglas de construcción Sucesiones A/B) : construcción bloque
-    - Sección XI.bis (locale spectral_family, v3.35)     : factorización genérica
-    - Sección XII (generalización 1/k paramétrica)       : estudio 1/k >= 2
-    - Sección XIII (Puente Savard, v3.34)                : teorema de unificación
-    - Sección License (Apache 2.0)                       : licencia
+  NAVEGACIÃ“N SUGERIDA :
+    - SecciÃ³n 0 (Foundations / Meta-theory)              : contexto y postulados
+    - Secciones I - X (regÃ­menes 1/2, 1/3, 1/4, mixtos)  : pruebas tÃ©cnicas
+    - SecciÃ³n XI (reglas de construcciÃ³n Sucesiones A/B) : construcciÃ³n bloque
+    - SecciÃ³n XI.bis (locale spectral_family, v3.35)     : factorizaciÃ³n genÃ©rica
+    - SecciÃ³n XII (generalizaciÃ³n 1/k paramÃ©trica)       : estudio 1/k >= 2
+    - SecciÃ³n XIII (Puente Savard, v3.34)                : teorema de unificaciÃ³n
+    - SecciÃ³n License (Apache 2.0)                       : licencia
 \<close>
 
 

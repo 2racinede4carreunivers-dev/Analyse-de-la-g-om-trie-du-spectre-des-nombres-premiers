@@ -85,8 +85,17 @@ FORMULA_REGISTRY: dict[str, SpectralFormulas] = {
         coeff_SB_b=Fraction(-12292, 3),
         symmetric_invariant=False,      # invariant asymétrique pour k != 2
     ),
+
+    # ── Entrée k=3 (ratio 1/3) ───────────────────────────
+    "1/3": SpectralFormulas(
+        k=3, base=3,
+        coeff_SA_a=Fraction(73, 108),
+        coeff_SA_b=Fraction(-3, 2),
+        coeff_SB_a=Fraction(219, 108),
+        coeff_SB_b=Fraction(-1461, 2),
+        symmetric_invariant=False,      # invariant asymétrique pour k != 2
+    ),
     # ─────────────────────────────────────────────────────
-    # Étendre ici : "1/3": SpectralFormulas(k=3, base=3, ...)
 }
 
 # Ancien DEFAULT_MODEL = "1/2"  ← SUPPRIMÉ (CORRECTION DEF-01)

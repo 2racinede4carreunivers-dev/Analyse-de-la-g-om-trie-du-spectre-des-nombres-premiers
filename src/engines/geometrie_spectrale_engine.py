@@ -201,11 +201,11 @@ class GeometrieSpectraleEngine:
     ) -> ReconstructionResult:
         """Q2 sur un seul modele. Si actual_prime non fourni, le prend dans la table."""
         if actual_prime is None:
-            if self.spectral_core is None:
-                raise ValueError(
-                    "actual_prime requis si spectral_core non fourni au moteur"
-                )
-            actual_prime = self.spectral_core.get_prime_at_position(n)
+            if self.spectral_core is not None:
+                actual_prime = self.spectral_core.get_prime_at_position(n)
+            else:
+                from ..spectral.prime_table import nth_prime
+                actual_prime = nth_prime(n)
             if actual_prime is None:
                 raise ValueError(f"Position {n} hors de la table primes")
         return self.models[model_name].reconstruct_nth_prime(n, actual_prime)
@@ -217,11 +217,11 @@ class GeometrieSpectraleEngine:
     ) -> ComparativeReport:
         """Q2 sur les 3 modeles."""
         if actual_prime is None:
-            if self.spectral_core is None:
-                raise ValueError(
-                    "actual_prime requis si spectral_core non fourni au moteur"
-                )
-            actual_prime = self.spectral_core.get_prime_at_position(n)
+            if self.spectral_core is not None:
+                actual_prime = self.spectral_core.get_prime_at_position(n)
+            else:
+                from ..spectral.prime_table import nth_prime
+                actual_prime = nth_prime(n)
             if actual_prime is None:
                 raise ValueError(f"Position {n} hors de la table primes")
         report = ComparativeReport(

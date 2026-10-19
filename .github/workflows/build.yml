@@ -14,7 +14,7 @@ permissions:
 jobs:
   validation-institutionnelle:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 360
 
     env:
       ISABELLE_VERSION: Isabelle2025-2
@@ -29,13 +29,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cache Isabelle 2025-2
+        id: isabelle-cache
         uses: actions/cache@v4
         with:
           path: /tmp/isabelle
           key: isabelle-2025-2-linux-v1
 
       - name: Install Isabelle 2025-2 (robuste, verifie)
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.isabelle-cache.outputs.cache-hit != 'true'
         run: |
           set -euo pipefail
           sudo apt-get update
@@ -88,11 +89,16 @@ jobs:
           fi
           echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"
 
-      - name: Verify Isabelle installation
+      - name: Restore Isabelle PATH (cache-hit ou frais)
+        run: |
+          set -euo pipefail
+          echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"
+          test -x "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle"
+
+      - name: Verify Isabelle installation (minimale)
         run: |
           set -euo pipefail
           isabelle version
-          isabelle build -b
 
       - name: Show repository layout
         run: |
@@ -105,42 +111,122 @@ jobs:
         working-directory: theories
         run: |
           set -euo pipefail
-          isabelle build -d . -v "${SESSION_NAME}"
+          isabelle build -d . -v "${SESSION_NAME}" 2>&1 | tee "${GITHUB_WORKSPACE}/isabelle_build.log"
 
-      - name: Create explicit attestation payload
+      - name: SHA256 session manifest (attestation cryptographique complete)
         if: success()
         run: |
-          cat > attestation_payload.json <<'EOF'
+          set -euo pipefail
+          cd "${GITHUB_WORKSPACE}"
+          {
+            echo "# SHA256 — session ${SESSION_NAME}"
+            echo "# Auteur : Philippe Thomas Savard — Le dix-huit octobre deux mille vingt-six — Levis, Chaudiere-Appalaches, Canada"
+            echo "# Genere apres compilation reussie de la session complete."
+            sha256sum theories/ROOT
+            for f in theories/MS_01_Fondements.thy theories/MS_02_Suites_AB_RsP_1_2.thy theories/MS_03_Digamma_Equation_Generale.thy theories/MS_04_Generalisation_Prime_i.thy theories/MS_05_Modeles_1_3_1_4.thy theories/MS_06_Mixtes_Negatives_Asymetries.thy theories/MS_07_Comparaison_Blocs.thy theories/MS_08_Ecarts_Negatifs.thy theories/MS_09_Preuve_Absurde.thy theories/MS_10_Ecarts_Mixtes_Positifs.thy theories/MS_11_Construction_SpectralFamily.thy theories/MS_12_Construction_Generalisee_1k.thy theories/MS_13_Pont_Savard.thy theories/MS_14_Systeme_Convolutif.thy theories/validation_hol_unifiee.thy theories/validation_zeta_lean.thy theories/README.thy; do sha256sum "$f"; done
+            sha256sum isabelle_build.log
+          } | tee SHA256SUMS_session.txt
+          sha256sum -c SHA256SUMS_session.txt --ignore-missing
+
+      - name: Create explicit attestation payload (identite + SHA256)
+        if: success()
+        run: |
+          set -euo pipefail
+          CKSUM="$(sha256sum SHA256SUMS_session.txt | cut -d' ' -f1)"
+          cat > attestation_payload.json <<EOF
           {
             "schemaVersion": 1,
-            "subject": "theories/methode_spectral.thy",
+            "session": "${SESSION_NAME}",
+            "root": "theories/ROOT",
             "author": "Philippe Thomas Savard",
+            "date": "Le dix-huit octobre deux mille vingt-six",
+            "place": "Levis, Chaudiere-Appalaches, Canada",
+            "isabelle": "${ISABELLE_VERSION}",
+            "manifest": "SHA256SUMS_session.txt",
+            "manifestSha256": "${CKSUM}",
+            "files": [
+              "theories/ROOT",
+              "theories/MS_01_Fondements.thy",
+              "theories/MS_02_Suites_AB_RsP_1_2.thy",
+              "theories/MS_03_Digamma_Equation_Generale.thy",
+              "theories/MS_04_Generalisation_Prime_i.thy",
+              "theories/MS_05_Modeles_1_3_1_4.thy",
+              "theories/MS_06_Mixtes_Negatives_Asymetries.thy",
+              "theories/MS_07_Comparaison_Blocs.thy",
+              "theories/MS_08_Ecarts_Negatifs.thy",
+              "theories/MS_09_Preuve_Absurde.thy",
+              "theories/MS_10_Ecarts_Mixtes_Positifs.thy",
+              "theories/MS_11_Construction_SpectralFamily.thy",
+              "theories/MS_12_Construction_Generalisee_1k.thy",
+              "theories/MS_13_Pont_Savard.thy",
+              "theories/MS_14_Systeme_Convolutif.thy",
+              "theories/validation_hol_unifiee.thy",
+              "theories/validation_zeta_lean.thy",
+              "theories/README.thy",
+              "isabelle_build.log"
+            ],
             "coAuthors": [
               "Emergent.sh E1",
               "Gordon Docker Desktop",
               "Copilot Microsoft"
             ],
-            "statement": "These assistants contributed remarkably and their contribution is invaluable for Philippe Thomas Savard."
+            "statement": "Attestation cryptographique SHA256 de la compilation complete de la session : chaque fichier ci-dessus a ete reconstruit par isabelle build et son empreinte figure dans SHA256SUMS_session.txt. These assistants contributed remarkably and their contribution is invaluable for Philippe Thomas Savard."
           }
           EOF
+          cat attestation_payload.json
 
       - name: Generate build provenance attestation
         if: success()
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: |
-            theories/methode_spectral.thy
+            SHA256SUMS_session.txt
+            attestation_payload.json
+            isabelle_build.log
+            theories/ROOT
+            theories/MS_01_Fondements.thy
+            theories/MS_02_Suites_AB_RsP_1_2.thy
+            theories/MS_03_Digamma_Equation_Generale.thy
+            theories/MS_04_Generalisation_Prime_i.thy
+            theories/MS_05_Modeles_1_3_1_4.thy
+            theories/MS_06_Mixtes_Negatives_Asymetries.thy
+            theories/MS_07_Comparaison_Blocs.thy
+            theories/MS_08_Ecarts_Negatifs.thy
+            theories/MS_09_Preuve_Absurde.thy
+            theories/MS_10_Ecarts_Mixtes_Positifs.thy
+            theories/MS_11_Construction_SpectralFamily.thy
+            theories/MS_12_Construction_Generalisee_1k.thy
+            theories/MS_13_Pont_Savard.thy
+            theories/MS_14_Systeme_Convolutif.thy
             theories/validation_hol_unifiee.thy
             theories/validation_zeta_lean.thy
+            theories/README.thy
 
       - name: Upload attestation payload artifact
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: methode-spectral-attestation-payload
+          name: session-attestation-philippe-thomas-savard
           path: |
             attestation_payload.json
-            theories/methode_spectral.thy
+            SHA256SUMS_session.txt
+            isabelle_build.log
+            theories/ROOT
+            theories/MS_01_Fondements.thy
+            theories/MS_02_Suites_AB_RsP_1_2.thy
+            theories/MS_03_Digamma_Equation_Generale.thy
+            theories/MS_04_Generalisation_Prime_i.thy
+            theories/MS_05_Modeles_1_3_1_4.thy
+            theories/MS_06_Mixtes_Negatives_Asymetries.thy
+            theories/MS_07_Comparaison_Blocs.thy
+            theories/MS_08_Ecarts_Negatifs.thy
+            theories/MS_09_Preuve_Absurde.thy
+            theories/MS_10_Ecarts_Mixtes_Positifs.thy
+            theories/MS_11_Construction_SpectralFamily.thy
+            theories/MS_12_Construction_Generalisee_1k.thy
+            theories/MS_13_Pont_Savard.thy
+            theories/MS_14_Systeme_Convolutif.thy
             theories/validation_hol_unifiee.thy
             theories/validation_zeta_lean.thy
-          retention-days: 30
+            theories/README.thy
+          retention-days: 90

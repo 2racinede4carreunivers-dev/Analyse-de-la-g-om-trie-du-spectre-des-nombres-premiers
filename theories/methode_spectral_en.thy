@@ -1,22 +1,22 @@
-(*
+﻿(*
 ================================================================================
   File : Methode_spectral.thy
-    /fiʃje : metod spɛktʁal ti/
+    /fiÊƒje : metod spÉ›ktÊal ti/
   Date : July twenty-fourth, two thousand twenty-six
-    /vɛ̃t katʁ ʒɥijɛ dø mil vɛ̃t sis/
+    /vÉ›Ìƒt katÊ Ê’É¥ijÉ› dÃ¸ mil vÉ›Ìƒt sis/
   Location : Levis, Chaudiere-Appalaches, Canada
-    /levi ʃodjɛʁ apalak kanada/
+    /levi ÊƒodjÉ›Ê apalak kanada/
   Title : The Universe Squared
-    /lynivɛʁ ɛto kaʁe/
+    /lynivÉ›Ê É›to kaÊe/
   Subtitle : Chapter -- The Geometry of the Prime Number Spectrum
-    /ʃapitʁ — la ʒeometʁi dy spɛktʁ dɛ nɔ̃bʁ pʁəmje/
+    /ÊƒapitÊ â€” la Ê’eometÊi dy spÉ›ktÊ dÉ› nÉ”ÌƒbÊ pÊÉ™mje/
   Author : Philippe Thomas Savard
-    /filip tɔma savaʁ/
+    /filip tÉ”ma savaÊ/
 ================================================================================
 *)
 
 
-theory methode_spectral
+theory methode_spectral_en
   imports Complex_Main "HOL-Computational_Algebra.Primes"
 begin
 (****************************************************************)
@@ -438,7 +438,7 @@ text \<open>
   validated by the exclusion of composites C by contradiction, implies the truth of Re = 1/2.
 \<close>
 
-subsection \<open>Instance 1 : Incohérence algébrique locale (Espace Imaginaire)\<close>
+subsection \<open>Instance 1 : IncohÃ©rence algÃ©brique locale (Espace Imaginaire)\<close>
 
 lemma algebriquement_incoherent_local:
   fixes A1 A2 B1 B2 :: real
@@ -446,7 +446,7 @@ lemma algebriquement_incoherent_local:
   shows "A1 / B1 \<noteq> 1/2 \<and> A2 / B2 \<noteq> 1/2"
   using assms by simp
 
-subsection \<open>Instance 2 : Cohérence numérique réelle globale (Re = 1/2)\<close>
+subsection \<open>Instance 2 : CohÃ©rence numÃ©rique rÃ©elle globale (Re = 1/2)\<close>
 
 lemma coherence_numerique_reelle_P:
   fixes A1 A2 B1 B2 :: real
@@ -2208,8 +2208,8 @@ text \<open>
       in itself, and free in its own nature, without temporal
       or conceptual restriction ;
 
-    - neither of the two entities — neither methode_spectral.thy, nor the analytic
-      examples presented here — possesses the capacity to annul, invalidate,
+    - neither of the two entities â€” neither methode_spectral.thy, nor the analytic
+      examples presented here â€” possesses the capacity to annul, invalidate,
       or restrict the other, whether through their content, their structure, or
       their interpretation.
 
@@ -2367,7 +2367,7 @@ text \<open>
  *
  * Author      : Philippe Thomas Savard
  * Date        : 29 June 2026
- * Location    : Lévis, Chaudière-Appalaches, Canada
+ * Location    : LÃ©vis, ChaudiÃ¨re-Appalaches, Canada
  * Licence     : Apache 2.0 (Attribution and preservation of required notices)
  *
  * RULES FORMALIZED WITHOUT USE OF THE 'RING' TACTIC
@@ -2422,7 +2422,7 @@ definition suite_A_savard_construction :: "real \<Rightarrow> real \<Rightarrow>
       else if (i = n) then dernier_terme_savard a1 r n
       else 0)"
 
-subsection \<open>XI.6. Substitution Spécifique Position 6 de la Suite B (n \<ge> 8)\<close>
+subsection \<open>XI.6. Substitution SpÃ©cifique Position 6 de la Suite B (n \<ge> 8)\<close>
 
 text \<open>
   Manuscript rule : Sequence B follows the classical progression but inserts
@@ -2439,7 +2439,7 @@ definition suite_B_savard_construction :: "real \<Rightarrow> real \<Rightarrow>
       else if (i = n) then ((r - 1 / r) * (a1 * r ^ (n - 2))) * r
       else 0)"
 
-subsection \<open>XI.7. Sommation et Formules Fermées Globales\<close>
+subsection \<open>XI.7. Sommation et Formules FermÃ©es Globales\<close>
 
 definition somme_A_compacte_savard :: "real \<Rightarrow> nat \<Rightarrow> real" where
   "somme_A_compacte_savard r n = (3.25 / 2) * (r ^ n) - 2"
@@ -2494,7 +2494,7 @@ proof -
 
   from step1 step2 show ?thesis by simp
 qed
-subsection \<open>XI.9. Lemmes de validation numérique par différence fine\<close>
+subsection \<open>XI.9. Lemmes de validation numÃ©rique par diffÃ©rence fine\<close>
 
 text \<open>
   Verification of the extraction of the Savard constant 3.25 for sequence A
@@ -2515,7 +2515,7 @@ lemma validation_constante_B_savard:
 (****************************************************************************
  * END OF SECTION XI - SUCCESSFULLY RECONSTRUCTED FOR ISABELLE/HOL
  ****************************************************************************)
-subsection "XI.10.b Détermination formelle des constantes par différence fine"
+subsection "XI.10.b DÃ©termination formelle des constantes par diffÃ©rence fine"
 
 text \<open>
   This section formalizes the discovery of Philippe Thomas Savard concerning
@@ -2589,7 +2589,7 @@ text \<open>
   the spectral ratio 1/k_i for any integer k (k = 2, 3, 4, ...).
 \<close>
 
-subsection "XI.12. Preuve analytique générale de l'écart minimal stable"
+subsection "XI.12. Preuve analytique gÃ©nÃ©rale de l'Ã©cart minimal stable"
 text \<open>
   Generalized theorem of Philippe Thomas Savard :
   Demonstration that for any sequence of length n >= 8, the fine difference
@@ -3156,7 +3156,7 @@ definition RsP_neg_k :: "nat \<Rightarrow> nat \<Rightarrow> nat \<Rightarrow> r
  *
  * Author      : Philippe Thomas Savard
  * Date        : July 2026
- * Location    : Lévis, Chaudière-Appalaches, Canada
+ * Location    : LÃ©vis, ChaudiÃ¨re-Appalaches, Canada
  * License     : Apache 2.0
  *
  * This section formally establishes the double logical bridge in a
@@ -3191,7 +3191,7 @@ text \<open>
     1/x  = 1/y1 + 1/y2 + 1/y3                         (decomposition of zeta)
              |          |          |
            Chebyshev  Re(rho)   non-trivial zeros
-           (ψ)         = 1/2     positions of P
+           (Ïˆ)         = 1/2     positions of P
 
     1/ms = 1/ms1 + 1/ms2 + 1/ms3                      (Spect. Meth. decomposition)
              |          |          |

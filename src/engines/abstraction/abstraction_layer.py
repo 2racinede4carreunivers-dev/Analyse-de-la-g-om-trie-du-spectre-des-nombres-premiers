@@ -240,7 +240,9 @@ def _detect_intent(text: str) -> str:
     if re.search(r"rapport|ratio|asym[ée]trique|sym[ée]trique|chaotique", t):
         return "ratio"
     # Chercher les patterns gap plus simplement
-    if re.search(r"\becart\b|\bgap\b", t) and re.search(r"quantit[eé]|terme|entier|nombre", t):
+    if re.search(r"\becart\b|\bgap\b", t):
+        return "gap"
+    if re.search(r"quantit[eé]\s+(?:de\s+)?(?:terme|nombre|entier)", t):
         return "gap"
     if re.search(r"riemann|hypoth[èe]se|z[êe]ta", t):
         return "riemann_link"
