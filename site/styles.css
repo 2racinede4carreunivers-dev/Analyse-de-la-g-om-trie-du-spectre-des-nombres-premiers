@@ -37,6 +37,13 @@ h2 { color: var(--navy); margin-top: 0; }
 .stats div { padding: .8rem 1rem; border-left: 4px solid var(--gold); background: var(--paper); }
 .stats dt { color: var(--muted); font-size: .9rem; }
 .stats dd { margin: .25rem 0 0; color: var(--navy); font-size: 1.3rem; font-weight: 750; }
+.story { border-color: #dfc995; background: linear-gradient(135deg, #fff 0%, #fbf8f0 100%); }
+.story-label { margin: 0 0 .35rem; color: #80602a; font-size: .8rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.story h2 { margin-bottom: .75rem; }
+.story blockquote { margin: 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid var(--gold); color: var(--navy); font-size: 1.05rem; }
+.story blockquote p { margin: .5rem 0; }
+.byline { margin: .75rem 0 1rem; color: var(--muted); font-weight: 700; text-align: right; }
+.scope-note, .download-note { padding: .8rem 1rem; border-radius: 6px; background: #f0f3f7; color: var(--muted); }
 .caveat { padding: .8rem 1rem; border-left: 4px solid #a8424c; background: #fff6f6; }
 .hash-line, .integrity { overflow-wrap: anywhere; color: var(--muted); }
 

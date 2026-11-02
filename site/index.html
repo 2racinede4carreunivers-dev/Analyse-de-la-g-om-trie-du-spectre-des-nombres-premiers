@@ -27,6 +27,37 @@
   </header>
 
   <main>
+    <section class="story" aria-labelledby="story-title">
+      <p class="story-label">Témoignage de l’auteur</p>
+      <h2 id="story-title">Une étape dont je suis fier</h2>
+      <blockquote>
+        <p>
+          Je suis fier d’avoir mené cette validation à son terme. Dans le
+          corpus numérique extrait, les 6&nbsp;849&nbsp;579 valeurs examinées
+          ont été reconnues premières par PARI/GP&nbsp;2.19&nbsp;:
+          aucun composé n’a été détecté. Pour moi, concevoir cette démarche,
+          la faire traiter à cette échelle et rendre les résultats consultables
+          est une réussite personnelle que je n’aurais pas imaginé atteindre.
+        </p>
+        <p>
+          Je n’ai pas suivi de parcours scolaire formel en mathématiques.
+          Les idées, méthodes et concepts présentés ici sont le fruit de mon
+          travail et de mes réflexions; les outils d’IA m’ont aidé pour la
+          programmation et l’organisation des vérifications.
+        </p>
+      </blockquote>
+      <p class="byline">Philippe Thomas Savard · 2026</p>
+      <p class="scope-note">
+        <strong>Portée documentée :</strong> les fichiers de détail retrouvés
+        couvrent 12 tranches de <code>k = 28&nbsp;000&nbsp;000</code> à
+        <code>84&nbsp;000&nbsp;000</code>, soit 56&nbsp;000&nbsp;001 valeurs de
+        <code>k</code> aux bornes incluses. Ce périmètre ne signifie pas
+        84&nbsp;millions de lignes de rapport : le rapport audité contient
+        6&nbsp;441&nbsp;794 lignes. Le registre ci-dessous publie la liste
+        normalisée complète des verdicts extraits en 29 fragments contrôlables.
+      </p>
+    </section>
+
     <section class="summary" aria-labelledby="summary-title">
       <h2 id="summary-title">Bilan de la validation</h2>
       <dl class="stats">
@@ -60,6 +91,13 @@
         </label>
         <button id="search-all" type="button">Rechercher dans les 29 fragments</button>
       </div>
+      <p class="download-note">
+        Le registre complet comprend les 6&nbsp;849&nbsp;579 verdicts répartis
+        dans les 29 fichiers gzip proposés par le sélecteur. Le
+        <a href="data/manifest.json">manifeste</a> donne les plages, les
+        empreintes SHA-256 et la racine de Merkle. Il s’agit du registre
+        normalisé, et non d’une copie octet pour octet du rapport source.
+      </p>
       <p id="status" role="status" aria-live="polite">Chargement du manifeste…</p>
       <div class="table-wrap">
         <table>
@@ -83,6 +121,7 @@
       <ul>
         <li>Rapports : 6 441 794 lignes, dont 6 045 662 <code>UNIQUE</code> et 396 132 <code>AMBIGU</code>.</li>
         <li>Les deux branches des rapports ambigus sont incluses; chaque verdict est conservé dans le registre.</li>
+        <li>La primalité a été évaluée par PARI/GP <code>isprime</code>; les empreintes SHA-256 contrôlent l’intégrité des fragments, pas la primalité.</li>
         <li>Empreinte SHA-256 du rapport source : <code>2ed34d1461a8520eb4760ccb99301bb3916eb1ca35f8c41b576e202bbc3d7a31</code>.</li>
         <li>Une empreinte cryptographique atteste l’intégrité des octets fournis; elle ne chiffre pas les données et ne peut pas restaurer à elle seule un commit ou un fichier absent.</li>
       </ul>
