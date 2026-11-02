@@ -42,50 +42,65 @@
   \ifdim\wd\eqbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\eqbox}}\else\usebox{\eqbox}\fi}
 \setlength{\emergencystretch}{2em}
 \setlength{\tabcolsep}{4pt}
+\hypersetup{colorlinks=true,linkcolor=spectralbleu,citecolor=spectralbronze,
+  urlcolor=spectralazur,pdfauthor={Philippe Thomas Savard},
+  pdftitle={Le système convolutif — Géométrie du spectre des nombres premiers}}
+\newcommand{\arriereplan}[1]{%
+  \begingroup\setlength{\fboxsep}{1.2pt}%
+  \colorbox{spectralvertpale}{\strut #1}\endgroup}
 
-% ---------- Palette « géométrie du spectre » ----------
-\definecolor{spectralbleu}{RGB}{18,42,90}
-\definecolor{spectralazur}{RGB}{41,98,168}
-\definecolor{spectralor}{RGB}{196,148,34}
-\definecolor{spectralviolet}{RGB}{96,54,140}
-\definecolor{spectralgris}{RGB}{244,246,250}
-\definecolor{spectralrouge}{RGB}{158,42,52}
+% ---------- Palette éditoriale ----------
+\definecolor{spectralbleu}{RGB}{24,42,67}
+\definecolor{spectralazur}{RGB}{42,153,161}
+\definecolor{spectralor}{RGB}{196,153,73}
+\definecolor{spectralviolet}{RGB}{117,88,153}
+\definecolor{spectralgris}{RGB}{242,245,248}
+\definecolor{spectralrouge}{RGB}{153,57,62}
+\definecolor{spectralbronze}{RGB}{139,89,52}
+\definecolor{spectralargent}{RGB}{164,174,187}
+\definecolor{spectraljaune}{RGB}{250,240,191}
+\definecolor{spectralgrisbleu}{RGB}{101,121,142}
+\definecolor{spectralvertpale}{RGB}{226,240,224}
 
 % ---------- En-tête / pied de page ----------
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{spectralbleu}\textbf{www.universestaucarre.com} --- Dépôt GitHub du projet Analyse de la géométrie du spectre des nombres premiers}
-\fancyhead[R]{\small\color{spectralbleu}Page \thepage\ sur \pageref{LastPage}}
+\fancyhead[L]{\small\color{spectralbleu}\textsc{Le système convolutif} \textcolor{spectralargent}{\textbar} Géométrie du spectre}
+\fancyhead[R]{\small\color{spectralgrisbleu}Page \thepage\ sur \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0.8pt}
-\renewcommand{\headrule}{\color{spectralor}\hrule width\headwidth height 0.8pt}
-\fancyfoot[C]{\small\color{spectralbleu}\itshape La géométrie du spectre des nombres premiers --- Le système convolutif}
+\renewcommand{\headrule}{\color{spectralbronze}\hrule width\headwidth height 0.8pt}
+\fancyfoot[C]{\small\color{spectralgrisbleu}\itshape La géométrie du spectre des nombres premiers}
+\fancyfoot[R]{\small\color{spectralbronze}\textsc{Savard · 2026}}
 
 % ---------- Titres ----------
-\titleformat{\section}{\Large\bfseries\color{spectralbleu}}{\thesection.}{0.6em}{}[{\color{spectralor}\titlerule[1.2pt]}]
-\titleformat{\subsection}{\large\bfseries\color{spectralazur}}{\thesubsection.}{0.6em}{}
+\titleformat{\section}{\Large\bfseries\color{spectralbleu}}{\thesection.}{0.6em}{}[{\color{spectralbronze}\titlerule[1.2pt]}]
+\titleformat{\subsection}{\large\bfseries\color{spectralazur}}{\thesubsection.}{0.6em}{}[{\color{spectralargent}\titlerule[0.5pt]}]
 \titleformat{\subsubsection}{\normalsize\bfseries\color{spectralviolet}}{\thesubsubsection.}{0.6em}{}
 
 % ---------- Boîtes ----------
-\newtcolorbox{boiteformule}[1][]{colback=spectralgris,colframe=spectralbleu,
-  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+\newtcolorbox{boiteformule}[1][]{colback=white,colframe=spectralbleu,
+  colbacktitle=spectralbleu,coltitle=white,title={#1},fonttitle=\bfseries\small,fontupper=\small,
   enhanced,breakable,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
-\newtcolorbox{boitenote}[1][Note]{colback=white,colframe=spectralor,
-  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+\newtcolorbox{boitenote}[1][Note]{colback=spectraljaune!28,colframe=spectralbronze,
+  colbacktitle=spectralbronze,coltitle=white,title={#1},fonttitle=\bfseries\small,fontupper=\small,
   enhanced,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
-\newtcolorbox{boitealerte}[1][Point de vigilance]{colback=white,colframe=spectralrouge,
-  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+\newtcolorbox{boitealerte}[1][Point de vigilance]{colback=spectralgris,colframe=spectralgrisbleu,
+  colbacktitle=spectralgrisbleu,coltitle=white,title={#1},fonttitle=\bfseries\small,fontupper=\small,
   enhanced,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
 
 % ---------- Boîtes supplémentaires (pages 29-36) ----------
-\newtcolorbox{boitecalc}[1][]{colback=spectralgris,colframe=spectralbleu,
-  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+\newtcolorbox{boitecalc}[1][]{colback=spectralgris,colframe=spectralargent,
+  colbacktitle=spectralbleu,coltitle=white,title={#1},fonttitle=\bfseries\small,fontupper=\small,
   enhanced,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
-\newtcolorbox{boitealgo}[1][]{colback=white,colframe=spectralazur,
-  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+\newtcolorbox{boitealgo}[1][]{colback=spectralazur!6,colframe=spectralazur,
+  colbacktitle=spectralazur,coltitle=white,title={#1},fonttitle=\bfseries\small,fontupper=\small,
   enhanced,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
-\newtcolorbox{boiteexo}[1][]{colback=white,colframe=spectralviolet,
-  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+\newtcolorbox{boiteexo}[1][]{colback=spectralviolet!5,colframe=spectralviolet,
+  colbacktitle=spectralviolet,coltitle=white,title={#1},fonttitle=\bfseries\small,fontupper=\small,
   enhanced,left=2mm,right=2mm,arc=2mm,boxrule=0.8pt}
+\newtcolorbox{boitearriereplan}[1][]{colback=spectralvertpale,colframe=spectralgrisbleu,
+  title={#1},fonttitle=\bfseries\small,fontupper=\small,
+  enhanced,breakable,left=2mm,right=2mm,arc=2mm,boxrule=0.6pt}
 
 \definecolor{vert}{RGB}{0,128,0}
 \definecolor{rouge}{RGB}{158,42,52}
@@ -131,7 +146,6 @@
 \newcommand{\hverdict}{non calculé --- exécuter valider\_hol\_tex.py}
 \title{Rapports typique et non typiques 1/k : le système convolutif de la géométrie du spectre des nombres premiers Cadre formel, validation numérique et pipeline cognitif}
 \begin{document}
-\maketitle
 % ---- PythonTeX : fonctions de validation numerique (aucune sortie) ----
 
 \begin{pycode}
@@ -281,57 +295,6 @@ def ecrire_score():
         f.write('\\renewcommand{\\vverdict}{%s}\n' % verdict(n, c, taux))
 \end{pycode}
 
-% ======================================================================
-%  PAGE DE TITRE --- style autodidacte mathématique, thème spectral
-% ======================================================================
-\begin{titlepage}
-\begin{tikzpicture}[remember picture,overlay]
-  \fill[spectralbleu] (current page.north west) rectangle ([yshift=-3.2cm]current page.north east);
-  \fill[spectralor]   ([yshift=-3.2cm]current page.north west) rectangle ([yshift=-3.35cm]current page.north east);
-  \fill[spectralbleu] (current page.south west) rectangle ([yshift=1.6cm]current page.south east);
-  \fill[spectralor]   ([yshift=1.6cm]current page.south west) rectangle ([yshift=1.75cm]current page.south east);
-  % Spectre des nombres premiers : graduations 1..61, barres dorées aux premiers
-  \begin{scope}[shift={([yshift=-10.9cm]current page.north west)},x=2.5mm]
-    \draw[spectralbleu!40,thick] (2,0) -- (61,0);
-    \foreach \n in {2,3,...,61}{ \draw[spectralbleu!35] (\n,0) -- (\n,0.12); }
-    \foreach \p in {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61}{
-      \draw[spectralor,line width=1.4pt] (\p,0) -- (\p,0.85);
-      \fill[spectralor] (\p,0.85) circle (0.9pt); }
-    \draw[spectralviolet,dashed,line width=1pt] (31.5,-0.25) -- (31.5,0.85)
-      node[above]{\footnotesize\color{spectralviolet}$R_{sP}=\tfrac{1}{2}$};
-  \end{scope}
-  % Carré « L'Univers est au carré » avec hypoténuse
-  \begin{scope}[shift={([xshift=9.3cm,yshift=-14.2cm]current page.north west)}]
-    \draw[spectralazur,thick] (0,0) rectangle (2.4,2.4);
-    \draw[spectralor,thick] (0,0) -- (2.4,2.4) node[midway,above left,sloped]{\footnotesize $\sqrt{a^{2}+b^{2}}$};
-    \node[below] at (1.2,0) {\footnotesize $b=k^{i}$};
-    \node[left] at (0,1.2) {\footnotesize $a=k^{i-1}$};
-  \end{scope}
-  \node[anchor=west,text=white,font=\small\bfseries] at ([xshift=2.2cm,yshift=-1.1cm]current page.north west)
-    {www.universestaucarre.com};
-  \node[anchor=west,text=white!85!spectralbleu,font=\footnotesize] at ([xshift=2.2cm,yshift=-1.75cm]current page.north west)
-    {Dépôt GitHub du projet Analyse de la géométrie du spectre des nombres premiers --- \url{https://github.com/2racinede4carreunivers-dev/Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers.git}};
-  \node[anchor=west,text=white!85!spectralbleu,font=\footnotesize] at ([xshift=2.2cm,yshift=-2.35cm]current page.north west)
-    {Théorie unifiée : \emph{L'Univers est au carré} --- Chapitre : \emph{La géométrie du spectre des nombres premiers}};
-  \node[anchor=north,text=spectralbleu,font=\Huge\bfseries,align=center] at ([yshift=-6.6cm]current page.north)
-    {Le système convolutif};
-  \node[anchor=north,text=spectralazur,font=\LARGE\bfseries] at ([yshift=-7.9cm]current page.north)
-    {Rapports typique et non typiques : $1/k = 1/2$ et $1/k \neq 1/2$};
-  \node[anchor=north,text=spectralviolet,font=\large\itshape] at ([yshift=-8.9cm]current page.north)
-    {Système équationnel convolutif pour les requêtes multi-rapports du pipeline cognitif};
-  \node[anchor=north,align=center,font=\small] at ([yshift=-17.6cm]current page.north)
-    {\textbf{\color{spectralbleu}Auteur :} Philippe Thomas Savard\\[2pt]
-     \textbf{\color{spectralbleu}Collaborateurs :} Copilot Microsoft --- Gordon Docker Desktop --- E1 emergent.sh\\
-     \hspace{3.1cm} API Anthropic --- API OpenAI --- Cline --- Gemini Google\\[6pt]
-     \textbf{\color{spectralbleu}Adresse :} 4-5354 Rue du Menuet, Lévis, Chaudière-Appalaches, Canada, G6X 2Y6\\
-     \textbf{\color{spectralbleu}Courriel :} philippethomassavard@gmail.com\\[6pt]
-     \textbf{\color{spectralbleu}Lieu et date :} Lévis, Chaudière-Appalaches, Canada --- le vingt-six septembre deux mille vingt-six};
-  \node[anchor=south,text=white,font=\footnotesize] at ([yshift=0.6cm]current page.south)
-    {Licence Apache 2.0 --- Document fourni tel quel, sans garantie --- Créé sans financement d'aucune nature};
-\end{tikzpicture}
-\phantom{x}
-\end{titlepage}
-\maketitle
 % ---- PythonTeX : fonctions de validation numerique (aucune sortie) ----
 
 \begin{pycode}
@@ -860,59 +823,85 @@ def valider_n15(k):
 
 
 % ======================================================================
-%  PAGE DE TITRE --- style autodidacte mathématique, thème spectral
+%  PAGE DE COUVERTURE
 % ======================================================================
 \begin{titlepage}
 \begin{tikzpicture}[remember picture,overlay]
-  \fill[spectralbleu] (current page.north west) rectangle ([yshift=-3.2cm]current page.north east);
-  \fill[spectralor]   ([yshift=-3.2cm]current page.north west) rectangle ([yshift=-3.35cm]current page.north east);
-  \fill[spectralbleu] (current page.south west) rectangle ([yshift=1.6cm]current page.south east);
-  \fill[spectralor]   ([yshift=1.6cm]current page.south west) rectangle ([yshift=1.75cm]current page.south east);
-  % Spectre des nombres premiers : graduations 1..61, barres dorées aux premiers
-  \begin{scope}[shift={([yshift=-10.9cm]current page.north west)},x=2.5mm]
-    \draw[spectralbleu!40,thick] (2,0) -- (61,0);
-    \foreach \n in {2,3,...,61}{ \draw[spectralbleu!35] (\n,0) -- (\n,0.12); }
-    \foreach \p in {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61}{
-      \draw[spectralor,line width=1.4pt] (\p,0) -- (\p,0.85);
-      \fill[spectralor] (\p,0.85) circle (0.9pt); }
-    \draw[spectralviolet,dashed,line width=1pt] (31.5,-0.25) -- (31.5,0.85)
-      node[above]{\footnotesize\color{spectralviolet}$R_{sP}=\tfrac{1}{2}$};
-  \end{scope}
-  % Carré « L'Univers est au carré » avec hypoténuse
-  \begin{scope}[shift={([xshift=9.3cm,yshift=-14.2cm]current page.north west)}]
-    \draw[spectralazur,thick] (0,0) rectangle (2.4,2.4);
-    \draw[spectralor,thick] (0,0) -- (2.4,2.4) node[midway,above left,sloped]{\footnotesize $\sqrt{a^{2}+b^{2}}$};
-    \node[below] at (1.2,0) {\footnotesize $b=k^{i}$};
-    \node[left] at (0,1.2) {\footnotesize $a=k^{i-1}$};
-  \end{scope}
-  \node[anchor=west,text=white,font=\small\bfseries] at ([xshift=2.2cm,yshift=-1.1cm]current page.north west)
-    {www.universestaucarre.com};
-  \node[anchor=west,text=white!85!spectralbleu,font=\footnotesize] at ([xshift=2.2cm,yshift=-1.75cm]current page.north west)
-    {Dépôt GitHub du projet Analyse de la géométrie du spectre des nombres premiers --- \url{https://github.com/2racinede4carreunivers-dev/Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers.git}};
-  \node[anchor=west,text=white!85!spectralbleu,font=\footnotesize] at ([xshift=2.2cm,yshift=-2.35cm]current page.north west)
-    {Théorie unifiée : \emph{L'Univers est au carré} --- Chapitre : \emph{La géométrie du spectre des nombres premiers}};
-  \node[anchor=north,text=spectralbleu,font=\Huge\bfseries,align=center] at ([yshift=-6.6cm]current page.north)
-    {Le système convolutif};
-  \node[anchor=north,text=spectralazur,font=\LARGE\bfseries] at ([yshift=-7.9cm]current page.north)
-    {Rapports typique et non typiques : $1/k = 1/2$ et $1/k \neq 1/2$};
-  \node[anchor=north,text=spectralviolet,font=\large\itshape] at ([yshift=-8.9cm]current page.north)
-    {Système équationnel convolutif pour les requêtes multi-rapports du pipeline cognitif};
-  \node[anchor=north,align=center,font=\small] at ([yshift=-17.6cm]current page.north)
-    {\textbf{\color{spectralbleu}Auteur :} Philippe Thomas Savard\\[2pt]
-     \textbf{\color{spectralbleu}Collaborateurs :} Copilot Microsoft --- Gordon Docker Desktop --- E1 emergent.sh\\
-     \hspace{3.1cm} API Anthropic --- API OpenAI --- Cline --- Gemini Google\\[6pt]
-     \textbf{\color{spectralbleu}Adresse :} 4-5354 Rue du Menuet, Lévis, Chaudière-Appalaches, Canada, G6X 2Y6\\
-     \textbf{\color{spectralbleu}Courriel :} philippethomassavard@gmail.com\\[6pt]
-     \textbf{\color{spectralbleu}Lieu et date :} Lévis, Chaudière-Appalaches, Canada --- le vingt-six septembre deux mille vingt-six};
-  \node[anchor=south,text=white,font=\footnotesize] at ([yshift=0.6cm]current page.south)
-    {Licence Apache 2.0 --- Document fourni tel quel, sans garantie --- Créé sans financement d'aucune nature};
+  \fill[spectralbleu] (current page.north west) rectangle
+    ([yshift=-2.55cm]current page.north east);
+  \fill[spectralbronze] ([yshift=-2.55cm]current page.north west) rectangle
+    ([yshift=-2.68cm]current page.north east);
+  \fill[spectralargent] (current page.south west) rectangle
+    ([yshift=0.22cm]current page.south east);
+  \node[anchor=west,text=spectralargent,font=\small\scshape]
+    at ([xshift=1.6cm,yshift=-1.45cm]current page.north west)
+    {Géométrie du spectre des nombres premiers};
 \end{tikzpicture}
-\phantom{x}
+  \par
+  \vspace*{3.2cm}
+  \noindent
+\begin{minipage}[c]{0.56\textwidth}
+  {\color{spectralbronze}\small\textsc{Cadre formel · calcul · reconstruction}}\par
+  \vspace{0.35cm}
+  {\color{spectralbleu}\fontsize{30}{35}\selectfont\bfseries
+   Le système\\convolutif}\par
+  \vspace{0.45cm}
+  {\color{spectralazur}\Large Rapports typiques et non typiques}\par
+  \vspace{0.2cm}
+  {\color{spectralgrisbleu}\large $1/k=1/2$ et $1/k\ne 1/2$}\par
+  \vspace{0.7cm}
+  {\color{spectralviolet}\normalsize
+   Formules, suites A--B, contrôles numériques et limites de validité.}\par
+  \vspace{0.65cm}
+  {\color{spectralgrisbleu}\small
+   Une présentation de travail distinguant les identités calculées,
+   les hypothèses du modèle et les validations indépendantes.}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.37\textwidth}
+  \centering
+  \fcolorbox{spectralbronze}{spectralbleu}{%
+    \includegraphics[width=5.45cm]{assets/illustration_couverture.png}}
+\end{minipage}
+
+\vfill
+\begin{tcolorbox}[colback=spectralgris,colframe=spectralargent,
+  boxrule=0.6pt,arc=1.5mm,left=3mm,right=3mm,top=2mm,bottom=2mm]
+  \textbf{\color{spectralbleu}Auteur :} Philippe Thomas Savard
+  \hfill \textbf{\color{spectralbronze}Édition :} 2026\par
+  \vspace{1mm}
+  \textbf{\color{spectralbleu}Projet :} \emph{L'Univers est au carré}
+  \hfill \textcolor{spectralgrisbleu}{Lévis, Québec}
+\end{tcolorbox}
+\begin{center}
+  {\small\color{spectralgrisbleu}
+   Document de recherche personnel · les résultats et leurs limites sont explicités dans le texte}
+\end{center}
 \end{titlepage}
 
 % ======================================================================
 %  AVERTISSEMENT ET LICENCE (texte du document original, orthographe corrigée)
 % ======================================================================
+\section*{Repères de lecture}
+\addcontentsline{toc}{section}{Repères de lecture}
+\begin{boitearriereplan}[Palette et statut des énoncés]
+\begin{description}[leftmargin=2.8cm,style=nextline]
+  \item[\textcolor{spectralbronze}{Bronze, or, argent}]
+    Repères d'édition, filets et éléments de hiérarchie visuelle.
+  \item[\textcolor{spectralbleu}{Bleu profond}]
+    Définitions, objets et formules fondamentales du modèle.
+  \item[\textcolor{spectralazur}{Turquoise}, \textcolor{spectralviolet}{violet},
+    \textcolor{spectraljaune}{jaune pâle}]
+    Détails, méthodes et résultats secondaires associés aux fondements.
+  \item[\textcolor{spectralgrisbleu}{Gris-bleu}]
+    Limites, réserves, conditions d'application et statut non établi.
+  \item[\colorbox{spectralvertpale}{Vert pâle}]
+    Renvoi explicite vers une idée déjà formulée ou reprise plus loin.
+\end{description}
+\end{boitearriereplan}
+Les couleurs sont des repères éditoriaux, pas des preuves. Les contrôles
+numériques portent sur les calculs exécutés; une preuve universelle n'est
+établie que par un énoncé formel effectivement vérifié dans sa session.
+
 \section*{Avertissement et licence}
 \addcontentsline{toc}{section}{Avertissement et licence}
 
@@ -923,16 +912,17 @@ GitHub dans le dépôt public :
 Il est possible, selon certaines restrictions en lien avec la \textsc{Licence
 Apache~2.0} et la réglementation du dépôt, de contribuer via PR, de cloner,
 partager et modifier les informations présentes dans ce document. Le document a été créé sans financement de toute nature, ni
-avantage, ni intérêt. La validation formelle HOL incluse dans le document
-valide l'idée générale présentée.
+avantage, ni intérêt. Les extraits Isabelle/HOL reproduits dans le document
+indiquent les sources formelles visées; leur présence typographique ne vaut
+pas, à elle seule, confirmation d'un build HOL de la version courante.
 
 Le présent document est une section de la théorie unifiée \og L'Univers est au
-carré \fg{}, et fait partie du chapitre de cette théorie unifiée : \og La
-géométrie du spectre des nombres premiers \fg{}. Cette géométrie, incluse dans
-la théorie mentionnée, est un outil dynamique conçu entièrement par son auteur
-Philippe Thomas Savard en collaboration avec les entités mentionnées. Cet outil
-dynamique est conçu pour résoudre la question de l'énigme de Bernhard Riemann
-et la conjecture de la fonction Zêta de Riemann.
+carré \fg{}, et fait partie du chapitre \og La géométrie du spectre des nombres
+premiers \fg{}. L'auteur présente ce cadre comme un programme de recherche
+personnel, élaboré par Philippe Thomas Savard avec les collaborateurs indiqués.
+Le lien envisagé avec l'hypothèse de Riemann est un objectif de recherche :
+le présent document ne démontre ni l'hypothèse de Riemann ni une conjecture
+générale sur la fonction zêta.
 
 Le dépôt mathlib : \url{https://github.com/leanprover-community/mathlib4.git}
 est utilisé pour certaines informations selon les termes de la licence du dépôt
@@ -948,8 +938,8 @@ $1/k$ typiques et non typiques \fg{} du chapitre \og La géométrie du spectre d
 nombres premiers \fg{}), se trouve à l'adresse suivante (licence Apache~2.0) :
 \url{https://github.com/2racinede4carreunivers-dev/Theorie-mathematique-philippe-thomas-savard-2026.git}.
 
-Les fichiers de contre-validation (\texttt{validation\_zeta\_lean.thy},
-\texttt{validation\_hol\_unifiee.thy}, \texttt{methode\_spectral.thy}) sont
+Les fichiers de contre-validation (\path{validation_zeta_lean.thy},
+\path{validation_hol_unifiee.thy}, \path{methode_spectral.thy}) sont
 présents sur ces dépôts, disponibles en sept langues différentes ; quelques
 annotations sont en langue phonétique.
 
@@ -3615,7 +3605,7 @@ Les 4 candidats standards sont tous composites. Deux stratgies possibles selon v
 
 \subsection*{4.1.2. Niveau 2 -- Formules fermées de SA et SB}
 
-Ce niveau calcule les sommes spectrales fermées $\SA(13,15)$ et $\SB(13,15)$. Comme présenté dans la section \ref{sec:formules-fermees}, ces sommes représentent l'énergie cumulée des suites A et B. Leur différence spectrale doit toujours valoir $1/k$, constituant l'\emph{invariant spectral} (Théorème XIV.3).
+Ce niveau calcule les sommes spectrales fermées $\SA(13,15)$ et $\SB(13,15)$. Comme présenté dans la \arriereplan{\hyperref[sec:formules-fermees]{section~\ref*{sec:formules-fermees}}}, ces sommes représentent l'énergie cumulée des suites A et B. Leur différence spectrale doit toujours valoir $1/k$, constituant l'\emph{invariant spectral} (Théorème XIV.3).
 
 \begin{boitecalc}[Calcul de $\SA(13, 15)$]
 $$\SA(13, 15) = \frac{(k^{4}-k^{2}+1) \cdot k^{12}}{k-1} - \frac{k}{k-1}$$
@@ -3632,7 +3622,7 @@ $$\boxed{= 716\,627\,741\,784\,659\,809}$$
 
 \paragraph{Invariant spectral (Théorème XIV.3)}
 
-L'invariant spectral relie les différences de somme entre $n=15$ et $n=10$. Comme démontré dans la section \ref{sec:invariant-spectral}, ce rapport doit être exactement $1/k$ :
+L'invariant spectral relie les différences de somme entre $n=15$ et $n=10$. Comme démontré dans la \arriereplan{\hyperref[sec:invariant-spectral]{section~\ref*{sec:invariant-spectral}}}, ce rapport doit être exactement $1/k$ :
 
 $$\frac{\Delta SA}{\Delta SB} = \frac{55\,125\,062\,438\,663\,321}{716\,625\,811\,702\,623\,173} = \frac{1}{13} \quad \checkmark$$
 
@@ -5818,10 +5808,92 @@ la \emph{contamination}.}
 
 \clearpage
 \appendix
-\section{Annexe --- Tables du classeur Excel}
+\section{Annexe --- Classeur convolutif et traçabilité}
 % ======================================================================
 
-\textbf{Classeur source :} \url{systeme_convolutif_spectral_general.xlsx}.
+\subsection{Classeur source et index des feuilles}
+\textbf{Classeur compagnon :}
+\href{run:assets/Annexe_Classeur_convolutif.xlsx}
+{\texttt{Annexe\_Classeur\_convolutif.xlsx}}.
+Le classeur fourni contient 22 feuilles visibles, 97\,066 cellules non vides
+et 1\,415 formules. La feuille \emph{Catalogue Premiers} occupe
+44\,223 lignes et 9 colonnes; le catalogue complet reste dans le classeur
+compagnon afin de ne pas gonfler inutilement le PDF.
+
+\begin{boiteformule}[Empreinte du classeur source]
+SHA-256 :
+\texttt{d1d252687a43d47b48fa60708d90a0babe180614f61c05836f1cacd92aa6f07c}.
+Cette empreinte identifie les octets du classeur indexé; elle ne certifie pas
+la validité mathématique de ses formules.
+\end{boiteformule}
+
+\small
+\begin{longtable}{@{}p{6.5cm}r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+Feuille & Dimensions & Cellules renseignées & Formules \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{spectralgris}
+Feuille & Dimensions & Cellules renseignées & Formules \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Accueil & $26\times3$ & 46 & 0 \\
+Catalogue Premiers & $44\,223\times9$ & 88\,502 & 0 \\
+Exemple 1-3 & $35\times14$ & 69 & 5 \\
+Parametres & $39\times7$ & 182 & 6 \\
+Moteur Universel & $69\times13$ & 307 & 21 \\
+Modèle Formel & $68\times7$ & 239 & 16 \\
+Démonstration Formelle & $68\times9$ & 307 & 32 \\
+Convolution & $205\times9$ & 1\,812 & 0 \\
+Suites Géo A-B & $76\times10$ & 317 & 0 \\
+Tests Digamma & $102\times10$ & 482 & 106 \\
+Code Python & $150\times2$ & 216 & 0 \\
+Systeme General & $35\times11$ & 143 & 0 \\
+Reconstruction Universelle & $57\times8$ & 159 & 78 \\
+Validation Convolutive & $69\times10$ & 443 & 292 \\
+Moteur Géo Convolutif & $134\times10$ & 510 & 272 \\
+Références PDF & $40\times11$ & 260 & 70 \\
+Tests Géo Demandés & $140\times10$ & 798 & 10 \\
+Test 1-66 & $31\times10$ & 141 & 0 \\
+Test 1-14 & $149\times10$ & 782 & 218 \\
+Checklist 1-81 & $55\times10$ & 341 & 0 \\
+Validation HOL Générale & $114\times10$ & 392 & 65 \\
+Référence Géo Généralisée & $137\times12$ & 618 & 224 \\
+\end{longtable}
+\normalsize
+
+Les dimensions sont celles des plages déclarées par le classeur; les comptes
+de cellules et de formules ont été relevés dans le fichier fourni. La
+compilation LaTeX ne recalcule pas les formules Excel : le classeur original
+est conservé comme source compagnon, tandis que le présent index et les
+extraits ci-dessous en décrivent les éléments pertinents.
+
+\subsection{Portée des contrôles PythonTeX et Isabelle/HOL}
+\begin{boitealerte}[Statut de validation pour cette édition]
+\textbf{PythonTeX :} le rapport local indique
+\texttt{\vconf/\vtotal} contrôles conformes (\texttt{\vtaux}\,\%),
+avec \texttt{\vecart} écart(s) et \texttt{\vnan} erreur(s) numérique(s).
+Ce contrôle porte sur les calculs explicitement codés dans les blocs
+PythonTeX; il ne constitue pas une preuve générale des conjectures du texte.
+
+\medskip
+\textbf{Isabelle/HOL :} des sources et extraits sont cités dans le dépôt,
+mais cette édition n'a pas été reconstruite par Isabelle. Lors de sa
+préparation, la commande Isabelle n'était pas disponible dans l'environnement
+et \texttt{theories/ROOT} référençait
+\texttt{MS\_03\_Digamma\_Equation\_Generale.thy}, absent du dossier local.
+Les encadrés HOL reproduits doivent donc être lus comme des extraits de
+formalisation, et non comme le résultat d'un build HOL fraîchement vérifié.
+\end{boitealerte}
+
+\section{Annexe --- Tables du classeur Excel}
+\textbf{Classeur source :}
+\href{run:assets/Annexe_Classeur_convolutif.xlsx}
+{\texttt{Annexe\_Classeur\_convolutif.xlsx}}.
 
 \subsection{Table de convolution formelle (feuille \emph{Convolution}, extrait)}
 
@@ -6155,8 +6227,10 @@ Chaque ligne ci-dessous est l'empreinte SHA-256 du fragment correspondant
 \[
 \texttt{aaa1c91c06f8950ff53347e1efe67bcd2cbc1751fa827d0f9225ccfb69eca0d6}.
 \]
-La SHA-256 du rapport source est
-\texttt{2ed34d1461a8520eb4760ccb99301bb3916eb1ca35f8c41b576e202bbc3d7a31}.
+La SHA-256 du rapport source est :
+\begin{center}\small
+\texttt{2ed34d1461a8520eb4760ccb99301bb3916eb1ca35f8c41b576e202bbc3d7a31}
+\end{center}
 Ces empreintes authentifient les octets comparés; elles ne chiffrent pas le
 contenu et ne peuvent pas reconstruire un ancien commit ni des fichiers absents.
 Le code est présenté ouvertement : aucun message secret n'est dissimulé.
@@ -6270,5 +6344,30 @@ ce document, dont les affirmations doivent continuer à être vérifiées de fa�
 reconnaît la part de chacun.
 
 \vspace{0.5cm}
+
+\clearpage
+\pdfpagewidth=297mm
+\pdfpageheight=210mm
+\paperwidth=297mm
+\paperheight=210mm
+\textwidth=27cm
+\textheight=18cm
+\oddsidemargin=-0.47in
+\evensidemargin=-0.47in
+\topmargin=-0.45in
+\headheight=0pt
+\headsep=0pt
+\footskip=0pt
+\thispagestyle{empty}
+\noindent\hspace*{13.5cm}\makebox[0pt][c]{%
+  {\Large\bfseries\color{spectralbleu}
+   Quadrature de la parabole — figure de clôture}}\par
+\vspace{0.3cm}
+\noindent\hspace*{13.5cm}\makebox[0pt][c]{%
+  {\color{spectralbronze}\rule{18cm}{1pt}}}\par
+\vspace{0.6cm}
+\noindent\hspace*{13.5cm}\makebox[0pt][c]{%
+  \includegraphics[width=24.7cm,height=16cm,keepaspectratio]
+    {assets/quadrature_parabole_zero_critique.png}}\par
 
 \end{document}
