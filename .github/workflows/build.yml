@@ -23,8 +23,8 @@ jobs:
     env:
       ISABELLE_VERSION: Isabelle2025-2
       ISABELLE_TARBALL: Isabelle2025-2_linux.tar.gz
-      ISABELLE_MIN_BYTES: "1200000000"
-      ISABELLE_SHA256: 8f187496e295f169952e944745af9e4ae00c9c1cd2ed4cadbcf7d898e444913e
+      ISABELLE_SIZE_BYTES: "1228480874"
+      ISABELLE_SHA256: a20a507bc7c1270d8be96a9f3fbec06345387789d2dc2c4d3df6260d47bfb33c
       SESSION_NAME: Geometrie_Spectre_Premier_Philippe_Thomas_Savard
       DOCUMENT_TEX: Philippe_Thomas_Savard_@_tous_droits_réservé-2026.tex
       DOCUMENT_PDF: Philippe_Thomas_Savard_@_tous_droits_réservé-2026.pdf
@@ -58,7 +58,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/isabelle
-          key: isabelle-2025-2-linux-v1
+          key: isabelle-2025-2-linux-v2-a20a507bc7c1270d8be96a9f3fbec06345387789d2dc2c4d3df6260d47bfb33c
 
       - name: Install and verify Isabelle 2025-2
         if: steps.isabelle-cache.outputs.cache-hit != 'true'
@@ -73,20 +73,25 @@ jobs:
           )
           downloaded=false
           for url in "${mirrors[@]}"; do
+            rm -f "${ISABELLE_TARBALL}"
             if wget --tries=3 --timeout=120 -O "${ISABELLE_TARBALL}" "$url"; then
               size=$(stat -c%s "${ISABELLE_TARBALL}")
-              if [ "$size" -ge "$ISABELLE_MIN_BYTES" ]; then
-                downloaded=true
-                break
+              if [ "$size" -eq "$ISABELLE_SIZE_BYTES" ]; then
+                sha256=$(sha256sum "${ISABELLE_TARBALL}" | cut -d' ' -f1)
+                if [ "$sha256" = "$ISABELLE_SHA256" ]; then
+                  downloaded=true
+                  break
+                fi
+                echo "Empreinte Isabelle incorrecte sur ce miroir : ${sha256}" >&2
+              else
+                echo "Taille Isabelle incorrecte sur ce miroir : ${size}" >&2
               fi
-              echo "Archive Isabelle trop petite : ${size} octets" >&2
             fi
           done
           if [ "$downloaded" != true ]; then
-            echo "::error::Aucun miroir n’a fourni l’archive Isabelle attendue."
+            echo "::error::Aucun miroir n’a fourni l’archive Isabelle attendue (taille et SHA-256)."
             exit 1
           fi
-          echo "${ISABELLE_SHA256}  ${ISABELLE_TARBALL}" | sha256sum --check -
           tar -xzf "${ISABELLE_TARBALL}" -C /tmp/isabelle
           test -x "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle"
 

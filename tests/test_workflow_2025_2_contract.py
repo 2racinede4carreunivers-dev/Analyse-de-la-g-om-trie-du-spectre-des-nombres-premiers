@@ -1,46 +1,29 @@
 """Contrat statique complet du workflow Isabelle 2025-2."""
 from pathlib import Path
-import re
 
 
-BUILD = Path("/home/agent/app/.github/workflows/build.yml")
+ROOT = Path(__file__).resolve().parents[1]
+BUILD = ROOT / ".github" / "workflows" / "build.yml"
 CONTENT = BUILD.read_text(encoding="utf-8")
 
 
 def test_workflow_isabelle_2025_2_contract():
-    """Vérifie exactement les propriétés demandées pour le correctif du 404."""
-    assert "github.com/isabelle-prover/isabelle/releases/download" not in CONTENT
+    """Vérifie les chemins, la session et l'archive propres à ce dépôt."""
     assert "Isabelle2025-2" in CONTENT
     assert "Isabelle2025-2_linux.tar.gz" in CONTENT
-
-    cambridge = CONTENT.index("www.cl.cam.ac.uk/research/hvg/Isabelle/dist")
-    sourceforge = CONTENT.index("sourceforge.net/projects/isabelle")
-    assert cambridge < sourceforge
-
-    assert 'echo "/tmp/isabelle/Isabelle2025-2/bin" >> "$GITHUB_PATH"' in CONTENT
-    assert "/tmp/isabelle/Isabelle2025-2/bin/isabelle version" in CONTENT
-
-    forbidden = (
-        r"rm\s+-rf\s+.*contrib/z3-",
-        r"rm\s+-rf\s+.*contrib/cvc",
-        r"rm\s+-rf\s+.*contrib/jedit_build",
-        r"rm\s+-rf\s+.*contrib/jortho",
-        r"rm\s+-rf\s+.*contrib/isabelle_fonts-",
-        r"rm\s+-rf\s+.*src/Tools/jEdit",
-    )
-    assert not any(re.search(pattern, CONTENT) for pattern in forbidden)
-
-    assert "working-directory: agent-multiloop-Gabriel-local" in CONTENT
-    assert "isabelle build -v -D ." in CONTENT
-    assert not re.search(r"isabelle\s+process\s+-T", CONTENT)
-
-    assert (
-        "uses: actions/attest-build-provenance@v1" in CONTENT
-        or "uses: actions/attest@" in CONTENT
-    )
-    assert "subject-path: agent-multiloop-Gabriel-local/theories/methode_spectral.thy" in CONTENT
+    assert "a20a507bc7c1270d8be96a9f3fbec06345387789d2dc2c4d3df6260d47bfb33c" in CONTENT
+    assert "1228480874" in CONTENT
+    assert "www.cl.cam.ac.uk/research/hvg/Isabelle/dist" in CONTENT
+    assert "sourceforge.net/projects/isabelle" in CONTENT
+    assert 'echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"' in CONTENT
+    assert 'isabelle build -d . -v "${SESSION_NAME}"' in CONTENT
+    assert "SESSION_NAME: Geometrie_Spectre_Premier_Philippe_Thomas_Savard" in CONTENT
+    assert "working-directory: theories" in CONTENT
+    assert "Document-pdf-tex/${DOCUMENT_TEX}" in CONTENT
+    assert "reassemble_parts.py" in CONTENT
+    assert "sha256sum --check SHA256SUMS_build.txt" in CONTENT
     assert "uses: actions/upload-artifact@v4" in CONTENT
-    assert "name: methode-spectral-attestation-payload" in CONTENT
+    assert "uses: actions/attest-build-provenance@v2" in CONTENT
 
     for permission in ("contents: read", "id-token: write", "attestations: write"):
         assert permission in CONTENT

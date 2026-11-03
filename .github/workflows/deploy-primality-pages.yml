@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - "site/**"
-      - ".github/workflows/deploy-primality-pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -26,8 +25,6 @@ jobs:
     steps:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:

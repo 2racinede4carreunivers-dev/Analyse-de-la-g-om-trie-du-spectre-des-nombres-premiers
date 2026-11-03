@@ -8,7 +8,8 @@ from unittest.mock import patch
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
+CERTIFICATION_DIR = ROOT / "Document-pdf-tex" / "Certification_primalité"
+sys.path.insert(0, str(CERTIFICATION_DIR))
 
 import valider_primalite_ancres as validator  # noqa: E402
 

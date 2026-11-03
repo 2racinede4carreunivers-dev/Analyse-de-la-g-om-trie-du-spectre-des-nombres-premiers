@@ -72,20 +72,18 @@ class TestRootFileExists:
         root = LOCAL_ROOT / "theories" / "ROOT"
         assert root.exists(), (
             "Le fichier `theories/ROOT` doit exister pour declarer la session "
-            "Isabelle 'Methode_Spectral'."
+            "Isabelle Geometrie_Spectre_Premier_Philippe_Thomas_Savard."
         )
 
     def test_ROOT_declares_methode_spectral_session(self):
         root = LOCAL_ROOT / "theories" / "ROOT"
         content = root.read_text(encoding="utf-8")
-        # v3.32 : la session peut etre declaree avec ou sans guillemets
-        # (syntaxe Isabelle valide dans les deux cas).
         assert (
-            "session \"Methode_Spectral\"" in content
-            or "session Methode_Spectral" in content
+            "session Geometrie_Spectre_Premier_Philippe_Thomas_Savard = HOL"
+            in content
         )
-        assert "methode_spectral" in content
-        assert "HOL-Computational_Algebra" in content
+        assert "MS_14_Systeme_Convolutif" in content
+        assert "HOL-Number_Theory" in content
 
 
 class TestBuildWorkflowUsesIsabelleBuild:
@@ -151,7 +149,7 @@ class TestGithubReleaseInstallation:
 
     def test_isabelle_version_verified_after_install(self, build_content):
         """L'installation se termine par `isabelle version` (sanity check)."""
-        assert "isabelle version" in build_content
+        assert '"/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle" version' in build_content
 
     def test_path_registered(self, build_content):
         """Le binaire Isabelle doit etre ajoute au GITHUB_PATH."""
@@ -181,8 +179,7 @@ class TestGithubReleaseInstallation:
 
 
 class TestProvenanceAttestation:
-    """v3.32 : le workflow certifie la provenance de methode_spectral.thy
-    via actions/attest (attestation signee GitHub)."""
+    """Le workflow atteste les artefacts compilés de cette session."""
 
     @pytest.fixture(scope="class")
     def build_content(self):
@@ -209,18 +206,18 @@ class TestProvenanceAttestation:
         assert "attestations: write" in build_content
 
     def test_attestation_subject_is_thy_file(self, build_content):
-        assert "theories/methode_spectral.thy" in build_content
+        assert "theories/ROOT" in build_content
+        assert "isabelle_build.log" in build_content
 
     def test_author_credited(self, build_content):
-        assert "Philippe Thomas Savard" in build_content
+        assert "SESSION_NAME: Geometrie_Spectre_Premier_Philippe_Thomas_Savard" in build_content
 
     def test_artifact_uploaded(self, build_content):
         assert "actions/upload-artifact@" in build_content
 
 
 class TestBuildStep:
-    """v3.32 : la compilation utilise `isabelle build -v -D .` depuis le
-    dossier agent-multiloop-Gabriel-local (ou se trouve le ROOT)."""
+    """La compilation Isabelle doit démarrer dans theories/."""
 
     @pytest.fixture(scope="class")
     def build_content(self):
@@ -233,7 +230,7 @@ class TestBuildStep:
         assert "isabelle build" in build_content
 
     def test_working_directory_correct(self, build_content):
-        assert "agent-multiloop-Gabriel-local" in build_content
+        assert "working-directory: theories" in build_content
 
     def test_polyml_and_jdk_preserved(self, build_content):
         """CRITIQUE : polyml (moteur ML) et jdk (JVM) NE doivent PAS
