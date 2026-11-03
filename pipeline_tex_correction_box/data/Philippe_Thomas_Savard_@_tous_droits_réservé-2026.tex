@@ -134,10 +134,10 @@
 % (theories/MS_01_Fondements.thy, MS_02_Suites_AB_RsP_1_2.thy, MS_14_Systeme_Convolutif.thy)
 \usepackage{fancyvrb}
 \newenvironment{holcode}
-  {\VerbatimEnvironment\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=2mm,label={\small Isabelle/HOL}]}
+  {\VerbatimEnvironment\begin{Verbatim}[fontsize=\footnotesize,frame=single,framesep=2mm]}
   {\end{Verbatim}}
 \newtcolorbox{boitehol}[2]{colback=white,colframe=#2,
-  title={Validation HOL/Isabelle --- #1},fonttitle=\bfseries\scriptsize,fontupper=\scriptsize,
+  title={Extrait Isabelle/HOL --- #1},fonttitle=\bfseries\scriptsize,fontupper=\scriptsize,
   enhanced,breakable,left=2mm,right=2mm,top=1mm,bottom=1mm,arc=1.5mm,boxrule=0.6pt,
   before skip=6pt,after skip=8pt}
 \newcommand{\holok}{\textcolor{vert}{\textbf{$\checkmark$}}}
@@ -1078,8 +1078,9 @@ end
 \textbf{Correspondance HOL.} Le théorème \texttt{RsP\_un\_demi\_general} de la
 théorie Isabelle/HOL \texttt{MS\_02\_Suites\_AB\_RsP\_1\_2} prouve algébriquement
 que $(SA(n_1)-SA(n_2))/(SB(n_1)-SB(n_2)) = 1/2$ pour tout $n_1 \neq n_2$, ce qui
-confirme l'invariant spectral du rapport typique $1/k=1/2$ utilisé dans ce document.\\
-\holok HOL/Isabelle : rapport spectral $1/2$ démontré formellement.\\
+confirme l'identité des fonctions définies dans cette théorie. Cela ne démontre
+pas une propriété de primalité; le build courant de la session n'a pas été vérifié.\\
+\holok Preuve algébrique présente dans la source, sous les hypothèses affichées.\\
 \end{boitehol}
 
 \subsection{Reconstruction du nombre premier pour \texorpdfstring{$n = 10$}{n = 10}}
@@ -1219,8 +1220,11 @@ lemma candidat_k8_pos8_neg_est_32327:
 somme A par le terme de position 7 ou 8, avec signe $+$ ou $-$. Les lemmes
 \texttt{candidat\_k3\_pos8\_neg\_est\_227} et
 \texttt{candidat\_k8\_pos8\_neg\_est\_32327} confirment respectivement les ancrages
-$P=227$ pour $k=3$ et $P=32\,327$ pour $k=8$.\\
-\holok HOL/Isabelle : mécanisme d'ancrage Digamma validé formellement.\\
+$P=227$ pour $k=3$ et $P=32\,327$ pour $k=8$ par calcul arithmétique sur les
+constantes définies dans la théorie. Ils ne prouvent ni la primalité de ces
+valeurs ni l'unicité de la branche retenue.\\
+\textbf{Portée :} vérification formelle de deux égalités numériques, pas
+certification formelle des ancrages premiers.\\
 \end{boitehol}
 
 \subsubsection{Équations des sommes des suites A et B}
@@ -1965,7 +1969,7 @@ théorie Isabelle/HOL \texttt{MS\_14\_Systeme\_Convolutif} (XIV.1) formalisent
 exactement les quatre constantes Savard : $\alpha_A(k) = 2(k^4-k^2+1)/((k-1)k^3)$,
 $\alpha_B(k) = k\,\alpha_A(k)$, $\delta_A(k) = k/(k-1)$,
 $\delta_B(k) = (k^7-k^6+k)/(k-1)$.\\
-\holok HOL/Isabelle : constantes Savard validées formellement.\\
+\holok Définitions formalisées; valeurs particulières vérifiées par les lemmes affichés.\\
 \end{boitehol}
 
 \subsection{Niveau 2 --- Formules fermées (\texorpdfstring{$n$}{n} quelconque, \texorpdfstring{$n$}{n} commun à tous les rapports)}
@@ -2005,7 +2009,7 @@ lemma somme_B_conv_k2_eq_SB :
 \texttt{MS\_14\_Systeme\_Convolutif} (XIV.2) généralisent les suites historiques
 $SA$ ($k=2$) et $SB$ ($k=2$) à tout rapport $1/k$. Les lemmes de compatibilité
 prouvent que pour $k=2$, on retrouve exactement $SA$ et $SB$.\\
-\holok HOL/Isabelle : formules fermées validées formellement.\\
+\holok Compatibilités pour $k=2$ prouvées dans le code source affiché.\\
 \end{boitehol}
 
 \vspace{0.3cm}
@@ -2053,7 +2057,7 @@ théorie Isabelle/HOL \texttt{MS\_14\_Systeme\_Convolutif} (XIV.3) prouve
 algébriquement que pour tout $k \ge 2$ et tout $n_1 \neq n_2$,
 $(S_A(k,n_1)-S_A(k,n_2))/(S_B(k,n_1)-S_B(k,n_2)) = 1/k$. Le corollaire
 \texttt{RsP\_conv\_k3} instancie ce résultat pour le rapport $1/3$.\\
-\holok HOL/Isabelle : invariant spectral $1/k$ démontré formellement.\\
+\holok Théorème algébrique dans la source, sous les hypothèses affichées.\\
 \end{boitehol}
 
 
@@ -2143,7 +2147,7 @@ lemma saut_zeta_k8 :
 terme à terme des suites A et B : pour $n \ge 8$, la suite A utilise $k^i$
 aux positions $i \le n-2$, puis $k^{n-1}-k^{n-3}$ et $k^n-k^{n-2}$ ; la suite B
 introduit le saut Zêta en position 6 ($k^7$ au lieu de $k^6$).\\
-\holok HOL/Isabelle : construction terme à terme validée formellement.\\
+\holok Définitions formalisées; l'égalité numérique affichée est un cas particulier.\\
 \end{boitehol}
 
 \subsection{Niveau 4 --- Mécanisme d'ancrage à \texorpdfstring{$n = 10$}{n = 10} (4 candidats Digamma)}
@@ -2234,10 +2238,14 @@ lemma rang_cible_k8_n34 : "rang_cible_conv 8 34 = 3492"
 rangement spectral : $\text{rang\_cible}(k,n) = \text{rang\_base}(k) + n - 10$,
 puis $P(k,n) = \text{premier}(\text{rang\_cible})$. Le lemme
 \texttt{reconstruction\_conv\_identity} prouve que pour tout $k \ge 2$,
-la reconstruction redonne exactement le premier cible. Le lemme
-\texttt{rang\_cible\_k8\_n34} confirme que pour $k=8, n=34$, le rang cible est
-3\,492, conduisant à $P=32\,537$.\\
-\holok HOL/Isabelle : décalage de rang et reconstruction validés formellement.\\
+la substitution des définitions redonne la valeur de
+\texttt{premier\_cible\_conv}. Cette identité algébrique ne démontre pas que
+cette valeur est première. Le lemme \texttt{rang\_cible\_k8\_n34} donne le rang
+3\,492 en utilisant l'axiome \texttt{ancrages\_conv}; il n'établit pas
+\texttt{prime\_i 3492 = 32537}. La vérification arithmétique séparée de
+$32\,537$ n'est donc pas une preuve HOL de cette correspondance.\\
+\textbf{Portée :} identité par définition et décalage calculé sous les données
+d'ancrage axiomatisées.\\
 \end{boitehol}
 
 \subsection{Vérification \texorpdfstring{$k = 3$}{k = 3} à \texorpdfstring{$9$}{9} (tous corrects, 100\,\%)}
@@ -2277,25 +2285,29 @@ box(r"section 3.6 : table de vérification $k=3$ à $9$")
 \end{figure}
 
 
-\begin{boitehol}{Ancrages k=3 à 9 (MS$_{14}$ XIV.6)}{spectralbleu}
+\begin{boitehol}{Données d'ancrage k=3 à 9 (MS$_{14}$ XIV.6)}{spectralbleu}
 \begin{holcode}
-lemma ancrages_conv:
-  "rang_base_k 3 = 49 \<and> premier_base_k 3 = 227 \<and>
-   rang_base_k 4 = 80 \<and> premier_base_k 4 = 947 \<and>
-   rang_base_k 5 = 439 \<and> premier_base_k 5 = 2999 \<and>
-   rang_base_k 6 = 954 \<and> premier_base_k 6 = 7529 \<and>
-   rang_base_k 7 = 1913 \<and> premier_base_k 7 = 16519 \<and>
-   rang_base_k 8 = 3468 \<and> premier_base_k 8 = 32327 \<and>
-   rang_base_k 9 = 5906 \<and> premier_base_k 9 = 58337"
+axiomatization where
+  ancrages_conv:
+    "rang_base_k 3 = 49 \<and> premier_base_k 3 = 227 \<and>
+     rang_base_k 4 = 161 \<and> premier_base_k 4 = 947 \<and>
+     rang_base_k 5 = 430 \<and> premier_base_k 5 = 2999 \<and>
+     rang_base_k 6 = 954 \<and> premier_base_k 6 = 7529 \<and>
+     rang_base_k 7 = 1913 \<and> premier_base_k 7 = 16519 \<and>
+     rang_base_k 8 = 3468 \<and> premier_base_k 8 = 32327 \<and>
+     rang_base_k 9 = 5906 \<and> premier_base_k 9 = 58337"
 \end{holcode}
 \smallskip
-\textbf{Correspondance HOL.} Le lemme \texttt{ancrages\_conv} de la théorie
-Isabelle/HOL \texttt{MS\_14\_Systeme\_Convolutif} (XIV.6) catalogue les ancrages
-officiels pour $k=3$ à $9$ : $(k, \text{rang}, P) = (3,49,227), (4,80,947),
-(5,439,2999), (6,954,7529), (7,1913,16519), (8,3468,32327), (9,5906,58337)$.
-Ces valeurs correspondent exactement au tableau de vérification $k=3$ à $9$ du
-document.\\
-\holok HOL/Isabelle : ancrages $k=3$ à $9$ validés formellement.\\
+\textbf{Correspondance HOL.} Dans \texttt{MS\_14\_Systeme\_Convolutif},
+\texttt{ancrages\_conv} est une \textbf{axiomatisation}, et non un lemme
+démontré. La source donne $(k,\text{rang},P)=(3,49,227),(4,161,947),
+(5,430,2999),(6,954,7529),(7,1913,16519),(8,3468,32327),(9,5906,58337)$.
+Les rangs $80$ et $439$ précédemment reproduits ici étaient erronés; les rangs
+présentés dans le tableau numérique du document sont $161$ et $430$.\\
+\textbf{Portée :} données postulées dans la théorie, non déduites par Isabelle.
+La primalité des sept valeurs est elle-même introduite par des axiomes dans
+\texttt{validation\_hol\_unifiee.thy}; les lemmes \texttt{ancrage\_k3} à
+\texttt{ancrage\_k9} en héritent.\\
 \end{boitehol}
 
 
@@ -3282,9 +3294,10 @@ box(r"page 23 : fiche technique, module de reconstruction $1/7$")
 
 \subsection{Pipeline HOL du dépôt et corpus HOL}
 
-Le pipeline HOL repose sur une \textbf{architecture concentrique à trois
-sphères} formalisée dans \texttt{methode\_spectral.thy} et
-\texttt{validation\_hol\_unifiee.thy} :
+Les fichiers Isabelle/HOL du dépôt contiennent des définitions, des preuves
+conditionnelles, des calculs particuliers et des axiomes. Ces catégories ne
+sont pas interchangeables. La correspondance ci-dessous distingue ce qui est
+démontré dans les théories de ce qui est supposé ou reste à vérifier :
 \[
 \text{Ensemble} = \frac{1}{ms} + \frac{1}{t} + \frac{1}{x},
 \qquad
@@ -3295,52 +3308,58 @@ sphères} formalisée dans \texttt{methode\_spectral.thy} et
 \end{cases}
 \]
 
-Trois concordances verrouillent la preuve : \textbf{C1} : $1/y_1 = 1/t$
-(Chebyshev $=$ psi\_savard, validé numériquement) ; \textbf{C2} :
-$1/y_3 = 1/ms_1$ (zéros $\leftrightarrow$ positions des premiers, exclusion des
-composés) ; \textbf{C3} : $1/y_2 = 1/ms_3$ ($\mathrm{Re}(\rho) = 1/2 = R_{sP} = 1/2$,
-alignement central). Théorème final : $R_{sP} = \mathrm{Re} = 1/2$, vrai sur tous
-les entiers positifs distincts.
+Cette écriture et les concordances C1--C3 expriment l'architecture et les
+hypothèses du modèle; elles ne constituent pas, à elles seules, une preuve de
+l'hypothèse de Riemann.
 
-\begin{center}\small
-\begin{tabular}{@{}p{0.42\textwidth} p{0.54\textwidth}@{}}
+\small
+\begin{longtable}{@{}p{0.29\textwidth} p{0.65\textwidth}@{}}
 \toprule
 \rowcolor{spectralgris}
-Composante du corpus HOL & Caractéristiques \\
+Source & Résultat et statut constatés dans le code \\
 \midrule
-\url{theories/methode_spectral.thy} & preuve principale : 3\,714 lignes, 133 lemmes, 27 théorèmes, 13 régimes, Section XIII / Pont Savard \\
-\url{theories/validation_hol_unifiee.thy} & contre-validation jumelle HOL \\
-\url{theories/validation_zeta_lean.thy} & contre-validation Lean/mathlib4 \\
-\url{theories/ROOT} & session Isabelle \texttt{Methode\_Spectral} (Isabelle/HOL 2025-2) \\
-\url{corpus/formulas_1_4.json}, \url{verif_p1097_n23_ratio4.thy} & corpus de formules et vérifications ciblées \\
-\url{memory/dictionnaire_spectral.py} & 13 régimes cognitifs codifiés, dont \texttt{regime\_pont\_savard} \\
-\url{memory/methode_spectral_section_XIII.py} & encyclopédie du Pont Savard \\
-\url{gabriel_corpus.db} & base du corpus cognitif local (mémoire RAG) \\
+\url{theories/MS\_01\_Fondements.thy} & Définitions fondamentales; \texttt{foundations\_marker\_satisfaisable} établit seulement la satisfaisabilité du marqueur. \\
+\url{theories/MS\_02\_Suites\_AB\_RsP\_1\_2.thy} & \texttt{RsP\_un\_demi\_general} prouve l'identité algébrique $R_{sP}=1/2$ pour les fonctions $SA,SB$ définies dans ce fichier. \\
+\url{theories/MS\_03\_Digamma\_Equation\_Generale.thy} & Fichier référencé par la session et absent de l'arbre de travail; la copie suivie dans \texttt{HEAD} a été utilisée uniquement dans la tentative de build isolée. \\
+\url{theories/MS\_04\_Generalisation\_Prime\_i.thy} & \texttt{prime\_position\_exists} est un axiome. Les résultats dérivés pour \texttt{prime\_i} dépendent de ce postulat. \\
+\url{theories/MS\_05\_Modeles\_1\_3\_1\_4.thy} & \texttt{RsP\_un\_tiers\_constant} et \texttt{RsP\_un\_quart\_constant} portent sur les modèles définis; le fichier contient aussi des postulats spectraux, non dérivés. \\
+\url{theories/MS\_06\_Mixtes\_Negatives\_Asymetries.thy} & \texttt{RsP\_neg\_un\_demi\_general} concerne les définitions mixtes/négatives du fichier; ce n'est pas une règle universelle pour tous les ancrages positifs. \\
+\url{theories/MS\_07\_Comparaison\_Blocs.thy} & \texttt{ponderation\_bloc\_uniforme} et les lemmes de blocs portent sur les constructions définies dans cette théorie. \\
+\url{theories/MS\_08\_Ecarts\_Negatifs.thy} & \texttt{non\_typique\_absurde} est dans une théorie qui contient des axiomes pour certains écarts négatifs; les résultats concernés héritent de ces hypothèses. \\
+\url{theories/MS\_09\_Preuve\_Absurde.thy} & \texttt{composite\_not\_prime\_i} utilise \texttt{prime\_i}; il dépend donc notamment de l'axiome \texttt{prime\_position\_exists} de \texttt{MS\_04}. \\
+\url{theories/MS\_10\_Ecarts\_Mixtes\_Positifs.thy} & \texttt{gap\_equation\_1\_3\_for\_primes} est une vérification algébrique sur les valeurs de cas définies dans le fichier, pas une preuve générale sur les premiers. \\
+\url{theories/MS\_11\_Construction\_SpectralFamily.thy} & \texttt{RsP\_generic\_constant} est démontré dans le locale \texttt{spectral\_family}, sous ses hypothèses, dont \texttt{ratio\_eq}. \\
+\url{theories/MS\_12\_Construction\_Generalisee\_1k.thy} & \texttt{somme\_A\_pos\_k\_eq\_SA}; les coefficients sont définis par cas pour $k=2,3,4$ et valent $0$ autrement. \\
+\url{theories/MS\_13\_Pont\_Savard.thy} & \texttt{alignement\_central} et \texttt{pont\_spectral\_direct\_final} sont conditionnels aux hypothèses du locale; \texttt{Re\_droite\_critique} est défini comme $R_{sP}$. Cela ne prouve pas l'hypothèse de Riemann. \\
+\url{theories/MS\_14\_Systeme\_Convolutif.thy} & \texttt{RsP\_conv\_constant} est une preuve algébrique pour les formules définies. \texttt{reconstruction\_conv\_identity} suit des définitions; \texttt{ancrages\_conv} est un axiome. \\
+\url{theories/validation\_hol\_unifiee.thy} & \texttt{prime\_227\_ax} à \texttt{prime\_58337\_ax} introduisent les primalités comme axiomes; les lemmes \texttt{ancrage\_k3} à \texttt{ancrage\_k9} (dont \texttt{ancrage\_k4}) en héritent. L'association branche/rang n'est pas prouvée par \texttt{ancrage\_valide}. \\
+\url{theories/validation\_zeta\_lean.thy} & \texttt{equation\_fonctionnelle\_lean} et autres spécifications sont des axiomes Isabelle/HOL attribués à Mathlib; le fichier ne compile pas de code Lean ni ne vérifie Mathlib indépendamment. \\
+\url{theories/ROOT} & Déclare la session \url{Geometrie\_Spectre\_Premier\_Philippe\_Thomas\_Savard}, qui référence le fichier \texttt{MS\_03} absent localement. Le \texttt{ROOT} à la racine déclare une autre session, \texttt{Gabriel\_Multiloop}. \\
+\url{theories/audit\_tex\_hol\_alignment.py} & Contrôle statique reproductible des références TeX/PDF, des symboles et des rangs d'ancrage; il ne démontre pas l'équivalence sémantique des textes. \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{longtable}
+\normalsize
 
-Une \textbf{factorisation formelle} par \emph{locale paramétré}
-\texttt{spectral\_family} unifie les modèles 1/2, 1/3 et 1/4 ; trois
-interprétations (\texttt{regime\_1\_2}, \texttt{regime\_1\_3},
-\texttt{regime\_1\_4}) héritent du théorème universel
-\texttt{RsP\_generic\_constant}, et l'extension à un modèle $1/k$ arbitraire ne
-requiert qu'une seule ligne --- c'est le point d'ancrage HOL du système
-convolutif multi-rapports du présent document. La section \og Foundations /
-Meta-theory \fg{} du fichier \texttt{.thy} documente 6 postulats (P1..P6), les
-3 opérations fondamentales (Reconstruction, Exclusion, Rapport spectral), la
-règle Savard ($\text{Ensemble} = 1 = 1/x + 1/t + 1/ms$) et les 3 concordances
-C1, C2, C3.
+Isabelle2025-2 est installé et une compilation de la session complète a été
+tentée dans une copie isolée. Comme \texttt{MS\_03\_Digamma\_Equation\_Generale.thy}
+est absent de l'arbre de travail, la version suivie dans \texttt{HEAD} a été
+placée dans cette copie seulement; aucun fichier local n'a été restauré.
+Les théories du projet, notamment \texttt{MS\_09}, \texttt{MS\_13},
+\texttt{MS\_14} et les deux fichiers de validation, ont atteint 100\,\% dans
+le journal. Le build global a néanmoins échoué pendant la construction de
+dépendances HOL standard : le solveur externe \texttt{veriT.exe} a été bloqué
+par la stratégie de contrôle d'applications de Windows (code 126). La session
+complète ne peut donc pas être déclarée compilée avec succès.
 
 \begin{samepage}
 \subsection{Robustesse, audit et utilités pour la géométrie du spectre}
 
 \begin{itemize}[nosep]
-  \item \textbf{Tests} : 1\,702 tests Pytest (multiloop, RAG, syntaxe Isabelle, pipeline, PreReasoner, foundations, locale \texttt{spectral\_family}, Pont Savard, Section XIII) ; compilation Isabelle/HOL 2025-2 validée localement (Cygwin, 1\,min\,35) et en CI GitHub Actions (37 s, cache HIT) avec attestation SLSA (SHA256).
+  \item \textbf{Tests} : le nombre de tests et les résultats de compilation attribués ailleurs au dépôt concernent le pipeline plus large. Ils n'établissent pas que la session \url{Geometrie\_Spectre\_Premier\_Philippe\_Thomas\_Savard} dans son état courant compile; cette session est bloquée par le fichier \texttt{MS\_03} manquant.
   \item \textbf{Audit} : \texttt{AuditStore}, trace JSON signée de chaque question/réponse ; chaque réponse est ancrée sur \texttt{methode\_spectral.thy} (empreinte SHA256 tracée).
   \item \textbf{Reconstruction} : calcul de $R_{sP}$, de \texttt{psi\_savard}, reconstruction du $n$-ième premier, exclusion des composés, en arithmétique entière exacte (\texttt{Fraction}/\texttt{sympy}) --- indispensable dès $k \ge 50$ où $\SA, \SB > 10^{15}$.
-  \item \textbf{Contrat HOL} : le moteur produit les candidats C ; la validation HOL générale décide \texttt{EXCLU\_HOL}, \texttt{ANCRAGE\_POSSIBLE}, \texttt{P\_CERTIFIÉ} ou \texttt{C\_NON\_DÉCIDÉ} ; seul \texttt{P\_CERTIFIÉ} peut être annoncé comme nombre premier reconstruit (aucune sélection silencieuse).
-  \item \textbf{Utilité spectrale} : le pipeline convolutif fournit à la géométrie du spectre un mécanisme constructif de localisation des premiers (ancrages $n=10$ + loi de rang spectral), tandis que le corpus HOL garantit la contre-validation formelle de chaque résultat annoncé.
+  \item \textbf{Contrat HOL} : les statuts du moteur décrivent son interface. Dans les fichiers examinés, les axiomes et les hypothèses mentionnés ci-dessus empêchent d'interpréter chaque statut \texttt{P\_CERTIFIÉ} comme une preuve HOL indépendante de primalité.
+  \item \textbf{Utilité spectrale} : les théories formalisent des identités et des modèles conditionnels utiles à l'étude; elles ne certifient pas, à elles seules, les millions d'ancrages ni une preuve de l'hypothèse de Riemann.
 \end{itemize}
 \end{samepage}
 
@@ -4235,19 +4254,26 @@ box(r"pages 39 à 41 : équation de Tchebyshev et $\psi$ (Savard)")
 
 \subsection*{Lien avec la validation HOL/Isabelle}
 
-L'équation $\psi$ (Savard), conçue comme une méta-analyse de l'équation de
-Tchebyshev, est mise en avant dans la section~13 du fichier
-\texttt{methode\_spectral.thy} de la validation HOL/Isabelle. Cette section traite
-également de la répartition des nombres premiers et de leur correspondance avec les
-zéros de la droite critique de la fonction zêta. La répartition des premiers est au
-c\oe ur de l'énigme de Riemann, qui pose la question :
+La section XIII de \texttt{MS\_13\_Pont\_Savard.thy} propose un rapprochement
+entre l'équation de Tchebychev, la fonction $\psi_{\text{Savard}}$, la fonction
+zêta et la méthode spectrale. Dans le code, $\psi_{\text{Savard}}$ est définie
+par une formule et quelques valeurs sont vérifiées numériquement. En revanche,
+\texttt{psi\_classique} et \texttt{concerne\_fonction\_zeta} sont des constantes
+non interprétées : aucune preuve HOL ne démontre que cette formule est la
+fonction de Tchebychev ou qu'elle correspond aux zéros de $\zeta$. Le fichier
+\texttt{validation\_zeta\_lean.thy} spécifie lui aussi certaines fonctions et
+propriétés par axiomes Isabelle/HOL; il ne constitue pas une exécution de Lean
+ou une vérification indépendante de Mathlib.
+
+Le problème de Riemann pose notamment la question :
 \[
 \mathrm{Re}(s)=\frac{1}{2}\ ?
 \]
-Le fichier \texttt{methode\_spectral.thy}, conçu à l'aide de l'assistant de preuve
-Isabelle, inclut également une section intitulée « preuve par l'absurde »,
-démontrant que les entiers composés $C$ sont nécessairement exclus de la méthode
-spectrale.
+Le corpus Isabelle/HOL inclut également la théorie
+\texttt{MS\_09\_Preuve\_Absurde.thy}. Elle formalise l'exclusion d'un composé
+des valeurs de la fonction \texttt{prime\_i}; la portée de cette preuve et les
+hypothèses dont elle dépend sont précisées ci-dessous. Elle ne constitue pas à
+elle seule une vérification de chaque sortie numérique du pipeline.
 
 \paragraph{Théorème de la section « Preuve par l'absurde »}
 (\texttt{methode\_spectral.thy}, lignes 1982--2002)
@@ -4273,14 +4299,18 @@ proof (rule allI, rule ccontr)
 qed
 \end{Verbatim}
 
-Ce théorème démontre élégamment que si l'on attribue à un entier composé $C$ la
-qualité d'être un premier $P$, alors $C=P_i$ pour un certain $i$, ce qui est
-impossible. Ainsi, les composés sont exclus de la méthode spectrale de manière
-certaine. Cette exclusion se manifeste également dans l'historique de l'agent
-Gabriel multiloop, conçu par Savard à partir du corpus HOL et du pipeline cognitif
-incluant le système convolutif. Les logs de l'agent montrent que lorsqu'une requête
-demande un nombre composé, la méthode échoue, car elle ne s'applique qu'aux nombres
-premiers.
+Le raisonnement est le suivant : si un composé $C$ était égal à
+$\texttt{prime\_i}(i)$ pour un indice $i$, la propriété
+\texttt{prime\_i\_is\_prime} impliquerait $\mathrm{prime}(C)$, en contradiction
+avec l'hypothèse $\neg\mathrm{prime}(C)$. Il s'agit d'une exclusion formelle de
+toute valeur non première de la fonction indexée \texttt{prime\_i}. La fonction
+\texttt{prime\_i} est toutefois construite à partir de l'axiome
+\texttt{prime\_position\_exists} de \texttt{MS\_04}; ce théorème ne démontre ni
+la génération d'un candidat par toutes les étapes numériques du pipeline ni
+l'identité d'une sortie arbitraire $C_i$ avec un terme de \texttt{prime\_i}.
+L'identité algébrique de reconstruction seule n'est pas un certificat de
+primalité. Les journaux d'exécution de l'agent sont des observations de calcul,
+pas une preuve HOL additionnelle.
 
 \subsection*{Équation de reconstruction des premiers}
 
@@ -5981,13 +6011,14 @@ Ce contrôle porte sur les calculs explicitement codés dans les blocs
 PythonTeX; il ne constitue pas une preuve générale des conjectures du texte.
 
 \medskip
-\textbf{Isabelle/HOL :} des sources et extraits sont cités dans le dépôt,
-mais cette édition n'a pas été reconstruite par Isabelle. Lors de sa
-préparation, la commande Isabelle n'était pas disponible dans l'environnement
-et \texttt{theories/ROOT} référençait
-\texttt{MS\_03\_Digamma\_Equation\_Generale.thy}, absent du dossier local.
-Les encadrés HOL reproduits doivent donc être lus comme des extraits de
-formalisation, et non comme le résultat d'un build HOL fraîchement vérifié.
+\textbf{Isabelle/HOL :} une tentative de compilation de la session complète
+a été effectuée avec Isabelle2025-2 dans une copie temporaire, en utilisant
+la version suivie de \texttt{MS\_03} sans modifier l'arbre de travail.
+Les théories du projet ont été vérifiées, mais la construction globale s'est
+arrêtée sur le solveur externe \texttt{veriT.exe}, bloqué par la politique
+d'exécution Windows (code 126). Cette édition n'est donc pas le résultat d'un
+build complet réussi; les extraits doivent être lus avec les statuts et
+hypothèses explicités dans le document.
 \end{boitealerte}
 
 \section{Annexe --- Extraits du classeur harmonisé}
@@ -6295,6 +6326,121 @@ est incomplet. Le bilan ne déclare donc pas le rapport source intégralement
 valide (\texttt{Validation intégrale : NON}) tant que cette ligne n'est pas
 récupérée.
 \end{boiteformule}
+
+\subsection*{Preuve par l'absurde : exclusion d'un composé indexé}
+
+La section~9 de \texttt{MS\_09\_Preuve\_Absurde.thy} formalise le mécanisme
+d'exclusion. En notant $C_i$ un candidat composé et $P_i=\texttt{prime\_i}(i)$
+la valeur première associée à un indice, l'hypothèse $C_i=P_i$ contredit
+$\neg\mathrm{prime}(C_i)$, puisque \texttt{prime\_i\_is\_prime} établit
+$\mathrm{prime}(P_i)$. Le corollaire ci-dessous inclut aussi l'équation de
+reconstruction présente dans la théorie :
+
+\begin{boitehol}{Exclusion par l'index premier (MS$_{09}$)}{spectralbleu}
+\begin{holcode}
+theorem composite_no_reconstruction_position:
+  fixes C :: nat
+  assumes "C > 1" and "~ prime C"
+  shows "~ (EX n. n >= 1
+        & (SB n - digamma_calc n C) / 64 = real C
+        & C = prime_i n)"
+proof
+  assume "EX n. n >= 1
+          & (SB n - digamma_calc n C) / 64 = real C
+          & C = prime_i n"
+  then obtain n where prem: "C = prime_i n" by blast
+  have "prime (prime_i n)" by (rule prime_i_is_prime)
+  with prem have "prime C" by simp
+  with assms(2) show False by contradiction
+qed
+\end{holcode}
+\textbf{Interprétation exacte.} Si les opérations produisent un candidat $C_i$
+et si la certification l'identifie à $P_i=\texttt{prime\_i}(i)$, alors ce
+candidat est premier dans le modèle formel. Un composé ne peut donc satisfaire
+simultanément cette égalité d'indexation et l'équation de reconstruction.
+Dans la preuve source, l'équation arithmétique seule est une identité issue de
+\texttt{digamma\_calc}; c'est l'égalité $C=\texttt{prime\_i}(n)$ qui est
+réfutée.
+
+\textbf{Hypothèse et limite.} La propriété de primalité de
+\texttt{prime\_i} est dérivée dans \texttt{MS\_04} à partir de l'axiome
+\texttt{prime\_position\_exists}. La preuve exclut les composés de cette voie
+indexée, mais ne formalise pas le pipeline complet qui transformerait toute
+sortie numérique en une valeur \texttt{prime\_i}(n). Elle ne remplace donc pas
+la vérification PARI/GP des valeurs du registre.
+\end{boitehol}
+
+\subsection*{Pont Savard : portée des rapprochements formels}
+
+Le Pont Savard articule trois idées du document : (C1) rapprocher
+$\psi_{\text{Savard}}$ de l'équation de Tchebychev; (C2) relier les indices
+spectraux aux positions des nombres premiers et aux zéros de $\zeta$; (C3)
+établir l'invariant $R_{sP}=1/2$. Dans les fichiers examinés, C1 est illustré
+par des calculs numériques, mais aucune égalité HOL générale entre
+$\psi_{\text{Savard}}$ et la fonction de Tchebychev n'est démontrée. C2 est
+une interprétation proposée dans le texte, sans théorème HOL identifiant les
+zéros de $\zeta$ aux indices reconstruits. En particulier,
+\texttt{concerne\_fonction\_zeta} est non interprété et apparaît comme
+hypothèse, non comme résultat démontré.
+
+La contre-validation \texttt{validation\_zeta\_lean.thy} énonce le premier pont
+comme un résultat conditionnel. L'extrait ci-dessous rend visibles les
+prémisses : la relation à la fonction zêta et l'exclusion des composés sont
+fournies au théorème; cette déclaration ne prouve pas elle-même ces deux
+prémisses.
+
+\begin{boitehol}{Premier pont : théorème conditionnel (validation Zêta)}{spectralbleu}
+\begin{holcode}
+theorem premier_pont_tchebychev_zeta:
+  fixes n n1 n2 :: nat
+  assumes premier_pont:
+      "concerne_fonction_zeta (\<lambda>x. psi_savard x n)"
+    and second_pont:
+      "\<forall>C. \<not> prime C \<longrightarrow> (\<forall>i. C \<noteq> prime_i i)"
+    and h1: "1 \<le> n1" and h2: "1 \<le> n2"
+    and h3: "n1 \<noteq> n2"
+  shows "Re_droite_critique n1 n2 = 1 / 2"
+  by (rule pont_spectral_direct_final
+      [OF premier_pont second_pont h1 h2 h3])
+\end{holcode}
+\textbf{Statut :} résultat dérivé sous les hypothèses listées; le lien
+$\psi_{\text{Savard}}$--zêta n'est pas démontré par cet extrait.
+\end{boitehol}
+
+La partie algébrique C3, elle, possède un théorème local explicite. La théorie
+définit $\texttt{Re\_droite\_critique}$ comme le rapport $R_{sP}$, puis prouve
+l'égalité suivante pour deux indices distincts :
+
+\begin{boitehol}{Théorème local du rapport spectral (MS$_{13}$)}{spectralbleu}
+\begin{holcode}
+definition Re_droite_critique :: "nat => nat => real" where
+  "Re_droite_critique n1 n2 = RsP n1 n2"
+
+theorem synthese_pont_savard:
+  assumes "n1 >= 1" "n2 >= 1" "n1 ~= n2"
+  shows "Re_droite_critique n1 n2 = RsP n1 n2
+         & RsP n1 n2 = 1 / 2"
+proof -
+  have "Re_droite_critique n1 n2 = RsP n1 n2"
+    unfolding Re_droite_critique_def by simp
+  moreover have "RsP n1 n2 = 1 / 2"
+    using RsP_un_demi_general[OF assms] by simp
+  ultimately show ?thesis by simp
+qed
+\end{holcode}
+\textbf{Ce que le théorème établit.} Dans les définitions de la
+méthode spectrale, le rapport $R_{sP}$ vaut $1/2$; le symbole
+\texttt{Re\_droite\_critique} désigne ici ce même rapport par définition.
+Cette preuve algébrique locale est valable pour les indices indiqués.
+
+\textbf{Ce qu'il n'établit pas.} Le symbole ci-dessus n'est pas le
+\texttt{Re}(s) d'un zéro complexe de la fonction zêta. Le théorème ne prouve
+donc pas que tous les zéros non triviaux satisfont
+$\mathrm{Re}(s)=1/2$, ni l'hypothèse de Riemann. Dans
+\texttt{ensemble\_savard}, l'alignement avec une valeur appelée
+\texttt{zeta\_critique} est conditionnel aux hypothèses du locale, dont
+$\texttt{zeta\_critique}=1/2$ et $\texttt{ms\_rapport}=1/2$.
+\end{boitehol}
 
 \subsection*{Témoignage personnel de l'auteur}
 \begin{boitecertificat}[Une réussite dont je suis fier]
