@@ -148,8 +148,7 @@ def main() -> int:
     tex_path = (
         args.tex
         or root
-        / "pipeline_tex_correction_box"
-        / "data"
+        / "Document-pdf-tex"
         / "Philippe_Thomas_Savard_@_tous_droits_réservé-2026.tex"
     ).resolve()
     pdf_path = (args.pdf or tex_path.with_suffix(".pdf")).resolve()

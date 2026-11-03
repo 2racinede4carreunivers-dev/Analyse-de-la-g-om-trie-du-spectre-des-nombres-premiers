@@ -569,7 +569,12 @@ def main() -> int:
     parser.add_argument("--report", required=True, help="Output JSON report file")
     parser.add_argument(
         "--termbase",
-        default=str(Path(__file__).with_name("termbase_ca_qc.csv")),
+        default=str(
+            Path(__file__).resolve().parents[3]
+            / "Document-pdf-tex"
+            / "Certification_primalité"
+            / "termbase_ca_qc.csv"
+        ),
         help="CSV termbase with preferred forms and source attribution",
     )
     parser.add_argument("--threshold", type=float, default=9.6, help="Semantic acceptance score out of 10")

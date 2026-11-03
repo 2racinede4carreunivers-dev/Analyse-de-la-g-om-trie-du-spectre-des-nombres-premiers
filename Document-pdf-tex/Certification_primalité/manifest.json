@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "chunk_size_bytes": 94371840,
+  "files": [
+    {
+      "source_path": "reconstruction_1k_2_a_100001.txt",
+      "size_bytes": 10605000,
+      "sha256": "8fad6b943d0a5bb61e386b86cbd4183f0a12c4f6a1fadf6a97c006ffc60fd938",
+      "parts": [
+        {
+          "path": "parts/reconstruction_1k_2_a_100001.txt.part-00001",
+          "size_bytes": 10605000,
+          "sha256": "8fad6b943d0a5bb61e386b86cbd4183f0a12c4f6a1fadf6a97c006ffc60fd938"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_4M.txt",
+      "size_bytes": 431882521,
+      "sha256": "2e5e03c32ad6a745f3193f0b65a884f480e84612bdc45a5b2d2d61791b60b065",
+      "parts": [
+        {
+          "path": "parts/reconstruction_4M.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "8b9970b5133c7ae302f752309bd8c196adde07ddc6abc921f0ec289fd3888205"
+        },
+        {
+          "path": "parts/reconstruction_4M.txt.part-00002",
+          "size_bytes": 94371840,
+          "sha256": "d0932517b585cd191d2bb66069ef6f0b537abfbb206f52138bdc9fd898a6c9a0"
+        },
+        {
+          "path": "parts/reconstruction_4M.txt.part-00003",
+          "size_bytes": 94371840,
+          "sha256": "86b69fed16925ee87a4894c76e386dbaf6823f2800a1760474d016c816ff9500"
+        },
+        {
+          "path": "parts/reconstruction_4M.txt.part-00004",
+          "size_bytes": 94371840,
+          "sha256": "fabfb37eeaa96cae28e60bdd61de1c44621be44bc3eac5087b9f4108616e96ec"
+        },
+        {
+          "path": "parts/reconstruction_4M.txt.part-00005",
+          "size_bytes": 54395161,
+          "sha256": "3167d8f5662f814c11ad1216a57e4a22cb0f1ec5fac01d069d7a72b768f56a4a"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_detail.txt",
+      "size_bytes": 1006632960,
+      "sha256": "2ed34d1461a8520eb4760ccb99301bb3916eb1ca35f8c41b576e202bbc3d7a31",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "400ae99028df009b153ff099d93edc4b0bdebd6f8f05441f76569f3e44a4cba9"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00002",
+          "size_bytes": 94371840,
+          "sha256": "be0f4774a51390db98adf830a58991c8882e1ec56a5239598dd01a8bed54a60c"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00003",
+          "size_bytes": 94371840,
+          "sha256": "4dbb89c39d13f2fc563b97bbc5f6d26a8aa62adeba2d5b7135e73136147e2fb0"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00004",
+          "size_bytes": 94371840,
+          "sha256": "703b3051771cdcb6ca3e26bc4a41bf3052d3c8c9c5c48620e9c0cf1ee03eeebe"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00005",
+          "size_bytes": 94371840,
+          "sha256": "4ba4ff3a4e3ecdc2b6760f10ff74df9b44fdc94f1fa10263249cea04353642f5"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00006",
+          "size_bytes": 94371840,
+          "sha256": "28dcef0881f54feb9ecd3b7c30c5d8d5620cee75ce90d4707d05cbbe8768bb0a"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00007",
+          "size_bytes": 94371840,
+          "sha256": "e898fd92dd28968619c87d67a867e8e4219a809b3987de22b0211624c2dab820"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00008",
+          "size_bytes": 94371840,
+          "sha256": "d24da673030cdbbb2c7786fccaec5286c2756228afbafe9d3a83bb3eba366f2e"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00009",
+          "size_bytes": 94371840,
+          "sha256": "3ccac4b0dd28d4ae43783136909402bfba46a97aed1ef3ced56c5b338b87b69a"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00010",
+          "size_bytes": 94371840,
+          "sha256": "b1f6d31a2398a42d073608b5ffedb88242433fc6af406632c7c4b3c4c2b80a29"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail.txt.part-00011",
+          "size_bytes": 62914560,
+          "sha256": "7bffe763aa5a3e55c8c940befa56d219259d190299b7eb963ab4d4d7fa2533c8"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_detail_primalite.jsonl",
+      "size_bytes": 1115571209,
+      "sha256": "2f8f9cb7e02daa467817c8ddf5b7e18cfe3f6d88b269b8b2edeaf63037922572",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "9a1863a5c5d992eb600a978650d2d31bc08fa336b8fa749b769c4be866877756"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00002",
+          "size_bytes": 94371840,
+          "sha256": "297e89fde09d81ccd6b15081428d507f6706d7f4f76fce2a6b9569cc60228b09"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00003",
+          "size_bytes": 94371840,
+          "sha256": "75eb65e2efe9123e4e9894d195bcc828f2295f893fa9c734d553da3b168569ec"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00004",
+          "size_bytes": 94371840,
+          "sha256": "bedfc249ed3bc0229c73b53f67876a1fd81454ae87410ee99076747751546aa3"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00005",
+          "size_bytes": 94371840,
+          "sha256": "61f073a5ec2dabb31e46efb66d8213b7796746baecab094024f09326ce62f088"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00006",
+          "size_bytes": 94371840,
+          "sha256": "34b6a84a0139e024693bfb540da3e82e1b5800b1c3d6872a084e1820cbda6ead"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00007",
+          "size_bytes": 94371840,
+          "sha256": "55c7f3e40a4089228cd280d6eef017286d3898460af2b7743e2b34b92c71069a"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00008",
+          "size_bytes": 94371840,
+          "sha256": "f7eff62cb9f16426a107693402665d34f4a3204cf20c91ce4b0d7e54dc00d07d"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00009",
+          "size_bytes": 94371840,
+          "sha256": "d7cc14a94f8ae67cd428dffdd9233a0cc4376099050f7e66d64a6fa20db334e2"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00010",
+          "size_bytes": 94371840,
+          "sha256": "eb22b77913cb5c4ce6c2990051125d2d6c2d69a5451311b53c44ca38a467a3cb"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00011",
+          "size_bytes": 94371840,
+          "sha256": "6301badb554ee71925a4ee750a97d30e55adcccaed012d2bf053a7860faf0e9b"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.jsonl.part-00012",
+          "size_bytes": 77480969,
+          "sha256": "cabf7612bde9b5a0874cb5aa4085c3a8c4c92686442392015481c87b8cae61b2"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_detail_primalite.txt",
+      "size_bytes": 1006634581,
+      "sha256": "da5a903d47bc332ba6d23ad254518c80cd4c27f9bc52185f451146aba3650852",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "c9583e2de0379893b6369f92eb7aa58a1a7e5814c9522ff81f6052cc8f8aca74"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00002",
+          "size_bytes": 94371840,
+          "sha256": "871f987b662808a425877e6219c230124c345292e25c1ef3d5a5742a3dc60af0"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00003",
+          "size_bytes": 94371840,
+          "sha256": "c53dca5d205cfdb605a40267981fde461ef4b127fa7835073a14485d73871178"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00004",
+          "size_bytes": 94371840,
+          "sha256": "a3556a18b652b1c460b983534b8a31f6542879ebd3728073f79d9c18aa9c1ae2"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00005",
+          "size_bytes": 94371840,
+          "sha256": "0969920ba75f8b5e37337395b831e32d1a66b934615339cc4ded8fd27a753947"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00006",
+          "size_bytes": 94371840,
+          "sha256": "71a4167f80d56963c5e4912d040985f0609566e2199e71f80b60e9846ef5a10f"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00007",
+          "size_bytes": 94371840,
+          "sha256": "73277caf1cd34d6d49f240100970687f47f36c174be4afff2794cb0ef0d73d3e"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00008",
+          "size_bytes": 94371840,
+          "sha256": "0eed387b44feb3a26d0f11ef2f3d3d60aaf6edf0a6897bd3e58f68268b0a4ce1"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00009",
+          "size_bytes": 94371840,
+          "sha256": "321505256e4d2d1c81d5ab1535094627afb76ed5c15cba0d0e1218ab6783a2e2"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00010",
+          "size_bytes": 94371840,
+          "sha256": "91daaaaef8c1ffcd8d9dca8c8d9402a7219defb11cba692df0ff744728a4cbca"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_detail_primalite.txt.part-00011",
+          "size_bytes": 62916181,
+          "sha256": "6f53587488420621b496cf56288635cba416975606f24bc849a770b489508794"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_000_28000000_32666666_detail.txt",
+      "size_bytes": 108887299,
+      "sha256": "a2bbd73f209aa2092174e1751ffc1c747642adced0bd385aa08d6b4c632cce0b",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_000_28000000_32666666_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "400ae99028df009b153ff099d93edc4b0bdebd6f8f05441f76569f3e44a4cba9"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_000_28000000_32666666_detail.txt.part-00002",
+          "size_bytes": 14515459,
+          "sha256": "63ef5d443b99a6d5fb10394ff56136a5349051b52f29cd966364a1b2fed453eb"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_001_32666667_37333333_detail.txt",
+      "size_bytes": 108180201,
+      "sha256": "6dfd9ff7173819cb6f8e8d56a39c05c229a1def9323ab20db0933bf81644f77f",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_001_32666667_37333333_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "0307c4f928c402e480850e6a19128bc6a8534f8e2810e469865deec71131e99c"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_001_32666667_37333333_detail.txt.part-00002",
+          "size_bytes": 13808361,
+          "sha256": "3cc6d47d64ebeb30b80911310c71d6c6afcbcdb2be9cc76d3e2112a3726cde26"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_002_37333334_42000000_detail.txt",
+      "size_bytes": 108340346,
+      "sha256": "465a40be329dde0757906b664a1efb792d75dff4700944024a7ecb92cef4d257",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_002_37333334_42000000_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "e5285d979e422b0b036a627644b68a6acc547cd668cf8d494298a7a86d5d10cc"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_002_37333334_42000000_detail.txt.part-00002",
+          "size_bytes": 13968506,
+          "sha256": "595fd044f0032a17855422d5e925527fa48316a74b9465fb70e900de6305be90"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_003_42000001_46666667_detail.txt",
+      "size_bytes": 108927741,
+      "sha256": "0f3a3b5d574734198c94fe0c9a540fff7685aa7bc04772fbf51e1c2b613ae015",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_003_42000001_46666667_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "d1c572fdefbebc17a90babfec957e03fd1ad9f90f5b02f821f8cddd91b306996"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_003_42000001_46666667_detail.txt.part-00002",
+          "size_bytes": 14555901,
+          "sha256": "7a807e52686ae09ecb0631df9995cd79acd0c6b262cacedbae8afb136908f78a"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_004_46666668_51333334_detail.txt",
+      "size_bytes": 108284593,
+      "sha256": "b0983816c45f1c6401bda3e667dd762faa13c19b3438317eff851f7af8ad48f8",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_004_46666668_51333334_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "50de8aa9540160c57178d28dd57c88e76bd8a1c4a9629d6944841e096f440a28"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_004_46666668_51333334_detail.txt.part-00002",
+          "size_bytes": 13912753,
+          "sha256": "7666fe2a94309ff44f10fdefdcea55bc52e5ef92dcf9dfae885266fe5bafb140"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_005_51333335_56000001_detail.txt",
+      "size_bytes": 107825530,
+      "sha256": "4dd4ae850b188dd49b10ff5ef1bcae6874b3ceeb3c223ee387522ef7120b6757",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_005_51333335_56000001_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "214d14555d1452ca7b52533f92cb69ccda560bc81e6387015b4a2e4645d5f928"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_005_51333335_56000001_detail.txt.part-00002",
+          "size_bytes": 13453690,
+          "sha256": "b3158d1e7d69582b9ed8def65945f109119fea5b140d14e67deac1cd067077ce"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_006_56000002_60666668_detail.txt",
+      "size_bytes": 107305238,
+      "sha256": "dc09e081a51a0f27e48859f3d389a42a7420f6b57d2ea05ede1d9e01f15507da",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_006_56000002_60666668_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "e4fa8b8cea42346e77ab0fed1e8d32fcca781b1a9c57b708efd6b437b8901033"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_006_56000002_60666668_detail.txt.part-00002",
+          "size_bytes": 12933398,
+          "sha256": "d019b3650d6fec246ee3abca5b8500bc4a84a680d7e21baa310728b574fc9a7b"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_007_60666669_65333335_detail.txt",
+      "size_bytes": 107729506,
+      "sha256": "02137cb3b2eecdec0c88da8504ecd4497bcfcbab665a71486a80884754f65cd7",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_007_60666669_65333335_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "419d80903788006272c823bbc035194ab153fe55240a9cf3b041a6c3677e24bd"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_007_60666669_65333335_detail.txt.part-00002",
+          "size_bytes": 13357666,
+          "sha256": "5c3feead7bac05f27a2fcf00b7dda5761a52bfd36aceebdc61321a41606560e1"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_008_65333336_70000002_detail.txt",
+      "size_bytes": 108409516,
+      "sha256": "9baedcf225946520ec033426f4b24b4ee7dd47006a56eedabfa9ba38aa519185",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_008_65333336_70000002_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "9c40fb209ac2bf26723eae6e2cecb2fbe043415e7db1ce7bbd52f9ebb70cede3"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_008_65333336_70000002_detail.txt.part-00002",
+          "size_bytes": 14037676,
+          "sha256": "24c7ff9d0e6e2d1b615d254a588c5d24fb22a7cf4b013341439141112f547a48"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_009_70000003_74666669_detail.txt",
+      "size_bytes": 107990332,
+      "sha256": "874214fd3d613180d1da8a799c183a8e318d478351baa2d434a726c87447f831",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_009_70000003_74666669_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "5266237da3e61b843a1bcaca6052e25cb0df20e094f2df6b6c3e7cad39ee28fd"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_009_70000003_74666669_detail.txt.part-00002",
+          "size_bytes": 13618492,
+          "sha256": "38ec1ca375c77c71d137bed8854c5c51fbd433b5bb77851688f184e34eddec42"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_010_74666670_79333336_detail.txt",
+      "size_bytes": 107851315,
+      "sha256": "909db5306044036d338bac89d7933bcbdde5aec1e5837f50da2930fd873c98b8",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_010_74666670_79333336_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "3c63f245a6e223de6de13a7e81fe410aac2c32e9137e5ea590dad7f589f61c44"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_010_74666670_79333336_detail.txt.part-00002",
+          "size_bytes": 13479475,
+          "sha256": "48b109cd22b38bea5abbe02c435706042cb31b15a5cc492893cc1afe19a06ecd"
+        }
+      ]
+    },
+    {
+      "source_path": "reconstruction_k28M_84M_parts/part_011_79333337_84000000_detail.txt",
+      "size_bytes": 107264671,
+      "sha256": "c1be9026754d5878a4459c3123e9b802b0c3cde9f47a51a028c209e92026a934",
+      "parts": [
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_011_79333337_84000000_detail.txt.part-00001",
+          "size_bytes": 94371840,
+          "sha256": "e8c14ce3bfab73b203ea0d4e01dde8de001d91649627ea2bd511b54319e88286"
+        },
+        {
+          "path": "parts/reconstruction_k28M_84M_parts/part_011_79333337_84000000_detail.txt.part-00002",
+          "size_bytes": 12892831,
+          "sha256": "071eeb0748a35ac958b8080e29e72ef91f1f1f8bab6e4e059c6bfc1c540ea480"
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ This module improves prose quality in LaTeX files while preserving meaning.
 
 - `quality_pipeline.py`: main correction pipeline.
 - `style_profile.py`: builds an author style profile from existing prose.
-- `termbase_ca_qc.csv`: preferred terms with source attribution (TERMIUM/GDT references).
+- `Document-pdf-tex/Certification_primalité/termbase_ca_qc.csv`: preferred terms with source attribution (TERMIUM/GDT references).
 
 ## Usage
 

@@ -1,0 +1,28 @@
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  racine/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=3.0cm,minimum height=0.9cm,align=center},
+  etape/.style={rectangle,rounded corners,draw=spectralor,fill=spectralor!18,thick,minimum width=2.6cm,minimum height=0.8cm,align=center},
+  feuille/.style={rectangle,rounded corners,draw=spectralazur,fill=spectralazur!12,thick,minimum width=2.4cm,minimum height=0.7cm,align=center},
+  flux/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!70},
+  fluxor/.style={-{Stealth[length=2.2mm]},thick,spectralor!90!black}
+]
+  \node[racine] (root) at (0,0) {P-ième premier\\[-1pt]\scriptsize rang cible et loi spectrale};
+  \node[etape] (rang_base) at (-4.2,-2.2) {rang\_base(k)\\[-1pt]\scriptsize primepi(P(k,n=10))};
+  \node[etape] (delta) at (0,-2.2) {$\Delta n = n - 10$\\[-1pt]\scriptsize écart de rang};
+  \node[etape] (rang_cible) at (4.2,-2.2) {rang\_cible\\[-1pt]\scriptsize rang\_base + $\Delta n$};
+  \node[feuille] (primepi) at (-4.2,-3.8) {primepi(P(k,n=10))};
+  \node[feuille] (prime) at (0,-3.8) {prime(rang\_cible)};
+  \node[feuille] (P) at (4.2,-3.8) {P(k,n)};
+  \draw[flux] (root.south) -- (-2.1,-1.1) -| (rang_base.north);
+  \draw[flux] (root.south) -- (0,-1.1) -| (delta.north);
+  \draw[flux] (root.south) -- (2.1,-1.1) -| (rang_cible.north);
+  \draw[fluxor] (rang_base.south) -- (-4.2,-3.0) -| (primepi.north);
+  \draw[fluxor] (delta.south) -- (0,-3.0) -| (prime.north);
+  \draw[fluxor] (rang_cible.south) -- (4.2,-3.0) -| (P.north);
+  \draw[flux] (primepi.east) -- (-1.8,-3.8) -| (prime.west);
+  \draw[flux] (prime.east) -- (1.8,-3.8) -| (P.west);
+\end{tikzpicture}
+\caption{Arborescence du P-ième premier : calcul du rang de base, écart de rang $\Delta n$, rang cible, et détermination du premier P(k,n) par la loi de rang spectral.}
+\end{figure}

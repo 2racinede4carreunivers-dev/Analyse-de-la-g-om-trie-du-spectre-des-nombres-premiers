@@ -25,3 +25,53 @@ theories/#*#
 *#validation_hol_unifiee.thy#
 # Artefact generateur volumineux (46 Mo) — regenerable, jamais commite
 rapports_ancres_1000001_3000001.txt
+
+# === LaTeX compilation artefacts (never commit) ===
+*.pdf
+*.aux
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# === Old / fixed versions of .tex (archived in theories/tex/archive/) ===
+*_fixed.tex
+*_stack_fixed.tex
+*_fixe.tex
+*_convolution.tex
+
+# === Archive directory ===
+theories/tex/archive/
+
+# === Pipeline data (generated artefacts) ===
+pipeline_tex_correction_box/data/*.db
+pipeline_tex_correction_box/data/*.db-wal
+pipeline_tex_correction_box/data/*.db-shm
+pipeline_tex_correction_box/data/*.tex
+pipeline_tex_correction_box/data/*.pdf
+pipeline_tex_correction_box/data/*.log
+pipeline_tex_correction_box/data/*.txt
+
+# Published document, its source assets, and archived editions.
+!Document-pdf-tex/**/*.pdf
+!Document-pdf-tex/**/*.tex
+!Document-pdf-tex/**/*.png
+!Document-pdf-tex/**/*.md
+!Document-pdf-tex/**/*.py
+!Document-pdf-tex/**/*.json
+!Document-pdf-tex/**/*.csv
+!Document-pdf-tex/**/*.xlsx
+!Document-pdf-tex/**/*.txt
+!Document-pdf-tex/**/*.part-*
+
+# Full local copies are retained, but only their verified segments are published.
+Document-pdf-tex/Certification_primalité/originals/
+Document-pdf-tex/*.pytxcode
+Document-pdf-tex/pythontex-files-*/
+Document-pdf-tex/validation_pythontex_score.tex
+Document-pdf-tex/validation_rapport.tex
