@@ -13,8 +13,9 @@ def test_workflow_isabelle_2025_2_contract():
     assert "Isabelle2025-2_linux.tar.gz" in CONTENT
     assert "a20a507bc7c1270d8be96a9f3fbec06345387789d2dc2c4d3df6260d47bfb33c" in CONTENT
     assert "1228480874" in CONTENT
-    assert "www.cl.cam.ac.uk/research/hvg/Isabelle/dist" in CONTENT
-    assert "sourceforge.net/projects/isabelle" in CONTENT
+    assert "isabelle.in.tum.de/website-Isabelle2025-2/dist" in CONTENT
+    assert "isabelle.in.tum.de/dist/" in CONTENT
+    assert "--retry-all-errors" in CONTENT
     assert 'echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"' in CONTENT
     assert 'isabelle build -d . -v "${SESSION_NAME}"' in CONTENT
     assert "SESSION_NAME: Geometrie_Spectre_Premier_Philippe_Thomas_Savard" in CONTENT

@@ -130,16 +130,10 @@ class TestGithubReleaseInstallation:
         return build.read_text(encoding="utf-8")
 
     def test_multi_mirror_strategy(self, build_content):
-        """Le workflow doit lister plusieurs miroirs Isabelle."""
-        # Cambridge (le nouveau miroir en tete de liste)
-        assert "www.cl.cam.ac.uk/research/hvg/Isabelle/dist" in build_content, (
-            "Le workflow doit lister le miroir Cambridge (le plus stable "
-            "pour les IP GitHub Actions)."
-        )
-        # SourceForge en fallback ultime
-        assert "sourceforge.net/projects/isabelle" in build_content, (
-            "Le workflow doit avoir SourceForge en fallback."
-        )
+        """Les deux URL officielles sont réessayées avant l'échec explicite."""
+        assert "isabelle.in.tum.de/website-Isabelle2025-2/dist" in build_content
+        assert "isabelle.in.tum.de/dist/" in build_content
+        assert "--retry-all-errors" in build_content
 
     def test_isabelle_2025_2_version(self, build_content):
         """v3.35 : Isabelle 2025-2 est la version confirmee par la

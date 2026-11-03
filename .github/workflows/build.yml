@@ -40,6 +40,7 @@ jobs:
           sudo apt-get install -y \
             ca-certificates \
             coreutils \
+            curl \
             python3 \
             python-is-python3 \
             python3-pygments \
@@ -50,8 +51,7 @@ jobs:
             texlive-latex-extra \
             texlive-latex-recommended \
             texlive-lang-french \
-            texlive-pictures \
-            wget
+            texlive-pictures
 
       - name: Cache Isabelle 2025-2
         id: isabelle-cache
@@ -68,13 +68,15 @@ jobs:
           cd /tmp/isabelle
           mirrors=(
             "https://isabelle.in.tum.de/website-Isabelle2025-2/dist/${ISABELLE_TARBALL}"
-            "https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/${ISABELLE_TARBALL}"
-            "https://downloads.sourceforge.net/projects/isabelle/files/Isabelle2025-2/${ISABELLE_TARBALL}/download"
+            "https://isabelle.in.tum.de/dist/${ISABELLE_TARBALL}"
           )
           downloaded=false
           for url in "${mirrors[@]}"; do
             rm -f "${ISABELLE_TARBALL}"
-            if wget --tries=3 --timeout=120 -O "${ISABELLE_TARBALL}" "$url"; then
+            if curl --fail --location --silent --show-error \
+              --retry 5 --retry-delay 10 --retry-all-errors \
+              --connect-timeout 60 --max-time 1800 \
+              --output "${ISABELLE_TARBALL}" "$url"; then
               size=$(stat -c%s "${ISABELLE_TARBALL}")
               if [ "$size" -eq "$ISABELLE_SIZE_BYTES" ]; then
                 sha256=$(sha256sum "${ISABELLE_TARBALL}" | cut -d' ' -f1)
@@ -86,6 +88,8 @@ jobs:
               else
                 echo "Taille Isabelle incorrecte sur ce miroir : ${size}" >&2
               fi
+            else
+              echo "Téléchargement Isabelle impossible depuis ${url}; tentative du miroir suivant." >&2
             fi
           done
           if [ "$downloaded" != true ]; then
