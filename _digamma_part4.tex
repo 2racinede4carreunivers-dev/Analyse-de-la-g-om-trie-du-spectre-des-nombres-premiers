@@ -1,0 +1,131 @@
+\subsection{Validations expérimentales}
+
+Toutes les validations reposent sur le même corpus : les
+$676\,191$ ancres uniques extraites d'une reconstruction portant sur
+$4$ millions de rapports, et qui associent à chaque $k$ la branche
+effective et la valeur correspondante.
+
+\subsubsection{Validation principale : exactitude et intégrité}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l r@{}}
+\toprule
+\rowcolor{spectralgris}
+Mesure & Résultat \\
+\midrule
+Ancres analysées & 676\,191 \\
+Écarts au modèle polynomial $B_0$ & 0 \\
+Violations du criblage (0 attendues) & \textbf{0} \\
+Ancres à survivant unique & 71\,401 \quad (10{,}56\,\%) \\
+Exactitude sur ces ancres & 71\,401/71\,401 \;=\; \textbf{100{,}000000\,\%} \\
+Module de criblage $M$ & 111\,546\,435 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boiteformule}[Résultat de la validation]
+Sur l'ensemble du corpus, la règle de branche ne présente
+\textbf{aucune violation} et atteint une \textbf{exactitude de
+100\,\%} sur les $71\,401$ cas où elle se prononce. Le taux de
+couverture --- soit la proportion de $k$ pour lesquels la règle désigne
+une branche unique --- est de $10{,}56\,\%$.
+\end{boiteformule}
+
+\subsubsection{Contrôle anti-circularité}
+
+Le risque d'une telle règle est d'être circulaire : si elle ne
+distinguait rien, une sélection \emph{arbitraire} fonctionnerait aussi.
+Le test consiste donc à \emph{permuter} les quatre signes et à mesurer
+la pureté obtenue.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l c r@{}}
+\toprule
+\rowcolor{spectralgris}
+Essai & Permutation des signes & Pureté \\
+\midrule
+Référence (règle true) & $[0,1,2,3]$ & \textbf{100{,}000000\,\%} \\
+Essai 0 & $[3,1,0,2]$ & 8{,}627330\,\% \\
+Essai 1 & $[1,2,3,0]$ & 0{,}000000\,\% \\
+Essai 2 & $[1,0,3,2]$ & 0{,}000000\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boitenote}[Lecture du contrôle]
+Sous permutation aléatoire, la pureté s'effondre à $0$--$8{,}6\,\%$,
+très en deçà du taux de base de $28{,}84\,\%$ correspondant à la branche
+majoritaire. La règle ne peut donc pas être « bonne » par hasard :
+l'information qu'elle exploite est \emph{spécifique} à l'association
+entre la polarité de la position dans la suite A et le signe de la
+correction Digamma. C'est le test le plus important de la section.
+\end{boitenote}
+
+Un second contrôle porte sur le \emph{hors-échantillon} : appliqué à
+$20\,000$ valeurs de $k$ arbitraires, hors du corpus d'ancres, la règle
+désigne un survivant unique pour $4\,088$ d'entre elles, et le
+candidat désigné est impair dans les $4\,088$ cas (rapport typique
+$1/2$ : le Digamma et $k^{6}$ sont pairs, donc $P$ doit l'être aussi
+après soustraction --- la parité est un test de cohérence immédiat).
+
+\subsubsection{Convergence du criblage}
+
+\begin{center}
+\small
+\begin{tabular}{@{}r r r r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+\# premiers & Couverture & Exactitude & Intégrité & Ambigüité & Temps \\
+\midrule
+9   & 10{,}56\,\% & 100{,}0000\,\% & 100{,}00\,\% & 89{,}44\,\% & 2\,\text{s} \\
+25  & 22{,}69\,\% & 100{,}0000\,\% & 100{,}00\,\% & 77{,}31\,\% & 4\,\text{s} \\
+168 & 42{,}39\,\% & 100{,}0000\,\% & 100{,}00\,\% & 57{,}61\,\% & 19\,\text{s} \\
+430 & 49{,}65\,\% & 100{,}0000\,\% & 100{,}00\,\% & 50{,}35\,\% & 41\,\text{s} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boitenote}[Ce que montre la convergence]
+À mesure que l'on ajoute des petits premiers au crible, la
+\emph{couverture} croît de façon monotone ($10{,}56\,\%$ à $49{,}65\,\%$),
+tandis que l'\emph{exactitude} et l'\emph{intégrité} restent
+parfaitement constantes à $100\,\%$. C'est le comportement attendu et
+souhaitable : le criblage élimine de plus en plus de branches, mais ne
+sacrifie jamais la rigueur. La couverture pourrait tendre vers $100\,\%$
+en augmentant le nombre de premiers \emph{au prix} d'un coût de calcul
+qui croît brutalement : c'est le compromis central de la règle.
+\end{boitenote}
+
+\subsection{Cas de référence : $P = 29,\ 31,\ 37,\ 41$}
+
+Le tableau qui suit applique la procédure complète --- criblage, choix
+de branche, calcul du Digamma, reconstruction --- aux quatre nombres
+premiers d'ancrage, pour le rapport typique $1/2$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}r r l r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & $\mathrm{Digamma}$ & Branche retenue & $P$ reconstruit & $P$ attendu & Verdict \\
+\midrule
+2 & $-256$     & $A(8)-$ & 29 & 29 & conforme \\
+2 & $+1\,280$  & $A(8)+$ & 31 & 31 & conforme \\
+2 & $+4\,224$  & $A(8)+$ & 37 & 37 & conforme \\
+2 & $+10\,624$ & $A(8)+$ & 41 & 41 & conforme \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boitealerte}[Mise en garde sur la lecture de ce tableau]
+Ces quatre lignes \emph{valident la procédure}, elles ne la
+\emph{démontrent pas} : les quatre cas appartiennent à la table
+d'observation qui a servi à formuler la règle. Leur valeur est
+méthodologique --- ils prouvent que la formalisation reproduit
+exactement le comportement empirique qu'elle remplace --- et non
+probatoire au sens d'un test sur données inédites. La preuve
+opératoire est le test anti-circularité et l'exactitude à
+$100\,\%$ sur $71\,401$ ancres \emph{hors table d'observation}.
+\end{boitealerte}

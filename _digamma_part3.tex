@@ -1,0 +1,88 @@
+\subsection{La règle de criblage modulaire --- formalisation de l'empirique}
+
+\subsubsection{Le principe : éliminer par divisibilité, non par primalité}
+
+Les quatre candidats $P_{A(8)-}$, $P_{A(8)+}$, $P_{A(7)+}$, $P_{A(7)-}$ sont des
+\emph{polynômes} en $k$. Il en résulte une propriété décisive : pour
+tout premier $p$,
+\[
+  c_j(k) \equiv 0 \!\!\pmod p
+  \quad\Longleftrightarrow\quad
+  c_j(k \bmod p) \equiv 0 \!\!\pmod p .
+\]
+Autrement dit, la divisibilité d'un candidat par $p$ ne dépend que de la
+classe de $k$ modulo $p$. L'élimination d'un candidat par un petit
+premier est donc une opération \emph{modulaire}, entièrement calculable
+et \emph{indépendante} de toute conjecture sur les nombres premiers.
+
+\begin{boiteformule}[Définition --- élimination modulaire]
+Soit $\mathcal{P} = \{3,5,7,11,13,17,19,23\}$ un ensemble de petits
+premiers. Le candidat $c_j(k)$ est dit \textbf{éliminé par criblage} s'il
+existe $p \in \mathcal{P}$ tel que $p \mid c_j(k)$ ; il est dit
+\textbf{survivant} si aucun $p \in \mathcal{P}$ ne le divise.
+\end{boiteformule}
+
+Puisque chaque $c_j$ est un polynôme, l'ensemble des branches éliminées
+est une fonction de $k$ modulo
+\[
+  M \;=\; \prod_{p \in \mathcal{P}} p \;=\; 111\,546\,435 .
+\]
+
+\subsubsection{La règle de sélection}
+
+\begin{boiteformule}[Théorème empirique --- règle de branche]
+Étant donné $k$, on forme les quatre candidats
+\[
+  c_0 = B_0+k^{2},\qquad c_1 = B_0-k^{2},\qquad
+  c_2 = B_0-k,\qquad c_3 = B_0+k .
+\]
+On élimine tout candidat divisible par au moins un premier de
+$\mathcal{P} = \{3,5,7,11,13,17,19,23\}$. \textbf{Si le criblage laisse un
+seul survivant, ce survivant est la branche correcte.}
+\end{boiteformule}
+
+\begin{boitenote}[Pourquoi l'élimination est sûre]
+La branche correcte étant, par construction, celle qui donne le
+nombre premier $P$, son candidat n'est divisible par aucun premier
+strictement inférieur à $P$ --- et en particulier par aucun des huit
+premiers de $\mathcal{P}$. \emph{Le criblage ne peut donc jamais
+éliminer la vraie branche.} C'est la garantie d'\emph{intégrité} de la
+règle, et elle est structurelle, non statistique.
+\end{boitenote}
+
+\begin{boitealerte}[Ce que la règle ne fait pas]
+La règle \emph{ne remplace pas} un test de primalité. Elle indique
+\emph{quelle} branche est compatible avec la primalité, pas que le
+candidat retenu est premier. Symétriquement, elle ne prouve pas que les
+trois candidats éliminés sont composés : ils le sont bien (ils ont un
+diviseur trouvé), mais \emph{pour la mauvaise raison} --- par un petit
+premier --- ce qui est une information \emph{plus faible} que la
+composante complète.
+\end{boitealerte}
+
+\subsubsection{La fonction \textsc{Digamma\_Savard} proprement dite}
+
+\begin{boiteformule}[Définition --- fonction \textsc{Digamma\_Savard/Cline}]
+Pour $k \ge 2$ et $n$ entier positif, on pose
+\[
+  \mathrm{Digamma}_{\mathrm{S/C}}(k) \;=\;
+  \begin{cases}
+    \SA(k,n) - k^{8}, & \text{si le survivant unique est } A(8)-,\\
+    \SA(k,n) + k^{8}, & \text{si le survivant unique est } A(8)+,\\
+    \SA(k,n) + k^{7}, & \text{si le survivant unique est } A(7)+,\\
+    \SA(k,n) - k^{7}, & \text{si le survivant unique est } A(7)-,
+  \end{cases}
+\]
+et l'on pose $\mathrm{Digamma}_{\mathrm{S/C}}(k) = \text{indéterminé}$
+lorsque le criblage laisse deux survivants ou davantage.
+\end{boiteformule}
+
+\begin{boitenote}[Caractère de la fonction : une fonction \emph{définie} à
+totaux, \emph{partiellement} calculable]
+La fonction ci-dessus est \emph{totale} en tant qu'application : pour
+tout $k$, la règle de criblage produit un verdict. Elle est cependant
+\emph{partiellement calculable} au sens où, sur une fraction non
+négligeable des $k$, elle renvoie « indéterminé » : c'est le prix de
+l'exigence d'\emph{exactitude} (on ne devine jamais) devant celle de
+\emph{complétude} (on couvre tout).
+\end{boitenote}

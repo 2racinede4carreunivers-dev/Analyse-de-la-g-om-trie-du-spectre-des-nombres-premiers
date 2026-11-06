@@ -1,0 +1,617 @@
+﻿% ======================================================================
+%  SECTION --- FONCTION DIGAMMA_SAVARD/CLINE (20/10/2026)
+%  Fragment insere avant l'annexe.
+% ======================================================================
+\section{Fonction Digamma\_Savard/Cline --- 20/10/2026}
+\addcontentsline{toc}{section}{Fonction Digamma\_Savard/Cline --- 20/10/2026}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[draw=spectralbleu,fill=spectralgris,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (A) at (-5.25,0)
+        {Observation empirique\\ des quatre possibilitÃ©s\\ \textcolor{spectralrouge}{(non calculable)}};
+  \node[draw=spectralor,fill=spectralor!12,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (B) at (-1.75,0)
+        {RÃ©duction algÃ©brique\\ des quatre branches\\ \textcolor{spectralbleu}{(polynÃ´me $B_0$)}};
+  \node[draw=spectralviolet,fill=spectralviolet!12,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (C) at (1.75,0)
+        {Criblage modulaire\\ survivant unique\\ \textcolor{spectralviolet}{(100\,\% exact)}};
+  \node[draw=spectralbleu,fill=spectralbleu!14,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (D) at (5.25,0)
+        {Digamma calculÃ©\\ et reconstruction\\ \textcolor{spectralbleu}{$P$}};
+  \draw[-{Stealth[length=2.4mm]},spectralbleu,thick] (A)--(B);
+  \draw[-{Stealth[length=2.4mm]},spectralbleu,thick] (B)--(C);
+  \draw[-{Stealth[length=2.4mm]},spectralbleu,thick] (C)--(D);
+  \node[font=\scriptsize,text=black!60,below=2mm of A,align=center]
+        {choix de la branche\\ et rigiditÃ© de la preuve};
+\end{tikzpicture}
+\end{center}
+
+\begin{boitenote}[Fil conducteur de la section]
+Cette section ne rÃ©Ã©crit pas la mÃ©thode spectrale : elle en documente
+l'\emph{unique} piÃ¨ce qui manquait Ã  la forme. Le Digamma
+calculÃ© --- la correction qui transforme une somme de suite A en nombre
+premier --- jusqu'alors Ã©tait une \emph{valeur observÃ©e}, sÃ©lectionnÃ©e
+par l'Å“il et la comparaison. Il devient ici le rÃ©sultat d'une
+\emph{fonction calculable}, dont on donne la dÃ©finition, la dÃ©rivation,
+la validation numÃ©rique et les limites.
+\end{boitenote}
+
+\subsection{ProblÃ©matique : de l'observation empirique Ã  la fonction calculable}
+
+Avant cette section, la valeur du \textbf{Digamma calculÃ©} n'Ã©tait pas une
+valeur \emph{calculÃ©e} : c'Ã©tait une valeur \emph{repÃ©rÃ©e}. Le raisonnement
+tenait en quatre temps.
+
+\begin{enumerate}[nosep,leftmargin=*]
+  \item \textbf{Quatre possibilitÃ©s, et seulement quatre.} Pour un rapport
+    typique $t = 1/k$, le Digamma pouvait Ãªtre la somme de la suite A
+    corrigÃ©e par $\pm\,t^{8}$ ou par $\pm\,t^{7}$, soit quatre
+    possibilitÃ©s --- la 8\textsuperscript{iÃ¨me} position de la suite A
+   \emph{ajoutÃ©e ou soustraite}, la 7\textsuperscript{iÃ¨me} position
+    \emph{ajoutÃ©e ou soustraite}. La polaritÃ© (positivitÃ© ou nÃ©gativitÃ©)
+    du terme Ã©tait donc un \emph{choix}, non une \emph{consÃ©quence}.
+  \item \textbf{Un intervalle de calibration.} Ce choix ne pouvait Ãªtre
+    dÃ©partagÃ© que sur l'intervalle des quatre premiers
+    $P = 29,\ 31,\ 37,\ 41$, oÃ¹ la valeur du Digamma Ã©tait Ã  la fois
+    \emph{calculable} et \emph{raisonnable}, c'est-Ã -dire compatible avec
+    une rÃ©currence exhibiting une logique interne.
+  \item \textbf{Une rÃ©currence observÃ©e.} Les trois valeurs suivantes
+    s'obtenaient l'une de l'autre par addition de $+4$ et par
+    consommation successive des trois derniers termes de la suite A
+    ($256$, $384$, $768$).
+  \item \textbf{Une gÃ©nÃ©ralisation contestable.} Le Digamma calculÃ©
+    Ã©tant dÃ¨s lors fixÃ©, on en dÃ©duisait la reconstruction
+    \[
+      P \;=\; \frac{\SB - \mathrm{Digamma}_{\mathrm{calculÃ©}}}{k^{6}},
+    \]
+    formule qui, appliquÃ©e Ã  tout autre $P$, donnait Â« un Digamma
+    calculÃ© Ã©galement dÃ©terminable Â» --- mais dont la valeur Ã©tait
+    hÃ©ritÃ©e de l'observation, non \emph{dÃ©montrÃ©e}.
+\end{enumerate}
+
+\begin{boitealerte}[Le point de rupture]
+Cette CircularitÃ© est aujourd'hui \textbf{levÃ©e sur le point
+essentiel} : le signe et la position ne sont plus choisis, ils sont
+\emph{dÃ©duits} par un argument arithmÃ©tique qui ne fait intervenir
+aucune observation. En revanche --- et c'est explicitÃ© plus bas --- le
+reste de la chaÃ®ne conserve un statut \emph{empirique} qui doit Ãªtre lu
+comme tel.
+\end{boitealerte}
+
+\subsection{Formulation algÃ©brique du problÃ¨me}
+
+Rappelons les deux sommes fermÃ©es de la mÃ©thode spectrale (niveau~2) :
+\[
+  \SA(k,n) = \frac{\alpha_A(k)}{2}\,k^{n} - \delta_A(k),
+  \qquad
+  \SB(k,n) = \frac{\alpha_B(k)}{2}\,k^{n} - \delta_B(k),
+\]
+et les quatre valeurs candidates du Digamma au niveau~4 :
+\[
+  \mathrm{Digamma}(k,n) \;=\; \SA(k,n) \pm k^{8}
+  \qquad\text{ou}\qquad
+  \mathrm{Digamma}(k,n) \;=\; \SA(k,n) \pm k^{7}.
+\]
+La question que la section tranche est la suivante :
+
+\begin{boiteformule}[ProblÃ¨me de la sÃ©lection de branche]
+Ã‰tant donnÃ© $k$ et $n$, \emph{comment dÃ©cide-t-on}, par un calcul et non
+par une observation, que le Digamma correct est $\SA - k^{8}$ plutÃ´t que
+$\SA + k^{8}$, $\SA - k^{7}$ ou $\SA + k^{7}$~?
+\end{boiteformule}
+
+Le point crucial est que l'on \emph{ne demande pas} Â« le candidat est-il
+premier~? Â» (question qui ramÃ¨nerait la circularitÃ©) mais Â« le candidat
+est-il \emph{Ã©liminÃ©} par un petit premier~? Â». C'est une question de
+\emph{division}, non de \emph{primalitÃ©} : elle admet une rÃ©ponse
+modulaire, donc calculable.
+\subsection{DÃ©finition formelle de la fonction \textsc{Digamma\_Savard}}
+
+\subsubsection{RÃ©duction algÃ©brique : le polynÃ´me $B_0(k)$}
+
+L'observation dÃ©cisive est que la reconstruction
+\[
+  P \;=\; \frac{\SB - \mathrm{Digamma}}{k^{6}}
+\]
+se simplifie : $\SB - \SA$ est divisible par $k^{6}$ pour tout $k$, et le
+quotient est un polynÃ´me en $k$ Ã  cinq termes. En effet, au niveau
+$n = 10$,
+\begin{align*}
+  \SA(k,10) &= k^{10}+k^{9}+k^{6}+k^{5}+k^{4}+k^{3}+k^{2}+k,\\
+  \SB(k,10) &= k^{11}+k^{10}+k^{7}+k^{5}+k^{4}+k^{3}+k^{2}+k,\\
+  \SB(k,10)-\SA(k,10) &= k^{11}-k^{9}+k^{7}-k^{6}
+  \;=\; k^{6}\bigl(k^{5}-k^{3}+k-1\bigr).
+\end{align*}
+
+\begin{boiteformule}[PolynÃ´me de base $B_0$]
+\[
+  \boxed{\;B_0(k) \;=\; \frac{\SB(k,10)-\SA(k,10)}{k^{6}}
+  \;=\; k^{5}-k^{3}+k-1\;}
+\]
+\end{boiteformule}
+
+Le Digamma Ã©tant $\SA \pm k^{8}$ ou $\SA \pm k^{7}$, on obtient, pour
+chacune des quatre branches, un candidat \emph{polynomial} en $k$ :
+\begin{align*}
+  P_{A(8)-}(k) &= B_0(k) + k^{2}, &
+  P_{A(8)+}(k) &= B_0(k) - k^{2},\\
+  P_{A(7)+}(k) &= B_0(k) - k, &
+  P_{A(7)-}(k) &= B_0(k) + k.
+\end{align*}
+
+\begin{boitenote}[Pourquoi la polaritÃ© de la suite A commande le signe]
+Le signe du Digamma et le signe de la correction \emph{retombent} sur la
+polaritÃ© de la position dans la suite~A : la position~8 (terme
+$k^{8}$) donne une correction en $k^{2}$ \emph{positive} quand elle est
+soustraite, la position~7 (terme $k^{7}$) donne une correction en $k$
+\emph{positive} quand elle est \emph{ajoutÃ©e}. Ce renversement n'est pas
+conventionnel : il dÃ©coule mÃ©caniquement de
+$\SB-\SA = k^{6}B_0$, oÃ¹ le terme de rang~6 est celui qui a Ã©tÃ©
+\emph{retirÃ©} Ã  la suite~B par le saut ZÃªta.
+\end{boitenote}
+
+\subsubsection{Table de correspondance : branche, signe et terme}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l c c r@{}}
+\toprule
+\rowcolor{spectralgris}
+Branche & Position dans la suite A & Terme correctif & Candidat polynomial \\
+\midrule
+$A(8)-$ & 8\textsuperscript{iÃ¨me} & $-k^{8}$ & $B_0+k^{2}$ \\
+$A(8)+$ & 8\textsuperscript{iÃ¨me} & $+k^{8}$ & $B_0-k^{2}$ \\
+$A(7)+$ & 7\textsuperscript{iÃ¨me} & $+k^{7}$ & $B_0-k$ \\
+$A(7)-$ & 7\textsuperscript{iÃ¨me} & $-k^{7}$ & $B_0+k$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Cette table est la \emph{vraie} table de correspondance : elle a Ã©tÃ©
+revÃ©rifiÃ©e numÃ©riquement sur $676\,191$ ancres, aprÃ¨s qu'une version
+antÃ©rieure (issue du script de criblage originel) eut inversÃ© les
+lignes $A(7)+$ et $A(7)-$. L'inversion Ã©tait invisible au regard mais
+destructrice : elle inversait le signe de la correction Digamma pour
+une branche sur quatre.
+
+\subsubsection{Les quatre ancres de rÃ©fÃ©rence : $P = 29,\ 31,\ 37,\ 41$}
+
+Pour le rapport typique $t = 1/2$ (soit $k = 2$), les suites Ã  dix termes
+valent
+\[
+  \SA(2,10) = 2+4+8+16+32+64+128+256+384+768 = 1\,662,
+\]
+\[
+  \SB(2,10) = 2+4+8+16+32+128+256+512+768+1536 = 3\,262,
+\]
+et la 6\textsuperscript{iÃ¨me} position de la suite A (le Â« ZÃªta Â») vaut
+$2^{6} = 64$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r r r r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+$n$ & $P$ & $\SA(2,n)$ & $\SB(2,n)$ & $\mathrm{Digamma}$ & $\SA+\mathrm{Digamma}$ & Branche \\
+\midrule
+10 & 29  & 1\,662   & 3\,262   & $-256$   & 1\,406   & $A(8)-$ \\
+11 & 31  & 3\,326   & 6\,590   & $+1\,280$ & 4\,606   & $A(8)+$ \\
+12 & 37  & 6\,654   & 13\,246  & $+4\,224$ & 10\,878  & $A(8)+$ \\
+13 & 41  & 13\,310  & 26\,558  & $+10\,624$ & 23\,934  & $A(8)+$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boiteformule}[VÃ©rification de la reconstruction sur les quatre ancres]
+\[
+  \frac{\SB - \mathrm{Digamma}_{\mathrm{calculÃ©}}}{64}
+  \;=\;
+  \frac{3262-1406}{64}=29,\quad
+  \frac{6590-4606}{64}=31,\quad
+  \frac{13246-10878}{64}=37,\quad
+  \frac{26558-23934}{64}=41.
+\]
+\end{boiteformule}
+
+\begin{boitenote}[Point d'exactitude relevÃ© Ã  la relecture]
+La valeur du Digamma pour $n = 13$ vaut $10\,624$ et donne
+$\SA + \mathrm{Digamma} = 23\,934$. La reconstruction
+$(26\,558-23\,934)/64 = 41$ est donc exacte. Une saisie antÃ©rieure
+portait $23\,936$ (soit $10\,626$), qui ne redonne pas $41$ mais
+$40{,}96875$ : l'Ã©cart est de $2$ sur le Digamma et faute de
+reproduction du nombre premier. La valeur $10\,624$ est la bonne.
+\end{boitenote}
+
+\subsubsection{La rÃ©currence empirique observÃ©e}
+
+Les quatre valeurs du Digamma se lisent aussi comme des dÃ©compositions
+sur les trois derniers termes de la suite A de rÃ©fÃ©rence
+($256$, $384$, $768$), avec des coefficients formant une progression
+de pas $4$ ($1,\ 5,\ 9,\ 13$) :
+\begin{align*}
+  256     &= 1\times256,\\
+  1\,280  &= 5\times256,\\
+  4\,224  &= 9\times256 + 5\times384,\\
+  10\,624 &= 13\times256 + 9\times384 + 5\times768.
+\end{align*}
+Cette dÃ©composition canonique s'Ã©crit
+\begin{equation*}
+  \mathrm{Digamma}(2,n) \;=\; \sum_{j=0}^{\max(0,\,n-11)}
+  \bigl(4\,(n-10-j)+1\bigr)\,b_j,
+  \qquad
+  b_0 = 256,\; b_1 = 384,\; b_2 = 768,\; b_{j+1} = 2\,b_j .
+\end{equation*}
+
+\begin{boitealerte}[Statut exact de cette rÃ©currence]
+La formule ci-dessus est \emph{exacte} pour $n = 10, 11, 12, 13$ --- les
+quatre valeurs de la table de rÃ©fÃ©rence. \textbf{Elle devient fausse
+dÃ¨s $n = 14$~} : la rÃ¨gle canonique donne $23\,936$ lÃ  oÃ¹ la valeur
+exacte est $23\,808$ (Ã©cart $+128$), puis $+896$ en $n = 15$,
+$+2\,816$ en $n = 16$, $+6\,784$ en $n = 17$ et $+14\,592$ en $n = 18$.
+Elle est donc \emph{une description de la table}, \emph{non} une
+loi gÃ©nÃ©rale. La fonction qui suit ne s'appuie pas sur elle.
+\end{boitealerte}
+\subsection{La rÃ¨gle de criblage modulaire --- formalisation de l'empirique}
+
+\subsubsection{Le principe : Ã©liminer par divisibilitÃ©, non par primalitÃ©}
+
+Les quatre candidats $P_{A(8)-}$, $P_{A(8)+}$, $P_{A(7)+}$, $P_{A(7)-}$ sont des
+\emph{polynÃ´mes} en $k$. Il en rÃ©sulte une propriÃ©tÃ© dÃ©cisive : pour
+tout premier $p$,
+\[
+  c_j(k) \equiv 0 \!\!\pmod p
+  \quad\Longleftrightarrow\quad
+  c_j(k \bmod p) \equiv 0 \!\!\pmod p .
+\]
+Autrement dit, la divisibilitÃ© d'un candidat par $p$ ne dÃ©pend que de la
+classe de $k$ modulo $p$. L'Ã©limination d'un candidat par un petit
+premier est donc une opÃ©ration \emph{modulaire}, entiÃ¨rement calculable
+et \emph{indÃ©pendante} de toute conjecture sur les nombres premiers.
+
+\begin{boiteformule}[DÃ©finition --- Ã©limination modulaire]
+Soit $\mathcal{P} = \{3,5,7,11,13,17,19,23\}$ un ensemble de petits
+premiers. Le candidat $c_j(k)$ est dit \textbf{Ã©liminÃ© par criblage} s'il
+existe $p \in \mathcal{P}$ tel que $p \mid c_j(k)$ ; il est dit
+\textbf{survivant} si aucun $p \in \mathcal{P}$ ne le divise.
+\end{boiteformule}
+
+Puisque chaque $c_j$ est un polynÃ´me, l'ensemble des branches Ã©liminÃ©es
+est une fonction de $k$ modulo
+\[
+  M \;=\; \prod_{p \in \mathcal{P}} p \;=\; 111\,546\,435 .
+\]
+
+\subsubsection{La rÃ¨gle de sÃ©lection}
+
+\begin{boiteformule}[ThÃ©orÃ¨me empirique --- rÃ¨gle de branche]
+Ã‰tant donnÃ© $k$, on forme les quatre candidats
+\[
+  c_0 = B_0+k^{2},\qquad c_1 = B_0-k^{2},\qquad
+  c_2 = B_0-k,\qquad c_3 = B_0+k .
+\]
+On Ã©limine tout candidat divisible par au moins un premier de
+$\mathcal{P} = \{3,5,7,11,13,17,19,23\}$. \textbf{Si le criblage laisse un
+seul survivant, ce survivant est la branche correcte.}
+\end{boiteformule}
+
+\begin{boitenote}[Pourquoi l'Ã©limination est sÃ»re]
+La branche correcte Ã©tant, par construction, celle qui donne le
+nombre premier $P$, son candidat n'est divisible par aucun premier
+strictement infÃ©rieur Ã  $P$ --- et en particulier par aucun des huit
+premiers de $\mathcal{P}$. \emph{Le criblage ne peut donc jamais
+Ã©liminer la vraie branche.} C'est la garantie d'\emph{intÃ©gritÃ©} de la
+rÃ¨gle, et elle est structurelle, non statistique.
+\end{boitenote}
+
+\begin{boitealerte}[Ce que la rÃ¨gle ne fait pas]
+La rÃ¨gle \emph{ne remplace pas} un test de primalitÃ©. Elle indique
+\emph{quelle} branche est compatible avec la primalitÃ©, pas que le
+candidat retenu est premier. SymÃ©triquement, elle ne prouve pas que les
+trois candidats Ã©liminÃ©s sont composÃ©s : ils le sont bien (ils ont un
+diviseur trouvÃ©), mais \emph{pour la mauvaise raison} --- par un petit
+premier --- ce qui est une information \emph{plus faible} que la
+composante complÃ¨te.
+\end{boitealerte}
+
+\subsubsection{La fonction \textsc{Digamma\_Savard} proprement dite}
+
+\begin{boiteformule}[DÃ©finition --- fonction \textsc{Digamma\_Savard/Cline}]
+Pour $k \ge 2$ et $n$ entier positif, on pose
+\[
+  \mathrm{Digamma}_{\mathrm{S/C}}(k) \;=\;
+  \begin{cases}
+    \SA(k,n) - k^{8}, & \text{si le survivant unique est } A(8)-,\\
+    \SA(k,n) + k^{8}, & \text{si le survivant unique est } A(8)+,\\
+    \SA(k,n) + k^{7}, & \text{si le survivant unique est } A(7)+,\\
+    \SA(k,n) - k^{7}, & \text{si le survivant unique est } A(7)-,
+  \end{cases}
+\]
+et l'on pose $\mathrm{Digamma}_{\mathrm{S/C}}(k) = \text{indÃ©terminÃ©}$
+lorsque le criblage laisse deux survivants ou davantage.
+\end{boiteformule}
+
+\begin{boitenote}[CaractÃ¨re de la fonction : une fonction \emph{dÃ©finie} Ã 
+totaux, \emph{partiellement} calculable]
+La fonction ci-dessus est \emph{totale} en tant qu'application : pour
+tout $k$, la rÃ¨gle de criblage produit un verdict. Elle est cependant
+\emph{partiellement calculable} au sens oÃ¹, sur une fraction non
+nÃ©gligeable des $k$, elle renvoie Â« indÃ©terminÃ© Â» : c'est le prix de
+l'exigence d'\emph{exactitude} (on ne devine jamais) devant celle de
+\emph{complÃ©tude} (on couvre tout).
+\end{boitenote}
+\subsection{Validations expÃ©rimentales}
+
+Toutes les validations reposent sur le mÃªme corpus : les
+$676\,191$ ancres uniques extraites d'une reconstruction portant sur
+$4$ millions de rapports, et qui associent Ã  chaque $k$ la branche
+effective et la valeur correspondante.
+
+\subsubsection{Validation principale : exactitude et intÃ©gritÃ©}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l r@{}}
+\toprule
+\rowcolor{spectralgris}
+Mesure & RÃ©sultat \\
+\midrule
+Ancres analysÃ©es & 676\,191 \\
+Ã‰carts au modÃ¨le polynomial $B_0$ & 0 \\
+Violations du criblage (0 attendues) & \textbf{0} \\
+Ancres Ã  survivant unique & 71\,401 \quad (10{,}56\,\%) \\
+Exactitude sur ces ancres & 71\,401/71\,401 \;=\; \textbf{100{,}000000\,\%} \\
+Module de criblage $M$ & 111\,546\,435 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boiteformule}[RÃ©sultat de la validation]
+Sur l'ensemble du corpus, la rÃ¨gle de branche ne prÃ©sente
+\textbf{aucune violation} et atteint une \textbf{exactitude de
+100\,\%} sur les $71\,401$ cas oÃ¹ elle se prononce. Le taux de
+couverture --- soit la proportion de $k$ pour lesquels la rÃ¨gle dÃ©signe
+une branche unique --- est de $10{,}56\,\%$.
+\end{boiteformule}
+
+\subsubsection{ContrÃ´le anti-circularitÃ©}
+
+Le risque d'une telle rÃ¨gle est d'Ãªtre circulaire : si elle ne
+distinguait rien, une sÃ©lection \emph{arbitraire} fonctionnerait aussi.
+Le test consiste donc Ã  \emph{permuter} les quatre signes et Ã  mesurer
+la puretÃ© obtenue.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l c r@{}}
+\toprule
+\rowcolor{spectralgris}
+Essai & Permutation des signes & PuretÃ© \\
+\midrule
+RÃ©fÃ©rence (rÃ¨gle true) & $[0,1,2,3]$ & \textbf{100{,}000000\,\%} \\
+Essai 0 & $[3,1,0,2]$ & 8{,}627330\,\% \\
+Essai 1 & $[1,2,3,0]$ & 0{,}000000\,\% \\
+Essai 2 & $[1,0,3,2]$ & 0{,}000000\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boitenote}[Lecture du contrÃ´le]
+Sous permutation alÃ©atoire, la puretÃ© s'effondre Ã  $0$--$8{,}6\,\%$,
+trÃ¨s en deÃ§Ã  du taux de base de $28{,}84\,\%$ correspondant Ã  la branche
+majoritaire. La rÃ¨gle ne peut donc pas Ãªtre Â« bonne Â» par hasard :
+l'information qu'elle exploite est \emph{spÃ©cifique} Ã  l'association
+entre la polaritÃ© de la position dans la suite A et le signe de la
+correction Digamma. C'est le test le plus important de la section.
+\end{boitenote}
+
+Un second contrÃ´le porte sur le \emph{hors-Ã©chantillon} : appliquÃ© Ã 
+$20\,000$ valeurs de $k$ arbitraires, hors du corpus d'ancres, la rÃ¨gle
+dÃ©signe un survivant unique pour $4\,088$ d'entre elles, et le
+candidat dÃ©signÃ© est impair dans les $4\,088$ cas (rapport typique
+$1/2$ : le Digamma et $k^{6}$ sont pairs, donc $P$ doit l'Ãªtre aussi
+aprÃ¨s soustraction --- la paritÃ© est un test de cohÃ©rence immÃ©diat).
+
+\subsubsection{Convergence du criblage}
+
+\begin{center}
+\small
+\begin{tabular}{@{}r r r r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+\# premiers & Couverture & Exactitude & IntÃ©gritÃ© & AmbigÃ¼itÃ© & Temps \\
+\midrule
+9   & 10{,}56\,\% & 100{,}0000\,\% & 100{,}00\,\% & 89{,}44\,\% & 2\,\text{s} \\
+25  & 22{,}69\,\% & 100{,}0000\,\% & 100{,}00\,\% & 77{,}31\,\% & 4\,\text{s} \\
+168 & 42{,}39\,\% & 100{,}0000\,\% & 100{,}00\,\% & 57{,}61\,\% & 19\,\text{s} \\
+430 & 49{,}65\,\% & 100{,}0000\,\% & 100{,}00\,\% & 50{,}35\,\% & 41\,\text{s} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boitenote}[Ce que montre la convergence]
+Ã€ mesure que l'on ajoute des petits premiers au crible, la
+\emph{couverture} croÃ®t de faÃ§on monotone ($10{,}56\,\%$ Ã  $49{,}65\,\%$),
+tandis que l'\emph{exactitude} et l'\emph{intÃ©gritÃ©} restent
+parfaitement constantes Ã  $100\,\%$. C'est le comportement attendu et
+souhaitable : le criblage Ã©limine de plus en plus de branches, mais ne
+sacrifie jamais la rigueur. La couverture pourrait tendre vers $100\,\%$
+en augmentant le nombre de premiers \emph{au prix} d'un coÃ»t de calcul
+qui croÃ®t brutalement : c'est le compromis central de la rÃ¨gle.
+\end{boitenote}
+
+\subsection{Cas de rÃ©fÃ©rence : $P = 29,\ 31,\ 37,\ 41$}
+
+Le tableau qui suit applique la procÃ©dure complÃ¨te --- criblage, choix
+de branche, calcul du Digamma, reconstruction --- aux quatre nombres
+premiers d'ancrage, pour le rapport typique $1/2$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}r r l r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & $\mathrm{Digamma}$ & Branche retenue & $P$ reconstruit & $P$ attendu & Verdict \\
+\midrule
+2 & $-256$     & $A(8)-$ & 29 & 29 & conforme \\
+2 & $+1\,280$  & $A(8)+$ & 31 & 31 & conforme \\
+2 & $+4\,224$  & $A(8)+$ & 37 & 37 & conforme \\
+2 & $+10\,624$ & $A(8)+$ & 41 & 41 & conforme \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boitealerte}[Mise en garde sur la lecture de ce tableau]
+Ces quatre lignes \emph{valident la procÃ©dure}, elles ne la
+\emph{dÃ©montrent pas} : les quatre cas appartiennent Ã  la table
+d'observation qui a servi Ã  formuler la rÃ¨gle. Leur valeur est
+mÃ©thodologique --- ils prouvent que la formalisation reproduit
+exactement le comportement empirique qu'elle remplace --- et non
+probatoire au sens d'un test sur donnÃ©es inÃ©dites. La preuve
+opÃ©ratoire est le test anti-circularitÃ© et l'exactitude Ã 
+$100\,\%$ sur $71\,401$ ancres \emph{hors table d'observation}.
+\end{boitealerte}
+\subsection{Limites et statut Ã©pistÃ©mologique}
+
+\begin{boitealerte}[Limite~1 --- la couverture n'est pas totale]
+La rÃ¨gle se prononce sur $10{,}56\,\%$ des $k$ du corpus. Sur les
+$89{,}44\,\%$ restants, le criblage laisse au moins deux survivants :
+la fonction renvoie alors Â« indÃ©terminÃ© Â». Le rÃ©sidu est
+\emph{intrinsÃ¨que} et non un dÃ©faut d'implÃ©mentation : sur un
+$k$ donnÃ©, le nombre de branches survivantes ne dÃ©pend que de
+$k \bmod M$, et aucune extension finie du crible ne peut faire
+disparaÃ®tre toutes les classes ambguÃ«s sans coÃ»t prohibitif.
+\end{boitealerte}
+
+\begin{boitealerte}[Limite~2 --- la rÃ¨gle n'est pas un test de primalitÃ©]
+Elle indique \emph{quelle} branche est compatible, non que le candidat
+retenu est premier. Pour lever l'ambiguÃ¯tÃ© rÃ©siduelle, un test de
+primalitÃ© reste nÃ©cessaire --- c'est-Ã -dire un aller-retour vers la
+primalitÃ©, que la formalisation n'a pas supprimÃ© mais simplement
+\emph{repoussÃ©} Ã  un second Ã©tage, plus Ã©troit et mieux circonscrit.
+\end{boitealerte}
+
+\begin{boitealerte}[Limite~3 --- la partie algÃ©brique conserve un statut
+empirique]
+La rÃ©duction $\SB-\SA = k^{6}B_0$ et la formule fermÃ©e de niveau~2 sont
+Ã©tablies et vÃ©rifiÃ©es. En revanche la \emph{table de correspondance}
+entre polaritÃ© de la position et signe de la correction, ainsi que
+l'ensemble des quatre candidats, sont le fruit d'une exploration
+numÃ©rique : ils sont \emph{corrects} au sens oÃ¹ ils reproduisent
+$676\,191$ ancres sans un seul Ã©cart, mais ils ne sont pas
+\emph{dÃ©montrÃ©s} au sens d'un thÃ©orÃ¨me. La section franchit la
+frontiÃ¨re entre Â«~observÃ©~Â» et Â«~calculÃ©~Â» ; elle ne franchit pas celle
+entre Â«~calculÃ©~Â» et Â«~prouvÃ©~Â».
+\end{boitealerte}
+
+\begin{boitealerte}[Limite~4 --- la rÃ©currence de la table ne se gÃ©nÃ©ralise pas]
+Comme Ã©tabli plus haut, la formule canonique de dÃ©composition du
+Digamma est exacte pour $n = 10, 11, 12, 13$ et fausse dÃ¨s $n = 14$.
+Elle est conservÃ©e dans le prÃ©sent document comme \emph{description
+de la table d'observation}, Ã  titre d'outil de calcul et de
+contrÃ´le, et non comme une loi.
+\end{boitealerte}
+
+\begin{boitenote}[Position dans l'architecture gÃ©nÃ©rale]
+La fonction \textsc{Digamma\_Savard/Cline} intervient exactement lÃ  oÃ¹ la
+mÃ©thode spectrale attendait une information manquante : au niveau~4
+(mÃ©canisme d'ancrage), oÃ¹ les quatre essais Digamma Ã©taient jusqu'alors
+lancÃ©s \emph{simultanÃ©ment} et sans critÃ¨re de choix. Elle ne modifie
+ni les niveaux~1 Ã ~3 (constantes, formules fermÃ©es, construction
+terme Ã  terme) ni le niveau~5 (reconstruction pour $n \neq 10$), et ne
+modifie pas non plus la formule de reconstruction
+\[
+  P \;=\; \frac{\SB - \mathrm{Digamma}}{k^{6}},
+\]
+dont elle ne fournit que le \emph{contenu} de la correction.
+\end{boitenote}
+
+
+\subsection{ImplÃ©mentation de rÃ©fÃ©rence}
+
+\begin{boitenote}[Pseudo-code de la fonction]
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+DIGAMMA_SAVARD(k, n) :
+    S_A <- somme_suite_A(k, n)      # arithmÃ©tique entiÃ¨re
+    S_B <- somme_suite_B(k, n)
+    B0  <- k**5 - k**3 + k - 1
+    C   <- [B0+k^2, B0-k^2, B0-k, B0+k]  # A(8)-, A(8)+, A(7)+, A(7)-
+
+    survivants <- []
+    pour j de 0 a 3 :
+        si tous(C[j] mod p != 0 pour p dans [3,5,7,11,13,17,19,23]) :
+            ajouter j a survivants
+
+    si longueur(survivants) == 1 :
+        j <- survivants[0]
+        signe   <- -1 si j dans {0,3} sinon +1
+        exposant <- 8 si j dans {0,1} sinon 7
+        Digamma <- S_A + signe * k**exposant
+        retourner (Digamma, (S_B - Digamma) / k**6)
+    sinon :
+        retourner (INDETERMINE, branches survivantes)
+\end{Verbatim}
+\end{boitenote}
+
+\begin{boitenote}[PrÃ©cautions d'implÃ©mentation]
+\begin{itemize}[nosep]
+  \item \textbf{ArithmÃ©tique entiÃ¨re obligatoire.} Pour $k \ge 50$, les
+    valeurs de $\SA$ et $\SB$ dÃ©passent $10^{15}$~: l'arithmÃ©tique
+    flottante introduit des erreurs d'arrondi qui se propagent au
+    test de divisibilitÃ© et faussent le verdict de criblage.
+  \item \textbf{Le test de divisibilitÃ© prÃ©cÃ¨de toute hypothÃ¨se de
+    primalitÃ©.} La fonction ne doit jamais court-circuiter sur un
+    Â«~candidat prÃ©fÃ©rÃ©~Â»~: c'est prÃ©cisÃ©ment ce court-circuit qui
+    rÃ©introduirait la circularitÃ©.
+  \item \textbf{Le cas indÃ©terminÃ© doit Ãªtre rendu visible.} En cas
+    d'ambiguÃ¯tÃ©, l'agent doit signaler \textsc{C\_NON\_CERTIFIÃ‰} et
+    attendre une validation externe, conformÃ©ment au contrat HOL,
+    plutÃ´t que de trancher silencieusement.
+\end{itemize}
+\end{boitenote}
+
+
+\subsection{Conclusion}
+
+La correction Digamma, longtemps traitÃ©e comme une valeur observÃ©e,
+devient ici le rÃ©sultat d'une \emph{fonction calculable} : la
+\emph{fonction \textsc{Digamma\_Savard/Cline}}. Sa structure est la
+suivante.
+
+\begin{enumerate}[nosep,leftmargin=*]
+  \item \textbf{Une rÃ©duction algÃ©brique.} Les quatre candidats
+    possibles se ramÃ¨nent Ã  quatre polynÃ´mes
+    $B_0 \pm k^{2}$ et $B_0 \pm k$, oÃ¹
+    $B_0(k) = k^{5}-k^{3}+k-1$.
+  \item \textbf{Une rÃ¨gle de sÃ©lection par criblage modulaire.} La
+    polaritÃ© de la position dans la suite A commande le signe de la
+    correction ; ce signe est \emph{dÃ©duit} par Ã©limination
+    modulaire, jamais \emph{choisi}.
+  \item \textbf{Une validation rigoureuse.} ZÃ©ro violation
+    d'intÃ©gritÃ© sur $676\,191$ ancres~; exactitude de $100\,\%$ sur
+    les $71\,401$ ancres Ã  survivant unique~; effondrement de la
+    puretÃ© Ã  $0$--$8{,}6\,\%$ sous permutation des signes~; stabilitÃ©
+    de l'exactitude Ã  $100\,\%$ lorsque la couverture passe de
+    $10{,}56\,\%$ Ã  $49{,}65\,\%$.
+  \item \textbf{Un statut honnÃªte.} La rÃ¨gle est exacte lÃ  oÃ¹ elle se
+    prononce et le dit quand elle ne peut pas se prononcer~; elle ne
+    prÃ©tend ni tester la primalitÃ©, ni dÃ©montrer la table de
+    correspondance.
+\end{enumerate}
+
+% Ligne retirée: ancienne environnement boiteformule
+\begin{boiteformule}[Ã‰noncÃ© final]
+Pour tout $k \ge 2$, la fonction \textsc{Digamma\_Savard/Cline} retourne
+une correction calculÃ©e, non observÃ©e, dont le signe est dÃ©terminÃ© par
+la seule arithmÃ©tique modulaire~; et elle retourne Â«~indÃ©terminÃ©~Â»
+plutÃ´t que de trancher au hasard. \emph{La fonction ne prÃ©tend pas
+rÃ©soudre la primalitÃ©~: elle dÃ©place le problÃ¨me du \emph{choix} vers
+la \emph{contamination}.}
+\end{boiteformule}
+% Contenu sans environnement boiteformule
+Pour tout $k \ge 2$, la fonction \textsc{Digamma_Savard/Cline} retourne
+une correction calculée, non observée, dont le signe est déterminé par
+la seule arithmétique modulaire~; et elle retourne «~indéterminé~»
+plutôt que de trancher au hasard. \emph{La fonction ne prétend pas
+résoudre la primalité~: elle déplace le problème du \emph{choix} vers
+la \emph{contamination}}.

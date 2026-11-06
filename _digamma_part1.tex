@@ -1,0 +1,108 @@
+% ======================================================================
+%  SECTION --- FONCTION DIGAMMA_SAVARD/CLINE (20/10/2026)
+%  Fragment insere avant l'annexe.
+% ======================================================================
+\section{Fonction Digamma\_Savard/Cline --- 20/10/2026}
+\addcontentsline{toc}{section}{Fonction Digamma\_Savard/Cline --- 20/10/2026}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \node[draw=spectralbleu,fill=spectralgris,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (A) at (-5.25,0)
+        {Observation empirique\\ des quatre possibilités\\ \textcolor{spectralrouge}{(non calculable)}};
+  \node[draw=spectralor,fill=spectralor!12,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (B) at (-1.75,0)
+        {Réduction algébrique\\ des quatre branches\\ \textcolor{spectralbleu}{(polynôme $B_0$)}};
+  \node[draw=spectralviolet,fill=spectralviolet!12,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (C) at (1.75,0)
+        {Criblage modulaire\\ survivant unique\\ \textcolor{spectralviolet}{(100\,\% exact)}};
+  \node[draw=spectralbleu,fill=spectralbleu!14,rounded corners=2pt,inner sep=6pt,
+        font=\small\bfseries,text width=3.5cm,align=center] (D) at (5.25,0)
+        {Digamma calculé\\ et reconstruction\\ \textcolor{spectralbleu}{$P$}};
+  \draw[-{Stealth[length=2.4mm]},spectralbleu,thick] (A)--(B);
+  \draw[-{Stealth[length=2.4mm]},spectralbleu,thick] (B)--(C);
+  \draw[-{Stealth[length=2.4mm]},spectralbleu,thick] (C)--(D);
+  \node[font=\scriptsize,text=black!60,below=2mm of A,align=center]
+        {choix de la branche\\ et rigidité de la preuve};
+\end{tikzpicture}
+\end{center}
+
+\begin{boitenote}[Fil conducteur de la section]
+Cette section ne réécrit pas la méthode spectrale : elle en documente
+l'\emph{unique} pièce qui manquait à la forme. Le Digamma
+calculé --- la correction qui transforme une somme de suite A en nombre
+premier --- jusqu'alors était une \emph{valeur observée}, sélectionnée
+par l'œil et la comparaison. Il devient ici le résultat d'une
+\emph{fonction calculable}, dont on donne la définition, la dérivation,
+la validation numérique et les limites.
+\end{boitenote}
+
+\subsection{Problématique : de l'observation empirique à la fonction calculable}
+
+Avant cette section, la valeur du \textbf{Digamma calculé} n'était pas une
+valeur \emph{calculée} : c'était une valeur \emph{repérée}. Le raisonnement
+tenait en quatre temps.
+
+\begin{enumerate}[nosep,leftmargin=*]
+  \item \textbf{Quatre possibilités, et seulement quatre.} Pour un rapport
+    typique $t = 1/k$, le Digamma pouvait être la somme de la suite A
+    corrigée par $\pm\,t^{8}$ ou par $\pm\,t^{7}$, soit quatre
+    possibilités --- la 8\textsuperscript{ième} position de la suite A
+   \emph{ajoutée ou soustraite}, la 7\textsuperscript{ième} position
+    \emph{ajoutée ou soustraite}. La polarité (positivité ou négativité)
+    du terme était donc un \emph{choix}, non une \emph{conséquence}.
+  \item \textbf{Un intervalle de calibration.} Ce choix ne pouvait être
+    départagé que sur l'intervalle des quatre premiers
+    $P = 29,\ 31,\ 37,\ 41$, où la valeur du Digamma était à la fois
+    \emph{calculable} et \emph{raisonnable}, c'est-à-dire compatible avec
+    une récurrence exhibiting une logique interne.
+  \item \textbf{Une récurrence observée.} Les trois valeurs suivantes
+    s'obtenaient l'une de l'autre par addition de $+4$ et par
+    consommation successive des trois derniers termes de la suite A
+    ($256$, $384$, $768$).
+  \item \textbf{Une généralisation contestable.} Le Digamma calculé
+    étant dès lors fixé, on en déduisait la reconstruction
+    \[
+      P \;=\; \frac{\SB - \mathrm{Digamma}_{\mathrm{calculé}}}{k^{6}},
+    \]
+    formule qui, appliquée à tout autre $P$, donnait « un Digamma
+    calculé également déterminable » --- mais dont la valeur était
+    héritée de l'observation, non \emph{démontrée}.
+\end{enumerate}
+
+\begin{boitealerte}[Le point de rupture]
+Cette Circularité est aujourd'hui \textbf{levée sur le point
+essentiel} : le signe et la position ne sont plus choisis, ils sont
+\emph{déduits} par un argument arithmétique qui ne fait intervenir
+aucune observation. En revanche --- et c'est explicité plus bas --- le
+reste de la chaîne conserve un statut \emph{empirique} qui doit être lu
+comme tel.
+\end{boitealerte}
+
+\subsection{Formulation algébrique du problème}
+
+Rappelons les deux sommes fermées de la méthode spectrale (niveau~2) :
+\[
+  \SA(k,n) = \frac{\alpha_A(k)}{2}\,k^{n} - \delta_A(k),
+  \qquad
+  \SB(k,n) = \frac{\alpha_B(k)}{2}\,k^{n} - \delta_B(k),
+\]
+et les quatre valeurs candidates du Digamma au niveau~4 :
+\[
+  \mathrm{Digamma}(k,n) \;=\; \SA(k,n) \pm k^{8}
+  \qquad\text{ou}\qquad
+  \mathrm{Digamma}(k,n) \;=\; \SA(k,n) \pm k^{7}.
+\]
+La question que la section tranche est la suivante :
+
+\begin{boiteformule}[Problème de la sélection de branche]
+Étant donné $k$ et $n$, \emph{comment décide-t-on}, par un calcul et non
+par une observation, que le Digamma correct est $\SA - k^{8}$ plutôt que
+$\SA + k^{8}$, $\SA - k^{7}$ ou $\SA + k^{7}$~?
+\end{boiteformule}
+
+Le point crucial est que l'on \emph{ne demande pas} « le candidat est-il
+premier~? » (question qui ramènerait la circularité) mais « le candidat
+est-il \emph{éliminé} par un petit premier~? ». C'est une question de
+\emph{division}, non de \emph{primalité} : elle admet une réponse
+modulaire, donc calculable.

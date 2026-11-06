@@ -1,0 +1,146 @@
+\subsection{Définition formelle de la fonction \textsc{Digamma\_Savard}}
+
+\subsubsection{Réduction algébrique : le polynôme $B_0(k)$}
+
+L'observation décisive est que la reconstruction
+\[
+  P \;=\; \frac{\SB - \mathrm{Digamma}}{k^{6}}
+\]
+se simplifie : $\SB - \SA$ est divisible par $k^{6}$ pour tout $k$, et le
+quotient est un polynôme en $k$ à cinq termes. En effet, au niveau
+$n = 10$,
+\begin{align*}
+  \SA(k,10) &= k^{10}+k^{9}+k^{6}+k^{5}+k^{4}+k^{3}+k^{2}+k,\\
+  \SB(k,10) &= k^{11}+k^{10}+k^{7}+k^{5}+k^{4}+k^{3}+k^{2}+k,\\
+  \SB(k,10)-\SA(k,10) &= k^{11}-k^{9}+k^{7}-k^{6}
+  \;=\; k^{6}\bigl(k^{5}-k^{3}+k-1\bigr).
+\end{align*}
+
+\begin{boiteformule}[Polynôme de base $B_0$]
+\[
+  \boxed{\;B_0(k) \;=\; \frac{\SB(k,10)-\SA(k,10)}{k^{6}}
+  \;=\; k^{5}-k^{3}+k-1\;}
+\]
+\end{boiteformule}
+
+Le Digamma étant $\SA \pm k^{8}$ ou $\SA \pm k^{7}$, on obtient, pour
+chacune des quatre branches, un candidat \emph{polynomial} en $k$ :
+\begin{align*}
+  P_{A(8)-}(k) &= B_0(k) + k^{2}, &
+  P_{A(8)+}(k) &= B_0(k) - k^{2},\\
+  P_{A(7)+}(k) &= B_0(k) - k, &
+  P_{A(7)-}(k) &= B_0(k) + k.
+\end{align*}
+
+\begin{boitenote}[Pourquoi la polarité de la suite A commande le signe]
+Le signe du Digamma et le signe de la correction \emph{retombent} sur la
+polarité de la position dans la suite~A : la position~8 (terme
+$k^{8}$) donne une correction en $k^{2}$ \emph{positive} quand elle est
+soustraite, la position~7 (terme $k^{7}$) donne une correction en $k$
+\emph{positive} quand elle est \emph{ajoutée}. Ce renversement n'est pas
+conventionnel : il découle mécaniquement de
+$\SB-\SA = k^{6}B_0$, où le terme de rang~6 est celui qui a été
+\emph{retiré} à la suite~B par le saut Zêta.
+\end{boitenote}
+
+\subsubsection{Table de correspondance : branche, signe et terme}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l c c r@{}}
+\toprule
+\rowcolor{spectralgris}
+Branche & Position dans la suite A & Terme correctif & Candidat polynomial \\
+\midrule
+$A(8)-$ & 8\textsuperscript{ième} & $-k^{8}$ & $B_0+k^{2}$ \\
+$A(8)+$ & 8\textsuperscript{ième} & $+k^{8}$ & $B_0-k^{2}$ \\
+$A(7)+$ & 7\textsuperscript{ième} & $+k^{7}$ & $B_0-k$ \\
+$A(7)-$ & 7\textsuperscript{ième} & $-k^{7}$ & $B_0+k$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Cette table est la \emph{vraie} table de correspondance : elle a été
+revérifiée numériquement sur $676\,191$ ancres, après qu'une version
+antérieure (issue du script de criblage originel) eut inversé les
+lignes $A(7)+$ et $A(7)-$. L'inversion était invisible au regard mais
+destructrice : elle inversait le signe de la correction Digamma pour
+une branche sur quatre.
+
+\subsubsection{Les quatre ancres de référence : $P = 29,\ 31,\ 37,\ 41$}
+
+Pour le rapport typique $t = 1/2$ (soit $k = 2$), les suites à dix termes
+valent
+\[
+  \SA(2,10) = 2+4+8+16+32+64+128+256+384+768 = 1\,662,
+\]
+\[
+  \SB(2,10) = 2+4+8+16+32+128+256+512+768+1536 = 3\,262,
+\]
+et la 6\textsuperscript{ième} position de la suite A (le « Zêta ») vaut
+$2^{6} = 64$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r r r r r r@{}}
+\toprule
+\rowcolor{spectralgris}
+$n$ & $P$ & $\SA(2,n)$ & $\SB(2,n)$ & $\mathrm{Digamma}$ & $\SA+\mathrm{Digamma}$ & Branche \\
+\midrule
+10 & 29  & 1\,662   & 3\,262   & $-256$   & 1\,406   & $A(8)-$ \\
+11 & 31  & 3\,326   & 6\,590   & $+1\,280$ & 4\,606   & $A(8)+$ \\
+12 & 37  & 6\,654   & 13\,246  & $+4\,224$ & 10\,878  & $A(8)+$ \\
+13 & 41  & 13\,310  & 26\,558  & $+10\,624$ & 23\,934  & $A(8)+$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{boiteformule}[Vérification de la reconstruction sur les quatre ancres]
+\[
+  \frac{\SB - \mathrm{Digamma}_{\mathrm{calculé}}}{64}
+  \;=\;
+  \frac{3262-1406}{64}=29,\quad
+  \frac{6590-4606}{64}=31,\quad
+  \frac{13246-10878}{64}=37,\quad
+  \frac{26558-23934}{64}=41.
+\]
+\end{boiteformule}
+
+\begin{boitenote}[Point d'exactitude relevé à la relecture]
+La valeur du Digamma pour $n = 13$ vaut $10\,624$ et donne
+$\SA + \mathrm{Digamma} = 23\,934$. La reconstruction
+$(26\,558-23\,934)/64 = 41$ est donc exacte. Une saisie antérieure
+portait $23\,936$ (soit $10\,626$), qui ne redonne pas $41$ mais
+$40{,}96875$ : l'écart est de $2$ sur le Digamma et faute de
+reproduction du nombre premier. La valeur $10\,624$ est la bonne.
+\end{boitenote}
+
+\subsubsection{La récurrence empirique observée}
+
+Les quatre valeurs du Digamma se lisent aussi comme des décompositions
+sur les trois derniers termes de la suite A de référence
+($256$, $384$, $768$), avec des coefficients formant une progression
+de pas $4$ ($1,\ 5,\ 9,\ 13$) :
+\begin{align*}
+  256     &= 1\times256,\\
+  1\,280  &= 5\times256,\\
+  4\,224  &= 9\times256 + 5\times384,\\
+  10\,624 &= 13\times256 + 9\times384 + 5\times768.
+\end{align*}
+Cette décomposition canonique s'écrit
+\begin{equation*}
+  \mathrm{Digamma}(2,n) \;=\; \sum_{j=0}^{\max(0,\,n-11)}
+  \bigl(4\,(n-10-j)+1\bigr)\,b_j,
+  \qquad
+  b_0 = 256,\; b_1 = 384,\; b_2 = 768,\; b_{j+1} = 2\,b_j .
+\end{equation*}
+
+\begin{boitealerte}[Statut exact de cette récurrence]
+La formule ci-dessus est \emph{exacte} pour $n = 10, 11, 12, 13$ --- les
+quatre valeurs de la table de référence. \textbf{Elle devient fausse
+dès $n = 14$~} : la règle canonique donne $23\,936$ là où la valeur
+exacte est $23\,808$ (écart $+128$), puis $+896$ en $n = 15$,
+$+2\,816$ en $n = 16$, $+6\,784$ en $n = 17$ et $+14\,592$ en $n = 18$.
+Elle est donc \emph{une description de la table}, \emph{non} une
+loi générale. La fonction qui suit ne s'appuie pas sur elle.
+\end{boitealerte}

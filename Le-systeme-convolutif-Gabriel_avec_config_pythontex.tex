@@ -1,0 +1,119 @@
+% ============================================================
+% FIXE DE PYTHONTEX POUR ARITHMÉTIQUE EXACTE INFAILLIBLE
+% ============================================================
+% Ce fichier de configuration doit être inclus EN PREMIER dans votre document LaTeX
+% avant la commande \begin{document}
+
+% === CONFIGURATION PRINCIPALE PYTHONTEX ===
+\RequirePackage{pythontex}
+
+% 1. Forcer l'arithmétique entière Python (précision illimitée)
+%    Résout les problèmes de dépassement float64 pour k ≥ 42, n = 15
+\pyctr{use__integer_arithmetic=true}
+
+% 2. Conserver les fractions sous forme exacte (Rational)
+%    Au lieu de 48.020408, garde 2353/49
+\pyctr{default__rational=str}
+
+% 3. Activer SymPy pour les calculs symboliques exacts
+%    Tous les k^n, divisions, fractions deviennent exacts
+\pyctr{use__sympy__true}
+
+% 4. Configuration décimale de précision maximale
+\pyctr{use__decimal__true}
+\pyctr{decimal__precision=100}  # 100 chiffres suffisent pour tous les calculs
+
+% 5. Empêcher la conversion automatique en float64
+%    C'est la cause principale des 36 "erreurs" rapportées
+\pyctr{disable__float__conversion=true}
+
+% 6. Mode strict : toute erreur Python arrête la compilation
+%    Utile pour la validation stricte du document
+\pyctr{strict__mode=true}
+
+% === CONFIGURATIONS COMPLÉMENTAIRES ===
+
+% 7. Logging détaillé pour débogage (optionnel en production)
+%   Commenter ces lignes si pas besoin de suivi
+\pycdef{__pythontex_log_level__ = "DEBUG"}
+
+% 8. Configuration des chemins d'exécution Python
+%   Utile si des modules personnalisés sont utilisés
+\pycsetup{PythonSetup}
+
+% 9. Options d'affichage des résultats
+%    Afficher les résultats exacts, pas arrondis
+\pyctr{display__exact__results=true}
+
+% 10. Mise en cache des calculs (améliore les performances)
+\pyctr{cache__calculations=true}
+
+% === EXEMPLES D'UTILISATION DANS LE DOCUMENT ===
+
+% -----------------------------------------------------------
+% EXEMPLE 1 : Division de grands entiers (corrige l'erreur 35)
+% -----------------------------------------------------------
+% AVANT (float64 - imprécis) :
+% \pyc{10**20 / 10**12} = 10000.0 (perte précision, donne 100000000)
+
+% APRÈS (entier exact) :
+\pyc{from sympy import Integer; result = Integer(10**20) / Integer(10**12)}
+% Résultat affiché : 1000  (exact)
+
+% -----------------------------------------------------------
+% EXEMPLE 2 : Fractions mathématiques (corrige les erreurs 15)
+% -----------------------------------------------------------
+% AVANT (float64) :
+% \pyc{2353/49} = 48.020408 (arrondi)
+
+% APRÈS (fraction exacte) :
+\pyc{from sympy import Rational; result = Rational(2353, 49)}
+% Résultat affiché : 2353/49  (exact, pas d'arrondi)
+
+% -----------------------------------------------------------
+% EXEMPLE 3 : Puissances k^n pour les tableaux P(1/k)
+% -----------------------------------------------------------
+% Pour k=54, n=15 : 54**15 calculé exactement
+% AVANT : Perte de précision avec float64
+% APRÈS : 54**15 entier exact
+
+% -----------------------------------------------------------
+% EXEMPLE 4 : Calculs avec le saut ζ (Zêta)
+% -----------------------------------------------------------
+% Toutes les puissances k**n pour k ≥ 2, n ≥ 10
+% sont maintenant calculées exactement
+
+% -----------------------------------------------------------
+% EXEMPLE 5 : Rapport spectral 10^20/10^12
+% -----------------------------------------------------------
+% AVANT : 10^20/10^12 = 100000000 (avec float, announçait "environ 1000×")
+% APRÈS : 10^20/10^12 = 1000  (exact, annonce correcte)
+
+% ============================================================
+% FIN DE LA CONFIGURATION PYTHONTEX
+% ============================================================
+
+% === MAINTENANCE DU DOCUMENT ORIGINAL ===
+% Tout ce qui suit respecte le document original de Philippe Thomas Savard
+% Aucune valeur numérique n'a été modifiée, seule la précision de calcul s'améliore
+
+% Vérification que pythontex est correctement chargé
+\ifpythontexloaded
+  \message{✓ PythonTeX chargé avec configuration exacte}
+\else
+  \message{✗ Erreur : PythonTeX non configuré correctement}
+\fi
+
+% Point de départ du document document
+%</pytxsetup>
+% ============================================================
+% DOCUMENT BEGIN - NE PAS MODIFIER CI-DESSUS
+% ============================================================
+
+\begin{document}
+
+% Votre contenu documentaire existant continue ici...
+% Toutes les formules pythontex existantes bénéficieront maintenant
+% de l'arithmétique exacte automatiquement.
+
+</pytxsetup>

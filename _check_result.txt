@@ -1,0 +1,2 @@
+COMPILE OK
+WARNING:root:PyPDF2 non disponible - fonctionnalité PDF limitée

@@ -1,0 +1,158 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.25)  29 OCT 2026 20:39
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./Le-systeme-convolutif-Gabriel_avec_config_pythontex.tex
+(Le-systeme-convolutif-Gabriel_avec_config_pythontex.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-09-09>
+(C:\MikTeX\tex/latex/pythontex\pythontex.sty
+Package: pythontex 2026/02/15 v0.19 execute and typeset Python code and other l
+anguages
+
+(C:\MikTeX\tex/latex/fvextra\fvextra.sty
+Package: fvextra 2026/02/25 v1.14.0 fvextra - extensions and patches for fancyv
+rb
+
+(C:\MikTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count276
+)
+(C:\MikTeX\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2026/08/13 4.7 verbatim text (tvz,hv)
+
+(C:\MikTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2026-05-17 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+\FV@CodeLineNo=\count277
+\FV@InFile=\read2
+\FV@TabBox=\box53
+\c@FancyVerbLine=\count278
+\FV@StepNumber=\count279
+\FV@OutFile=\write3
+)
+(C:\MikTeX\tex/latex/upquote\upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+(C:\MikTeX\tex/latex/lineno\lineno.sty
+Package: lineno 2026/03/08 line numbers on paragraphs v5.9
+
+(C:\MikTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(C:\MikTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(C:\MikTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+))
+\linenopenalty=\count280
+\output=\toks18
+\linenoprevgraf=\count281
+\linenumbersep=\dimen150
+\linenumberwidth=\dimen151
+\c@linenumber=\count282
+\c@pagewiselinenumber=\count283
+\c@LN@truepage=\count284
+\c@internallinenumber=\count285
+\c@internallinenumbers=\count286
+\quotelinenumbersep=\dimen152
+\bframerule=\dimen153
+\bframesep=\dimen154
+\bframebox=\box54
+)
+\c@FancyVerbWriteLine=\count287
+\c@FancyVerbBufferLine=\count288
+\c@FV@TrueTabGroupLevel=\count289
+\c@FV@TrueTabCounter=\count290
+\FV@TabBox@Group=\box55
+\FV@bgcolorstructbox=\box56
+\FV@TmpLength=\skip49
+\c@FV@HighlightLinesStart=\count291
+\c@FV@HighlightLinesStop=\count292
+\FV@LoopCount=\count293
+\FV@NCharsBox=\box57
+\FV@BreakIndent=\dimen155
+\FV@BreakIndentNChars=\count294
+\FV@BreakSymbolSepLeft=\dimen156
+\FV@BreakSymbolSepLeftNChars=\count295
+\FV@BreakSymbolSepRight=\dimen157
+\FV@BreakSymbolSepRightNChars=\count296
+\FV@BreakSymbolIndentLeft=\dimen158
+\FV@BreakSymbolIndentLeftNChars=\count297
+\FV@BreakSymbolIndentRight=\dimen159
+\FV@BreakSymbolIndentRightNChars=\count298
+\c@FancyVerbLineBreakLast=\count299
+\FV@LineBox=\box58
+\FV@LineIndentBox=\box59
+\c@FV@BreakBufferDepth=\count300
+\FV@LineWidth=\dimen160
+)
+(C:\MikTeX\tex/latex/xstring\xstring.sty
+(C:\MikTeX\tex/generic/xstring\xstring.tex
+\xs_counta=\count301
+\xs_countb=\count302
+)
+Package: xstring 2023/08/22 v1.86 String manipulations (CT)
+)
+(C:\MikTeX\tex/latex/pgfopts\pgfopts.sty
+Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
+
+(C:\MikTeX\tex/latex/pgf/utilities\pgfkeys.sty
+(C:\MikTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks19
+\pgfkeys@temptoks=\toks20
+
+(C:\MikTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks21
+)))
+\pgfopts@list@add@a@toks=\toks22
+\pgfopts@list@add@b@toks=\toks23
+)
+(C:\MikTeX\tex/latex/newfloat\newfloat.sty
+Package: newfloat 2023/10/01 v1.2 Defining new floating environments (AR)
+)
+(C:\MikTeX\tex/latex/currfile\currfile.sty
+Package: currfile 2024/03/14 v1.0 Provides the file path elements of the curren
+t input file
+
+(C:\MikTeX\tex/latex/filehook\filehook.sty
+Package: filehook 2022/10/25 v0.8b Hooks for input files
+
+(C:\MikTeX\tex/latex/filehook\filehook-2020.sty
+Package: filehook-2020 2022/10/25 v0.8b Hooks for input files
+))
+\c@currfiledepth=\count303
+)
+\pytx@codefile=\write4
+\openout4 = `Le-systeme-convolutif-Gabriel_avec_config_pythontex.pytxcode'.
+
+\c@pytx@FancyVerbLineTemp=\count304
+\c@pytx@py@default@default=\count305
+\c@pytx@pycon@default@default=\count306
+\c@pytx@sympy@default@default=\count307
+\c@pytx@sympycon@default@default=\count308
+\c@pytx@pylab@default@default=\count309
+\c@pytx@pylabcon@default@default=\count310
+)
+! Undefined control sequence.
+l.12 \pyctr
+           {use__integer_arithmetic=true}
+? 
+! Emergency stop.
+l.12 
+     
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 4080 strings out of 467392
+ 83118 string characters out of 5422525
+ 521520 words of memory out of 5000000
+ 33457 multiletter control sequences out of 15000+600000
+ 628489 words of font info for 40 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 86i,0n,93p,484b,42s stack positions out of 10000i,1000n,20000p,200000b,200000s
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -1,0 +1,136 @@
+\subsection{Limites et statut épistémologique}
+
+\begin{boitealerte}[Limite~1 --- la couverture n'est pas totale]
+La règle se prononce sur $10{,}56\,\%$ des $k$ du corpus. Sur les
+$89{,}44\,\%$ restants, le criblage laisse au moins deux survivants :
+la fonction renvoie alors « indéterminé ». Le résidu est
+\emph{intrinsèque} et non un défaut d'implémentation : sur un
+$k$ donné, le nombre de branches survivantes ne dépend que de
+$k \bmod M$, et aucune extension finie du crible ne peut faire
+disparaître toutes les classes ambguës sans coût prohibitif.
+\end{boitealerte}
+
+\begin{boitealerte}[Limite~2 --- la règle n'est pas un test de primalité]
+Elle indique \emph{quelle} branche est compatible, non que le candidat
+retenu est premier. Pour lever l'ambiguïté résiduelle, un test de
+primalité reste nécessaire --- c'est-à-dire un aller-retour vers la
+primalité, que la formalisation n'a pas supprimé mais simplement
+\emph{repoussé} à un second étage, plus étroit et mieux circonscrit.
+\end{boitealerte}
+
+\begin{boitealerte}[Limite~3 --- la partie algébrique conserve un statut
+empirique]
+La réduction $\SB-\SA = k^{6}B_0$ et la formule fermée de niveau~2 sont
+établies et vérifiées. En revanche la \emph{table de correspondance}
+entre polarité de la position et signe de la correction, ainsi que
+l'ensemble des quatre candidats, sont le fruit d'une exploration
+numérique : ils sont \emph{corrects} au sens où ils reproduisent
+$676\,191$ ancres sans un seul écart, mais ils ne sont pas
+\emph{démontrés} au sens d'un théorème. La section franchit la
+frontière entre «~observé~» et «~calculé~» ; elle ne franchit pas celle
+entre «~calculé~» et «~prouvé~».
+\end{boitealerte}
+
+\begin{boitealerte}[Limite~4 --- la récurrence de la table ne se généralise pas]
+Comme établi plus haut, la formule canonique de décomposition du
+Digamma est exacte pour $n = 10, 11, 12, 13$ et fausse dès $n = 14$.
+Elle est conservée dans le présent document comme \emph{description
+de la table d'observation}, à titre d'outil de calcul et de
+contrôle, et non comme une loi.
+\end{boitealerte}
+
+\begin{boitenote}[Position dans l'architecture générale]
+La fonction \textsc{Digamma\_Savard/Cline} intervient exactement là où la
+méthode spectrale attendait une information manquante : au niveau~4
+(mécanisme d'ancrage), où les quatre essais Digamma étaient jusqu'alors
+lancés \emph{simultanément} et sans critère de choix. Elle ne modifie
+ni les niveaux~1 à~3 (constantes, formules fermées, construction
+terme à terme) ni le niveau~5 (reconstruction pour $n \neq 10$), et ne
+modifie pas non plus la formule de reconstruction
+\[
+  P \;=\; \frac{\SB - \mathrm{Digamma}}{k^{6}},
+\]
+dont elle ne fournit que le \emph{contenu} de la correction.
+\end{boitenote}
+
+
+\subsection{Implémentation de référence}
+
+\begin{boitenote}[Pseudo-code de la fonction]
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+DIGAMMA_SAVARD(k, n) :
+    S_A <- somme_suite_A(k, n)      # arithmétique entière
+    S_B <- somme_suite_B(k, n)
+    B0  <- k**5 - k**3 + k - 1
+    C   <- [B0+k^2, B0-k^2, B0-k, B0+k]  # A(8)-, A(8)+, A(7)+, A(7)-
+
+    survivants <- []
+    pour j de 0 a 3 :
+        si tous(C[j] mod p != 0 pour p dans [3,5,7,11,13,17,19,23]) :
+            ajouter j a survivants
+
+    si longueur(survivants) == 1 :
+        j <- survivants[0]
+        signe   <- -1 si j dans {0,3} sinon +1
+        exposant <- 8 si j dans {0,1} sinon 7
+        Digamma <- S_A + signe * k**exposant
+        retourner (Digamma, (S_B - Digamma) / k**6)
+    sinon :
+        retourner (INDETERMINE, branches survivantes)
+\end{Verbatim}
+\end{boitenote}
+
+\begin{boitenote}[Précautions d'implémentation]
+\begin{itemize}[nosep]
+  \item \textbf{Arithmétique entière obligatoire.} Pour $k \ge 50$, les
+    valeurs de $\SA$ et $\SB$ dépassent $10^{15}$~: l'arithmétique
+    flottante introduit des erreurs d'arrondi qui se propagent au
+    test de divisibilité et faussent le verdict de criblage.
+  \item \textbf{Le test de divisibilité précède toute hypothèse de
+    primalité.} La fonction ne doit jamais court-circuiter sur un
+    «~candidat préféré~»~: c'est précisément ce court-circuit qui
+    réintroduirait la circularité.
+  \item \textbf{Le cas indéterminé doit être rendu visible.} En cas
+    d'ambiguïté, l'agent doit signaler \textsc{C\_NON\_CERTIFIÉ} et
+    attendre une validation externe, conformément au contrat HOL,
+    plutôt que de trancher silencieusement.
+\end{itemize}
+\end{boitenote}
+
+
+\subsection{Conclusion}
+
+La correction Digamma, longtemps traitée comme une valeur observée,
+devient ici le résultat d'une \emph{fonction calculable} : la
+\emph{fonction \textsc{Digamma\_Savard/Cline}}. Sa structure est la
+suivante.
+
+\begin{enumerate}[nosep,leftmargin=*]
+  \item \textbf{Une réduction algébrique.} Les quatre candidats
+    possibles se ramènent à quatre polynômes
+    $B_0 \pm k^{2}$ et $B_0 \pm k$, où
+    $B_0(k) = k^{5}-k^{3}+k-1$.
+  \item \textbf{Une règle de sélection par criblage modulaire.} La
+    polarité de la position dans la suite A commande le signe de la
+    correction ; ce signe est \emph{déduit} par élimination
+    modulaire, jamais \emph{choisi}.
+  \item \textbf{Une validation rigoureuse.} Zéro violation
+    d'intégrité sur $676\,191$ ancres~; exactitude de $100\,\%$ sur
+    les $71\,401$ ancres à survivant unique~; effondrement de la
+    pureté à $0$--$8{,}6\,\%$ sous permutation des signes~; stabilité
+    de l'exactitude à $100\,\%$ lorsque la couverture passe de
+    $10{,}56\,\%$ à $49{,}65\,\%$.
+  \item \textbf{Un statut honnête.} La règle est exacte là où elle se
+    prononce et le dit quand elle ne peut pas se prononcer~; elle ne
+    prétend ni tester la primalité, ni démontrer la table de
+    correspondance.
+\end{enumerate}
+
+\begin{boiteformule}[Énoncé final]
+Pour tout $k \ge 2$, la fonction \textsc{Digamma\_Savard/Cline} retourne
+une correction calculée, non observée, dont le signe est déterminé par
+la seule arithmétique modulaire~; et elle retourne «~indéterminé~»
+plutôt que de trancher au hasard. \emph{La fonction ne prétend pas
+résoudre la primalité~: elle déplace le problème du \emph{choix} vers
+la \emph{contamination}.}
+\end{boiteformule}
