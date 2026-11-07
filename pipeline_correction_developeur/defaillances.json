@@ -1,0 +1,110 @@
+{
+  "session_prompt": "Reconstruit le premier pour le rapport 1/4 pour n=23",
+  "defaillances": [
+    {
+      "id": "DEF-01",
+      "moteur": "ratio_dispatcher",
+      "fichier": "src/dispatch/ratio_dispatcher.py",
+      "gravite": "CRITIQUE",
+      "description": "Fallback silencieux vers model='1/2' quand k≠2",
+      "comportement_observé": "Requête k=4 (ratio 1/4) → dispatch retourne model='1/2'. Aucune exception levée, aucun log d'avertissement.",
+      "comportement_attendu": "Pour k=4, ratio_dispatcher doit retourner model='1/4' et charger les formules SA=(241/192)×4^n-4/3.",
+      "preuve_log": "model = 1/2  dans Chiffres calculés (session Gabriel)",
+      "correction_requise": "1. Supprimer le fallback DEFAULT_MODEL='1/2'. \n2. Ajouter '1/4' dans FORMULA_REGISTRY avec les bons coefficients. \n3. Lever UnknownRatioError si k absent du registre. \n4. Logger explicitement : 'Dispatching to model={model_id} for k={k}'.",
+      "fichier_a_corriger": "src/dispatch/ratio_dispatcher.py",
+      "priorité": 1
+    },
+    {
+      "id": "DEF-02",
+      "moteur": "spectral_core",
+      "fichier": "src/core/spectral_core.py",
+      "gravite": "CRITIQUE",
+      "description": "Formules SA/SB hardcodées pour k=2 indépendamment du model reçu",
+      "comportement_observé": "SA(23) = 13 631 486.0 = (3.25/2)×2^23-2  (formule k=2). SB(23) = 27 262 910.0 = (6.5/2)×2^23-66  (formule k=2). Ces valeurs sont 6 ordres de grandeur inférieures aux valeurs k=4.",
+      "comportement_attendu": "SA(23) ≈ 8.8327×10^13  = (241/192)×4^23-4/3. SB(23) ≈ 3.5331×10^14  = (964/192)×4^23-12292/3.",
+      "preuve_log": "SA_float=13631486.0, SB_float=27262910.0 confirmés par calcul : (3.25/2)×2^23-2 = 13631486.",
+      "correction_requise": "1. Remplacer les constantes SA/SB hardcodées par un appel à    spectral_model.get_formulas(k).compute_SA(n).\n2. Paramétrer la base : base = k (pas base = 2 en dur).\n3. Vérification : assert abs(SA - expected_SA(k,n)) < epsilon.",
+      "fichier_a_corriger": "src/core/spectral_core.py",
+      "priorité": 2
+    },
+    {
+      "id": "DEF-03",
+      "moteur": "spectral_core",
+      "fichier": "src/core/spectral_core.py",
+      "gravite": "CRITIQUE",
+      "description": "Mauvais invariant appliqué : position=n=terms pour k≠2",
+      "comportement_observé": "Log : 'INVARIANT (ratio 1/2): position = n = number_of_terms = 23'. Résultat : p=83 (23ème premier), comme si n=position.",
+      "comportement_attendu": "Pour k=4 : n = nombre_de_termes ≠ position_dans_les_premiers. p=1097 est le 184ème premier ; n=23 est la quantité de termes.",
+      "preuve_log": "INVARIANT (ratio 1/2): position = n = number_of_terms = 23 → p = 83 (23ème premier)",
+      "correction_requise": "1. Extraire l'invariant vers spectral_model.get_formulas(k).invariant.\n2. k=2 → invariant='symmetric' : position=n=terms.\n3. k≠2 → invariant='asymmetric' : n=terms, position=f(p).\n4. Le log doit afficher : 'INVARIANT (ratio 1/{k}): n=terms≠position'.",
+      "fichier_a_corriger": "src/core/spectral_core.py",
+      "priorité": 3
+    },
+    {
+      "id": "DEF-04",
+      "moteur": "spectral_model",
+      "fichier": "src/models/spectral_model.py",
+      "gravite": "MAJEURE",
+      "description": "Formules k=4 absentes ou non chargées dans le registre",
+      "comportement_observé": "Aucun chargement de formulas_1_k.json ou d'un bloc k=4 dans spectral_model.py. Les coefficients 241/192 et 964/192 ne sont jamais instanciés.",
+      "comportement_attendu": "FORMULA_REGISTRY = {\n  '1/2': SpectralFormulas(a_SA=Fraction(13,8), b_SA=-2, ...),\n  '1/4': SpectralFormulas(a_SA=Fraction(241,192), b_SA=Fraction(-4,3),\n                         a_SB=Fraction(964,192), b_SB=Fraction(-12292,3),\n                         base=4),\n}",
+      "preuve_log": "corpus/formulas_1_2.json chargé ; formulas_1_k.json ignoré.",
+      "correction_requise": "1. Créer corpus/formulas_1_4.json avec les coefficients exacts.\n2. Ajouter SpectralFormulas(k=4, ...) dans FORMULA_REGISTRY.\n3. Tester : get_formulas(4).compute_SA(23) == 88327434098004.",
+      "fichier_a_corriger": "src/models/spectral_model.py",
+      "priorité": 4
+    },
+    {
+      "id": "DEF-05",
+      "moteur": "hol_generator",
+      "fichier": "src/engines/hol_generator.py",
+      "gravite": "MAJEURE",
+      "description": "Fragment HOL généré avec formules k=2 malgré titre 'modele 1/4'",
+      "comportement_observé": "theory verif_p83_n23 : formules SA_def=(3.25/2)×2^n-2, lemme validant SA=13631486, SB=27262910, p=83. Section titulaire : 'Verification 83 via modele 1/4' (contradiction).",
+      "comportement_attendu": "theory verif_p1097_n23_ratio4 : formules SA_k4_def=(241/192)×4^n-4/3, lemmes validant SA≈8.83e13, SB≈3.53e14, p=1097.",
+      "preuve_log": "Fragment HOL : 'SA(n) = (3.25/2) × 2^n - 2' et 'lemma verif_premier_83_n_23'.",
+      "correction_requise": "1. hol_generator reçoit {k, n, p, SA, SB} depuis spectral_core.\n2. theory_name = f'verif_p{p}_n{n}_ratio{k}'.\n3. SA_def_name = f'SA_k{k}_def', SB_def_name = f'SB_k{k}_def'.\n4. Lemme invariant : si k≠2 → 'invariant_ratio_asymetrique'.\n5. Valeurs numériques dans les lemmes issues de spectral_core (k=4).",
+      "fichier_a_corriger": "src/engines/hol_generator.py",
+      "priorité": 5
+    },
+    {
+      "id": "DEF-06",
+      "moteur": "scorer",
+      "fichier": "src/engines/scorer.py",
+      "gravite": "MAJEURE",
+      "description": "Absence du critère ratio_coherence dans le scorer",
+      "comportement_observé": "Score 8.1/10 attribué à une réponse avec model=1/2 pour requête k=4. Le scorer n'a pas pénalisé l'incohérence ratio/model.",
+      "comportement_attendu": "Critère ratio_coherence obligatoire. Si model ≠ ratio_demandé → pénalité -3.0 pts. Score résultant ≤ 5.1/10 → multiloop itère à nouveau.",
+      "preuve_log": "score 8.1/10, iter 2 — malgré model=1/2 pour k=4.",
+      "correction_requise": "1. Ajouter check_ratio_coherence(response, request) dans scorer.\n2. Pondérer ratio_coherence avec poids >= 30% du score total.\n3. Configurer seuil_score > 5.0 pour forcer rejet si ratio faux.\n4. Tester : scorer(model='1/2', ratio='1/4') doit retourner < seuil.",
+      "fichier_a_corriger": "src/engines/scorer.py",
+      "priorité": 6
+    },
+    {
+      "id": "DEF-07",
+      "moteur": "config",
+      "fichier": "config/gabriel_defaults.yaml",
+      "gravite": "MINEURE",
+      "description": "DEFAULT_MODEL='1/2' dans la configuration globale",
+      "comportement_observé": "gabriel_defaults.yaml fixe DEFAULT_MODEL: '1/2'. Ce défaut est propagé silencieusement si ratio_dispatcher échoue.",
+      "comportement_attendu": "DEFAULT_MODEL: null (ou absent). Si le ratio n'est pas reconnu → exception explicite, pas de calcul avec un modèle par défaut incorrect.",
+      "preuve_log": "model = 1/2  dans les chiffres calculés (jamais overridé).",
+      "correction_requise": "1. Remplacer DEFAULT_MODEL: '1/2' par DEFAULT_MODEL: null.\n2. Ajouter STRICT_RATIO_MODE: true pour forcer l'exception.\n3. Documenter dans le yaml que le ratio doit être explicite.",
+      "fichier_a_corriger": "config/gabriel_defaults.yaml",
+      "priorité": 7
+    }
+  ],
+  "resume": {
+    "total_defaillances": 7,
+    "CRITIQUE": 3,
+    "MAJEURE": 3,
+    "MINEURE": 1,
+    "fichiers_a_corriger": [
+      "src/models/spectral_model.py",
+      "config/gabriel_defaults.yaml",
+      "src/core/spectral_core.py",
+      "src/engines/hol_generator.py",
+      "src/dispatch/ratio_dispatcher.py",
+      "src/engines/scorer.py"
+    ]
+  }
+}

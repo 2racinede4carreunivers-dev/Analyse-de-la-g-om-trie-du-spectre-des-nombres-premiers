@@ -1,0 +1,64 @@
+# =============================================================================
+# Multi-Loop Math Agent - Dockerfile.cli (SLIM) v5.1
+# =============================================================================
+
+FROM python:3.11-slim AS base
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONFAULTHANDLER=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    PYTHONPATH="/home/agent/app:/home/agent/app/src:/home/agent/app/memory" \
+    GABRIEL_TESTS_DIR="/home/agent/app/tests"
+
+# Dépendances système minimales
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        ca-certificates \
+        git \
+        build-essential \
+        netcat-openbsd \
+        procps \
+        iproute2 \
+        psmisc \
+        python3-venv \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# User non-root
+RUN useradd --create-home --shell /bin/bash agent
+WORKDIR /home/agent/app
+
+# Cache layer : requirements.txt (a la racine du contexte, cf. docker-compose.yml)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt \
+    && find /usr/local/lib/python3.11 -name "*.pyc" -delete \
+    && find /usr/local/lib/python3.11 -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+
+# Code applicatif (contexte = racine du depot fusionne v5.4+)
+# Note : backend/ et tests/ sont exclus du contexte par .dockerignore
+# (montes en volume au runtime) -> pas de COPY, mkdir + chown a la place.
+COPY --chown=agent:agent main.py main_cli.py config.yaml config_optimized.yaml ./
+COPY --chown=agent:agent src/ ./src/
+COPY --chown=agent:agent pipeline_cognitif/ ./pipeline_cognitif/
+COPY --chown=agent:agent pipeline_correction/ ./pipeline_correction/
+COPY --chown=agent:agent theories/ ./theories/
+COPY --chown=agent:agent memory/ ./memory/
+COPY --chown=agent:agent scripts/ ./scripts/
+
+# Theories a la racine absolue pour le certainty_kernel
+COPY --chown=agent:agent theories/ /theories/
+
+# Helpers runtime
+COPY --chown=agent:agent gabriel_launcher.py port_cleanup.py socket_cleanup.py ./
+
+# Dossiers runtime
+RUN mkdir -p data logs && chown -R agent:agent .
+
+USER agent
+
+VOLUME ["/home/agent/app/data", "/home/agent/app/logs"]
+
+CMD ["python", "main_cli.py"]

@@ -15,6 +15,7 @@ param(
     [switch]$PullOnly
 )
 
+<<<<<<< HEAD
 # --- Racine du depot ---
 $RepoRoot = "C:\Analyse-de-la-geometrie-du-spectre-des-nombres-premiers"
 $DepotDir = "Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers"
@@ -28,6 +29,15 @@ if (-not (Test-Path -LiteralPath (Join-Path $ProjectRoot "docker-compose.yml")))
     exit 1
 }
 Set-Location -Path $ProjectRoot
+=======
+# --- Racine du depot (ne pas modifier : derive du script lui-meme) ---
+$RepoRoot = "C:\Analyse-de-la-geometrie-du-spectre-des-nombres-premiers"
+$DepotDir = "Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers"
+
+Set-Location -Path $PSScriptRoot
+
+$ProjectRoot   = $PSScriptRoot
+>>>>>>> 25aba2ccd060409b5c029e6b5ac96ceba8236460
 # Nom derive du dossier reel (Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers).
 # -p docker compose normalise : minuscules, sans accents/espaces.
 $ProjectName   = "analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers"
@@ -41,6 +51,7 @@ function Write-Step { param([string]$M) Write-Host "`n>  $M" -ForegroundColor $C
 function Write-OK   { param([string]$M) Write-Host "   OK  $M" -ForegroundColor $C_OK }
 function Write-Warn { param([string]$M) Write-Host "   !!  $M" -ForegroundColor $C_WARN }
 function Write-Err  { param([string]$M) Write-Host "   XX  $M" -ForegroundColor $C_ERR }
+<<<<<<< HEAD
 function Get-DotEnvValue {
     param([string]$Name, [string]$DefaultValue)
     $envPath = Join-Path $ProjectRoot ".env"
@@ -54,6 +65,8 @@ function Get-DotEnvValue {
     }
     return $DefaultValue
 }
+=======
+>>>>>>> 25aba2ccd060409b5c029e6b5ac96ceba8236460
 
 # ============================================================
 # BANNER
@@ -63,7 +76,11 @@ Write-Host @"
 
   +============================================================+
   |   MULTI-LOOP MATH AGENT  -  Gabriel Local Launcher  v4.1  |
+<<<<<<< HEAD
   |   Methode Spectrale  *  Ollama / Groq  *  Isabelle/HOL    |
+=======
+  |   Methode Spectrale  *  Ollama / OpenAI  *  Isabelle/HOL  |
+>>>>>>> 25aba2ccd060409b5c029e6b5ac96ceba8236460
   +============================================================+
 
 "@ -ForegroundColor Magenta
@@ -93,6 +110,7 @@ if ($Logs) {
 }
 
 # ============================================================
+<<<<<<< HEAD
 # Vérification Ollama local (les fallbacks cloud restent autorisés)
 # ============================================================
 if (-not $PullOnly) {
@@ -116,6 +134,8 @@ if (-not $PullOnly) {
 }
 
 # ============================================================
+=======
+>>>>>>> 25aba2ccd060409b5c029e6b5ac96ceba8236460
 # Build
 # ============================================================
 Write-Step "Construction des images"
@@ -132,7 +152,11 @@ Write-OK "Build complete"
 # ============================================================
 Write-Step "Demarrage des services"
 docker compose -f $ComposeFile -p $ProjectName down 2>&1 | Out-Null
+<<<<<<< HEAD
 $upResult = docker compose -f $ComposeFile -p $ProjectName up -d $ServiceMain 2>$null
+=======
+docker compose -f $ComposeFile -p $ProjectName up -d ollama ollama-init $ServiceMain 2>&1 | Out-Null
+>>>>>>> 25aba2ccd060409b5c029e6b5ac96ceba8236460
 if ($LASTEXITCODE -ne 0) { Write-Err "Up echoue"; exit 1 }
 Write-OK "Services demarre"
 
@@ -167,7 +191,11 @@ Write-Host ''
 Write-Host '  +===========================================================+' -ForegroundColor Magenta
 Write-Host '  |   AGENT MULTI-LOOP  -  Gabriel  |  Terminal actif        |' -ForegroundColor Magenta
 Write-Host '  |   Container : $ContainerName' -ForegroundColor Magenta
+<<<<<<< HEAD
 Write-Host '  |   Mode      : Multi-Loop (Ollama/Groq + HOL)              |' -ForegroundColor Magenta
+=======
+Write-Host '  |   Mode      : Multi-Loop (Ollama/OpenAI + HOL)            |' -ForegroundColor Magenta
+>>>>>>> 25aba2ccd060409b5c029e6b5ac96ceba8236460
 Write-Host '  +===========================================================+' -ForegroundColor Magenta
 Write-Host ''
 Write-Host '  [Session de travail Gabriel]' -ForegroundColor Yellow

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Registre public consultable de 6 849 579 ancrages dont la primalité a été vérifiée par PARI/GP.">
+  <title>Validation de primalité — ancrages 1/k</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Géométrie du spectre des nombres premiers · validation reproductible</p>
+    <h1>Registre de primalité des ancrages 1/k</h1>
+    <p class="intro">
+      Cette page publie les résultats d’une vérification complète des ancrages
+      extraits du rapport de reconstruction <code>k = 28&nbsp;000&nbsp;000…84&nbsp;000&nbsp;000</code>.
+      Elle permet de consulter chaque valeur, de retrouver son rapport et de
+      télécharger les fragments de données contrôlables indépendamment.
+    </p>
+    <p class="intro">
+      Chaque candidat a été soumis à <strong>PARI/GP 2.19 <code>isprime</code></strong>.
+      Les fragments compressés sont vérifiés par SHA-256 avant affichage.
+      La liste est découpée pour permettre sa consultation sans charger près de
+      sept millions de lignes d’un seul coup.
+    </p>
+  </header>
+
+  <main>
+    <section class="story" aria-labelledby="story-title">
+      <p class="story-label">Témoignage de l’auteur</p>
+      <h2 id="story-title">Une étape dont je suis fier</h2>
+      <blockquote>
+        <p>
+          Je suis fier d’avoir mené cette validation à son terme. Dans le
+          corpus numérique extrait, les 6&nbsp;849&nbsp;579 valeurs examinées
+          ont été reconnues premières par PARI/GP&nbsp;2.19&nbsp;:
+          aucun composé n’a été détecté. Pour moi, concevoir cette démarche,
+          la faire traiter à cette échelle et rendre les résultats consultables
+          est une réussite personnelle que je n’aurais pas imaginé atteindre.
+        </p>
+        <p>
+          Je n’ai pas suivi de parcours scolaire formel en mathématiques.
+          Les idées, méthodes et concepts présentés ici sont le fruit de mon
+          travail et de mes réflexions; les outils d’IA m’ont aidé pour la
+          programmation et l’organisation des vérifications.
+        </p>
+      </blockquote>
+      <p class="byline">Philippe Thomas Savard · 2026</p>
+      <p class="scope-note">
+        <strong>Portée documentée :</strong> les fichiers de détail retrouvés
+        couvrent 12 tranches de <code>k = 28&nbsp;000&nbsp;000</code> à
+        <code>84&nbsp;000&nbsp;000</code>, soit 56&nbsp;000&nbsp;001 valeurs de
+        <code>k</code> aux bornes incluses. Ce périmètre ne signifie pas
+        84&nbsp;millions de lignes de rapport : le rapport audité contient
+        6&nbsp;441&nbsp;794 lignes. Le registre ci-dessous publie la liste
+        normalisée complète des verdicts extraits en 29 fragments contrôlables.
+      </p>
+    </section>
+
+    <section class="summary" aria-labelledby="summary-title">
+      <h2 id="summary-title">Bilan de la validation</h2>
+      <dl class="stats">
+        <div><dt>Candidats vérifiés</dt><dd id="record-count">6 849 579</dd></div>
+        <div><dt>Premiers démontrés</dt><dd id="prime-count">6 849 579</dd></div>
+        <div><dt>Composés trouvés</dt><dd id="composite-count">0</dd></div>
+        <div><dt>Couverture des valeurs extraites</dt><dd>100 %</dd></div>
+      </dl>
+      <p class="caveat">
+        <strong>Réserve sur la source :</strong> une ligne finale est tronquée.
+        Son ancre numérique a été vérifiée, mais la branche est incomplète;
+        l’intégrité structurelle du rapport source n’est donc pas déclarée
+        complète. Les totaux ci-dessus couvrent toutes les valeurs numériques
+        effectivement extraites et auditées.
+      </p>
+      <p class="hash-line">Racine de Merkle des fragments : <code id="merkle-root">chargement…</code></p>
+    </section>
+
+    <section class="browser" aria-labelledby="browser-title">
+      <h2 id="browser-title">Consulter la liste complète</h2>
+      <div class="controls">
+        <label for="part-select">Fragment
+          <select id="part-select"></select>
+        </label>
+        <button id="load-part" type="button">Afficher ce fragment</button>
+        <a id="download-part" class="button secondary" href="#">Télécharger le fragment</a>
+      </div>
+      <div class="controls search-controls">
+        <label for="query">Ancre numérique ou rapport (ex. 1/28000006)
+          <input id="query" type="search" autocomplete="off" placeholder="Saisir une valeur exacte">
+        </label>
+        <button id="search-all" type="button">Rechercher dans les 29 fragments</button>
+      </div>
+      <p class="download-note">
+        Le registre complet comprend les 6&nbsp;849&nbsp;579 verdicts répartis
+        dans les 29 fichiers gzip proposés par le sélecteur. Le
+        <a href="data/manifest.json">manifeste</a> donne les plages, les
+        empreintes SHA-256 et la racine de Merkle. Il s’agit du registre
+        normalisé, et non d’une copie octet pour octet du rapport source.
+      </p>
+      <p id="status" role="status" aria-live="polite">Chargement du manifeste…</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rapport</th><th>Statut</th><th>Ancrage</th><th>Verdict</th></tr></thead>
+          <tbody id="results"></tbody>
+        </table>
+      </div>
+      <nav class="pagination" aria-label="Pagination">
+        <button id="previous" type="button" disabled>Précédent</button>
+        <span id="page-label"></span>
+        <button id="next" type="button" disabled>Suivant</button>
+      </nav>
+      <p class="integrity">
+        SHA-256 du fragment affiché :
+        <code id="part-sha">—</code>
+      </p>
+    </section>
+
+    <section class="method">
+      <h2>Sources et méthode</h2>
+      <ul>
+        <li>Rapports : 6 441 794 lignes, dont 6 045 662 <code>UNIQUE</code> et 396 132 <code>AMBIGU</code>.</li>
+        <li>Les deux branches des rapports ambigus sont incluses; chaque verdict est conservé dans le registre.</li>
+        <li>La primalité a été évaluée par PARI/GP <code>isprime</code>; les empreintes SHA-256 contrôlent l’intégrité des fragments, pas la primalité.</li>
+        <li>Empreinte SHA-256 du rapport source : <code>2ed34d1461a8520eb4760ccb99301bb3916eb1ca35f8c41b576e202bbc3d7a31</code>.</li>
+        <li>Une empreinte cryptographique atteste l’intégrité des octets fournis; elle ne chiffre pas les données et ne peut pas restaurer à elle seule un commit ou un fichier absent.</li>
+      </ul>
+      <p>Projet : <a href="https://github.com/2racinede4carreunivers-dev/Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers">dépôt GitHub</a>.</p>
+      <p class="copyright">© 2026 Philippe Thomas Savard. Tous droits réservés.</p>
+    </section>
+  </main>
+</body>
+</html>

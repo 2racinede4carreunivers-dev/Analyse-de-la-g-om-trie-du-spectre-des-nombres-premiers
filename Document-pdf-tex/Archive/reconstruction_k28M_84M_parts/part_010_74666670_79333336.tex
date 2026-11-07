@@ -1,0 +1,55 @@
+% !TeX program = pdflatex
+% ============================================================
+% Rapports NON TYPIQUES 1/k - Reconstruction des nombres premiers
+% Systeme convolutif spectral - Pipeline Cognitif Gabriel
+% Genere le 30/10/2026 21:50:16
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=2.2cm}
+\title{Reconstruction des nombres premiers\\Rapports non typiques $1/k$ --- ancrages $n=10$
+}
+\author{Pipeline cognitif Gabriel --- methode Savard}
+\date{30/10/2026 21:50:16}
+\begin{document}
+\maketitle
+
+\section*{Parametres}
+\begin{itemize}
+\item Nombre de termes commun a tous les rapports : $n=10$
+\item Plage des rapports non typiques : $1/74666670$ a $1/79333336$
+\item Nombre total de rapports generes : 4,666,667
+\item Duree du calcul : 3573.1 s
+\end{itemize}
+
+\section*{Ancrages pour un nombre premier}
+
+Pour chaque rapport $1/k$, les quatre branches Digamma $(8,-1)$, $(8,+1)$, $(7,+1)$, $(7,-1)$ sont testees : un seul candidat premier produit un ancrage \textbf{unique}, plusieurs candidats produisent un ancrage \textbf{ambigu}.
+
+\begin{table}[h!]
+\centering
+\caption{Synthese des ancrages pour $n=10$ sur 4,666,667 rapports non typiques.}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Categorie} & \textbf{Nombre de rapports} & \textbf{Pourcentage} \\
+\midrule
+1. Unique (un seul candidat premier) & 637,244 & 13.66\,\% \\
+2. Ambigue (plusieurs candidats premiers) & 40,710 & 0.87\,\% \\
+\midrule
+\textbf{3. Total unique + ambigu} & \textbf{677,954} & \textbf{14.53\,\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Details complementaires}
+\begin{itemize}
+\item Rapports sans aucun ancrage : 3,988,713 (85.47\,\%)
+\item Reconstructions reussies (premier $P(n)$ obtenu) : 637,244 (13.66\,\%)
+\item Echecs d'ancrage : 4,029,423
+\item Detail exhaustif par rapport : \texttt{part_010_74666670_79333336_detail.txt}
+\end{itemize}
+
+\end{document}

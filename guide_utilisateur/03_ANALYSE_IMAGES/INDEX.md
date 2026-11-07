@@ -1,0 +1,12 @@
+# 📸 Analyse d'Images - Guides Complets
+
+Fichiers principaux:
+- `../GUIDE_COMPLET_ANALYSE_IMAGES_SCHEMAS_FIGURES.md`
+- `../GUIDE_ANALYSE_AVEC_CRITERES.md`
+- `../GABRIEL_IMAGE_ANALYSIS_COMPLETE_GUIDE.md`
+- `../GABRIEL_VISION_QUICK_START.md`
+- `../GABRIEL_VISION_VERIFICATION_COMPLETE.md`
+- `../GABRIEL_VISION_MODULE_DOCUMENTATION.md`
+- `../QUICK_START_IMAGE_ANALYSIS.md`
+
+Consultez ces fichiers pour analyser des images.

@@ -1,0 +1,11 @@
+// ============================================================
+// Slot DOT 03 - Univers au Carre / Methode Spectrale Savard
+// Pre-provisionne dans l'image Docker. A remplir sans rebuild.
+// Convention : hierarchie theoremes, Pont Savard, dependances
+// des lemmes. Rendu : dot -Tsvg graphe_savard_03.dot -o out.svg
+// ============================================================
+digraph savard_03 {
+  rankdir=LR;
+  node [shape=box, style=rounded];
+  // Ajouter les noeuds et aretes ici
+}

@@ -1,0 +1,16 @@
+﻿{
+  "meta": {
+    "nom": "Ajout_Multi_Ratio_Spectral_Core",
+    "description": "Insertion de traiter_multi_ratios dans la classe SpectralMethodCore",
+    "version": "1.0"
+  },
+  "operations": [
+    {
+      "op": "remplacer_texte",
+      "cible": "src/core/spectral_core.py",
+      "ancien_texte": "    def rapport_convolutif_non_typique(self, rapport: str, n: int = 10) -> Dict:\n        \"\"\"Retourne équations, référence n=10 et reconstruction cible.\"\"\"\n        return rnt_construire_rapport_convolutif(rapport, n)",
+      "nouveau_texte": "    def rapport_convolutif_non_typique(self, rapport: str, n: int = 10) -> Dict:\n        \"\"\"Retourne équations, référence n=10 et reconstruction cible.\"\"\"\n        return rnt_construire_rapport_convolutif(rapport, n)\n\n    def traiter_multi_ratios(self, ratios: list, n: int = 10) -> dict:\n        \"\"\"Exécute la reconstruction exacte pour chaque ratio via le modèle spectral individuel.\"\"\"\n        resultats = {}\n        for ratio in ratios:\n            resultats[ratio] = self.reconstruire_rapport_non_typique(ratio, n=n)\n        return resultats",
+      "message": "Ajout de la méthode traiter_multi_ratios"
+    }
+  ]
+}

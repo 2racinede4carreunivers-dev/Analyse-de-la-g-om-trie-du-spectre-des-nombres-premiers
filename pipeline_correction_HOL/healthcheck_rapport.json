@@ -1,0 +1,534 @@
+{
+  "tool": "Healthcheck_HOL_correction v1.0.0",
+  "session": "Geometrie_Spectre_Premier_Philippe_Thomas_Savard",
+  "theories_dir": "agent-multiloop-Gabriel-local\\theories",
+  "counts": {
+    "errors": 2,
+    "warnings": 43,
+    "patches": 0,
+    "fixes_applied": 0
+  },
+  "issues": [
+    {
+      "severity": "info",
+      "passe": "p0-env",
+      "file": "",
+      "line": 0,
+      "message": "Terminal emule : Isabelle2025-2, ML_OPTIONS=--minheap 800.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "info",
+      "passe": "p0-env",
+      "file": "",
+      "line": 0,
+      "message": "Cygwin-Terminal.bat conforme.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\geometrie_spectre_premier.thy",
+      "line": 0,
+      "message": "Fichier geometrie_spectre_premier.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral - Copie.txt.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral - Copie.txt.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral_en.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral_en.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral_es.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral_es.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral_ja.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral_ja.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral_pt.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral_pt.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral_ru.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral_ru.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\methode_spectral_zh.thy",
+      "line": 0,
+      "message": "Fichier methode_spectral_zh.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_hol_unifiee123.thy",
+      "line": 0,
+      "message": "Fichier validation_hol_unifiee123.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p1-session",
+      "file": "agent-multiloop-Gabriel-local\\theories\\verif_p1097_n23_ratio4.thy",
+      "line": 0,
+      "message": "Fichier verif_p1097_n23_ratio4.thy non declare dans ROOT : ignore par build -D.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_02_Suites_AB_RsP_1_2.thy",
+      "line": 111,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "using hne_pow_2 by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_03_Digamma_Equation_Generale.thy",
+      "line": 91,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_05_Modeles_1_3_1_4.thy",
+      "line": 263,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "using hne_pow_3 by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_05_Modeles_1_3_1_4.thy",
+      "line": 318,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "using hne_pow_4 by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_06_Mixtes_Negatives_Asymetries.thy",
+      "line": 71,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_06_Mixtes_Negatives_Asymetries.thy",
+      "line": 93,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_06_Mixtes_Negatives_Asymetries.thy",
+      "line": 115,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_06_Mixtes_Negatives_Asymetries.thy",
+      "line": 135,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_08_Ecarts_Negatifs.thy",
+      "line": 274,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "info",
+      "passe": "p6-memoire",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_08_Ecarts_Negatifs.thy",
+      "line": 0,
+      "message": "Litteraux >= 10 chiffres : arithmetique ML lourde.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 173,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 187,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 195,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 290,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 314,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 443,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding A_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 445,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding B_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 534,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding SA_def regime_1_2.A_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 537,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding SB_def regime_1_2.B_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 540,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding A_1_3_def regime_1_3.A_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 543,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding B_1_3_def regime_1_3.B_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 546,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding A_1_4_def regime_1_4.A_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_11_Construction_SpectralFamily.thy",
+      "line": 549,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding B_1_4_def regime_1_4.B_pos_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "info",
+      "passe": "p6-memoire",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_13_Pont_Savard.thy",
+      "line": 0,
+      "message": "Litteraux >= 10 chiffres : arithmetique ML lourde.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_14_Systeme_Convolutif.thy",
+      "line": 218,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_14_Systeme_Convolutif.thy",
+      "line": 223,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_14_Systeme_Convolutif.thy",
+      "line": 270,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding somme_A_conv_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_14_Systeme_Convolutif.thy",
+      "line": 276,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "unfolding somme_B_conv_def by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_14_Systeme_Convolutif.thy",
+      "line": 324,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "using hpow_ne halphaB_ne0 by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_14_Systeme_Convolutif.thy",
+      "line": 328,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "using halphaA_ne0 hk_ne0 by (simp add: field_simps)"
+    },
+    {
+      "severity": "info",
+      "passe": "p6-memoire",
+      "file": "agent-multiloop-Gabriel-local\\theories\\MS_14_Systeme_Convolutif.thy",
+      "line": 0,
+      "message": "Litteraux >= 10 chiffres : arithmetique ML lourde.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_hol_unifiee.thy",
+      "line": 253,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_hol_unifiee.thy",
+      "line": 332,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p5-unicode",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_hol_unifiee.thy",
+      "line": 795,
+      "message": "`field_simps` sans temoin `\\<noteq> 0` dans les 5 lignes precedentes. Risque de `Failed to finish proof` sur les fractions.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": "by (simp add: field_simps)"
+    },
+    {
+      "severity": "warning",
+      "passe": "p6-memoire",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_hol_unifiee.thy",
+      "line": 0,
+      "message": "3x by eval (certificat vivant jusqu'a fin de session).",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "error",
+      "passe": "p6-memoire",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_hol_unifiee.thy",
+      "line": 0,
+      "message": "7x primalite >= 10^7. Extraire en session annexe ou axiomatiser.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "info",
+      "passe": "p6-memoire",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_hol_unifiee.thy",
+      "line": 0,
+      "message": "Litteraux >= 10 chiffres : arithmetique ML lourde.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "info",
+      "passe": "p6-memoire",
+      "file": "agent-multiloop-Gabriel-local\\theories\\validation_zeta_lean.thy",
+      "line": 0,
+      "message": "Litteraux >= 10 chiffres : arithmetique ML lourde.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    },
+    {
+      "severity": "error",
+      "passe": "p6-memoire",
+      "file": "",
+      "line": 0,
+      "message": "Cout ~15.5 Go vs plafond 16 Go (x86_64_32-windows). Extraire certificats, -j1.",
+      "fixable": false,
+      "fix_applied": false,
+      "snippet": ""
+    }
+  ],
+  "patches": []
+}

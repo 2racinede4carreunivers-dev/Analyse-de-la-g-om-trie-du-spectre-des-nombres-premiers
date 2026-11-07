@@ -1,0 +1,23 @@
+session Geometrie_Spectre_Premier_Philippe_Thomas_Savard = HOL +
+  options [document = false]
+  sessions
+    "HOL-Computational_Algebra"
+    "HOL-Number_Theory"
+  theories
+    MS_01_Fondements
+    MS_02_Suites_AB_RsP_1_2
+    MS_03_Digamma_Equation_Generale
+    MS_04_Generalisation_Prime_i
+    MS_05_Modeles_1_3_1_4
+    MS_06_Mixtes_Negatives_Asymetries
+    MS_07_Comparaison_Blocs
+    MS_08_Ecarts_Negatifs
+    MS_09_Preuve_Absurde
+    MS_10_Ecarts_Mixtes_Positifs
+    MS_11_Construction_SpectralFamily
+    MS_12_Construction_Generalisee_1k
+    MS_13_Pont_Savard
+    MS_14_Systeme_Convolutif
+    validation_hol_unifiee
+    validation_zeta_lean
+    README

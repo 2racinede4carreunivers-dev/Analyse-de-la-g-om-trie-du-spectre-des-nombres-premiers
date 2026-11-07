@@ -1,0 +1,74 @@
+name: Publish primality validation site
+
+# IMPORTANT : dans Settings > Pages, la source doit être « GitHub Actions ».
+# En mode « Deploy from a branch », GitHub publie la totalité du dépôt
+# (~4,8 Go, dont Document-pdf-tex/) : l'artefact dépasse la limite de 1 Go
+# de GitHub Pages et le déploiement expire en « syncing_files ».
+# Ce workflow ne publie que le site (index.html racine, site/, docs/) : ~140 Mo.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "docs/**"
+      - "index.html"
+      - ".github/workflows/deploy-primality-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout (sans LFS, historique minimal)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            /site/
+            /docs/
+            /index.html
+          sparse-checkout-cone-mode: false
+      - name: Assemble website (site/ uniquement, pas les données lourdes du dépôt)
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          cp -R site _site/site
+          [ -d docs ] && cp -R docs _site/docs
+          if [ -f index.html ]; then
+            cp index.html _site/index.html
+          else
+            printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=site/"><a href="site/">site/</a>\n' > _site/index.html
+          fi
+          touch _site/.nojekyll
+          size_kb=$(du -sk _site | cut -f1)
+          echo "Taille du site publié : $((size_kb / 1024)) Mo"
+          if [ "$size_kb" -gt 921600 ]; then
+            echo "::error::Le site dépasse 900 Mo ; GitHub Pages limite les sites publiés à 1 Go."
+            exit 1
+          fi
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 1200000

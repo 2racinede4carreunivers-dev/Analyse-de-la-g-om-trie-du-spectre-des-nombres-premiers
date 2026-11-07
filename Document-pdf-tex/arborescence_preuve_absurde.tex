@@ -1,0 +1,30 @@
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  racine/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=3.2cm,minimum height=0.9cm,align=center},
+  etape/.style={rectangle,rounded corners,draw=spectralor,fill=spectralor!18,thick,minimum width=2.8cm,minimum height=0.8cm,align=center},
+  decision/.style={diamond,draw=spectralrouge,fill=spectralrouge!15,thick,aspect=2.0,align=center,inner sep=0.5pt},
+  validation/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=2.8cm,minimum height=0.8cm,align=center},
+  flux/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!70},
+  fluxor/.style={-{Stealth[length=2.2mm]},thick,spectralor!90!black},
+  fluxrouge/.style={-{Stealth[length=2.2mm]},thick,spectralrouge!80!black}
+]
+  \node[racine] (root) at (0,0) {P-ième premier\\[-1pt]\scriptsize hypothèse à prouver};
+  \node[etape] (hyp) at (-4.5,-2.2) {Supposons P\\[-1pt]\scriptsize non premier};
+  \node[etape] (calcul) at (0,-2.2) {Calcul P(1/k)\\[-1pt]\scriptsize suites A et B};
+  \node[etape] (verif) at (4.5,-2.2) {Vérification\\[-1pt]\scriptsize primalité HOL};
+  \node[decision] (test) at (0,-4.4) {P est\\[-1pt]\scriptsize premier ?};
+  \node[validation] (oui) at (-4.5,-6.6) {P certifié\\[-1pt]\scriptsize ancrage n=10};
+  \node[validation,fill=spectralrouge] (non) at (4.5,-6.6) {Composite\\[-1pt]\scriptsize rejeté HOL};
+  \draw[flux] (root.south) -- (-2.2,-1.1) -| (hyp.north);
+  \draw[flux] (root.south) -- (0,-1.1) -| (calcul.north);
+  \draw[flux] (root.south) -- (2.2,-1.1) -| (verif.north);
+  \draw[fluxor] (hyp.south) -- (-2.2,-3.0) -| (test.north);
+  \draw[fluxor] (calcul.south) -- (0,-3.0) -| (test.north);
+  \draw[fluxor] (verif.south) -- (2.2,-3.0) -| (test.north);
+  \draw[fluxrouge] (test.west) -- (-6.0,-4.4) -| (oui.north);
+  \draw[fluxrouge] (test.east) -- (6.0,-4.4) -| (non.north);
+\end{tikzpicture}
+\caption{Arborescence de la preuve par l'absurde (pipeline HOL/Isabelle) : supposition de non-primalité, calcul des suites, vérification formelle, test de primalité, issue certifiée ou rejetée.}
+\end{figure}

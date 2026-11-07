@@ -1,0 +1,448 @@
+\subsubsection*{Page 29}
+\subsection*{Système convolutif Savard - Analyse détaillée k=13}
+
+\subsection*{4.1.2. Niveau 2 -- Formules fermées de SA et SB}
+
+Ce niveau calcule les sommes spectrales fermées $\SA(13,15)$ et $\SB(13,15)$. Comme présenté dans la section \ref{sec:formules-fermees}, ces sommes représentent l'énergie cumulée des suites A et B. Leur différence spectrale doit toujours valoir $1/k$, constituant l'\emph{invariant spectral} (Théorème XIV.3).
+
+\begin{boitecalc}[Calcul de $\SA(13, 15)$]
+$$\SA(13, 15) = \frac{(k^{4}-k^{2}+1) \cdot k^{12}}{k-1} - \frac{k}{k-1}$$
+$$= 28\,393 \times \frac{23\,298\,085\,122\,481}{12} - \frac{13}{12}$$
+$$\boxed{= 55\,125\,210\,906\,883\,585}$$
+\end{boitecalc}
+
+\begin{boitecalc}[Calcul de $\SB(13, 15)$]
+$$\SB(13, 15) = \frac{(k^{4}-k^{2}+1) \cdot k^{13}}{k-1} - \frac{k^{7}-k^{6}+k}{k-1}$$
+$$\boxed{= 716\,627\,741\,784\,659\,809}$$
+\end{boitecalc}
+
+\vspace{0.3cm}
+
+\paragraph{Invariant spectral (Théorème XIV.3)}
+
+L'invariant spectral relie les différences de somme entre $n=15$ et $n=10$. Comme démontré dans la section \ref{sec:invariant-spectral}, ce rapport doit être exactement $1/k$ :
+
+$$\frac{\Delta SA}{\Delta SB} = \frac{55\,125\,062\,438\,663\,321}{716\,625\,811\,702\,623\,173} = \frac{1}{13} \quad \checkmark$$
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 3 -- Construction terme à terme ($n = 15$)}
+
+Le niveau 3 construit les suites A et B terme par terme. L'observation clé est que les suites sont identiques pour $i \leq 5$ ($A = B = k^{i}$), puis un \emph{Saut Zêta} apparaît dans la suite B à $i=6$ ($k^{6} \to k^{7}$), alors que la suite A reste sur $k^{6}$. Cette asymétrie est un pilier géométrique fondamental du système.
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r r l l@{}}
+\toprule
+\rowcolor{spectralgris}
+\boldmath$i$ & \boldmath$A(13, 15, i)$ & \boldmath$B(13, 15, i)$ & \boldmath{Règles} \\
+\midrule
+1  & 13 & 13 & $k^{1}$ / $k^{1}$ \\
+2  & 169 & 169 & $k^{2}$ / $k^{2}$ \\
+3  & 2\,197 & 2\,197 & $k^{3}$ / $k^{3}$ \\
+4  & 28\,561 & 28\,561 & $k^{4}$ / $k^{4}$ \\
+5  & 371\,293 & 371\,293 & $k^{5}$ / $k^{5}$ \\
+6  & 4\,826\,809 & 62\,748\,517 & $k^{6}$ / $k^{7}$ \quad \textcolor{rouge}{Saut Zêta} \\
+7  & 62\,748\,517 & 815\,730\,721 & $k^{7}$ / $k^{8}$ \\
+8  & 815\,730\,721 & 10\,604\,499\,373 & $k^{8}$ / $k^{9}$ \\
+9  & 10\,604\,499\,373 & 137\,858\,491\,849 & $k^{9}$ / $k^{10}$ \\
+10 & 137\,858\,491\,849 & 1\,792\,160\,394\,037 & $k^{10}$ / $k^{11}$ \\
+11 & 1\,792\,160\,394\,037 & 23\,298\,085\,122\,481 & $k^{11}$ / $k^{12}$ \\
+12 & 23\,298\,085\,122\,481 & 302\,875\,106\,592\,253 & $k^{12}$ / $k^{13}$ \\
+13 & 302\,875\,106\,592\,253 & 3\,937\,376\,385\,699\,289 & $k^{13}$ / $k^{14}-k^{12}$ \\
+14 & 3\,914\,078\,300\,576\,808 & 50\,883\,017\,907\,498\,504 & $k^{14}-k^{12}$ / $k^{15}-k^{13}$ \\
+15 & 50\,883\,017\,907\,498\,504 & 661\,479\,232\,797\,480\,552 & $k^{15}-k^{13}$ / $k^{16}-k^{14}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+\begin{align*}
+\Sigma A &= \SA(13,15) = 55\,125\,210\,906\,883\,585 \\
+\Sigma B &= \SB(13,15) = 716\,627\,741\,784\,659\,809
+\end{align*}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 4 -- 4 essais Digamma ($k^{6} = 4\,826\,809$)}
+
+Les 4 essais Digamma explorent les branches $\text{pos}(n-2)\pm$ et $\text{pos}(n-3)\pm$. Pour $n=15$, tous les candidats sont \emph{composés} -- comportement attendu car ces essais sont calibrés sur $n=10$.
+
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Branche} & \textbf{État} \\
+\midrule
+pos13- & compuesto \\
+pos13+ & compuesto \\
+pos12+ & compuesto \\
+pos12- & compuesto \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 5 -- Reconstruction rang cible (méthode officielle pour $n \neq 10$)}
+
+Le Niveau 5 reconstruit $P$ via le rang spectral :
+
+\begin{boitealgo}[Reconstruction rangf -- k=13]
+\begin{description}[nosep]
+  \item[Ancrage] $P(13, n=10) = 368\,939$ (documenté dans le PDF)
+  \item[Rang de base] $\pi(368\,939) = 31\,452$
+  \item[Écart] $\Delta n = 15 - 10 = 5$
+  \item[Rang cible] $31\,452 + 5 = 31\,457$
+  \item[Résultat] $P(13, n=15) = \text{prime}(31\,457) = 369\,023$ -- \textcolor{vert}{PREMIER certifié}
+\end{description}
+\end{boitealgo}
+
+Digamma(13,15) = $716\,627\,741\,784\,659\,809 - 369\,023 \times 4\,826\,809 = 716\,625\,960\,581\,122\,202$
+
+\vspace{0.5cm}
+% --- Page 30 ---
+
+\subsubsection*{Page 30}
+
+\subsection*{4.1.3. Rapports supérieurs et structure élargie}
+
+La page 30 continue l'analyse du rapport $1/13$ avec les niveaux supérieurs et la structure complète des suites. Comme vu au Niveau 3, la structure des suites A et B révèle des propriétés intéressantes concernant la distribution des termes et les invariants spectraux.
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r l l@{}}
+\toprule
+\rowcolor{spectralgris}
+\boldmath$i$ & \textbf{Relation} & \textbf{Observation} \\
+\midrule
+1-5  & A = B = $k^{i}$ & Suites identiques jusqu\'a $i=5$ \\
+6    & A = $k^{6}$, B = $k^{7}$ & Saut Zêta dans B uniquement \\
+7-15 & A = $k^{i}$, B = $k^{i+1}$ & Décalage constant de 1 dans B \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Digamma et validation}
+
+La formule Digamma pour k=13, n=15 donne :
+$$\text{Digamma}(13,15) = \SB - P \times k^{6} = 716\,627\,741\,784\,659\,809 - 369\,023 \times 4\,826\,809 = 716\,625\,960\,581\,122\,202$$
+
+Comme $716\,625\,960\,581\,122\,202$ n'est pas un nombre premier (il est divisible par des petits premiers), la méthode de rang cible au Niveau 5 est nécessaire pour trouver le premier certifié $P = 369\,023$.
+
+\vspace{0.5cm}
+
+\subsection*{4.2. Rapport 1/42 ($k = 42$, $n = 15$)}
+
+Ce rapport illustre comment les valeurs de $k$ plus grandes affectent la structure du système, avec des calculs impliquant des nombres de l'ordre de $10^{24}$ et nécessitant l'arithmétique entière Python.
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 1 -- Constantes Savard universelles}
+
+Pour $k=42$, les constantes sont :
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Constante} & \textbf{Formule} & \textbf{Valeur exacte} \\
+\midrule
+$\alpha_A(42)$ & Formule générique & $\frac{3\,109\,933}{1\,518\,804}$ \\
+$\alpha_B(42)$ & $42 \cdot \alpha_A(42)$ & $\frac{3\,109\,933}{36\,162}$ \\
+$\delta_A(42)$ & $\frac{42}{41}$ & $\frac{42}{41}$ \\
+$\delta_B(42)$ & Formule & $\frac{225\,050\,301\,546}{41}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 2 -- Formules fermées de SA et SB}
+
+$$\SA(42, 15) = 2\,285\,381\,254\,365\,702\,554\,104\,806$$
+$$\SB(42, 15) = 95\,986\,012\,683\,359\,501\,783\,370\,150$$
+$$\frac{\Delta SA}{\Delta SB} = \frac{1}{42} \quad \checkmark$$
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 3 -- Construction terme à terme ($n = 15$)}
+
+Les suites continuent le pattern observé précédemment avec le Saut Zêta à $i=6$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r r l@{}}
+\toprule
+\rowcolor{spectralgris}
+\boldmath$i$ & \boldmath$A(42, 15, i)$ & \boldmath$B(42, 15, i)$ & \boldmath{Règles} \\
+\midrule
+1  & 42 & 42 & $k^{1}$ / $k^{1}$ \\
+2  & 1\,764 & 1\,764 & $k^{2}$ / $k^{2}$ \\
+3  & 74\,088 & 74\,088 & $k^{3}$ / $k^{3}$ \\
+4  & 3\,111\,696 & 3\,111\,696 & $k^{4}$ / $k^{4}$ \\
+5  & 130\,691\,232 & 130\,691\,232 & $k^{5}$ / $k^{5}$ \\
+6  & 5\,489\,031\,744 & 23\,053\,933\,248 & $k^{6}$ / $k^{7}$ \quad \textcolor{rouge}{Saut Zêta} \\
+7  & 23\,053\,933\,248 & 9\,682\,651\,996\,416 & $k^{7}$ / $k^{8}$ \\
+8  & 9\,682\,651\,996\,416 & 406\,671\,383\,849\,472 & $k^{8}$ / $k^{9}$ \\
+9  & 406\,671\,383\,849\,472 & 17\,080\,198\,121\,677\,824 & $k^{9}$ / $k^{10}$ \\
+10 & 17\,080\,198\,121\,677\,824 & 717\,368\,321\,110\,468\,608 & $k^{10}$ / $k^{11}$ \\
+11 & 717\,368\,321\,110\,468\,608 & 30\,129\,469\,486\,639\,681\,536 & $k^{11}$ / $k^{12}$ \\
+12 & 30\,129\,469\,486\,639\,681\,536 & 1\,265\,437\,718\,438\,866\,624\,512 & $k^{12}$ / $k^{13}$ \\
+13 & 1\,265\,437\,718\,438\,866\,624\,512 & 53\,148\,384\,174\,432\,398\,229\,504 & $k^{13}$ / $k^{14}-k^{12}$ \\
+14 & 53\,148\,384\,174\,432\,398\,229\,504 & 2\,230\,966\,697\,607\,721\,859\,014\,656 & $k^{14}-k^{12}$ / $k^{15}-k^{13}$ \\
+15 & 2\,230\,966\,697\,607\,721\,859\,014\,656 & 93\,700\,601\,299\,524\,318\,078\,615\,552 & $k^{15}-k^{13}$ / $k^{16}-k^{14}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+$\Sigma A = 2\,285\,381\,254\,365\,702\,554\,104\,806$
+$\Sigma B = 95\,986\,012\,683\,359\,501\,783\,370\,150$
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 4 -- 4 essais Digamma ($k^{6} = 5\,489\,031\,744$)}
+
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Branche} & \textbf{État} \\
+\midrule
+pos13- & compuesto \\
+pos13+ & compuesto \\
+pos12+ & compuesto \\
+pos12- & compuesto \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 5 -- Reconstruction rangf k=42}
+
+\begin{boitealgo}[Reconstruction rangf -- k=42]
+\begin{description}[nosep]
+  \item[Ancrage] $P(42, n=10) = 130\,617\,143$
+  \item[Rang de base] $7\,411\,117$
+  \item[Écart] $\Delta n = 5$
+  \item[Rang cible] $7\,411\,122$
+  \item[Résultat] $P(42, n=15) = 130\,617\,251$ -- \textcolor{vert}{PREMIER certifié}
+\end{description}
+\end{boitealgo}
+
+Digamma(42,15) = $95\,986\,011\,966\,397\,264\,730\,354\,406$
+
+\vspace{0.5cm}
+
+% --- Page 32 ---
+
+\subsubsection*{Page 32}
+
+\subsection*{4.3. Rapport 1/54 ($k = 54$, $n = 15$)}
+
+Ce troisième rapport démontre la pattern général avec $k=54$, montrant des valeurs encore plus grandes et renforçant la validité de la loi de rang spectral à travers plusieurs valeurs de $k$.
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 1 -- Constantes Savard universelles}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Constante} & \textbf{Formule} & \textbf{Valeur exacte} \\
+\midrule
+$\alpha_A(54)$ & Formule générique & $\frac{8\,500\,141}{4\,172\,796}$ \\
+$\alpha_B(54)$ & $54 \cdot \alpha_A(54)$ & $\frac{8\,500\,141}{77\,274}$ \\
+$\delta_A(54)$ & $\frac{54}{53}$ & $\frac{54}{53}$ \\
+$\delta_B(54)$ & Formule & $\frac{1\,314\,130\,298\,742}{53}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 2 -- Formules fermées de SA et SB}
+
+$$\SA(54, 15) = 98\,599\,651\,085\,954\,948\,762\,648\,034$$
+$$\SB(54, 15) = 5\,324\,381\,158\,641\,567\,208\,388\,082\,594$$
+$$\frac{\Delta SA}{\Delta SB} = \frac{1}{54} \quad \checkmark$$
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 3 -- Construction terme à terme ($n = 15$)}
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r l l@{}}
+\toprule
+\rowcolor{spectralgris}
+\boldmath$i$ & \boldmath$A$ / $\boldmath{B$ & \boldmath{Règles} \\
+\midrule
+1-5  & identiques & $k^{1}$ à $k^{5}$ / $k^{1}$ à $k^{5}$ \\
+6  & A: 24\,794\,911\,296 / B: 1\,338\,925\,209\,984 & $k^{6}$ / $k^{7}$ \quad \textcolor{rouge}{Saut Zêta} \\
+7  & 1\,338\,925\,209\,984 / 72\,301\,961\,339\,136 & $k^{7}$ / $k^{8}$ \\
+8  & 72\,301\,961\,339\,136 / 3\,904\,305\,912\,313\,344 & $k^{8}$ / $k^{9}$ \\
+9  & 3\,904\,305\,912\,313\,344 / 210\,832\,519\,264\,920\,576 & $k^{9}$ / $k^{10}$ \\
+10 & 210\,832\,519\,264\,920\,576 / 11\,384\,956\,040\,305\,711\,104 & $k^{10}$ / $k^{11}$ \\
+11 & 11\,384\,956\,040\,305\,711\,104 / 614\,787\,626\,176\,508\,399\,616 & $k^{11}$ / $k^{12}$ \\
+12 & 614\,787\,626\,176\,508\,399\,616 / 33\,198\,531\,813\,531\,453\,579\,264 & $k^{12}$ / $k^{13}$ \\
+13 & 33\,198\,531\,813\,531\,453\,579\,264 / 1\,792\,720\,717\,930\,698\,493\,280\,256 & $k^{13}$ / $k^{14}-k^{12}$ \\
+14 & 1\,792\,105\,930\,304\,521\,984\,880\,640 / 96\,773\,720\,236\,444\,187\,183\,554\,560 & $k^{14}-k^{12}$ / $k^{15}-k^{13}$ \\
+15 & 96\,773\,720\,236\,444\,187\,183\,554\,560 / 5\,225\,780\,892\,767\,986\,107\,911\,946\,240 & $k^{15}-k^{13}$ / $k^{16}-k^{14}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+$\Sigma A = 98\,599\,651\,085\,954\,948\,762\,648\,034$
+$\Sigma B = 5\,324\,381\,158\,641\,567\,208\,388\,082\,594$
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 4 -- 4 essais Digamma ($k^{6} = 24\,794\,911\,296$)}
+
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Branche} & \textbf{État} \\
+\midrule
+pos13- & compuesto \\
+pos13+ & compuesto \\
+pos12+ & compuesto \\
+pos12- & compuesto \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 5 -- Reconstruction rangf k=54}
+
+\begin{boitealgo}[Reconstruction rangf -- k=54]
+\begin{description}[nosep]
+  \item[Ancrage] $P(54, n=10) = 459\,010\,529$
+  \item[Rang de base] $24\,304\,918$
+  \item[Écart] $\Delta n = 5$
+  \item[Rang cible] $24\,304\,923$
+  \item[Résultat] $P(54, n=15) = 459\,010\,597$ -- \textcolor{vert}{PREMIER certifié}
+\end{description}
+\end{boitealgo}
+
+Digamma(54,15) = $5\,324\,381\,147\,260\,440\,171\,849\,078\,882$
+
+\vspace{0.5cm}
+
+% --- Tableau récapitulatif ---
+
+\subsubsection*{4.4. Tableau récapitulatif final -- $P(1/k, n = 15)$}
+
+\begin{center}
+\small
+\begin{tabular}{@{}cccccccc@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & $\SA(k, 15)$ & $\SB(k, 15)$ & rang\_base & rang\_cible & $P(k, n=15)$ & $P(k, n=10)$ & \textbf{État} \\
+\midrule
+13 & $5.5 \times 10^{16}$ & $7.2 \times 10^{17}$ & 31\,452 & 31\,457 & 369\,023 & 368\,939 & \textcolor{vert}{CERTIFIÉ} \\
+42 & $2.29 \times 10^{24}$ & $9.6 \times 10^{25}$ & 7\,411\,117 & 7\,411\,122 & 130\,617\,251 & 130\,617\,143 & \textcolor{vert}{CERTIFIÉ} \\
+54 & $9.86 \times 10^{25}$ & $5.32 \times 10^{27}$ & 24\,304\,918 & 24\,304\,923 & 459\,010\,597 & 459\,010\,529 & \textcolor{vert}{CERTIFIÉ} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+% --- Notes critiques ---
+
+\subsubsection*{4.5. Notes critiques pour l'agent}
+
+\begin{boitenote}[1. Saut Zêta -- Asymétrie A/B confirmée]
+La correction validée : $A(k, n, i) = k^{i}$ pour $1 \leq i \leq n-2$ (pas de Saut Zêta dans A). Le Saut Zêta $k^{7}$ à $i=6$ n'existe que dans B. Les suites A et B sont identiques pour $i \leq 5$, divergent à partir de $i=6$.
+\end{boitenote}
+
+\vspace{0.3cm}
+
+\begin{boitenote}[2. Niveau 4 hors-calibrage pour $n \neq 10$]
+Les 4 essais Digamma $\text{pos}(n-2)\pm, \text{pos}(n-3)\pm)$ produisent tous des candidats \emph{composés} pour $n=15$ -- ce comportement est attendu. Ces essais sont calibrés sur $n=10$ ; le Niveau 5 est la voie officielle pour tout $n \neq 10$.
+\end{boitenote}
+
+\vspace{0.3cm}
+
+\begin{boitenote}[3. Niveau 5 -- Formule rang\_cible]
+\begin{verbatim}
+rang_base(k)       = primepi(P(k, n=10))   # rang du P certifié à n=10
+rang_cible(k, n)   = rang_base(k) + (n - 10)
+P(k, n)            = prime(rang_cible(k, n))  # arithmétique exacte sympy
+\end{verbatim}
+L'écart $+\Delta n = +5$ (pour $\Delta n = 5$) est cohérent pour les 3 valeurs de $k$, confirmant l'universalité de la loi de rang spectral.
+\end{boitenote}
+
+\vspace{0.3cm}
+
+\begin{boitenote}[4. Invariant spectral (Théorème XIV.3) -- Vérifié]
+$$\frac{\Delta SA(k, n=15, n=10)}{\Delta SB(k, n=15, n=10)} = \frac{1}{k} \quad \text{pour } k \in \{13, 42, 54\}$$
+\end{boitenote}
+
+\vspace{0.3cm}
+
+\begin{boitenote}[5. Arithmétique -- Seuils de dépassement float]
+\begin{center}
+\small
+\begin{tabular}{@{}clcc@{}}
+\toprule
+\rowcolor{spectralgris}
+$k$ & $\SA(k, 15)$ & \textbf{Ordre de grandeur} & \textbf{Sécurité float64} \\
+\midrule
+13 & $55\,125\,210\,906\,883\,585$ & $\sim 5.5 \times 10^{16}$ & limite \\
+42 & $2.285 \times 10^{24}$ & $\sim 10^{24}$ & erreur garantie \\
+54 & $9.86 \times 10^{25}$ & $\sim 10^{25}$ & erreur garantie \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{boitenote}
+
+\vspace{0.3cm}
+
+\begin{boitealerte}[Arithmétique entière Python obligatoire]
+$\rightarrow$ Arithmétique entière Python obligatoire dès $k \geq 42$ pour $n=15$. Excel / float64 introduiraient des erreurs d'arrondi fatales.
+\end{boitealerte}
+
+\vspace{0.5cm}
+
+% --- Page 36 ---
+
+\subsubsection*{Page 36}
+
+\subsection*{Comparaison structurelle entre les géométries du spectre des nombres premiers et les zéros non triviaux de la fonction zêta de Riemann}
+
+La fonction zêta de Riemann encode les nombres premiers dans le plan complexe via la relation fondamentale :
+
+$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^{s}}$$
+
+\begin{boiteexo}[Zéros non triviaux de $\zeta(s)$]
+Les zéros non triviaux de $\zeta(s)$ se situent dans la bande critique $0 < \text{Re}(s) < 1$, et leur distribution est décrite par la formule asymptotique :
+$$N(T) \sim \frac{T}{2\pi} \log\!\left(\frac{T}{2\pi}\right) - \frac{T}{2\pi}, \quad \text{où } N(T) = \#\{t : |\Im(\rho)| \leq T\}$$
+\end{boiteexo}
+
+Cette loi est presque linéaire en $T$, modulée par un facteur logarithmique. Dans la géométrie du spectre des nombres premiers, la situation est fondamentalement différente : il ne s'agit pas de compter des zéros, mais de \emph{reconstruire} des nombres premiers à partir de rapports typiques et non typiques $1/k$.
+
+Chaque rapport $1/k$ produit un entier $P(k)$, qui peut être un nombre premier ou un composé. Les rapports typiques et non typiques qui possèdent un ancrage pour $n=10$ -- comme démontré précédemment -- retournent un élément de l'ensemble complet des nombres premiers $\mathcal{P}$. Inversement, lorsque le système convolutif (et l'équation qui permet la reconstruction des premiers pour des rapports multiples) ne trouve aucun ancrage, aucun nombre premier n'est retourné pour l'ensemble $\mathcal{P}$.
+
+\paragraph{Rapport typique $1/k = 1/2$}
+
+Pour $n=10$, le rapport typique $1/k = 1/2$ retourne l'ancrage $P = 29$. Dans ce cas, la valeur de $n$ correspond exactement à la position du nombre premier dans l'ordre chronologique des premiers.
+
+\paragraph{Rapports non typiques $1/k \neq 1/2$}
+
+Pour les rapports non typiques, la valeur de $n$ ne représente que la quantité de termes dans les suites A et B. Le nombre premier retourné ne correspond pas à sa position dans l'ordre des premiers.
+
+\vspace{0.5cm}
+
+Comparaison entre la géométrie du spectre des nombres premiers et la fonction zêta de Riemann -- analyse des invariants communs et de la conjecture de Riemann dans le cadre de la méthode spectrale Savard.

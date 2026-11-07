@@ -1,0 +1,232 @@
+name: Certification de provenance - Geometrie du Spectre des Nombres Premiers
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  validation-institutionnelle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    env:
+      ISABELLE_VERSION: Isabelle2025-2
+      # Taille officielle (octets) et SHA256 de Isabelle2025-2_linux.tar.gz
+      ISABELLE_TARBALL: Isabelle2025-2_linux.tar.gz
+      ISABELLE_MIN_BYTES: "1200000000"
+      ISABELLE_SHA256: 8f187496e295f169952e944745af9e4ae00c9c1cd2ed4cadbcf7d898e444913e
+      SESSION_NAME: Geometrie_Spectre_Premier_Philippe_Thomas_Savard
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache Isabelle 2025-2
+        id: isabelle-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/isabelle
+          key: isabelle-2025-2-linux-v1
+
+      - name: Install Isabelle 2025-2 (robuste, verifie)
+        if: steps.isabelle-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y wget tar coreutils
+          mkdir -p /tmp/isabelle
+          cd /tmp/isabelle
+
+          MIRRORS=(
+            "https://isabelle.in.tum.de/website-Isabelle2025-2/dist/${ISABELLE_TARBALL}"
+            "https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/${ISABELLE_TARBALL}"
+            "https://downloads.sourceforge.net/projects/isabelle/files/Isabelle2025-2/${ISABELLE_TARBALL}/download"
+          )
+
+          success=0
+          for url in "${MIRRORS[@]}"; do
+            echo "::group::Telechargement : ${url}"
+            if wget --tries=3 --timeout=120 -O "${ISABELLE_TARBALL}" "${url}"; then
+              size=$(stat -c%s "${ISABELLE_TARBALL}" 2>/dev/null || echo 0)
+              echo "Taille telechargee : ${size} octets"
+              if [ "${size}" -gt "${ISABELLE_MIN_BYTES}" ]; then
+                echo "Telechargement OK"
+                success=1
+                echo "::endgroup::"
+                break
+              else
+                echo "Archive trop petite (${size} octets), miroir suivant."
+              fi
+            else
+              echo "Echec wget sur ce miroir."
+            fi
+            echo "::endgroup::"
+          done
+
+          if [ "${success}" -ne 1 ]; then
+            echo "::error::Aucun miroir Isabelle n'a fourni une archive valide."
+            exit 8
+          fi
+
+          echo "Verification SHA256..."
+          echo "${ISABELLE_SHA256}  ${ISABELLE_TARBALL}" | sha256sum -c -
+
+          echo "Extraction..."
+          tar -xzf "${ISABELLE_TARBALL}"
+
+          # Verification explicite AVANT tout build : le binaire doit exister
+          if [ ! -x "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle" ]; then
+            echo "::error::Extraction echouee : /tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle absent."
+            ls -la /tmp/isabelle || true
+            exit 9
+          fi
+          echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"
+
+      - name: Restore Isabelle PATH (cache-hit ou frais)
+        run: |
+          set -euo pipefail
+          echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"
+          test -x "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle"
+
+      - name: Verify Isabelle installation (minimale)
+        run: |
+          set -euo pipefail
+          isabelle version
+
+      - name: Show repository layout
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 3 \( -name ROOT -o -name 'methode_spectral.thy' \) | sort
+
+      - name: Build Isabelle session
+        # La session est definie dans theories/ROOT (structure sans prefixe).
+        working-directory: theories
+        run: |
+          set -euo pipefail
+          isabelle build -d . -v "${SESSION_NAME}" 2>&1 | tee "${GITHUB_WORKSPACE}/isabelle_build.log"
+
+      - name: SHA256 session manifest (attestation cryptographique complete)
+        if: success()
+        run: |
+          set -euo pipefail
+          cd "${GITHUB_WORKSPACE}"
+          {
+            echo "# SHA256 — session ${SESSION_NAME}"
+            echo "# Auteur : Philippe Thomas Savard — Le dix-huit octobre deux mille vingt-six — Levis, Chaudiere-Appalaches, Canada"
+            echo "# Genere apres compilation reussie de la session complete."
+            sha256sum theories/ROOT
+            for f in theories/MS_01_Fondements.thy theories/MS_02_Suites_AB_RsP_1_2.thy theories/MS_03_Digamma_Equation_Generale.thy theories/MS_04_Generalisation_Prime_i.thy theories/MS_05_Modeles_1_3_1_4.thy theories/MS_06_Mixtes_Negatives_Asymetries.thy theories/MS_07_Comparaison_Blocs.thy theories/MS_08_Ecarts_Negatifs.thy theories/MS_09_Preuve_Absurde.thy theories/MS_10_Ecarts_Mixtes_Positifs.thy theories/MS_11_Construction_SpectralFamily.thy theories/MS_12_Construction_Generalisee_1k.thy theories/MS_13_Pont_Savard.thy theories/MS_14_Systeme_Convolutif.thy theories/validation_hol_unifiee.thy theories/validation_zeta_lean.thy theories/README.thy; do sha256sum "$f"; done
+            sha256sum isabelle_build.log
+          } | tee SHA256SUMS_session.txt
+          sha256sum -c SHA256SUMS_session.txt --ignore-missing
+
+      - name: Create explicit attestation payload (identite + SHA256)
+        if: success()
+        run: |
+          set -euo pipefail
+          CKSUM="$(sha256sum SHA256SUMS_session.txt | cut -d' ' -f1)"
+          cat > attestation_payload.json <<EOF
+          {
+            "schemaVersion": 1,
+            "session": "${SESSION_NAME}",
+            "root": "theories/ROOT",
+            "author": "Philippe Thomas Savard",
+            "date": "Le dix-huit octobre deux mille vingt-six",
+            "place": "Levis, Chaudiere-Appalaches, Canada",
+            "isabelle": "${ISABELLE_VERSION}",
+            "manifest": "SHA256SUMS_session.txt",
+            "manifestSha256": "${CKSUM}",
+            "files": [
+              "theories/ROOT",
+              "theories/MS_01_Fondements.thy",
+              "theories/MS_02_Suites_AB_RsP_1_2.thy",
+              "theories/MS_03_Digamma_Equation_Generale.thy",
+              "theories/MS_04_Generalisation_Prime_i.thy",
+              "theories/MS_05_Modeles_1_3_1_4.thy",
+              "theories/MS_06_Mixtes_Negatives_Asymetries.thy",
+              "theories/MS_07_Comparaison_Blocs.thy",
+              "theories/MS_08_Ecarts_Negatifs.thy",
+              "theories/MS_09_Preuve_Absurde.thy",
+              "theories/MS_10_Ecarts_Mixtes_Positifs.thy",
+              "theories/MS_11_Construction_SpectralFamily.thy",
+              "theories/MS_12_Construction_Generalisee_1k.thy",
+              "theories/MS_13_Pont_Savard.thy",
+              "theories/MS_14_Systeme_Convolutif.thy",
+              "theories/validation_hol_unifiee.thy",
+              "theories/validation_zeta_lean.thy",
+              "theories/README.thy",
+              "isabelle_build.log"
+            ],
+            "coAuthors": [
+              "Emergent.sh E1",
+              "Gordon Docker Desktop",
+              "Copilot Microsoft"
+            ],
+            "statement": "Attestation cryptographique SHA256 de la compilation complete de la session : chaque fichier ci-dessus a ete reconstruit par isabelle build et son empreinte figure dans SHA256SUMS_session.txt. These assistants contributed remarkably and their contribution is invaluable for Philippe Thomas Savard."
+          }
+          EOF
+          cat attestation_payload.json
+
+      - name: Generate build provenance attestation
+        if: success()
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            SHA256SUMS_session.txt
+            attestation_payload.json
+            isabelle_build.log
+            theories/ROOT
+            theories/MS_01_Fondements.thy
+            theories/MS_02_Suites_AB_RsP_1_2.thy
+            theories/MS_03_Digamma_Equation_Generale.thy
+            theories/MS_04_Generalisation_Prime_i.thy
+            theories/MS_05_Modeles_1_3_1_4.thy
+            theories/MS_06_Mixtes_Negatives_Asymetries.thy
+            theories/MS_07_Comparaison_Blocs.thy
+            theories/MS_08_Ecarts_Negatifs.thy
+            theories/MS_09_Preuve_Absurde.thy
+            theories/MS_10_Ecarts_Mixtes_Positifs.thy
+            theories/MS_11_Construction_SpectralFamily.thy
+            theories/MS_12_Construction_Generalisee_1k.thy
+            theories/MS_13_Pont_Savard.thy
+            theories/MS_14_Systeme_Convolutif.thy
+            theories/validation_hol_unifiee.thy
+            theories/validation_zeta_lean.thy
+            theories/README.thy
+
+      - name: Upload attestation payload artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: session-attestation-philippe-thomas-savard
+          path: |
+            attestation_payload.json
+            SHA256SUMS_session.txt
+            isabelle_build.log
+            theories/ROOT
+            theories/MS_01_Fondements.thy
+            theories/MS_02_Suites_AB_RsP_1_2.thy
+            theories/MS_03_Digamma_Equation_Generale.thy
+            theories/MS_04_Generalisation_Prime_i.thy
+            theories/MS_05_Modeles_1_3_1_4.thy
+            theories/MS_06_Mixtes_Negatives_Asymetries.thy
+            theories/MS_07_Comparaison_Blocs.thy
+            theories/MS_08_Ecarts_Negatifs.thy
+            theories/MS_09_Preuve_Absurde.thy
+            theories/MS_10_Ecarts_Mixtes_Positifs.thy
+            theories/MS_11_Construction_SpectralFamily.thy
+            theories/MS_12_Construction_Generalisee_1k.thy
+            theories/MS_13_Pont_Savard.thy
+            theories/MS_14_Systeme_Convolutif.thy
+            theories/validation_hol_unifiee.thy
+            theories/validation_zeta_lean.thy
+            theories/README.thy
+          retention-days: 90

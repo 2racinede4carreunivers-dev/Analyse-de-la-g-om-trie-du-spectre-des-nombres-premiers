@@ -1,0 +1,1560 @@
+﻿================================================================================
+ REQUETE MULTI-RATIO v7.9 | n=10 | 1000 rapport(s) 1/k | k_min=2 k_max=1001
+================================================================================
+  1/2              (typique    ) | ancre=29 | P(n=10)=29 | [PREMIER TROUVE]
+  1/3              (non typique) | ancre=227 | P(n=10)=227 | [PREMIER TROUVE]
+  1/4              (non typique) | ancre=947 | P(n=10)=947 | [PREMIER TROUVE]
+  1/5              (non typique) | ancre=2999 | P(n=10)=2999 | [PREMIER TROUVE]
+  1/6              (non typique) | ancre=7529 | P(n=10)=7529 | [PREMIER TROUVE]
+  1/7              (non typique) | ancre=16519 | P(n=10)=16519 | [PREMIER TROUVE]
+  1/8              (non typique) | ancre=32327 | P(n=10)=32327 | [PREMIER TROUVE]
+  1/9              (non typique) | ancre=58337 | P(n=10)=58337 | [PREMIER TROUVE]
+  1/10             (non typique) [DYN] | ancre=99109 | P(n=10)=99109 | [PREMIER TROUVE]
+  1/11             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=11 (4 Digamma testes).
+  1/12             (non typique) [DYN] | ancre=247259 | P(n=10)=247259 | [PREMIER TROUVE]
+  1/13             (non typique) [DYN] | ancre=368939 | P(n=10)=368939 | [PREMIER TROUVE]
+  1/14             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=14 (4 Digamma testes).
+  1/15             (non typique) [DYN] | ancre=755789 | P(n=10)=755789 | [PREMIER TROUVE]
+  1/16             (non typique) [DYN] | ancre=1044751 | P(n=10)=1044751 | [PREMIER TROUVE]
+  1/17             (non typique) [DYN] | ancre=1414943 | P(n=10)=1414943 | [PREMIER TROUVE]
+  1/18             (non typique) [DYN] | ancre=1883429 | P(n=10)=1883429 | [PREMIER TROUVE]
+  1/19             (non typique) [DYN] | ancre=2469277 | P(n=10)=2469277 | [PREMIER TROUVE]
+  1/20             (non typique) [DYN] | ancre=3192419 | P(n=10)=3192419 | [PREMIER TROUVE]
+  1/21             (non typique) [DYN] | ancre=4074419 | P(n=10)=4074419 | [PREMIER TROUVE]
+  1/22             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=22 (4 Digamma testes).
+  1/23             (non typique) [DYN] | ancre=6424727 | P(n=10)=6424727 | [PREMIER TROUVE]
+  1/24             (non typique) [DYN] | ancre=7949399 | P(n=10)=7949399 | [PREMIER TROUVE]
+  1/25             (non typique) [DYN] | ancre=9750649 | P(n=10)=9750649 | [PREMIER TROUVE]
+  1/26             (non typique) [DYN] | ancre=11863799 | P(n=10)=11863799 | [PREMIER TROUVE]
+  1/27             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=27 (4 Digamma testes).
+  1/28             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=28 (4 Digamma testes).
+  1/29             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=29 (4 Digamma testes).
+  1/30             (non typique) [DYN] | ancre=24273929 | P(n=10)=24273929 | [PREMIER TROUVE]
+  1/31             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=31 (4 Digamma testes).
+  1/32             (non typique) [DYN] | ancre=33522719 | P(n=10)=33522719 | [PREMIER TROUVE]
+  1/33             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=33 (4 Digamma testes).
+  1/34             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=34 (4 Digamma testes).
+  1/35             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=35 (4 Digamma testes).
+  1/36             (non typique) [DYN] | ancre=60420851 | P(n=10)=60420851 | [PREMIER TROUVE]
+  1/37             (non typique) [DYN] | ancre=69293303 | P(n=10)=69293303 | [PREMIER TROUVE]
+  1/38             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=38 (4 Digamma testes).
+  1/39             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=39 (4 Digamma testes).
+  1/40             (non typique) [DYN] | ancre=102337639 | P(n=10)=102337639 | [PREMIER TROUVE]
+  1/41             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=41 (4 Digamma testes).
+  1/42             (non typique) [DYN] | ancre=130617143 | P(n=10)=130617143 | [PREMIER TROUVE]
+  1/43             (non typique) [DYN] | ancre=146929021 | P(n=10)=146929021 | [PREMIER TROUVE]
+  1/44             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=44 (4 Digamma testes).
+  1/45             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=45 (4 Digamma testes).
+  1/46             (non typique) [DYN] | ancre=205867801 | P(n=10)=205867801 | [PREMIER TROUVE]
+  1/47             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=47 (4 Digamma testes).
+  1/48             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=48 (4 Digamma testes).
+  1/49             (non typique) [DYN] | ancre=282357599 | P(n=10)=282357599 | [PREMIER TROUVE]
+  1/50             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=50 (4 Digamma testes).
+  1/51             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=51 (4 Digamma testes).
+  1/52             (non typique) [DYN] | ancre=380066179 | P(n=10)=380066179 | [PREMIER TROUVE]
+  1/53             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=53 (4 Digamma testes).
+  1/54             (non typique) [DYN] | ancre=459010529 | P(n=10)=459010529 | [PREMIER TROUVE]
+  1/55             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=55 (4 Digamma testes).
+  1/56             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=56 (4 Digamma testes).
+  1/57             (non typique) [DYN] | ancre=601506977 | P(n=10)=601506977 | [PREMIER TROUVE]
+  1/58             (non typique) [DYN] | ancre=656165077 | P(n=10)=656165077 | [PREMIER TROUVE]
+  1/59             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=59 (4 Digamma testes).
+  1/60             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=60 (4 Digamma testes).
+  1/61             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=61 (4 Digamma testes).
+  1/62             (non typique) [DYN] | ancre=915894503 | P(n=10)=915894503 | [PREMIER TROUVE]
+  1/63             (non typique) [DYN] | ancre=992182589 | P(n=10)=992182589 | [PREMIER TROUVE]
+  1/64             (non typique) [DYN] | ancre=1073483839 | P(n=10)=1073483839 | [PREMIER TROUVE]
+  1/65             (non typique) [DYN] | ancre=1160020289 | P(n=10)=1160020289 | [PREMIER TROUVE]
+  1/66             (non typique) [DYN] | ancre=1252049501 | P(n=10)=1252049501 | [PREMIER TROUVE]
+  1/67             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=67 (4 Digamma testes).
+  1/68             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=68 (4 Digamma testes).
+  1/69             (non typique) [DYN] | ancre=1563702839 | P(n=10)=1563702839 | [PREMIER TROUVE]
+  1/70             (non typique) [DYN] | ancre=1680356999 | P(n=10)=1680356999 | [PREMIER TROUVE]
+  1/71             (non typique) [DYN] | ancre=1803876551 | P(n=10)=1803876551 | [PREMIER TROUVE]
+  1/72             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=72 (4 Digamma testes).
+  1/73             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=73 (4 Digamma testes).
+  1/74             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=74 (4 Digamma testes).
+  1/75             (non typique) [DYN] | ancre=2372624999 | P(n=10)=2372624999 | [PREMIER TROUVE]
+  1/76             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=76 (4 Digamma testes).
+  1/77             (non typique) [DYN] | ancre=2706333629 | P(n=10)=2706333629 | [PREMIER TROUVE]
+  1/78             (non typique) [DYN] | ancre=2886705977 | P(n=10)=2886705977 | [PREMIER TROUVE]
+  1/79             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=79 (4 Digamma testes).
+  1/80             (non typique) [DYN] | ancre=3276294479 | P(n=10)=3276294479 | [PREMIER TROUVE]
+  1/81             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=81 (4 Digamma testes).
+  1/82             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=82 (4 Digamma testes).
+  1/83             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=83 (4 Digamma testes).
+  1/84             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=84 (4 Digamma testes).
+  1/85             (non typique) [DYN] | ancre=4436438999 | P(n=10)=4436438999 | [PREMIER TROUVE]
+  1/86             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=86 (4 Digamma testes).
+  1/87             (non typique) [DYN] | ancre=4983550877 | P(n=10)=4983550877 | [PREMIER TROUVE]
+  1/88             (non typique) [DYN] | ancre=5276645527 | P(n=10)=5276645527 | [PREMIER TROUVE]
+  1/89             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=89 (4 Digamma testes).
+  1/90             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=90 (4 Digamma testes).
+  1/91             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=91 (4 Digamma testes).
+  1/92             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=92 (4 Digamma testes).
+  1/93             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=93 (4 Digamma testes).
+  1/94             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=94 (4 Digamma testes).
+  1/95             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=95 (4 Digamma testes).
+  1/96             (non typique) [DYN] | ancre=8152842431 | P(n=10)=8152842431 | [PREMIER TROUVE]
+  1/97             (non typique) [DYN] | ancre=8586418271 | P(n=10)=8586418271 | [PREMIER TROUVE]
+  1/98             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=98 (4 Digamma testes).
+  1/99             (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=99 (4 Digamma testes).
+  1/100            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=100 (4 Digamma testes).
+  1/101            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=101 (4 Digamma testes).
+  1/102            (non typique) [DYN] | ancre=11039747027 | P(n=10)=11039747027 | [PREMIER TROUVE]
+  1/103            (non typique) [DYN] | ancre=11591637509 | P(n=10)=11591637509 | [PREMIER TROUVE]
+  1/104            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=104 (4 Digamma testes).
+  1/105            (non typique) [DYN] | ancre=12761657999 | P(n=10)=12761657999 | [PREMIER TROUVE]
+  1/106            (non typique) [DYN] | ancre=13381076101 | P(n=10)=13381076101 | [PREMIER TROUVE]
+  1/107            (non typique) [DYN] | ancre=14024303819 | P(n=10)=14024303819 | [PREMIER TROUVE]
+  1/108            (non typique) [DYN] | ancre=14692021271 | P(n=10)=14692021271 | [PREMIER TROUVE]
+  1/109            (non typique) [DYN] | ancre=15384932747 | P(n=10)=15384932747 | [PREMIER TROUVE]
+  1/110            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=110 (4 Digamma testes).
+  1/111            (non typique) [DYN] | ancre=16849226351 | P(n=10)=16849226351 | [PREMIER TROUVE]
+  1/112            (non typique) [DYN] | ancre=17621999471 | P(n=10)=17621999471 | [PREMIER TROUVE]
+  1/113            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=113 (4 Digamma testes).
+  1/114            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=114 (4 Digamma testes).
+  1/115            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=115 (4 Digamma testes).
+  1/116            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=116 (4 Digamma testes).
+  1/117            (non typique) [DYN] | ancre=21922892549 | P(n=10)=21922892549 | [PREMIER TROUVE]
+  1/118            (non typique) [DYN] | ancre=22875920729 | P(n=10)=22875920729 | [PREMIER TROUVE]
+  1/119            (non typique) [DYN] | ancre=23861851439 | P(n=10)=23861851439 | [PREMIER TROUVE]
+  1/120            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=120 (4 Digamma testes).
+  1/121            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=121 (4 Digamma testes).
+  1/122            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=122 (4 Digamma testes).
+  1/123            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=123 (4 Digamma testes).
+  1/124            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=124 (4 Digamma testes).
+  1/125            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=125 (4 Digamma testes).
+  1/126            (non typique) [DYN] | ancre=31755969251 | P(n=10)=31755969251 | [PREMIER TROUVE]
+  1/127            (non typique) [DYN] | ancre=33036321277 | P(n=10)=33036321277 | [PREMIER TROUVE]
+  1/128            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=128 (4 Digamma testes).
+  1/129            (non typique) [DYN] | ancre=35720904959 | P(n=10)=35720904959 | [PREMIER TROUVE]
+  1/130            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=130 (4 Digamma testes).
+  1/131            (non typique) [DYN] | ancre=38577241559 | P(n=10)=38577241559 | [PREMIER TROUVE]
+  1/132            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=132 (4 Digamma testes).
+  1/133            (non typique) [DYN] | ancre=41613461077 | P(n=10)=41613461077 | [PREMIER TROUVE]
+  1/134            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=134 (4 Digamma testes).
+  1/135            (non typique) [DYN] | ancre=44837873999 | P(n=10)=44837873999 | [PREMIER TROUVE]
+  1/136            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=136 (4 Digamma testes).
+  1/137            (non typique) [DYN] | ancre=48259172009 | P(n=10)=48259172009 | [PREMIER TROUVE]
+  1/138            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=138 (4 Digamma testes).
+  1/139            (non typique) [DYN] | ancre=51886159079 | P(n=10)=51886159079 | [PREMIER TROUVE]
+  1/140            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=140 (4 Digamma testes).
+  1/141            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=141 (4 Digamma testes).
+  1/142            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=142 (4 Digamma testes).
+  1/143            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=143 (4 Digamma testes).
+  1/144            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=144 (4 Digamma testes).
+  1/145            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=145 (4 Digamma testes).
+  1/146            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=146 (4 Digamma testes).
+  1/147            (non typique) [DYN] | ancre=68638287521 | P(n=10)=68638287521 | [PREMIER TROUVE]
+  1/148            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=148 (4 Digamma testes).
+  1/149            (non typique) [DYN] | ancre=73436467799 | P(n=10)=73436467799 | [PREMIER TROUVE]
+  1/150            (non typique) [DYN] | ancre=75934124999 | P(n=10)=75934124999 | [PREMIER TROUVE]
+  1/151            (non typique) [DYN] | ancre=78499305751 | P(n=10)=78499305751 | [PREMIER TROUVE]
+  1/152            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=152 (4 Digamma testes).
+  1/153            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=153 (4 Digamma testes).
+  1/154            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=154 (4 Digamma testes).
+  1/155            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=155 (4 Digamma testes).
+  1/156            (non typique) [DYN] | ancre=92385807851 | P(n=10)=92385807851 | [PREMIER TROUVE]
+  1/157            (non typique) [DYN] | ancre=95385122663 | P(n=10)=95385122663 | [PREMIER TROUVE]
+  1/158            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=158 (4 Digamma testes).
+  1/159            (non typique) [DYN] | ancre=101617459997 | P(n=10)=101617459997 | [PREMIER TROUVE]
+  1/160            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=160 (4 Digamma testes).
+  1/161            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=161 (4 Digamma testes).
+  1/162            (non typique) [DYN] | ancre=111572849627 | P(n=10)=111572849627 | [PREMIER TROUVE]
+  1/163            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=163 (4 Digamma testes).
+  1/164            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=164 (4 Digamma testes).
+  1/165            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=165 (4 Digamma testes).
+  1/166            (non typique) [DYN] | ancre=126044726279 | P(n=10)=126044726279 | [PREMIER TROUVE]
+  1/167            (non typique) [DYN] | ancre=129887356199 | P(n=10)=129887356199 | [PREMIER TROUVE]
+  1/168            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=168 (4 Digamma testes).
+  1/169            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=169 (4 Digamma testes).
+  1/170            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=170 (4 Digamma testes).
+  1/171            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=171 (4 Digamma testes).
+  1/172            (non typique) [DYN] | ancre=150531586939 | P(n=10)=150531586939 | [PREMIER TROUVE]
+  1/173            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=173 (4 Digamma testes).
+  1/174            (non typique) [DYN] | ancre=159489426599 | P(n=10)=159489426599 | [PREMIER TROUVE]
+  1/175            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=175 (4 Digamma testes).
+  1/176            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=176 (4 Digamma testes).
+  1/177            (non typique) [DYN] | ancre=173721059777 | P(n=10)=173721059777 | [PREMIER TROUVE]
+  1/178            (non typique) [DYN] | ancre=178684262971 | P(n=10)=178684262971 | [PREMIER TROUVE]
+  1/179            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=179 (4 Digamma testes).
+  1/180            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=180 (4 Digamma testes).
+  1/181            (non typique) [DYN] | ancre=194258315521 | P(n=10)=194258315521 | [PREMIER TROUVE]
+  1/182            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=182 (4 Digamma testes).
+  1/183            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=183 (4 Digamma testes).
+  1/184            (non typique) [DYN] | ancre=210899858287 | P(n=10)=210899858287 | [PREMIER TROUVE]
+  1/185            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=185 (4 Digamma testes).
+  1/186            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=186 (4 Digamma testes).
+  1/187            (non typique) [DYN] | ancre=228662815721 | P(n=10)=228662815721 | [PREMIER TROUVE]
+  1/188            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=188 (4 Digamma testes).
+  1/189            (non typique) [DYN] | ancre=241155329057 | P(n=10)=241155329057 | [PREMIER TROUVE]
+  1/190            (non typique) [DYN] | ancre=247603040999 | P(n=10)=247603040999 | [PREMIER TROUVE]
+  1/191            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=191 (4 Digamma testes).
+  1/192            (non typique) [DYN] | ancre=260912185343 | P(n=10)=260912185343 | [PREMIER TROUVE]
+  1/193            (non typique) [DYN] | ancre=267777995521 | P(n=10)=267777995521 | [PREMIER TROUVE]
+  1/194            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=194 (4 Digamma testes).
+  1/195            (non typique) [DYN] | ancre=281943245219 | P(n=10)=281943245219 | [PREMIER TROUVE]
+  1/196            (non typique) [DYN] | ancre=289247125439 | P(n=10)=289247125439 | [PREMIER TROUVE]
+  1/197            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=197 (4 Digamma testes).
+  1/198            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=198 (4 Digamma testes).
+  1/199            (non typique) [DYN] | ancre=312071720399 | P(n=10)=312071720399 | [PREMIER TROUVE]
+  1/200            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=200 (4 Digamma testes).
+  1/201            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=201 (4 Digamma testes).
+  1/202            (non typique) [DYN] | ancre=336314974027 | P(n=10)=336314974027 | [PREMIER TROUVE]
+  1/203            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=203 (4 Digamma testes).
+  1/204            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=204 (4 Digamma testes).
+  1/205            (non typique) [DYN] | ancre=362042012999 | P(n=10)=362042012999 | [PREMIER TROUVE]
+  1/206            (non typique) [DYN] | ancre=370958961959 | P(n=10)=370958961959 | [PREMIER TROUVE]
+  1/207            (non typique) [DYN] | ancre=380050791119 | P(n=10)=380050791119 | [PREMIER TROUVE]
+  1/208            (non typique) [DYN] | ancre=389319886799 | P(n=10)=389319886799 | [PREMIER TROUVE]
+  1/209            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=209 (4 Digamma testes).
+  1/210            (non typique) [DYN] | ancre=408400838999 | P(n=10)=408400838999 | [PREMIER TROUVE]
+  1/211            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=211 (4 Digamma testes).
+  1/212            (non typique) [DYN] | ancre=428222701859 | P(n=10)=428222701859 | [PREMIER TROUVE]
+  1/213            (non typique) [DYN] | ancre=438418023539 | P(n=10)=438418023539 | [PREMIER TROUVE]
+  1/214            (non typique) [DYN] | ancre=448806753907 | P(n=10)=448806753907 | [PREMIER TROUVE]
+  1/215            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=215 (4 Digamma testes).
+  1/216            (non typique) [DYN] | ancre=470174953751 | P(n=10)=470174953751 | [PREMIER TROUVE]
+  1/217            (non typique) [DYN] | ancre=481159875671 | P(n=10)=481159875671 | [PREMIER TROUVE]
+  1/218            (non typique) [DYN] | ancre=492349353077 | P(n=10)=492349353077 | [PREMIER TROUVE]
+  1/219            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=219 (4 Digamma testes).
+  1/220            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=220 (4 Digamma testes).
+  1/221            (non typique) [DYN] | ancre=527172220301 | P(n=10)=527172220301 | [PREMIER TROUVE]
+  1/222            (non typique) [DYN] | ancre=539207718089 | P(n=10)=539207718089 | [PREMIER TROUVE]
+  1/223            (non typique) [DYN] | ancre=551462037727 | P(n=10)=551462037727 | [PREMIER TROUVE]
+  1/224            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=224 (4 Digamma testes).
+  1/225            (non typique) [DYN] | ancre=576638999999 | P(n=10)=576638999999 | [PREMIER TROUVE]
+  1/226            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=226 (4 Digamma testes).
+  1/227            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=227 (4 Digamma testes).
+  1/228            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=228 (4 Digamma testes).
+  1/229            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=229 (4 Digamma testes).
+  1/230            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=230 (4 Digamma testes).
+  1/231            (non typique) [DYN] | ancre=657736224221 | P(n=10)=657736224221 | [PREMIER TROUVE]
+  1/232            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=232 (4 Digamma testes).
+  1/233            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=233 (4 Digamma testes).
+  1/234            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=234 (4 Digamma testes).
+  1/235            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=235 (4 Digamma testes).
+  1/236            (non typique) [DYN] | ancre=732069393851 | P(n=10)=732069393851 | [PREMIER TROUVE]
+  1/237            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=237 (4 Digamma testes).
+  1/238            (non typique) [DYN] | ancre=763619690371 | P(n=10)=763619690371 | [PREMIER TROUVE]
+  1/239            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=239 (4 Digamma testes).
+  1/240            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=240 (4 Digamma testes).
+  1/241            (non typique) [DYN] | ancre=812976078001 | P(n=10)=812976078001 | [PREMIER TROUVE]
+  1/242            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=242 (4 Digamma testes).
+  1/243            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=243 (4 Digamma testes).
+  1/244            (non typique) [DYN] | ancre=864852085927 | P(n=10)=864852085927 | [PREMIER TROUVE]
+  1/245            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=245 (4 Digamma testes).
+  1/246            (non typique) [DYN] | ancre=900882932531 | P(n=10)=900882932531 | [PREMIER TROUVE]
+  1/247            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=247 (4 Digamma testes).
+  1/248            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=248 (4 Digamma testes).
+  1/249            (non typique) [DYN] | ancre=957171438497 | P(n=10)=957171438497 | [PREMIER TROUVE]
+  1/250            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=250 (4 Digamma testes).
+  1/251            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=251 (4 Digamma testes).
+  1/252            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=252 (4 Digamma testes).
+  1/253            (non typique) [DYN] | ancre=1036563282721 | P(n=10)=1036563282721 | [PREMIER TROUVE]
+  1/254            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=254 (4 Digamma testes).
+  1/255            (non typique) [DYN] | ancre=1078187263229 | P(n=10)=1078187263229 | [PREMIER TROUVE]
+  1/256            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=256 (4 Digamma testes).
+  1/257            (non typique) [DYN] | ancre=1121137918463 | P(n=10)=1121137918463 | [PREMIER TROUVE]
+  1/258            (non typique) [DYN] | ancre=1143120412949 | P(n=10)=1143120412949 | [PREMIER TROUVE]
+  1/259            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=259 (4 Digamma testes).
+  1/260            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=260 (4 Digamma testes).
+  1/261            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=261 (4 Digamma testes).
+  1/262            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=262 (4 Digamma testes).
+  1/263            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=263 (4 Digamma testes).
+  1/264            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=264 (4 Digamma testes).
+  1/265            (non typique) [DYN] | ancre=1306842305999 | P(n=10)=1306842305999 | [PREMIER TROUVE]
+  1/266            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=266 (4 Digamma testes).
+  1/267            (non typique) [DYN] | ancre=1356907483499 | P(n=10)=1356907483499 | [PREMIER TROUVE]
+  1/268            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=268 (4 Digamma testes).
+  1/269            (non typique) [DYN] | ancre=1408495287239 | P(n=10)=1408495287239 | [PREMIER TROUVE]
+  1/270            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=270 (4 Digamma testes).
+  1/271            (non typique) [DYN] | ancre=1461640334669 | P(n=10)=1461640334669 | [PREMIER TROUVE]
+  1/272            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=272 (4 Digamma testes).
+  1/273            (non typique) [DYN] | ancre=1516377691919 | P(n=10)=1516377691919 | [PREMIER TROUVE]
+  1/274            (non typique) [DYN] | ancre=1544354611799 | P(n=10)=1544354611799 | [PREMIER TROUVE]
+  1/275            (non typique) [DYN] | ancre=1572742950899 | P(n=10)=1572742950899 | [PREMIER TROUVE]
+  1/276            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=276 (4 Digamma testes).
+  1/277            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=277 (4 Digamma testes).
+  1/278            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=278 (4 Digamma testes).
+  1/279            (non typique) [DYN] | ancre=1690500942197 | P(n=10)=1690500942197 | [PREMIER TROUVE]
+  1/280            (non typique) [DYN] | ancre=1721014769879 | P(n=10)=1721014769879 | [PREMIER TROUVE]
+  1/281            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=281 (4 Digamma testes).
+  1/282            (non typique) [DYN] | ancre=1783364348663 | P(n=10)=1783364348663 | [PREMIER TROUVE]
+  1/283            (non typique) [DYN] | ancre=1815209497021 | P(n=10)=1815209497021 | [PREMIER TROUVE]
+  1/284            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=284 (4 Digamma testes).
+  1/285            (non typique) [DYN] | ancre=1880264528999 | P(n=10)=1880264528999 | [PREMIER TROUVE]
+  1/286            (non typique) [DYN] | ancre=1913484174601 | P(n=10)=1913484174601 | [PREMIER TROUVE]
+  1/287            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=287 (4 Digamma testes).
+  1/288            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=288 (4 Digamma testes).
+  1/289            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=289 (4 Digamma testes).
+  1/290            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=290 (4 Digamma testes).
+  1/291            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=291 (4 Digamma testes).
+  1/292            (non typique) [DYN] | ancre=2122800329171 | P(n=10)=2122800329171 | [PREMIER TROUVE]
+  1/293            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=293 (4 Digamma testes).
+  1/294            (non typique) [DYN] | ancre=2196502037897 | P(n=10)=2196502037897 | [PREMIER TROUVE]
+  1/295            (non typique) [DYN] | ancre=2234112762589 | P(n=10)=2234112762589 | [PREMIER TROUVE]
+  1/296            (non typique) [DYN] | ancre=2272236848639 | P(n=10)=2272236848639 | [PREMIER TROUVE]
+  1/297            (non typique) [DYN] | ancre=2310879535271 | P(n=10)=2310879535271 | [PREMIER TROUVE]
+  1/298            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=298 (4 Digamma testes).
+  1/299            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=299 (4 Digamma testes).
+  1/300            (non typique) [DYN] | ancre=2429972999999 | P(n=10)=2429972999999 | [PREMIER TROUVE]
+  1/301            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=301 (4 Digamma testes).
+  1/302            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=302 (4 Digamma testes).
+  1/303            (non typique) [DYN] | ancre=2553926604221 | P(n=10)=2553926604221 | [PREMIER TROUVE]
+  1/304            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=304 (4 Digamma testes).
+  1/305            (non typique) [DYN] | ancre=2639335161329 | P(n=10)=2639335161329 | [PREMIER TROUVE]
+  1/306            (non typique) [DYN] | ancre=2682887793101 | P(n=10)=2682887793101 | [PREMIER TROUVE]
+  1/307            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=307 (4 Digamma testes).
+  1/308            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=308 (4 Digamma testes).
+  1/309            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=309 (4 Digamma testes).
+  1/310            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=310 (4 Digamma testes).
+  1/311            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=311 (4 Digamma testes).
+  1/312            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=312 (4 Digamma testes).
+  1/313            (non typique) [DYN] | ancre=3004119946777 | P(n=10)=3004119946777 | [PREMIER TROUVE]
+  1/314            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=314 (4 Digamma testes).
+  1/315            (non typique) [DYN] | ancre=3101332842089 | P(n=10)=3101332842089 | [PREMIER TROUVE]
+  1/316            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=316 (4 Digamma testes).
+  1/317            (non typique) [DYN] | ancre=3201046546343 | P(n=10)=3201046546343 | [PREMIER TROUVE]
+  1/318            (non typique) [DYN] | ancre=3251856097577 | P(n=10)=3251856097577 | [PREMIER TROUVE]
+  1/319            (non typique) [DYN] | ancre=3303308697919 | P(n=10)=3303308697919 | [PREMIER TROUVE]
+  1/320            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=320 (4 Digamma testes).
+  1/321            (non typique) [DYN] | ancre=3408167526719 | P(n=10)=3408167526719 | [PREMIER TROUVE]
+  1/322            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=322 (4 Digamma testes).
+  1/323            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=323 (4 Digamma testes).
+  1/324            (non typique) [DYN] | ancre=3570433319699 | P(n=10)=3570433319699 | [PREMIER TROUVE]
+  1/325            (non typique) [DYN] | ancre=3625873875649 | P(n=10)=3625873875649 | [PREMIER TROUVE]
+  1/326            (non typique) [DYN] | ancre=3682001206001 | P(n=10)=3682001206001 | [PREMIER TROUVE]
+  1/327            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=327 (4 Digamma testes).
+  1/328            (non typique) [DYN] | ancre=3796340599559 | P(n=10)=3796340599559 | [PREMIER TROUVE]
+  1/329            (non typique) [DYN] | ancre=3854565921359 | P(n=10)=3854565921359 | [PREMIER TROUVE]
+  1/330            (non typique) [DYN] | ancre=3913503362999 | P(n=10)=3913503362999 | [PREMIER TROUVE]
+  1/331            (non typique) [DYN] | ancre=3973159655851 | P(n=10)=3973159655851 | [PREMIER TROUVE]
+  1/332            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=332 (4 Digamma testes).
+  1/333            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=333 (4 Digamma testes).
+  1/334            (non typique) [DYN] | ancre=4156506168497 | P(n=10)=4156506168497 | [PREMIER TROUVE]
+  1/335            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=335 (4 Digamma testes).
+  1/336            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=336 (4 Digamma testes).
+  1/337            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=337 (4 Digamma testes).
+  1/338            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=338 (4 Digamma testes).
+  1/339            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=339 (4 Digamma testes).
+  1/340            (non typique) [DYN] | ancre=4543502980739 | P(n=10)=4543502980739 | [PREMIER TROUVE]
+  1/341            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=341 (4 Digamma testes).
+  1/342            (non typique) [DYN] | ancre=4678717433543 | P(n=10)=4678717433543 | [PREMIER TROUVE]
+  1/343            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=343 (4 Digamma testes).
+  1/344            (non typique) [DYN] | ancre=4817132071319 | P(n=10)=4817132071319 | [PREMIER TROUVE]
+  1/345            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=345 (4 Digamma testes).
+  1/346            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=346 (4 Digamma testes).
+  1/347            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=347 (4 Digamma testes).
+  1/348            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=348 (4 Digamma testes).
+  1/349            (non typique) [DYN] | ancre=5177541390349 | P(n=10)=5177541390349 | [PREMIER TROUVE]
+  1/350            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=350 (4 Digamma testes).
+  1/351            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=351 (4 Digamma testes).
+  1/352            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=352 (4 Digamma testes).
+  1/353            (non typique) [DYN] | ancre=5481129354977 | P(n=10)=5481129354977 | [PREMIER TROUVE]
+  1/354            (non typique) [DYN] | ancre=5559207112829 | P(n=10)=5559207112829 | [PREMIER TROUVE]
+  1/355            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=355 (4 Digamma testes).
+  1/356            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=356 (4 Digamma testes).
+  1/357            (non typique) [DYN] | ancre=5798794022069 | P(n=10)=5798794022069 | [PREMIER TROUVE]
+  1/358            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=358 (4 Digamma testes).
+  1/359            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=359 (4 Digamma testes).
+  1/360            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=360 (4 Digamma testes).
+  1/361            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=361 (4 Digamma testes).
+  1/362            (non typique) [DYN] | ancre=6216408530309 | P(n=10)=6216408530309 | [PREMIER TROUVE]
+  1/363            (non typique) [DYN] | ancre=6302746346621 | P(n=10)=6302746346621 | [PREMIER TROUVE]
+  1/364            (non typique) [DYN] | ancre=6390041070139 | P(n=10)=6390041070139 | [PREMIER TROUVE]
+  1/365            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=365 (4 Digamma testes).
+  1/366            (non typique) [DYN] | ancre=6567531808679 | P(n=10)=6567531808679 | [PREMIER TROUVE]
+  1/367            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=367 (4 Digamma testes).
+  1/368            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=368 (4 Digamma testes).
+  1/369            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=369 (4 Digamma testes).
+  1/370            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=370 (4 Digamma testes).
+  1/371            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=371 (4 Digamma testes).
+  1/372            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=372 (4 Digamma testes).
+  1/373            (non typique) [DYN] | ancre=7220063838721 | P(n=10)=7220063838721 | [PREMIER TROUVE]
+  1/374            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=374 (4 Digamma testes).
+  1/375            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=375 (4 Digamma testes).
+  1/376            (non typique) [DYN] | ancre=7515124031999 | P(n=10)=7515124031999 | [PREMIER TROUVE]
+  1/377            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=377 (4 Digamma testes).
+  1/378            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=378 (4 Digamma testes).
+  1/379            (non typique) [DYN] | ancre=7819752837959 | P(n=10)=7819752837959 | [PREMIER TROUVE]
+  1/380            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=380 (4 Digamma testes).
+  1/381            (non typique) [DYN] | ancre=8028268459559 | P(n=10)=8028268459559 | [PREMIER TROUVE]
+  1/382            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=382 (4 Digamma testes).
+  1/383            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=383 (4 Digamma testes).
+  1/384            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=384 (4 Digamma testes).
+  1/385            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=385 (4 Digamma testes).
+  1/386            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=386 (4 Digamma testes).
+  1/387            (non typique) [DYN] | ancre=8680643590103 | P(n=10)=8680643590103 | [PREMIER TROUVE]
+  1/388            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=388 (4 Digamma testes).
+  1/389            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=389 (4 Digamma testes).
+  1/390            (non typique) [DYN] | ancre=9022360733489 | P(n=10)=9022360733489 | [PREMIER TROUVE]
+  1/391            (non typique) [DYN] | ancre=9138626733989 | P(n=10)=9138626733989 | [PREMIER TROUVE]
+  1/392            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=392 (4 Digamma testes).
+  1/393            (non typique) [DYN] | ancre=9374755132679 | P(n=10)=9374755132679 | [PREMIER TROUVE]
+  1/394            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=394 (4 Digamma testes).
+  1/395            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=395 (4 Digamma testes).
+  1/396            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=396 (4 Digamma testes).
+  1/397            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=397 (4 Digamma testes).
+  1/398            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=398 (4 Digamma testes).
+  1/399            (non typique) [DYN] | ancre=10112574881597 | P(n=10)=10112574881597 | [PREMIER TROUVE]
+  1/400            (non typique) [DYN] | ancre=10239936000799 | P(n=10)=10239936000799 | [PREMIER TROUVE]
+  1/401            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=401 (4 Digamma testes).
+  1/402            (non typique) [DYN] | ancre=10498507867223 | P(n=10)=10498507867223 | [PREMIER TROUVE]
+  1/403            (non typique) [DYN] | ancre=10629737749409 | P(n=10)=10629737749409 | [PREMIER TROUVE]
+  1/404            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=404 (4 Digamma testes).
+  1/405            (non typique) [DYN] | ancre=10896134659379 | P(n=10)=10896134659379 | [PREMIER TROUVE]
+  1/406            (non typique) [DYN] | ancre=11031321111929 | P(n=10)=11031321111929 | [PREMIER TROUVE]
+  1/407            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=407 (4 Digamma testes).
+  1/408            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=408 (4 Digamma testes).
+  1/409            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=409 (4 Digamma testes).
+  1/410            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=410 (4 Digamma testes).
+  1/411            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=411 (4 Digamma testes).
+  1/412            (non typique) [DYN] | ancre=11870896586303 | P(n=10)=11870896586303 | [PREMIER TROUVE]
+  1/413            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=413 (4 Digamma testes).
+  1/414            (non typique) [DYN] | ancre=12161836811879 | P(n=10)=12161836811879 | [PREMIER TROUVE]
+  1/415            (non typique) [DYN] | ancre=12309430708639 | P(n=10)=12309430708639 | [PREMIER TROUVE]
+  1/416            (non typique) [DYN] | ancre=12458453902751 | P(n=10)=12458453902751 | [PREMIER TROUVE]
+  1/417            (non typique) [DYN] | ancre=12608916750977 | P(n=10)=12608916750977 | [PREMIER TROUVE]
+  1/418            (non typique) [DYN] | ancre=12760830182077 | P(n=10)=12760830182077 | [PREMIER TROUVE]
+  1/419            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=419 (4 Digamma testes).
+  1/420            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=420 (4 Digamma testes).
+  1/421            (non typique) [DYN] | ancre=13225376027639 | P(n=10)=13225376027639 | [PREMIER TROUVE]
+  1/422            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=422 (4 Digamma testes).
+  1/423            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=423 (4 Digamma testes).
+  1/424            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=424 (4 Digamma testes).
+  1/425            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=425 (4 Digamma testes).
+  1/426            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=426 (4 Digamma testes).
+  1/427            (non typique) [DYN] | ancre=14195051994521 | P(n=10)=14195051994521 | [PREMIER TROUVE]
+  1/428            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=428 (4 Digamma testes).
+  1/429            (non typique) [DYN] | ancre=14530618704029 | P(n=10)=14530618704029 | [PREMIER TROUVE]
+  1/430            (non typique) [DYN] | ancre=14700764608529 | P(n=10)=14700764608529 | [PREMIER TROUVE]
+  1/431            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=431 (4 Digamma testes).
+  1/432            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=432 (4 Digamma testes).
+  1/433            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=433 (4 Digamma testes).
+  1/434            (non typique) [DYN] | ancre=15397362760919 | P(n=10)=15397362760919 | [PREMIER TROUVE]
+  1/435            (non typique) [DYN] | ancre=15575571459869 | P(n=10)=15575571459869 | [PREMIER TROUVE]
+  1/436            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=436 (4 Digamma testes).
+  1/437            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=437 (4 Digamma testes).
+  1/438            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=438 (4 Digamma testes).
+  1/439            (non typique) [DYN] | ancre=16304982709397 | P(n=10)=16304982709397 | [PREMIER TROUVE]
+  1/440            (non typique) [DYN] | ancre=16491537215999 | P(n=10)=16491537215999 | [PREMIER TROUVE]
+  1/441            (non typique) [DYN] | ancre=16679795212961 | P(n=10)=16679795212961 | [PREMIER TROUVE]
+  1/442            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=442 (4 Digamma testes).
+  1/443            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=443 (4 Digamma testes).
+  1/444            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=444 (4 Digamma testes).
+  1/445            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=445 (4 Digamma testes).
+  1/446            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=446 (4 Digamma testes).
+  1/447            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=447 (4 Digamma testes).
+  1/448            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=448 (4 Digamma testes).
+  1/449            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=449 (4 Digamma testes).
+  1/450            (non typique) [DYN] | ancre=18452721374999 | P(n=10)=18452721374999 | [PREMIER TROUVE]
+  1/451            (non typique) [DYN] | ancre=18658665294301 | P(n=10)=18658665294301 | [PREMIER TROUVE]
+  1/452            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=452 (4 Digamma testes).
+  1/453            (non typique) [DYN] | ancre=19076069193059 | P(n=10)=19076069193059 | [PREMIER TROUVE]
+  1/454            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=454 (4 Digamma testes).
+  1/455            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=455 (4 Digamma testes).
+  1/456            (non typique) [DYN] | ancre=19716150297479 | P(n=10)=19716150297479 | [PREMIER TROUVE]
+  1/457            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=457 (4 Digamma testes).
+  1/458            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=458 (4 Digamma testes).
+  1/459            (non typique) [DYN] | ancre=20373299344637 | P(n=10)=20373299344637 | [PREMIER TROUVE]
+  1/460            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=460 (4 Digamma testes).
+  1/461            (non typique) [DYN] | ancre=20821048119101 | P(n=10)=20821048119101 | [PREMIER TROUVE]
+  1/462            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=462 (4 Digamma testes).
+  1/463            (non typique) [DYN] | ancre=21276634520527 | P(n=10)=21276634520527 | [PREMIER TROUVE]
+  1/464            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=464 (4 Digamma testes).
+  1/465            (non typique) [DYN] | ancre=21740161212689 | P(n=10)=21740161212689 | [PREMIER TROUVE]
+  1/466            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=466 (4 Digamma testes).
+  1/467            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=467 (4 Digamma testes).
+  1/468            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=468 (4 Digamma testes).
+  1/469            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=469 (4 Digamma testes).
+  1/470            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=470 (4 Digamma testes).
+  1/471            (non typique) [DYN] | ancre=23179420704239 | P(n=10)=23179420704239 | [PREMIER TROUVE]
+  1/472            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=472 (4 Digamma testes).
+  1/473            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=473 (4 Digamma testes).
+  1/474            (non typique) [DYN] | ancre=23927084287349 | P(n=10)=23927084287349 | [PREMIER TROUVE]
+  1/475            (non typique) [DYN] | ancre=24180546899849 | P(n=10)=24180546899849 | [PREMIER TROUVE]
+  1/476            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=476 (4 Digamma testes).
+  1/477            (non typique) [DYN] | ancre=24693916907771 | P(n=10)=24693916907771 | [PREMIER TROUVE]
+  1/478            (non typique) [DYN] | ancre=24953851271971 | P(n=10)=24953851271971 | [PREMIER TROUVE]
+  1/479            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=479 (4 Digamma testes).
+  1/480            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=480 (4 Digamma testes).
+  1/481            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=481 (4 Digamma testes).
+  1/482            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=482 (4 Digamma testes).
+  1/483            (non typique) [DYN] | ancre=26286561971249 | P(n=10)=26286561971249 | [PREMIER TROUVE]
+  1/484            (non typique) [DYN] | ancre=26559809177747 | P(n=10)=26559809177747 | [PREMIER TROUVE]
+  1/485            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=485 (4 Digamma testes).
+  1/486            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=486 (4 Digamma testes).
+  1/487            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=487 (4 Digamma testes).
+  1/488            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=488 (4 Digamma testes).
+  1/489            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=489 (4 Digamma testes).
+  1/490            (non typique) [DYN] | ancre=28247407011389 | P(n=10)=28247407011389 | [PREMIER TROUVE]
+  1/491            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=491 (4 Digamma testes).
+  1/492            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=492 (4 Digamma testes).
+  1/493            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=493 (4 Digamma testes).
+  1/494            (non typique) [DYN] | ancre=29419342922969 | P(n=10)=29419342922969 | [PREMIER TROUVE]
+  1/495            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=495 (4 Digamma testes).
+  1/496            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=496 (4 Digamma testes).
+  1/497            (non typique) [DYN] | ancre=30323560186289 | P(n=10)=30323560186289 | [PREMIER TROUVE]
+  1/498            (non typique) [DYN] | ancre=30629856782477 | P(n=10)=30629856782477 | [PREMIER TROUVE]
+  1/499            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=499 (4 Digamma testes).
+  1/500            (non typique) [DYN] | ancre=31249874999999 | P(n=10)=31249874999999 | [PREMIER TROUVE]
+  1/501            (non typique) [DYN] | ancre=31563626752001 | P(n=10)=31563626752001 | [PREMIER TROUVE]
+  1/502            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=502 (4 Digamma testes).
+  1/503            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=503 (4 Digamma testes).
+  1/504            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=504 (4 Digamma testes).
+  1/505            (non typique) [DYN] | ancre=32843935533529 | P(n=10)=32843935533529 | [PREMIER TROUVE]
+  1/506            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=506 (4 Digamma testes).
+  1/507            (non typique) [DYN] | ancre=33499483196477 | P(n=10)=33499483196477 | [PREMIER TROUVE]
+  1/508            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=508 (4 Digamma testes).
+  1/509            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=509 (4 Digamma testes).
+  1/510            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=510 (4 Digamma testes).
+  1/511            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=511 (4 Digamma testes).
+  1/512            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=512 (4 Digamma testes).
+  1/513            (non typique) [DYN] | ancre=35529179531777 | P(n=10)=35529179531777 | [PREMIER TROUVE]
+  1/514            (non typique) [DYN] | ancre=35876820782107 | P(n=10)=35876820782107 | [PREMIER TROUVE]
+  1/515            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=515 (4 Digamma testes).
+  1/516            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=516 (4 Digamma testes).
+  1/517            (non typique) [DYN] | ancre=36936104534977 | P(n=10)=36936104534977 | [PREMIER TROUVE]
+  1/518            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=518 (4 Digamma testes).
+  1/519            (non typique) [DYN] | ancre=37656085711397 | P(n=10)=37656085711397 | [PREMIER TROUVE]
+  1/520            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=520 (4 Digamma testes).
+  1/521            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=521 (4 Digamma testes).
+  1/522            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=522 (4 Digamma testes).
+  1/523            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=523 (4 Digamma testes).
+  1/524            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=524 (4 Digamma testes).
+  1/525            (non typique) [DYN] | ancre=39883654124999 | P(n=10)=39883654124999 | [PREMIER TROUVE]
+  1/526            (non typique) [DYN] | ancre=40264948790851 | P(n=10)=40264948790851 | [PREMIER TROUVE]
+  1/527            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=527 (4 Digamma testes).
+  1/528            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=528 (4 Digamma testes).
+  1/529            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=529 (4 Digamma testes).
+  1/530            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=530 (4 Digamma testes).
+  1/531            (non typique) [DYN] | ancre=42215415492851 | P(n=10)=42215415492851 | [PREMIER TROUVE]
+  1/532            (non typique) [DYN] | ancre=42614424143171 | P(n=10)=42614424143171 | [PREMIER TROUVE]
+  1/533            (non typique) [DYN] | ancre=43016445303077 | P(n=10)=43016445303077 | [PREMIER TROUVE]
+  1/534            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=534 (4 Digamma testes).
+  1/535            (non typique) [DYN] | ancre=43829588453999 | P(n=10)=43829588453999 | [PREMIER TROUVE]
+  1/536            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=536 (4 Digamma testes).
+  1/537            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=537 (4 Digamma testes).
+  1/538            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=538 (4 Digamma testes).
+  1/539            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=539 (4 Digamma testes).
+  1/540            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=540 (4 Digamma testes).
+  1/541            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=541 (4 Digamma testes).
+  1/542            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=542 (4 Digamma testes).
+  1/543            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=543 (4 Digamma testes).
+  1/544            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=544 (4 Digamma testes).
+  1/545            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=545 (4 Digamma testes).
+  1/546            (non typique) [DYN] | ancre=48524576534069 | P(n=10)=48524576534069 | [PREMIER TROUVE]
+  1/547            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=547 (4 Digamma testes).
+  1/548            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=548 (4 Digamma testes).
+  1/549            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=549 (4 Digamma testes).
+  1/550            (non typique) [DYN] | ancre=50328270823049 | P(n=10)=50328270823049 | [PREMIER TROUVE]
+  1/551            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=551 (4 Digamma testes).
+  1/552            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=552 (4 Digamma testes).
+  1/553            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=553 (4 Digamma testes).
+  1/554            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=554 (4 Digamma testes).
+  1/555            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=555 (4 Digamma testes).
+  1/556            (non typique) [DYN] | ancre=53134005092159 | P(n=10)=53134005092159 | [PREMIER TROUVE]
+  1/557            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=557 (4 Digamma testes).
+  1/558            (non typique) [DYN] | ancre=54096553544849 | P(n=10)=54096553544849 | [PREMIER TROUVE]
+  1/559            (non typique) [DYN] | ancre=54583031149919 | P(n=10)=54583031149919 | [PREMIER TROUVE]
+  1/560            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=560 (4 Digamma testes).
+  1/561            (non typique) [DYN] | ancre=55566485140319 | P(n=10)=55566485140319 | [PREMIER TROUVE]
+  1/562            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=562 (4 Digamma testes).
+  1/563            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=563 (4 Digamma testes).
+  1/564            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=564 (4 Digamma testes).
+  1/565            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=565 (4 Digamma testes).
+  1/566            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=566 (4 Digamma testes).
+  1/567            (non typique) [DYN] | ancre=58602203143343 | P(n=10)=58602203143343 | [PREMIER TROUVE]
+  1/568            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=568 (4 Digamma testes).
+  1/569            (non typique) [DYN] | ancre=59643070438169 | P(n=10)=59643070438169 | [PREMIER TROUVE]
+  1/570            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=570 (4 Digamma testes).
+  1/571            (non typique) [DYN] | ancre=60698675089051 | P(n=10)=60698675089051 | [PREMIER TROUVE]
+  1/572            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=572 (4 Digamma testes).
+  1/573            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=573 (4 Digamma testes).
+  1/574            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=574 (4 Digamma testes).
+  1/575            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=575 (4 Digamma testes).
+  1/576            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=576 (4 Digamma testes).
+  1/577            (non typique) [DYN] | ancre=63955479454271 | P(n=10)=63955479454271 | [PREMIER TROUVE]
+  1/578            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=578 (4 Digamma testes).
+  1/579            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=579 (4 Digamma testes).
+  1/580            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=580 (4 Digamma testes).
+  1/581            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=581 (4 Digamma testes).
+  1/582            (non typique) [DYN] | ancre=66774960362921 | P(n=10)=66774960362921 | [PREMIER TROUVE]
+  1/583            (non typique) [DYN] | ancre=67350604528327 | P(n=10)=67350604528327 | [PREMIER TROUVE]
+  1/584            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=584 (4 Digamma testes).
+  1/585            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=585 (4 Digamma testes).
+  1/586            (non typique) [DYN] | ancre=69101395424101 | P(n=10)=69101395424101 | [PREMIER TROUVE]
+  1/587            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=587 (4 Digamma testes).
+  1/588            (non typique) [DYN] | ancre=70288677516539 | P(n=10)=70288677516539 | [PREMIER TROUVE]
+  1/589            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=589 (4 Digamma testes).
+  1/590            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=590 (4 Digamma testes).
+  1/591            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=591 (4 Digamma testes).
+  1/592            (non typique) [DYN] | ancre=72712201931599 | P(n=10)=72712201931599 | [PREMIER TROUVE]
+  1/593            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=593 (4 Digamma testes).
+  1/594            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=594 (4 Digamma testes).
+  1/595            (non typique) [DYN] | ancre=74573340873569 | P(n=10)=74573340873569 | [PREMIER TROUVE]
+  1/596            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=596 (4 Digamma testes).
+  1/597            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=597 (4 Digamma testes).
+  1/598            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=598 (4 Digamma testes).
+  1/599            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=599 (4 Digamma testes).
+  1/600            (non typique) [DYN] | ancre=77759783640599 | P(n=10)=77759783640599 | [PREMIER TROUVE]
+  1/601            (non typique) [DYN] | ancre=78409946160599 | P(n=10)=78409946160599 | [PREMIER TROUVE]
+  1/602            (non typique) [DYN] | ancre=79064451043829 | P(n=10)=79064451043829 | [PREMIER TROUVE]
+  1/603            (non typique) [DYN] | ancre=79723317824009 | P(n=10)=79723317824009 | [PREMIER TROUVE]
+  1/604            (non typique) [DYN] | ancre=80386570820159 | P(n=10)=80386570820159 | [PREMIER TROUVE]
+  1/605            (non typique) [DYN] | ancre=81054230799629 | P(n=10)=81054230799629 | [PREMIER TROUVE]
+  1/606            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=606 (4 Digamma testes).
+  1/607            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=607 (4 Digamma testes).
+  1/608            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=608 (4 Digamma testes).
+  1/609            (non typique) [DYN] | ancre=83769378275519 | P(n=10)=83769378275519 | [PREMIER TROUVE]
+  1/610            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=610 (4 Digamma testes).
+  1/611            (non typique) [DYN] | ancre=85153967584919 | P(n=10)=85153967584919 | [PREMIER TROUVE]
+  1/612            (non typique) [DYN] | ancre=85853094035903 | P(n=10)=85853094035903 | [PREMIER TROUVE]
+  1/613            (non typique) [DYN] | ancre=86556805284277 | P(n=10)=86556805284277 | [PREMIER TROUVE]
+  1/614            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=614 (4 Digamma testes).
+  1/615            (non typique) [DYN] | ancre=87978070404839 | P(n=10)=87978070404839 | [PREMIER TROUVE]
+  1/616            (non typique) [DYN] | ancre=88695669512911 | P(n=10)=88695669512911 | [PREMIER TROUVE]
+  1/617            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=617 (4 Digamma testes).
+  1/618            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=618 (4 Digamma testes).
+  1/619            (non typique) [DYN] | ancre=90876608663677 | P(n=10)=90876608663677 | [PREMIER TROUVE]
+  1/620            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=620 (4 Digamma testes).
+  1/621            (non typique) [DYN] | ancre=92354247259019 | P(n=10)=92354247259019 | [PREMIER TROUVE]
+  1/622            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=622 (4 Digamma testes).
+  1/623            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=623 (4 Digamma testes).
+  1/624            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=624 (4 Digamma testes).
+  1/625            (non typique) [DYN] | ancre=95367187891249 | P(n=10)=95367187891249 | [PREMIER TROUVE]
+  1/626            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=626 (4 Digamma testes).
+  1/627            (non typique) [DYN] | ancre=96902860587521 | P(n=10)=96902860587521 | [PREMIER TROUVE]
+  1/628            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=628 (4 Digamma testes).
+  1/629            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=629 (4 Digamma testes).
+  1/630            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=630 (4 Digamma testes).
+  1/631            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=631 (4 Digamma testes).
+  1/632            (non typique) [DYN] | ancre=100828731646463 | P(n=10)=100828731646463 | [PREMIER TROUVE]
+  1/633            (non typique) [DYN] | ancre=101628956463521 | P(n=10)=101628956463521 | [PREMIER TROUVE]
+  1/634            (non typique) [DYN] | ancre=102434254405909 | P(n=10)=102434254405909 | [PREMIER TROUVE]
+  1/635            (non typique) [DYN] | ancre=103244648348999 | P(n=10)=103244648348999 | [PREMIER TROUVE]
+  1/636            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=636 (4 Digamma testes).
+  1/637            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=637 (4 Digamma testes).
+  1/638            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=638 (4 Digamma testes).
+  1/639            (non typique) [DYN] | ancre=106537678031357 | P(n=10)=106537678031357 | [PREMIER TROUVE]
+  1/640            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=640 (4 Digamma testes).
+  1/641            (non typique) [DYN] | ancre=108215405776001 | P(n=10)=108215405776001 | [PREMIER TROUVE]
+  1/642            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=642 (4 Digamma testes).
+  1/643            (non typique) [DYN] | ancre=109914203177827 | P(n=10)=109914203177827 | [PREMIER TROUVE]
+  1/644            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=644 (4 Digamma testes).
+  1/645            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=645 (4 Digamma testes).
+  1/646            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=646 (4 Digamma testes).
+  1/647            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=647 (4 Digamma testes).
+  1/648            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=648 (4 Digamma testes).
+  1/649            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=649 (4 Digamma testes).
+  1/650            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=650 (4 Digamma testes).
+  1/651            (non typique) [DYN] | ancre=116924067910649 | P(n=10)=116924067910649 | [PREMIER TROUVE]
+  1/652            (non typique) [DYN] | ancre=117824867109979 | P(n=10)=117824867109979 | [PREMIER TROUVE]
+  1/653            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=653 (4 Digamma testes).
+  1/654            (non typique) [DYN] | ancre=119643119435129 | P(n=10)=119643119435129 | [PREMIER TROUVE]
+  1/655            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=655 (4 Digamma testes).
+  1/656            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=656 (4 Digamma testes).
+  1/657            (non typique) [DYN] | ancre=122412520901663 | P(n=10)=122412520901663 | [PREMIER TROUVE]
+  1/658            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=658 (4 Digamma testes).
+  1/659            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=659 (4 Digamma testes).
+  1/660            (non typique) [DYN] | ancre=125232970540259 | P(n=10)=125232970540259 | [PREMIER TROUVE]
+  1/661            (non typique) [DYN] | ancre=126184585352101 | P(n=10)=126184585352101 | [PREMIER TROUVE]
+  1/662            (non typique) [DYN] | ancre=127141976262209 | P(n=10)=127141976262209 | [PREMIER TROUVE]
+  1/663            (non typique) [DYN] | ancre=128105169525527 | P(n=10)=128105169525527 | [PREMIER TROUVE]
+  1/664            (non typique) [DYN] | ancre=129074191036207 | P(n=10)=129074191036207 | [PREMIER TROUVE]
+  1/665            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=665 (4 Digamma testes).
+  1/666            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=666 (4 Digamma testes).
+  1/667            (non typique) [DYN] | ancre=132016493992699 | P(n=10)=132016493992699 | [PREMIER TROUVE]
+  1/668            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=668 (4 Digamma testes).
+  1/669            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=669 (4 Digamma testes).
+  1/670            (non typique) [DYN] | ancre=135012209488769 | P(n=10)=135012209488769 | [PREMIER TROUVE]
+  1/671            (non typique) [DYN] | ancre=136022777211551 | P(n=10)=136022777211551 | [PREMIER TROUVE]
+  1/672            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=672 (4 Digamma testes).
+  1/673            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=673 (4 Digamma testes).
+  1/674            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=674 (4 Digamma testes).
+  1/675            (non typique) [DYN] | ancre=140125737376349 | P(n=10)=140125737376349 | [PREMIER TROUVE]
+  1/676            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=676 (4 Digamma testes).
+  1/677            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=677 (4 Digamma testes).
+  1/678            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=678 (4 Digamma testes).
+  1/679            (non typique) [DYN] | ancre=144327115114279 | P(n=10)=144327115114279 | [PREMIER TROUVE]
+  1/680            (non typique) [DYN] | ancre=145393042367999 | P(n=10)=145393042367999 | [PREMIER TROUVE]
+  1/681            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=681 (4 Digamma testes).
+  1/682            (non typique) [DYN] | ancre=147543791511863 | P(n=10)=147543791511863 | [PREMIER TROUVE]
+  1/683            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=683 (4 Digamma testes).
+  1/684            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=684 (4 Digamma testes).
+  1/685            (non typique) [DYN] | ancre=150817567508999 | P(n=10)=150817567508999 | [PREMIER TROUVE]
+  1/686            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=686 (4 Digamma testes).
+  1/687            (non typique) [DYN] | ancre=153032180050877 | P(n=10)=153032180050877 | [PREMIER TROUVE]
+  1/688            (non typique) [DYN] | ancre=154149199467871 | P(n=10)=154149199467871 | [PREMIER TROUVE]
+  1/689            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=689 (4 Digamma testes).
+  1/690            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=690 (4 Digamma testes).
+  1/691            (non typique) [DYN] | ancre=157539450388289 | P(n=10)=157539450388289 | [PREMIER TROUVE]
+  1/692            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=692 (4 Digamma testes).
+  1/693            (non typique) [DYN] | ancre=159832565355077 | P(n=10)=159832565355077 | [PREMIER TROUVE]
+  1/694            (non typique) [DYN] | ancre=160989091391897 | P(n=10)=160989091391897 | [PREMIER TROUVE]
+  1/695            (non typique) [DYN] | ancre=162152303981999 | P(n=10)=162152303981999 | [PREMIER TROUVE]
+  1/696            (non typique) [DYN] | ancre=163322230626551 | P(n=10)=163322230626551 | [PREMIER TROUVE]
+  1/697            (non typique) [DYN] | ancre=164498899375777 | P(n=10)=164498899375777 | [PREMIER TROUVE]
+  1/698            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=698 (4 Digamma testes).
+  1/699            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=699 (4 Digamma testes).
+  1/700            (non typique) [DYN] | ancre=168069656510699 | P(n=10)=168069656510699 | [PREMIER TROUVE]
+  1/701            (non typique) [DYN] | ancre=169273590923501 | P(n=10)=169273590923501 | [PREMIER TROUVE]
+  1/702            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=702 (4 Digamma testes).
+  1/703            (non typique) [DYN] | ancre=171702154661309 | P(n=10)=171702154661309 | [PREMIER TROUVE]
+  1/704            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=704 (4 Digamma testes).
+  1/705            (non typique) [DYN] | ancre=174158513791679 | P(n=10)=174158513791679 | [PREMIER TROUVE]
+  1/706            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=706 (4 Digamma testes).
+  1/707            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=707 (4 Digamma testes).
+  1/708            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=708 (4 Digamma testes).
+  1/709            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=709 (4 Digamma testes).
+  1/710            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=710 (4 Digamma testes).
+  1/711            (non typique) [DYN] | ancre=181696743880541 | P(n=10)=181696743880541 | [PREMIER TROUVE]
+  1/712            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=712 (4 Digamma testes).
+  1/713            (non typique) [DYN] | ancre=184266673676777 | P(n=10)=184266673676777 | [PREMIER TROUVE]
+  1/714            (non typique) [DYN] | ancre=185562497109989 | P(n=10)=185562497109989 | [PREMIER TROUVE]
+  1/715            (non typique) [DYN] | ancre=186865600432939 | P(n=10)=186865600432939 | [PREMIER TROUVE]
+  1/716            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=716 (4 Digamma testes).
+  1/717            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=717 (4 Digamma testes).
+  1/718            (non typique) [DYN] | ancre=190818896475577 | P(n=10)=190818896475577 | [PREMIER TROUVE]
+  1/719            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=719 (4 Digamma testes).
+  1/720            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=720 (4 Digamma testes).
+  1/721            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=721 (4 Digamma testes).
+  1/722            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=722 (4 Digamma testes).
+  1/723            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=723 (4 Digamma testes).
+  1/724            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=724 (4 Digamma testes).
+  1/725            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=725 (4 Digamma testes).
+  1/726            (non typique) [DYN] | ancre=201689031041651 | P(n=10)=201689031041651 | [PREMIER TROUVE]
+  1/727            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=727 (4 Digamma testes).
+  1/728            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=728 (4 Digamma testes).
+  1/729            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=729 (4 Digamma testes).
+  1/730            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=730 (4 Digamma testes).
+  1/731            (non typique) [DYN] | ancre=208730576234759 | P(n=10)=208730576234759 | [PREMIER TROUVE]
+  1/732            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=732 (4 Digamma testes).
+  1/733            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=733 (4 Digamma testes).
+  1/734            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=734 (4 Digamma testes).
+  1/735            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=735 (4 Digamma testes).
+  1/736            (non typique) [DYN] | ancre=215967435376351 | P(n=10)=215967435376351 | [PREMIER TROUVE]
+  1/737            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=737 (4 Digamma testes).
+  1/738            (non typique) [DYN] | ancre=218917768065371 | P(n=10)=218917768065371 | [PREMIER TROUVE]
+  1/739            (non typique) [DYN] | ancre=220404976785757 | P(n=10)=220404976785757 | [PREMIER TROUVE]
+  1/740            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=740 (4 Digamma testes).
+  1/741            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=741 (4 Digamma testes).
+  1/742            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=742 (4 Digamma testes).
+  1/743            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=743 (4 Digamma testes).
+  1/744            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=744 (4 Digamma testes).
+  1/745            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=745 (4 Digamma testes).
+  1/746            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=746 (4 Digamma testes).
+  1/747            (non typique) [DYN] | ancre=232595993538521 | P(n=10)=232595993538521 | [PREMIER TROUVE]
+  1/748            (non typique) [DYN] | ancre=234157035992219 | P(n=10)=234157035992219 | [PREMIER TROUVE]
+  1/749            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=749 (4 Digamma testes).
+  1/750            (non typique) [DYN] | ancre=237304265063249 | P(n=10)=237304265063249 | [PREMIER TROUVE]
+  1/751            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=751 (4 Digamma testes).
+  1/752            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=752 (4 Digamma testes).
+  1/753            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=753 (4 Digamma testes).
+  1/754            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=754 (4 Digamma testes).
+  1/755            (non typique) [DYN] | ancre=245320588173779 | P(n=10)=245320588173779 | [PREMIER TROUVE]
+  1/756            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=756 (4 Digamma testes).
+  1/757            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=757 (4 Digamma testes).
+  1/758            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=758 (4 Digamma testes).
+  1/759            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=759 (4 Digamma testes).
+  1/760            (non typique) [DYN] | ancre=253552098047159 | P(n=10)=253552098047159 | [PREMIER TROUVE]
+  1/761            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=761 (4 Digamma testes).
+  1/762            (non typique) [DYN] | ancre=256905918058103 | P(n=10)=256905918058103 | [PREMIER TROUVE]
+  1/763            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=763 (4 Digamma testes).
+  1/764            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=764 (4 Digamma testes).
+  1/765            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=765 (4 Digamma testes).
+  1/766            (non typique) [DYN] | ancre=263720024267489 | P(n=10)=263720024267489 | [PREMIER TROUVE]
+  1/767            (non typique) [DYN] | ancre=265445937119999 | P(n=10)=265445937119999 | [PREMIER TROUVE]
+  1/768            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=768 (4 Digamma testes).
+  1/769            (non typique) [DYN] | ancre=268924868890369 | P(n=10)=268924868890369 | [PREMIER TROUVE]
+  1/770            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=770 (4 Digamma testes).
+  1/771            (non typique) [DYN] | ancre=272440180105169 | P(n=10)=272440180105169 | [PREMIER TROUVE]
+  1/772            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=772 (4 Digamma testes).
+  1/773            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=773 (4 Digamma testes).
+  1/774            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=774 (4 Digamma testes).
+  1/775            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=775 (4 Digamma testes).
+  1/776            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=776 (4 Digamma testes).
+  1/777            (non typique) [DYN] | ancre=283207255031777 | P(n=10)=283207255031777 | [PREMIER TROUVE]
+  1/778            (non typique) [DYN] | ancre=285034393154909 | P(n=10)=285034393154909 | [PREMIER TROUVE]
+  1/779            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=779 (4 Digamma testes).
+  1/780            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=780 (4 Digamma testes).
+  1/781            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=781 (4 Digamma testes).
+  1/782            (non typique) [DYN] | ancre=292437495002663 | P(n=10)=292437495002663 | [PREMIER TROUVE]
+  1/783            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=783 (4 Digamma testes).
+  1/784            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=784 (4 Digamma testes).
+  1/785            (non typique) [DYN] | ancre=298090118003999 | P(n=10)=298090118003999 | [PREMIER TROUVE]
+  1/786            (non typique) [DYN] | ancre=299993626557101 | P(n=10)=299993626557101 | [PREMIER TROUVE]
+  1/787            (non typique) [DYN] | ancre=301906845010721 | P(n=10)=301906845010721 | [PREMIER TROUVE]
+  1/788            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=788 (4 Digamma testes).
+  1/789            (non typique) [DYN] | ancre=305762568833879 | P(n=10)=305762568833879 | [PREMIER TROUVE]
+  1/790            (non typique) [DYN] | ancre=307705146862579 | P(n=10)=307705146862579 | [PREMIER TROUVE]
+  1/791            (non typique) [DYN] | ancre=309657586297751 | P(n=10)=309657586297751 | [PREMIER TROUVE]
+  1/792            (non typique) [DYN] | ancre=311619922131671 | P(n=10)=311619922131671 | [PREMIER TROUVE]
+  1/793            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=793 (4 Digamma testes).
+  1/794            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=794 (4 Digamma testes).
+  1/795            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=795 (4 Digamma testes).
+  1/796            (non typique) [DYN] | ancre=319569007064639 | P(n=10)=319569007064639 | [PREMIER TROUVE]
+  1/797            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=797 (4 Digamma testes).
+  1/798            (non typique) [DYN] | ancre=323603920695971 | P(n=10)=323603920695971 | [PREMIER TROUVE]
+  1/799            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=799 (4 Digamma testes).
+  1/800            (non typique) [DYN] | ancre=327679487999999 | P(n=10)=327679487999999 | [PREMIER TROUVE]
+  1/801            (non typique) [DYN] | ancre=329732613124001 | P(n=10)=329732613124001 | [PREMIER TROUVE]
+  1/802            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=802 (4 Digamma testes).
+  1/803            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=803 (4 Digamma testes).
+  1/804            (non typique) [DYN] | ancre=335953810906559 | P(n=10)=335953810906559 | [PREMIER TROUVE]
+  1/805            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=805 (4 Digamma testes).
+  1/806            (non typique) [DYN] | ancre=340153183985159 | P(n=10)=340153183985159 | [PREMIER TROUVE]
+  1/807            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=807 (4 Digamma testes).
+  1/808            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=808 (4 Digamma testes).
+  1/809            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=809 (4 Digamma testes).
+  1/810            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=810 (4 Digamma testes).
+  1/811            (non typique) [DYN] | ancre=350835563056409 | P(n=10)=350835563056409 | [PREMIER TROUVE]
+  1/812            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=812 (4 Digamma testes).
+  1/813            (non typique) [DYN] | ancre=355182918709277 | P(n=10)=355182918709277 | [PREMIER TROUVE]
+  1/814            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=814 (4 Digamma testes).
+  1/815            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=815 (4 Digamma testes).
+  1/816            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=816 (4 Digamma testes).
+  1/817            (non typique) [DYN] | ancre=364006914033649 | P(n=10)=364006914033649 | [PREMIER TROUVE]
+  1/818            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=818 (4 Digamma testes).
+  1/819            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=819 (4 Digamma testes).
+  1/820            (non typique) [DYN] | ancre=370739291833639 | P(n=10)=370739291833639 | [PREMIER TROUVE]
+  1/821            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=821 (4 Digamma testes).
+  1/822            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=822 (4 Digamma testes).
+  1/823            (non typique) [DYN] | ancre=377570917836727 | P(n=10)=377570917836727 | [PREMIER TROUVE]
+  1/824            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=824 (4 Digamma testes).
+  1/825            (non typique) [DYN] | ancre=382181010070199 | P(n=10)=382181010070199 | [PREMIER TROUVE]
+  1/826            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=826 (4 Digamma testes).
+  1/827            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=827 (4 Digamma testes).
+  1/828            (non typique) [DYN] | ancre=389180480972471 | P(n=10)=389180480972471 | [PREMIER TROUVE]
+  1/829            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=829 (4 Digamma testes).
+  1/830            (non typique) [DYN] | ancre=393903493202729 | P(n=10)=393903493202729 | [PREMIER TROUVE]
+  1/831            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=831 (4 Digamma testes).
+  1/832            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=832 (4 Digamma testes).
+  1/833            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=833 (4 Digamma testes).
+  1/834            (non typique) [DYN] | ancre=403487075590997 | P(n=10)=403487075590997 | [PREMIER TROUVE]
+  1/835            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=835 (4 Digamma testes).
+  1/836            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=836 (4 Digamma testes).
+  1/837            (non typique) [DYN] | ancre=410796438813377 | P(n=10)=410796438813377 | [PREMIER TROUVE]
+  1/838            (non typique) [DYN] | ancre=413256291397289 | P(n=10)=413256291397289 | [PREMIER TROUVE]
+  1/839            (non typique) [DYN] | ancre=415727915703239 | P(n=10)=415727915703239 | [PREMIER TROUVE]
+  1/840            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=840 (4 Digamma testes).
+  1/841            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=841 (4 Digamma testes).
+  1/842            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=842 (4 Digamma testes).
+  1/843            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=843 (4 Digamma testes).
+  1/844            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=844 (4 Digamma testes).
+  1/845            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=845 (4 Digamma testes).
+  1/846            (non typique) [DYN] | ancre=433362379976369 | P(n=10)=433362379976369 | [PREMIER TROUVE]
+  1/847            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=847 (4 Digamma testes).
+  1/848            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=848 (4 Digamma testes).
+  1/849            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=849 (4 Digamma testes).
+  1/850            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=850 (4 Digamma testes).
+  1/851            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=851 (4 Digamma testes).
+  1/852            (non typique) [DYN] | ancre=448949379399527 | P(n=10)=448949379399527 | [PREMIER TROUVE]
+  1/853            (non typique) [DYN] | ancre=451590251542259 | P(n=10)=451590251542259 | [PREMIER TROUVE]
+  1/854            (non typique) [DYN] | ancre=454243538153159 | P(n=10)=454243538153159 | [PREMIER TROUVE]
+  1/855            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=855 (4 Digamma testes).
+  1/856            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=856 (4 Digamma testes).
+  1/857            (non typique) [DYN] | ancre=462278312208569 | P(n=10)=462278312208569 | [PREMIER TROUVE]
+  1/858            (non typique) [DYN] | ancre=464981688249077 | P(n=10)=464981688249077 | [PREMIER TROUVE]
+  1/859            (non typique) [DYN] | ancre=467697696130237 | P(n=10)=467697696130237 | [PREMIER TROUVE]
+  1/860            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=860 (4 Digamma testes).
+  1/861            (non typique) [DYN] | ancre=473167788082919 | P(n=10)=473167788082919 | [PREMIER TROUVE]
+  1/862            (non typique) [DYN] | ancre=475921959430721 | P(n=10)=475921959430721 | [PREMIER TROUVE]
+  1/863            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=863 (4 Digamma testes).
+  1/864            (non typique) [DYN] | ancre=481468778487647 | P(n=10)=481468778487647 | [PREMIER TROUVE]
+  1/865            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=865 (4 Digamma testes).
+  1/866            (non typique) [DYN] | ancre=487067196214679 | P(n=10)=487067196214679 | [PREMIER TROUVE]
+  1/867            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=867 (4 Digamma testes).
+  1/868            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=868 (4 Digamma testes).
+  1/869            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=869 (4 Digamma testes).
+  1/870            (non typique) [DYN] | ancre=498420262954769 | P(n=10)=498420262954769 | [PREMIER TROUVE]
+  1/871            (non typique) [DYN] | ancre=501291340577039 | P(n=10)=501291340577039 | [PREMIER TROUVE]
+  1/872            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=872 (4 Digamma testes).
+  1/873            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=873 (4 Digamma testes).
+  1/874            (non typique) [DYN] | ancre=509984052047749 | P(n=10)=509984052047749 | [PREMIER TROUVE]
+  1/875            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=875 (4 Digamma testes).
+  1/876            (non typique) [DYN] | ancre=515845877641499 | P(n=10)=515845877641499 | [PREMIER TROUVE]
+  1/877            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=877 (4 Digamma testes).
+  1/878            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=878 (4 Digamma testes).
+  1/879            (non typique) [DYN] | ancre=524739567830717 | P(n=10)=524739567830717 | [PREMIER TROUVE]
+  1/880            (non typique) [DYN] | ancre=527731235327999 | P(n=10)=527731235327999 | [PREMIER TROUVE]
+  1/881            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=881 (4 Digamma testes).
+  1/882            (non typique) [DYN] | ancre=533755505175227 | P(n=10)=533755505175227 | [PREMIER TROUVE]
+  1/883            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=883 (4 Digamma testes).
+  1/884            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=884 (4 Digamma testes).
+  1/885            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=885 (4 Digamma testes).
+  1/886            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=886 (4 Digamma testes).
+  1/887            (non typique) [DYN] | ancre=549057144589103 | P(n=10)=549057144589103 | [PREMIER TROUVE]
+  1/888            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=888 (4 Digamma testes).
+  1/889            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=889 (4 Digamma testes).
+  1/890            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=890 (4 Digamma testes).
+  1/891            (non typique) [DYN] | ancre=561549408012251 | P(n=10)=561549408012251 | [PREMIER TROUVE]
+  1/892            (non typique) [DYN] | ancre=564707721468727 | P(n=10)=564707721468727 | [PREMIER TROUVE]
+  1/893            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=893 (4 Digamma testes).
+  1/894            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=894 (4 Digamma testes).
+  1/895            (non typique) [DYN] | ancre=574268023393789 | P(n=10)=574268023393789 | [PREMIER TROUVE]
+  1/896            (non typique) [DYN] | ancre=577483404231551 | P(n=10)=577483404231551 | [PREMIER TROUVE]
+  1/897            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=897 (4 Digamma testes).
+  1/898            (non typique) [DYN] | ancre=583957371122971 | P(n=10)=583957371122971 | [PREMIER TROUVE]
+  1/899            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=899 (4 Digamma testes).
+  1/900            (non typique) [DYN] | ancre=590489270190899 | P(n=10)=590489270190899 | [PREMIER TROUVE]
+  1/901            (non typique) [DYN] | ancre=593777066671799 | P(n=10)=593777066671799 | [PREMIER TROUVE]
+  1/902            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=902 (4 Digamma testes).
+  1/903            (non typique) [DYN] | ancre=600396592752221 | P(n=10)=600396592752221 | [PREMIER TROUVE]
+  1/904            (non typique) [DYN] | ancre=603728419973447 | P(n=10)=603728419973447 | [PREMIER TROUVE]
+  1/905            (non typique) [DYN] | ancre=607075024097999 | P(n=10)=607075024097999 | [PREMIER TROUVE]
+  1/906            (non typique) [DYN] | ancre=610436450942429 | P(n=10)=610436450942429 | [PREMIER TROUVE]
+  1/907            (non typique) [DYN] | ancre=613812752156921 | P(n=10)=613812752156921 | [PREMIER TROUVE]
+  1/908            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=908 (4 Digamma testes).
+  1/909            (non typique) [DYN] | ancre=620610174221309 | P(n=10)=620610174221309 | [PREMIER TROUVE]
+  1/910            (non typique) [DYN] | ancre=624031392358009 | P(n=10)=624031392358009 | [PREMIER TROUVE]
+  1/911            (non typique) [DYN] | ancre=627467681087519 | P(n=10)=627467681087519 | [PREMIER TROUVE]
+  1/912            (non typique) [DYN] | ancre=630919091812127 | P(n=10)=630919091812127 | [PREMIER TROUVE]
+  1/913            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=913 (4 Digamma testes).
+  1/914            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=914 (4 Digamma testes).
+  1/915            (non typique) [DYN] | ancre=641364550010999 | P(n=10)=641364550010999 | [PREMIER TROUVE]
+  1/916            (non typique) [DYN] | ancre=644876944987111 | P(n=10)=644876944987111 | [PREMIER TROUVE]
+  1/917            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=917 (4 Digamma testes).
+  1/918            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=918 (4 Digamma testes).
+  1/919            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=919 (4 Digamma testes).
+  1/920            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=920 (4 Digamma testes).
+  1/921            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=921 (4 Digamma testes).
+  1/922            (non typique) [DYN] | ancre=666275883479021 | P(n=10)=666275883479021 | [PREMIER TROUVE]
+  1/923            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=923 (4 Digamma testes).
+  1/924            (non typique) [DYN] | ancre=673533726467447 | P(n=10)=673533726467447 | [PREMIER TROUVE]
+  1/925            (non typique) [DYN] | ancre=677186288624999 | P(n=10)=677186288624999 | [PREMIER TROUVE]
+  1/926            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=926 (4 Digamma testes).
+  1/927            (non typique) [DYN] | ancre=684538952395679 | P(n=10)=684538952395679 | [PREMIER TROUVE]
+  1/928            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=928 (4 Digamma testes).
+  1/929            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=929 (4 Digamma testes).
+  1/930            (non typique) [DYN] | ancre=695687564942999 | P(n=10)=695687564942999 | [PREMIER TROUVE]
+  1/931            (non typique) [DYN] | ancre=699435875486851 | P(n=10)=699435875486851 | [PREMIER TROUVE]
+  1/932            (non typique) [DYN] | ancre=703200323388863 | P(n=10)=703200323388863 | [PREMIER TROUVE]
+  1/933            (non typique) [DYN] | ancre=706980963315521 | P(n=10)=706980963315521 | [PREMIER TROUVE]
+  1/934            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=934 (4 Digamma testes).
+  1/935            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=935 (4 Digamma testes).
+  1/936            (non typique) [DYN] | ancre=718420552312319 | P(n=10)=718420552312319 | [PREMIER TROUVE]
+  1/937            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=937 (4 Digamma testes).
+  1/938            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=938 (4 Digamma testes).
+  1/939            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=939 (4 Digamma testes).
+  1/940            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=940 (4 Digamma testes).
+  1/941            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=941 (4 Digamma testes).
+  1/942            (non typique) [DYN] | ancre=741743969339921 | P(n=10)=741743969339921 | [PREMIER TROUVE]
+  1/943            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=943 (4 Digamma testes).
+  1/944            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=944 (4 Digamma testes).
+  1/945            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=945 (4 Digamma testes).
+  1/946            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=946 (4 Digamma testes).
+  1/947            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=947 (4 Digamma testes).
+  1/948            (non typique) [DYN] | ancre=765669246804227 | P(n=10)=765669246804227 | [PREMIER TROUVE]
+  1/949            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=949 (4 Digamma testes).
+  1/950            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=950 (4 Digamma testes).
+  1/951            (non typique) [DYN] | ancre=777861191444399 | P(n=10)=777861191444399 | [PREMIER TROUVE]
+  1/952            (non typique) [DYN] | ancre=781959503569271 | P(n=10)=781959503569271 | [PREMIER TROUVE]
+  1/953            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=953 (4 Digamma testes).
+  1/954            (non typique) [DYN] | ancre=790207953066359 | P(n=10)=790207953066359 | [PREMIER TROUVE]
+  1/955            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=955 (4 Digamma testes).
+  1/956            (non typique) [DYN] | ancre=798525862755851 | P(n=10)=798525862755851 | [PREMIER TROUVE]
+  1/957            (non typique) [DYN] | ancre=802711001445869 | P(n=10)=802711001445869 | [PREMIER TROUVE]
+  1/958            (non typique) [DYN] | ancre=806913667654049 | P(n=10)=806913667654049 | [PREMIER TROUVE]
+  1/959            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=959 (4 Digamma testes).
+  1/960            (non typique) [DYN] | ancre=815371813786559 | P(n=10)=815371813786559 | [PREMIER TROUVE]
+  1/961            (non typique) [DYN] | ancre=819627399477119 | P(n=10)=819627399477119 | [PREMIER TROUVE]
+  1/962            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=962 (4 Digamma testes).
+  1/963            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=963 (4 Digamma testes).
+  1/964            (non typique) [DYN] | ancre=832500881772479 | P(n=10)=832500881772479 | [PREMIER TROUVE]
+  1/965            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=965 (4 Digamma testes).
+  1/966            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=966 (4 Digamma testes).
+  1/967            (non typique) [DYN] | ancre=845535615304421 | P(n=10)=845535615304421 | [PREMIER TROUVE]
+  1/968            (non typique) [DYN] | ancre=849916623224327 | P(n=10)=849916623224327 | [PREMIER TROUVE]
+  1/969            (non typique) [DYN] | ancre=854315769122639 | P(n=10)=854315769122639 | [PREMIER TROUVE]
+  1/970            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=970 (4 Digamma testes).
+  1/971            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=971 (4 Digamma testes).
+  1/972            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=972 (4 Digamma testes).
+  1/973            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=973 (4 Digamma testes).
+  1/974            (non typique) [DYN] | ancre=876585588988199 | P(n=10)=876585588988199 | [PREMIER TROUVE]
+  1/975            (non typique) [DYN] | ancre=881094767451599 | P(n=10)=881094767451599 | [PREMIER TROUVE]
+  1/976            (non typique) [DYN] | ancre=885622481203199 | P(n=10)=885622481203199 | [PREMIER TROUVE]
+  1/977            (non typique) [DYN] | ancre=890168791149329 | P(n=10)=890168791149329 | [PREMIER TROUVE]
+  1/978            (non typique) [DYN] | ancre=894733751642477 | P(n=10)=894733751642477 | [PREMIER TROUVE]
+  1/979            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=979 (4 Digamma testes).
+  1/980            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=980 (4 Digamma testes).
+  1/981            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=981 (4 Digamma testes).
+  1/982            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=982 (4 Digamma testes).
+  1/983            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=983 (4 Digamma testes).
+  1/984            (non typique) [DYN] | ancre=922518412900247 | P(n=10)=922518412900247 | [PREMIER TROUVE]
+  1/985            (non typique) [DYN] | ancre=927215546695969 | P(n=10)=927215546695969 | [PREMIER TROUVE]
+  1/986            (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Ancrage n=10 echoue pour k=986 (4 Digamma testes).
+  1/987            (non typique) [DYN] | ancre=936667209955721 | P(n=10)=936667209955721 | [PREMIER TROUVE]
+ c

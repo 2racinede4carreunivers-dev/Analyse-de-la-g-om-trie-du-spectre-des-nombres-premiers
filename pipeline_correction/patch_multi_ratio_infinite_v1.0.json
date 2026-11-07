@@ -1,0 +1,14 @@
+﻿{
+  "meta": {
+    "nom": "Patch multi-ratio infini",
+    "description": "Dispatcher multi-ratio 1/k generalise k=2..infini",
+    "version": "1.0"
+  },
+  "operations": [
+    {
+      "op": "creer_fichier",
+      "cible": "C:\\agent-multiloop-Gabriel-local\\pipeline_cognitif\\multi_ratio_dispatcher.py",
+      "contenu_fichier": "C:\\agent-multiloop-Gabriel-local\\pipeline_cognitif\\multi_ratio_dispatcher_infinite.py"
+    }
+  ]
+}

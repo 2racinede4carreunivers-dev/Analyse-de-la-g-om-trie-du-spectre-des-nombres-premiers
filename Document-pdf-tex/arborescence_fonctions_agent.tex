@@ -1,0 +1,30 @@
+﻿\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  fonction/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu!12,thick,minimum width=2.8cm,minimum height=0.9cm,align=center},
+  entreesortie/.style={rectangle,rounded corners,draw=spectralor,fill=spectralor!18,thick,minimum width=2.8cm,minimum height=0.8cm,align=center},
+  moteur8/.style={rectangle,rounded corners,draw=spectralviolet,fill=spectralviolet!15,thick,minimum width=2.8cm,minimum height=0.9cm,align=center},
+  flux/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!70},
+  fluxor/.style={-{Stealth[length=2.2mm]},thick,spectralor!90!black},
+  fluxviolet/.style={-{Stealth[length=2.2mm]},thick,spectralviolet!80!black}
+]
+  \node[entreesortie] (req) at (0,0) {Requete utilisateur};
+  \node[fonction] (vision) at (-4.2,-2.2) {\textbf{Fonction Vision}};
+  \node[fonction] (corpus) at (4.2,-2.2) {\textbf{Corpus HOL}};
+  \node[fonction] (pcognitif) at (-4.2,-4.4) {\textbf{Pipeline Cognitif}};
+  \node[fonction] (pcorrection) at (4.2,-4.4) {\textbf{Pipeline Correction}};
+  \node[moteur8] (moteur8) at (0,-6.6) {\textbf{Moteur Recursif (8)}};
+  \draw[flux] (req.south) -- (0,-1.1) -| (vision.north);
+  \draw[flux] (req.south) -- (0,-1.1) -| (corpus.north);
+  \draw[fluxor] (vision.south) -- (pcognitif.north);
+  \draw[fluxor] (corpus.south) -- (pcorrection.north);
+  \draw[fluxor] (pcognitif.south) -- (moteur8.north);
+  \draw[fluxor] (pcorrection.south) -- (moteur8.north);
+  \draw[fluxviolet] (moteur8.south) -- (0,-7.8) -| (0,-1.1);
+  \node[rotate=90,anchor=south,color=spectralbleu] at (-6.6,-4.4) {\scriptsize Perception};
+  \node[rotate=90,anchor=south,color=spectralor!80!black] at (6.6,-4.4) {\scriptsize Validation};
+  \node[rotate=90,anchor=south,color=spectralviolet] at (0,-8.6) {\scriptsize Recursion};
+\end{tikzpicture}
+\caption{Arborescence des fonctions de l agent Gabriel}
+\end{figure}

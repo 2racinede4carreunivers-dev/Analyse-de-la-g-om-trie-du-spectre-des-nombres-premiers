@@ -1,0 +1,41 @@
+{
+  "ERR_001": {
+    "type": "timeout",
+    "lemme": "classification_regime_weak",
+    "domaine": "regime",
+    "tactique_cassee": "omega on (p mod 4 = 1 ∨ p mod 4 = 3)",
+    "erreur": "omega timeout après 30s sur arithmétique modulaire",
+    "solution": "Remplacer omega par interval_cases (p mod 4)",
+    "validee": true,
+    "nb_fois_rencontree": 15,
+    "timestamp": "2026-06-20T10:00:00",
+    "resolu": true,
+    "resolution": "interval_cases marche 100% des fois"
+  },
+  "ERR_002": {
+    "type": "tactic_failed",
+    "lemme": "gap_mixed_detection",
+    "domaine": "gap",
+    "tactique_cassee": "blast sur contexte avec 12+ hypothèses",
+    "erreur": "blast explosion combinatoire",
+    "solution": "Nettoyer d'abord avec simp only [relevant_hyps]",
+    "validee": true,
+    "nb_fois_rencontree": 23,
+    "timestamp": "2026-06-20T11:30:00",
+    "resolu": true,
+    "resolution": "simp then blast marche 98% des fois"
+  },
+  "ERR_003": {
+    "type": "induction_weak",
+    "lemme": "property_by_regime_induction",
+    "domaine": "regime",
+    "tactique_cassee": "Induction simple avec ih faible",
+    "erreur": "Étape d'induction échoue, ih insuffisante",
+    "solution": "Utiliser suffices pour renforcer l'hypothèse d'induction",
+    "validee": true,
+    "nb_fois_rencontree": 8,
+    "timestamp": "2026-06-20T14:00:00",
+    "resolu": true,
+    "resolution": "suffices renforce correctement l'IH"
+  }
+}

@@ -1,0 +1,24 @@
+(* ============================================================
+ * ROOT SLOT 17 - Univers au Carre / Methode Spectrale Savard
+ *
+ * Ce fichier est un slot pre-provisionne dans l'image Docker.
+ * A remplir par Gabriel ou l'utilisateur pour activer une
+ * session Isabelle independante SANS reconstruire l'image.
+ *
+ * TEMPLATE MINIMAL (a decommenter et adapter) :
+ *
+ *   session Slot_17_Savard = HOL +
+ *     description "Description du projet slot 17"
+ *     options [document = false]
+ *     sessions
+ *       "HOL-Computational_Algebra"
+ *     theories
+ *       "../../projet_uni_car_savard_17"
+ *
+ * Convention : le fichier .thy reference doit declarer
+ *   theory projet_uni_car_savard_17
+ * en tete pour respecter la contrainte de nommage Isabelle.
+ *
+ * Compilation locale :
+ *   isabelle build -v -D theories/projects/roots/session_17
+ * ============================================================ *)

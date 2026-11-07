@@ -1,0 +1,135 @@
+@'
+PATCH = {
+    "meta": {
+        "nom": "correction_hol_unicode",
+        "description": "Correction Unicode brut U+21D2 (fleche) et U+2260 (non-egal) dans tous les .thy du depot Gabriel_Multiloop",
+        "version": "1.0",
+        "cible_erreur": "Inner lexical error line 1832 - Failed to parse type",
+    },
+    "operations": [
+        {
+            "op": "executer_python",
+            "message": "Scan recursif tous les .thy - correction U+21D2->\\<Rightarrow> et U+2260->\\<noteq> - backup + log SQLite",
+            "contenu": """
+import hashlib, json, os, shutil, sqlite3
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO_ROOT   = Path(os.getcwd()).resolve()
+DB_PATH     = REPO_ROOT / "data" / "gabriel_repo_map.db"
+RAPPORT_DIR = REPO_ROOT / "pipeline_correction"
+SNAPSHOT_ID = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+BAK_DIR     = REPO_ROOT / ".gabriel_variateur" / "snapshots" / (SNAPSHOT_ID + "_hol_unicode_fix")
+
+CORRECTIONS = [
+    ("FIX_RIGHTARROW", "\\u21d2".encode("utf-8"), b"\\\\<Rightarrow>",
+     "U+21D2 -> \\\\<Rightarrow> [consts/definition/types HOL]"),
+    ("FIX_NOTEQ", "\\u2260".encode("utf-8"), b"\\\\<noteq>",
+     "U+2260 -> \\\\<noteq> [assumes/axiomatization HOL]"),
+]
+
+EXCLUDE = {".git", ".venv", "venv", "__pycache__", ".gabriel_variateur",
+           "node_modules", ".github"}
+
+def sha256b(data): return hashlib.sha256(data).hexdigest()
+
+def scan_thy():
+    return sorted([f for f in REPO_ROOT.rglob("*.thy")
+                   if not any(p in EXCLUDE for p in f.parts)])
+
+def corriger(path):
+    original = path.read_bytes()
+    corrige  = original
+    details  = []
+    for fid, old, new, desc in CORRECTIONS:
+        n = corrige.count(old)
+        corrige = corrige.replace(old, new)
+        details.append({"id": fid, "count": n, "desc": desc})
+    modifie = corrige != original
+    res = {
+        "fichier": path.relative_to(REPO_ROOT).as_posix(),
+        "modifie": modifie,
+        "backup": None,
+        "sha_avant": sha256b(original),
+        "sha_apres": sha256b(corrige),
+        "corrections": details,
+        "total_rempl": sum(d["count"] for d in details),
+    }
+    if modifie:
+        BAK_DIR.mkdir(parents=True, exist_ok=True)
+        bak = BAK_DIR / (sha256b(original)[:10] + "_" + path.name + ".bak")
+        shutil.copy2(path, bak)
+        res["backup"] = bak.as_posix()
+        path.write_bytes(corrige)
+    return res
+
+def log_sqlite(resultats):
+    if not DB_PATH.exists():
+        print("  [WARN] gabriel_repo_map.db absent - log SQLite ignore")
+        return
+    conn = sqlite3.connect(str(DB_PATH))
+    conn.execute("""CREATE TABLE IF NOT EXISTS corrections_hol (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        snapshot_id TEXT, fichier TEXT, modifie INTEGER,
+        total_rempl INTEGER, sha_avant TEXT, sha_apres TEXT,
+        backup_path TEXT, details_json TEXT, applied_at TEXT)""")
+    now = datetime.now(timezone.utc).isoformat()
+    for r in resultats:
+        conn.execute(
+            "INSERT INTO corrections_hol VALUES (NULL,?,?,?,?,?,?,?,?,?)",
+            (SNAPSHOT_ID, r["fichier"], int(r["modifie"]), r["total_rempl"],
+             r["sha_avant"], r["sha_apres"], r["backup"],
+             json.dumps(r["corrections"], ensure_ascii=False), now))
+    conn.commit(); conn.close()
+    print(f"  [DB] {len(resultats)} entrees dans corrections_hol")
+
+SEP = "=" * 65
+print(SEP)
+print(f"CORRECTION HOL UNICODE | Snapshot: {SNAPSHOT_ID}")
+print(f"Repo: {REPO_ROOT}")
+print(SEP)
+
+fichiers  = scan_thy()
+resultats = []
+print(f"{len(fichiers)} fichiers .thy detectes\\n")
+
+for f in fichiers:
+    try:
+        r = corriger(f)
+        resultats.append(r)
+        tag = "[CORRIGE]" if r["modifie"] else "[propre ]"
+        print(f"  {tag} {r['total_rempl']:3d} rempl.  {r['fichier']}")
+    except Exception as exc:
+        print(f"  [ERREUR] {f.name}: {exc}")
+
+modifies   = [r for r in resultats if r["modifie"]]
+total_rempl = sum(r["total_rempl"] for r in resultats)
+print(f"\\n{SEP}")
+print(f"Traites: {len(resultats)} | Modifies: {len(modifies)} | Remplacements: {total_rempl}")
+print(f"Backups: {BAK_DIR}")
+print(SEP)
+
+log_sqlite(resultats)
+
+RAPPORT_DIR.mkdir(parents=True, exist_ok=True)
+data = {"session": "Gabriel_Multiloop HOL Unicode", "snapshot_id": SNAPSHOT_ID,
+        "total_fichiers": len(resultats), "total_modifies": len(modifies),
+        "total_rempl": total_rempl, "corriges": [r for r in resultats if r["modifie"]]}
+(RAPPORT_DIR / "rapport_pipeline.json").write_text(
+    json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+(RAPPORT_DIR / f"rapport_hol_unicode_{SNAPSHOT_ID}.json").write_text(
+    json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+print("  [RAPPORT] rapport_pipeline.json mis a jour")
+
+if total_rempl > 0:
+    print("\\n[SUCCES] Correction terminee.")
+    print(f"  Rollback: python orchestrator_main.py --rollback .gabriel_variateur/snapshots/{SNAPSHOT_ID}_hol_unicode_fix")
+else:
+    print("\\n[INFO] Tous les fichiers etaient deja propres.")
+print(SEP)
+""",
+        }
+    ],
+}
+'@ | Set-Content -Path "patch_hol_unicode_variateur.py" -Encoding UTF8
+Write-Host "patch_hol_unicode_variateur.py cree." -ForegroundColor Green

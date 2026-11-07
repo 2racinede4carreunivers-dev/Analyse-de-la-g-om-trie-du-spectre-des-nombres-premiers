@@ -1,0 +1,151 @@
+##### Code Python | rows=150 cols=2 #####
+Code Python du moteur convolutif | 
+Moteur exact corrigé : les quatre essais créent l’ancrage à n=10; les autres n utilisent le rang premier et calculent Digamma à rebours. | 
+ | 
+CODE | 
+Ligne | Code
+1 | from fractions import Fraction
+2 | from math import isqrt
+3 | 
+4 | ANCHORS = {
+5 |     3:(227,49), 4:(947,161), 5:(2999,430),
+6 |     6:(7529,954), 7:(16519,1913), 8:(32327,3468),
+7 |     9:(58337,5906),
+8 | }
+9 | 
+10 | def term_a(k,n,i):
+11 |     if not (k>=2 and n>=1 and 1<=i<=n): return 0
+12 |     if n<=7: return k**i
+13 |     if i<=n-2: return k**i
+14 |     if i==n-1: return k**(n-1)-k**(n-3)
+15 |     return k**n-k**(n-2)
+16 | 
+17 | def term_b(k,n,i):
+18 |     if not (k>=2 and n>=1 and 1<=i<=n): return 0
+19 |     if n<=7: return term_a(k,n,i)
+20 |     if i<=5: return k**i
+21 |     if i==6: return k**7
+22 |     if i<=n-2: return k**(i+1)
+23 |     if i==n-1: return k**n-k**(n-2)
+24 |     return k**(n+1)-k**(n-1)
+25 | 
+26 | def build(k,n):
+27 |     return ([term_a(k,n,i) for i in range(1,n+1)],
+28 |             [term_b(k,n,i) for i in range(1,n+1)])
+29 | 
+30 | def closed_sums(k,n):
+31 |     h=Fraction(k**4-k**2+1,(k-1)*k**3)
+32 |     sa=h*k**n-Fraction(k,k-1)
+33 |     sb=k*h*k**n-Fraction(k**7-k**6+k,k-1)
+34 |     return sa,sb
+35 | 
+36 | def is_prime(p):
+37 |     if not isinstance(p,int) or p<2: return False
+38 |     if p%2==0: return p==2
+39 |     return all(p%d for d in range(3,isqrt(p)+1,2))
+40 | 
+41 | def prime_table(count):
+42 |     out=[]; p=2
+43 |     while len(out)<count:
+44 |         if is_prime(p): out.append(p)
+45 |         p=3 if p==2 else p+2
+46 |     return out
+47 | 
+48 | def digamma_trials_n10(k):
+49 |     A,B=build(k,10); sa,sb=sum(A),sum(B); out=[]
+50 |     for pos in (7,8):
+51 |         for sign in (1,-1):
+52 |             d=sa+sign*A[pos-1]
+53 |             q=Fraction(sb-d,k**6)
+54 |             p=q.numerator if q.denominator==1 else q
+55 |             out.append({"position":pos,"sign":sign,"digamma":d,
+56 |                         "P":p,"prime":isinstance(p,int) and is_prime(p)})
+57 |     return out
+58 | 
+59 | def reconstruct(k,n,primes=None):
+60 |     if k not in ANCHORS:
+61 |         raise ValueError("Ancrage n=10 unique requis pour ce rapport")
+62 |     base_p,base_rank=ANCHORS[k]
+63 |     target_rank=base_rank+n-10
+64 |     if target_rank<1: raise ValueError("Rang cible inférieur à 1")
+65 |     if primes is None or len(primes)<target_rank:
+66 |         primes=prime_table(target_rank)
+67 |     p=primes[target_rank-1]
+68 |     A,B=build(k,n); sa,sb=sum(A),sum(B)
+69 |     d=sb-p*k**6
+70 |     assert Fraction(sb-d,k**6)==p
+71 |     return {"k":k,"n":n,"A":A,"B":B,"sum_A":sa,"sum_B":sb,
+72 |             "base_prime":base_p,"base_rank":base_rank,
+73 |             "target_rank":target_rank,"P":p,"digamma":d}
+74 | 
+75 | if __name__ == "__main__":
+76 |     assert [x["P"] for x in digamma_trials_n10(3) if x["prime"]]==[227]
+77 |     r=reconstruct(8,34)
+78 |     assert r["P"]==32537 and r["target_rank"]==3492
+79 |     assert r["sum_A"]==5705842489643358455620763423304
+80 |     assert r["sum_B"]==45646739917146867644966107124296
+81 |     assert r["digamma"]==45646739917146867644957577744968
+82 |     print(r)
+ | 
+ | # ══════════════════════════════════════════════════════════
+ | # SUITES GÉOMÉTRIQUES A ET B + FALLBACK — Gabriel v7.4
+ | # Philippe Savard 2026
+ | # ══════════════════════════════════════════════════════════
+ | import math
+ | 
+ | def suite_geo_A(k):
+ |     p=[1.0]+[(1/k)**n for n in range(1,13)]
+ |     return [math.sqrt(p[0]**2+p[1]**2), math.sqrt(p[1]**2+p[2]**2),
+ |             math.sqrt(p[2]**2+p[3]**2), math.sqrt(p[3]**2+p[4]**2),
+ |             math.sqrt(p[4]**2+p[5]**2), math.sqrt(p[5]**2+p[6]**2),
+ |             math.sqrt(p[6]**2+p[7]**2), math.sqrt(p[7]**2+p[8]**2),
+ |             math.sqrt((p[8]-p[6])**2+(p[9]-p[7])**2),   # T9 diff
+ |             math.sqrt((p[9]-p[7])**2+(p[10]-p[8])**2)]  # T10 diff
+ | 
+ | def suite_geo_B(k):
+ |     p=[1.0]+[(1/k)**n for n in range(1,13)]
+ |     return [math.sqrt(p[0]**2+p[1]**2), math.sqrt(p[1]**2+p[2]**2),
+ |             math.sqrt(p[2]**2+p[3]**2), math.sqrt(p[3]**2+p[4]**2),
+ |             math.sqrt(p[4]**2+p[5]**2),
+ |             # SAUT: pas de terme (t^5,t^6) dans B
+ |             math.sqrt(p[6]**2+p[7]**2), math.sqrt(p[7]**2+p[8]**2),
+ |             math.sqrt(p[8]**2+p[9]**2),
+ |             math.sqrt((p[10]-p[8])**2+(p[11]-p[9])**2),   # T9 diff
+ |             math.sqrt((p[11]-p[9])**2+(p[12]-p[10])**2)]  # T10 diff
+ | 
+ | def est_premier(n):
+ |     if n<2: return False
+ |     if n==2: return True
+ |     if n%2==0: return False
+ |     for i in range(3,int(n**0.5)+1,2):
+ |         if n%i==0: return False
+ |     return True
+ | 
+ | def candidats_premiers_geo(k):
+ |     tA=suite_geo_A(k); sA=sum(tA)
+ |     tB=suite_geo_B(k); sB=sum(tB)
+ |     cands=set()
+ |     for v in [sA,sB,sA+sB,abs(sA-sB)]:
+ |         for c in [math.floor(v),math.ceil(v),round(v)]:
+ |             if c>1: cands.add(c)
+ |     for n in range(1,15):
+ |         for v in [n*sA,n*sB]:
+ |             c=round(v)
+ |             if 2<=c<=10_000_000: cands.add(c)
+ |     return sorted(p for p in cands if est_premier(p))
+ | 
+ | def reconstruire_avec_fallback_geo(n, fn_algebrique, k=2):
+ |     """
+ |     Ordre Gabriel v7.4 :
+ |     1. Approche algébrique (suites k^n + 4 Digamma)
+ |     2. Si 0 premier → FALLBACK géométrique automatique
+ |     """
+ |     premiers = fn_algebrique(n)
+ |     if premiers:
+ |         return {'premiers':premiers,'approche':'algebrique','fallback':False}
+ |     # ── FALLBACK GÉOMÉTRIQUE ──────────────────────────
+ |     geo = candidats_premiers_geo(k)
+ |     if n>=2 and n!=k:
+ |         geo = sorted(set(geo)|set(candidats_premiers_geo(n)))
+ |     return {'premiers':geo,'approche':'geometrique','fallback':True,
+ |             'S_A':sum(suite_geo_A(k)),'S_B':sum(suite_geo_B(k))}

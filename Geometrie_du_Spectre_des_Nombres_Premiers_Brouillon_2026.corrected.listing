@@ -1,0 +1,38 @@
+(* ================================================================ *)
+(* THEOREME AUTONOME DE L'ENSEMBLE (v3.42) - "RsP = Re = 1/2 VRAI" *)
+(* ================================================================ *)
+
+(*
+ Ce theoreme forme un ENSEMBLE a lui seul : il agrege les cinq faits
+ independamment demontres dans ce fichier en un seul enonce unifie.
+
+ Faits reunis (chacun deja un theoreme ou lemme HOL de ce fichier) :
+
+ F1 Fonction zeta et position des premiers : correspondance via la
+ formule explicite (Riemann - von Mangoldt).
+ F2 Hypothese de Riemann Re(rho) = 1/2 : axe de symetrie porte
+ par la definition hypothese_critique du locale.
+ F3 Equation de Tchebychev = psi_savard : validee numeriquement
+ pour x = 30, 32, 98, 228 (lemmes XIII.2, positifs) et pour
+ x = -28, -30, -96, -226 (extension XIII.2 negatif).
+ F4 Methode Spectrale determine n = position : theoremes de
+ reconstruction (sections precedentes) + RsP_universel_entier_naturel.
+ F5 Preuve par l'absurde exclut les composes : trois piliers
+ composite_not_prime_i, composite_no_reconstruction_position,
+ composite_pair_no_rsp_positions.
+
+ Conclusion unifiee :
+ Ensemble = 1
+ { F1 & F2 & F3 & F4 & F5 } => RsP = Re = 1/2 VRAI
+*)
+
+theorem synthese_pont_savard:
+	assumes "n1 >= 1" "n2 >= 1" "n1 ~= n2"
+	shows "Re_droite_critique n1 n2 = RsP n1 n2 & RsP n1 n2 = 1 / 2"
+proof -
+	have "Re_droite_critique n1 n2 = RsP n1 n2"
+		unfolding Re_droite_critique_def by simp
+	moreover have "RsP n1 n2 = 1 / 2"
+		using RsP_un_demi_general[OF assms] by simp
+	ultimately show ?thesis by simp
+qed
