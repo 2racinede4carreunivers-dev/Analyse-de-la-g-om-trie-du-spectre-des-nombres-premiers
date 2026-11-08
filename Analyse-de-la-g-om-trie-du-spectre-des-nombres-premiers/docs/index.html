@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Multiloop Gabriel — Géométrie du spectre des nombres premiers</title>
+<meta name="description" content="Agent multiloop local HOL/Isabelle dédié à la géométrie du spectre des nombres premiers de Philippe Thomas Savard. Outil formel Isabelle/HOL 2025-2 pour la Méthode Spectrale et l'hypothèse de Riemann.">
+<meta name="author" content="Philippe Thomas Savard">
+<style>
+  :root {
+    --ink: #0e1a2b;
+    --paper: #f7f4ec;
+    --accent: #7a1e28;
+    --accent-2: #c7a17a;
+    --line: #1f3b5c;
+    --code-bg: #14202d;
+    --code-fg: #e6d9b8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Georgia', 'Palatino', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3.5rem 1.5rem 3rem;
+    border-bottom: 6px double var(--accent-2);
+  }
+  header .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.5px;
+  }
+  header .tagline {
+    font-style: italic;
+    font-size: 1.1rem;
+    opacity: 0.85;
+    max-width: 700px;
+  }
+  header .badges {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .badge {
+    background: var(--accent);
+    color: var(--paper);
+    padding: 0.35rem 0.85rem;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    font-family: 'Menlo', 'Courier New', monospace;
+    letter-spacing: 0.5px;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-2);
+    padding-bottom: 0.4rem;
+    margin-top: 2.5rem;
+  }
+  h3 {
+    color: var(--line);
+    margin-top: 1.5rem;
+  }
+  blockquote {
+    border-left: 4px solid var(--accent);
+    background: rgba(199, 161, 122, 0.15);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+  }
+  code, pre {
+    font-family: 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 0.9rem;
+  }
+  code {
+    background: rgba(31, 59, 92, 0.1);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    color: var(--line);
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 1.2rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+  }
+  a:hover {
+    background: rgba(122, 30, 40, 0.1);
+  }
+  .table-wrap { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    background: white;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.55rem 0.85rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--line);
+    color: var(--paper);
+  }
+  .concordance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .concordance {
+    background: white;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .concordance h4 {
+    margin: 0 0 0.4rem;
+    color: var(--accent);
+    font-family: 'Menlo', monospace;
+    font-size: 1rem;
+  }
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--accent-2); border-bottom-color: var(--accent-2); }
+  .contact-box {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--paper) !important;
+    padding: 0.7rem 1.4rem;
+    border-radius: 4px;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: none !important;
+  }
+  .cta:hover { background: var(--line); background: rgba(122, 30, 40, 1); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Agent Multiloop Gabriel</h1>
+    <p class="tagline">Assistant HOL/Isabelle expert de la géométrie du spectre des nombres premiers — outil formel dédié à l'énigme de Bernhard Riemann.</p>
+    <div class="badges">
+      <span class="badge">v3.35</span>
+      <span class="badge">Isabelle 2025-2</span>
+      <span class="badge">1702 pytests ✓</span>
+      <span class="badge">Apache 2.0</span>
+      <span class="badge">Lévis, QC</span>
+    </div>
+    <div style="margin-top: 1.5rem;">
+      <a class="cta" href="https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local">Dépôt GitHub</a>
+      <a class="cta" href="https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local/releases">Releases</a>
+      <a class="cta" href="https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local/blob/main/agent-multiloop-Gabriel-local/theories/methode_spectral.thy">methode_spectral.thy</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <h2>Pourquoi cet agent existe</h2>
+  <p>L'agent multiloop <strong>Gabriel</strong> est un assistant mathématique formel entièrement dédié à un objectif unique : <strong>assister Philippe Thomas Savard à construire un outil géométrique dynamique permettant d'apporter une réponse à l'énigme de Bernhard Riemann et à la conjecture de la fonction zêta de Riemann.</strong></p>
+  <p>L'outil en question — <strong>la géométrie du spectre des nombres premiers</strong> — n'est pas une simple visualisation : c'est <em>la construction formelle</em> elle-même, formalisée dans Isabelle/HOL, qui incarne la réponse constructive à l'énigme.</p>
+</section>
+
+<section>
+  <h2>Parcours de l'auteur</h2>
+  <p><strong>Philippe Thomas Savard</strong> est un autodidacte de Lévis (Québec, Canada), passionné de mathématiques et auteur de la théorie personnelle <em>L'Univers est au carré</em>. Malgré l'absence de formation académique formelle, il consacre son temps à l'étude des structures profondes des nombres entiers, en particulier à la géométrie du spectre des nombres premiers — un chapitre central qui représente près de 80 % de sa théorie.</p>
+  <p>Sa conviction : le rapport spectral <code>RsP = 1/2</code> n'est pas un artefact algébrique mais une <strong>cohérence numérique réelle globale</strong> émergeant des sommes de nombres premiers, en concordance directe avec la droite critique <code>Re(ρ) = 1/2</code> de la fonction ζ.</p>
+</section>
+
+<section>
+  <h2>Portée limitée — géométrie du spectre uniquement</h2>
+  <p>Gabriel <strong>ne répond qu'aux questions portant sur la géométrie du spectre des nombres premiers</strong>. Cette limitation est volontaire : elle garantit un assistant <em>compétent</em> plutôt qu'un chatbot généraliste.</p>
+  <p>La compétence principale est le fichier <code>theories/methode_spectral.thy</code>, complétée par la mémoire RAG cognitive et le dictionnaire spectral.</p>
+</section>
+
+<section>
+  <h2>Les trois concordances (Section XIII)</h2>
+  <p>Dans le locale <code>ensemble_savard</code>, dont la satisfaisabilité est démontrée par Isabelle, trois concordances se verrouillent mutuellement pour rendre <code>RsP = Re = 1/2</code> vraie :</p>
+  <div class="concordance-grid">
+    <div class="concordance">
+      <h4>C1 : 1/y1 = 1/t</h4>
+      <p>Tchebychev = ψ<sub>Savard</sub><br>Validation numérique exacte sur x = 30, 98, 228, −100.</p>
+    </div>
+    <div class="concordance">
+      <h4>C2 : 1/y3 = 1/ms1</h4>
+      <p>Zéros non-triviaux = valeurs de n = positions des nombres premiers P.</p>
+    </div>
+    <div class="concordance">
+      <h4>C3 : 1/y2 = 1/ms3</h4>
+      <p>Re(ρ) = 1/2 = RsP = 1/2 (théorème <code>alignement_central</code>).</p>
+    </div>
+  </div>
+  <blockquote>« Le rapport spectral 1/2 n'est pas un artefact algébrique — c'est une réalité numérique globale, verrouillée par trois concordances, qui rend <code>RsP = Re = 1/2</code> vraie dans le cadre du locale <code>ensemble_savard</code>. » — <strong>Philippe Thomas Savard</strong></blockquote>
+</section>
+
+<section>
+  <h2>Caractéristiques principales</h2>
+  <ul>
+    <li><strong>Pré-raisonnement dynamique</strong> — 5 modes (INSTANTANE, RAPIDE, STANDARD, APPROFONDI, TRÈS COMPLEXE) choisis automatiquement, ou forcés via <code>/rapide</code>, <code>/complet</code>, etc.</li>
+    <li><strong>7 moteurs cognitifs collaboratifs</strong> — décomposition, planification, calcul spectral, multiloop self-critique, détection d'incohérence, slow-motion fallback, audit silencieux anti-hallucination.</li>
+    <li><strong>Locale paramétré <code>spectral_family</code></strong> (v3.35) qui unifie les modèles 1/2, 1/3, 1/4 en un cadre algébrique. Extension à un modèle 1/k arbitraire en une ligne.</li>
+    <li><strong>Foundations / Meta-theory</strong> (v3.35) — 6 postulats P1..P6, 3 opérations fondamentales, règle Savard, position affirmative sur l'énigme de Riemann.</li>
+    <li><strong>Mode cinématique</strong> avec timer temps réel (écoulé, ETA, itérations prévues).</li>
+    <li><strong>Audit trail SLSA</strong> — attestation SHA256 générée par la CI GitHub Actions à chaque compilation Isabelle/HOL.</li>
+    <li><strong>1702 tests Pytest</strong> couvrant multiloop, RAG, Isabelle, PreReasoner, Foundations, spectral_family, Pont Savard.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Exemples de possibilités</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Exemple de requête</th><th>Mode auto</th></tr>
+    <tr><td><em>Reconstruis le 42ᵉ nombre premier via la Méthode Spectrale</em></td><td>STANDARD</td></tr>
+    <tr><td><em>RsP(5, 7) = ? Vérifie que le rapport est bien 1/2</em></td><td>STANDARD</td></tr>
+    <tr><td><em>Ratio spectral symétrique 4×4 avec Bloc A = {2,3,5,7}</em></td><td>APPROFONDI</td></tr>
+    <tr><td><em>La preuve de RsP_universel_entier_naturel te semble-t-elle bien formée ?</em></td><td>RAPIDE</td></tr>
+    <tr><td><em>Explique le lien entre la Section XIII, le Pont Savard et Re(ρ) = 1/2</em></td><td>TRÈS COMPLEXE</td></tr>
+    <tr><td><em>Compare psi_savard(228, 49) et Chebyshev sur le premier 227</em></td><td>TRÈS COMPLEXE</td></tr>
+    <tr><td><em>Résume les 3 concordances C1, C2, C3 en un tableau</em></td><td>RAPIDE</td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Installation rapide</h2>
+<pre><code>git clone https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local.git
+cd agent-multiloop-Gabriel-local
+cp .env.example .env
+docker-compose up -d
+docker exec -it gabriel_cli python -m src.ui.cli</code></pre>
+  <p>Compilation Isabelle locale : <code>cd theories &amp;&amp; isabelle build -v -D .</code></p>
+  <p>Tests Python : <code>python -m pytest tests/ -q</code></p>
+</section>
+
+<section>
+  <h2>Licence, propriété et contributions</h2>
+  <p>Ce dépôt est publié sous <a href="https://www.apache.org/licenses/LICENSE-2.0"><strong>Apache License 2.0</strong></a>. Il vous est permis de :</p>
+  <ul>
+    <li>✅ <strong>Cloner</strong> ce dépôt librement</li>
+    <li>✅ <strong>Partager</strong> le code et le fichier <code>methode_spectral.thy</code></li>
+    <li>✅ <strong>Modifier</strong> l'agent et les preuves formelles</li>
+    <li>✅ <strong>Contribuer</strong> via <em>Pull Request</em></li>
+    <li>✅ <strong>Utiliser</strong> le code, y compris à titre commercial, en respectant les conditions Apache 2.0</li>
+  </ul>
+  <p><strong>L'agent Gabriel, le fichier <code>methode_spectral.thy</code> et la théorie <em>L'Univers est au carré</em> sont et restent la propriété intellectuelle de Philippe Thomas Savard et de E1</strong> (Emergent Labs). La licence Apache 2.0 s'applique à l'usage du code ; elle ne transfère pas la propriété intellectuelle des œuvres.</p>
+</section>
+
+<section>
+  <h2>Contact et sécurité</h2>
+  <div class="contact-box">
+    <p style="margin-top:0"><strong>Pour toute question sensible, signalement de faille de sécurité, incident touchant l'intégrité du code, ou information nécessitant l'intervention du propriétaire du dépôt :</strong></p>
+    <p style="font-family: 'Menlo', monospace; font-size: 1.05rem; margin-bottom: 0.5rem;">📧 <a href="mailto:philipppthomassavard@gmail.com">philipppthomassavard@gmail.com</a></p>
+    <p style="margin-bottom:0">Les autres canaux (Issues GitHub, Discussions) restent ouverts pour les échanges publics et non urgents.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Contributeurs à part égale</h2>
+  <ul>
+    <li><strong>Philippe Thomas Savard</strong> — auteur principal, mathématicien, propriétaire de la théorie et du dépôt. Lévis, Chaudière-Appalaches, Québec, Canada.</li>
+    <li><strong>E1</strong> <em>(Emergent Labs)</em> — co-conception et implémentation de l'agent multiloop, du pipeline cognitif, des Foundations Isabelle, de la CI GitHub Actions.</li>
+    <li><strong>Copilot Microsoft</strong> — assistance en programmation Python et documentation.</li>
+    <li><strong>Gordon Docker Desktop</strong> — orchestration Docker locale et image du conteneur Gabriel.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p><strong>Agent Multiloop Gabriel v3.35</strong> — Apache License 2.0<br>
+  © 2026 Philippe Thomas Savard &amp; E1 (Emergent Labs) — Tous droits réservés sur la théorie <em>L'Univers est au carré</em><br>
+  📍 Lévis, Chaudière-Appalaches, Québec, Canada · 📧 <a href="mailto:philipppthomassavard@gmail.com">philipppthomassavard@gmail.com</a></p>
+  <p style="margin-top: 1.5rem; opacity: 0.7;">
+    <a href="https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local">GitHub</a> ·
+    <a href="https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local/actions">CI</a> ·
+    <a href="https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local/releases">Releases</a> ·
+    <a href="https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local/blob/main/LICENSE">Licence</a>
+  </p>
+</footer>
+
+</body>
+</html>

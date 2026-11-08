@@ -1,0 +1,70 @@
+
+\begin{center}
+\small
+\begin{tabular}{@{}c r r l l@{}}
+\toprule
+\rowcolor{spectralgris}
+\boldmath$i$ & \boldmath$A(13, 15, i)$ & \boldmath$B(13, 15, i)$ & \boldmath{Règles} \\
+\midrule
+1  & 13 & 13 & $k^{1}$ / $k^{1}$ \\
+2  & 169 & 169 & $k^{2}$ / $k^{2}$ \\
+3  & 2\,197 & 2\,197 & $k^{3}$ / $k^{3}$ \\
+4  & 28\,561 & 28\,561 & $k^{4}$ / $k^{4}$ \\
+5  & 371\,293 & 371\,293 & $k^{5}$ / $k^{5}$ \\
+6  & 4\,826\,809 & 62\,748\,517 & $k^{6}$ / $k^{7}$ \quad \textcolor{rouge}{Saut Zêta} \\
+7  & 62\,748\,517 & 815\,730\,721 & $k^{7}$ / $k^{8}$ \\
+8  & 815\,730\,721 & 10\,604\,499\,373 & $k^{8}$ / $k^{9}$ \\
+9  & 10\,604\,499\,373 & 137\,858\,491\,849 & $k^{9}$ / $k^{10}$ \\
+10 & 137\,858\,491\,849 & 1\,792\,160\,394\,037 & $k^{10}$ / $k^{11}$ \\
+11 & 1\,792\,160\,394\,037 & 23\,298\,085\,122\,481 & $k^{11}$ / $k^{12}$ \\
+12 & 23\,298\,085\,122\,481 & 302\,875\,106\,592\,253 & $k^{12}$ / $k^{13}$ \\
+13 & 302\,875\,106\,592\,253 & 3\,937\,376\,385\,699\,289 & $k^{13}$ / $k^{14}-k^{12}$ \\
+14 & 3\,914\,078\,300\,576\,808 & 50\,883\,017\,907\,498\,504 & $k^{14}-k^{12}$ / $k^{15}-k^{13}$ \\
+15 & 50\,883\,017\,907\,498\,504 & 661\,479\,232\,797\,480\,552 & $k^{15}-k^{13}$ / $k^{16}-k^{14}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+\begin{align*}
+\Sigma A &= \SA(13,15) = 55\,125\,210\,906\,883\,585 \\
+\Sigma B &= \SB(13,15) = 716\,627\,741\,784\,659\,809
+\end{align*}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 4 -- 4 essais Digamma ($k^{6} = 4\,826\,809$)}
+
+Les 4 essais Digamma explorent les branches $\text{pos}(n-2)\pm$ et $\text{pos}(n-3)\pm$. Pour $n=15$, tous les candidats sont \emph{composés} -- comportement attendu car calibrés sur $n=10$.
+
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Branche} & \textbf{État} \\
+\midrule
+pos13- & composé \\
+pos13+ & composé \\
+pos12+ & composé \\
+pos12- & composé \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 5 -- Reconstruction rang cible (méthode officielle pour $n \neq 10$)}
+
+Le Niveau 5 reconstruit $P$ via le rang spectral:
+
+\begin{boitealgo}[Reconstruction rang cible -- k=13]
+\begin{description}[nosep]
+  \item[Ancrage] $P(13, n=10) = 368\,939$ (documenté)
+  \item[Rang de base] $\pi(368\,939) = 31\,452$
+  \item[Écart] $\Delta n = 15 - 10 = 5$
+  \item[Rang cible] $31\,452 + 5 = 31\,457$
+  \item[Résultat] $P(13, n=15) = \text{prime}(31\,457) = 369\,023$ -- PREMIER certifié
+\end{description}
+\end{boitealgo}
+
+Digamma(13,15) = 716\,627\,741\,784\,659\,709 - 369\,023 x 4\,826\,809 = 716\,625\,960\,581\,122\,202

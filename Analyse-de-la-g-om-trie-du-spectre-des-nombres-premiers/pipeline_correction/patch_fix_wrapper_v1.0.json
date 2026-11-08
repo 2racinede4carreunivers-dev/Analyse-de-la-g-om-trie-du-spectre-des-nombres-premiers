@@ -1,0 +1,14 @@
+﻿{
+  "meta": {
+    "nom": "Fix wrapper multi-ratio",
+    "description": "Corrige les imports cassés dans gabriel_geometric_wrapper_v74.py",
+    "version": "1.0"
+  },
+  "operations": [
+    {
+      "op": "creer_fichier",
+      "cible": "C:\\agent-multiloop-Gabriel-local\\pipeline_cognitif\\gabriel_geometric_wrapper_v74.py",
+      "contenu_fichier": "C:\\agent-multiloop-Gabriel-local\\pipeline_cognitif\\gabriel_multi_ratio_wrapper.py"
+    }
+  ]
+}

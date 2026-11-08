@@ -1,0 +1,159 @@
+# ============================================================
+# Agent Multi-Loop Mathematique - Configuration YAML
+# ============================================================
+
+agent:
+  name: "Multi-Loop Mathematical Agent"
+  version: "1.0.0"
+  language: "fr"
+  user_name: "Philippe"
+
+# === LLM : Ollama primaire, Groq fallback, Claude/OpenAI facultatifs ===
+llm:
+  primary: "ollama"
+  fallback_1: "groq"
+  fallback_2: "claude"
+  fallback_3: "openai"
+  # true force Ollama uniquement; false autorise Groq puis les fallbacks facultatifs.
+  ollama_only: false
+  ollama:
+    model: "qwen2.5-coder:7b"
+    base_url: "http://host.docker.internal:11434"
+    # 2026-10 : le 1er appel charge llama3.2 en RAM (~7s). Un prompt multi-
+    # rapports depassait 10s -> faux "Ollama indisponible". Timeout genereux.
+    # Qwen 2.5 Coder 7B a pris 281 s pour une reponse spectrale complete
+    # avec le prompt d'ancrage; laisser une marge pour les variations locales.
+    timeout_seconds: 360
+    # Garde le modele precharge en RAM entre les appels (evite le cold-start).
+    keep_alive: "30m"
+    temperature: 0.2
+    # Restitution enrichie (hors pipeline cognitif) : budget generation / contexte.
+    # 8192 tokens permet le tableau 1/2 -> 1/111 (109 ancrages) sans surcout (100% local).
+    num_predict: 8192
+    num_ctx: 8192
+  groq:
+    model: "llama-3.3-70b-versatile"
+    base_url: "https://api.groq.com/openai/v1"
+    timeout_seconds: 60
+    temperature: 0.2
+    max_tokens: 4096
+  claude:
+    # Si vide, lit CLAUDE_MODEL du .env, sinon defaut Sonnet 4.5
+    # Modeles disponibles en 2026 :
+    #   claude-sonnet-4-5-20250929   <- recommande (qualite/cout/vitesse)
+    #   claude-opus-4-5              <- maximum qualite (plus cher, plus lent)
+    model: ""
+    temperature: 0.7
+    max_tokens: 4096
+    # Plafond max d'attente Claude (lit CLAUDE_TIMEOUT_SECONDS du .env si defini).
+    # Claude prend typiquement 15-25s pour une question HOL/maths.
+    # 2026-07 : passe de 45s a 90s (demande Philippe apres timeouts recurrents
+    # sur requetes longues type kit metrique + audit signe).
+    # Si toujours des timeouts : monter a 120s. Si ennuye d'attendre : redescendre a 60s.
+    timeout_seconds: 90
+  openai:
+    model: "gpt-5.4"          # gpt-5.4 / gpt-5.5 / gpt-4o / o3-pro
+    temperature: 0.2
+    max_tokens: 4096
+    timeout_seconds: 45       # 45s max OpenAI (aligne sur Claude)
+
+# === Multi-loop self-critique ===
+multiloop:
+  max_iterations: 3            # nb max de cycles critique-amelioration
+  min_acceptance_score: 8.0    # score 0-10 minimum pour valider
+  num_candidates_per_round: 2  # genere N candidats par tour, garde le meilleur
+  enable_critique: true
+  enable_self_improvement: true
+  enable_grounded_check: true  # verifie que la reponse s'appuie sur le corpus
+
+# === Audit silencieux post-pipeline (anti-hallucination actif) ===
+# Apres le multi-loop, audite la reponse contre la verite spectrale.
+# Si une violation est detectee, re-prompte silencieusement le LLM
+# avec les valeurs correctes injectees.
+audit:
+  enabled: true                # active la boucle audit silencieuse
+  max_retries: 2               # nombre max de re-prompts si hallucination
+  temperature: 0.1             # temperature basse pour corrections factuelles
+
+# === Slow-Motion Debugger (mode ralenti anti-incoherence) ===
+# Se declenche AUTOMATIQUEMENT si la sortie multi-loop est jugee
+# incoherente. Decompose la requete, bypass les segments problematiques,
+# se replie sur le CertaintyKernel (3 sources : methode_spectral.thy,
+# geometrie_spectre_premier.thy, plan cognitif), produit une reponse
+# courte mais CERTAINE avec timeline.
+slow_motion:
+  enabled: true                # active le debugger ralenti
+  coherence_threshold: 0.55    # seuil sous lequel on declenche (0..1)
+  # v3.27 : LLM Reformulator - genere des reformulations contextuelles via LLM
+  # (Claude / OpenAI / Ollama) au lieu de proposer toujours la meme
+  # reformulation heuristique ("reconstruction de nombres premiers").
+  # Fallback silencieux vers les heuristiques en cas de timeout / erreur.
+  llm_reformulations:
+    enabled: true              # active la reformulation LLM
+    num_variants: 4            # nombre de reformulations demandees (3-5 ideal)
+    timeout_s: 5.0             # timeout LLM (fallback silencieux au-dela)
+    temperature: 0.3           # basse pour rester factuel
+
+# === Restitution MULTI-RAPPORTS (couche reponse - equations non modifiees) ===
+# Quand l'utilisateur demande PLUSIEURS rapports 1/k (plage « 1/2 a 1/111 »,
+# lots « 1/2-1/10, 1/11-1/20 », « tous les rapports »), la couche reponse
+# append un tableau DETERMINISTE genere par pipeline_cognitif (lecture seule).
+# Fichiers precalcules reutilises : Liste_Premier_Multi_Rapports_K/liste_k*_n*.txt
+multi_ratio_reponse:
+  enabled: true
+  max_k_calcul_direct: 2000   # au-dela : fichier precalcule requis ou message
+  max_k_inline: 5000          # au-dela : extrait tete/queue dans la reponse
+  lots_lignes: 10             # taille des lots pour la consigne LLM
+  tableau_comparatif: true    # + tableau Digamma/branches si <= 200 rapports
+
+# === Pipeline cognitif ===
+pipeline:
+  enable_abstraction: true
+  enable_meta_reasoning: true
+  enable_concept_navigation: true
+  enable_generalization: true
+  enable_theorem_discovery: false   # optionnel
+  enable_hol_generation: true
+  enable_isabelle_validation: false # active si conteneur Isabelle accessible
+  enable_wolfram_verification: true # 6e moteur : verifie via Wolfram si App ID present
+
+# === Wolfram|Alpha (verification numerique independante) ===
+wolfram:
+  enabled: true
+  app_id_env: "WOLFRAM_APP_ID"
+  timeout_seconds: 15
+
+# === Donnees ===
+data:
+  hol_dir: "/theories"
+  pdf_dir: "/workspace/corpus_actions/pdf"
+  tex_dir: "/workspace/corpus_actions/tex"
+  data_dir: "/home/agent/app/data"
+
+# === Isabelle/HOL ===
+isabelle:
+  enabled: true
+  home: "/opt/Isabelle2025-2"
+  heap: "HOL"
+  service_url: "isabelle"      # nom du service Docker Compose
+  theory_dir: "/theories"
+
+# === Domaines mathematiques supportes ===
+domains:
+  - "methode_spectrale_savard"
+  - "rapport_spectral_1_2"
+  - "rapport_spectral_1_3"
+  - "rapport_spectral_1_4"
+  - "suites_mixtes"
+  - "suites_negatives"
+  - "geometrie_spectrale"
+  - "plan_trifocal"
+  - "hypothese_riemann"
+  - "isabelle_hol"
+
+# === Logging ===
+logging:
+  level: "INFO"
+  log_dir: "/home/agent/app/logs"
+  log_file: "agent_cli.log"
+  format: "[%(asctime)s] [%(levelname)s] %(name)s: %(message)s"

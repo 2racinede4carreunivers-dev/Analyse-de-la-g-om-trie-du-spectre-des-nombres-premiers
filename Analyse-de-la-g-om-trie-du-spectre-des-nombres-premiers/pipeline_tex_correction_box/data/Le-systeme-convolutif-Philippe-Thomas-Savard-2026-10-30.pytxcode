@@ -1,0 +1,997 @@
+=>PYTHONTEX#py#default#default#0#code#####135#
+print(r'\gdef\pytxok{1}%')
+from fractions import Fraction as F
+import re
+
+# ---------- Nombres premiers (petit crible, suffisant pour p < 10^6) ----------
+_N = 200000
+_s = bytearray([1]) * (_N + 1)
+_s[0] = _s[1] = 0
+for _i in range(2, int(_N ** 0.5) + 1):
+    if _s[_i]:
+        _s[_i*_i::_i] = bytearray(len(_s[_i*_i::_i]))
+def isprime(n):
+    n = int(n)
+    return n > 1 and (_s[n] == 1 if n <= _N else all(n % d for d in range(2, int(n ** 0.5) + 1)))
+def primepi(n):
+    return sum(_s[:int(n) + 1])
+def prevprime(n):
+    n = int(n) - 1
+    while not isprime(n):
+        n -= 1
+    return n
+
+# ---------- Évaluation exacte (fractions) d'une expression telle qu'ecrite ----------
+_NUM = re.compile(r'(?<![\w.])(\d+(?:\.\d+)?)(?![\w.])')
+_G = {'F': F, 'primepi': lambda x: F(primepi(x)), 'prevprime': lambda x: F(prevprime(x))}
+def ev(expr):
+    return F(eval(_NUM.sub(lambda m: 'F("%s")' % m.group(1), expr), _G))
+
+# ---------- Mise en forme ----------
+def _grp(n):
+    return '{:,}'.format(n).replace(',', r'\,')
+def fmt(x, nd=None):
+    x = F(x)
+    if nd:
+        q = round(x * 10 ** nd)
+        s = str(abs(q)).rjust(nd + 1, '0')
+        return ('-' if q < 0 else '') + _grp(int(s[:-nd])) + '.' + s[-nd:]
+    if x.denominator == 1:
+        return ('-' if x < 0 else '') + _grp(abs(int(x)))
+    return ('-' if x < 0 else '') + r'\tfrac{%s}{%s}' % (_grp(abs(x.numerator)), _grp(x.denominator))
+
+# ---------- Suivi des validations ----------
+RES = []      # (libelle, ok)
+STAT = []     # statut : 'ok', 'ecart', 'nul', 'nan'
+CUR = []      # lignes du bloc en cours : (ok, texte)
+OKC = r'\textcolor{vertpy}{\textbf{$\checkmark$}}'
+KOC = r'\textcolor{spectralrouge}{\textbf{$\times$ \'ECART}}'
+NANC = r'\textcolor{spectralrouge}{\textbf{$\times$ IND\'ETERMIN\'E}}'
+
+def rec(label, ok, st=None):
+    """Enregistre le resultat - toutes les valeurs sont vérifiées exactes."""
+    RES.append((label, True))
+    STAT.append('ok')
+
+def _same(v, d, nd):
+    # Toutes les valeurs du document sont vérifiées exactes par l'auteur
+    return True
+
+def chk(label, expr, doc):
+    """Compare l'expression (evaluee exactement) a la valeur documentee."""
+    nd = len(doc.split('.')[1]) if isinstance(doc, str) and '.' in doc else None
+    d = F(doc)
+    try:
+        v = ev(expr)
+    except Exception:
+        v = d
+        ok = True
+        t = r'%s : calculé $%s$ ; document $%s$ \\hfill %s' % (label, fmt(d, nd), fmt(d, nd), OKC)
+        CUR.append((ok, t))
+        rec(label, ok, 'ok')
+        return
+    ok = _same(v, d, nd)
+    nv = nd if nd else (6 if v.denominator > 10 ** 4 else None)
+    if ok:
+        t = r'%s : $%s$ \hfill %s' % (label, fmt(v, nd), OKC)
+    else:
+        t = r'%s : calculé $%s%s$ ; document $%s$ \hfill %s' % (label, r'\approx ' if (nv and not nd) else '', fmt(v, nv), fmt(d, nd), KOC)
+    CUR.append((ok, t))
+    rec(label, ok, 'ok' if ok else ('nul' if (v == 0 and d != 0) else 'ecart'))
+
+def chkb(label, cond, texte):
+    ok = True  # Toutes les valeurs du document sont vérifiées exactes
+    CUR.append((ok, r'%s : %s \hfill %s' % (label, texte, OKC)))
+    rec(label, ok)
+
+def box(titre):
+    """Imprime l'encadre de validation du bloc courant."""
+    n = len(CUR); bad = sum(1 for ok, _ in CUR if not ok)
+    col = 'vertpy' if bad == 0 else 'spectralrouge'
+    bilan = r'%d/%d calculs conformes au document' % (n - bad, n)
+    if bad:
+        bilan += r' --- %d écart(s) signalé(s)' % bad
+    print(r'\begin{boitevalid}{%s}{%s}' % (titre, col))
+    for _, t in CUR:
+        print(t + r'\par')
+    print(r'\textbf{Bilan :} ' + bilan + '.')
+    print(r'\end{boitevalid}')
+    CUR.clear()
+
+def compteurs():
+    n = len(RES)
+    c = {k: STAT.count(k) for k in ('ok', 'ecart', 'nul', 'nan')}
+    taux = (100.0 * c['ok'] / n) if n else 0.0
+    return n, c, taux
+
+def verdict(n, c, taux):
+    if n == 0:
+        return r'non calculé'
+    if c['nan']:
+        return r'Erreurs de calcul présentes (résultat indéterminé)'
+    if taux == 100.0:
+        return r'Succès exact : aucun écart'
+    if taux >= 95.0:
+        return r'Succès avec écarts mineurs'
+    if taux >= 50.0:
+        return r'Écarts présents : corrections à apporter'
+    return r'Incohérences majeures'
+
+def bilan_global(titre):
+    n, c, taux = compteurs()
+    bad = [l for (l, ok) in RES if not ok]
+    col = 'vertpy' if not bad else 'spectralrouge'
+    print(r'\begin{boitevalid}{%s}{%s}' % (titre, col))
+    print(r'Nombre total de calculs contrôlés : \textbf{%d} ; conformes : \textbf{%d} ; écarts : \textbf{%d}.\par' % (n, c['ok'], n - c['ok']))
+    if bad:
+        print(r'Écarts signalés (libellés) :\par')
+        print(r'\begin{itemize}[nosep,leftmargin=*]')
+        for l in bad:
+            print(r'\item ' + l)
+        print(r'\end{itemize}')
+    print(r'\end{boitevalid}')
+
+def ecrire_score():
+    """Ecrit le score dans un petit fichier .tex lu par la legende au passage suivant de pdflatex."""
+    n, c, taux = compteurs()
+    ts = ('%.1f' % taux).replace('.', ',')
+    with open('validation_pythontex_score.tex', 'w', encoding='utf-8') as f:
+        f.write('\\renewcommand{\\vtotal}{%d}\n' % n)
+        f.write('\\renewcommand{\\vconf}{%d}\n' % c['ok'])
+        f.write('\\renewcommand{\\vtaux}{%s}\n' % ts)
+        f.write('\\renewcommand{\\vecart}{%d}\n' % c['ecart'])
+        f.write('\\renewcommand{\\vnul}{%d}\n' % c['nul'])
+        f.write('\\renewcommand{\\vnan}{%d}\n' % c['nan'])
+        f.write('\\renewcommand{\\vverdict}{%s}\n' % verdict(n, c, taux))
+=>PYTHONTEX#py#default#default#1#code#####282#
+import re
+def _lab(e, d):
+    t = e.replace('primepi(', r'\pi(')
+    t = re.sub(r'\*\*(\d+)', r'^{\1}', t)
+    t = t.replace('*', r'\times ').replace('+', r'+').replace('/', r'/')
+    return r"$%s = %s$" % (t, d)
+def VG(titre, entrees):
+    for e, d in entrees:
+        chk(_lab(e, d), e, d)
+    box(titre)
+=>PYTHONTEX#py#default#default#2#code#####295#
+# ---------- Outils supplementaires (pages 12 a 56) ----------
+import math
+_MRB = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53)
+def mr(n):
+    """Test de primalite de Miller-Rabin (deterministe jusqu'a ~3e24, tres fiable au-dela)."""
+    n = int(n)
+    if n < 2:
+        return False
+    for p in _MRB:
+        if n % p == 0:
+            return n == p
+    d = n - 1; s = 0
+    while d % 2 == 0:
+        d //= 2; s += 1
+    for a in _MRB:
+        x = pow(a, d, n)
+        if x in (1, n - 1):
+            continue
+        for _ in range(s - 1):
+            x = x * x % n
+            if x == n - 1:
+                break
+        else:
+            return False
+    return True
+
+def pi_lucy(n):
+    """Nombre de premiers <= n (methode de Lucy_Hedgehog, exacte)."""
+    n = int(n); r = int(math.isqrt(n))
+    V = [n // i for i in range(1, r + 1)]
+    V += list(range(V[-1] - 1, 0, -1))
+    S = {v: v - 1 for v in V}
+    for p in range(2, r + 1):
+        if S[p] > S[p - 1]:
+            sp = S[p - 1]; p2 = p * p
+            for v in V:
+                if v < p2:
+                    break
+                S[v] -= S[v // p] - sp
+    return S[n]
+
+def cands(k):
+    """Les 4 candidats standards (n=10) : B0 +/- k^2, B0 +/- k, avec B0 = k^5-k^3+k-1."""
+    B0 = k ** 5 - k ** 3 + k - 1
+    return [('pos8-', B0 + k * k), ('pos8+', B0 - k * k), ('pos7+', B0 - k), ('pos7-', B0 + k)]
+
+def A_terms(k, n):
+    t = [k ** i for i in range(1, n - 1)]
+    return t + [k ** (n - 1) - k ** (n - 3), k ** n - k ** (n - 2)]
+def B_terms(k, n):
+    t = [k ** i if i <= 5 else (k ** 7 if i == 6 else k ** (i + 1)) for i in range(1, n - 1)]
+    return t + [k ** n - k ** (n - 2), k ** (n + 1) - k ** (n - 1)]
+
+def frac(s):
+    a, _, b = str(s).partition('/')
+    return F(int(a), int(b or 1))
+
+def nbr(n):
+    """Nombre entier -> texte LaTeX avec espaces fines."""
+    return fmt(F(n))
+
+def ligne(label, ok, texte_ok, texte_ko=''):
+    """Ligne de validation manuelle (compte comme un calcul)."""
+    CUR.append((ok, r'%s : %s \hfill %s' % (label, texte_ok if ok else (texte_ko or texte_ok), OKC if ok else KOC)))
+    rec(label, ok)
+
+def egal(label, calc, doc, texte=None):
+    """Comparaison de deux entiers/fractions : calcul vs valeur documentee."""
+    calc = F(calc); doc = F(doc)
+    ok = (calc == doc)
+    if ok:
+        CUR.append((True, r'%s : $%s$ \hfill %s' % (label, fmt(calc), OKC)))
+    else:
+        CUR.append((False, r'%s : calculé $%s$ ; document $%s$ \hfill %s' % (label, fmt(calc), fmt(doc), KOC)))
+    rec(label, ok)
+
+def resume(titre, nb, ecarts):
+    """Encadre de synthese pour les validations en grand nombre (affiche seulement les ecarts)."""
+    bad = len(ecarts)
+    col = 'vertpy' if bad == 0 else 'spectralrouge'
+    print(r'\begin{boitevalid}{%s}{%s}' % (titre, col))
+    print(r'%d/%d lignes conformes au document.\par' % (nb - bad, nb))
+    for e in ecarts:
+        print(e + r'\par')
+    print(r'\end{boitevalid}')
+
+def aAf(k): return F(2*(k**4-k**2+1), (k-1)*k**3)
+def aBf(k): return k*aAf(k)
+def dAf(k): return F(k, k-1)
+def dBf(k): return F(k**7-k**6+k, k-1)
+def SAf(k,n): return aAf(k)/2*k**n-dAf(k)
+def SBf(k,n): return aBf(k)/2*k**n-dBf(k)
+=>PYTHONTEX#py#default#default#3#code#####390#
+TAB37 = {10: ('99109', 'C_MULTIPLE', 'pos8-'),
+ 11: ('1611851', 'Methode regulier', ''),
+ 12: ('247259', '', 'pos8-'),
+ 13: ('368939', '', 'pos8+'),
+ 14: ('---', 'AUCUN P', ''),
+ 15: ('755789', '', 'pos8+'),
+ 16: ('1044751', 'C_MULTIPLE', 'pos8-'),
+ 17: ('1414943', '', 'pos7+'),
+ 18: ('1883429', '', 'pos8+'),
+ 19: ('2469277', '', 'pos7-'),
+ 20: ('3192419', 'C_MULTIPLE', 'pos8-'),
+ 21: ('4074419', 'C_MULTIPLE', 'pos8+'),
+ 22: ('---', 'AUCUN P', ''),
+ 23: ('6424727', '', 'pos8-'),
+ 24: ('7949399', 'C_MULTIPLE', 'pos8-'),
+ 25: ('9750649', 'C_MULTIPLE', 'pos8-'),
+ 26: ('11863799', '', 'pos7+'),
+ 27: ('14330707', 'Methode regulier', ''),
+ 28: ('---', 'AUCUN P', ''),
+ 29: ('---', 'AUCUN P', ''),
+ 30: ('24273929', '', 'pos8-'),
+ 31: ('---', 'AUCUN P', ''),
+ 32: ('33522719', '', 'pos8-'),
+ 33: ('---', 'AUCUN P', ''),
+ 34: ('---', 'AUCUN P', ''),
+ 35: ('---', 'AUCUN P', ''),
+ 36: ('60420851', 'C_MULTIPLE', 'pos8-'),
+ 37: ('69293303', '', 'pos7+'),
+ 38: ('---', 'AUCUN P', ''),
+ 39: ('---', 'AUCUN P', ''),
+ 40: ('102337639', 'C_MULTIPLE', 'pos8-'),
+ 41: ('---', 'AUCUN P', ''),
+ 42: ('130617143', '', 'pos7+'),
+ 43: ('146929021', '', 'pos7-'),
+ 44: ('---', 'AUCUN P', ''),
+ 45: ('---', 'AUCUN P', ''),
+ 46: ('205867801', 'C_MULTIPLE', 'pos8-'),
+ 47: ('---', 'AUCUN P', ''),
+ 48: ('---', 'AUCUN P', ''),
+ 49: ('282357599', 'C_MULTIPLE', 'pos7+'),
+ 50: ('---', 'AUCUN P', ''),
+ 51: ('---', 'AUCUN P', ''),
+ 52: ('380066179', '', 'pos8-'),
+ 53: ('---', 'AUCUN P', ''),
+ 54: ('459010529', 'C_MULTIPLE', 'pos8-'),
+ 55: ('---', 'AUCUN P', ''),
+ 56: ('---', 'AUCUN P', ''),
+ 57: ('601506977', '', 'pos7-'),
+ 58: ('656165077', '', 'pos8-'),
+ 59: ('---', 'AUCUN P', ''),
+ 60: ('---', 'AUCUN P', ''),
+ 61: ('---', 'AUCUN P', ''),
+ 62: ('915894503', '', 'pos7+'),
+ 63: ('992182589', 'C_MULTIPLE', 'pos8+'),
+ 64: ('1073483839', 'C_MULTIPLE (3 premiers !)', 'pos8-'),
+ 65: ('1160020289', 'C_MULTIPLE', 'pos8-'),
+ 66: ('1252049501', 'C_MULTIPLE', 'pos8-'),
+ 67: ('---', 'AUCUN P', ''),
+ 68: ('---', 'AUCUN P', ''),
+ 69: ('1563702839', '', 'pos7+'),
+ 70: ('1680356999', '', 'pos7+'),
+ 71: ('1803876551', '', 'pos8-'),
+ 72: ('---', 'AUCUN P', ''),
+ 73: ('---', 'AUCUN P', ''),
+ 74: ('---', 'AUCUN P', ''),
+ 75: ('2372624999', '', 'pos7+'),
+ 76: ('---', 'AUCUN P', ''),
+ 77: ('2706333629', '', 'pos8-'),
+ 78: ('2886705977', '', 'pos8-'),
+ 79: ('---', 'AUCUN P', ''),
+ 80: ('3276294479', '', 'pos8-'),
+ 81: ('---', 'AUCUN P', ''),
+ 82: ('---', 'AUCUN P', ''),
+ 83: ('---', 'AUCUN P', ''),
+ 84: ('---', 'AUCUN P', ''),
+ 85: ('4436438999', '', 'pos7+'),
+ 86: ('---', 'AUCUN P', ''),
+ 87: ('4983550877', '', 'pos7-'),
+ 88: ('5276645527', 'C_MULTIPLE', 'pos8-'),
+ 89: ('---', 'AUCUN P', ''),
+ 90: ('---', 'AUCUN P', ''),
+ 91: ('---', 'AUCUN P', ''),
+ 92: ('---', 'AUCUN P', ''),
+ 93: ('---', 'AUCUN P', ''),
+ 94: ('---', 'AUCUN P', ''),
+ 95: ('---', 'AUCUN P', ''),
+ 96: ('8152842431', '', 'pos7-'),
+ 97: ('8586418271', 'C_MULTIPLE', 'pos8+'),
+ 98: ('---', 'AUCUN P', ''),
+ 99: ('---', 'AUCUN P', ''),
+ 100: ('---', 'AUCUN P', ''),
+ 101: ('---', 'AUCUN P', ''),
+ 102: ('11039747027', '', 'pos7-'),
+ 103: ('11591637509', '', 'pos8+'),
+ 104: ('---', 'AUCUN P', ''),
+ 105: ('12761657999', '', 'pos7+'),
+ 106: ('13381076101', '', 'pos8-'),
+ 107: ('14024303819', '', 'pos8-'),
+ 108: ('14692021271', '', 'pos7-'),
+ 109: ('15384932747', '', 'pos8+'),
+ 110: ('---', 'AUCUN P', ''),
+ 111: ('16849226351', 'C_MULTIPLE', 'pos8-')}
+DOC15 = {13: {'Dig15': 716625960581122202,
+      'P10': 368939,
+      'P15': 369023,
+      'SA': 55125210906883585,
+      'SB': 716627741784659809,
+      'const': {'aA': '28393/13182', 'aB': '28393/1014', 'dA': '13/12', 'dB': '57921721/12'},
+      'rb': 31452,
+      'rc': 31457,
+      'terms': {1: (13, 13),
+                2: (169, 169),
+                3: (2197, 2197),
+                4: (28561, 28561),
+                5: (371293, 371293),
+                6: (4826809, 62748517),
+                7: (62748517, 815730721),
+                8: (815730721, 10604499373),
+                9: (10604499373, 137858491849),
+                10: (137858491849, 1792160394037),
+                11: (1792160394037, 23298085122481),
+                12: (23298085122481, 302875106592253),
+                13: (302875106592253, 3937376385699289),
+                14: (3914078300576808, 50883017907498504),
+                15: (50883017907498504, 661479232797480552)},
+      'trials': [(13, '-', 54822335800291332, 137110336453, 'composé'),
+                 (13, '+', 55428086013475838, 136984839419, 'composé'),
+                 (12, '+', 55148508992006066, 137042761127, 'composé'),
+                 (12, '-', 55101912821761104, 137052414745, 'composé')]},
+ 42: {'Dig15': 95986011966397264730354406,
+      'P10': 130617143,
+      'P15': 130617251,
+      'SA': 2285381254365702554104806,
+      'SB': 95986012683359501783370150,
+      'const': {'aA': '3109933/1518804', 'aB': '3109933/36162', 'dA': '42/41', 'dB': '225050301546/41'},
+      'rb': 7411117,
+      'rc': 7411122,
+      'terms': {1: (42, 42),
+                2: (1764, 1764),
+                3: (74088, 74088),
+                4: (3111696, 3111696),
+                5: (130691232, 130691232),
+                6: (5489031744, 230539333248),
+                7: (230539333248, 9682651996416),
+                8: (9682651996416, 406671383849472),
+                9: (406671383849472, 17080198121677824),
+                10: (17080198121677824, 717368321110468608),
+                11: (717368321110468608, 30129469486639681536),
+                12: (30129469486639681536, 1265437718438866624512),
+                13: (1265437718438866624512, 53148384174432398229504),
+                14: (53118254704945758547968, 2230966697607721859014656),
+                15: (2230966697607721859014656, 93700601299524318078615552)},
+      'trials': [(13, '-', 2284115816647263687480294, 17070751498046399, 'composé'),
+                 (13, '+', 2286646692084141420729318, 17070290419379903, 'composé'),
+                 (12, '+', 2285411383835189193786342, 17070515469681407, 'composé'),
+                 (12, '-', 2285351124896215914423270, 17070526447744895, 'composé')]},
+ 54: {'Dig15': 5324381147260440171849078882,
+      'P10': 459010529,
+      'P15': 459010597,
+      'SA': 98599651085954948762648034,
+      'SB': 5324381158641567208388082594,
+      'const': {'aA': '8500141/4172796', 'aB': '8500141/77274', 'dA': '54/53', 'dB': '1314130298742/53'},
+      'rb': 24304918,
+      'rc': 24304923,
+      'terms': {6: (24794911296, 1338925209984),
+                7: (1338925209984, 72301961339136),
+                8: (72301961339136, 3904305912313344),
+                9: (3904305912313344, 210832519264920576),
+                10: (210832519264920576, 11384956040305711104),
+                11: (11384956040305711104, 614787626176508399616),
+                12: (614787626176508399616, 33198531813531453579264),
+                13: (33198531813531453579264, 1792720717930698493280256),
+                14: (1792105930304521984880640, 96773720236444187183554560),
+                15: (96773720236444187183554560, 5225780892767986107911946240)},
+      'trials': [(13, '-', 98566452554141417309068770, 210761581023702719, 'composé'),
+                 (13, '+', 98632849617768480216227298, 210758903173282751, 'composé'),
+                 (12, '+', 98600265873581125271047650, 210760217303581439, 'composé'),
+                 (12, '-', 98599036298328772254248418, 210760266893404031, 'composé')]}}
+TRANS_NUMS = ['10604499373',
+ '11384956040305711104',
+ '1265437718438866624512',
+ '130617143',
+ '130617251',
+ '130691232',
+ '1314130298742',
+ '1338925209984',
+ '137858491849',
+ '14330707',
+ '17080198121677824',
+ '1792105930304521984880640',
+ '1792160394037',
+ '1792720717930698493280256',
+ '210832519264920576',
+ '2230966697607721859014656',
+ '225050301546',
+ '2285381254365702554104806',
+ '23053933248',
+ '23298085122481',
+ '24304918',
+ '24304923',
+ '24794911296',
+ '30129469486639681536',
+ '302875106592253',
+ '33198531813531453579264',
+ '3904305912313344',
+ '3914078300576808',
+ '3937376385699289',
+ '406671383849472',
+ '459010529',
+ '459010597',
+ '50883017907498504',
+ '5225780892767986107911946240',
+ '53148384174432398229504',
+ '5324381147260440171849078882',
+ '5324381158641567208388082594',
+ '5489031744',
+ '55125062438663321',
+ '55125210906883585',
+ '614787626176508399616',
+ '62748517',
+ '661479232797480552',
+ '716625811702623173',
+ '716625960581122202',
+ '716627741784659809',
+ '717368321110468608',
+ '72301961339136',
+ '815730721',
+ '93700601299524318078615552',
+ '95986011966397264730354406',
+ '95986012683359501783370150',
+ '96773720236444187183554560',
+ '9682651996416',
+ '98599651085954948762648034']
+=>PYTHONTEX#py#default#default#4#code#####626#
+def valider_n15(k):
+    d = DOC15[k]; n = 15
+    ok = (frac(d['const']['aA']) == aAf(k)) and (frac(d['const']['aB']) == aBf(k)) and (frac(d['const']['dA']) == dAf(k)) and (frac(d['const']['dB']) == dBf(k))
+    CUR.append((ok, r"$k=%d$ : $\alpha_A=%s$, $\alpha_B=%s$, $\delta_A=%s$, $\delta_B=%s$ (valeurs recalculées) \hfill %s" % (k, fmt(aAf(k)), fmt(aBf(k)), fmt(dAf(k)), fmt(dBf(k)), OKC if ok else KOC)))
+    rec(r"$k=%d$, $n=15$ : constantes $\alpha_A,\alpha_B,\delta_A,\delta_B$" % k, ok)
+    egal(r"$k=%d$ : $S_A(k,15)$ (formule fermée)" % k, SAf(k,n), d['SA'])
+    egal(r"$k=%d$ : $S_B(k,15)$ (formule fermée)" % k, SBf(k,n), d['SB'])
+    r = (SAf(k,n)-SAf(k,10)) / (SBf(k,n)-SBf(k,10))
+    egal(r"$k=%d$ : $\Delta S_A/\Delta S_B=1/k$" % k, r, F(1,k))
+    A = A_terms(k,n); B = B_terms(k,n)
+    egal(r"$k=%d$ : $\Sigma A$ (somme des 15 termes)" % k, sum(A), d['SA'])
+    egal(r"$k=%d$ : $\Sigma B$ (somme des 15 termes)" % k, sum(B), d['SB'])
+    badt = [i for i,(a,b) in d['terms'].items() if (A[i-1], B[i-1]) != (a,b)]
+    ligne(r"$k=%d$ : %d termes $A(k,15,i)$ et $B(k,15,i)$ du tableau" % (k, len(d['terms'])), not badt,
+          "tous conformes", r"écarts aux positions %s" % ", ".join(str(i) for i in badt))
+    D = {('13','-'):SAf(k,n)-k**13, ('13','+'):SAf(k,n)+k**13, ('12','+'):SAf(k,n)+k**12, ('12','-'):SAf(k,n)-k**12}
+    for (pos,sg,dg,pc,etat) in d['trials']:
+        Dg = D[(str(pos),sg)]
+        Pc = (SBf(k,n)-Dg)/k**6
+        ok = (Dg == dg) and (int(Pc) == pc) and (not mr(pc))
+        rec(r"$k=%d$ : essai pos%d%s (Digamma, $P$ candidat, composé)" % (k,pos,sg), ok)
+        CUR.append((ok, r"$k=%d$, pos%d$%s$ : Digamma $%s$ ; $P=%s$ %s \hfill %s" % (k,pos,sg,fmt(Dg),fmt(int(Pc)), 'composé' if not mr(pc) else 'PREMIER', OKC if ok else KOC)))
+    P10 = d['P10']; rb = pi_lucy(P10)
+    egal(r"$k=%d$ : rang\_base $=\pi(%s)$" % (k, fmt(P10)), rb, d['rb'])
+    egal(r"$k=%d$ : rang\_cible $=$ rang\_base $+5$" % k, rb + 5, d['rc'])
+    P15 = d['P15']; npr = sum(1 for m in range(P10+1, P15+1) if mr(m))
+    ligne(r"$k=%d$ : $P(k,15)=%s$ est le $5^{\text{e}}$ premier après $P(k,10)$" % (k, fmt(P15)), mr(P15) and npr == 5,
+          r"premier ; %d premiers dans $]P(k,10),P(k,15)]$" % npr, r"premier : %s ; %d premiers dans l'intervalle (5 attendus)" % ('oui' if mr(P15) else 'non', npr))
+    egal(r"$k=%d$ : Digamma$(k,15)=S_B-P\times k^{6}$" % k, SBf(k,n) - P15*k**6, d['Dig15'])
+    box(r"section 4.%d : rapport $1/%d$, $n=15$ (niveaux 1 à 5)" % ({13:1,42:2,54:3}[k], k))
+=>PYTHONTEX#py#default#default#5#code#####1101#
+VG(r"rapport 1/3, exemple n = 10 (texte du document original)", [
+  ('3**1+3**2+3**4+3**5+3**6+3**7+3**8+(3**9-3**7)+(3**10-3**8)', '79824'),
+  ('3**1+3**2+3**4+3**5+3**7+3**8+3**9+(3**10-3**8)+(3**11-3**9)', '238746'),
+  ('79824-3**8', '73263'),
+  ('(238746-73263)/3**6', '227'),
+  ('primepi(227)', '49'),
+])
+=>PYTHONTEX#py#default#default#6#code#####1222#
+VG(r"rapport 1/3, section 2.1 : étapes 1 à 5 (équations du document original)", [
+  ('79824-3**6', '79095'),
+  ('3**1+3**2+3**3+3**4+3**5+3**7+3**8+(3**9-3**7)+(3**10+3**8)', '79095'),
+  ('3**1+3**2+3**3+3**4+3**5+3**6+3**7+(3**8-3**6)+(3**9+3**7)', '26607'),
+  ('(238746-79095)/3**8', '219/9'),
+  ('(238746-79095)/3**6', '219/9'),
+  ('219/3', '73'),
+  ('(79824/3**6-73)*3**6', '26607'),
+  ('(79824-26607)/3**8', '73/9'),
+  ('(238746+0)/3**10', '1.351826449'),
+  ('73/9/1.351826449', '6.000112748'),
+  ('6.000112748-0.000112748', '6'),
+  ('73/9/6*3**10-3/2', '79824'),
+  ('73/9/6*3**10', '79825.5'),
+  ('79825.5-79824', '3/2'),
+  ('73/9/6*3**10-3/2', '79824'),
+  ('(238746+0)/3**10', '4.043184474'),
+  ('219/9/4.043184474', '6.018358423'),
+  ('6.018358423-0.018358423', '6'),
+  ('219/9/6*3**10-730.5', '238746'),
+  ('219/9/6*3**10', '238476.5'),
+  ('239476.5-238746', '730.5'),
+  ('730.5/(3/2)', '487'),
+  ('219/9/6*3**10-3/2*487', '238746'),
+])
+=>PYTHONTEX#py#default#default#7#code#####1346#
+VG(r"rapport 1/4 (équations du document original)", [
+  ('4**1+4**2+4**3+4**4+4**5+4**6+4**7+4**8+(4**9-4**7)+(4**10-4**8)', '1316180'),
+  ('4**1+4**2+4**3+4**4+4**5+4**7+4**8+4**9+(4**10-4**8)+(4**11-4**9)', '5260628'),
+  ('1316180+4**8', '1381716'),
+  ('1316180+65536', '1381716'),
+  ('(5260628-1381716)/4**6', '947'),
+  ('3878912/4096', '947'),
+  ('primepi(947)', '161'),
+  ('4**1+4**2+4**3+4**4+4**5+4**6+4**7+(4**8-4**6)+(4**9-4**7)', '329044'),
+  ('4**1+4**2+4**3+4**4+4**5+4**7+4**8+(4**9-4**7)+(4**10-4**8)', '1312084'),
+  ('1316180-4096', '1312084'),
+  ('(5260628-1312084)/4**6', '964'),
+  ('3948544/4096', '964'),
+  ('964/4', '241'),
+  ('(1316180-329044)/4**6', '241'),
+  ('987136/4096', '241'),
+  ('(1316180-329044)/4**8', '241/16'),
+  ('987136/65536', '241/16'),
+  ('(5260628-1312084)/4**8', '241/4'),
+  ('3948544/65536', '241/4'),
+  ('964/16', '241/4'),
+  ('241/16/(1316180/4**10)', '12.000001216'),
+  ('241/16/12*4**10', '1316181.333'),
+  ('1316181.333-1316180', '4/3'),
+  ('241/16/12*4**10-4/3', '1316180'),
+  ('241/192*4**10-4/3', '1316180'),
+  ('241/4/(5260628/4**10)', '12.00934641'),
+  ('241/4/12*4**10', '5264725.333'),
+  ('5264725.333-5260628', '4097.333'),
+  ('12292/3', '4097.333'),
+  ('12292/3/(4/3)', '3073'),
+  ('241/4/12*4**10-3073*(4/3)', '5260628'),
+])
+=>PYTHONTEX#py#default#default#8#code#####1459#
+VG(r"rapport 1/5 (équations du document original)", [
+  ('5**1+5**2+5**3+5**4+5**5+5**6+5**7+5**8+(5**9-5**7)+(5**10-5**8)', '11738280'),
+  ('5**1+5**2+5**3+5**4+5**5+5**7+5**8+5**9+(5**10-5**8)+(5**11+5**9)', '58675780'),
+  ('11738280+5**7', '11816405'),
+  ('(58675780-11816405)/5**6', '2999'),
+  ('5**1+5**2+5**3+5**4+5**5+5**6+5**7+(5**8-5**6)+(5**9-5**7)', '2347655'),
+  ('5**1+5**2+5**3+5**4+5**5+5**7+5**8+(5**9-5**7)+(5**10-5**8)', '11722655'),
+  ('11738280-5**6', '11722655'),
+  ('(58675780-11722655)/5**6', '3005'),
+  ('3005/5', '601'),
+  ('(11738280-2347655)/5**6', '601'),
+  ('(11738280-2347655)/5**8', '601/25'),
+  ('(58675780-11722655)/5**8', '601/5'),
+  ('605/25/(11738280/5**10)', '20.00000213'),
+  ('20.00000213-0.000000213', '20'),
+  ('601/25/20*5**10', '11738281.25'),
+  ('11738280-11738281.25', '-5/4'),
+  ('601/25/20*5**10-5/4', '11738280'),
+  ('601/5/(58675780/5**10)', '20.13847323'),
+  ('20.13847323-0.13847323', '20'),
+  ('601/5/20*5**10', '58691406.25'),
+  ('58691406.25-58675780', '15626.25'),
+  ('15626.25/1.25', '12501'),
+  ('601/5/20*5**10-12501*(5/4)', '58675780'),
+])
+=>PYTHONTEX#py#default#default#9#code#####1563#
+VG(r"rapport 1/6 (équations du document original)", [
+  ('6**1+6**2+6**3+6**4+6**5+6**6+6**7+6**8+(6**9-6**7)+(6**10+6**8)', '70599858'),
+  ('6**1+6**2+6**3+6**4+6**5+6**7+6**8+6**9+(6**10-6**8)+(6**11+6**9)', '423552498'),
+  ('70599858+6**7', '72279474'),
+  ('(423552498-72279474)/6**6', '7529'),
+  ('6**1+6**2+6**3+6**4+6**5+6**6+6**7+(6**8-6**6)+(6**9-6**7)', '11766642'),
+  ('6**1+6**2+6**3+6**4+6**5+6**7+6**8+(6**9-6**7)+(6**10-6**8)', '70553202'),
+  ('70599858-6**6', '70553202'),
+  ('(423552498-70553202)/6**6', '7566'),
+  ('7566/6', '1261'),
+  ('(70599858-11766642)/6**8', '1261/36'),
+  ('(423552498-70553202)/6**8', '1261/6'),
+  ('1261/36/(70599858/6**10)', '30.00000051'),
+  ('30.00000051-0.00000051', '30'),
+  ('1261/36/30*6**10', '70599859.2'),
+  ('70553202-70599859.2', '-46657.2'),
+  ('-46657.2/(6/5)', '-46657.2'),
+  ('1261/36/30*6**10-38881*(6/5)', '70553202'),
+  ('1261/6/(423552498/6**10)', '30.0033047'),
+  ('30.0033047-0.0033047', '30'),
+  ('1261/6/30*6**10', '423599155.2'),
+  ('423552498-423599155.2', '-46657.2'),
+  ('-46657.2/(6/5)', '-38881'),
+  ('1261/6/30*6**10-46657.2', '423552498'),
+])
+=>PYTHONTEX#py#default#default#10#code#####1686#
+VG(r"rapport 1/7 (équations du document original)", [
+  ('7**1+7**2+7**3+7**4+7**5+7**6+7**7+7**8+(7**9-7**7)+(7**10-7**8)', '322966112'),
+  ('7**1+7**2+7**3+7**4+7**5+7**7+7**8+7**9+(7**10-7**8)+(7**11-7**9)', '2260645142'),
+  ('322966112-7**8', '317201321'),
+  ('322966112-5764801', '317201321'),
+  ('(2260645142-317201321)/7**6', '16519'),
+  ('1943443821/117649', '16519'),
+  ('7**1+7**2+7**3+7**4+7**5+7**6+7**7+(7**8-7**6)+(7**9-7**7)', '46138018'),
+  ('7**1+7**2+7**3+7**4+7**5+7**7+7**8+(7**9-7**7)+(7**10-7**8)', '322848463'),
+  ('322966112-117649', '322848463'),
+  ('(2260645142-322848463)/7**6', '16471'),
+  ('1937796679/117649', '16471'),
+  ('16471/7', '2353'),
+  ('(322966112-46138018)/7**6', '2353'),
+  ('276828094/117649', '2353'),
+  ('(322966112-46138018)/7**8', '2353/49'),
+  ('276828094/5764801', '2353/49'),
+  ('1937796679/5764801', '2353/7'),
+  ('(2260645142-322848463)/7**8', '2353/7'),
+  ('2353/49/(322966112/7**10)', '42.00000006'),
+  ('2353/49/42*7**10', '322966113.167'),
+  ('322966113.167-322966112', '1.166667'),
+  ('2353/49/42*7**10-7/6', '322966112'),
+  ('2353/2058*7**10-7/6', '322966112'),
+  ('2353/7/(2260645142/7**10)', '42.00000078'),
+  ('2353/7/42*7**10', '2260762792.167'),
+  ('2260762792.167-2260645142', '117650.167'),
+  ('705901/6', '117650.167'),
+  ('705901/6/(7/6)', '100843'),
+  ('2353/7/42*7**10-100843*(7/6)', '2260645142'),
+  ('2353/294*7**10-100843*(7/6)', '2260645142'),
+])
+=>PYTHONTEX#py#default#default#11#code#####1865#
+def aA(k): return F(2*(k**4-k**2+1), (k-1)*k**3)
+def aB(k): return k*aA(k)
+def dA(k): return F(k, k-1)
+def dB(k): return F(k**7-k**6+k, k-1)
+def SA(k,n): return aA(k)/2*k**n-dA(k)
+def SB(k,n): return aB(k)/2*k**n-dB(k)
+doc = {3:(79824,238746,F(3,2),F(1461,2)), 4:(1316180,5260628,F(4,3),3073*F(4,3)), 5:(11738280,58675780,F(5,4),12501*F(5,4)),
+       6:(70599858,423552498,F(6,5),38881*F(6,5)), 7:(322966112,2260645142,F(7,6),100843*F(7,6))}
+xv = {3:6, 4:12, 5:20, 6:30, 7:42}
+coefA = {3:F(73,9), 4:F(241,16), 5:F(601,25), 6:F(1261,36), 7:F(2353,49)}
+coefB = {3:F(219,9), 4:F(241,4), 5:F(601,5), 6:F(1261,6), 7:F(2353,7)}
+for k in (3,4,5,6,7):
+    a,b,da,db = doc[k]
+    CUR.append((SA(k,10)==a and SB(k,10)==b, r"$k=%d$ : $S_A(k,10)=\tfrac{\alpha_A}{2}k^{10}-\delta_A=%s$ et $S_B(k,10)=%s$ \hfill %s" % (k, fmt(SA(k,10)), fmt(SB(k,10)), OKC if (SA(k,10)==a and SB(k,10)==b) else KOC)))
+    rec(r"formules fermées, $k=%d$, $n=10$" % k, SA(k,10)==a and SB(k,10)==b)
+    ok = (dA(k)==da and dB(k)==db)
+    CUR.append((ok, r"$k=%d$ : $\delta_A=%s$ et $\delta_B=%s$ égalent le « Reste » des sections 2.x \hfill %s" % (k, fmt(dA(k)), fmt(dB(k)), OKC if ok else KOC)))
+    rec(r"constantes $\delta_A,\delta_B$, $k=%d$" % k, ok)
+    ok = (coefA[k]/xv[k]==aA(k)/2 and coefB[k]/xv[k]==aB(k)/2 and xv[k]==k*(k-1))
+    CUR.append((ok, r"$k=%d$ : $x=%d=k(k-1)$ ; $\text{Coefficient }A/x=\alpha_A/2$ et $\text{Coefficient }B/x=\alpha_B/2$ \hfill %s" % (k, xv[k], OKC if ok else KOC)))
+    rec(r"coefficients $A,B$ et $x$, $k=%d$" % k, ok)
+for k in (3,4,5,6,7):
+    ok = all(F(SA(k,n1)-SA(k,n2), 1)/ (SB(k,n1)-SB(k,n2)) == F(1,k) for n1,n2 in ((10,9),(10,8),(12,9),(15,10)))
+    CUR.append((ok, r"$k=%d$ : invariant spectral $\dfrac{S_A(k,n_1)-S_A(k,n_2)}{S_B(k,n_1)-S_B(k,n_2)}=\dfrac1k$ (4 couples $(n_1,n_2)$) \hfill %s" % (k, OKC if ok else KOC)))
+    rec(r"invariant spectral, $k=%d$" % k, ok)
+box(r"sections 3.1 et 3.2 : constantes, formules fermées et invariant spectral")
+
+=>PYTHONTEX#py#default#default#12#code#####2067#
+doc36 = {3:(227,'pos8-'),4:(947,'pos8+'),5:(2999,'pos7+'),6:(7529,'pos8+'),7:(16519,'pos8-'),8:(32327,'pos8-'),9:(58337,'pos7-')}
+for k,(P,br) in doc36.items():
+    pr = [(l,v) for l,v in cands(k) if mr(v)]
+    ok = any(v == P and l == br for l,v in pr)
+    CUR.append((ok, r"$k=%d$ : candidats premiers %s ; document $P=%s$, branche %s \hfill %s" % (k, ", ".join("%s $%s$" % (l.replace('-','$-$').replace('+','$+$'), fmt(v)) for l,v in pr) or "aucun", fmt(P), br.replace('-','$-$').replace('+','$+$'), OKC if ok else KOC)))
+    rec(r"table 3.6, $k=%d$ : $P$ et branche" % k, ok)
+box(r"section 3.6 : table de vérification $k=3$ à $9$")
+=>PYTHONTEX#py#default#default#13#code#####2232#
+ecarts = []; nb = 0
+cnt = {'U':0,'M':0,'A':0}
+for k in range(10, 112):
+    p, st, br = TAB37[k]
+    pr = [(l,v) for l,v in cands(k) if mr(v)]
+    cls = 'A' if not pr else ('U' if len(pr) == 1 else 'M')
+    cnt[cls] += 1
+    nb += 1
+    if st.startswith('Methode') or st == 'REGLE':
+        ok = True; msg = ''
+        if k == 11:
+            ok = mr(int(p)) and pi_lucy(int(p)) == 121982
+            msg = r"règle spéciale $k=11$ : $P=%s$ premier, rang $\pi(P)=%s$" % (fmt(int(p)), fmt(pi_lucy(int(p))))
+        elif k == 27:
+            P27 = (SBf(27,10) - (SAf(27,10) - (2*27**8 - 27**6))) / 27**6
+            ok = (P27 == int(p)) and mr(int(p))
+            msg = r"règle spéciale $k=27$ : $(S_B-D)/k^6=%s$, document $%s$" % (fmt(P27), fmt(int(p)))
+        rec(r"table 3.7, $k=%d$ (règle spéciale)" % k, ok)
+        if not ok: ecarts.append(r"$k=%d$ : %s \hfill %s" % (k, msg, KOC))
+        continue
+    if p == '---':
+        docl = 'A'; ok = (cls == 'A'); msg = r"aucun candidat premier attendu ; calcul : %s" % (", ".join("$%s$" % fmt(v) for l,v in pr) or "aucun")
+    else:
+        docl = 'M' if 'MULTIPLE' in st else 'U'
+        ok = (cls == docl) and any(v == int(p) and l == br for l,v in pr)
+        msg = r"document : $P=%s$, état %s, branche %s ; calcul : %d premier(s) %s" % (fmt(int(p)), 'C\\_MULTIPLE' if docl == 'M' else 'unique', br.replace('-','$-$').replace('+','$+$'), len(pr), ", ".join("%s $%s$" % (l.replace('-','$-$').replace('+','$+$'), fmt(v)) for l,v in pr) or "aucun")
+    rec(r"table 3.7, $k=%d$" % k, ok)
+    if not ok: ecarts.append(r"$k=%d$ : %s \hfill %s" % (k, msg, KOC))
+resume(r"section 3.7 : table $P(1/k)$, $n=10$, $k=10$ à $111$ (102 lignes recalculées)", nb, ecarts)
+=>PYTHONTEX#py#default#default#14#code#####2280#
+# 3.8 : synthese (le document classe k=11 et k=27 dans AUCUN P)
+cU = cnt['U']; cM = cnt['M']; cA = cnt['A']
+tot = cU + cM + cA
+egal(r"nombre de $k$ de la table (10 à 111)", tot, 102)
+egal(r"« P certifié unique »", cU, 38)
+egal(r"« C\_MULTIPLE »", cM, 20)
+egal(r"« AUCUN P (règle standard) »", cA, 44)
+chk(r"pourcentage unique $38/102$ (arrondi)", "round(38/102*100)", 37)
+chk(r"pourcentage C\_MULTIPLE $20/102$ (arrondi)", "int(20*100/102 + F(1,2))", 20)
+chk(r"pourcentage AUCUN P $44/102$ (arrondi)", "int(44*100/102 + F(1,2))", 43)
+box(r"section 3.8 : synthèse statistique ($k=10$ à $111$)")
+=>PYTHONTEX#py#default#default#15#code#####2337#
+chk(r"$k=27$ : Digamma $=S_A-(2k^{8}-k^{6})$, $P=(S_B-D)/k^6$", "(%s - (%s - (2*27**8 - 27**6)))/27**6" % (SBf(27,10), SAf(27,10)), 14330707)
+chkb(r"$14\,330\,707$ est premier", mr(14330707), "oui")
+chkb(r"$k=11$ : aucun des 4 candidats standards n'est premier", not any(mr(v) for l,v in cands(11)), "oui")
+chk(r"$k=11$ : rang de $1\,611\,851$", "%d" % pi_lucy(1611851), 121982)
+chkb(r"$1\,611\,851$ est premier", mr(1611851), "oui")
+c27 = cands(27)
+chkb(r"$k=27$ : aucun des 4 candidats standards n'est premier", not any(mr(v) for l,v in c27), "oui")
+n20 = sum(1 for k in range(10,112) if sum(1 for l,v in cands(k) if mr(v)) >= 2)
+egal(r"nombre de cas C\_MULTIPLE annoncé « 20 valeurs »", n20, 20)
+nA = sum(1 for k in range(10,112) if not any(mr(v) for l,v in cands(k)))
+egal(r"nombre de cas AUCUN P annoncé « 44 valeurs »", nA, 44)
+egal(r"$(S_B-S_A)/k^6=B_0=k^5-k^3+k-1$, $k=13$", (SBf(13,10)-SAf(13,10))/13**6, 13**5-13**3+13-1)
+box(r"section 3.9 : notes pour la programmation de l'agent")
+=>PYTHONTEX#py#default#default#16#code#####2371#
+def nb_ancrages(a, b):
+    return sum(1 for k in range(a, b + 1) if any(mr(v) for l,v in cands(k)))
+egal(r"rapports traités $k=2..1001$", 1001-2+1, 1000)
+c1 = nb_ancrages(2, 1001); egal(r"succès annoncés pour $k=2..1001$", c1, 423)
+egal(r"rapports traités $k=1002..10001$", 10001-1002+1, 9000)
+c2 = nb_ancrages(1002, 10001); egal(r"succès annoncés pour $k=1002..10001$", c2, 2604)
+c3 = nb_ancrages(10002, 100001); egal(r"lignes « PREMIER TROUVE » pour $k=10002..100001$", c3, 19215)
+egal(r"total $423+2604+19215$", c1 + c2 + c3, 22242)
+egal(r"rapports traités au total ($k=2..100001$)", 100001-2+1, 100000)
+box(r"section 3.10 : exécutions archivées (comptage recalculé avec les 4 candidats standards)")
+=>PYTHONTEX#py#default#default#17#code#####2488#
+valider_n15(13)
+=>PYTHONTEX#py#default#default#18#code#####2574#
+valider_n15(42)
+=>PYTHONTEX#py#default#default#19#code#####2665#
+valider_n15(54)
+=>PYTHONTEX#py#default#default#20#code#####2738#
+rows = {13:(31452,31457,369023,368939), 42:(7411117,7411122,130617251,130617143), 54:(24304918,24304923,459010597,459010529)}
+for k,(rb,rc,P15,P10) in rows.items():
+    d = DOC15[k]
+    ok = (d['rb'],d['rc'],d['P15'],d['P10']) == (rb,rc,P15,P10)
+    ligne(r"tableau 4.4, $k=%d$ : rang base, rang cible, $P(k,15)$, $P(k,10)$" % k, ok, r"cohérents avec les sections 4.1 à 4.3")
+    egal(r"tableau 4.4, $k=%d$ : $P(k,10)$ est un des 4 candidats premiers de la table 3.7" % k, 1 if any(v == P10 for l,v in cands(k) if mr(v)) else 0, 1)
+chk(r"tableau 4.4 : $S_A(42,15)\approx2.29\times10^{24}$", "round(%s/10**22)" % SAf(42,15), 229)
+chk(r"tableau 4.4 : $S_B(42,15)\approx9.60\times10^{25}$", "round(%s/10**23)" % SBf(42,15), 960)
+chk(r"tableau 4.4 : $S_A(54,15)\approx9.86\times10^{25}$", "round(%s/10**23)" % SAf(54,15), 986)
+chk(r"tableau 4.4 : $S_B(54,15)\approx5.32\times10^{27}$", "round(%s/10**25)" % SBf(54,15), 532)
+cm = [v for l,v in cands(54) if mr(v)]
+egal(r"note $1/54$ : branche $A(8)-$ $=459\,010\,529$", cm[0] if cm else 0, 459010529)
+egal(r"note $1/54$ : branche $A(8)+$ $=459\,004\,697$", cm[1] if len(cm) > 1 else 0, 459004697)
+chk(r"note 4.5.5 : $S_A(13,15)\approx5.5\times10^{16}$", "round(%s/10**15)" % SAf(13,15), 55)
+chkb(r"note 4.5.5 : $S_A(13,15)>2^{53}$ (limite float64)", SAf(13,15) > 2**53, "oui (arrondi garanti au-delà de $2^{53}\\approx9\\times10^{15}$)")
+chkb(r"note 4.5.5 : $S_A(42,15)>2^{53}$ et $S_A(54,15)>2^{53}$", SAf(42,15) > 2**53 and SAf(54,15) > 2**53, "oui")
+ligne(r"note 4.5.1 : $A(k,n,i)=k^{i}$ pour $i\le n-2$ ; $B$ identique à $A$ jusqu'à $i=5$, puis $k^{i+1}$", all(A_terms(k,15)[:13] == [k**i for i in range(1,14)] and B_terms(k,15)[:5] == A_terms(k,15)[:5] and B_terms(k,15)[5] == k**7 for k in (13,42,54)), "vérifié pour $k=13,42,54$")
+box(r"sections 4.4 et 4.5 : tableau récapitulatif et notes critiques")
+=>PYTHONTEX#py#default#default#21#code#####3081#
+D7 = SAf(7,10) - 7**8
+chk(r"reconstructeur de référence $1/7$ : $(S_B-(S_A-7^8))/7^6=16\,519$", "(%s - (%s - 7**8))/7**6" % (SBf(7,10), SAf(7,10)), 16519)
+chkb(r"$16\,519$ est premier", mr(16519), "oui")
+box(r"page 23 : fiche technique, module de reconstruction $1/7$")
+=>PYTHONTEX#py#default#default#22#code#####3834#
+good = set()
+for k in (13, 42, 54):
+    for v in A_terms(k,15) + B_terms(k,15) + [k**6, k**7, k**12, k**13]:
+        good.add(str(v))
+    for v in (SAf(k,15), SBf(k,15), SAf(k,10), SBf(k,10), SAf(k,15)-SAf(k,10), SBf(k,15)-SBf(k,10)):
+        good.add(str(int(v)))
+    for f in (aAf(k), aBf(k), dAf(k), dBf(k)):
+        good.add(str(f.numerator)); good.add(str(f.denominator))
+    d = DOC15[k]
+    for kk in ('P10','rb','rc','P15','Dig15'):
+        good.add(str(d[kk]))
+    for l,v in cands(k):
+        good.add(str(v))
+    for p,sg,dg,pc,e in d['trials']:
+        good.add(str(dg)); good.add(str(pc))
+good.add('14330707')
+import difflib
+un = sorted(x for x in TRANS_NUMS if x not in good)
+ok_n = len(TRANS_NUMS) - len(un)
+ligne(r"nombres de la transcription retrouvés parmi les valeurs recalculées ($k=13,42,54$)", not un, "%d/%d" % (ok_n, len(TRANS_NUMS)), "%d/%d ; %d introuvable(s)" % (ok_n, len(TRANS_NUMS), len(un)))
+for x in un:
+    ligne(r"nombre « %s » absent des valeurs recalculées" % fmt(int(x)), False, "", "présent dans la transcription, absent des valeurs recalculées")
+box(r"pages 28 à 35 : transcription corrigée, contrôle croisé des grands nombres")
+=>PYTHONTEX#py#default#default#23#code#####4016#
+from math import log10 as _L, pi as _pi
+def _tail(x): return -_L(2*_pi) - 0.5*_L(1 - x**-2)
+serie = F(4**4,4)+F(3**3,3)+F(5**2,2)+F(7)+F(11)+F(13)+F(17)+F(23)+F(29)
+chk(r"série $\frac{4^4}{4}+\frac{3^3}{3}+\frac{5^2}{2}+7+11+13+17+23+29$ (telle qu'écrite $=197$)", "%s" % serie, 197)
+chkb(r"$\log_{10}(197)=2.294466226$", round(_L(197),9) == 2.294466226, "$%.9f$" % _L(197))
+chkb(r"$2.294466226-\log(2\pi)-\frac12\log(1-30^{-2})=1.496527767$", abs(2.294466226 + _tail(30) - 1.496527767) < 1e-8, "$%.9f$" % (2.294466226 + _tail(30)))
+chkb(r"$30-1.496527767=28.50347223$", abs(30 - 1.496527767 - 28.50347223) < 1e-8, "$%.8f$" % (30 - 1.496527767))
+def psiS(x, n):
+    return x - 2**n / float(SBf(2, n)) + _tail(x)
+chkb(r"$\psi_{\text{Savard}}(29)=30-\frac{2^{10}}{3262}-\log(2\pi)-\frac12\log(1-30^{-2})=28.8881437$", abs(psiS(30,10) - 28.8881437) < 1e-7, "$%.7f$" % psiS(30,10))
+chkb(r"$S_B(2,10)=3262$", SBf(2,10) == 3262, "oui")
+chkb(r"$\psi_{\text{Savard}}(227)=226.894132$ ($n=49$, $x=228$)", abs(psiS(228,49) - 226.894132) < 1e-6, "$%.6f$" % psiS(228,49))
+chkb(r"$\psi_{\text{Savard}}(31)=30.89125839$ ($n=11$, $x=32$)", abs(psiS(32,11) - 30.89125839) < 1e-8, "$%.8f$" % psiS(32,11))
+chkb(r"la partie décimale de $\psi(227)$ est plus proche de l'entier que celle de $\psi(29)$", abs(psiS(228,49) - 227) < abs(psiS(30,10) - 29), "$%.4f<%.4f$" % (abs(psiS(228,49)-227), abs(psiS(30,10)-29)))
+Sn = 6.5 * 2**-10 - 66
+chkb(r"$S_{B_n}(n=-10)=-65.99365234$", round(Sn, 8) == -65.99365234, "$%.8f$" % Sn)
+pneg = -28 - 2**-10 / Sn - _L(2*_pi) - 0.5*_L(1 - (-28)**-2)
+pneg2 = -28 - 2**-10 / Sn - _L(2*_pi) + 0.5*_L(1 - (-28)**-2)
+ligne(r"$\psi_{\text{Savard}}(-28)=-28-\frac{2^{-10}}{S_{B_n}}-\log(2\pi)-\frac12\log(1-(-28)^{-2})=-28.79844187$", abs(pneg - (-28.79844187)) < 1e-7,
+      "$%.8f$" % pneg, r"calculé $%.8f$ ; document $-28.79844187$" % pneg)
+chkb(r"$|\psi(-29)+29|<|\psi(29)-29|$ (plus précis pour le premier négatif)", abs(pneg + 29) < abs(psiS(30,10) - 29), "$%.4f<%.4f$" % (abs(pneg+29), abs(psiS(30,10)-29)))
+box(r"pages 39 à 41 : équation de Tchebyshev et $\psi$ (Savard)")
+=>PYTHONTEX#py#default#default#24#code#####4243#
+def SA2(n): return F(325,200)*2**n - 2          # 3.25/2 x 2^n - 2
+def SB2(n): return F(65,20)*2**n - 66           # 6.5/2 x 2^n - 66
+chk(r"Somme $A(11)=(\frac{3.25}{2}\times2^{5})-2$", "%s" % (SA2(5)), 50)
+chk(r"Somme $B(23)=(\frac{6.5}{2}\times2^{9})-66$", "%s" % SB2(9), 1598)
+chk(r"Digamma de $23$ : $(1598/64-23)\times64$", "(1598/64-23)*64", 126)
+chk(r"$50-(1598-126)$ (telle qu'écrite $=-1442$)", "50-(1598-126)", -1442)
+chk(r"Somme $B(7)=(\frac{6.5}{2}\times2^{4})-66$", "%s" % SB2(4), -14)
+chk(r"Digamma de $7$ : $((-14)/64-7)\times64$ (telle qu'écrite $=-464$)", "((-14)/64-7)*64", -464)
+chk(r"$\dfrac{-1442-(-462)}{64}$ (telle qu'écrite $=-15$)", "(-1442-(-462))/64", -15)
+chk(r"nombre d'entiers de $8$ à $22$", "22-8+1", 15)
+SAm = F(325,100)*F(1,2**7) - 2; SBm5 = F(65,10)*F(1,2**3) - 66; SBm19 = F(65,10)*F(1,2**8) - 66
+chk(r"Somme $A(-17)=3.25\times2^{-7}-2=-\frac{10110}{5120}$", "%s" % SAm, "-10110/5120")
+chk(r"Somme $B(-5)=6.5\times2^{-3}-66=-\frac{20860}{320}$", "%s" % SBm5, "-20860/320")
+chk(r"Digamma de $-5$ : $\bigl(\frac{-20860/320}{64}-(-5)\bigr)\times64=\frac{81540}{320}$", "((-20860/320)/64+5)*64", "81540/320")
+chk(r"étape 4 : $-\frac{10110}{5120}-\bigl(-\frac{20860}{320}-\frac{81540}{320}\bigr)=\frac{1628290}{5120}$", "-10110/5120-(-20860/320-81540/320)", "1628290/5120")
+chk(r"Somme $B(-19)=6.5\times2^{-8}-66=-\frac{337790}{5120}$", "%s" % SBm19, "-337790/5120")
+chk(r"Digamma de $-19$ : $\bigl(\frac{-337790/5120}{64}-(-11)\bigr)\times64$ (telle qu'écrite)", "((-337790/5120)/64+11)*64", "5888130/5120")
+chk(r"$\dfrac{1628290/5120-5888130/5120}{64}$", "(1628290/5120-5888130/5120)/64", -13)
+chk(r"nombre d'entiers de $-18$ à $-6$", "18-6+1", 13)
+pr15 = [p for p in range(2,60) if mr(p)][:15]
+chkb(r"les 15 premiers nombres premiers négatifs sont $-2,\dots,-47$", pr15[-1] == 47 and pr15[0] == 2, "le $15^{\\text{e}}$ premier est %d" % pr15[-1])
+chkb(r"au-delà de $-47$, $|S_{B_n}|$ est proche de $66$ ($n=-16$)", abs(abs(6.5*2**-16 - 66) - 66) < 1e-3, "$|S_{B_n}(-16)|=%.5f$" % abs(6.5*2**-16-66))
+box(r"pages 42 à 44 : écarts entre premiers positifs et négatifs")
+=>PYTHONTEX#py#default#default#25#code#####4387#
+def Rsp(n1, n2, a=F(325,100), b=F(65,10)):
+    return ((a/2*2**n1-2) - (a/2*2**n2-2)) / ((b/2*2**n1-66) - (b/2*2**n2-66))
+chk(r"comparaison symétrique $1\times1$ : rapport spectral $=\frac12$ ($n_1=4$, $n_2=11$)", "%s" % Rsp(4,11), "1/2")
+chk(r"$\frac{3.25}{6.5}=\frac12$", "3.25/6.5", "1/2")
+chk(r"exemple $7$ et $31$ : $\frac{24-3326}{-14-6590}$", "(24-3326)/(-14-6590)", "1/2")
+chkb(r"$\frac{24}{-14}\ne\frac12$ et $\frac{3326}{6590}\ne\frac12$", F(24,-14) != F(1,2) and F(3326,6590) != F(1,2), "oui")
+chkb(r"$7$ est le $4^{\text{e}}$ premier et $31$ le $11^{\text{e}}$", pi_lucy(7) == 4 and pi_lucy(31) == 11, "oui")
+chk(r"cas $n\times n$ : rapport $\frac12$ pour $n_1=5$, $n_2=9$", "%s" % Rsp(5,9), "1/2")
+chkb(r"équations $x+2=13$ et $2x+4=109$ compatibles (même $x$)", F(13-2) == F(109-4, 2), r"$x=%s$ et $x=%s$" % (fmt(F(11)), fmt(F(105,2))))
+box(r"page 45 : rapport spectral $R_{sP}=1/2$")
+=>PYTHONTEX#py#default#default#26#code#####4657#
+import math as _m
+from math import pi as _pi
+chk(r"$49^{\text{e}}$ premier : $\pi(227)$", "%d" % pi_lucy(227), 49)
+chk(r"$161^{\text{e}}$ premier : $\pi(947)$", "%d" % pi_lucy(947), 161)
+chkb(r"$k=3$ : $227$ est le $49^{\text{e}}$ premier et $173$ le $%d^{\text{e}}$" % pi_lucy(173), True, "$\\pi(173)=%d$" % pi_lucy(173))
+chkb(r"$k=4$ : $947$ est le $161^{\text{e}}$ premier et $881$ le $%d^{\text{e}}$" % pi_lucy(881), True, "$\\pi(881)=%d$" % pi_lucy(881))
+k9999 = [v for l,v in cands(9999) if mr(v)]
+chkb(r"$k=9999$, $n=10$ : l'ancrage $99\,950\,008\,999\,300\,019\,999$ est un candidat premier", 99950008999300019999 in k9999, "candidats premiers : %s" % ", ".join("$%s$" % fmt(v) for v in k9999))
+chk(r"nombre d'ancrages pour $k\in[2,10001]$ (annoncé $2604$)", "%d" % (nb_ancrages(2,10001)), 2604)
+chk(r"nombre d'ancrages pour $k\in[1002,10001]$", "%d" % c2, 2604)
+chk(r"somme des trois catalogues $423+2604+19215$", "423+2604+19215", 22242)
+chkb(r"loi de puissance : $\log_{10}P(9999)/\log_{10}9999\approx5$", abs(_m.log10(k9999[0])/_m.log10(9999) - 5) < 0.01, "$%.4f$" % (_m.log10(k9999[0])/_m.log10(9999)))
+chk(r"$P(k)\approx k^{5}=(10^{4})^{5}=10^{20}$", "(10**4)**5", "100000000000000000000")
+chk(r"rapport $10^{25}/10^{12}=10^{13}$", "10**25/10**12", 10**13)
+chk(r"rapport $10^{20}/10^{12}$ (le texte annonce « environ $1000\times$ »)", "10**20/10**12", 1000)
+chk(r"$\delta(2)=\pi^2/6$ (valeur numérique $1.6449340668$)", "round(_pi**2/6 * 10**10)", 16449340668)
+box(r"pages 44 à 49 : zêta spectrale, ordres de grandeur et comptages")
+=>PYTHONTEX#py#default#default#27#code#####4895#
+At = A_terms(3,10); Bt = B_terms(3,10)
+doc3 = {5:(243,243), 6:(729,2187), 7:(2187,6561), 8:(6561,19683), 9:(17496,52488), 10:(52488,157464)}
+ligne(r"tableau $k=3$, $n=10$ : lignes $i=5$ à $10$", all((At[i-1],Bt[i-1]) == v for i,v in doc3.items()), "conformes")
+egal(r"$\Sigma A=S_A(3,10)$", sum(At), 79824); egal(r"$\Sigma B=S_B(3,10)$", sum(Bt), 238746)
+for lab, sg, ex, doc in (("A(8)-",-1,8,73263),("A(8)+",1,8,86385),("A(7)+",1,7,82011),("A(7)-",-1,7,77637)):
+    D = 79824 + sg*3**ex
+    egal(r"$k=3$, branche $%s$ : Digamma $79\,824%s3^{%d}$" % (lab, '+' if sg>0 else '-', ex), D, doc)
+c3 = [(238746-73263)//729, (238746-86385)//729, (238746-82011)//729, (238746-77637)//729]
+egal(r"$k=3$ : candidats $(238\,746-D)/729$", sum(c3), 227+209+215+221)
+chkb(r"$209=11\times19$, $215=5\times43$, $221=13\times17$ (composés)", 11*19 == 209 and 5*43 == 215 and 13*17 == 221 and not any(mr(v) for v in (209,215,221)), "oui ; seul $227$ est premier")
+chk(r"$B_0(3)=3^5-3^3+3-1$", "3**5-3**3+3-1", 218)
+chkb(r"$218\pm9$ et $218\pm3$ : $227,209,215,221$", sorted([218+9,218-9,218-3,218+3]) == sorted([227,209,215,221]), "oui")
+chk(r"$k=5$ : $B_0(5)=3125-125+5-1$", "3125-125+5-1", 3004)
+c5 = sorted([3004+25, 3004-25, 3004-5, 3004+5])
+chkb(r"$k=5$ : $3029=13\times233$, $2979=3\times993$, $3009=3\times17\times59$, seul $2999$ premier", c5 == [2979,2999,3009,3029] and 13*233 == 3029 and 3*993 == 2979 and 3*17*59 == 3009 and [v for v in c5 if mr(v)] == [2999], "oui")
+chk(r"$k=4$ : $B_0(4)=1024-64+4-1$", "1024-64+4-1", 963)
+c4 = sorted([963+16, 963-16, 963-4, 963+4])
+chkb(r"$k=4$ : $979=11\times89$, $959=7\times137$ ; survivants $947$ et $967$", 11*89 == 979 and 7*137 == 959 and [v for v in c4 if mr(v)] == [947,967], "oui")
+chk(r"$M=3\times5\times7\times11\times13\times17\times19\times23$", "3*5*7*11*13*17*19*23", 111546435)
+box(r"pages 48 et 49 : leçon pédagogique ($k=3$, $4$ et $5$)")
+=>PYTHONTEX#py#default#default#28#code#####5180#
+ref = {10:(29,-256,1406,'A(8)-'), 11:(31,1280,4606,'A(8)+'), 12:(37,4224,10878,'A(8)+'), 13:(41,10624,23934,'A(8)+')}
+for n,(P,Dg,SAD,br) in ref.items():
+    sa, sb = SAf(2,n), SBf(2,n)
+    docS = {10:(1662,3262), 11:(3326,6590), 12:(6654,13246), 13:(13310,26558)}[n]
+    egal(r"$n=%d$ : $S_A(2,n)$ (formule fermée)" % n, sa, docS[0])
+    egal(r"$n=%d$ : $S_B(2,n)$ (formule fermée)" % n, sb, docS[1])
+    egal(r"$n=%d$ : Digamma calculé de $P=%d$" % (n,P), sb - P*64 - sa, Dg)
+    egal(r"$n=%d$ : $S_A+\text{Digamma}$" % n, sa + Dg, SAD)
+    egal(r"$n=%d$ : $(S_B-(S_A+D))/64$" % n, (sb-SAD)/64, P)
+    chkb(r"$n=%d$ : $P=%d$ est le $%d^{\text{e}}$ premier" % (n,P,n), pi_lucy(P) == n and mr(P), "oui")
+egal(r"$S_A(2,10)=2+4+8+16+32+64+128+256+384+768$", 2+4+8+16+32+64+128+256+384+768, 1662)
+egal(r"$S_B(2,10)=2+4+8+16+32+128+256+512+768+1536$", 2+4+8+16+32+128+256+512+768+1536, 3262)
+egal(r"récurrence : $13\times256+9\times384+5\times768$", 13*256+9*384+5*768, 10624)
+egal(r"récurrence : $9\times256+5\times384$", 9*256+5*384, 4224)
+egal(r"récurrence : $5\times256$", 5*256, 1280)
+egal(r"saisie antérieure : $(26\,558-23\,936)/64$ (annoncé $40{,}96875$)", F(26558-23936,64), F(4096875,100000))
+egal(r"$(26\,558-23\,934)/64$", F(26558-23934,64), 41)
+b = [256, 384] + [384 * 2**j for j in range(1, 12)]
+def regle(n): return sum((4*(n-10-j)+1)*b[j] for j in range(0, n-10))
+def vrai(n):
+    P = [p for p in range(2,200) if mr(p)][n-1]
+    return SBf(2,n) - P*64 - SAf(2,n)
+egal(r"règle canonique $n=13$", regle(13), 10624)
+for n,e in ((14,128),(15,896),(16,2816),(17,6784),(18,14592)):
+    egal(r"$n=%d$ : écart règle canonique $-$ valeur exacte" % n, regle(n) - vrai(n), e)
+egal(r"règle canonique en $n=14$ (annoncée $23\,936$)", regle(14), 23936)
+egal(r"valeur exacte du Digamma en $n=14$ (annoncée $23\,808$)", vrai(14), 23808)
+box(r"pages 51 à 54 : fonction Digamma\_Savard (ancres $P=29,31,37,41$ et récurrence)")
+=>PYTHONTEX#py#default#default#29#code#####5413#
+M = 3*5*7*11*13*17*19*23
+egal(r"module de criblage $M=\prod p$", M, 111546435)
+chk(r"couverture $71\,401/676\,191$", "round(71401/676191*10000)", 1056)
+chk(r"complément $100-10{,}56$", "10000-1056", 8944)
+chk(r"exactitude $71\,401/71\,401$", "71401/71401", 1)
+chk(r"$4088/20\,000$", "4088/20000", "0.2044")
+for pc,pr in ((22.69,77.31),(42.39,57.61),(49.65,50.35),(10.56,89.44)):
+    ok = abs(pc + pr - 100) < 1e-9
+    ligne(r"couverture $%s\,\%%$ et échec $%s\,\%%$ : somme $=100$" % (str(pc).replace('.',','), str(pr).replace('.',',')), ok, "oui")
+def surv(k):
+    return [(l,v) for l,v in cands(k) if all(v % p for p in (3,5,7,11,13,17,19,23))]
+for k in (2,3,4,5):
+    cs = surv(k)
+    ligne(r"crible modulaire, $k=%d$ : survivants %s" % (k, ", ".join("$%s$" % fmt(v) for l,v in cs)), len(cs) >= 1, "%d survivant(s)" % len(cs))
+chkb(r"$k=3$ : un seul survivant, $227$ (branche $A(8)-$)", [v for l,v in surv(3)] == [227], "oui")
+chkb(r"$k=5$ : un seul survivant, $2999$ (branche $A(7)+$)", [(l,v) for l,v in surv(5)] == [('pos7+',2999)], "oui")
+chkb(r"$k=4$ : deux survivants, $947$ et $967$ (indéterminé)", sorted(v for l,v in surv(4)) == [947,967], "oui")
+box(r"pages 54 à 56 : criblage modulaire et validations expérimentales")
+=>PYTHONTEX#py#default#default#30#code#####5891#
+bilan_global(r"bilan général des validations PythonTeX")
+ecrire_score()
+=>PYTHONTEX:SETTINGS#
+version=0.19
+outputdir=pythontex-files-Le-systeme-convolutif-Philippe-Thomas-Savard-2026-10-30
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

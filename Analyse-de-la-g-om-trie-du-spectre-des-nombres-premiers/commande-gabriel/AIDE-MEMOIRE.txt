@@ -1,0 +1,186 @@
+================================================================================
+  GABRIEL MULTI-LOOP - AIDE-MEMOIRE DES COMMANDES (v2.2 - 230/230 tests)
+================================================================================
+
+  LANCEMENT     :  .\start-agent.ps1          (sans Isabelle)
+                   .\start-agent.ps1 -WithIsabelle   (avec Isabelle/HOL)
+
+================================================================================
+  GENERAL
+================================================================================
+  aide  (h, ?)            Aide rapide (HELP_TEXT)
+  commandes  (cmd)        Liste complete + raccourcis clavier (panel Rich)
+  ask                     Principales commandes pour interagir avec Gabriel
+  ask type                Fonctions et caracteristiques de Gabriel
+  ask rules               Guide pour interagir efficacement avec Gabriel
+  version                 Version de Gabriel
+  contexte                Contexte mathematique actuel
+  memoire                 Historique des echanges (session)
+  quitter                 Ferme Gabriel
+
+================================================================================
+  CORPUS & PRIMES
+================================================================================
+  corpus                  Resume des fichiers .thy charges
+  corpus detail           Vue detaillee (sections, defs, lemmes)
+  primes                  Statut table des nombres premiers (1..1000)
+  prime <N>               N-ieme nombre premier      ex: prime 26 -> 101
+
+================================================================================
+  CALCULS DETERMINISTES (sans LLM, citables)
+================================================================================
+  gap <v1> <v2>           Ecart spectral direct       ex: gap 26 56
+  rsp <A> <B>             Rapport spectral direct     ex: rsp 2 3
+  rsp-test <cfg> <N>      N tests aleatoires d'une config
+                          cfg: 1x1 | sym2 | sym3 | sym5 | chaos | ord
+                          ex: rsp-test sym3 100
+
+  modele <action>         Interroge les 3 modeles spectraux (1/2, 1/3, 1/4) :
+    modele list             Liste les 3 modeles avec leurs facteurs
+    modele questions        Liste les 8 questions canoniques
+    modele all              Repond aux 8 questions sur les 3 modeles
+    modele rsp1x1 <n1> <n2>   Q1.a (rapport 1x1)
+    modele rsp <A>|<B> [cas]  Q1.b/c/d (cas: sym|chaos|ord)
+                              ex: modele rsp 2,3,4|5,6,7 sym
+    modele reconstruct <N>    Q2 (N-ieme premier)
+                              ex: modele reconstruct 26  (=> 101)
+    modele gap <p1> <p2>      Q3 (auto detecte +,+ / -,- / -,+)
+                              ex: modele gap -19 -5
+
+================================================================================
+  VISUALISATIONS (ASCII + Table + PNG)
+================================================================================
+  rsp-courbe <cfg> [kmax]    Courbe ASCII RsP en fonction de k
+                             cfg: 1x1 | sym | chaos | ord
+                             ex: rsp-courbe sym 50
+
+  courbe <type> <n1>..<n2> [--table] [--png] [--scale=X]
+
+    Types  : SA | SB | SA_SB | digamma | invariant | ratio | gap | prime
+    Flags  : --table   ajoute tableau Rich
+             --png     export PNG (150 dpi, dossier data/graphs/)
+             --scale=  auto (defaut) | linear | log10 | log2
+
+    Exemples :
+      courbe ratio 1..50
+      courbe SA_SB 1..50 --png
+      courbe digamma 1..30 --table
+      courbe ratio 1..200 --table --png
+      courbe SA 1..100 --scale=log10
+
+================================================================================
+  VALIDATION & VERIFICATION
+================================================================================
+  verifier <N>            Validation toolkit (sympy/mpmath/z3) + audit signe
+                          ex: verifier 26
+
+  valider <N>             Boucle Wolfram <-> Gabriel <-> Isabelle (+ .thy)
+                          ex: valider 42
+
+================================================================================
+  AUDIT & CITATIONS SCIENTIFIQUES
+================================================================================
+  historique              Liste les 20 derniers audits
+  audit <id>              Affiche le JSON complet d'un audit
+  citer <id> [fmt]        Genere une citation
+                          fmt: markdown (defaut) | latex | text
+                          ex: citer aa41c24a latex
+
+================================================================================
+  DEBUGGER PEDAGOGIQUE
+================================================================================
+  debug "<question>"      Mode interactif :
+                            - decomposition etape par etape
+                            - bypass LLM vers CertaintyKernel
+                            - commentaires manuels sauvegardes
+                          ex: debug "Reconstruis le 42eme prime"
+
+================================================================================
+  TESTS & CI
+================================================================================
+  ci          (alias: tests, pytest)
+                          Lance la suite pytest locale (230 tests)
+                          Affiche un Panel Rich detaille
+
+================================================================================
+  QUESTIONS EN LANGAGE NATUREL
+================================================================================
+  Tapez directement votre question au prompt 'Philippe >' :
+
+    > Reconstruis le 42eme nombre premier
+    > Quel est l'ecart spectral entre 26 et 56 ?
+    > Explique-moi la convergence du ratio SA/SB
+
+  Gabriel detectera automatiquement :
+    - Calcul exact possible -> reponse deterministe immediate
+    - Visualisation demandee -> graphique auto-genere (voir ci-dessous)
+    - Sinon -> pipeline multi-loop (7 moteurs + raffinement + garde-fous)
+
+================================================================================
+  AUTO-TRIGGER VISUALISATION (nouveaute v2.2)
+================================================================================
+  Gabriel detecte automatiquement les demandes de graphique en francais :
+
+    > Trace la convergence du ratio SA/SB sur 1..100
+    > Peux-tu illustrer l'evolution de digamma entre 1 et 50 ?
+    > Visualise SA et SB pour les 30 premiers
+    > Dessine les ecarts entre primes consecutifs sur 1..200
+    > Trace la courbe de SA pour mon article scientifique en PNG
+
+  Mots-cles reconnus :
+    - Verbes  : trace, dessine, illustre, visualise, affiche, montre,
+                evolue, converge, comportement, represente
+    - Types   : SA, SB, digamma, psi, ratio, rapport, gap, ecart,
+                invariant, D(n,P), prime(s), premiers
+    - Bornes  : "n=1..50", "de 1 a 100", "entre 5 et 25", "[1,200]",
+                "les 100 premiers"
+    - PNG     : "article scientifique", "exporte", "image", "PDF",
+                "citable", "rapport", "publication"
+
+  Resultat : ASCII + resume statistique + (PNG optionnel) + audit JSON signe
+  100% deterministe (zero LLM, zero hallucination possible)
+
+================================================================================
+  RACCOURCIS CLAVIER  (actifs si readline disponible, natif dans Docker)
+================================================================================
+  Fleche Haut / Bas       Naviguer dans l'historique des commandes
+  Ctrl + R                Recherche inversee dans l'historique
+  Tab                     Auto-completion des commandes
+  Ctrl + A / Ctrl + E     Debut / fin de ligne
+  Ctrl + W                Effacer mot precedent
+  Ctrl + U / Ctrl + K     Effacer ligne (gauche / droite)
+  Ctrl + Y                Coller dernier texte coupe (yank)
+  Ctrl + L                Effacer l'ecran
+  Ctrl + C                Interrompre commande en cours
+  Ctrl + D                Quitter (EOF)
+
+  Historique persistant : data/.gabriel_history
+
+================================================================================
+  FICHIERS GENERES
+================================================================================
+  data/audits/    Audits JSON signes (SHA-256), citables
+  data/graphs/    PNG haute resolution (150 dpi)
+  data/.gabriel_history    Historique des commandes (persistant)
+
+  Ces dossiers sont IGNORES par git (.gitignore).
+
+================================================================================
+  ASTUCES
+================================================================================
+  - Statut CI affiche en haut de la banniere a chaque ouverture
+  - Tous les calculs sont en ENTIERS EXACTS (jusqu'a 2^1000)
+  - Aucun appel reseau requis pour les commandes deterministes
+  - Les audits permettent de reproduire 100% des resultats publies
+
+================================================================================
+  POUR ALLER PLUS LOIN
+================================================================================
+  - Documentation complete : commande-gabriel/COMMANDES.md
+  - README.md a la racine pour la Methode Spectrale
+  - tests/ : 230 tests Pytest qui valident chaque fonctionnalite
+  - .github/workflows/tests.yml : CI automatique sur GitHub
+
+================================================================================
+  Bon travail avec Gabriel !            -- Philippe Thomas Savard - fev 2026 --
+================================================================================

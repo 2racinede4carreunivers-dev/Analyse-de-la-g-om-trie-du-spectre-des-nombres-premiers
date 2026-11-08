@@ -1,0 +1,10 @@
+(* Session de test isolee : compile la validation principale
+   methode_spectral.thy SEULE, sans les deux contre-validations.
+   Sert a mesurer si la validation principale tient seule dans le
+   budget memoire de Poly/ML (plafond 16 Go sur x86_64_32-windows). *)
+
+session Methode_Spectrale_Seule = HOL +
+  sessions
+    "HOL-Computational_Algebra"
+  theories
+    methode_spectral

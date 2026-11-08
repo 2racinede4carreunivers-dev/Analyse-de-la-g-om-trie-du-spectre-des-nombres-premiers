@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "nom": "CORRECTIONS_DEF_01_07",
+    "description": "Deploiement automatique des corrections DEF-01..DEF-07 du pipeline_correction via le variateur (fichiers nouveaux/marquants uniquement)",
+    "version": "1.0",
+    "source_corrector": "gabriel_03_corrector.py",
+    "note": "spectral_core.py et spectral_model.py deja corriges en place => non ecrases."
+  },
+  "operations": [
+    {
+      "op": "deployer_fichier",
+      "message": "DEF-01 : ratio_dispatcher corrige (fallback 1/2 supprime, cle 1/4 ajoutee)",
+      "source": "src/dispatch/ratio_dispatcher.py",
+      "cible": "src/dispatch/ratio_dispatcher.py",
+      "creer_si_absent": true
+    },
+    {
+      "op": "deployer_fichier",
+      "message": "DEF-05 : hol_generator corrige (k,n,p encodes dans le nom de theorie)",
+      "source": "src/engines/hol_generator.py",
+      "cible": "src/engines/hol_generator.py",
+      "creer_si_absent": true
+    },
+    {
+      "op": "deployer_fichier",
+      "message": "DEF-06 : scorer avec critere ratio_coherence (ponderation >= 30%)",
+      "source": "src/engines/scorer.py",
+      "cible": "src/engines/scorer.py",
+      "creer_si_absent": true
+    },
+    {
+      "op": "deployer_fichier",
+      "message": "DEF-07 : gabriel_defaults.yaml sans DEFAULT_MODEL='1/2' (STRICT_RATIO_MODE=true)",
+      "source": "config/gabriel_defaults.yaml",
+      "cible": "config/gabriel_defaults.yaml",
+      "creer_si_absent": true
+    },
+    {
+      "op": "deployer_fichier",
+      "message": "DEF-04 : nouveau corpus formulas_1_4.json (coeff. exacts 1/4)",
+      "source": "corpus/formulas_1_4.json",
+      "cible": "corpus/formulas_1_4.json",
+      "creer_si_absent": true
+    },
+    {
+      "op": "deployer_fichier",
+      "message": "DEF-05 : fragment HOL verif_p1097_n23_ratio4.thy (p=1097 k=4)",
+      "source": "corpus/verif_p1097_n23_ratio4.thy",
+      "cible": "theories/verif_p1097_n23_ratio4.thy",
+      "creer_si_absent": true
+    }
+  ]
+}

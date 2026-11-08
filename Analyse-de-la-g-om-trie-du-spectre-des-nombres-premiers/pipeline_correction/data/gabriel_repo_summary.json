@@ -1,0 +1,142 @@
+{
+  "repo_root": "C:/Analyse-de-la-geometrie-du-spectre-des-nombres-premiers/Analyse-de-la-g-om-trie-du-spectre-des-nombres-premiers/pipeline_correction",
+  "total_files": 50,
+  "total_edges": 629,
+  "top_roles": [
+    {
+      "role": "core",
+      "count": 24
+    },
+    {
+      "role": "data",
+      "count": 12
+    },
+    {
+      "role": "spectral",
+      "count": 9
+    },
+    {
+      "role": "doc",
+      "count": 1
+    },
+    {
+      "role": "hol",
+      "count": 1
+    },
+    {
+      "role": "memory",
+      "count": 1
+    },
+    {
+      "role": "multiloop",
+      "count": 1
+    },
+    {
+      "role": "ui",
+      "count": 1
+    }
+  ],
+  "top_files": [
+    {
+      "path": "corrections/src/core/spectral_core.py",
+      "role": "core",
+      "score": 14.65
+    },
+    {
+      "path": "orchestrator_main.py",
+      "role": "core",
+      "score": 13.45
+    },
+    {
+      "path": "corrections/src/engines/hol_generator.py",
+      "role": "core",
+      "score": 12.8
+    },
+    {
+      "path": "gabriel_01_pipeline_trace.py",
+      "role": "core",
+      "score": 11.2
+    },
+    {
+      "path": "README_PIPELINE.md",
+      "role": "core",
+      "score": 10.5
+    },
+    {
+      "path": "rapport_pipeline.json",
+      "role": "core",
+      "score": 9.2
+    },
+    {
+      "path": "rapport_pipeline.txt",
+      "role": "core",
+      "score": 8.6
+    },
+    {
+      "path": "patch_fix_spectral_classes.json",
+      "role": "spectral",
+      "score": 8.3
+    },
+    {
+      "path": "rapport_hol_unicode_20260902T191125Z.json",
+      "role": "hol",
+      "score": 7.7
+    },
+    {
+      "path": "corrections/src/dispatch/ratio_dispatcher.py",
+      "role": "spectral",
+      "score": 7.2
+    },
+    {
+      "path": "corrections/src/engines/scorer.py",
+      "role": "core",
+      "score": 6.95
+    },
+    {
+      "path": "gabriel_02_engine_audit.py",
+      "role": "core",
+      "score": 4.05
+    },
+    {
+      "path": "archiviste.py",
+      "role": "core",
+      "score": 3.6
+    },
+    {
+      "path": "DEMARRAGE_RAPIDE.md",
+      "role": "memory",
+      "score": 3.5
+    },
+    {
+      "path": "GUIDE_UTILISATEUR.md",
+      "role": "ui",
+      "score": 3.5
+    },
+    {
+      "path": "__main__.py",
+      "role": "core",
+      "score": 3.45
+    },
+    {
+      "path": "corrections/corpus/verif_p1097_n23_ratio4.thy",
+      "role": "spectral",
+      "score": 3.4
+    },
+    {
+      "path": "config.py",
+      "role": "core",
+      "score": 3.2
+    },
+    {
+      "path": "gabriel_03_corrector.py",
+      "role": "core",
+      "score": 2.6
+    },
+    {
+      "path": "00_STRUCTURE_COMPLETE.md",
+      "role": "core",
+      "score": 2.3
+    }
+  ],
+  "generated_at": "2026-10-17T00:00:54.350466+00:00"
+}

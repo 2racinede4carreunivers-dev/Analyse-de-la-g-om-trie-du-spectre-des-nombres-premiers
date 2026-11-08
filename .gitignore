@@ -75,3 +75,8 @@ Document-pdf-tex/*.pytxcode
 Document-pdf-tex/pythontex-files-*/
 Document-pdf-tex/validation_pythontex_score.tex
 Document-pdf-tex/validation_rapport.tex
+
+# Fichiers générés par PythonTeX
+
+# Fichiers générés par PythonTeX
+**/pythontex-files-*/

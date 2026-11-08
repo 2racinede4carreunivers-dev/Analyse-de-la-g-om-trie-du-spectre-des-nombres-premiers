@@ -1,0 +1,38 @@
+% ======================================================================
+%  ARBORESCENCE DES 8 MOTEURS DE L'AGENT GABRIEL
+% ======================================================================
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  moteur/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu!12,thick,minimum width=2.8cm,minimum height=0.9cm,align=center},
+  entreesortie/.style={rectangle,rounded corners,draw=spectralor,fill=spectralor!18,thick,minimum width=2.8cm,minimum height=0.8cm,align=center},
+  resultat/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=3.2cm,minimum height=0.9cm,align=center},
+  flux/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!70},
+  fluxor/.style={-{Stealth[length=2.2mm]},thick,spectralor!90!black}
+]
+  \node[entreesortie] (req) at (0,0) {Requete utilisateur\\[-1pt]geometre spectre};
+  \node[moteur] (m1) at (-2.2,-2.2) {\textbf{RequestDecomposer}\\[-1pt]\scriptsize Decoupe la requete};
+  \node[moteur] (m2) at (2.2,-2.2) {\textbf{ProofPlanner}\\[-1pt]\scriptsize Planifie la preuve};
+  \node[moteur] (m3) at (-2.2,-3.8) {\textbf{SpectralCore}\\[-1pt]\scriptsize Coeur spectral};
+  \node[moteur] (m4) at (2.2,-3.8) {\textbf{RefinementLoop}\\[-1pt]\scriptsize Auto-critique multiloop};
+  \node[moteur] (m5) at (-2.2,-5.4) {\textbf{CoherenceDetector}\\[-1pt]\scriptsize Detecte coherence};
+  \node[moteur] (m6) at (2.2,-5.4) {\textbf{SilentAuditLoop}\\[-1pt]\scriptsize Audit anti-hallucination};
+  \node[moteur] (m7) at (-2.2,-7.0) {\textbf{PreReasoner}\\[-1pt]\scriptsize Pre-raisonneur T0};
+  \node[moteur] (m8) at (2.2,-7.0) {\textbf{MoteurRecursif}\\[-1pt]\scriptsize Recursion + dependances};
+  \draw[flux] (req.south) -- (0,-1.1) -| (m1.north);
+  \draw[flux] (req.south) -- (0,-1.1) -| (m2.north);
+  \draw[flux] (m1.east) -- (m3.west);
+  \draw[flux] (m3.east) -- (m4.west);
+  \draw[flux] (m4.east) -- (m5.west);
+  \draw[flux] (m5.east) -- (m6.west);
+  \draw[fluxor] (m2.north) -- (m3.north |- m2.north);
+  \draw[fluxor] (m7.south) -- (m7.south |- m1.north) node[midway,above]{\scriptsize decision T0};
+  \draw[fluxor] (m8.south) -- (m8.south |- m4.north) node[midway,right]{\scriptsize dependances};
+  \node[resultat] (sortie) at (0,-9.2) {P certifie\\[-1pt]ancrage n=10\\[-1pt]ou rang cible};
+  \draw[flux] (m6.south) -- (0,-7.8) -| (sortie.north);
+  \node[rotate=90,anchor=south,color=spectralbleu] at (-4.6,-5.2) {\scriptsize Pipeline cognitif};
+  \node[rotate=90,anchor=south,color=spectralor!80!black] at (4.6,-5.2) {\scriptsize Moteurs collaboratifs};
+\end{tikzpicture}
+\caption{Arborescence des 8 moteurs de l'agent Mm. Gabriel : decomposition de la requete, planification, coeur spectral, auto-critique multiloop, detection de coherence, audit anti-hallucination, pre-raisonneur et moteur recursif, aboutissant au premier certifie.}
+\end{figure}

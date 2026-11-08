@@ -1,0 +1,203 @@
+name: Isabelle, document final et provenance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: verification-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-attest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      ISABELLE_VERSION: Isabelle2025-2
+      ISABELLE_TARBALL: Isabelle2025-2_linux.tar.gz
+      ISABELLE_SIZE_BYTES: "1228480874"
+      ISABELLE_SHA256: a20a507bc7c1270d8be96a9f3fbec06345387789d2dc2c4d3df6260d47bfb33c
+      SESSION_NAME: Geometrie_Spectre_Premier_Philippe_Thomas_Savard
+      DOCUMENT_TEX: Philippe_Thomas_Savard_@_tous_droits_réservé-2026.tex
+      DOCUMENT_PDF: Philippe_Thomas_Savard_@_tous_droits_réservé-2026.pdf
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install TeX and PythonTeX dependencies
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y \
+            ca-certificates \
+            coreutils \
+            curl \
+            python3 \
+            python-is-python3 \
+            python3-pygments \
+            tar \
+            texlive-extra-utils \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended \
+            texlive-lang-french \
+            texlive-pictures
+
+      - name: Cache Isabelle 2025-2
+        id: isabelle-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/isabelle
+          key: isabelle-2025-2-linux-v2-a20a507bc7c1270d8be96a9f3fbec06345387789d2dc2c4d3df6260d47bfb33c
+
+      - name: Install and verify Isabelle 2025-2
+        if: steps.isabelle-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/isabelle
+          cd /tmp/isabelle
+          mirrors=(
+            "https://isabelle.in.tum.de/website-Isabelle2025-2/dist/${ISABELLE_TARBALL}"
+            "https://isabelle.in.tum.de/dist/${ISABELLE_TARBALL}"
+          )
+          downloaded=false
+          for url in "${mirrors[@]}"; do
+            rm -f "${ISABELLE_TARBALL}"
+            if curl --fail --location --silent --show-error \
+              --retry 5 --retry-delay 10 --retry-all-errors \
+              --connect-timeout 60 --max-time 1800 \
+              --output "${ISABELLE_TARBALL}" "$url"; then
+              size=$(stat -c%s "${ISABELLE_TARBALL}")
+              if [ "$size" -eq "$ISABELLE_SIZE_BYTES" ]; then
+                sha256=$(sha256sum "${ISABELLE_TARBALL}" | cut -d' ' -f1)
+                if [ "$sha256" = "$ISABELLE_SHA256" ]; then
+                  downloaded=true
+                  break
+                fi
+                echo "Empreinte Isabelle incorrecte sur ce miroir : ${sha256}" >&2
+              else
+                echo "Taille Isabelle incorrecte sur ce miroir : ${size}" >&2
+              fi
+            else
+              echo "Téléchargement Isabelle impossible depuis ${url}; tentative du miroir suivant." >&2
+            fi
+          done
+          if [ "$downloaded" != true ]; then
+            echo "::error::Aucun miroir n’a fourni l’archive Isabelle attendue (taille et SHA-256)."
+            exit 1
+          fi
+          tar -xzf "${ISABELLE_TARBALL}" -C /tmp/isabelle
+          test -x "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle"
+
+      - name: Add Isabelle to PATH and verify installation
+        run: |
+          set -euo pipefail
+          echo "/tmp/isabelle/${ISABELLE_VERSION}/bin" >> "$GITHUB_PATH"
+          test -x "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle"
+          "/tmp/isabelle/${ISABELLE_VERSION}/bin/isabelle" version
+
+      - name: Build Isabelle session
+        working-directory: theories
+        run: |
+          set -euo pipefail
+          isabelle build -d . -v "${SESSION_NAME}" 2>&1 | tee "${GITHUB_WORKSPACE}/isabelle_build.log"
+
+      - name: Verify published certification fragments
+        run: |
+          set -euo pipefail
+          python3 "Document-pdf-tex/Certification_primalité/reassemble_parts.py" \
+            --manifest "Document-pdf-tex/Certification_primalité/manifest.json" verify
+
+      - name: Compile final TeX document
+        working-directory: Document-pdf-tex
+        env:
+          TEXINPUTS: ".:"
+        run: |
+          set -euo pipefail
+          pdflatex -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error "${DOCUMENT_TEX}"
+          pythontex --rerun=always --error-exit-code=true "${DOCUMENT_TEX}"
+          pdflatex -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error "${DOCUMENT_TEX}"
+          pdflatex -shell-escape -file-line-error -interaction=nonstopmode -halt-on-error "${DOCUMENT_TEX}"
+          test -s "${DOCUMENT_PDF}"
+
+      - name: Create and verify SHA-256 build manifest
+        run: |
+          set -euo pipefail
+          {
+            echo "# SHA-256 — build ${GITHUB_SHA}"
+            echo "# Session Isabelle : ${SESSION_NAME}"
+            echo "# Document final : Document-pdf-tex/${DOCUMENT_TEX}"
+            find Document-pdf-tex -maxdepth 1 -type f \( -name '*.tex' -o -name '*.png' \) -print0 \
+              | sort -z | xargs -0 -r sha256sum
+            find Document-pdf-tex/assets -maxdepth 1 -type f -print0 \
+              | sort -z | xargs -0 -r sha256sum
+            find Document-pdf-tex/Certification_primalité -maxdepth 1 -type f -print0 \
+              | sort -z | xargs -0 -r sha256sum
+            sha256sum \
+              "Document-pdf-tex/${DOCUMENT_PDF}" \
+              theories/ROOT \
+              theories/*.thy \
+              isabelle_build.log
+          } | tee SHA256SUMS_build.txt
+          sha256sum --check SHA256SUMS_build.txt
+          {
+            echo "Commit: ${GITHUB_SHA}"
+            echo "Session: ${SESSION_NAME}"
+            echo "Isabelle: ${ISABELLE_VERSION}"
+            echo "Document TeX: Document-pdf-tex/${DOCUMENT_TEX}"
+            echo "Document PDF: Document-pdf-tex/${DOCUMENT_PDF}"
+            echo
+            echo "SHA-256:"
+            sha256sum "Document-pdf-tex/${DOCUMENT_PDF}"
+          } > build_metadata.txt
+
+      - name: Upload final document and build evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: document-final-${{ github.sha }}
+          path: |
+            Document-pdf-tex/${{ env.DOCUMENT_TEX }}
+            Document-pdf-tex/${{ env.DOCUMENT_PDF }}
+            Document-pdf-tex/arborescence_*.tex
+            Document-pdf-tex/*.png
+            Document-pdf-tex/assets/*
+            Document-pdf-tex/Certification_primalité/README.md
+            Document-pdf-tex/Certification_primalité/manifest.json
+            Document-pdf-tex/Certification_primalité/reassemble_parts.py
+            Document-pdf-tex/Certification_primalité/termbase_ca_qc.csv
+            Document-pdf-tex/Certification_primalité/GUIDE_VALIDATION_PRIMALITE_ANCRES.md
+            Document-pdf-tex/Certification_primalité/RAPPORT_VALIDATION_WOLFRAM_PRIMALITE.md
+            Document-pdf-tex/Certification_primalité/wolfram_validation_report.md
+            Document-pdf-tex/Certification_primalité/valider_primalite_ancres.py
+            Document-pdf-tex/Certification_primalité/wolfram_primality_validation.py
+            SHA256SUMS_build.txt
+            build_metadata.txt
+            isabelle_build.log
+            theories/ROOT
+            theories/*.thy
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Generate build provenance attestation
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            Document-pdf-tex/${{ env.DOCUMENT_TEX }}
+            Document-pdf-tex/${{ env.DOCUMENT_PDF }}
+            Document-pdf-tex/assets/Annexe_Classeur_convolutif.xlsx
+            Document-pdf-tex/assets/Annexe_Classeur_convolutif_theme_spectral.xlsx
+            Document-pdf-tex/Certification_primalité/manifest.json
+            SHA256SUMS_build.txt
+            theories/ROOT
+            isabelle_build.log

@@ -1,0 +1,72 @@
+================================================================================
+ REQUETE MULTI-RATIO v7.9 | n=10 | 21 rapport(s) 1/k | k_min=7999999980 k_max=8000000000
+================================================================================
+  1/7999999980     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999981     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999982     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999983     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999984     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999985     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999986     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999987     (non typique) [DYN] | ancre=32767999733760000864767998596352001138599999630721 | P(n=10)=32767999733760000864767998596352001138599999630721 | [PREMIER TROUVE]
+  1/7999999988     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999989     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999990     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999991     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999992     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999993     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999994     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999995     (non typique) [DYN] | ancre=32767999897600000127487999921024000024327999997019 | P(n=10)=32767999897600000127487999921024000024327999997019 | [PREMIER TROUVE]
+  1/7999999996     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999997     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/7999999998     (non typique) [DYN] | ancre=32767999959040000019967999995328000000519999999977 | P(n=10)=32767999959040000019967999995328000000519999999977 | [PREMIER TROUVE]
+  1/7999999999     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+  1/8000000000     (non typique) [DYN] | ancre=None | P(n=10)=None | [ECHEC]
+    Note: Aucun candidat premier parmi les quatre essais Digamma.
+================================================================================
+ Succes : 3/21 | Global : PARTIEL/ECHEC
+================================================================================
+
+Tableau comparatif v7.9 - n=10
+--------------------------------------------------------------------------------------------------------------------------------
+         Rapport |        Type |       Ancre n=10 |             P(n) |            Digamma |     Statut | Branches premières                                     | Src
+--------------------------------------------------------------------------------------------------------------------------------
+    1/7999999980 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999981 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999982 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999983 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999984 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999985 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999986 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999987 | non typique | 32767999733760000864767998596352001138599999630721 | 32767999733760000864767998596352001138599999630721 | 1073741806685913213644570083647817205152478327922397056404324789655148197407609190340011040074205233 |     UNIQUE | A(8)+=32767999733760000864767998596352001138599999630721 | DYN
+    1/7999999988 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999989 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999990 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999991 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999992 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999993 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999994 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999995 | non typique | 32767999897600000127487999921024000024327999997019 | 32767999897600000127487999921024000024327999997019 | 1073741817423331346102616034514042911470649321004105739649437691960438272917528703876746528007434895 |     UNIQUE | A(8)-=32767999897600000127487999921024000024327999997019 | DYN
+    1/7999999996 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999997 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/7999999998 | non typique | 32767999959040000019967999995328000000519999999977 | 32767999959040000019967999995328000000519999999977 | 1073741821449863170701131774322278400675545087816138752034156543995740672000339135999984584000000298 |     UNIQUE | A(8)-=32767999959040000019967999995328000000519999999977 | DYN
+    1/7999999999 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+    1/8000000000 | non typique |            ECHEC |            ECHEC |                  ? |     ABSENT | -                                                      | DYN
+--------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,1 @@
+# src/models package — registre des formules spectrales

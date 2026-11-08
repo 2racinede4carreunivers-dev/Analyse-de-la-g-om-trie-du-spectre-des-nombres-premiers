@@ -1,0 +1,145 @@
+# =============================================================================
+# .dockerignore - Multi-Loop Agent Gabriel Local
+#
+# OBJECTIF: garder le contexte de build < 5 Mo
+# Tout ce qui n'est PAS necessaire au build de l'image est ignore.
+# =============================================================================
+
+# ---------- Git ----------
+.git
+.gitignore
+.gitattributes
+.gitconfig
+
+# ---------- Docker files (pas besoin dans le build context) ----------
+.dockerignore
+docker-compose*.yml
+docker-compose*.yaml
+
+# ---------- Emergent / IDE / OS ----------
+.emergent/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+*.egg
+build/
+dist/
+
+# ---------- Node / JavaScript (frontend non utilise par l'agent CLI) ----------
+node_modules/
+**/node_modules/
+.yarn/
+.npm/
+*.log
+
+# ---------- Frontend complet (pas necessaire pour l'agent CLI) ----------
+frontend/
+
+# ---------- Backend FastAPI (pas necessaire pour l'agent CLI) ----------
+backend/
+
+# ---------- Reference de l'ancien agent (gros, deja sur disque local) ----------
+reference_old_agent/
+
+# ---------- Donnees runtime (montees en volume, pas copiees) ----------
+data/
+logs/
+**/data/
+**/logs/
+
+# ---------- Theories HOL (montees en volume) ----------
+
+# ---------- Tests, docs, examples (pas necessaires au runtime) ----------
+tests/
+docs/
+examples/
+
+# ---------- Memory et test_reports (specifiques Emergent) ----------
+# memory/   -> NECESSAIRE au runtime (motif cognitif) : retiré de l'ignore et copié dans l'image
+test_reports/
+test_result.md
+
+# ---------- Secrets - NE JAMAIS envoyer au build ----------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+
+# ---------- Isabelle local heaps (peut etre tres lourd) ----------
+.isabelle/
+*.heap
+
+# ---------- Archives ----------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# ---------- Docker Desktop / WSL virtual disks (TRES LOURD - JAMAIS dans le build) ----------
+# Ces fichiers (souvent > 10 Go) sont la cause principale des contextes 200 Go.
+# Ne JAMAIS les copier dans l'image, ni les versionner.
+*.vhdx
+*.vhd
+*.vmdk
+*.qcow2
+*.img
+**/DockerDesktopWSL/**
+**/Docker*Desktop*WSL/**
+**/wsl/**/ext4.vhdx
+**/wsl/**/data.vhdx
+**/Docker/wsl/**
+**/DockerData*
+**/data.vhdx
+**/ext4.vhdx
+
+# ---------- IDEs Python ----------
+*.iml
+.spyderproject
+.spyproject
+
+# ---------- Scripts PowerShell (pas necessaires dans l'image Linux) ----------
+*.ps1
+*.bat
+*.cmd
+
+# ---------- Documentation racine ----------
+README.md
+*.md
+!requirements*.txt
+
+# ---------- Fichiers temporaires ----------
+*.tmp
+*.bak
+*.old
+
+# =============================================================================
+# CE QUI EST INCLUS (whitelist implicite) :
+#   - main.py, main_cli.py
+#   - config.yaml
+#   - requirements.txt
+#   - Dockerfile.cli (lu mais pas copie dans l'image)
+#   - src/  (le code de l'agent, ~200 Ko)
+# =============================================================================

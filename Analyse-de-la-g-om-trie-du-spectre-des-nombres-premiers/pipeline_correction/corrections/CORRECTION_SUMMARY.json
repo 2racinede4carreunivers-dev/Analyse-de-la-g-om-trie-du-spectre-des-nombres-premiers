@@ -1,0 +1,61 @@
+{
+  "generated_files": 8,
+  "reference_values": {
+    "k": 4,
+    "n": 23,
+    "p": 1097,
+    "SA_23": 88327434098004,
+    "SB_23": 353309736387924,
+    "digamma_exp": 6
+  },
+  "files": [
+    {
+      "path": "corrections/src/dispatch/ratio_dispatcher.py",
+      "size": 6802,
+      "desc": "DEF-01 : ratio_dispatcher corrigé"
+    },
+    {
+      "path": "corrections/src/core/spectral_core.py",
+      "size": 4934,
+      "desc": "DEF-02+03 : spectral_core corrigé"
+    },
+    {
+      "path": "corrections/src/models/spectral_model.py",
+      "size": 3838,
+      "desc": "DEF-04 : spectral_model corrigé"
+    },
+    {
+      "path": "corrections/src/engines/hol_generator.py",
+      "size": 5345,
+      "desc": "DEF-05 : hol_generator corrigé"
+    },
+    {
+      "path": "corrections/src/engines/scorer.py",
+      "size": 6633,
+      "desc": "DEF-06 : scorer corrigé"
+    },
+    {
+      "path": "corrections/config/gabriel_defaults.yaml",
+      "size": 1163,
+      "desc": "DEF-07 : defaults corrigé"
+    },
+    {
+      "path": "corrections/corpus/formulas_1_4.json",
+      "size": 731,
+      "desc": "Nouveau : formulas_1_4.json"
+    },
+    {
+      "path": "corrections/corpus/verif_p1097_n23_ratio4.thy",
+      "size": 1415,
+      "desc": "Fragment HOL corrigé (p=1097)"
+    }
+  ],
+  "deploy_instructions": [
+    "1. Copier corrections/src/          → <repo>/src/",
+    "2. Copier corrections/config/        → <repo>/config/",
+    "3. Copier corrections/corpus/        → <repo>/corpus/",
+    "4. Lancer : python3 -m pytest tests/ -v",
+    "5. Tester manuellement : gabriel 'Reconstruit le premier pour le rapport 1/4 pour n=23'",
+    "6. Vérifier : p=1097, model=1/4, SA≈8.83e13, SB≈3.53e14"
+  ]
+}

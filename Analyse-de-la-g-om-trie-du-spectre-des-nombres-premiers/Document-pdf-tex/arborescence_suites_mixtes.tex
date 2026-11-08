@@ -1,0 +1,35 @@
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  racine/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=3.0cm,minimum height=0.9cm,align=center},
+  branche/.style={rectangle,rounded corners,draw=spectralor,fill=spectralor!18,thick,minimum width=2.6cm,minimum height=0.8cm,align=center},
+  feuille/.style={rectangle,rounded corners,draw=spectralazur,fill=spectralazur!12,thick,minimum width=2.4cm,minimum height=0.7cm,align=center},
+  flux/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!70},
+  fluxor/.style={-{Stealth[length=2.2mm]},thick,spectralor!90!black},
+  fluxviolet/.style={-{Stealth[length=2.2mm]},thick,spectralviolet!80!black}
+]
+  \node[racine] (root) at (0,0) {Suites A et B\\[-1pt]\scriptsize tous rapports 1/k};
+  \node[branche] (mixte) at (-4.5,-2.2) {\textbf{Suites mixtes}\\[-1pt]\scriptsize A et B altern\'ees};
+  \node[branche] (negative) at (0,-2.2) {\textbf{Suites n\'egatives}\\[-1pt]\scriptsize k negatif};
+  \node[branche] (ecart) at (4.5,-2.2) {\textbf{\'Ecarts spectral}\\[-1pt]\scriptsize (-,-), (+,+), (-,+)};
+  \node[feuille] (m1) at (-4.5,-3.8) {$A_i = k^i$};
+  \node[feuille] (m2) at (-4.5,-4.6) {$B_i = k^i \pm k^j$};
+  \node[feuille] (n1) at (0,-3.8) {$A_i = k^i$};
+  \node[feuille] (n2) at (0,-4.6) {$B_i = k^i$};
+  \node[feuille] (e1) at (4.5,-3.8) {$\Delta = (-,-)$};
+  \node[feuille] (e2) at (4.5,-4.6) {$\Delta = (+,+)$};
+  \node[feuille] (e3) at (4.5,-5.4) {$\Delta = (-,+)$};
+  \draw[flux] (root.south) -- (-2.0,-1.1) -| (mixte.north);
+  \draw[flux] (root.south) -- (0,-1.1) -| (negative.north);
+  \draw[flux] (root.south) -- (2.0,-1.1) -| (ecart.north);
+  \draw[fluxor] (mixte.south) -- (-4.5,-3.0) -| (m1.north);
+  \draw[fluxor] (mixte.south) -- (-4.5,-3.8) -| (m2.north);
+  \draw[fluxor] (negative.south) -- (0,-3.0) -| (n1.north);
+  \draw[fluxor] (negative.south) -- (0,-3.8) -| (n2.north);
+  \draw[fluxviolet] (ecart.south) -- (4.5,-3.0) -| (e1.north);
+  \draw[fluxviolet] (ecart.south) -- (4.5,-3.8) -| (e2.north);
+  \draw[fluxviolet] (ecart.south) -- (4.5,-4.6) -| (e3.north);
+\end{tikzpicture}
+\caption{Arborescence des familles de suites : suites mixtes, suites n\'egatives et \'ecarts spectraux (-,-), (+,+), (-,+) pour tous rapports 1/k.}
+\end{figure}

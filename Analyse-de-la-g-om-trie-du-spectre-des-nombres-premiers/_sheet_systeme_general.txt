@@ -1,0 +1,36 @@
+##### Systeme General | rows=35 cols=11 #####
+Système convolutif généralisé — tous les rapports non typiques 1/k |  |  |  |  |  |  |  |  |  | 
+Formules fermées exactes, valables pour tout k entier >= 3 et tout n entier (positif ou négatif). Validées contre les exemples numériques fournis pour k=3..7. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+FORMULES GÉNÉRALES (n entier, positif ou négatif) |  |  |  |  |  |  |  |  |  | 
+Somme suite A(k,n) = (alphaA(k)/2) * k^n − offsetA(k) |  |  |  |  |  |  |  |  |  | 
+Somme suite B(k,n) = (alphaB(k)/2) * k^n − offsetB(k) |  |  |  |  |  |  |  |  |  | 
+alphaA(k) = 2*(k^4 − k^2 + 1) / [(k−1) * k^3] |  |  |  |  |  |  |  |  |  | 
+alphaB(k) = k * alphaA(k) |  |  |  |  |  |  |  |  |  | 
+offsetA(k) = k / (k−1) |  |  |  |  |  |  |  |  |  | 
+offsetB(k) = (k^7 − k^6 + k) / (k−1) |  |  |  |  |  |  |  |  |  | 
+À n=10 : Digamma = Somme A ± A(7 ou 8); les quatre possibilités servent uniquement à déterminer l’ancrage premier du rapport. |  |  |  |  |  |  |  |  |  | 
+À n≠10 : rang cible = rang premier à n=10 + n − 10; P cible est lu dans tblPremiers; Digamma calculé = Somme B(k,n) − P cible × k^6. |  |  |  |  |  |  |  |  |  | 
+Reconstruction : P = [Somme B(k,n) − Digamma calculé] / k^6. Un rapport sans ancrage unique à n=10 demeure bloqué. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+Rapport | k | n | Somme A | Somme B | Position Digamma | Signe Digamma | Digamma calculé | Premier reconstruit | Rang du premier | Statut
+1/3 | 3 | 10 | 79824 | 238746 | 8 | -1 | 73263 | 227 | 49 | Résolu (formule générale)
+1/4 | 4 | 10 | 1316180 | 5260628 | 8 | 1 | 1381716 | 947 | 161 | Résolu (formule générale)
+1/5 | 5 | 10 | 11738280 | 58675780 | 7 | 1 | 11816405 | 2999 | 430 | Résolu (formule générale)
+1/6 | 6 | 10 | 70599858 | 423552498 | 8 | 1 | 72279474 | 7529 | 954 | Résolu (formule générale)
+1/7 | 7 | 10 | 322966112 | 2260645142 | 8 | -1 | 317201311 | 16519 | 1913 | Résolu (formule générale)
+1/8 | 8 | 10 | 1208259144 | 9665811016 | 8 | -1 | 1191481928 | 32327 | 3468 | Résolu (formule générale)
+1/9 | 9 | 10 | 3874802760 | 34872693408 | 7 | -1 | 3870019791 | 58337 | 5906 | Résolu (formule générale)
+1/10 | 10 | 10 | 11001111110 | 110010111110 |  |  |  |  |  | Ambigu : Plusieurs candidats premiers trouvés pour k=10, n=10: [CandidatDigamma(position=7, signe=1, digamma_calcule=Fraction(11011111110, 1), p_candidat=Fraction(98999, 1), est_entier=True, est_premier=True, rang_premier=9505), CandidatDigamma(position=8, signe=1, digamma_calcule=Fraction(11101111110, 1), p_candidat=Fraction(98909, 1), est_entier=True, est_premier=True, rang_premier=9495), CandidatDigamma(position=8, signe=-1, digamma_calcule=Fraction(10901111110, 1), p_candidat=Fraction(99109, 1), est_entier=True, est_premier=True, rang_premier=9515)]. Ajoutez une entrée dans CATALOGUE_DIGAMMA pour désambiguïser.
+1/11 | 11 | 10 | 28297321008 | 311268759538 |  |  |  |  |  | Ambigu : Aucun candidat premier trouvé pour k=11, n=10.
+1/12 | 12 | 10 | 67080402012 | 804961838172 |  |  |  |  |  | Ambigu : Plusieurs candidats premiers trouvés pour k=12, n=10: [CandidatDigamma(position=8, signe=1, digamma_calcule=Fraction(67510383708, 1), p_candidat=Fraction(246971, 1), est_entier=True, est_premier=True, rang_premier=21796), CandidatDigamma(position=8, signe=-1, digamma_calcule=Fraction(66650420316, 1), p_candidat=Fraction(247259, 1), est_entier=True, est_premier=True, rang_premier=21814)]. Ajoutez une entrée dans CATALOGUE_DIGAMMA pour désambiguïser.
+ |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+Note : la table Convolution encode les suites; Catalogue Premiers contient les rangs et tblAncrages contient les solutions de départ à n=10. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+CAS CORRIGÉ EXACT — RAPPORT 1/8, n = 34 |  |  |  |  |  |  |  |  |  | 
+32 327 est le 3 468e premier à n=10; le décalage de 24 rangs donne le 3 492e premier, soit 32 537. |  |  |  |  |  |  |  |  |  | 
+ |  |  |  |  |  |  |  |  |  | 
+Rapport | k | n | Somme A exacte | Somme B exacte | Rang base | Rang cible | Premier cible | Zêta k^6 | Digamma exact | Statut
+1/8 | 8 | 34 | 5705842489643358455620763423304 | 45646739917146867644966107124296 | 3468 | 3492 | 32537 | 262144 | 45646739917146867644957577744968 | Reconstruit exactement

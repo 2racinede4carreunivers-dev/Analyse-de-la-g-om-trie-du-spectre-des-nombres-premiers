@@ -1,0 +1,52 @@
+\subsubsection*{Page 28}
+\subsection*{Système convolutif Savard}
+
+\subsection*{3.8. Synthèse statistique (k=10 à 111)}
+
+\vspace{0.3cm}
+
+Ce tableau récapitule la répartition des 102 rapports $1/k$ étudiés pour $n=10$ et $k \in [10,111]$, selon le résultat de la reconstruction du premier $P$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l c c@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{État} & \textbf{Nombre de $k$} & \textbf{\%} \\
+\midrule
+P certifié unique & 38 & 37\% \\
+C\_MULTIPLE (≥ 2 premiers) & 20 & 20\% \\
+AUCUN P (règle standard) & 44 & 43\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\subsection*{3.9. Notes importantes pour la programmation de l'agent}
+
+\begin{boitealerte}[Cas AUCUN P (44 valeurs)]
+Les 4 candidats standards sont tous composites. Deux stratégies possibles selon votre HOL :
+\begin{itemize}[nosep]
+  \item Règle spéciale cataloguée (comme $k=27$ : Digamma $= \SA - (2k^{8}-k^{6})$, $P = 14\,330\,707$) ;
+  \item Mode \textsc{création d'ancrage} : l'agent retourne C\_NON\_CERTIFIÉ et attend validation HOL externe.
+\end{itemize}
+\end{boitealerte}
+
+\vspace{0.3cm}
+
+\begin{boitenote}[Cas C\_MULTIPLE (20 valeurs)]
+Selon le contrat HOL : retourner tous les C/P possibles, aucune sélection silencieuse. L'agent doit les lister tous et attendre confirmation.
+\end{boitenote}
+
+\vspace{0.3cm}
+
+\begin{boitealerte}[Cas particulier $k=11$]
+$k=11$ est un cas forme spéciale : $P = 1\,611\,851$ (rang 121 982) avec règle A7- documentée dans le PDF -- non reconstruit par les 4 essais standards à $n=10$.
+\end{boitealerte}
+
+\vspace{0.3cm}
+
+\begin{boitealerte}[Arithmétique exacte requise]
+Pour $k \ge 50$, les valeurs de $\SA$ et $\SB$ dépassent $10^{15}$ -- l'agent doit utiliser l'arithmétique entière Python (pas float) pour éviter les erreurs d'arrondi Excel.
+\end{boitealerte}

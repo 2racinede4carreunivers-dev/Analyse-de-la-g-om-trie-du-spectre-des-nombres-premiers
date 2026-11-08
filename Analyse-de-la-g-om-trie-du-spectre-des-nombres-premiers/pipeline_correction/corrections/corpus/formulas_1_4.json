@@ -1,0 +1,32 @@
+{
+  "ratio": "1/4",
+  "k": 4,
+  "base": 4,
+  "invariant": "asymmetric",
+  "SA": {
+    "formula": "SA(n) = (241/192) * 4^n - 4/3",
+    "coeff_a_num": 241,
+    "coeff_a_den": 192,
+    "coeff_b_num": -4,
+    "coeff_b_den": 3,
+    "example_n23": 88327434098004
+  },
+  "SB": {
+    "formula": "SB(n) = (964/192) * 4^n - 12292/3",
+    "coeff_a_num": 964,
+    "coeff_a_den": 192,
+    "coeff_b_num": -12292,
+    "coeff_b_den": 3,
+    "example_n23": 353309736387924
+  },
+  "digamma": {
+    "formula": "digamma(n,p) = SB(n) - p * 4^6",
+    "digamma_exp": 6,
+    "digamma_base": 4
+  },
+  "reconstruction": {
+    "formula": "p = (SB(n) - digamma(n,p)) / 4^6",
+    "example_n23_p": 1097,
+    "verified": true
+  }
+}

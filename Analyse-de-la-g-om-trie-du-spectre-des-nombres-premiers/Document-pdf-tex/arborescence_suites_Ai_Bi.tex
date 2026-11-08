@@ -1,0 +1,66 @@
+﻿\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  entree/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu!12,thick,minimum width=2.6cm,minimum height=0.8cm,align=center},
+  neurone/.style={circle,draw=spectralazur,fill=spectralazur!12,thick,minimum size=0.62cm,inner sep=1pt},
+  somme/.style={rectangle,rounded corners,draw=spectralor,fill=spectralor!18,thick,minimum width=1.7cm,minimum height=0.8cm,align=center},
+  sortie/.style={rectangle,rounded corners,draw=spectralbleu,fill=spectralbleu,text=white,thick,minimum width=2.9cm,minimum height=0.9cm,align=center},
+  digamma/.style={diamond,draw=spectralviolet,fill=spectralviolet!10,thick,aspect=2.2,align=center,inner sep=0.5pt},
+  flux/.style={-{Stealth[length=2.2mm]},thick,spectralbleu!70},
+  fluxor/.style={-{Stealth[length=2.2mm]},thick,spectralor!90!black}
+]
+  \node[entree] (k) at (0,0) {Rapport $1/k$};
+  \node[entree] (n) at (3.4,0) {$n$ = nombre de termes ($n \ge 8$)};
+  \node[neurone] (a1) at (0.6,-2.1) {$k^{1}$};
+  \node[neurone] (a2) at (1.0,-2.1) {$k^{2}$};
+  \node[neurone] (a3) at (1.4,-2.1) {$k^{3}$};
+  \node[neurone] (a5) at (2.2,-2.1) {$k^{i}$};
+  \node[neurone] (a7) at (3.0,-2.1) {$k^{n-2}$};
+  \node at (3.8,-2.1) {\footnotesize $\cdots$};
+  \node[neurone,draw=spectralor,fill=spectralor!25] (as1) at (4.0,-2.1) {};
+  \node[neurone,draw=spectralor,fill=spectralor!25] (as2) at (4.8,-2.1) {};
+  \node[below=1pt of as1,xshift=-4pt] {\scriptsize Savard $k^{n-1}-k^{n-3}$};
+  \node[below=1pt of as2,xshift=4pt] {\scriptsize Savard $k^{n}-k^{n-2}$};
+  \node[neurone] (b1) at (0.6,-3.4) {$k^{1}$};
+  \node[neurone] (b2) at (1.0,-3.4) {$k^{2}$};
+  \node[neurone] (b3) at (1.4,-3.4) {$k^{5}$};
+  \node[neurone] (b5) at (2.2,-3.4) {$k^{i+1}$};
+  \node[neurone] (b7) at (3.0,-3.4) {$k^{n-2}$};
+  \node at (3.8,-3.4) {\footnotesize $\cdots$};
+  \node[neurone,draw=spectralor,fill=spectralor!25] (bs1) at (4.0,-3.4) {};
+  \node[neurone,draw=spectralor,fill=spectralor!25] (bs2) at (4.8,-3.4) {};
+  \node[below=1pt of bs1,xshift=-4pt] {\scriptsize decale $k^{n}-k^{n-2}$};
+  \node[below=1pt of bs2,xshift=4pt] {\scriptsize decale $k^{n+1}-k^{n-1}$};
+  \node[neurone,draw=spectralrouge,fill=spectralrouge!15] (zeta) at (2.6,-3.4) {$k^{7}$};
+  \node[above=1pt of zeta] {\scriptsize\color{spectralrouge} Saut Zeta ($i=6$)};
+  \node[somme] (sa) at (2.1,-5.0) {$S_A(k,n)$};
+  \node[somme] (sb) at (2.1,-6.3) {$S_B(k,n)$};
+  \node[digamma] (d1) at (6.9,-4.4) {\scriptsize $S_A - k^{8}$};
+  \node[digamma] (d2) at (6.9,-5.3) {\scriptsize $S_A + k^{8}$};
+  \node[digamma] (d3) at (6.9,-6.2) {\scriptsize $S_A + k^{7}$};
+  \node[digamma] (d4) at (6.9,-7.1) {\scriptsize $S_A - k^{7}$};
+  \node[somme,minimum width=2.5cm] (div) at (10.6,-5.3) {$P = \dfrac{S_B - \text{Digamma}}{k^{6}}$};
+  \node[sortie] (p) at (10.6,-7.4) {$P$ certifie};
+  \node[sortie,fill=spectralviolet] (rang) at (10.6,-8.9) {Niveau 5};
+  \draw[flux] (k.south) -- (1.1,-1.2) -| (a1.north);
+  \draw[flux] (n.south) -- (3.4,-1.2) -| (as2.north);
+  \foreach \i in {1,2,3,5,7}{ \draw[fluxor] (a\i.south) -- (a\i.south |- sa.north); }
+  \draw[fluxor] (as1.south) -- (as1.south |- sa.north);
+  \draw[fluxor] (as2.south) -- (as2.south |- sa.north);
+  \foreach \i in {1,2,3,5,7}{ \draw[fluxor] (b\i.south) -- (b\i.south |- sb.north); }
+  \draw[fluxor] (zeta.south) -- (zeta.south |- sb.north);
+  \draw[fluxor] (bs1.south) -- (bs1.south |- sb.north);
+  \draw[fluxor] (bs2.south) -- (bs2.south |- sb.north);
+  \draw[flux] (sa.east) -- (d1.west); \draw[flux] (sa.east) -- (d2.west);
+  \draw[flux] (sa.east) -- (d3.west); \draw[flux] (sa.east) -- (d4.west);
+  \draw[flux] (sb.east) -| (div.south);
+  \foreach \i in {1,2,3,4}{ \draw[flux] (d\i.east) -- (div.west |- d\i.east); }
+  \draw[flux] (div.south) -- (p.north);
+  \draw[flux] (p.south) -- (rang.north) node[midway,right]{\scriptsize $n \neq 10$};
+  \node[rotate=90,anchor=south,color=spectralbleu] at (-1.15,-2.75) {\scriptsize Suite Ai};
+  \node[rotate=90,anchor=south,color=spectralor!80!black] at (-1.15,-5.65) {\scriptsize Somme SA};
+  \node[rotate=90,anchor=south,color=spectralviolet] at (5.6,-5.75) {\scriptsize 4 branches Digamma};
+\end{tikzpicture}
+\caption{Arborescence de construction des suites Ai et Bi}
+\end{figure}

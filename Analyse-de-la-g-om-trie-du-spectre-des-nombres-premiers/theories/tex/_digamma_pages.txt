@@ -1,0 +1,645 @@
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 46 sur 60
+
+7.2. Rapports non typiques : positions et polarité spectrales
+Les rapports non typiques 1/k, avec k ≥ 3, conservent dans cette interprétation la grille des
+positions définie par les premiers, mais n représente seulement le nombre de termes des suites A
+et B. Il n’est donc pas, en général, le rang du premier retourné. La polarité associée à un premier
+peut aussi dépendre du rapport considéré.
+Par exemple, pour n = 10, le rapport 1/3 retourne 227, qui est le 49e premier, tandis que 1/4
+retourne 947, qui est le 161e premier. Selon les conventions décrites dans le rapport, les premiers
+inférieurs à 881 sont négatifs pour le rapport 1/4. Un même premier peut donc être positif pour
+un rapport non typique et négatif pour un autre, tout en gardant son rang habituel dans la suite
+des premiers. On peut interpréter les rapports non typiques comme des projections spectrales
+de la structure associée au rapport typique ; il s’agit ici d’une analogie du modèle, et non d’une
+identité avec les zéros de la fonction zêta classique.
+
+7.3. Définition proposée de la fonction zêta spectrale de Savard
+L’équation proposée pour la fonction ψ de Savard s’écrit
+ψSavard (x; k, n) = x −
+
+1
+kn
+− log(2π) − log(1 − x−2 ),
+SB (k, n)
+2
+
+pour les valeurs où les termes de l’expression sont définis. Les cas négatifs requièrent l’adaptation
+de signe décrite dans les sections précédentes.
+Un ancrage premier P est dit résonant dans ce modèle lorsque ψSavard (P ; k, n) est proche de
+P , c’est-à-dire lorsque l’écart résiduel est faible. Les exemples présentés attribuent au rapport
+typique 1/2 une ondulation faible et décrivent une amélioration de la proximité pour certains
+grands premiers. Pour les indices négatifs au-delà de −47, le rapport indique que SB (n) se stabilise
+près de 66 ; cette observation concerne la suite négative et l’extension de l’équation à ce cas.
+
+7.4. Reconstruction des premiers et exclusion des composés
+La relation de reconstruction utilisée est
+Pi =
+
+SB (k, n) − Digammacalculé
+.
+k6
+
+Dans la formalisation citée, la fonction prime_i ne retourne que des nombres premiers, ce qui
+exclut les composés de son image. L’interprétation supplémentaire selon laquelle le remplacement
+d’un premier par un composé conduirait à un indice non entier est une explication du mécanisme de
+reconstruction présenté ; elle doit être distinguée du théorème Isabelle composite_not_prime_i.
+
+7.5. Comptages observés et loi de croissance proposée
+Les trois catalogues dynamiques actuellement cités couvrent les plages k = 2 à 1001, 1002
+à 10001, et 10002 à 100001. Ils rapportent respectivement 423, 2604 et 19215 lignes marquées
+PREMIER TROUVE, soit
+423 + 2604 + 19215 = 22242
+ancrages consignés sur 100000 rapports traités. Ces nombres sont les bilans des fichiers générés ;
+ils ne signifient pas que chaque résultat dispose d’un certificat HOL indépendant.
+Les ancrages observés suggèrent empiriquement une croissance de type puissance :
+log P (k) ≈ a log k + b,
+
+a ≈ 5,
+
+soit
+
+P (k) ≈ Ck 5 .
+
+Cette loi reste une approximation empirique dans les données présentées. Elle place certains
+ancrages vers 1020 pour k de l’ordre de 104 et vers 1025 pour k de l’ordre de 105 .
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 47 sur 60
+
+7.6. Interprétation zêta : analogie des exposants
+Dans la fonction zêta de Riemann, la droite critique est donnée par σ = 1/2. Dans le modèle
+spectral de Savard, l’exposant de croissance a ≈ 5 décrit la taille des ancrages premiers. On
+peut rapprocher ces deux paramètres comme analogues structurels : l’un intervient dans la
+description des zéros, l’autre dans la croissance des ancrages. Les deux constructions ne sont
+pas mathématiquement équivalentes : la fonction zêta classique concerne ses zéros, tandis que le
+modèle de Savard produit des candidats nombres premiers.
+Le rapport mentionne des hauteurs de zéros non triviaux de l’ordre de 1012 et des ancrages
+pouvant atteindre l’ordre de 1025 . Le quotient des deux échelles est
+1025
+= 1013 .
+1012
+Cette comparaison est uniquement une comparaison d’ordres de grandeur : une hauteur de zéro
+et la valeur d’un nombre premier sont des quantités de nature différente. Faute de référence
+bibliographique précisant une borne vérifiable, 1012 est présenté ici comme l’ordre de grandeur
+mentionné dans le rapport, et non comme un record mondial établi.
+
+7.7. Hypothèse de Savard : formulation spectrale
+Hypothèse de Savard (formulation proposée). Pour un entier n fixé et le long des
+rapports non typiques 1/k pour lesquels le pipeline fournit un ancrage unique, la résonance et la
+loi de croissance sont conjecturées sous la forme
+ψSavard (Pk,n ; k, n) = Pk,n + o(1),
+
+P (k) ∼ Ck 5
+
+(k → ∞).
+
+Ces relations sont des hypothèses asymptotiques à vérifier ; elles ne découlent pas des seuls exemples
+numériques ni du théorème d’exclusion des composés.
+
+8. Fonction Digamma_Savard/Cline — 20/10/2026
+Observation
+empirique
+des quatre
+possibilités
+(non calculable)
+
+Réduction
+algébrique
+des quatre
+branches
+(polynôme B0 )
+
+Criblage modulaire Digamma calculé
+survivant unique et reconstruction
+(100 % exact)
+P
+
+choix de la branche
+et rigidité de la preuve
+
+Fil conducteur de la section
+Cette section ne réécrit pas la méthode spectrale : elle en documente l’unique pièce qui manquait à la
+forme. Le Digamma calculé — la correction qui transforme une somme de suite A en nombre premier —
+jusqu’alors était une valeur observée, sélectionnée par l’œil et la comparaison. Il devient ici le résultat
+d’une fonction calculable, dont on donne la définition, la dérivation, la validation numérique et les
+limites.
+
+8.1. Problématique : de l’observation empirique à la fonction calculable
+Avant cette section, la valeur du Digamma calculé n’était pas une valeur calculée : c’était
+une valeur repérée. Le raisonnement tenait en quatre temps.
+1. Quatre possibilités, et seulement quatre. Pour un rapport typique t = 1/k, le Digamma
+pouvait être la somme de la suite A corrigée par ± t8 ou par ± t7 , soit quatre possibilités — la
+8ième position de la suite A ajoutée ou soustraite, la 7ième position ajoutée ou soustraite. La
+polarité (positivité ou négativité) du terme était donc un choix, non une conséquence.
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 48 sur 60
+
+2. Un intervalle de calibration. Ce choix ne pouvait être départagé que sur l’intervalle des
+quatre premiers P = 29, 31, 37, 41, où la valeur du Digamma était à la fois calculable et
+raisonnable, c’est-à-dire compatible avec une récurrence exhibiting une logique interne.
+3. Une récurrence observée. Les trois valeurs suivantes s’obtenaient l’une de l’autre par
+addition de +4 et par consommation successive des trois derniers termes de la suite A (256,
+384, 768).
+4. Une généralisation contestable. Le Digamma calculé étant dès lors fixé, on en déduisait la
+reconstruction
+SB − Digammacalc.
+P =
+,
+k6
+formule qui, appliquée à tout autre P , donnait « un Digamma calculé également déterminable
+» — mais dont la valeur était héritée de l’observation, non démontrée.
+Le point de rupture
+Cette Circularité est aujourd’hui levée sur le point essentiel : le signe et la position ne sont plus
+choisis, ils sont déduits par un argument arithmétique qui ne fait intervenir aucune observation. En
+revanche — et c’est explicité plus bas — le reste de la chaîne conserve un statut empirique qui doit
+être lu comme tel.
+
+8.2. Formulation algébrique du problème
+Rappelons les deux sommes fermées de la méthode spectrale (niveau 2) :
+SA (k, n) =
+
+αA (k) n
+k − δA (k),
+2
+
+SB (k, n) =
+
+αB (k) n
+k − δB (k),
+2
+
+et les quatre valeurs candidates du Digamma au niveau 4 :
+Digamma(k, n) = SA (k, n) ± k 8
+
+ou
+
+Digamma(k, n) = SA (k, n) ± k 7 .
+
+La question que la section tranche est la suivante :
+Problème de la sélection de branche
+Étant donné k et n, comment décide-t-on, par un calcul et non par une observation, que le Digamma
+correct est SA − k 8 plutôt que SA + k 8 , SA − k 7 ou SA + k 7 ?
+
+Le point crucial est que l’on ne demande pas « le candidat est-il premier ? » (question qui
+ramènerait la circularité) mais « le candidat est-il éliminé par un petit premier ? ». C’est une
+question de division, non de primalité : elle admet une réponse modulaire, donc calculable.
+
+8.3. Définition formelle de la fonction Digamma_Savard
+8.3.1. Réduction algébrique : le polynôme B0 (k)
+L’observation décisive est que la reconstruction
+P =
+
+SB − Digamma
+k6
+
+se simplifie : SB − SA est divisible par k 6 pour tout k, et le quotient est un polynôme en k à cinq
+termes. En effet, au niveau n = 10,
+SA (k, 10) = k 10 + k 9 + k 6 + k 5 + k 4 + k 3 + k 2 + k,
+SB (k, 10) = k 11 + k 10 + k 7 + k 5 + k 4 + k 3 + k 2 + k,
+SB (k, 10) − SA (k, 10) = k 11 − k 9 + k 7 − k 6 = k 6 k 5 − k 3 + k − 1 .
+
+
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 49 sur 60
+
+Polynôme de base B0
+B0 (k) =
+
+SB (k, 10) − SA (k, 10)
+= k5 − k3 + k − 1
+k6
+
+Le Digamma étant SA ± k 8 ou SA ± k 7 , on obtient, pour chacune des quatre branches, un
+candidat polynomial en k :
+PA(8)− (k) = B0 (k) + k 2 ,
+
+PA(8)+ (k) = B0 (k) − k 2 ,
+
+PA(7)+ (k) = B0 (k) − k,
+
+PA(7)− (k) = B0 (k) + k.
+
+Pourquoi la polarité de la suite A commande le signe
+Le signe du Digamma et le signe de la correction retombent sur la polarité de la position dans la
+suite A : la position 8 (terme k 8 ) donne une correction en k 2 positive quand elle est soustraite, la
+position 7 (terme k 7 ) donne une correction en k positive quand elle est ajoutée. Ce renversement n’est
+pas conventionnel : il découle mécaniquement de SB − SA = k 6 B0 , où le terme de rang 6 est celui qui a
+été retiré à la suite B par le saut Zêta.
+
+8.3.2. Table de correspondance : branche, signe et terme
+Branche Position dans la suite A Terme correctif Candidat polynomial
+8ième
+8ième
+7ième
+7ième
+
+A(8)−
+A(8)+
+A(7)+
+A(7)−
+
+−k 8
++k 8
++k 7
+−k 7
+
+B0 + k 2
+B0 − k 2
+B0 − k
+B0 + k
+
+Cette table est la vraie table de correspondance : elle a été revérifiée numériquement sur
+676 191 ancres, après qu’une version antérieure (issue du script de criblage originel) eut inversé les
+lignes A(7)+ et A(7)−. L’inversion était invisible au regard mais destructrice : elle inversait le
+signe de la correction Digamma pour une branche sur quatre.
+8.3.3. Les quatre ancres de référence : P = 29, 31, 37, 41
+Pour le rapport typique t = 1/2 (soit k = 2), les suites à dix termes valent
+SA (2, 10) = 2 + 4 + 8 + 16 + 32 + 64 + 128 + 256 + 384 + 768 = 1 662,
+SB (2, 10) = 2 + 4 + 8 + 16 + 32 + 128 + 256 + 512 + 768 + 1536 = 3 262,
+et la 6ième position de la suite A (le « Zêta ») vaut 26 = 64.
+n
+
+P SA (2, n) SB (2, n) Digamma SA + Digamma Branche
+
+10
+11
+12
+13
+
+29
+31
+37
+41
+
+1 662
+3 326
+6 654
+13 310
+
+3 262
+6 590
+13 246
+26 558
+
+−256
++1 280
++4 224
++10 624
+
+1 406
+4 606
+10 878
+23 934
+
+A(8)−
+A(8)+
+A(8)+
+A(8)+
+
+Vérification de la reconstruction sur les quatre ancres
+SB − Digammacalc.
+3262 − 1406
+=
+= 29,
+64
+64
+SB − Digammacalc.
+13246 − 10878
+=
+= 37,
+64
+64
+
+SB − Digammacalc.
+6590 − 4606
+=
+= 31,
+64
+64
+SB − Digammacalc.
+26558 − 23934
+=
+= 41.
+64
+64
+
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 50 sur 60
+
+Point d’exactitude relevé à la relecture
+La valeur du Digamma pour n = 13 vaut 10 624 et donne SA + Digamma = 23 934. La reconstruction
+(26 558 − 23 934)/64 = 41 est donc exacte. Une saisie antérieure portait 23 936 (soit 10 626), qui ne
+redonne pas 41 mais 40,96875 : l’écart est de 2 sur le Digamma et faute de reproduction du nombre
+premier. La valeur 10 624 est la bonne.
+
+8.3.4. La récurrence empirique observée
+Les quatre valeurs du Digamma se lisent aussi comme des décompositions sur les trois derniers
+termes de la suite A de référence (256, 384, 768), avec des coefficients formant une progression de
+pas 4 (1, 5, 9, 13) :
+256 = 1 × 256,
+1 280 = 5 × 256,
+4 224 = 9 × 256 + 5 × 384,
+10 624 = 13 × 256 + 9 × 384 + 5 × 768.
+Cette décomposition canonique s’écrit
+max(0, n−11)
+
+Digamma(2, n) =
+
+X
+
+
+
+4 (n−10−j)+1 bj ,
+
+b0 = 256, b1 = 384, b2 = 768, bj+1 = 2 bj .
+
+j=0
+
+Statut exact de cette récurrence
+La formule ci-dessus est exacte pour n = 10, 11, 12, 13 — les quatre valeurs de la table de référence.
+Elle devient fausse dès n = 14 : la règle canonique donne 23 936 là où la valeur exacte est 23 808
+(écart +128), puis +896 en n = 15, +2 816 en n = 16, +6 784 en n = 17 et +14 592 en n = 18. Elle est
+donc une description de la table, non une loi générale. La fonction qui suit ne s’appuie pas sur elle.
+
+8.4. La règle de criblage modulaire — formalisation de l’empirique
+8.4.1. Le principe : éliminer par divisibilité, non par primalité
+Les quatre candidats PA(8)− , PA(8)+ , PA(7)+ , PA(7)− sont des polynômes en k. Il en résulte une
+propriété décisive : pour tout premier p,
+cj (k) ≡ 0 (mod p)
+
+⇐⇒
+
+cj (k mod p) ≡ 0 (mod p).
+
+Autrement dit, la divisibilité d’un candidat par p ne dépend que de la classe de k modulo p.
+L’élimination d’un candidat par un petit premier est donc une opération modulaire, entièrement
+calculable et indépendante de toute conjecture sur les nombres premiers.
+Définition — élimination modulaire
+Soit P = {3, 5, 7, 11, 13, 17, 19, 23} un ensemble de petits premiers. Le candidat cj (k) est dit éliminé
+par criblage s’il existe p ∈ P tel que p | cj (k) ; il est dit survivant si aucun p ∈ P ne le divise.
+
+Puisque chaque cj est un polynôme, l’ensemble des branches éliminées est une fonction de k
+modulo
+Y
+M =
+p = 111 546 435.
+p∈P
+
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 51 sur 60
+
+8.4.2. La règle de sélection
+Théorème empirique — règle de branche
+Étant donné k, on forme les quatre candidats
+c0 = B0 + k 2 ,
+
+c1 = B0 − k 2 ,
+
+c2 = B0 − k,
+
+c3 = B0 + k.
+
+On élimine tout candidat divisible par au moins un premier de P = {3, 5, 7, 11, 13, 17, 19, 23}. Si le
+criblage laisse un seul survivant, ce survivant est la branche correcte.
+Pourquoi l’élimination est sûre
+La branche correcte étant, par construction, celle qui donne le nombre premier P , son candidat n’est
+divisible par aucun premier strictement inférieur à P — et en particulier par aucun des huit premiers
+de P. Le criblage ne peut donc jamais éliminer la vraie branche. C’est la garantie d’intégrité de la
+règle, et elle est structurelle, non statistique.
+Ce que la règle ne fait pas
+La règle ne remplace pas un test de primalité. Elle indique quelle branche est compatible avec la
+primalité, pas que le candidat retenu est premier. Symétriquement, elle ne prouve pas que les trois
+candidats éliminés sont composés : ils le sont bien (ils ont un diviseur trouvé), mais pour la mauvaise
+raison — par un petit premier — ce qui est une information plus faible que la composante complète.
+
+8.4.3. La fonction Digamma_Savard proprement dite
+Définition — fonction Digamma_Savard/Cline
+Pour k ≥ 2 et n entier positif, on pose
+
+8
+
+SA (k, n) − k ,
+
+S (k, n) + k 8 ,
+A
+DigammaS/C (k) =
+SA (k, n) + k 7 ,
+
+
+
+SA (k, n) − k 7 ,
+
+si le survivant unique est A(8)−,
+si le survivant unique est A(8)+,
+si le survivant unique est A(7)+,
+si le survivant unique est A(7)−,
+
+et l’on pose DigammaS/C (k) = indéterminé lorsque le criblage laisse deux survivants ou davantage.
+Caractère de la fonction : une fonction définie à totaux, partiellement calculable
+La fonction ci-dessus est totale en tant qu’application : pour tout k, la règle de criblage produit un
+verdict. Elle est cependant partiellement calculable au sens où, sur une fraction non négligeable des k,
+elle renvoie « indéterminé » : c’est le prix de l’exigence d’exactitude (on ne devine jamais) devant celle
+de complétude (on couvre tout).
+
+8.5. Validations expérimentales
+Toutes les validations reposent sur le même corpus : les 676 191 ancres uniques extraites d’une
+reconstruction portant sur 4 millions de rapports, et qui associent à chaque k la branche effective
+et la valeur correspondante.
+
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 52 sur 60
+
+8.5.1. Validation principale : exactitude et intégrité
+Mesure
+
+Résultat
+
+Ancres analysées
+676 191
+Écarts au modèle polynomial B0
+0
+Violations du criblage (0 attendues)
+0
+Ancres à survivant unique
+71 401 (10,56 %)
+Exactitude sur ces ancres
+71 401/71 401 = 100,000000 %
+Module de criblage M
+111 546 435
+Résultat de la validation
+Sur l’ensemble du corpus, la règle de branche ne présente aucune violation et atteint une exactitude
+de 100 % sur les 71 401 cas où elle se prononce. Le taux de couverture — soit la proportion de k pour
+lesquels la règle désigne une branche unique — est de 10,56 %.
+
+8.5.2. Contrôle anti-circularité
+Le risque d’une telle règle est d’être circulaire : si elle ne distinguait rien, une sélection arbitraire
+fonctionnerait aussi. Le test consiste donc à permuter les quatre signes et à mesurer la pureté
+obtenue.
+Essai
+
+Permutation des signes
+
+Référence (règle true)
+Essai 0
+Essai 1
+Essai 2
+
+[0, 1, 2, 3]
+[3, 1, 0, 2]
+[1, 2, 3, 0]
+[1, 0, 3, 2]
+
+Pureté
+100,000000 %
+8,627330 %
+0,000000 %
+0,000000 %
+
+Lecture du contrôle
+Sous permutation aléatoire, la pureté s’effondre à 0–8,6 %, très en deçà du taux de base de 28,84 %
+correspondant à la branche majoritaire. La règle ne peut donc pas être « bonne » par hasard :
+l’information qu’elle exploite est spécifique à l’association entre la polarité de la position dans la suite
+A et le signe de la correction Digamma. C’est le test le plus important de la section.
+
+Un second contrôle porte sur le hors-échantillon : appliqué à 20 000 valeurs de k arbitraires,
+hors du corpus d’ancres, la règle désigne un survivant unique pour 4 088 d’entre elles, et le candidat
+désigné est impair dans les 4 088 cas (rapport typique 1/2 : le Digamma et k 6 sont pairs, donc P
+doit l’être aussi après soustraction — la parité est un test de cohérence immédiat).
+8.5.3. Convergence du criblage
+# premiers Couverture Exactitude Intégrité Ambigüité Temps
+9
+25
+168
+430
+
+10,56 %
+22,69 %
+42,39 %
+49,65 %
+
+100,0000 %
+100,0000 %
+100,0000 %
+100,0000 %
+
+100,00 %
+100,00 %
+100,00 %
+100,00 %
+
+89,44 %
+77,31 %
+57,61 %
+50,35 %
+
+2s
+4s
+19 s
+41 s
+
+Ce que montre la convergence
+À mesure que l’on ajoute des petits premiers au crible, la couverture croît de façon monotone (10,56 %
+à 49,65 %), tandis que l’exactitude et l’intégrité restent parfaitement constantes à 100 %. C’est le
+comportement attendu et souhaitable : le criblage élimine de plus en plus de branches, mais ne sacrifie
+jamais la rigueur. La couverture pourrait tendre vers 100 % en augmentant le nombre de premiers au
+prix d’un coût de calcul qui croît brutalement : c’est le compromis central de la règle.
+
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local
+
+Page 53 sur 60
+
+8.6. Cas de référence : P = 29, 31, 37, 41
+Le tableau qui suit applique la procédure complète — criblage, choix de branche, calcul du
+Digamma, reconstruction — aux quatre nombres premiers d’ancrage, pour le rapport typique 1/2.
+k Digamma Branche retenue P reconstruit P attendu
+2
+2
+2
+2
+
+−256
++1 280
++4 224
++10 624
+
+A(8)−
+A(8)+
+A(8)+
+A(8)+
+
+29
+31
+37
+41
+
+29
+31
+37
+41
+
+Verdict
+conforme
+conforme
+conforme
+conforme
+
+Mise en garde sur la lecture de ce tableau
+Ces quatre lignes valident la procédure, elles ne la démontrent pas : les quatre cas appartiennent à la
+table d’observation qui a servi à formuler la règle. Leur valeur est méthodologique — ils prouvent que
+la formalisation reproduit exactement le comportement empirique qu’elle remplace — et non probatoire
+au sens d’un test sur données inédites. La preuve opératoire est le test anti-circularité et l’exactitude à
+100 % sur 71 401 ancres hors table d’observation.
+
+8.7. Limites et statut épistémologique
+Limite 1 — la couverture n’est pas totale
+La règle se prononce sur 10,56 % des k du corpus. Sur les 89,44 % restants, le criblage laisse au moins
+deux survivants : la fonction renvoie alors « indéterminé ». Le résidu est intrinsèque et non un défaut
+d’implémentation : sur un k donné, le nombre de branches survivantes ne dépend que de k mod M , et
+aucune extension finie du crible ne peut faire disparaître toutes les classes ambguës sans coût prohibitif.
+Limite 2 — la règle n’est pas un test de primalité
+Elle indique quelle branche est compatible, non que le candidat retenu est premier. Pour lever l’ambiguïté
+résiduelle, un test de primalité reste nécessaire — c’est-à-dire un aller-retour vers la primalité, que
+la formalisation n’a pas supprimé mais simplement repoussé à un second étage, plus étroit et mieux
+circonscrit.
+Limite 3 — la partie algébrique conserve un statut empirique
+La réduction SB − SA = k 6 B0 et la formule fermée de niveau 2 sont établies et vérifiées. En revanche la
+table de correspondance entre polarité de la position et signe de la correction, ainsi que l’ensemble des
+quatre candidats, sont le fruit d’une exploration numérique : ils sont corrects au sens où ils reproduisent
+676 191 ancres sans un seul écart, mais ils ne sont pas démontrés au sens d’un théorème. La section
+franchit la frontière entre « observé » et « calculé » ; elle ne franchit pas celle entre « calculé » et
+« prouvé ».
+Limite 4 — la récurrence de la table ne se généralise pas
+Comme établi plus haut, la formule canonique de décomposition du Digamma est exacte pour n =
+10, 11, 12, 13 et fausse dès n = 14. Elle est conservée dans le présent document comme description de la
+table d’observation, à titre d’outil de calcul et de contrôle, et non comme une loi.
+Position dans l’architecture générale
+La fonction Digamma_Savard/Cline intervient exactement là où la méthode spectrale attendait
+une information manquante : au niveau 4 (mécanisme d’ancrage), où les quatre essais Digamma étaient
+jusqu’alors lancés simultanément et sans critère de choix. Elle ne modifie ni les niveaux 1 à 3 (constantes,
+formules fermées, construction terme à terme) ni le niveau 5 (reconstruction pour n =
+̸ 10), et ne modifie
+
+La géométrie du spectre des nombres premiers — Le système convolutif
+
+

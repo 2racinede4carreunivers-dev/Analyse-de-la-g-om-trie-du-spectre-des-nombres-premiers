@@ -1,0 +1,33 @@
+
+
+\vspace{0.5cm}
+
+% ===== RAPPORT k=42 =====
+\subsubsection*{4.2. Rapport 1/42 ($k = 42$, $n = 15$)}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 1 -- Constantes Savard universelles}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Constante} & \textbf{Formule} & \textbf{Valeur exacte} \\
+\midrule
+$\alpha_A(42)$ & Formule générique & $\frac{3\,109\,933}{1\,518\,804}$ \\
+$\alpha_B(42)$ & $42 \cdot \alpha_A(42)$ & $\frac{3\,109\,933}{36\,162}$ \\
+$\delta_A(42)$ & $\frac{42}{41}$ & $\frac{42}{41}$ \\
+$\delta_B(42)$ & Formule & $\frac{225\,050\,301\,546}{41}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 2 -- Formules fermées de SA et SB}
+
+$$\SA(42, 15) = 2\,285\,381\,254\,365\,702\,554\,104\,806$$
+$$\SB(42, 15) = 95\,986\,012\,683\,359\,501\,783\,370\,150$$
+$$\frac{\Delta SA}{\Delta SB} = \frac{1}{42} \quad \checkmark$$

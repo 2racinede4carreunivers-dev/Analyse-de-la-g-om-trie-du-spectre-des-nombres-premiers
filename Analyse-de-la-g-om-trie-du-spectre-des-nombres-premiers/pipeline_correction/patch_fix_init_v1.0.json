@@ -1,0 +1,14 @@
+﻿{
+  "meta": {
+    "nom": "Fix init multi-ratio",
+    "description": "Corrige les imports cassés dans pipeline_cognitif/__init__.py",
+    "version": "1.0"
+  },
+  "operations": [
+    {
+      "op": "creer_fichier",
+      "cible": "C:\\agent-multiloop-Gabriel-local\\pipeline_cognitif\\__init__.py",
+      "contenu_fichier": "C:\\agent-multiloop-Gabriel-local\\pipeline_cognitif\\__init__.py"
+    }
+  ]
+}

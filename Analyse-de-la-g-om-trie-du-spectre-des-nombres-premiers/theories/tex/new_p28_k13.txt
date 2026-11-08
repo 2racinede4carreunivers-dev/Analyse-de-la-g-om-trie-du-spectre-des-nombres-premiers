@@ -1,0 +1,110 @@
+\subsubsection*{Page 28}
+\subsection*{Système convolutif Savard}
+
+\subsection*{3.8. Synthèse statistique (k=10 à 111)}
+
+\vspace{0.3cm}
+
+Ce tableau récapitule la répartition des 102 rapports $1/k$ étudiés pour $n=10$ et $k \in [10,111]$, selon le résultat de la reconstruction du premier $P$.
+
+\begin{center}
+\small
+\begin{tabular}{@{}l c c@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{État} & \textbf{Nombre de $k$} & \textbf{\%} \\
+\midrule
+P certifié unique & 38 & 37\% \\
+C\_MULTIPLE (≥ 2 premiers) & 20 & 20\% \\
+AUCUN P (règle standard) & 44 & 43\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\subsection*{3.9. Notes importantes pour la programmation de l'agent}
+
+\begin{boitealerte}[Cas AUCUN P (44 valeurs)]
+Les 4 candidats standards sont tous composites. Deux stratégies possibles selon votre HOL :
+\begin{itemize}[nosep]
+  \item Règle spéciale cataloguée (comme $k=27$ : Digamma $= \SA - (2k^{8}-k^{6})$, $P = 14\,330\,707$) ;
+  \item Mode \textsc{création d'ancrage} : l'agent retourne C\_NON\_CERTIFIÉ et attend validation HOL externe.
+\end{itemize}
+\end{boitealerte}
+
+\vspace{0.3cm}
+
+\begin{boitenote}[Cas C\_MULTIPLE (20 valeurs)]
+Selon le contrat HOL : retourner tous les C/P possibles, aucune sélection silencieuse. L'agent doit les lister tous et attender confirmation.
+\end{boitenote}
+
+\vspace{0.3cm}
+
+\begin{boitealerte}[Cas particulier $k=11$]
+$k=11$ est un cas forme spéciale : $P = 1\,611\,851$ (rang 121 982) avec règle A7- documentée dans le PDF -- non reconstruit par les 4 essais standards à $n=10$.
+\end{boitealerte}
+
+\vspace{0.3cm}
+
+\begin{boitealerte}[Arithmétique exacte requise]
+Pour $k \ge 50$, les valeurs de $\SA$ et $\SB$ dépassent $10^{15}$ -- l'agent doit utiliser l'arithmétique entière Python (pas float) pour éviter les erreurs d'arrondi Excel.
+\end{boitealerte}
+
+\vspace{0.5cm}
+
+% ===== DEBUT DE L'EXEMPLE NUMERIQUE =====
+\subsection*{4. Exemple numérique complet -- $n = 15$}
+
+\vspace{0.3cm}
+
+\subsubsection*{4.1. Rapport 1/13 ($k = 13$, $n = 15$)}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 1 -- Constantes Savard universelles}
+
+Le niveau 1 établit les constantes universelles du système convolutif Savard pour $k=13$. Ces constantes sont indépendantes de $n$ et servent de fondation à tous les calculs ultérieurs. Comme expliqué dans la théorie des constantes, $\alpha_A$ et $\alpha_B$ contrôlent l'amplitude des suites A et B, tandis que $\delta_A$ et $\delta_B$ gouvernent leur croissance exponentielle.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Constante} & \textbf{Formule} & \textbf{Valeur exacte} \\
+\midrule
+$\alpha_A(13)$ & $\frac{2(13^{4}-13^{2}+1)}{12 \cdot 13^{3}}$ & $\frac{28\,393}{13\,182}$ \\
+$\alpha_B(13)$ & $13 \cdot \alpha_A(13)$ & $\frac{28\,393}{1\,014}$ \\
+$\delta_A(13)$ & $\frac{13}{12}$ & $\frac{13}{12}$ \\
+$\delta_B(13)$ & $\frac{13^{7}-13^{6}+13}{12}$ & $\frac{57\,921\,721}{12}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 2 -- Formules fermées de SA et SB}
+
+Le niveau 2 calcule les sommes spectrales fermées $\SA(k,n)$ et $\SB(k,n)$. Leur différence spectrale doit toujours valer $1/k$, constituant l'invariant spectral (Théorème XIV.3).
+
+\begin{boitecalc}[Calcul de SA(13, 15)]
+$$\SA(13, 15) = \frac{(k^{4}-k^{2}+1) \cdot k^{12}}{k-1} - \frac{k}{k-1} = 28\,393 \times \frac{23\,298\,085\,122\,481}{12} - \frac{13}{12}$$
+$$\boxed{= 55\,125\,210\,906\,883\,585}$$
+\end{boitecalc}
+
+\begin{boitecalc}[Calcul de SB(13, 15)]
+$$\SB(13, 15) = \frac{(k^{4}-k^{2}+1) \cdot k^{13}}{k-1} - \frac{k^{7}-k^{6}+k}{k-1}$$
+$$\boxed{= 716\,627\,741\,784\,659\,809}$$
+\end{boitecalc}
+
+\vspace{0.3cm}
+
+\paragraph{Invariant spectral (Théorème XIV.3)}
+
+$$\frac{\Delta SA}{\Delta SB} = \frac{55\,125\,062\,438\,663\,321}{716\,625\,811\,702\,623\,173} = \frac{1}{13} \quad \checkmark$$
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 3 -- Construction terme à terme ($n = 15$)}
+
+Le niveau 3 construit les suites A et B. Le \emph{Saut Zêta} apparaît à $i=6$ dans B ($k^{6} \to k^{7}$) mais pas dans A. Cette asymétrie est un pilier géométrique du système.

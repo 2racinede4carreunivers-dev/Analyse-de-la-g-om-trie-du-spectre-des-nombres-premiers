@@ -1,0 +1,75 @@
+\begin{bouclier}[Calcul SA et SB -- k=42]
+$$SA(42, 15) = 2\,285\,381\,254\,365\,702\,554\,104\,806$$
+$$SB(42, 15) = 95\,986\,012\,683\,359\,501\,783\,370\,150$$
+$$\frac{\Delta SA}{\Delta SB} = \frac{1}{42}$$
+\end{bouclier}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 3 -- Construction terme à terme ($n = 15$)}
+
+\begin{table}[h!]
+\small
+\begin{tabular}{@{}c r r l@{}}
+\toprule
+\rowcolor{spectralgris}
+\boldmath$i$ & \boldmath$A(42, 15, i)$ & \boldmath$B(42, 15, i)$ & \boldmath{Règles} \\
+\midrule
+1  & 42 & 42 & $k^{1}$ / $k^{1}$ \\
+2  & 1\,764 & 1\,764 & $k^{2}$ / $k^{2}$ \\
+3  & 74\,088 & 74\,088 & $k^{3}$ / $k^{3}$ \\
+4  & 3\,111\,696 & 3\,111\,696 & $k^{4}$ / $k^{4}$ \\
+5  & 130\,691\,232 & 130\,691\,232 & $k^{5}$ / $k^{5}$ \\
+6  & 5\,489\,031\,744 & 23\,053\,933\,248 & $k^{6}$ / $k^{7}$ \quad \brouge{Saut Zêta} \\
+7  & 23\,053\,933\,248 & 9\,682\,651\,996\,416 & $k^{7}$ / $k^{8}$ \\
+8  & 9\,682\,651\,996\,416 & 406\,671\,383\,849\,472 & $k^{8}$ / $k^{9}$ \\
+9  & 406\,671\,383\,849\,472 & 17\,080\,198\,121\,677\,824 & $k^{9}$ / $k^{10}$ \\
+10 & 17\,080\,198\,121\,677\,824 & 717\,368\,321\,110\,468\,608 & $k^{10}$ / $k^{11}$ \\
+11 & 717\,368\,321\,110\,468\,608 & 30\,129\,469\,486\,639\,681\,536 & $k^{11}$ / $k^{12}$ \\
+12 & 30\,129\,469\,486\,639\,681\,536 & 1\,265\,437\,718\,438\,866\,624\,512 & $k^{12}$ / $k^{13}$ \\
+13 & 1\,265\,437\,718\,438\,866\,624\,512 & 53\,148\,384\,174\,432\,398\,229\,504 & $k^{13}$ / $k^{14}-k^{12}$ \\
+14 & 53\,148\,384\,174\,432\,398\,229\,504 & 2\,230\,966\,697\,607\,721\,859\,014\,656 & $k^{14}-k^{12}$ / $k^{15}-k^{13}$ \\
+15 & 2\,230\,966\,697\,607\,721\,859\,014\,656 & 93\,700\,601\,299\,524\,318\,078\,615\,552 & $k^{15}-k^{13}$ / $k^{16}-k^{14}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.2cm}
+$\Sigma A = 2\,285\,381\,254\,365\,702\,554\,104\,806$ \\
+$\Sigma B = 95\,986\,012\,683\,359\,501\,783\,370\,150$
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 4 -- 4 essais Digamma ($k^{6} = 5\,489\,031\,744$)}
+
+Tous les candidats sont \emph{composés} pour $n=15$.
+
+\begin{bouclier}[4 essais Digamma k=42]
+\begin{tabular}{@{}lr@{}}
+\toprule
+\rowcolor{spectralgris}
+\textbf{Branche} & \textbf{État} \\
+\midrule
+pos13- & composé \\
+pos13+ & composé \\
+pos12+ & composé \\
+pos12- & composé \\
+\bottomrule
+\end{tabular}
+\end{bouclier}
+
+\vspace{0.3cm}
+
+\paragraph{Niveau 5 -- Reconstruction rangf k=42}
+
+\begin{boitealgo}[Reconstruction rangf -- k=42]
+\begin{description}[nosep]
+  \item[Ancrage] $P(42, n=10) = 130\,617\,143$
+  \item[Rang de base] $7\,411\,117$
+  \item[Écart] $\Delta n = 5$
+  \item[Rangf] $7\,411\,122$
+  \item[Résultat] $P(42, n=15) = 130\,617\,251$ -- \brouge{PREMIER certifié}
+\end{description}
+\end{boitealgo}
+
+Digamma(42,15) = 95\,986\,011\,966\,397\,264\,730\,354\,406

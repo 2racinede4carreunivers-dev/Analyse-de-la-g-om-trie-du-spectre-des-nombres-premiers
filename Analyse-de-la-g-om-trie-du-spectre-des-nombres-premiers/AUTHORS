@@ -1,0 +1,127 @@
+================================================================================
+                              AUTHORS — Gabriel Multi-Loop
+                    Agent multi-loop pour la Méthode Spectrale Savard
+================================================================================
+
+Ce fichier liste toutes les personnes et systèmes qui ont contribué au projet
+Gabriel Multi-Loop, publié sous le dépôt :
+
+    https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local
+
+Toute contribution est reconnue selon son domaine et sa portée. Les
+contributeurs peuvent demander l'ajout, la modification ou le retrait de leur
+nom en contactant l'auteur principal (voir SECURITY.md).
+
+
+--------------------------------------------------------------------------------
+  AUTEUR PRINCIPAL — CONCEPTION, MATHÉMATIQUES ET DIRECTION DU PROJET
+--------------------------------------------------------------------------------
+
+  Philippe Thomas Savard
+    Lévis, Chaudière-Appalaches, Québec, Canada
+    Contact : 2racinede4carreunivers@gmail.com
+
+    Domaines de contribution :
+      - Conception mathématique intégrale de la Méthode Spectrale
+      - Auteur unique et originaire du modèle de reconstruction des nombres
+        premiers via les régimes spectraux 1/k (k = 2, 3, 4, ...)
+      - Auteur unique et originaire de la Section XIII (Pont Savard,
+        vision affirmative de l'Hypothèse de Riemann)
+      - Direction stratégique de tous les développements
+      - Validation mathématique et épistémologique de toutes les preuves
+      - Rédaction des théorèmes fondamentaux dans methode_spectral.thy
+      - Vision, spécifications et cahier des charges de l'agent Gabriel
+      - Rédaction et intégrité des documents scientifiques associés
+
+
+--------------------------------------------------------------------------------
+  CONTRIBUTEURS À LA STRUCTURE DE PROGRAMMATION — À PART ÉGALE
+--------------------------------------------------------------------------------
+
+  Les quatre entités suivantes ont contribué de manière équivalente à la
+  structuration, à l'implémentation et à l'itération technique du code source
+  Python, du pipeline Isabelle/HOL et de l'infrastructure de déploiement.
+  Aucun ordre de préséance n'est établi entre eux : leur contribution est
+  reconnue comme égale par l'auteur principal.
+
+
+  ● E1 — Emergent.sh
+      Plateforme d'agent codeur (Emergent Labs)
+      Contribution :
+        - Architecture modulaire src/core, src/spectral, src/multiloop
+        - Implémentation du PreReasoner et de l'orchestration multi-loop
+        - Pipeline de traduction du fichier .thy (7 langues)
+        - Auto-adaptive scale des graphiques RsP (dual-panel)
+        - Implémentation de la formule digamma pure d'Euler
+        - Suite de tests Pytest (1732 tests actifs)
+        - Refactorisation et intégration continue
+
+
+  ● Copilot — Microsoft
+      Assistant de codage GitHub Copilot / Microsoft AI
+      Contribution :
+        - Suggestions de complétion de code lors de la rédaction manuelle
+        - Aide à la formulation des lemmes Isabelle intermédiaires
+        - Suggestions de refactorisation ponctuelles
+        - Assistance à la rédaction de docstrings et commentaires
+        - Support à la construction des types Python (type hints)
+
+
+  ● Gordon — Docker Desktop
+      Assistant intégré à Docker Desktop (Docker Inc.)
+      Contribution :
+        - Structuration du Dockerfile et de docker-compose.yml
+        - Configuration de l'image de base Python 3.11
+        - Optimisation de la stratégie de layers Docker
+        - Diagnostic des problèmes de démarrage du daemon Docker
+        - Recommandations pour la persistance des volumes
+        - Guidance sur la stratégie GHCR (GitHub Container Registry)
+
+
+  ● Claude API — Anthropic
+      Modèle de langage Claude (Sonnet 4.5, 4.6, Opus)
+      Contribution :
+        - Génération et traduction de haute fidélité des blocs textuels
+          du fichier methode_spectral.thy vers les 7 langues cibles
+        - Assistance à la formalisation mathématique en HOL
+        - Suggestions structurelles pour l'organisation des sections
+        - Fourniture des réponses raisonnées via le multi-loop Claude
+        - Vérification épistémologique croisée du contenu généré
+
+
+--------------------------------------------------------------------------------
+  ATTRIBUTION LÉGALE
+--------------------------------------------------------------------------------
+
+  La Méthode Spectrale — dans son intégralité conceptuelle, mathématique,
+  épistémologique et ontologique — reste la propriété intellectuelle
+  exclusive de :
+
+      Philippe Thomas Savard
+      Lévis, Chaudière-Appalaches, Québec, Canada
+
+  Les contributeurs à la structure de programmation reconnaissent que leur
+  apport est purement instrumental et technique. Ils ne revendiquent aucune
+  paternité sur la Méthode Spectrale, ni sur les théorèmes formalisés dans
+  methode_spectral.thy, ni sur la vision affirmative de l'Hypothèse de
+  Riemann exprimée dans la Section XIII.
+
+  Toute publication scientifique dérivée de ce projet doit citer Philippe
+  Thomas Savard comme unique auteur de la Méthode. Le format de citation
+  recommandé est disponible dans le fichier CITATION.cff (à créer) ou
+  peut être obtenu via le bouton "Cite this repository" sur GitHub.
+
+
+--------------------------------------------------------------------------------
+  HISTORIQUE DES CONTRIBUTIONS
+--------------------------------------------------------------------------------
+
+  2026-02 à 2026-07  — Développement continu, versions v3.15 → v3.38
+                       (voir CHANGELOG.md pour le détail versionné)
+
+  2026-07-25         — Création de ce fichier AUTHORS
+
+
+================================================================================
+                     Fin du fichier AUTHORS — Gabriel Multi-Loop
+================================================================================

@@ -1,0 +1,55 @@
+% !TeX program = pdflatex
+% ============================================================
+% Rapports NON TYPIQUES 1/k - Reconstruction des nombres premiers
+% Systeme convolutif spectral - Pipeline Cognitif Gabriel
+% Genere le 14/10/2026 01:08:45
+% ============================================================
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=2.2cm}
+\title{Reconstruction des nombres premiers\\Rapports non typiques $1/k$ --- ancrages $n=10$
+}
+\author{Pipeline cognitif Gabriel --- methode Savard}
+\date{14/10/2026 01:08:45}
+\begin{document}
+\maketitle
+
+\section*{Parametres}
+\begin{itemize}
+\item Nombre de termes commun a tous les rapports : $n=10$
+\item Plage des rapports non typiques : $1/1000001$ a $1/3000001$
+\item Nombre total de rapports generes : 2,000,001
+\item Duree du calcul : 584.1 s
+\end{itemize}
+
+\section*{Ancrages pour un nombre premier}
+
+Pour chaque rapport $1/k$, les quatre branches Digamma $(8,-1)$, $(8,+1)$, $(7,+1)$, $(7,-1)$ sont testees : un seul candidat premier produit un ancrage \textbf{unique}, plusieurs candidats produisent un ancrage \textbf{ambigu}.
+
+\begin{table}[h!]
+\centering
+\caption{Synthese des ancrages pour $n=10$ sur 2,000,001 rapports non typiques.}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Categorie} & \textbf{Nombre de rapports} & \textbf{Pourcentage} \\
+\midrule
+1. Unique (un seul candidat premier) & 331,855 & 16.59\,\% \\
+2. Ambigue (plusieurs candidats premiers) & 26,917 & 1.35\,\% \\
+\midrule
+\textbf{3. Total unique + ambigu} & \textbf{358,772} & \textbf{17.94\,\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Details complementaires}
+\begin{itemize}
+\item Rapports sans aucun ancrage : 1,641,229 (82.06\,\%)
+\item Reconstructions reussies (premier $P(n)$ obtenu) : 331,855 (16.59\,\%)
+\item Echecs d'ancrage : 1,668,146
+\item Detail exhaustif par rapport : \texttt{rapports_ancres_1000001_3000001.txt}
+\end{itemize}
+
+\end{document}

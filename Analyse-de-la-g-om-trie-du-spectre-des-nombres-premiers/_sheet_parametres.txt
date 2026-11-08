@@ -1,0 +1,40 @@
+##### Parametres | rows=39 cols=7 #####
+Paramètres des règles |  |  |  |  |  | 
+Une ligne par rapport 1/k. Aucun autre rapport n’est inventé : ajoutez ses termes dans Convolution puis ses paramètres ici. |  |  |  |  |  | 
+ |  |  |  |  |  | 
+CATALOGUE DES RÈGLES |  |  |  |  |  | 
+Rapport | k | n | Exp reconstruction | Position Digamma | Signe Digamma | Statut
+1/3 | 3 | 10 | 6 | 8 | -1 | Ancrage n=10 validé; séquence par rang active
+1/4 | 4 | 10 | 6 | 8 | 1 | Ancrage n=10 validé; séquence par rang active
+1/5 | 5 | 10 | 6 | 7 | 1 | Ancrage n=10 validé; séquence par rang active
+1/6 | 6 | 10 | 6 | 8 | 1 | Ancrage n=10 validé; séquence par rang active
+1/7 | 7 | 10 | 6 | 8 | -1 | Ancrage n=10 validé; séquence par rang active
+1/8 | 8 | 10 | 6 | 8 | -1 | Ancrage n=10 validé; séquence par rang active
+1/9 | 9 | 10 | 6 | 7 | -1 | Ancrage n=10 validé; séquence par rang active
+1/10 | 10 | 10 | 6 |  |  | Essai-erreur requis
+1/11 | 11 | 10 | 6 |  |  | Essai-erreur requis
+1/12 | 12 | 10 | 6 |  |  | Essai-erreur requis
+ |  |  |  |  |  | 
+ |  |  |  |  |  | 
+SORTIE DE LA RÈGLE SÉLECTIONNÉE |  |  |  |  |  | 
+Rapport | Somme A | Somme B | A ajustée | P reconstruit | Premier? | Rang premier
+1/8 | 1208259144 | 9665811016 | 1191481928 | 32327 | Oui | 3468
+Obligation universelle |  |  |  |  |  | Chaque premier cible doit être produit une fois par le catalogue complet.
+ |  |  |  |  |  | 
+ |  |  |  |  |  | 
+CONSTANTES DES SOMMES FERMÉES |  |  |  |  |  | 
+k | αA | αB | offset A | offset B | Portée | Statut
+3 | 2.703703703703704 | 8.11111111111111 | 1.5 | 730.5 | 1/3 | Généralisé (formule fermée validée)
+4 | 2.510416666666667 | 10.04166666666667 | 1.333333333333333 | 4097.333333333333 | 1/4 | Généralisé (formule fermée validée)
+5 | 2.404 | 12.02 | 1.25 | 15626.25 | 1/5 | Généralisé (formule fermée validée)
+6 | 2.335185185185185 | 14.01111111111111 | 1.2 | 46657.2 | 1/6 | Généralisé (formule fermée validée)
+7 | 2.286686103012634 | 16.00680272108843 | 1.166666666666667 | 117650.1666666667 | 1/7 | Généralisé (formule fermée validée)
+8 | 2.250558035714286 | 18.00446428571428 | 1.142857142857143 | 262145.1428571428 | 1/8 | Généralisé (formule fermée validée)
+9 | 2.222565157750343 | 20.00308641975309 | 1.125 | 531442.125 | 1/9 | Généralisé (formule fermée validée)
+10 | 2.200222222222222 | 22.00222222222222 | 1.111111111111111 | 1000001.111111111 | 1/10 | Généralisé (formule fermée validée)
+11 | 2.181968444778362 | 24.00165289256199 | 1.1 | 1771562.1 | 1/11 | Généralisé (formule fermée validée)
+12 | 2.166771885521885 | 26.00126262626263 | 1.090909090909091 | 2985985.090909091 | 1/12 | Généralisé (formule fermée validée)
+ |  |  |  |  |  | 
+RÈGLES ACTIVES |  |  |  |  |  | 
+n = 10 | A et B construites | Quatre Digamma ±A(7), ±A(8) | Sélection du seul entier premier | Dénominateur k^6 | Création de l’ancrage | 
+n ≠ 10 | A et B construites | Rang cible = rang base + n − 10 | Premier lu dans tblPremiers | Digamma = ΣB − P×k^6 | Ancrage n=10 obligatoire | 

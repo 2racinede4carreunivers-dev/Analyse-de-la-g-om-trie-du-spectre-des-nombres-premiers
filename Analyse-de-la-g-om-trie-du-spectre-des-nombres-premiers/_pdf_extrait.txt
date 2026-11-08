@@ -1,0 +1,1610 @@
+===== PAGE 1 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 1 sur 36 
+Auteur : Philippe Thomas Savard. 
+Collaborateur : 
+- Copilot Microsoft. 
+- Gordon Docker Desktop. 
+- E1 emergent.sh. 
+- API Antropic. 
+- API OpenAi. 
+- Cline. 
+- Gemini Google. 
+Adresse : 
+ 4-5354 Rue du Menuet. 
+Lévis, Chaudière Appalaches, Canada. 
+G6X 2Y6. 
+Adresse Courriel : Philippethomassavard gmail.com. 
+ 
+Le vingt-six septembre deux milles-vingt-six.  
+Lieu : Lévis, Chaudière Appalaches, Canada. 
+ 
+Les informations qui sont contenues dans le document que vous consulté est sous 
+LICENCE Apach 2.0. Le document est présent sous la même licence sur le GitHub dans 
+le dépôt public : https://github.com/2racinede4carreunivers-dev/agent-multiloop-
+Gabriel-local.git. Il est possible selon certaine restriction en lien avec la LICENCE 
+Apach 2.0 et la réglementation du dépôt de contribuer via PR de cloner partager et 
+modifier les informations qui sont présentes dans se document. Le document est 
+fournie tel qu’elle sans garantie ni assurance tant qu’a sa validité et son utilisation est 
+permise dans la mesure des cette avertissement en ce qui concerne sa validité. Le 
+document à été créé sans financement de toute nature ni avantage ni intérêt. Le 
+présent document est une section de la théorie unifiée : « L’univers est au carré. », et fait 
+partie du chapitre de cette théorie unifiée : « La géométrie du spectre des nombres 
+premiers. ». Cette géométrie qui est incluse dans la théorie mentionné est un outil 
+dynamique qui a été conçu entièrement par son auteur Philippe Thomas Savard en 
+collaboration avec les entités mentionnées. Cet outil dynamique est conçu pour 
+résoudre la question de l’énigme de Bernhard Riemann et la conjecture de la fonction 
+Zêta de Riemann. Le dépôt de mathlib : https://github.com/leanprover-
+community/mathlib4.git est utiliser pour certaines informations selon les termes de la 
+LICENCES du dépôt en question. Les informations qui sont utilisées et peuvent avoir 
+===== PAGE 2 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 2 sur 36 
+été modifier sont inclut dans le fichier .thy de contre validation du dépôt : 
+https://github.com/2racinede4carreunivers-dev/agent-multiloop-Gabriel-local.git 
+validation_zeta_lean.thy de ce dépôt à l’adresse du dépôt : agent-multiloop-Gabriel-
+local/theories/validation_zeta_lean.thy la licence du dépôt : 
+https://github.com/leanprover-community/mathlib4.git est incluse dans le fichier .thy. 
+Cette contre validation et la contre validation jumelle dans le même sens 
+validation_hol_unifiee.thy sont toutes deux concernant la validation principal 
+methode_spectral.thy présentent à l’adresse du dépôt : agent-multiloop-Gabriel-
+local/theories/validation_hol_unifiee.thy et agent-multiloop-Gabriel-
+local/theories/methode_spectral.thy disponible en 7 langues différente sur le dépôt 
+quelques annotation sont en langue phonétique. 
+ 
+1.Rapports typique et non typiques: 1/k=1/2 et 1/k ≠ 
+½ : 
+ 
+ 
+Auteur : Philippe Thomas Savard. ...................................................................................... 1 
+1.Rapports typique et non typiques: 1/k=1/2 et 1/k ≠ ½ : .................................................... 2 
+1.1. Exemple de suites géométriques A et B ................................................................... 4 
+1.2. Reconstruction du nombre premier pour n = 10 ....................................................... 5 
+1.2.1. Quatre possibilités pour le Digamma ................................................................ 5 
+1.3. Généralisation des équations des suites A et B ........................................................ 5 
+1.4. Approche généralisée de niveau 1 ........................................................................... 7 
+1.4.1. Détermination du nombre premier ................................................................... 7 
+1.4.2. Équations des sommes des suites A et B .......................................................... 7 
+2. Définition et propriétés des rapports non typiques ......................................................... 8 
+2.1. Rapport non typique 1/k = 1/3 ................................................................................. 9 
+2.2. Rapport non typique 1/k = 1/5 ............................................................................... 15 
+2.3. Rapport non typique 1/k = 1/6 ............................................................................... 18 
+3.  SYSTÈME D'ÉQUATIONS CONVOLUTIF GÉNÉRALISÉ ................................................... 22 
+3.1. NIVEAU 1 — Constantes Savard universelles ......................................................... 22 
+3.2. NIVEAU 2 — Formules fermées (n quelconque, n commun à tous les rapports) ...... 23 
+===== PAGE 3 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 3 sur 36 
+3.3. NIVEAU 3 — Construction terme à terme (Suite A, n ≥ 8) ........................................ 23 
+3.4. NIVEAU 4 — Mécanisme d'ancrage à n=10 (4 candidats Digamma) ........................ 23 
+3.5. NIVEAU 5 — Reconstruction pour n ≠ 10 (n commun) ............................................ 23 
+3.6.  VÉRIFICATION k=3 à 9 (tous corrects, 100%) ......................................................... 24 
+3.7.  TABLEAU COMPLET P(1/k), n=10 — k=10 à k=111 .................................................. 24 
+3.8.  Synthèse statistique (k=10 à 111) ......................................................................... 28 
+3.9.  Notes importantes pour la programmation de l'agent ............................................ 28 
+4. EXEMPLE NUMÉRIQUE COMPLET — n = 15 .................................................................. 28 
+4.1.  RAPPORT 1/13 (k = 13, n = 15) .............................................................................. 28 
+4.1.1. NIVEAU 1 — Constantes Savard universelles .................................................. 28 
+4.1.2. NIVEAU 2 — Formules fermées ....................................................................... 29 
+4.1.3. NIVEAU 3 — Construction terme à terme (n = 15) ............................................ 29 
+4.1.4. NIVEAU 4 — 4 essais Digamma (k^6 = 4 826 809) ............................................ 30 
+4.1.5. NIVEAU 5 — Reconstruction rang_cible (méthode officielle pour n ≠ 10) .......... 30 
+4.2.  RAPPORT 1/42 (k = 42, n = 15) .............................................................................. 31 
+4.2.1. NIVEAU 1 — Constantes Savard universelles .................................................. 31 
+4.2.2. NIVEAU 2 — Formules fermées ....................................................................... 31 
+4.2.3. NIVEAU 3 — Construction terme à terme (n = 15) ............................................ 31 
+4.2.4. NIVEAU 4 — 4 essais Digamma (k^6 = 5 489 031 744) ...................................... 32 
+4.2.5. NIVEAU 5 — Reconstruction rang_cible .......................................................... 32 
+4.3.  RAPPORT 1/54 (k = 54, n = 15) .............................................................................. 32 
+4.3.1. NIVEAU 1 — Constantes Savard universelles .................................................. 32 
+4.3.2. NIVEAU 2 — Formules fermées ....................................................................... 33 
+4.3.3. NIVEAU 3 — Construction terme à terme (n = 15) ............................................ 33 
+4.3.4. NIVEAU 4 — 4 essais Digamma (k^6 = 24 794 911 296) .................................... 34 
+4.3.5. NIVEAU 5 — Reconstruction rang_cible .......................................................... 34 
+4.4.  TABLEAU RÉCAPITULATIF FINAL — P(1/k, n = 15) .................................................. 34 
+4.5.  Notes critiques pour l'agent ................................................................................. 35 
+4.5.1. 1. Saut Zêta — asymétrie A / B confirmée ........................................................ 35 
+4.5.2. 2. Niveau 4 hors-calibrage pour n ≠ 10 ............................................................ 35 
+4.5.3. 3. Niveau 5 — formule rang_cible ................................................................... 35 
+4.5.4. 4. Invariant spectral (Théorème XIV .3) — vérifié pour les 3 rapports .................. 35 
+===== PAGE 4 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 4 sur 36 
+4.5.5. 5. Arithmétique — seuils de dépassement float .............................................. 35 
+ 
+ 
+ 
+ 
+ 
+ 
+Les suites A et B associées à un rapport autre que le rapport typique 1/k = 1/2 permettent de 
+reconstruire les nombres premiers selon une méthode analogue. Ces rapports non 
+typiques, notés 1/k, prennent la forme 1/3, 1/4, 1/5, 1/6, …, 1/k. La méthode applicable aux 
+suites A et B est présentée ci-dessous. 
+ 
+1. Les suites aux rapports non-typiques 1/k<>1/2 sont toujours déterminées dans 
+un premier effort pour une valeur de n=10 lorsque la valeur du nombre premier 
+n’est pas connue pour n=10. 
+ 
+2. Les suites aux rapports non-typiques 1/k<>1/2 la valeur de n<> la position du 
+nombre premier. Une valeur de n=10 pour les suites aux rapports non-typiques 
+1/k<>1/2 ne correspond pas comme le fait le rapport typique 1/k=1/2 au premier 
+égale à 29 qui est le 10ième nombre premier quand 2=1er 3=2ième 5=3ième …Pn=n-
+ième. 
+ 
+ 
+1.1. Exemple de suites géométriques A et B 
+Suites A et B de 10 termes(n=10) : 
+((11)2 + 𝑡1)2)
+1
+2 + ((𝑡1)2 + 𝑡2)2)
+1
+2 + ((𝑡2)2 + (𝑡3)2)
+1
+2 + ((𝑡3)2 + (𝑡4)2)
+1
+2 + ((𝑡4)2 + (𝑡5)2)
+1
+2
++ ((𝑡5)2 + (𝑡6)2)
+1
+2 + ((𝑡6)2 + (𝑡7)2)
+1
+2 + ((𝑡7)2 + (𝑡8)2)
+1
+2 + ((𝑡8 − 𝑡6)2 + (𝑡9
+− 𝑡7)2)
+1
+2 + ((𝑡9 − 𝑡7)2 + (𝑡10 − 𝑡8)2)
+1
+2 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+((11)2 + 𝑡1)2)
+1
+2 + ((𝑡1)2 + 𝑡2)2)
+1
+2 + ((𝑡2)2 + (𝑡3)2)
+1
+2 + ((𝑡3)2 + (𝑡4)2)
+1
+2 + ((𝑡4)2 + (𝑡5)2)
+1
+2
++ ((𝑡6)2 + (𝑡7)2)
+1
+2 + ((𝑡7)2 + (𝑡8)2)
+1
+2 + ((𝑡8)2 + (𝑡9)2)
+1
+2 + ((𝑡10 − 𝑡8)2
++ (𝑡11 − 𝑡9)2)
+1
+2 + ((𝑡11 − 𝑡9)2 + (𝑡12 − 𝑡10)2)
+1
+2 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+===== PAGE 5 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 5 sur 36 
+1.2. Reconstruction du nombre premier pour n = 10 
+ 
+1.2.1. Quatre possibilités pour le Digamma 
+1. Additionner la 8ième position de la suite A à la somme de la suite A 10 termes(n=10). 
+2. Soustraire la 8ième position de la suite A à la somme suite A 10 termes(n=10). 
+3. Additionner la 7ième position de la suite A de la somme de la suite A 10 termes(n=10). 
+4. Soustraire la 7ième position de la suite A de la somme de la suite A 10 termes(n=10). 
+ 
+Les 4 possibilités permettent de déterminer la valeur du Digamma calculé. 
+ 
+Suites A et B de 9 termes(n=9) : 
+((11)2 + 𝑡1)2)
+1
+2 + ((𝑡1)2 + 𝑡2)2)
+1
+2 + ((𝑡2)2 + (𝑡3)2)
+1
+2 + ((𝑡3)2 + (𝑡4)2)
+1
+2 + ((𝑡4)2 + (𝑡5)2)
+1
+2
++ ((𝑡5)2 + (𝑡6)2)
+1
+2 + ((𝑡6)2 + (𝑡7)2)
+1
+2 + ((𝑡7 − 𝑡5)2 + (𝑡8 − 𝑡6)2)
+1
+2 + ((𝑡8
+− 𝑡6)2 + (𝑡9 − 𝑡7)2)
+1
+2 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+ 
+((11)2 + 𝑡1)2)
+1
+2 + ((𝑡1)2 + 𝑡2)2)
+1
+2 + ((𝑡2)2 + (𝑡3)2)
+1
+2 + ((𝑡3)2 + (𝑡4)2)
+1
+2 + ((𝑡4)2
++ (𝑡5)2)
+1
+2 + ((𝑡6)2 + (𝑡7)2)
+1
+2 + ((𝑡7)2 + (𝑡8)2)
+1
+2 + ((𝑡8 − 𝑡6)2 + (𝑡9
+− 𝑡7)2)
+1
+2 + ((𝑡9 − 𝑡7)2 + (𝑡10 − 𝑡8)2)
+1
+2 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+ 
+ 
+1.3. Généralisation des équations des suites A et B 
+ 
+1.Coefficient A : 
+ 
+𝑆𝑜𝑚𝑚𝑒𝑠 𝑆𝑢𝑖𝑡𝑒 𝐴(10 𝑡𝑒𝑟𝑚𝑒𝑠) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(9𝑡𝑒𝑟𝑚𝑒𝑠)
+𝑡8 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴. 
+ 
+Coefficient B : 
+ 
+𝑆𝑜𝑚𝑚𝑒𝑠 𝑆𝑢𝑖𝑡𝑒 𝐵(10 𝑡𝑒𝑟𝑚𝑒𝑠) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(9𝑡𝑒𝑟𝑚𝑒𝑠)
+𝑡8 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵. 
+ 
+ 
+2. Reconstruire les suites A et B déterminant la somme des suites A et B pour toutes 
+les valeurs n. 
+===== PAGE 6 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 6 sur 36 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑒𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑥 × 𝑘𝑛 − 𝑅𝑒𝑠𝑡𝑒 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴
+𝑘10
+= 𝑅𝑒𝑠𝑡𝑒 + 𝑥. 
+ 
+(𝑅𝑒𝑠𝑡𝑒 + 𝑥) − 𝑙𝑎 𝑣𝑎𝑙𝑒𝑢𝑟 𝑒𝑛𝑡𝑖è𝑟𝑒 = 𝑥 
+ 
+La valeur de ( 𝑅𝑒𝑠𝑡𝑒 + 𝑥) forme deux blocs A et B. A étant la partie entière de la 
+valeur (𝑅𝑒𝑠𝑡𝑒 + 𝑥)  et B formant la partie< 1 qui est décimale de (𝑅𝑒𝑠𝑡𝑒 + 𝑥). 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑥 × 𝑘10 − 𝑅𝑒𝑠𝑡𝑒 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 + 𝑅𝑒𝑠𝑡𝑒. 
+ 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 − (𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 + 𝑅𝑒𝑠𝑡𝑒) = 𝑅𝑒𝑠𝑡𝑒. 
+ 
+Équation reconstruit A généralisant la valeur de n :
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑥 × 𝑘𝑛 − 𝑅𝑒𝑠𝑡𝑒 =
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+𝑄𝑢𝑎𝑛𝑑 𝑛 𝑒𝑠𝑡 𝑢𝑛 𝑒𝑛𝑡𝑖𝑒𝑟 𝑠𝑡𝑟𝑖𝑐𝑡𝑒𝑚𝑒𝑛𝑡 𝑝𝑜𝑠𝑖𝑡𝑖𝑓. 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑒𝑐𝑖𝑒𝑛𝑡 𝐵
+𝑥 × 𝑘𝑛 − 𝑅𝑒𝑠𝑡𝑒 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵
+𝑘10
+= 𝑅𝑒𝑠𝑡𝑒 + 𝑥. 
+ 
+(𝑅𝑒𝑠𝑡𝑒 + 𝑥) − 𝑙𝑎 𝑣𝑎𝑙𝑒𝑢𝑟 𝑒𝑛𝑡𝑖è𝑟𝑒 = 𝑥 
+ 
+La valeur de ( 𝑅𝑒𝑠𝑡𝑒 + 𝑥) forme deux blocs A et B. A étant la partie entière de la 
+valeur (𝑅𝑒𝑠𝑡𝑒 + 𝑥)  et B formant la partie< 1 qui est décimale de (𝑅𝑒𝑠𝑡𝑒 + 𝑥). 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵
+𝑥 × 𝑘10 − 𝑅𝑒𝑠𝑡𝑒 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 + 𝑅𝑒𝑠𝑡𝑒. 
+ 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 − (𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 + 𝑅𝑒𝑠𝑡𝑒) = 𝑅𝑒𝑠𝑡𝑒. 
+ 
+Équation reconstruit A généralisant la valeur de n :
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵
+𝑥 × 𝑘𝑛 − 𝑅𝑒𝑠𝑡𝑒 =
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+𝑄𝑢𝑎𝑛𝑑 𝑛 𝑒𝑠𝑡 𝑢𝑛 𝑒𝑛𝑡𝑖𝑒𝑟 𝑠𝑡𝑟𝑖𝑐𝑡𝑒𝑚𝑒𝑛𝑡 𝑝𝑜𝑠𝑖𝑡𝑖𝑓. 
+ 
+ 
+ 
+===== PAGE 7 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 7 sur 36 
+1.4. Approche généralisée de niveau 1 
+ 
+𝑡1 + 𝑡2 + 𝑡3 + 𝑡4 + 𝑡5 + 𝑡6 + 𝑡7 + 𝑡8 + (𝑡9 − 𝑡7) + (𝑡10 − 𝑡8) = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 
+𝑡1 + 𝑡2 + 𝑡3 + 𝑡4 + 𝑡5 + 𝑡7 + 𝑡8 + 𝑡9 + (𝑡10 − 𝑡8) + (𝑡11 − 𝑡9) = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 
+Digamma 4 possibilités : 
+1. – 8ième position suite A -𝑡8 
+2. + 8ième position suite A +𝑡8 
+3. – 7ième position suite A −𝑡7 
+4. + 7ième position suite A +𝑡7 
+Digamma calculé : 
+1. 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 −𝑡8 
+2. 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 +𝑡8 
+3. 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 −𝑡7 
+4. 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 +𝑡7 
+ 
+1.4.1. Détermination du nombre premier 
+(𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 − 𝐷𝑖𝑔𝑎𝑚𝑚𝑎 𝑐𝑎𝑙𝑐𝑢𝑙é
+6𝑖è𝑚𝑒 𝑝𝑜𝑠𝑖𝑡𝑖𝑜𝑛 𝑠𝑢𝑖𝑡𝑒 𝐴 (𝑍ê𝑡𝑎) = 𝑁𝑜𝑚𝑏𝑟𝑒 𝑝𝑟𝑒𝑚𝑖𝑒𝑟. 
+ 
+1.4.2. Équations des sommes des suites A et B 
+ 
+Déterminer le coefficient A :
+(𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 𝑛=10)−𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 𝑛=9)
+𝑡^8  
+ 
+Déterminer le coefficient B : 
+(𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 𝑛=10)−𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 𝑛=9)
+𝑡^8  
+ 
+Déterminer l’équation A :  
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 𝑛 = 10
+𝑡10
+= 𝑥 + 𝑅𝑒𝑠𝑡𝑒 
+ 
+(𝑥 + 𝑅𝑒𝑠𝑡𝑒) − 𝑉𝑎𝑙𝑒𝑢𝑟 𝑟é𝑒𝑙𝑙𝑒 = 𝑥 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑥 × 𝑡10 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 + 𝑅𝑒𝑠𝑡𝑒 
+(𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 + 𝑅𝑒𝑠𝑡𝑒) − (𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴) = 𝑅𝑒𝑠𝑡𝑒 
+ 
+Équation A : 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑥 × 𝑡𝑛 − 𝑅𝑒𝑠𝑡𝑒 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 
+ 
+===== PAGE 8 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 8 sur 36 
+𝑄𝑢𝑎𝑛𝑑 𝑛 𝑒𝑠𝑡 𝑢𝑛 𝑒𝑛𝑖𝑡𝑒𝑟 𝑠𝑡𝑟𝑖𝑐𝑡𝑒𝑚𝑒𝑛𝑡 𝑝𝑜𝑠𝑖𝑡𝑖𝑓. 
+Déterminer l’équation B :  
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 𝑛 = 10
+𝑡10
+= 𝑥 + 𝑅𝑒𝑠𝑡𝑒 
+ 
+(𝑥 + 𝑅𝑒𝑠𝑡𝑒) − 𝑉𝑎𝑙𝑒𝑢𝑟 𝑟é𝑒𝑙𝑙𝑒 = 𝑥 
+ 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵
+𝑥 × 𝑡10 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 + 𝑅𝑒𝑠𝑡𝑒 
+(𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 + 𝑅𝑒𝑠𝑡𝑒) − (𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵) = 𝑅𝑒𝑠𝑡𝑒 
+ 
+Équation A : 
+𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴
+𝑥 × 𝑡𝑛 − 𝑅𝑒𝑠𝑡𝑒 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 
+ 
+𝑄𝑢𝑎𝑛𝑑 𝑛 𝑒𝑠𝑡 𝑢𝑛 𝑒𝑛𝑖𝑡𝑒𝑟 𝑠𝑡𝑟𝑖𝑐𝑡𝑒𝑚𝑒𝑛𝑡 𝑝𝑜𝑠𝑖𝑡𝑖𝑓. 
+ 
+Cette équation est tirée de : 
+ 
+𝑆𝑖 𝑞 ≠ 1, 𝑆 = 1 + 𝑞 + 𝑞2 + 𝑞3 … 𝑞𝑛 = 1 − 𝑞𝑛+1
+1 − 𝑞 . 
+ 
+ 
+ 
+ 
+Déterminer la somme de la suite B  
+ 
+2. Définition et propriétés des rapports non typiques 
+ 
+Les rapports non typiques 1/k sont définis pour toute valeur 1/k < 1/2, notamment 1/3, 1/4, 
+1/5, 1/6, …, 1/k. 
+1/3, 1/4, 1/5, 1/6, …, 1/k. 
+ 
+Contrairement au rapport typique 1/2, la valeur de n ne correspond pas à la position du 
+nombre premier. Elle représente exclusivement le nombre de termes des suites A et B. 
+ 
+ 
+3. Exemple pour n=10 des suites A et B pour un rapport non-typique 1/k=1/3. 
+===== PAGE 9 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 9 sur 36 
+ 
+31 + 32 + 34 + 35 + 36 + 37 + 38 + (39 − 37) + (310 − 38) = 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 = 79824 
+ 
+ 
+31 + 32 + 34 + 35 + 37 + 38 + 39 + (310 − 38) + (311 − 39) 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 = 238746 
+ 
+𝐷𝑖𝑔𝑎𝑚𝑚𝑎 = 38 8𝑖è𝑚𝑒 
+𝐷𝑖𝑔𝑎𝑚𝑚𝑎 𝑐𝑎𝑙𝑐𝑢𝑙é = 79824 − 38 = 73263  
+ 
+Déterminer le nombre premier :
+238746−73263
+36 = 227 49𝑖è𝑚𝑒 𝑛𝑜𝑚𝑏𝑟𝑒 𝑝𝑟𝑒𝑚𝑖𝑒𝑟. 
+ 
+2.1. Rapport non typique 1/k = 1/3 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(227) = 79824 
+1. Déterminer la somme de la suite B du nombre précédent 227 qui est 223 : 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(227) − 36 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(223) 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(223) = 79824 − 36 = 79095 
+9 termes suite B(223): 
+31 + 32 + 33 + 34 + 35 + 37 + 38 + (39 − 37) + (310 + 38) = 79095 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(223) 
+9termes suite A (223) 
+31 + 32 + 33 + 34 + 35 + 36 + 37 + (38 − 36) + (39 + 37) = 26607 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(223) 
+ 
+2. Déterminer le coefficient B : 
+ 
+Somme suite B (227)=238746 : 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(227) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(223)
+38 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵. 
+238746 − 79095
+38 = 219
+9 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵. 
+*Il s’agit de l’écart le plus petit entre deux suites B pour toutes les valeurs de n positive.  
+ 
+3. Déterminer l’écart minimum entre les termes n=1 et n=2 pour le rapport   
+non typique 
+1
+𝑘 =
+1
+3  des suites B. 
+ 
+===== PAGE 10 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 10 sur 36 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(227) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(223)
+36
+= 𝐷𝑖𝑓é𝑟𝑒𝑛𝑐𝑒 𝑒𝑛𝑡𝑟𝑒 𝑙𝑒𝑠 𝑑𝑒𝑢𝑥 𝑠𝑢𝑖𝑡𝑒𝑠 𝐵(227) 𝑒𝑡 𝐵(223). 
+ 
+238746 − 79095
+36 = 219
+9  é𝑐𝑎𝑟𝑡 𝑒𝑛𝑡𝑟𝑒 𝑙𝑒𝑠 𝑠𝑢𝑖𝑡𝑒𝑠 𝐵(227) 𝑒𝑡 𝐵(223). 
+ 
+ 
+ 
+4. Déterminer l’écart minimum entre les termes n=1 et n=2 pour le rapport non typique 
+1
+𝑘 =
+1
+3 des suites B. 
+219
+3 = 73 é𝑐𝑎𝑟𝑡 𝑒𝑛𝑡𝑟𝑒 𝑙𝑒𝑠 𝑠𝑢𝑖𝑡𝑒𝑠 𝐴(227)𝑒𝑡 𝐵(223). 
+ 
+(79824
+36 − 73) × 36 = 26607 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(223) 
+5. Déterminer le coefficient pour l’équation de la suite A : 
+ 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(227) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(223)
+38 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴. 
+79824 − 26607
+38 = 73
+9 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴. 
+ 
+6. Équations pour les sommes des suites A et B : 
+ 
+*L’équation est inspirée de celle-ci déjà connu concernant les suites géométriques :  
+∗∗ 𝑆𝑖 𝑞 ≠ 1, 𝑆 = 1 + 𝑞 + 𝑞2 + 𝑞3 … 𝑞𝑛 = 1 − 𝑞𝑛+1
+1 − 𝑞 . 
+Déterminer l’équation pour la suite A 
+ 
+Coefficient A :
+73
+9  
+(
+73
+9
+𝑥 × 310) − 𝑅𝑒𝑠𝑡𝑒 = 79824 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 
+238746 + 𝑟𝑒𝑠𝑡𝑒
+310 = 1.351826449 
+===== PAGE 11 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 11 sur 36 
+73
+9
+1.351826449 = 6.000112748 
+6.000112748 − 0.000112748 = 6 = 𝑥 
+73
+9
+6 × 310 − 𝑅𝑒𝑠𝑡𝑒 = 79824 
+73
+9
+6 × 310 = 79825.5 
+79825.5 − 79824 = 3
+2 = 𝑅𝑒𝑠𝑡𝑒 
+Équation somme suite A : (
+73
+9
+6 × 310) −
+3
+2 = 79824 
+ 
+Forme générale de l’équation de la suite A pour le rapport non typique
+1
+𝑘 =
+1
+3: 
+Forme générale : (
+73
+9
+6 × 3𝑛) −
+3
+2 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+Quand n est un entier strictement positif. 
+ 
+73
+9 × 3−𝑛 − 3
+2 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 𝑛é𝑔𝑎𝑡𝑖𝑣𝑒. 
+Quand n est un entier strictement négatif. 
+ 
+7. Déterminer l’équation pour la suite B 
+Coefficient A :
+73
+9  
+(
+219
+9
+𝑥 × 310) − 𝑅𝑒𝑠𝑡𝑒 = 238746 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 
+238746 + 𝑟𝑒𝑠𝑡𝑒
+310 = 4.043184474 𝑅𝑒𝑠𝑡𝑒 
+ 
+219
+9
+4.043184474 = 6.018358423 
+ 
+6.018358423 − 0.018358423 = 6 = 𝑥 
+===== PAGE 12 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 12 sur 36 
+219
+9
+6 × 310 − 𝑅𝑒𝑠𝑡𝑒 = 238746 
+219
+9
+6 × 310 = 238476.5 
+239476.5 − 238746−= 730.5 = 𝑅𝑒𝑠𝑡𝑒 
+730.5
+3
+2
+= 487  
+8. Équation somme suite B : (
+219
+9
+6 × 310) −
+3
+2 (487) = 238746 
+ 
+Forme générale de l’équation de la suite B pour le rapport non typique
+1
+𝑘 =
+1
+3: 
+Forme générale : (
+219
+9
+6 × 3𝑛) −
+3
+2 (487) = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+Quand n est un entier strictement positif. 
+ 
+219
+9 × 3−𝑛 − 3
+2 (487) = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 𝑛é𝑔𝑎𝑡𝑖𝑣𝑒. 
+Quand n est un entier strictement négatif. 
+9. Caractéristiques intrinsèques de la valeur de n pour les rapports non typiques 
+1
+𝑘 ≠
+1
+2: 
+La valeur de n pour des suites A et B non typiques la valeur de n ne correspond pas à la 
+position du nombre premier, la valeur de n correspond à la quantité de termes dans les 
+suites A et B tant pour les suites positives que négatives. 
+ 
+Rapport non-typique 1/4 (𝑛 = 10) selon tes nouvelles valeurs exactes (𝑝 = 947, 161ᵉ 
+nombre premier). 
+ 
+Rapport non typique 1/𝑘 = 1/4 suite de 𝑛 = 10 : 
+41 + 42 + 43 + 44 + 45 + 46 + 47 + 48 + (49 − 47) + (410 − 48)
+= 1316180 Somme suite A. 
+41 + 42 + 43 + 44 + 45 + 47 + 48 + 49 + (410 − 48) + (411 − 49)
+= 5260628 Somme suite B. 
+Reconstruire le nombre premier : 
+Digamma : +48 
+===== PAGE 13 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 13 sur 36 
+Digamma calculé : 1316180 + 48 = 1316180 + 65536 = 1381716 
+5260628 − 1381716
+46 = 3878912
+4096 = 947 (947 est un nombre premier, le 161ème) 
+ 
+Suites A et B pour 𝒏 = 𝟗 termes (941) : 
+41 + 42 + 43 + 44 + 45 + 46 + 47 + (48 − 46) + (49 − 47)
+= 329044 Somme suite A 9 termes. 
+41 + 42 + 43 + 44 + 45 + 47 + 48 + (49 − 47) + (410 − 48)
+= 1312084 Somme suite B 9 termes. 
+ 
+Déterminer les équations servant de manière généralisée à l’ensemble des valeurs de 𝒏 qui 
+sont un nombre entier positives et négatives pour les suites A et B. 
+Déterminer Somme suite B 941 : 
+Somme suite B(947) − 46 = Somme suite B(941) 
+1316180 − 4096 = 1312084 
+Somme suite B(947) − Somme suite B(941)
+46  
+5260628 − 1312084
+46 = 3948544
+4096 = 964 *Écart entre les suites B = 964 
+964
+4 = 241 Écart entre les suites A 947 et 941. 
+1316180 − 329044
+46 = 987136
+4096 = 241 
+ 
+Déterminer les coefficients pour les équations généralisées pour les valeurs entières de 𝒏 
+négatives et positives : 
+Pour équation A coefficient A : 
+Somme suite A(947) − Somme suite A(941)
+48 = 987136
+65536 = 241
+16 = Coefficient A. 
+Pour équation B coefficient B : 
+Somme suite B(947) − Somme suite B(941)
+48 = 3948544
+65536 = 964
+16 = 241
+4 = Coefficient B. 
+ 
+ 
+ 
+===== PAGE 14 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 14 sur 36 
+Équation suite A : 
+(
+241
+16
+𝑥 × 410) − Reste = 1316180 
+241
+16
+1316180
+410
+= 12.000001216 ⟹ 𝑥 = 12 
+(
+241
+16
+12 × 410) − Reste = 1316181.333 
+1316181.333 − 1316180 = 4
+3 = Reste 
+Équation A 𝑛 = 10 : 
+(
+241
+16
+12 × 410) − 4
+3 = 1316180 Somme suite A 10 termes. 
+Équation A forme généralisée à l’ensemble des valeurs entières de 𝑛 positives : 
+(241
+192 × 4𝑛) − 4
+3 = Somme suite A. 
+*Quand 𝑛 est un entier et qu'il est strictement positif. 
+Équation A forme généralisée à l’ensemble des valeurs de 𝑛 entières négatives : 
+241
+16 × 4−𝑛 − 4
+3 = Somme suite A négative. 
+ 
+Équation suite B : 
+(
+241
+4
+𝑥 × 410) − Reste = 5260628 
+241
+4
+5260628
+410
+= 12.00934641 ⟹ 𝑥 = 12 
+(
+241
+4
+12 × 410) − Reste = 5264725.333 
+5264725.333 − 5260628 = 4097.333 = 12292
+3 = Reste 
+===== PAGE 15 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 15 sur 36 
+12292
+3
+4
+3
+= 3073 
+Équation B 𝑛 = 10 : 
+(
+241
+4
+12 × 410) − 3073 (4
+3) = 5260628 Somme suite B. 
+Équation B forme généralisée : 
+(
+241
+4
+12 × 4𝑛) − 3073 (4
+3) = Somme suite B. 
+Équation B forme généralisée négative : 
+241
+4 × 4𝑛 − 3073 (4
+3) = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵.  
+ 
+ 
+2.2. Rapport non typique 1/k = 1/5 
+51 + 52 + 53 + 54 + 55 + 56 + 57 + 58 + (59 − 57) + (510 − 58)
+= 11738280 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+51 + 52 + 53 + 54 + 55 + 57 + 58 + 59 + (510 − 58) 
++(511 + 59) = 58675780 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+1. Reconstruire le nombre premier : 
+ 
+Digamma : +7ième position suite A : +57 
+Digamma calculé :11738280+57 =11816405 
+ 
+58675780 − 11816405
+56 = 2999 
+2. Suites A et B pour n=9 termes (2993) : 
+51 + 52 + 53 + 54 + 55 + 56 + 57 + (58 − 56) + (59 − 57)
+= 2347655 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+51 + 52 + 53 + 54 + 55 + 57 + 58 + (59 − 57) + (510 − 58) 
+11722655 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+===== PAGE 16 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 16 sur 36 
+3. Déterminer les équations servant de manière généralisée à l’ensemble des valeurs 
+de n qui sont un nombre entier positives et négatives pour les suites A et B. 
+ 
+ 
+ 
+ 
+ 
+4. Déterminer Somme suite B 2993 : 
+ 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(2999) − 56 = 𝑆𝑜𝑚𝑚𝑒𝑠 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+11738280 − 56 = 11722655 
+ 
+5. 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(2999)−𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(2993)
+56  
+ 
+58675780 − 11722655
+56 = 3005 
+*Écart entre les suites B=3005 
+ 
+6. 
+3005
+5 = 601 Écart entre les suites A 2999 et 2993. 
+ 
+11738280 − 2347655
+56 = 601 
+ 
+7. Déterminer les coefficients pour les équations généraliser pour les valeurs entières 
+de n négatives et positives : 
+Pour équation A coefficient A : 
+11738280−2347655
+58 =
+601
+25 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴. 
+ 
+Pour équation B coefficient B : 
+58675780−11722655
+58 =
+601
+5 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵. 
+ 
+8. Équation A :(
+601
+25
+𝑥 × 510) − 𝑅𝑒𝑠𝑡𝑒 = 11738280 
+605/25
+11738280
+510
+− 𝑅𝑒𝑠𝑡𝑒 = 20.00000213 
+20.00000213 − 0.000000213 = 20 = 𝑥 
+601
+25
+20 × 510 − 𝑅𝑒𝑠𝑡𝑒 = 11738281.25 
+11738280 − 11738281.25 = − 5
+4 
+ 
+===== PAGE 17 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 17 sur 36 
+Équation A : (
+601
+25
+20 × 510) −
+5
+4 = 11738280 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 10 𝑡𝑒𝑟𝑚𝑒𝑠. 
+ 
+Équation A forme généralisée a l’ensemble des valeurs des valeurs entières de n 
+positives : 
+ 
+(
+601
+25
+20 × 5𝑛) − 5
+4 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+∗ 𝑄𝑢𝑎𝑛𝑑 𝑛 𝑒𝑠𝑡 𝑢𝑛 𝑒𝑛𝑡𝑖𝑒𝑟 𝑒𝑡 𝑞𝑢′𝑖𝑙𝑒𝑠𝑡 𝑠𝑡𝑟𝑖𝑐𝑡𝑒𝑚𝑒𝑛𝑡 𝑝𝑜𝑠𝑖𝑡𝑖𝑓. 
+ 
+9. Équation A forme généralisée à l’ensemble des valeurs de n entières négatives : 
+ 
+(601
+25 ) × 5𝑛 − 5
+4 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+Équation B :
+605
+5
+𝑥 × 510 − 𝑅𝑒𝑠𝑡𝑒 = 58675780 
+ 
+601/5
+58675780
+510
+= 20.13847323 
+20.13847323 − 0.13847323 = 20 = 𝑥 
+ 
+(
+601
+5
+20 × 510) − 𝑅𝑒𝑠𝑡𝑒 = 58691406.25 
+ 
+58691406.25 − 58675780 = 15626.25 
+15626.25
+1.25 = 12501 
+ 
+10. Équation B n=10 : 
+601
+5
+20 × 510 − 12501 (
+5
+4) = 58675780 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+11. Équation B forme généralisée : 
+601
+5
+20 × 5𝑛 − 12501 (
+5
+4) = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+ 
+ 
+61 + 62 + 63 + 64 + 65 + 66 + 67 + 68 + (69 − 67) + (610 + 68)= 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 =70599858 
+ 
+61 + 62 + 63 + 64 + 65 + 67 + 68 + 69 + (610 − 68) + (611 + 69)= 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 = 423552498 
+===== PAGE 18 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 18 sur 36 
+ 
+Digamma=+8  
+*La septième position est la position pour déterminer le Digamma calculé et est 
+soustraite. 
+ 
+Digamma calculé=70599858 + 67 = 72279474. 
+ 
+Déterminer le nombre premier :
+423552498−72279474
+66 = 7529 𝑛𝑜𝑚𝑏𝑟𝑒 𝑝𝑟𝑒𝑚𝑖𝑒𝑟. 
+ 
+1. Suites A et B de 9 termes (7523) : 
+ 
+61 + 62 + 63 + 64 + 65 + 66 + 67 + (68 − 66) + (69 − 67)
+= 11766642 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴 9𝑡𝑒𝑟𝑚𝑒𝑠(7523). 
+61 + 62 + 63 + 64 + 65 + 67 + 68 + (69 − 67) + (610 − 68)
+= 70553202 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 9 𝑡𝑒𝑟𝑚𝑒𝑠(7523). 
+ 
+2.3. Rapport non typique 1/k = 1/6 
+ 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(7529) − 66 = 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+70599858 − 66 = 70553202 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+ 
+2. Déterminer somme suite A (7523) : 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(7529) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵 (7523)
+56
+= é𝑐𝑎𝑟𝑡 𝑠𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(7529) − 𝑒𝑡 𝑠𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(7523). 
+ 
+423552498 − 70553202 
+66 = 7566. 
+3. Déterminer l’écart entre les sommes des suites A (7529) et suite A (7523) : 
+7566
+6 = 1261 
+ 
+4. Déterminer le coefficient de la suite A : 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(7529) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴(7523)
+58 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴. 
+ 
+70599858 − 11766642
+68 = 1261
+36 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐴. 
+ 
+  
+===== PAGE 19 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 19 sur 36 
+ 
+5. Déterminer le coefficient de la suite B : 
+ 
+𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵(7529) − 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 (7523)
+58 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵. 
+423552498 − 70553202
+68 = 1261
+6 = 𝐶𝑜𝑒𝑓𝑓𝑖𝑐𝑖𝑒𝑛𝑡 𝐵. 
+ 
+6. Déterminer les équations généralisants la valeur de n pour les suites A et B 
+pour le rapport non typique 1/k=1/6 : 
+ 
+Déterminer l’équation pour la suite A : 
+1261
+36
+𝑥 × 610 − 𝑅𝑒𝑠𝑡𝑒 = 70599858 Somme suite A. 
+1261
+36
+70599858 
+610
+− 𝑅𝑒𝑠𝑡𝑒 = 30.00000051 
+30.00000051 − 0.00000051 = 30 = 𝑥 
+1261
+36
+30 × 610 − 𝑅𝑒𝑠𝑡𝑒 = 70599859.2 
+70553202 − 70599859.2 = −46657.2 
+−46657.2
+6
+5
+= −38881 × 6
+5 
+1261
+36
+30 × 610 − 38881 (6
+5) = 70553202 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐴. 
+ 
+Déterminer l’équation pour la somme de la suite B : 
+1261
+6
+𝑥 × 610 − 𝑅𝑒𝑠𝑡𝑒 = 423552498 𝑆𝑜𝑚𝑚𝑒 𝑠𝑢𝑖𝑡𝑒 𝐵. 
+1261
+6
+423552498 
+610
+= 30.0033047 
+30.0033047 − 0.0033047 = 30 = 𝑥 
+1261
+6
+30 × 610 − 𝑅𝑒𝑠𝑡𝑒 = 423599155.2 
+===== PAGE 20 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 20 sur 36 
+423552498 − 423599155.2 = −46657.2 
+−46657.2
+6
+5
+= −38881 
+1261
+6
+30 × 610 − 𝑅𝑒𝑠𝑡𝑒 = 423552498 
+ 
+Rapport non typique 𝟏/𝒌 = 𝟏/𝟕 suite de 𝒏 = 𝟏𝟎 : 
+71 + 72 + 73 + 74 + 75 + 76 + 77 + 78 + (79 − 77) + (710 − 78)
+= 322966112 Somme suite A. 
+71 + 72 + 73 + 74 + 75 + 77 + 78 + 79 + (710 − 78) + (711 − 79)
+= 2260645142 Somme suite B. 
+Reconstruire le nombre premier : 
+Digamma : −78 
+Digamma calculé : 322966112 − 78 = 322966112 − 5764801 = 317201321 
+Déterminer le nombre premier : 
+2260645142 − 317201321
+76 = 1943443821
+117649 = 16519 (16519 est un nombre premier). 
+ 
+Suites A and B pour 𝒏 = 𝟗 termes (16511) : 
+71 + 72 + 73 + 74 + 75 + 76 + 77 + (78 − 76) + (79 − 77)
+= 46138018 Somme suite A 9 termes. 
+71 + 72 + 73 + 74 + 75 + 77 + 78 + (79 − 77) + (710 − 78)
+= 322848463 Somme suite B 9 termes. 
+ 
+Déterminer les équations pour les suites A et B pour le rapport non typique 𝟏/𝟕 : 
+Somme suite A(16519) − 76 = Somme suite B(9 termes) 
+322966112 − 117649 = 322848463 Somme suite B (9 termes). 
+Déterminer somme suite A (9 termes) : 
+Somme suite B(16519) − Somme suite B(16511)
+76
+= écart somme suite B(16519) et somme suite B(16511) 
+2260645142 − 322848463
+76 = 1937796679
+117649 = 16471 
+Déterminer l’écart entre les sommes des suites A(16519) et suite A(16511) : 
+===== PAGE 21 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 21 sur 36 
+16471
+7 = 2353 écart entre les suites A(16519) et A(16511). 
+322966112 − 46138018
+76 = 276828094
+117649 = 2353 
+ 
+Déterminer les coefficients pour les équations généralisées pour les valeurs entières 
+de 𝒏 négatives et positives : 
+Pour équation A coefficient A : 
+Somme suite A(16519) − Somme suite A(16511)
+78 = 276828094
+5764801 = 2353
+49 = Coefficient A. 
+Pour équation B coefficient B : 
+Somme suite B(16519) − Somme suite B(16511)
+78 = 1937796679
+5764801 = 2353
+7 = Coefficient B. 
+ 
+Déterminer les équations généralisant la valeur de 𝒏 pour les suites A et B pour le 
+rapport non typique 𝟏/𝒌 = 𝟏/𝟕 : 
+Déterminer l’équation pour la suite A : 
+(
+2353
+49
+𝑥 × 710) − Reste = 322966112 Somme suite A. 
+2353
+49
+322966112
+710
+= 42.00000006 ⟹ 𝑥 = 42 
+(
+2353
+49
+42 × 710) − Reste = 322966113.167 
+322966113.167 − 322966112 = 1.166667 = 7
+6 = Reste 
+Équation A 𝑛 = 10 : 
+(
+2353
+49
+42 × 710) − 7
+6 = 322966112 Somme suite A 10 termes. 
+Forme générale pour la suite A (1/7) : 
+(2353
+2058 × 7𝑛) − 7
+6 = Somme suite A. 
+*Quand 𝑛 est un entier et qu'il est strictement positif. 
+===== PAGE 22 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 22 sur 36 
+2353
+49 × 7−𝑛 − 7
+6 = Somme suite A négative. 
+*Quand 𝑛 est un entier et qu'il est strictement négatif. 
+ 
+Déterminer l’équation pour la somme de la suite B : 
+(
+2353
+7
+𝑥 × 710) − Reste = 2260645142 Somme suite B. 
+2353
+7
+2260645142
+710
+= 42.00000078 ⟹ 𝑥 = 42 
+(
+2353
+7
+42 × 710) − Reste = 2260762792.167 
+2260762792.167 − 2260645142 = 117650.167 = 705901
+6 = Reste 
+705901
+6
+7
+6
+= 100843 
+Équation B 𝑛 = 10 : 
+(
+2353
+7
+42 × 710) − 100843 (7
+6) = 2260645142 Somme suite B. 
+Forme générale pour la suite B (1/7) : 
+(2353
+294 × 7𝑛) − 100843 (7
+6) = Somme suite B. 
+3.  SYSTÈME D'ÉQUATIONS CONVOLUTIF 
+GÉNÉRALISÉ 
+Pour tout rapport 1/k (k ≥ 2) et tout n commun 
+3.1. NIVEAU 1 — Constantes Savard universelles 
+αA(k) = 2(k4 − k2 + 1) / ((k − 1) ⋅ k3) 
+αB(k) = k ⋅ αA(k) 
+δA(k) = k / (k − 1) 
+δB(k) = (k7 − k6 + k) / (k − 1) 
+===== PAGE 23 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 23 sur 36 
+3.2. NIVEAU 2 — Formules fermées (n quelconque, n commun à 
+tous les rapports) 
+SA(k, n) = (αA(k) / 2) ⋅ kn − δA(k) 
+SB(k, n) = (αB(k) / 2) ⋅ kn − δB(k) 
+Invariant spectral prouvé algébriquement (Théorème XIV .3) : 
+(SA(k,n1) − SA(k,n2)) / (SB(k,n1) − SB(k,n2)) = 1/k ∀ n1 ≠ n2, k ≥ 2 
+3.3. NIVEAU 3 — Construction terme à terme (Suite A, n ≥ 8) 
+Position i Terme A(k,n,i) Terme B(k,n,i) 
+1 ≤ i ≤ n−2 kⁱ kⁱ (i≤5) ; k⁷ (i=6, Saut Zêta) ; k^(i+1) (7≤i≤n−2) 
+i = n−1 k^(n−1) − k^(n−3) k^n − k^(n−2) 
+i = n k^n − k^(n−2) k^(n+1) − k^(n−1) 
+ 
+3.4. NIVEAU 4 — Mécanisme d'ancrage à n=10 (4 candidats 
+Digamma) 
+Les quatre essais dans l'ordre déterministe : 
+# Position Signe Digamma Candidat P 
+1 8 − SA(k,10) − k⁸ (SB − Digamma) / k⁶ 
+2 8 + SA(k,10) + k⁸ (SB − Digamma) / k⁶ 
+3 7 + SA(k,10) + k⁷ (SB − Digamma) / k⁶ 
+4 7 − SA(k,10) − k⁷ (SB − Digamma) / k⁶ 
+ 
+→ P certifié = premier candidat entier premier dans cet ordre. 
+P(1/k, n=10) = (SB(k,10) − [SA(k,10) ± k7 ou ± k8]) / k6 
+3.5. NIVEAU 5 — Reconstruction pour n ≠ 10 (n commun) 
+rang_cible(k,n) = rang_base(k) + n − 10 
+P(k,n) = premier rang_cible 
+Digamma(k,n) = SB(k,n) − P(k,n) × k6 
+===== PAGE 24 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 24 sur 36 
+ 
+3.6. ✅ VÉRIFICATION k=3 à 9 (tous corrects, 100%) 
+k P(n=10) HOL Branche Calculé ✓ 
+3 227 pos8 − 227    
+4 947 pos8 + 947    
+5 2 999 pos7 + 2 999    
+6 7 529 pos8 + 7 529    
+7 16 519 pos8 − 16 519    
+8 32 327 pos8 − 32 327    
+9 58 337 pos7 − 58 337    
+ 
+3.7. TABLEAU COMPLET P(1/k), n=10 — k=10 à k=111 
+Légende :  P certifié unique |  C_MULTIPLE (plusieurs premiers, premier en ordre retenu) |  
+AUCUN P (règle spéciale requise) 
+k P(1/k, n=10) État Branche 
+10 99 109     C_MULTIPLE pos8 − 
+11 —   RÈGLE SPÉCIALE (PDF: 1 611 851) — 
+12 247 259    pos8 − 
+13 368 939    pos8 + 
+14 —   AUCUN P — 
+15 755 789    pos8 + 
+16 1 044 751     C_MULTIPLE pos8 − 
+17 1 414 943    pos7 + 
+18 1 883 429    pos8 + 
+19 2 469 277    pos7 − 
+20 3 192 419     C_MULTIPLE pos8 − 
+21 4 074 419     C_MULTIPLE pos8 + 
+22 —   AUCUN P — 
+23 6 424 727    pos8 − 
+===== PAGE 25 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 25 sur 36 
+24 7 949 399     C_MULTIPLE pos8 − 
+25 9 750 649     C_MULTIPLE pos8 − 
+26 11 863 799    pos7 + 
+27 —   RÈGLE SPÉCIALE HOL (P=14 330 707) — 
+28 —   AUCUN P — 
+29 —   AUCUN P — 
+30 24 273 929    pos8 − 
+31 —   AUCUN P — 
+32 33 522 719    pos8 − 
+33 —   AUCUN P — 
+34 —   AUCUN P — 
+35 —   AUCUN P — 
+36 60 420 851     C_MULTIPLE pos8 − 
+37 69 293 303    pos7 + 
+38 —   AUCUN P — 
+39 —   AUCUN P — 
+40 102 337 639     C_MULTIPLE pos8 − 
+41 —   AUCUN P — 
+42 130 617 143    pos7 + 
+43 146 929 021    pos7 − 
+44 —   AUCUN P — 
+45 —   AUCUN P — 
+46 205 867 801     C_MULTIPLE pos8 − 
+47 —   AUCUN P — 
+48 —   AUCUN P — 
+49 282 357 599     C_MULTIPLE pos7 + 
+50 —   AUCUN P — 
+51 —   AUCUN P — 
+52 380 066 179    pos8 − 
+53 —   AUCUN P — 
+===== PAGE 26 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 26 sur 36 
+54 459 010 529     C_MULTIPLE pos8 − 
+55 —   AUCUN P — 
+56 —   AUCUN P — 
+57 601 506 977    pos7 − 
+58 656 165 077    pos8 − 
+59 —   AUCUN P — 
+60 —   AUCUN P — 
+61 —   AUCUN P — 
+62 915 894 503    pos7 + 
+63 992 182 589     C_MULTIPLE pos8 + 
+64 1 073 483 839     C_MULTIPLE (3 premiers!) pos8 − 
+65 1 160 020 289     C_MULTIPLE pos8 − 
+66 1 252 049 501     C_MULTIPLE pos8 − 
+67 —   AUCUN P — 
+68 —   AUCUN P — 
+69 1 563 702 839    pos7 + 
+70 1 680 356 999    pos7 + 
+71 1 803 876 551    pos8 − 
+72 —   AUCUN P — 
+73 —   AUCUN P — 
+74 —   AUCUN P — 
+75 2 372 624 999    pos7 + 
+76 —   AUCUN P — 
+77 2 706 333 629    pos8 − 
+78 2 886 705 977    pos8 − 
+79 —   AUCUN P — 
+80 3 276 294 479    pos8 − 
+81 —   AUCUN P — 
+82 —   AUCUN P — 
+83 —   AUCUN P — 
+===== PAGE 27 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 27 sur 36 
+84 —   AUCUN P — 
+85 4 436 438 999    pos7 + 
+86 —   AUCUN P — 
+87 4 983 550 877    pos7 − 
+88 5 276 645 527     C_MULTIPLE pos8 − 
+89 —   AUCUN P — 
+90 —   AUCUN P — 
+91 —   AUCUN P — 
+92 —   AUCUN P — 
+93 —   AUCUN P — 
+94 —   AUCUN P — 
+95 —   AUCUN P — 
+96 8 152 842 431    pos7 − 
+97 8 586 418 271     C_MULTIPLE pos8 + 
+98 —   AUCUN P — 
+99 —   AUCUN P — 
+100 —   AUCUN P — 
+101 —   AUCUN P — 
+102 11 039 747 027    pos7 − 
+103 11 591 637 509    pos8 + 
+104 —   AUCUN P — 
+105 12 761 657 999    pos7 + 
+106 13 381 076 101    pos8 − 
+107 14 024 303 819    pos8 − 
+108 14 692 021 271    pos7 − 
+109 15 384 932 747    pos8 + 
+110 —   AUCUN P — 
+111 16 849 226 351     C_MULTIPLE pos8 − 
+ 
+===== PAGE 28 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 28 sur 36 
+3.8.  Synthèse statistique (k=10 à 111) 
+État Nombre de k % 
+   P certifié unique 38 37 % 
+    C_MULTIPLE (≥2 premiers) 20 20 % 
+  AUCUN P (règle standard) 44 43 % 
+ 
+3.9.  Notes importantes pour la programmation de l'agent 
+Cas AUCUN P (44 valeurs) — Les 4 candidats standards sont tous composites. Deux 
+stratégies possibles selon votre HOL : 
+Règle spéciale cataloguée (comme k=27 : Digamma = SA − (2k⁸−k⁶), P=14 330 707) 
+Mode CRÉATION D'ANCRAGE : l'agent retourne C_NON_CERTIFIÉ et attend validation HOL 
+externe 
+Cas C_MULTIPLE (20 valeurs) — Per le contrat HOL : retourner tous les C/P possibles, 
+aucune sélection silencieuse. L'agent doit les lister tous et attendre confirmation. 
+k=11 est un cas forme spéciale : per votre fichier Moteur Géo, P=1 611 851 (rang 121 982) 
+avec règle A7− documentée dans le PDF — non reconstruit par les 4 essais standards à 
+n=10. 
+Arithmétique exacte requise : pour k ≥ 50, les valeurs de SA et SB dépassent 10¹⁵ — l'agent 
+doit utiliser l'arithmétique entière Python (pas float) pour éviter les erreurs d'arrondi Excel 
+4.  EXEMPLE NUMÉRIQUE COMPLET — n = 15 
+4.1.  RAPPORT 1/13 (k = 13, n = 15) 
+4.1.1. NIVEAU 1 — Constantes Savard universelles 
+Constante Formule Valeur exacte 
+α_A(13) 2(13⁴−13²+1) / (12·13³) 28393/13182 
+α_B(13) 13·α_A(13) 28393/1014 
+δ_A(13) 13/12 13/12 
+δ_B(13) (13⁷−13⁶+13)/12 57 921 721/12 
+ 
+===== PAGE 29 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 29 sur 36 
+ 
+4.1.2. NIVEAU 2 — Formules fermées 
+Code 
+Copier 
+SA(13, 15) = (k⁴−k²+1)·k¹² / (k−1) − k/(k−1) 
+           = 28 393 × 23 298 085 122 481 / 12 − 13/12 
+           = 55 125 210 906 883 585 
+SB(13, 15) = (k⁴−k²+1)·k¹³ / (k−1) − (k⁷−k⁶+k)/(k−1) 
+           = 716 627 741 784 659 809 
+Invariant spectral (Théorème XIV .3) : 
+Code 
+Copier 
+ΔSA = SA(n=15) − SA(n=10) = 55 125 210 906 883 585 − 148 468 220 264 
+    = 55 125 062 438 663 321 
+ΔSB = SB(n=15) − SB(n=10) = 716 627 741 784 659 809 − 1 930 082 036 636 
+    = 716 625 811 702 623 173 
+ΔSA / ΔSB = 1/13   
+4.1.3. NIVEAU 3 — Construction terme à terme (n = 15) 
+i A(13, 15, i) B(13, 15, i) Règle A Règle B 
+1 13 13 k¹ k¹ 
+2 169 169 k² k² 
+3 2 197 2 197 k³ k³ 
+4 28 561 28 561 k⁴ k⁴ 
+5 371 293 371 293 k⁵ k⁵ 
+6 4 826 809 62 748 517 k⁶ k⁷ ← Saut Zêta 
+7 62 748 517 815 730 721 k⁷ k⁸ 
+8 815 730 721 10 604 499 373 k⁸ k⁹ 
+9 10 604 499 373 137 858 491 849 k⁹ k¹⁰ 
+10 137 858 491 849 1 792 160 394 037 k¹⁰ k¹¹ 
+11 1 792 160 394 037 23 298 085 122 481 k¹¹ k¹² 
+12 23 298 085 122 481 302 875 106 592 253 k¹² k¹³ 
+===== PAGE 30 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 30 sur 36 
+13 302 875 106 592 253 3 937 376 385 699 289 k¹³ k¹⁴ 
+14 3 914 078 300 576 808 50 883 017 907 498 504 k¹⁴−k¹² k¹⁵−k¹³ 
+15 50 883 017 907 498 504 661 479 232 797 480 552 k¹⁵−k¹³ k¹⁶−k¹⁴ 
+ 
+Code 
+Copier 
+Σ A = 55 125 210 906 883 585   = SA(13,15) 
+Σ B = 716 627 741 784 659 809  = SB(13,15) 
+4.1.4. NIVEAU 4 — 4 essais Digamma (k^6 = 4 826 809) 
+ Les 4 essais sont calibrés pour n=10. Pour n=15, ils servent de vérification structurelle — 
+tous composites est le comportement attendu. 
+Branche Digamma P candidat État 
+pos13− 54 822 335 800 291 332 137 110 336 453   composé 
+pos13+ 55 428 086 013 475 838 136 984 839 419   composé 
+pos12+ 55 148 508 992 006 066 137 042 761 127   composé 
+pos12− 55 101 912 821 761 104 137 052 414 745   composé 
+ 
+4.1.5. NIVEAU 5 — Reconstruction rang cible (méthode officielle pour n 
+≠ 10) 
+Code 
+Copier 
+P(13, n=10) documenté = 368 939 
+rang_base(13)  = primepi(368 939) = 31 452 
+Δn = 15 − 10 = 5 
+rang_cible(13, n=15) = 31 452 + 5 = 31 457 
+P(13, n=15) = prime(31 457) = 369 023   PREMIER certifié 
+Digamma (13,15) = SB − P × k⁶ 
+               = 716 627 741 784 659 809 − 369 023 × 4 826 809 
+               = 716 625 960 581 122 202 
+===== PAGE 31 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 31 sur 36 
+4.2. ▌ RAPPORT 1/42 (k = 42, n = 15) 
+4.2.1. NIVEAU 1 — Constantes Savard universelles 
+Constante Valeur exacte 
+α_A(42) 3 109 933 / 1 518 804 
+α_B(42) 3 109 933 / 36 162 
+δ_A(42) 42/41 
+δ_B(42) 225 050 301 546 / 41 
+ 
+4.2.2. NIVEAU 2 — Formules fermées 
+Code 
+Copier 
+SA(42, 15) = 2 285 381 254 365 702 554 104 806 
+SB(42, 15) = 95 986 012 683 359 501 783 370 150 
+ΔSA / ΔSB = 1/42   
+4.2.3. NIVEAU 3 — Construction terme à terme (n = 15) 
+i A(42, 15, i) B(42, 15, i) 
+1 42 42 
+2 1 764 1 764 
+3 74 088 74 088 
+4 3 111 696 3 111 696 
+5 130 691 232 130 691 232 
+6 5 489 031 744 230 539 333 248 ← Saut Zêta (k⁷) 
+7 230 539 333 248 9 682 651 996 416 
+8 9 682 651 996 416 406 671 383 849 472 
+9 406 671 383 849 472 17 080 198 121 677 824 
+10 17 080 198 121 677 824 717 368 321 110 468 608 
+11 717 368 321 110 468 608 30 129 469 486 639 681 536 
+12 30 129 469 486 639 681 536 1 265 437 718 438 866 624 512 
+13 1 265 437 718 438 866 624 512 53 148 384 174 432 398 229 504 
+14 53 118 254 704 945 758 547 968 2 230 966 697 607 721 859 014 656 
+===== PAGE 32 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 32 sur 36 
+15 2 230 966 697 607 721 859 014 656 93 700 601 299 524 318 078 615 552 
+ 
+Code 
+Copier 
+Σ A = 2 285 381 254 365 702 554 104 806   
+Σ B = 95 986 012 683 359 501 783 370 150   
+4.2.4. NIVEAU 4 — 4 essais Digamma (k^6 = 5 489 031 744) 
+Branche Digamma P candidat État 
+pos13− 2 284 115 816 647 263 687 480 294 17 070 751 498 046 399   composé 
+pos13+ 2 286 646 692 084 141 420 729 318 17 070 290 419 379 903   composé 
+pos12+ 2 285 411 383 835 189 193 786 342 17 070 515 469 681 407   composé 
+pos12− 2 285 351 124 896 215 914 423 270 17 070 526 447 744 895   composé 
+ 
+4.2.5. NIVEAU 5 — Reconstruction rang_cible 
+Code 
+Copier 
+P(42, n=10) documenté = 130 617 143 
+rang_base(42)  = primepi(130 617 143) = 7 411 117 
+Δn = 15 − 10 = 5 
+rang_cible(42, n=15) = 7 411 117 + 5 = 7 411 122 
+P(42, n=15) = prime(7 411 122) = 130 617 251   PREMIER certifié 
+Digamma (42,15) = 95 986 012 683 359 501 783 370 150 
+               − 130 617 251 × 5 489 031 744 
+               = 95 986 011 966 397 264 730 354 406 
+4.3.  RAPPORT 1/54 (k = 54, n = 15) 
+4.3.1. NIVEAU 1 — Constantes Savard universelles 
+Constante Valeur exacte 
+α_A(54) 8 500 141 / 4 172 796 
+α_B(54) 8 500 141 / 77 274 
+δ_A(54) 54/53 
+δ_B(54) 1 314 130 298 742 / 53 
+===== PAGE 33 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 33 sur 36 
+ 
+4.3.2. NIVEAU 2 — Formules fermées 
+Code 
+Copier 
+SA(54, 15) = 98 599 651 085 954 948 762 648 034 
+SB(54, 15) = 5 324 381 158 641 567 208 388 082 594 
+ΔSA / ΔSB = 1/54   
+4.3.3. NIVEAU 3 — Construction terme à terme (n = 15) 
+i A(54, 15, i) B(54, 15, i) 
+1–
+5 
+54 / 2 916 / 157 464 / 8 503 056 / 459 165 
+024 
+idem 
+6 24 794 911 296 1 338 925 209 984 ← Saut Zêta (54⁷) 
+7 1 338 925 209 984 72 301 961 339 136 
+8 72 301 961 339 136 3 904 305 912 313 344 
+9 3 904 305 912 313 344 210 832 519 264 920 576 
+10 210 832 519 264 920 576 11 384 956 040 305 711 104 
+11 11 384 956 040 305 711 104 614 787 626 176 508 399 616 
+12 614 787 626 176 508 399 616 33 198 531 813 531 453 579 264 
+13 33 198 531 813 531 453 579 264 1 792 720 717 930 698 493 280 256 
+14 1 792 105 930 304 521 984 880 640 96 773 720 236 444 187 183 554 560 
+15 96 773 720 236 444 187 183 554 560 5 225 780 892 767 986 107 911 946 
+240 
+ 
+Code 
+Copier 
+Σ A = 98 599 651 085 954 948 762 648 034   
+Σ B = 5 324 381 158 641 567 208 388 082 594   
+===== PAGE 34 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 34 sur 36 
+ 
+ 
+4.3.4. NIVEAU 4 — 4 essais Digamma (k^6 = 24 794 911 296) 
+Branche Digamma P candidat État 
+pos13− 98 566 452 554 141 417 309 068 
+770 
+210 761 581 023 702 
+719 
+  
+composé 
+pos13+ 98 632 849 617 768 480 216 227 
+298 
+210 758 903 173 282 
+751 
+  
+composé 
+pos12+ 98 600 265 873 581 125 271 047 
+650 
+210 760 217 303 581 
+439 
+  
+composé 
+pos12− 98 599 036 298 328 772 254 248 
+418 
+210 760 266 893 404 
+031 
+  
+composé 
+ 
+4.3.5. NIVEAU 5 — Reconstruction rang_cible 
+Code 
+Copier 
+P(54, n=10) documenté = 459 010 529 
+rang_base(54)  = primepi(459 010 529) = 24 304 918 
+Δn = 15 − 10 = 5 
+rang_cible(54, n=15) = 24 304 918 + 5 = 24 304 923 
+P(54, n=15) = prime(24 304 923) = 459 010 597   PREMIER certifié 
+Digamma(54,15) = 5 324 381 158 641 567 208 388 082 594 
+               − 459 010 597 × 24 794 911 296 
+               = 5 324 381 147 260 440 171 849 078 882 
+4.4.  TABLEAU RÉCAPITULATIF FINAL — P(1/k, n = 15) 
+k SA(k, 15) SB(k, 15) rang_base rang_cible P(k, 
+n=15) 
+P(k, 
+n=10) 
+État 
+13 55 125 210 
+906 883 
+585 
+716 627 741 
+784 659 809 
+31 452 31 457 369 
+023 
+368 
+939 
+   
+CERTIFIÉ 
+42 2 285 381 
+254 365 
+95 986 012 
+683 359 501 
+783 370 150 
+7 411 117 7 411 122 130 
+617 
+251 
+130 
+617 
+143 
+   
+CERTIFIÉ 
+===== PAGE 35 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 35 sur 36 
+702 554 
+104 806 
+54 98 599 651 
+085 954 
+948 762 
+648 034 
+5 324 381 
+158 641 567 
+208 388 082 
+594 
+24 304 
+918 
+24 304 923 459 
+010 
+597 
+459 
+010 
+529 
+   
+CERTIFIÉ 
+ 
+4.5.  Notes critiques pour l'agent 
+4.5.1. 1. Saut Zêta — asymétrie A / B confirmée 
+La correction importante validée ici : A(k, n, i) = k^i pour tout 1 ≤ i ≤ n−2 (pas de Saut Zêta 
+dans la suite A). Le Saut Zêta k⁷ à la position i=6 n'existe que dans la suite B. Les deux suites 
+sont identiques pour i ≤ 5, puis divergent à partir de i = 6. 
+4.5.2. 2. Niveau 4 hors-calibrage pour n ≠ 10 
+Les 4 essais Digamma (pos(n−2)±, pos(n−3)±) produisent tous des candidats composites 
+pour n=15 — ce comportement est attendu et correct. Ces essais sont calibrés 
+structurellement sur n=10 ; le Niveau 5 est la voie officielle pour tout n ≠ 10. 
+4.5.3. 3. Niveau 5 — formule rang_cible 
+python 
+Copier 
+rang_base(k)       = primepi(P(k, n=10))   # rang du P certifié à n=10 
+rang_cible(k, n)   = rang_base(k) + (n - 10) 
+P(k, n)            = prime(rang_cible(k, n))  # arithmétique exacte sympy 
+L'écart en rang +5 (pour Δn = 5) est cohérent pour les trois k, confirmant l'universalité de la 
+loi de rang spectral. 
+4.5.4. 4. Invariant spectral (Théorème XIV .3) — vérifié pour les 3 rapports 
+Code 
+Copier 
+ΔSA(k, n=15, n=10) / ΔSB(k, n=15, n=10) = 1/k   ∀ k ∈ {13, 42, 54}   
+4.5.5. 5. Arithmétique — seuils de dépassement float 
+k SA(k,15) Ordre de grandeur Float 64 safe? 
+13 55 125 210 906 883 585 ~5.5×10¹⁶     limite 
+42 2.29×10²⁴ ~10²⁴   erreur garantie 
+54 9.86×10²⁵ ~10²⁵   erreur garantie 
+===== PAGE 36 =====
+www.universestaucarre.com — Dépôt GitHub de l’agent Gabriel multiloop local 
+Page 36 sur 36 
+ 
+→ Arithmétique entière Python obligatoire dès k ≥ 42 pour n = 15. Excel / float64 
+introduiraient des erreurs d'arrondi fatales. 
+ 
