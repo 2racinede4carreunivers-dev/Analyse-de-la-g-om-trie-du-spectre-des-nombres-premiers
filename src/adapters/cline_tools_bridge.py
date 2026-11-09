@@ -1,3 +1,15 @@
+# COPYRIGHT ET LICENCE:
+# ---------------------
+# Ce fichier constitue un pont (bridge) d'adaptation entre l'agent Gabriel
+# et les capacités open source de Cline.
+#
+# - Code d'adaptation/bridge (Gabriel) : Copyright 2026 Philippe Thomas Savard
+# - Capacités sous-jacentes inspirées de Cline : Copyright 2026 Cline Bot Inc.
+# - Licence : Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+#
+# Le code de Cline est utilisé conformément à sa licence Apache 2.0.
+# Voir LICENSE-CLINE.md à la racine du dépôt pour l'attribution complète.
+#
 """
 cline_tools_bridge.py  —  Intégration des capacités Cline dans Gabriel
 ═══════════════════════════════════════════════════════════════════════════════

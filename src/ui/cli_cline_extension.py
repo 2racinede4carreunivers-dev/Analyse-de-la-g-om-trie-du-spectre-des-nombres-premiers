@@ -1,3 +1,14 @@
+# COPYRIGHT ET LICENCE:
+# ---------------------
+# Ce fichier constitue une extension Cline pour le CLI Gabriel.
+#
+# - Code d'extension (Gabriel) : Copyright 2026 Philippe Thomas Savard
+# - Capacités sous-jacentes inspirées de Cline : Copyright 2026 Cline Bot Inc.
+# - Licence : Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+#
+# Le code de Cline est utilisé conformément à sa licence Apache 2.0.
+# Voir LICENSE-CLINE.md à la racine du dépôt pour l'attribution complète.
+#
 """
 cli_cline_extension.py  —  Extension Cline pour Gabriel CLI
 ═══════════════════════════════════════════════════════════════════════════════

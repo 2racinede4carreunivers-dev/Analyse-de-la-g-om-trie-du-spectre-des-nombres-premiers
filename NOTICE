@@ -1,0 +1,69 @@
+NOTICE — COMPOSANTS TIERS ET ATTRIBUTIONS
+==========================================
+
+Ce dépôt contient le code de l'agent Gabriel ainsi que des composants
+tiers sous licence open source. Chaque composant est identifié ci-dessous
+avec son titulaire des droits et sa licence.
+
+==========================================================
+1. CODE PROPRIÉ — AGENT GABRIEL
+==========================================================
+
+Titulaire des droits : Philippe Thomas Savard
+Licence : Apache License, Version 2.0
+Fichier de licence : LICENSE (à la racine du dépôt)
+
+Le code de l'agent Gabriel, la théorie "L'univers est au carré",
+et la géométrie du spectre des nombres premiers sont et restent la
+propriété intellectuelle de Philippe Thomas Savard. La licence Apache
+2.0 s'applique à l'usage du code ; elle ne transfère pas la
+propriété intellectuelle des œuvres.
+
+Fichiers principaux concernés :
+  - src/multiloop/domain_gate.py
+  - src/multiloop/gabriel_domain_config.py
+  - src/spectral/ (tous les fichiers)
+  - src/adapters/ (sauf cline_tools_bridge.py)
+  - src/ui/ (sauf cli_cline_extension.py)
+  - theories/ (fichiers .thy et .py)
+  - tests/ (tous les fichiers)
+  - et tous les autres fichiers Python non listés ci-dessous
+
+==========================================================
+2. COMPOSANT TIERS — CLINE
+==========================================================
+
+Titulaire des droits : Cline Bot Inc.
+Licence : Apache License, Version 2.0
+Dépôt source : https://github.com/cline/cline
+Fichier de licence : https://www.apache.org/licenses/LICENSE-2.0
+Attribution détaillée : LICENSE-CLINE.md (à la racine du dépôt)
+
+Les fonctionnalités de programmation de l'agent Gabriel intègrent
+des capacités inspirées du code source ouvert de Cline.
+
+Fichiers concernés :
+  - src/adapters/cline_tools_bridge.py — Pont d'adaptation Cline vers Gabriel
+  - src/ui/cli_cline_extension.py — Extension Cline pour le CLI Gabriel
+
+==========================================================
+3. AUTRES COMPOSANTS TIERS
+==========================================================
+
+- Isabelle/HOL — Assistant de preuve formelle (licence propre à Isabelle)
+- Mathlib (Lean 4) — Bibliothèque mathématique formelle (licence Apache 2.0)
+- Python — Langage de programmation (licence PSF)
+- Rich — Bibliothèque Python pour l'affichage terminal (licence MIT)
+
+==========================================================
+4. COMMENT APPLIQUER LES LICENCES
+==========================================================
+
+Tout logiciel distribué sous licence Apache 2.0 est fourni "EN L'ÉTAT",
+SANS GARANTIE D'AUCUNE SORTE, explicite ou implicite. Consultez la
+licence Apache 2.0 pour connaître les droits et limitations spécifiques
+régissant les autorisations sous cette licence.
+
+==========================================================
+FIN DU NOTICE
+==========================================================
